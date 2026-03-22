@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poás Agua y Fuego</title>
+    <meta name="description"
+        content="Página comunitaria e interactiva sobre el Volcán Poás. Alertas, patrimonio hídrico, turismo y reportes ciudadanos.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/index.html">
+    <meta property="og:title"       content="Poás Agua y Fuego">
+    <meta property="og:description" content="Plataforma informativa del cantón de Poás, Costa Rica. Patrimonio hídrico, turismo, directorio comercial y más.">
+    <meta property="og:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/qr_poas.jpg">
+    <meta property="og:image:width"  content="800">
+    <meta property="og:image:height" content="800">
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Poás Agua y Fuego">
+    <meta name="twitter:description" content="Plataforma informativa del cantón de Poás, Costa Rica. Patrimonio hídrico, turismo, directorio comercial y más.">
+    <meta name="twitter:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/qr_poas.jpg">
+</head>
+
+<body>
+<!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Poás <span>Agua y Fuego</span></div>
+        <ul class="nav-links">
+            <li><a href="#agua">Patrimonio Hídrico</a></li>
+            <li><a href="plan-regulador.html">Plan Regulador</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#comunidad">Comunidad</a></li>
+            <li><a href="bolsa-empleo.html">Bolsa de Empleo</a></li>
+            <li><a href="directorio-comercial.html" style="text-align:center;white-space:normal;line-height:1.3;">Directorio Turístico y<br>Comercial</a></li>
+            <li><a href="eventos.html">Eventos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <div class="nav-lang">
+            <a href="index.html" class="lang-btn active">🇨🇷 ES</a>
+            <a href="index-en.html" class="lang-btn">🇺🇸 EN</a>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#agua"       onclick="closeMobileNav()">Patrimonio Hídrico</a>
+        <a href="plan-regulador.html" onclick="closeMobileNav()">Plan Regulador</a>
+        <a href="#galeria"    onclick="closeMobileNav()">Galería</a>
+        <a href="#comunidad"                    onclick="closeMobileNav()">Comunidad</a>
+        <a href="bolsa-empleo.html"            onclick="closeMobileNav()">Bolsa de Empleo</a>
+        <a href="directorio-comercial.html"    onclick="closeMobileNav()" style="text-align:center;white-space:normal;line-height:1.3;">Directorio Turístico y<br>Comercial</a>
+        <a href="eventos.html"                 onclick="closeMobileNav()">Eventos</a>
+        <a href="#contacto"   onclick="closeMobileNav()">Contacto</a>
+    </nav>
+
+    <!-- Hero Section: Fuego vs Agua -->
+    <header class="hero" id="inicio">
+        <div class="hero-split hero-fire">
+            <div class="hero-content">
+                <h2>El Pulso de la Tierra</h2>
+                <p>Cráter Principal del Volcán Poás</p>
+            </div>
+        </div>
+        <div class="hero-split hero-water">
+            <div class="hero-content">
+                <h2>El Espejo del Cielo</h2>
+                <p>La serenidad de la Laguna Botos</p>
+            </div>
+        </div>
+        <div class="hero-center">
+            <h1>Poás, Agua y Fuego</h1>
+            <p>Donde el Fuego y el Agua coexisten</p>
+            <a href="#agua" class="scroll-down">Explorar ▼</a>
+        </div>
+    </header>
+
+
+    <!-- Patrimonio Hídrico -->
+    <section id="agua" class="water-heritage-section">
+        <div class="container">
+            <div class="water-content">
+                <div class="water-text">
+                    <h2 class="section-title">Nuestro Patrimonio Hídrico</h2>
+                    <p>El macizo del Poás no solo es un gigante de fuego, es el pulmón húmedo de la región. El entorno
+                        de bosque nuboso actúa como una esponja gigante, capturando la humedad y alimentando las
+                        reservas subterráneas.</p>
+                    <ul class="water-facts">
+                        <li>
+                            <strong>💧 Área de recarga crítica:</strong> El macizo del Poás funciona como una "torre de
+                            agua", permitiendo la filtración que alimenta los acuíferos Colima y Barva, principales
+                            fuentes de agua potable para la Gran Área Metropolitana.
+                        </li>
+                        <li>🌲 Ecosistema único que regula el clima local.</li>
+                        <li>🚰 Fuente directa de acueductos comunitarios locales (ASADAS).</li>
+                    </ul>
+                </div>
+                <div class="water-visual">
+                    <div class="water-anim-container">
+
+                        <!-- Gotas pequeñas orbitando -->
+                        <div class="mini-drop md1">
+                            <svg viewBox="0 0 60 72" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <radialGradient id="miniGrad1" cx="35%" cy="28%" r="65%">
+                                        <stop offset="0%"   stop-color="#E0F7FF" stop-opacity="1"/>
+                                        <stop offset="100%" stop-color="#56B4D3" stop-opacity="1"/>
+                                    </radialGradient>
+                                </defs>
+                                <path d="M30 4 C30 4, 52 28, 52 44 C52 57, 42 66, 30 66 C18 66, 8 57, 8 44 C8 28, 30 4, 30 4Z" fill="url(#miniGrad1)"/>
+                                <ellipse cx="21" cy="36" rx="6" ry="10" fill="rgba(255,255,255,0.55)" transform="rotate(-20 21 36)"/>
+                            </svg>
+                        </div>
+                        <div class="mini-drop md2">
+                            <svg viewBox="0 0 60 72" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <radialGradient id="miniGrad2" cx="35%" cy="28%" r="65%">
+                                        <stop offset="0%"   stop-color="#E0F7FF" stop-opacity="1"/>
+                                        <stop offset="100%" stop-color="#56B4D3" stop-opacity="1"/>
+                                    </radialGradient>
+                                </defs>
+                                <path d="M30 4 C30 4, 52 28, 52 44 C52 57, 42 66, 30 66 C18 66, 8 57, 8 44 C8 28, 30 4, 30 4Z" fill="url(#miniGrad2)"/>
+                                <ellipse cx="21" cy="36" rx="6" ry="10" fill="rgba(255,255,255,0.55)" transform="rotate(-20 21 36)"/>
+                            </svg>
+                        </div>
+                        <div class="mini-drop md3">
+                            <svg viewBox="0 0 60 72" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <radialGradient id="miniGrad3" cx="35%" cy="28%" r="65%">
+                                        <stop offset="0%"   stop-color="#E0F7FF" stop-opacity="1"/>
+                                        <stop offset="100%" stop-color="#56B4D3" stop-opacity="1"/>
+                                    </radialGradient>
+                                </defs>
+                                <path d="M30 4 C30 4, 52 28, 52 44 C52 57, 42 66, 30 66 C18 66, 8 57, 8 44 C8 28, 30 4, 30 4Z" fill="url(#miniGrad3)"/>
+                                <ellipse cx="21" cy="36" rx="6" ry="10" fill="rgba(255,255,255,0.55)" transform="rotate(-20 21 36)"/>
+                            </svg>
+                        </div>
+                        <div class="mini-drop md4">
+                            <svg viewBox="0 0 60 72" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <radialGradient id="miniGrad4" cx="35%" cy="28%" r="65%">
+                                        <stop offset="0%"   stop-color="#E0F7FF" stop-opacity="1"/>
+                                        <stop offset="100%" stop-color="#56B4D3" stop-opacity="1"/>
+                                    </radialGradient>
+                                </defs>
+                                <path d="M30 4 C30 4, 52 28, 52 44 C52 57, 42 66, 30 66 C18 66, 8 57, 8 44 C8 28, 30 4, 30 4Z" fill="url(#miniGrad4)"/>
+                                <ellipse cx="21" cy="36" rx="6" ry="10" fill="rgba(255,255,255,0.55)" transform="rotate(-20 21 36)"/>
+                            </svg>
+                        </div>
+                        <div class="mini-drop md5">
+                            <svg viewBox="0 0 60 72" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <radialGradient id="miniGrad5" cx="35%" cy="28%" r="65%">
+                                        <stop offset="0%"   stop-color="#E0F7FF" stop-opacity="1"/>
+                                        <stop offset="100%" stop-color="#56B4D3" stop-opacity="1"/>
+                                    </radialGradient>
+                                </defs>
+                                <path d="M30 4 C30 4, 52 28, 52 44 C52 57, 42 66, 30 66 C18 66, 8 57, 8 44 C8 28, 30 4, 30 4Z" fill="url(#miniGrad5)"/>
+                                <ellipse cx="21" cy="36" rx="6" ry="10" fill="rgba(255,255,255,0.55)" transform="rotate(-20 21 36)"/>
+                            </svg>
+                        </div>
+
+                        <!-- Gota principal celeste -->
+                        <div class="water-drop-wrapper">
+                            <svg class="water-drop-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <radialGradient id="dropGrad" cx="32%" cy="28%" r="72%">
+                                        <stop offset="0%"   stop-color="#E8F8FF" stop-opacity="1"/>
+                                        <stop offset="45%"  stop-color="#87CEEB" stop-opacity="0.95"/>
+                                        <stop offset="100%" stop-color="#2196C4" stop-opacity="1"/>
+                                    </radialGradient>
+                                    <radialGradient id="shineGrad" cx="30%" cy="28%" r="38%">
+                                        <stop offset="0%"   stop-color="white" stop-opacity="0.8"/>
+                                        <stop offset="100%" stop-color="white" stop-opacity="0"/>
+                                    </radialGradient>
+                                </defs>
+                                <path d="M100 12 C100 12, 168 100, 168 155 C168 193, 138 218, 100 218 C62 218, 32 193, 32 155 C32 100, 100 12, 100 12 Z"
+                                      fill="url(#dropGrad)"/>
+                                <ellipse cx="72" cy="115" rx="20" ry="34"
+                                         fill="url(#shineGrad)"
+                                         transform="rotate(-22 72 115)"/>
+                                <circle cx="130" cy="165" r="10"
+                                        fill="rgba(255,255,255,0.25)"
+                                        stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+                            </svg>
+                        </div>
+
+                        <!-- Ondas de impacto en la base -->
+                        <div class="drop-ripple r1"></div>
+                        <div class="drop-ripple r2"></div>
+                        <div class="drop-ripple r3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plan Regulador – Acceso rápido -->
+    <section id="regulador" class="regulador-preview-section">
+        <div class="container">
+            <div class="regulador-preview-card">
+                <div class="regulador-preview-icon">🗺️</div>
+                <div class="regulador-preview-text">
+                    <h2>Plan Regulador Cantonal</h2>
+                    <p>Consulta la zonificación, normas de desarrollo, protección ambiental y gestión del riesgo volcánico del cantón de Poás.</p>
+                    <ul class="regulador-preview-tags">
+                        <li>🏗️ Zonificación</li>
+                        <li>🌿 Protección Ambiental</li>
+                        <li>🌋 Riesgo Volcánico</li>
+                        <li>💧 Patrimonio Hídrico</li>
+                    </ul>
+                </div>
+                <a href="plan-regulador.html" class="btn-primary regulador-preview-btn">Ver Plan Regulador →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería de Fotos -->
+    <section id="galeria" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title">El Poás en Imágenes</h2>
+            <p class="subtitle">Descubre la majestuosidad de nuestro coloso y sus alrededores.</p>
+            
+            <div class="gallery-grid">
+
+                <div class="gallery-item" data-caption="🌋 Erupción del Volcán Poás">
+                    <img src="img/erupcion_poas.jpg" alt="Erupción del Volcán Poás">
+                    <div class="gallery-overlay"><span>🌋 Erupción del Volcán Poás</span></div>
+                </div>
+
+                <div class="gallery-item" data-caption="🛩️ Vista aérea — Cráter Principal y Laguna Botos">
+                    <img src="img/crateres_poas.jpg" alt="Vista aérea de los cráteres del Volcán Poás y Laguna Botos">
+                    <div class="gallery-overlay"><span>🛩️ Cráter Principal y Laguna Botos</span></div>
+                </div>
+
+                <div class="gallery-item" data-caption="🏙️ Centro del Cantón de Poás">
+                    <img src="img/centro_poas.jpg" alt="Vista aérea del cantón de Poás">
+                    <div class="gallery-overlay"><span>🏙️ Centro de Poás</span></div>
+                </div>
+
+                <div class="gallery-item" data-caption="🌳 Letrero de Poás">
+                    <img src="img/letrero_poas.jpg" alt="Letrero de Poás con corteza amarilla">
+                    <div class="gallery-overlay"><span>🌳 Letrero de Poás</span></div>
+                </div>
+
+                <div class="gallery-item" data-caption="🔥 Cráter del Volcán Poás de noche" style="grid-column: span 2; aspect-ratio: 16/9;">
+                    <img src="img/crater_noche_poas.jpg" alt="Cráter del Volcán Poás de noche con lava" style="object-position: center 55%;">
+                    <div class="gallery-overlay"><span>🔥 Cráter activo — Volcán Poás</span></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+
+
+    <!-- Turismo y Comunidad -->
+    <section id="comunidad" class="community-section">
+        <div class="container">
+            <h2 class="section-title">Corazón Poaseño</h2>
+            <div class="community-grid">
+                <!-- Parque Nacional -->
+                <div class="comm-card park-info">
+                    <h3>🌋 Parque Nacional Volcán Poás</h3>
+                    <p><strong>Horario:</strong> Lunes a Domingo, 8:00 am a 4:00 pm</p>
+                    <p><strong>Ingreso:</strong> Se requiere reserva previa electrónica.</p>
+                    <p><strong>Tarifa adultos:</strong> ₡1.130 nacionales / $18 extranjeros</p>
+                    <p><strong>Menores 6 años:</strong> Ingreso gratuito</p>
+                    <div class="ticket-buttons">
+                        <a href="https://serviciosenlinea.sinac.go.cr/" target="_blank" class="btn-outline">🎟️ Comprar Entradas</a>
+                        <a href="https://www.ovsicori.una.ac.cr/index.php/vulcanologia/camara-volcanes-2/camara-crater-v-poas" target="_blank" rel="noopener" class="btn-outline" style="margin-top:0.6rem;background:rgba(255,80,50,0.12);border-color:#FF6B4A;color:#FF6B4A;">📷 Cámara en Vivo del Cráter</a>
+                        <a href="ruta-gastronomica.html#consejos-volcan" class="btn-outline" style="margin-top:0.6rem;background:rgba(135,206,235,0.15);border-color:#87CEEB;color:#87CEEB;">📝 Consejos para visitar el Volcán</a>
+                    </div>
+                </div>
+                <!-- Productos Locales -->
+                <div class="comm-card local-products">
+                    <h3>Mercado Local</h3>
+                    <div class="products-list">
+                        <div class="product-item">
+                            <span class="emoji">🍓</span>
+                            <div>
+                                <h4>Fresas de Poás</h4>
+                                <p>Cosechadas en las faldas del volcán.</p>
+                            </div>
+                        </div>
+                        <div class="product-item">
+                            <span class="emoji">🧀</span>
+                            <div>
+                                <h4>Quesos Artesanales</h4>
+                                <p>Lácteos premium de fincas de altura.</p>
+                            </div>
+                        </div>
+                        <div class="product-item">
+                            <span class="emoji">☕</span>
+                            <div>
+                                <h4>Café de Altura</h4>
+                                <p>Aroma nutrido por suelos volcánicos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preview Cards: Bolsa de Empleo + Directorio Turístico y Comercial -->
+    <section class="regulador-preview-section" id="empleo">
+        <div class="container" style="display:flex; flex-direction:column; gap:1.5rem;">
+
+            <!-- Bolsa de Empleo -->
+            <div class="regulador-preview-card">
+                <div class="regulador-preview-icon">💼</div>
+                <div class="regulador-preview-text">
+                    <h2>Bolsa de Empleo</h2>
+                    <p>Oportunidades laborales en el cantón de Poás. ¿Buscás trabajo o querés publicar una plaza?</p>
+                    <ul class="regulador-preview-tags">
+                        <li>🔍 Buscar empleo</li>
+                        <li>📢 Publicar plaza</li>
+                        <li>🤝 Talento local</li>
+                    </ul>
+                </div>
+                <a href="bolsa-empleo.html" class="btn-primary regulador-preview-btn">Ver Bolsa de Empleo →</a>
+            </div>
+
+            <!-- Eventos -->
+            <div class="regulador-preview-card" id="eventos">
+                <div class="regulador-preview-icon">📅</div>
+                <div class="regulador-preview-text">
+                    <h2>Eventos del Cantón</h2>
+                    <p>Actividades culturales, deportivas y comunitarias en Poás. Agregá y consultá eventos fácilmente.</p>
+                    <ul class="regulador-preview-tags">
+                        <li>🎭 Culturales</li>
+                        <li>⚽ Deportivos</li>
+                        <li>🤝 Comunidad</li>
+                        <li>🍽️ Gastronomía</li>
+                    </ul>
+                </div>
+                <a href="eventos.html" class="btn-primary regulador-preview-btn">Ver Eventos →</a>
+            </div>
+
+            <!-- Directorio Turístico y Comercial -->
+            <div class="regulador-preview-card" id="turismo">
+                <div class="regulador-preview-icon">🛍️</div>
+                <div class="regulador-preview-text">
+                    <h2 style="text-align:center;white-space:normal;line-height:1.3;">Directorio Turístico y<br>Comercial</h2>
+                    <p>Negocios y servicios del cantón de Poás. Restaurantes, hospedaje, tours, tiendas y más.</p>
+                    <ul class="regulador-preview-tags">
+                        <li>🍽️ Restaurantes</li>
+                        <li>🏨 Hospedaje</li>
+                        <li>🌋 Tours</li>
+                        <li>🍓 Ruta Gastronómica</li>
+                    </ul>
+                </div>
+                <a href="directorio-comercial.html" class="btn-primary regulador-preview-btn">Ver Directorio →</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Sección de Contacto y Redes Sociales -->
+    <section id="contacto" class="contacto-section">
+        <div class="container">
+            <h2 class="section-title">Contáctanos</h2>
+            <p class="subtitle">Síguenos en redes sociales o escríbenos directamente por WhatsApp.</p>
+
+            <div class="contacto-grid">
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/50687058612" target="_blank" rel="noopener" class="contacto-card whatsapp-card">
+                    <div class="contacto-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                    </div>
+                    <div class="contacto-info">
+                        <h3>WhatsApp</h3>
+                        <p>Escríbenos directo</p>
+                        <span class="contacto-link">+506 8705-8612</span>
+                    </div>
+                </a>
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/profile.php?id=61577824591706" target="_blank" rel="noopener" class="contacto-card facebook-card">
+                    <div class="contacto-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </div>
+                    <div class="contacto-info">
+                        <h3>Facebook</h3>
+                        <p>Síguenos en Facebook</p>
+                        <span class="contacto-link">@PoasAguayFuego</span>
+                    </div>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/TUPERFIL" target="_blank" rel="noopener" class="contacto-card instagram-card">
+                    <div class="contacto-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </div>
+                    <div class="contacto-info">
+                        <h3>Instagram</h3>
+                        <p>Fotos y contenido</p>
+                        <span class="contacto-link">@PoasAguayFuego</span>
+                    </div>
+                </a>
+
+                <!-- TikTok -->
+                <a href="https://tiktok.com/@TUPERFIL" target="_blank" rel="noopener" class="contacto-card tiktok-card">
+                    <div class="contacto-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/>
+                        </svg>
+                    </div>
+                    <div class="contacto-info">
+                        <h3>TikTok</h3>
+                        <p>Videos del volcán</p>
+                        <span class="contacto-link">@PoasAguayFuego</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h3>Poás Agua y Fuego</h3>
+                <p>Plataforma informativa cantonal. El equilibrio entre el fuego y el agua.</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="plan-regulador.html">Plan Regulador</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Poás Agua y Fuego. Concepto Visual.</p>
+            <p class="copyright-autor">César Luis Quesada Herrera</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

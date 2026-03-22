@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gastronomic Route – Poás Water &amp; Fire</title>
+    <meta name="description" content="Discover the Gastronomic Route of the Poás canton. Traditional dishes, restaurants with a view, and tips for tourists.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── Hero Gastronómica ── */
+        .rg-hero {
+            min-height: 42vh;
+            background: linear-gradient(135deg, #1a0a00 0%, #3B1A08 50%, #6B3520 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 7rem 1.5rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rg-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('img/letrero_poas.jpg') center/cover no-repeat;
+            opacity: 0.18;
+        }
+
+        .rg-hero-content { position: relative; z-index: 1; }
+
+        .rg-hero h1 {
+            font-size: clamp(2rem, 6vw, 3.6rem);
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .rg-hero h1 span { color: #FFBB56; }
+
+        .rg-hero p {
+            color: rgba(255,255,255,0.75);
+            font-size: 1.1rem;
+            margin-top: 0.75rem;
+            max-width: 600px;
+            margin-inline: auto;
+        }
+
+        /* ── Layout general ── */
+        .rg-main {
+            background: #FFF9F4;
+            padding: 5rem 0;
+        }
+
+        .rg-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #C07028;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+            transition: opacity 0.2s;
+        }
+
+        .rg-back:hover { opacity: 0.7; }
+
+        /* ── Sección título ── */
+        .rg-section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #FFF0DC;
+            color: #9A4E10;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        .rg-section-title {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 800;
+            color: #2D1A0A;
+            margin-bottom: 0.5rem;
+        }
+
+        .rg-section-desc {
+            color: #6B5040;
+            font-size: 0.97rem;
+            line-height: 1.7;
+            max-width: 680px;
+            margin-bottom: 2.5rem;
+        }
+
+        .rg-divider {
+            border: none;
+            border-top: 2px solid #F0E0CC;
+            margin: 4rem 0;
+        }
+
+        /* ── Platillos emblemáticos ── */
+        .platillos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .platillo-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+            border-top: 4px solid #FFBB56;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .platillo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        .platillo-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .platillo-card h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #2D1A0A;
+            margin-bottom: 0.4rem;
+        }
+
+        .platillo-card p {
+            font-size: 0.88rem;
+            color: #6B5040;
+            line-height: 1.6;
+        }
+
+        /* ── Restaurantes ── */
+        .restaurantes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+
+        .rest-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 1.75rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            border-left: 5px solid #C07028;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .rest-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+        }
+
+        .rest-icon {
+            font-size: 2.4rem;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .rest-info h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #2D1A0A;
+            margin-bottom: 0.3rem;
+        }
+
+        .rest-info p {
+            font-size: 0.9rem;
+            color: #6B5040;
+            line-height: 1.65;
+        }
+
+        /* ── Restaurante especial (Típico Fraijanes) ── */
+        .rest-featured {
+            background: linear-gradient(135deg, #FFF5E6, #FFEBD0);
+            border-left: 5px solid #FFBB56;
+        }
+
+        .rest-featured h3 { color: #7A3A00; }
+
+        .especialidades {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .esp-item {
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+            font-size: 0.88rem;
+            color: #5A3A20;
+        }
+
+        .esp-item strong {
+            color: #2D1A0A;
+            white-space: nowrap;
+        }
+
+        .rest-badge {
+            display: inline-block;
+            background: #FFBB56;
+            color: #6B3000;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.7rem;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ── Imagen banner restaurante ── */
+        .rest-img-banner {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            max-height: 420px;
+        }
+
+        .rest-img-banner img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .rest-img-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.72));
+            padding: 1.5rem 1.75rem 1.25rem;
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 600px) {
+            .rest-img-banner img { height: 240px; }
+        }
+
+        /* ── Restaurante Lo que tú quieras ── */
+        .rest-casual {
+            background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+            border-left: 5px solid #3B82F6;
+        }
+
+        .rest-casual h3 { color: #1E3A6E; }
+
+        .rest-badge-casual {
+            background: #BFDBFE;
+            color: #1D4ED8;
+        }
+
+        /* ── Cafeterías ── */
+        .cafeterias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .cafe-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 1.4rem;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.06);
+            border-top: 3px solid #A0C878;
+        }
+
+        .cafe-card h4 {
+            font-size: 0.97rem;
+            font-weight: 700;
+            color: #2D1A0A;
+            margin-bottom: 0.35rem;
+        }
+
+        .cafe-card p {
+            font-size: 0.85rem;
+            color: #6B5040;
+            line-height: 1.6;
+        }
+
+        /* ── Consejos ── */
+        .consejos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .consejo-card {
+            background: linear-gradient(135deg, #1a2a3a, #0D2035);
+            color: #fff;
+            border-radius: 16px;
+            padding: 1.75rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .consejo-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .consejo-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: #FFBB56;
+        }
+
+        .consejo-card p {
+            font-size: 0.87rem;
+            color: rgba(255,255,255,0.78);
+            line-height: 1.65;
+        }
+
+        /* ── Equipaje ── */
+        .equipaje-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .equip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: #fff;
+            border-radius: 14px;
+            padding: 1.4rem;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.06);
+            border-left: 4px solid #87CEEB;
+        }
+
+        .equip-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .equip-item strong {
+            display: block;
+            font-size: 0.97rem;
+            color: #2D1A0A;
+            margin-bottom: 0.3rem;
+        }
+
+        .equip-item p {
+            font-size: 0.87rem;
+            color: #6B5040;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ── CTA final ── */
+        .rg-cta {
+            background: linear-gradient(135deg, #C07028, #7A3A00);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            margin-top: 4rem;
+            color: #fff;
+        }
+
+        .rg-cta h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+        }
+
+        .rg-cta p {
+            font-size: 0.97rem;
+            opacity: 0.85;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-cta-rg {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #FFBB56;
+            color: #6B3000;
+            padding: 0.9rem 2rem;
+            border-radius: 10px;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-cta-rg:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 600px) {
+            .rest-card { flex-direction: column; gap: 0.75rem; }
+            .rg-cta { padding: 2rem 1.5rem; }
+        }
+    </style>
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/ruta-gastronomica-en.html">
+    <meta property="og:title"       content="Poás Gastronomic Route">
+    <meta property="og:description" content="Discover iconic dishes and restaurants with views in Poás canton.">
+    <meta property="og:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/qr_poas.jpg">
+    <meta property="og:image:width"  content="800">
+    <meta property="og:image:height" content="800">
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Poás Gastronomic Route">
+    <meta name="twitter:description" content="Discover iconic dishes and restaurants with views in Poás canton.">
+    <meta name="twitter:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/qr_poas.jpg">
+</head>
+
+<body>
+<!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Poás <span>Agua y Fuego</span></div>
+        <ul class="nav-links">
+            <li><a href="index-en.html">Home</a></li>
+            <li><a href="index-en.html#patrimonio">Water Heritage</a></li>
+            <li><a href="plan-regulador-en.html">Zoning Plan</a></li>
+            <li><a href="index-en.html#galeria">Gallery</a></li>
+            <li><a href="index-en.html#turismo" style="text-align:center;white-space:normal;line-height:1.3;">Tourism &amp; Business<br>Directory</a></li>
+            <li><a href="index-en.html#contacto">Contact</a></li>
+        </ul>
+        <div class="nav-lang">
+            <a href="ruta-gastronomica.html" class="lang-btn">🇨🇷 ES</a>
+            <a href="ruta-gastronomica-en.html" class="lang-btn active">🇺🇸 EN</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <button class="close-btn" id="closeNav" aria-label="Close menu">✕</button>
+        <a href="index-en.html"             onclick="closeMobileNav()">Home</a>
+        <a href="index-en.html#patrimonio"  onclick="closeMobileNav()">Water Heritage</a>
+        <a href="plan-regulador-en.html"    onclick="closeMobileNav()">Zoning Plan</a>
+        <a href="index-en.html#galeria"     onclick="closeMobileNav()">Gallery</a>
+        <a href="index-en.html#turismo"     onclick="closeMobileNav()" style="text-align:center;white-space:normal;line-height:1.3;">Tourism &amp; Business<br>Directory</a>
+        <a href="index-en.html#contacto"    onclick="closeMobileNav()">Contact</a>
+    </div>
+
+    <!-- Hero -->
+    <div class="rg-hero">
+        <div class="rg-hero-content">
+            <h1>Gastronomic <span>Route</span></h1>
+            <p>Unique flavors born between the fire of the volcano and the freshness of the mountains of the Poás canton.</p>
+        </div>
+    </div>
+
+    <!-- Contenido -->
+    <section class="rg-main">
+        <div class="container">
+            <a href="index-en.html#turismo" class="rg-back">← Back to Tourism &amp; Business Directory</a>
+
+            <!-- ICONIC DISHES -->
+            <div class="rg-section-label">🍽️ Must-Try</div>
+            <h2 class="rg-section-title">Iconic Dishes of the Canton</h2>
+            <p class="rg-section-desc">Before exploring the restaurants, find out what you absolutely must try during your visit to the Poás canton.</p>
+
+            <div class="platillos-grid">
+                <div class="platillo-card">
+                    <div class="platillo-icon">🧀</div>
+                    <h4>Artisan Palmito Cheese</h4>
+                    <p>The star product of the Poasito area, known for its freshness and characteristic rolled shape. Freshly made and full of flavor.</p>
+                </div>
+                <div class="platillo-card">
+                    <div class="platillo-icon">🫘</div>
+                    <h4>Mountain Chifrijo</h4>
+                    <p>Local versions that often include fresh ingredients grown in the area, with that special touch of highland cooking.</p>
+                </div>
+                <div class="platillo-card">
+                    <div class="platillo-icon">🐟</div>
+                    <h4>Fresh Trout</h4>
+                    <p>Very common in the highland districts. Prepared with garlic, grilled, or as ceviche. Its freshness makes it an exceptional dish.</p>
+                </div>
+                <div class="platillo-card">
+                    <div class="platillo-icon">🍲</div>
+                    <h4>Olla de Carne</h4>
+                    <p>A Costa Rican classic served in Poás with vegetables grown on the slopes of the volcano, full of flavor and nutrition.</p>
+                </div>
+            </div>
+
+            <hr class="rg-divider">
+
+            <!-- RESTAURANTS WITH A VIEW -->
+            <div class="rg-section-label">🏔️ Experience</div>
+            <h2 class="rg-section-title">Restaurants with a View and an Experience</h2>
+            <p class="rg-section-desc">Options organized by the type of experience you are looking for.</p>
+
+            <div class="restaurantes-list">
+                <div class="rest-card">
+                    <div class="rest-icon">🍕</div>
+                    <div class="rest-info">
+                        <h3>Gastro Bar Magia del Poás</h3>
+                        <p>Ideal for a romantic or special dinner. It stands out for its cozy atmosphere, live music, and dishes like burgers, pizzas, and strawberry drinks. Perfect for a memorable evening at altitude.</p>
+                    </div>
+                </div>
+                <div class="rest-card">
+                    <div class="rest-icon">🍓</div>
+                    <div class="rest-info">
+                        <h3>Restaurante Freddo Fresas</h3>
+                        <p>A traditional stop in Poasito. Famous for its typical cuisine, strawberry smoothies, and artisan desserts. A must-stop on the way to the volcano.</p>
+                    </div>
+                </div>
+                <div class="rest-card">
+                    <div class="rest-icon">🌄</div>
+                    <div class="rest-info">
+                        <h3>La Terraza de Luna</h3>
+                        <p>Located in Fraijanes, it offers a spectacular view of the Central Valley. Recommended for its strawberry sangria, churrasco, and pastas. The perfect place to enjoy the scenery while dining.</p>
+                    </div>
+                </div>
+                <div class="rest-card">
+                    <div class="rest-icon">🌿</div>
+                    <div class="rest-info">
+                        <h3>Terrazas del Bosque</h3>
+                        <p>Perfect for those seeking a natural setting, with dining rooms that open directly to the forest. Typical food options like chifrijo and olla de carne in a purely natural atmosphere.</p>
+                    </div>
+                </div>
+                <div class="rest-card">
+                    <div class="rest-icon">🏡</div>
+                    <div class="rest-info">
+                        <h3>La Casona de Doña Julia</h3>
+                        <p>Very popular for those seeking the authentic flavor of "grandma's cooking" near the volcano. Home-cooked food, generous portions, and the warmth of traditional Costa Rican cuisine.</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="rg-divider">
+
+            <!-- TÍPICO FRAIJANES RESTAURANT -->
+            <div class="rg-section-label">🥘 Featured</div>
+            <h2 class="rg-section-title">Típico Fraijanes Restaurant</h2>
+            <p class="rg-section-desc">The reference spot for those seeking authentic Costa Rican cuisine with generous portions and warm service.</p>
+
+            <div class="rest-img-banner">
+                <img src="img/tipico_fraijanes.jpg" alt="Típico Fraijanes Restaurant – Typical Dishes / Family Atmosphere">
+                <div class="rest-img-overlay">
+                    <span>🍽️ Typical Dishes &nbsp;|&nbsp; 👨‍👩‍👧‍👦 Family Atmosphere &nbsp;|&nbsp; 📞 2482-2853</span>
+                </div>
+            </div>
+
+            <div class="restaurantes-list">
+                <div class="rest-card rest-featured">
+                    <div class="rest-icon">🍽️</div>
+                    <div class="rest-info">
+                        <span class="rest-badge">⭐ Recommended</span>
+                        <h3>House Specialties</h3>
+                        <div class="especialidades">
+                            <div class="esp-item">🥗 <div><strong>Full Traditional Plates:</strong> Served with wood-fire flavor, including options of meat in sauce, pork chop, or chicken, always accompanied by daily-made vegetable hash.</div></div>
+                            <div class="esp-item">🍳 <div><strong>Traditional Breakfast:</strong> Their gallo pinto with seasoned tortilla (hand-patted) and fresh cheese, highly sought after by cyclists and tourists heading up to the volcano early in the morning.</div></div>
+                            <div class="esp-item">🍵 <div><strong>Soups &amp; Broths:</strong> Ideal for the cold climate of the area. Their olla de carne and meatball broth are comforting and delicious.</div></div>
+                            <div class="esp-item">🌿 <div><strong>Vegan &amp; Vegetarian Dishes:</strong> Fresh and nutritious options made with locally grown vegetables, designed for those who prefer plant-based eating without sacrificing traditional Costa Rican flavor.</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rest-card rest-featured">
+                    <div class="rest-icon">📍</div>
+                    <div class="rest-info">
+                        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.5rem;">
+                            <span class="rest-badge">🐾 Pet-Friendly</span>
+                            <span class="rest-badge" style="background:#D1FAE5;color:#065F46;">♿ Law 7600 Compliant</span>
+                        </div>
+                        <h3>Location &amp; Atmosphere</h3>
+                        <p>Located right across from the entrance to the Fraijanes Lagoon Recreational Park, the perfect stop before or after a hike. It features a rustic wooden structure that captures the essence of the old mountain farmhouses of Alajuela. Pet-friendly in open areas and known for its quick service, ideal for large groups or families with children.</p>
+                        <p style="font-size:0.85rem;color:#065F46;margin-top:0.6rem;font-weight:600;">♿ This establishment complies with <strong>Law 7600</strong> — Equal Opportunities Law for Persons with Disabilities, ensuring accessibility for all visitors.</p>
+                        <div style="display:flex;flex-wrap:wrap;gap:0.65rem;margin-top:1rem;">
+                            <a href="tel:+50624822853"
+                               style="display:inline-flex;align-items:center;gap:0.5rem;background:#2D1A0A;color:#FFBB56;padding:0.55rem 1.2rem;border-radius:8px;font-weight:700;font-size:0.88rem;text-decoration:none;">
+                                📞 2482-2853
+                            </a>
+                            <a href="https://wa.me/50686496653" target="_blank" rel="noopener"
+                               style="display:inline-flex;align-items:center;gap:0.5rem;background:#25D366;color:#fff;padding:0.55rem 1.2rem;border-radius:8px;font-weight:700;font-size:0.88rem;text-decoration:none;">
+                                💬 WhatsApp 8649-6653
+                            </a>
+                            <a href="https://ul.waze.com/ul?ll=10.14595548%2C-84.19472337&navigate=yes&zoom=17&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location" target="_blank" rel="noopener"
+                               style="display:inline-flex;align-items:center;gap:0.5rem;background:#05C8F7;color:#1A1A2E;padding:0.55rem 1.2rem;border-radius:8px;font-weight:700;font-size:0.88rem;text-decoration:none;">
+                                🗺️ How to get there (Waze)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="rg-divider">
+
+            <!-- RESTAURANTE LO QUE TÚ QUIERAS -->
+            <div class="rg-section-label">🌅 Casual View &amp; Flavor</div>
+            <h2 class="rg-section-title">Restaurante Lo que tú quieras</h2>
+            <p class="rg-section-desc">Located near Fraijanes, it has won the hearts of visitors with its modern atmosphere blended with fresh mountain air.</p>
+
+            <div class="rest-img-banner">
+                <img src="img/lo_que_tu_quieras.jpg" alt="Restaurante y Mirador Lo que tú Quieras – Poás">
+                <div class="rest-img-overlay">
+                    <span>📍 4km before Poás Volcano National Park &nbsp;|&nbsp; 📱 +506 6123-1507</span>
+                </div>
+            </div>
+
+            <div class="restaurantes-list">
+                <div class="rest-card rest-casual">
+                    <div class="rest-icon">🌇</div>
+                    <div class="rest-info">
+                        <span class="rest-badge rest-badge-casual">📸 Best View</span>
+                        <h3>The Main Attraction: The View</h3>
+                        <p>It is one of the best spots in the area to enjoy a sunset. Its terrace is perfect for photographing the city lights while enjoying Poás's cold climate.</p>
+                    </div>
+                </div>
+                <div class="rest-card rest-casual">
+                    <div class="rest-icon">🥩</div>
+                    <div class="rest-info">
+                        <h3>Culinary Offerings</h3>
+                        <div class="especialidades">
+                            <div class="esp-item">🔥 <div><strong>Steaks and Grills:</strong> Highly sought after for their sharing platters, ideal for groups of friends or families.</div></div>
+                            <div class="esp-item">🍓 <div><strong>House Drinks:</strong> Strawberry milkshakes, giant natural juices, and a good selection of cocktails and beers to complement the view.</div></div>
+                            <div class="esp-item">🍔 <div><strong>Varied Options:</strong> From traditional casados to artisan burgers and pastas. There's something for everyone!</div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rest-card rest-casual">
+                    <div class="rest-icon">🎉</div>
+                    <div class="rest-info">
+                        <span class="rest-badge rest-badge-casual">✨ Youthful Vibe</span>
+                        <h3>The Perfect Atmosphere</h3>
+                        <p>A place with a more youthful and dynamic feel, very popular for <em>"tardear"</em> — having a coffee or a drink as the sun sets over the Central Valley. Perfect for those special moments with friends.</p>
+                        <a href="https://wa.me/50661231507" target="_blank" rel="noopener"
+                           style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:1rem;background:#25D366;color:#fff;padding:0.55rem 1.2rem;border-radius:8px;font-weight:700;font-size:0.88rem;text-decoration:none;">
+                            📱 Mobile: 6123-1507
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="rg-divider">
+
+            <!-- CAFETERIAS AND QUICK STOPS -->
+            <div class="rg-section-label">☕ Quick Stops</div>
+            <h2 class="rg-section-title">Cafés &amp; Quick Stops</h2>
+            <p class="rg-section-desc">For a coffee, a snack, or a special purchase during your tour.</p>
+
+            <div class="cafeterias-grid">
+                <div class="cafe-card">
+                    <h4>☕ Fresas del Mirador</h4>
+                    <p>Specialty coffee paired with chocolate-dipped strawberries, enjoyed with a view 3 km before the national park. A must-stop.</p>
+                </div>
+                <div class="cafe-card">
+                    <h4>🌮 Sabor Mexicano Volcán Poás</h4>
+                    <p>For those looking for something different: Mexican corn and gallo pinto with a unique twist. A surprising fusion right in the mountains.</p>
+                </div>
+                <div class="cafe-card">
+                    <h4>🧀 Fresi</h4>
+                    <p>A must-stop to buy freshly made palmito cheese and artisan liqueurs. A local gastronomic treasure you cannot miss.</p>
+                </div>
+            </div>
+
+            <hr class="rg-divider">
+
+            <!-- TIPS FOR TOURISTS -->
+            <div class="rg-section-label">📝 Tips</div>
+            <h2 class="rg-section-title">Tips for Tourists</h2>
+
+            <div class="consejos-grid">
+                <div class="consejo-card">
+                    <div class="consejo-icon">📅</div>
+                    <div>
+                        <h4>Reservations</h4>
+                        <p>Many places, especially those with privileged views like Magia del Poás or La Terraza de Luna, tend to fill up on weekends. It is recommended to reserve in advance.</p>
+                    </div>
+                </div>
+                <div class="consejo-card">
+                    <div class="consejo-icon">🧥</div>
+                    <div>
+                        <h4>The Weather at Restaurants</h4>
+                        <p>Although restaurants usually have fireplaces or heating, it is always a good idea to bring an extra layer since the temperature drops considerably after 4:00 p.m.</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="rg-divider">
+
+            <!-- TIPS FOR VISITING POÁS VOLCANO -->
+            <div id="consejos-volcan" class="rg-section-label">🌋 Poás Volcano</div>
+            <h2 class="rg-section-title">Tips for Visiting Poás Volcano</h2>
+            <p class="rg-section-desc">Poás Volcano is one of the most visited destinations in Costa Rica, but it requires prior planning due to safety regulations and weather conditions.</p>
+
+            <div class="consejos-grid">
+                <div class="consejo-card">
+                    <div class="consejo-icon">🎟️</div>
+                    <div>
+                        <h4>Mandatory Reservation</h4>
+                        <p>You must purchase your tickets in advance <strong>exclusively</strong> through the official SINAC website. Tickets are not sold at the park's physical entrance.</p>
+                    </div>
+                </div>
+                <div class="consejo-card">
+                    <div class="consejo-icon">🌅</div>
+                    <div>
+                        <h4>The Ideal Time</h4>
+                        <p>It is recommended to book for the early morning hours (between 8:00 a.m. and 8:30 a.m.) to have a better chance of seeing the crater before clouds cover it.</p>
+                    </div>
+                </div>
+                <div class="consejo-card">
+                    <div class="consejo-icon">📷</div>
+                    <div>
+                        <h4>Check the Weather Live</h4>
+                        <p>Search <strong>"Cámara Cráter Poás"</strong> on Google to see live whether the volcano is clear before heading up. Save time and plan your visit better!</p>
+                    </div>
+                </div>
+                <div class="consejo-card">
+                    <div class="consejo-icon">⏱️</div>
+                    <div>
+                        <h4>Time Restrictions</h4>
+                        <p>For volcanic safety reasons, the stay at the main crater viewpoint is usually limited to <strong>20–40 minutes</strong>. Make the most of every moment.</p>
+                    </div>
+                </div>
+                <div class="consejo-card">
+                    <div class="consejo-icon">🥾</div>
+                    <div>
+                        <h4>Explore More: Laguna Botos</h4>
+                        <p>Don't miss the <strong>Laguna Botos Trail</strong>, which crosses the cloud forest and is once again open to the public. A unique experience surrounded by nature.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WHAT TO BRING -->
+            <div class="rg-section-label" style="margin-top:2.5rem;">🎒 Packing</div>
+            <h2 class="rg-section-title">What to Bring and How to Prepare</h2>
+            <p class="rg-section-desc">The weather in Poás is extremely variable and tends to be much colder than the rest of Alajuela.</p>
+
+            <div class="equipaje-grid">
+                <div class="equip-item">
+                    <span class="equip-icon">🧥</span>
+                    <div>
+                        <strong>Layered Clothing</strong>
+                        <p>Bring a sweater or light jacket, as the temperature drops considerably at the summit.</p>
+                    </div>
+                </div>
+                <div class="equip-item">
+                    <span class="equip-icon">🌧️</span>
+                    <div>
+                        <strong>Rain Protection</strong>
+                        <p>A raincoat or light poncho is essential, even if the day looks sunny. It can rain without warning.</p>
+                    </div>
+                </div>
+                <div class="equip-item">
+                    <span class="equip-icon">👟</span>
+                    <div>
+                        <strong>Footwear</strong>
+                        <p>Wear comfortable, closed-toe shoes, preferably with good grip for the park's trails.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="rg-cta">
+                <h3>Do you have a restaurant in Poás?</h3>
+                <p>Add it to the directory and reach more visitors looking for authentic experiences in our region.</p>
+                <a href="index-en.html#contacto" class="btn-cta-rg">📬 Contact us to register it</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">Poás <span>Agua y Fuego</span></div>
+                <p>Community page of the Poás canton, Alajuela, Costa Rica.</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="index-en.html">Home</a></li>
+                    <li><a href="plan-regulador-en.html">Zoning Plan</a></li>
+                    <li><a href="ruta-gastronomica-en.html">Gastronomic Route</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Poás Agua y Fuego. Visual Concept.</p>
+            <p class="copyright-autor">César Luis Quesada Herrera</p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        const closeNav  = document.getElementById('closeNav');
+        hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+        closeNav.addEventListener('click',  () => mobileNav.classList.remove('open'));
+        function closeMobileNav() { mobileNav.classList.remove('open'); }
+    </script>
+</body>
+</html>

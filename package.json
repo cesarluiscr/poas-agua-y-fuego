@@ -1,0 +1,14 @@
+{
+  "name": "poas-agua-y-fuego",
+  "version": "1.0.0",
+  "description": "Servidor local - Poás Agua y Fuego",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "exceljs": "^4.4.0",
+    "cors": "^2.8.5"
+  }
+}

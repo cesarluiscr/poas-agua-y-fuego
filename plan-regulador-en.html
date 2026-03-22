@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canton Zoning Plan – Poás Water & Fire</title>
+    <meta name="description" content="Canton Zoning Plan of Poás. Land use zoning, environmental protection and local development regulations.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .pr-hero { min-height:38vh; background:linear-gradient(135deg,var(--clr-volcanic-dark) 60%,var(--clr-volcanic-gray)); display:flex; align-items:center; justify-content:center; text-align:center; padding:7rem 1.5rem 4rem; }
+        .pr-hero h1 { font-size:clamp(2rem,6vw,3.8rem); font-weight:800; color:#fff; letter-spacing:1px; }
+        .pr-hero h1 span { color:var(--clr-turquoise); }
+        .pr-hero p { color:rgba(240,244,244,0.75); font-size:1.1rem; margin-top:0.8rem; max-width:600px; margin-inline:auto; }
+        .pr-back { display:inline-flex; align-items:center; gap:0.5rem; color:var(--clr-turquoise); text-decoration:none; font-weight:600; font-size:0.95rem; margin-bottom:2.5rem; transition:opacity 0.2s; }
+        .pr-back:hover { opacity:0.75; }
+        .pr-content { background:var(--clr-bg-light); padding:5rem 0; }
+        .pr-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start; }
+        .pr-info>p { color:var(--clr-text-muted); line-height:1.8; margin-bottom:2rem; font-size:1.05rem; }
+        .pr-features { display:flex; flex-direction:column; gap:1.25rem; margin-bottom:2.5rem; }
+        .pr-feature-item { display:flex; align-items:flex-start; gap:1rem; padding:1.25rem; background:#fff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.06); border-left:4px solid var(--clr-turquoise); }
+        .pr-feature-item .feature-icon { font-size:1.8rem; flex-shrink:0; }
+        .pr-feature-item h4 { font-size:1rem; font-weight:700; color:var(--clr-volcanic-dark); margin-bottom:0.25rem; }
+        .pr-feature-item p { font-size:0.9rem; color:var(--clr-text-muted); margin:0; }
+        .pr-table-section { margin-top:3rem; }
+        .pr-table-section h3 { font-size:1.4rem; font-weight:700; color:var(--clr-volcanic-dark); margin-bottom:1rem; }
+        .pr-table { width:100%; border-collapse:collapse; font-size:0.92rem; }
+        .pr-table th { background:var(--clr-volcanic-dark); color:#fff; padding:0.75rem 1rem; text-align:left; font-weight:600; }
+        .pr-table td { padding:0.75rem 1rem; border-bottom:1px solid #E8ECEC; color:var(--clr-text-muted); }
+        .pr-table tr:nth-child(even) td { background:#F4F8F8; }
+        .pr-table tr:hover td { background:#E8F5F5; }
+        .zona-badge { display:inline-block; padding:0.2rem 0.6rem; border-radius:6px; font-size:0.78rem; font-weight:700; }
+        .zona-residencial { background:#DBEAFE; color:#1D4ED8; }
+        .zona-comercial   { background:#FEF3C7; color:#92400E; }
+        .zona-protegida   { background:#D1FAE5; color:#065F46; }
+        .zona-industrial  { background:#FEE2E2; color:#991B1B; }
+        .zona-mixta       { background:#EDE9FE; color:#5B21B6; }
+        .pr-map-panel { position:sticky; top:90px; }
+        .pr-map-panel img { width:100%; border-radius:16px; box-shadow:0 8px 32px rgba(0,0,0,0.15); }
+        .pr-map-caption { font-size:0.83rem; color:var(--clr-text-muted); text-align:center; margin-top:0.75rem; }
+        .btn-doc { display:inline-flex; align-items:center; gap:0.5rem; background:var(--clr-turquoise); color:var(--clr-volcanic-dark); padding:0.85rem 1.75rem; border-radius:10px; font-weight:700; text-decoration:none; font-size:0.95rem; transition:transform 0.2s,box-shadow 0.2s; }
+        .btn-doc:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,200,180,0.3); }
+        @media(max-width:768px){ .pr-grid{grid-template-columns:1fr;} .pr-map-panel{position:static;} }
+        .nav-lang { display:flex; gap:0.35rem; align-items:center; margin-left:0.5rem; flex-shrink:0; }
+        .lang-btn { background:linear-gradient(135deg,#C0392B,#E74C3C); border:none; color:#fff; padding:0.3rem 0.75rem; border-radius:20px; font-size:0.73rem; font-weight:800; text-decoration:none; transition:filter 0.2s,transform 0.15s; white-space:nowrap; box-shadow:0 2px 8px rgba(231,76,60,.45); letter-spacing:0.3px; }
+        .lang-btn:hover { filter:brightness(1.15); transform:translateY(-1px); }
+        .lang-btn.active { background:linear-gradient(135deg,#0E5E6F,#17A589); box-shadow:0 2px 8px rgba(14,94,111,.5); }
+    </style>
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/plan-regulador-en.html">
+    <meta property="og:title"       content="Zoning Plan – Poás Water & Fire">
+    <meta property="og:description" content="Information about the Zoning Plan for Poás canton, Costa Rica.">
+    <meta property="og:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/qr_poas.jpg">
+    <meta property="og:image:width"  content="800">
+    <meta property="og:image:height" content="800">
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Zoning Plan – Poás Water & Fire">
+    <meta name="twitter:description" content="Information about the Zoning Plan for Poás canton, Costa Rica.">
+    <meta name="twitter:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/qr_poas.jpg">
+</head>
+
+<body>
+<nav class="navbar">
+        <div class="logo">Poás <span>Water & Fire</span></div>
+        <ul class="nav-links">
+            <li><a href="index-en.html">Home</a></li>
+            <li><a href="index-en.html#agua">Water Heritage</a></li>
+            <li><a href="plan-regulador-en.html" class="active">Zoning Plan</a></li>
+            <li><a href="index-en.html#galeria">Gallery</a></li>
+            <li><a href="index-en.html#turismo" style="text-align:center;white-space:normal;line-height:1.3;">Tourism &amp; Business<br>Directory</a></li>
+            <li><a href="index-en.html#contacto">Contact</a></li>
+        </ul>
+        <div class="nav-lang">
+            <a href="plan-regulador.html" class="lang-btn">🇨🇷 ES</a>
+            <a href="plan-regulador-en.html" class="lang-btn active">🇺🇸 EN</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <button class="close-btn" id="closeNav" aria-label="Close menu">✕</button>
+        <a href="index-en.html"           onclick="closeMobileNav()">Home</a>
+        <a href="index-en.html#agua"      onclick="closeMobileNav()">Water Heritage</a>
+        <a href="plan-regulador-en.html"  onclick="closeMobileNav()">Zoning Plan</a>
+        <a href="index-en.html#galeria"   onclick="closeMobileNav()">Gallery</a>
+        <a href="index-en.html#turismo"   onclick="closeMobileNav()" style="text-align:center;white-space:normal;line-height:1.3;">Tourism &amp; Business<br>Directory</a>
+        <a href="index-en.html#contacto"  onclick="closeMobileNav()">Contact</a>
+        <a href="plan-regulador.html"     onclick="closeMobileNav()">🇨🇷 Ver en Español</a>
+    </div>
+
+    <div class="pr-hero">
+        <div>
+            <h1>Canton <span>Zoning Plan</span></h1>
+            <p>The planning instrument that guides the sustainable development of Poás canton.</p>
+        </div>
+    </div>
+
+    <section class="pr-content">
+        <div class="container">
+            <a href="index-en.html" class="pr-back">← Back to Home</a>
+
+            <div class="pr-grid">
+                <div class="pr-info">
+                    <p>The Zoning Plan is the local planning instrument that defines land use and development regulations in our canton. Its goal is to ensure orderly and sustainable growth, protecting our water recharge zones and managing volcanic risk.</p>
+
+                    <div class="pr-features">
+                        <div class="pr-feature-item">
+                            <span class="feature-icon">🏗️</span>
+                            <div>
+                                <h4>Zoning</h4>
+                                <p>Definition of residential, commercial, industrial and protected areas for an orderly use of land.</p>
+                            </div>
+                        </div>
+                        <div class="pr-feature-item">
+                            <span class="feature-icon">🌿</span>
+                            <div>
+                                <h4>Environmental Protection</h4>
+                                <p>Protection of forests, water springs and biological corridors essential to local biodiversity.</p>
+                            </div>
+                        </div>
+                        <div class="pr-feature-item">
+                            <span class="feature-icon">🌋</span>
+                            <div>
+                                <h4>Volcanic Risk Management</h4>
+                                <p>Special regulations for areas under direct influence of Poás Volcano and its restriction zones.</p>
+                            </div>
+                        </div>
+                        <div class="pr-feature-item">
+                            <span class="feature-icon">💧</span>
+                            <div>
+                                <h4>Water Heritage</h4>
+                                <p>Protection of aquifers, recharge zones and rivers as strategic resources for the canton.</p>
+                            </div>
+                        </div>
+                        <div class="pr-feature-item">
+                            <span class="feature-icon">🏘️</span>
+                            <div>
+                                <h4>Urban Development</h4>
+                                <p>Regulation of buildings, setbacks, heights and densities to guarantee quality of life.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p style="margin-bottom:1rem;color:var(--clr-text-muted);font-size:0.97rem;line-height:1.6;">
+                        If you are interested in participating as a citizen in the follow-up of the zoning plan, contact us.
+                    </p>
+                    <a href="index-en.html#contacto" class="btn-doc">📬 Contact Us</a>
+
+                    <div class="pr-table-section">
+                        <h3>Canton Zones</h3>
+                        <table class="pr-table">
+                            <thead>
+                                <tr>
+                                    <th>Zone</th>
+                                    <th>Type</th>
+                                    <th>Permitted uses</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="zona-badge zona-residencial">ZR</span></td>
+                                    <td>Residential</td>
+                                    <td>Single and two-family housing</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="zona-badge zona-comercial">ZC</span></td>
+                                    <td>Commercial</td>
+                                    <td>Commerce, services and offices</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="zona-badge zona-mixta">ZM</span></td>
+                                    <td>Mixed</td>
+                                    <td>Residential with minor commerce</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="zona-badge zona-industrial">ZI</span></td>
+                                    <td>Industrial</td>
+                                    <td>Agro-industry and workshops</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="zona-badge zona-protegida">ZP</span></td>
+                                    <td>Protection</td>
+                                    <td>No construction, conservation only</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="pr-map-panel">
+                    <img src="img/mapa_zonificacion.jpg" alt="Zoning Map of Poás Canton">
+                    <p class="pr-map-caption">📍 Zoning map of Poás canton — Current Zoning Plan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">Poás <span>Water & Fire</span></div>
+                <p>Community platform for Poás canton, Alajuela, Costa Rica.</p>
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="index-en.html">Home</a></li>
+                    <li><a href="plan-regulador-en.html">Zoning Plan</a></li>
+                    <li><a href="ruta-gastronomica-en.html">Gastronomic Route</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 Poás Water & Fire. Visual Concept.</p>
+            <p class="copyright-autor">César Luis Quesada Herrera</p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        const closeNav  = document.getElementById('closeNav');
+        hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+        closeNav.addEventListener('click',  () => mobileNav.classList.remove('open'));
+        function closeMobileNav() { mobileNav.classList.remove('open'); }
+    </script>
+</body>
+</html>
