@@ -679,11 +679,7 @@ h4 {
     background: #E2E8E6;
 }
 
-/* Primera foto ocupa 2 columnas para destacarla */
-.gallery-item:first-child {
-    grid-column: span 2;
-    aspect-ratio: 16 / 9;
-}
+/* El span se controla con inline style en cada item grande */
 
 .gallery-item img {
     width: 100%;
@@ -1821,11 +1817,6 @@ footer {
         margin-top: 1.5rem;
     }
 
-    .gallery-item:first-child {
-        grid-column: span 2;
-        aspect-ratio: 16 / 9;
-    }
-
     /* Turismo filters */
     .turismo-filters {
         gap: 0.5rem;
@@ -1921,11 +1912,6 @@ footer {
     /* Gallery small phones */
     .gallery-grid {
         grid-template-columns: 1fr;
-    }
-
-    .gallery-item:first-child {
-        grid-column: span 1;
-        aspect-ratio: 4 / 3;
     }
 
     .contacto-grid {
