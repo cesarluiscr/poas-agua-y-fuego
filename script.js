@@ -155,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
             categoria: "hospedaje",
             emoji: "🏔️",
             descripcion: "Cabañas tipo A-frame en medio de la naturaleza, con vistas espectaculares al volcán Poás. Disfruta de una experiencia única rodeada de bosque y tranquilidad en Poásito, Alajuela.",
+            descripcion_en: "A-frame cabins nestled in nature, with spectacular views of Poás Volcano. Enjoy a unique experience surrounded by forest and tranquility in Poásito, Alajuela.",
             whatsapp: "50664859189",
             correo: "",
             facebook: "https://www.facebook.com/share/18Py73sqeq/",
@@ -172,6 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
             categoria: "tecnologia",
             emoji: "💻",
             descripcion: "Soluciones tecnológicas para el cantón de Poás. Soporte técnico, desarrollo web, redes y servicios informáticos. Atención personalizada por César Luis Quesada Herrera.",
+            descripcion_en: "Technology solutions for the Poás canton. Technical support, web development, networking and IT services. Personalized service by César Luis Quesada Herrera.",
             whatsapp: "50687058612",
             facebook: "https://www.facebook.com/techcentercr/",
             waze: "https://ul.waze.com/ul?ll=10.09587101%2C-84.24263835&navigate=yes&zoom=17&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location",
@@ -185,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             categoria: "servicio",
             emoji: "🧴",
             descripcion: "Venta de productos de limpieza para el hogar y empresas. Atención personalizada por Luis Murillo Vargas.",
+            descripcion_en: "Cleaning products for homes and businesses. Personalized service by Luis Murillo Vargas.",
             whatsapp: "50689944301",
             facebook: "https://www.facebook.com/luis.murillovargas.7?locale=es_LA",
             correo: "luismurillo21@gmail.com",
@@ -192,13 +195,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
+    const isEnglish = document.documentElement.lang === 'en';
+
     const CATEGORIA_META = {
-        restaurante: { emoji: "🍽️", label: "Restaurante" },
-        hospedaje:   { emoji: "🏨", label: "Hospedaje" },
-        tours:       { emoji: "🌋", label: "Tours" },
-        tienda:      { emoji: "🛍️", label: "Tienda" },
-        servicio:    { emoji: "⚙️", label: "Servicio" },
-        tecnologia:  { emoji: "💻", label: "Tecnología" }
+        restaurante: { emoji: "🍽️", label: isEnglish ? "Restaurant"  : "Restaurante" },
+        hospedaje:   { emoji: "🏨", label: isEnglish ? "Lodging"      : "Hospedaje" },
+        tours:       { emoji: "🌋", label: isEnglish ? "Tours"        : "Tours" },
+        tienda:      { emoji: "🛍️", label: isEnglish ? "Shop"         : "Tienda" },
+        servicio:    { emoji: "⚙️", label: isEnglish ? "Service"      : "Servicio" },
+        tecnologia:  { emoji: "💻", label: isEnglish ? "Technology"   : "Tecnología" }
     };
 
     // Los negocios por defecto siempre vienen del código (nunca del localStorage)
@@ -253,22 +258,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="negocio-badge">${meta.label}</span>
                     </div>
                 </div>
-                <p class="negocio-desc">${negocio.descripcion}</p>
+                <p class="negocio-desc">${isEnglish && negocio.descripcion_en ? negocio.descripcion_en : negocio.descripcion}</p>
                 <div class="negocio-meta">
                     ${negocio.direccion ? `<span>📍 ${negocio.direccion}</span>` : ''}
                     ${negocio.telefono  ? `<span>📞 ${negocio.telefono}</span>` : ''}
                     ${negocio.correo    ? `<a href="mailto:${negocio.correo}">✉️ ${negocio.correo}</a>` : ''}
-                    ${negocio.sitio && !negocio.facebook ? `<a href="${negocio.sitio}" target="_blank" rel="noopener">${negocio.sitio.includes('facebook') ? '📘 Ver en Facebook' : '🌐 ' + negocio.sitio}</a>` : ''}
                 </div>
                 ${(negocio.whatsapp || negocio.facebook || negocio.instagram || negocio.tiktok || negocio.waze || negocio.booking || negocio.sitio) ? `
                 <div class="negocio-social">
-                    ${negocio.sitio     ? `<a href="${negocio.sitio}" ${negocio.sitio.startsWith('http') ? 'target="_blank"' : ''} rel="noopener" class="social-btn ver-mas-btn">🌐 Ver más</a>` : ''}
+                    ${negocio.sitio     ? `<a href="${negocio.sitio}" ${negocio.sitio.startsWith('http') ? 'target="_blank"' : ''} rel="noopener" class="social-btn ver-mas-btn">🌐 ${isEnglish ? 'See more' : 'Ver más'}</a>` : ''}
                     ${negocio.whatsapp  ? `<a href="https://wa.me/${negocio.whatsapp}" target="_blank" rel="noopener" class="social-btn wa-btn">💬 WhatsApp</a>` : ''}
                     ${negocio.facebook  ? `<a href="${negocio.facebook}" target="_blank" rel="noopener" class="social-btn fb-btn">📘 Facebook</a>` : ''}
                     ${negocio.instagram ? `<a href="${negocio.instagram}" target="_blank" rel="noopener" class="social-btn ig-btn">📸 Instagram</a>` : ''}
                     ${negocio.tiktok    ? `<a href="${negocio.tiktok}" target="_blank" rel="noopener" class="social-btn tt-btn">🎵 TikTok</a>` : ''}
-                    ${negocio.booking   ? `<a href="${negocio.booking}" target="_blank" rel="noopener" class="social-btn bk-btn">🏨 Reservar en Booking</a>` : ''}
-                    ${negocio.waze      ? `<a href="${negocio.waze}" target="_blank" rel="noopener" class="social-btn wz-btn">📍 Cómo llegar</a>` : ''}
+                    ${negocio.booking   ? `<a href="${negocio.booking}" target="_blank" rel="noopener" class="social-btn bk-btn">🏨 ${isEnglish ? 'Book on Booking' : 'Reservar en Booking'}</a>` : ''}
+                    ${negocio.waze      ? `<a href="${negocio.waze}" target="_blank" rel="noopener" class="social-btn wz-btn">📍 ${isEnglish ? 'Get directions' : 'Cómo llegar'}</a>` : ''}
                 </div>` : ''}
             `;
             negociosGrid.appendChild(card);
