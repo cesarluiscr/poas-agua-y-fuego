@@ -401,37 +401,60 @@ h4 {
 }
 
 .river-svg {
-    width: 200px;
+    width: 260px;
     height: 300px;
 }
 
-/* Ondas fluyendo diagonalmente arriba-izquierda → abajo-derecha */
+/* Ondas del río bajando por el volcán */
 .river-wave {
-    animation: riverFlowDiag 2.8s linear infinite;
+    animation: rioDown 2.5s linear infinite;
 }
-.rw1 { animation-duration: 2.8s; animation-delay: 0s;    }
-.rw2 { animation-duration: 3.4s; animation-delay: -1s;   }
-.rw3 { animation-duration: 4s;   animation-delay: -2s;   }
+.rw1 { animation-duration: 2.5s; animation-delay: 0s;   }
+.rw2 { animation-duration: 3.2s; animation-delay: -1s;  }
 
-@keyframes riverFlowDiag {
-    from { transform: translate(0, 0);      }
-    to   { transform: translate(8px, 40px); }
+@keyframes rioDown {
+    from { transform: translateY(0);    }
+    to   { transform: translateY(30px); }
 }
 
-/* Espuma deslizándose con la corriente diagonal */
+/* Espuma bajando */
 .river-foam {
-    animation: foamDiag 3s ease-in-out infinite;
+    animation: foamDown 3s ease-in-out infinite;
 }
 .rf1 { animation-duration: 3s;   animation-delay: 0s;    }
 .rf2 { animation-duration: 3.5s; animation-delay: -0.7s; }
-.rf3 { animation-duration: 2.8s; animation-delay: -1.4s; }
-.rf4 { animation-duration: 4s;   animation-delay: -0.3s; }
-.rf5 { animation-duration: 3.3s; animation-delay: -2s;   }
-.rf6 { animation-duration: 3.8s; animation-delay: -1.2s; }
+.rf3 { animation-duration: 2.8s; animation-delay: -1.5s; }
+.rf4 { animation-duration: 4s;   animation-delay: -0.4s; }
+.rf5 { animation-duration: 3.2s; animation-delay: -2s;   }
 
-@keyframes foamDiag {
-    0%, 100% { transform: translate(0, 0);    opacity: 0.85; }
-    50%       { transform: translate(5px, 18px); opacity: 1;  }
+@keyframes foamDown {
+    0%, 100% { transform: translateY(0);     opacity: 0.9; }
+    50%       { transform: translateY(12px);  opacity: 1;   }
+}
+
+/* Vapor del cráter */
+.vapor {
+    animation: vaporRise 3s ease-in-out infinite;
+}
+.v1 { animation-duration: 3s;   animation-delay: 0s;    }
+.v2 { animation-duration: 3.5s; animation-delay: -1s;   }
+.v3 { animation-duration: 4s;   animation-delay: -2s;   }
+
+@keyframes vaporRise {
+    0%, 100% { transform: translateY(0) scaleX(1);   opacity: 0.7; }
+    50%       { transform: translateY(-8px) scaleX(1.2); opacity: 0.4; }
+}
+
+/* Nubes flotando */
+.cloud {
+    animation: cloudDrift 8s ease-in-out infinite;
+}
+.c1 { animation-duration: 8s;  animation-delay: 0s;   }
+.c2 { animation-duration: 10s; animation-delay: -3s;  }
+
+@keyframes cloudDrift {
+    0%, 100% { transform: translateX(0);    }
+    50%       { transform: translateX(8px); }
 }
 
 @keyframes dropFloat {

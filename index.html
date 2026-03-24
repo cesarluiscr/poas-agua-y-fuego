@@ -110,127 +110,125 @@
                 <div class="water-visual">
                     <div class="water-anim-container">
 
-                        <!-- Gotas pequeñas flotando alrededor -->
-                        <div class="mini-drop md1">
-                            <svg viewBox="0 0 60 72" xmlns="http://www.w3.org/2000/svg">
-                                <defs><radialGradient id="miniGrad1" cx="35%" cy="28%" r="65%"><stop offset="0%" stop-color="#E0F7FF"/><stop offset="100%" stop-color="#56B4D3"/></radialGradient></defs>
-                                <path d="M30 4 C30 4, 52 28, 52 44 C52 57, 42 66, 30 66 C18 66, 8 57, 8 44 C8 28, 30 4, 30 4Z" fill="url(#miniGrad1)"/>
-                                <ellipse cx="21" cy="36" rx="6" ry="10" fill="rgba(255,255,255,0.55)" transform="rotate(-20 21 36)"/>
-                            </svg>
-                        </div>
-                        <div class="mini-drop md2">
-                            <svg viewBox="0 0 60 72" xmlns="http://www.w3.org/2000/svg">
-                                <defs><radialGradient id="miniGrad2" cx="35%" cy="28%" r="65%"><stop offset="0%" stop-color="#E0F7FF"/><stop offset="100%" stop-color="#56B4D3"/></radialGradient></defs>
-                                <path d="M30 4 C30 4, 52 28, 52 44 C52 57, 42 66, 30 66 C18 66, 8 57, 8 44 C8 28, 30 4, 30 4Z" fill="url(#miniGrad2)"/>
-                                <ellipse cx="21" cy="36" rx="6" ry="10" fill="rgba(255,255,255,0.55)" transform="rotate(-20 21 36)"/>
-                            </svg>
-                        </div>
-                        <div class="mini-drop md3">
-                            <svg viewBox="0 0 60 72" xmlns="http://www.w3.org/2000/svg">
-                                <defs><radialGradient id="miniGrad3" cx="35%" cy="28%" r="65%"><stop offset="0%" stop-color="#E0F7FF"/><stop offset="100%" stop-color="#56B4D3"/></radialGradient></defs>
-                                <path d="M30 4 C30 4, 52 28, 52 44 C52 57, 42 66, 30 66 C18 66, 8 57, 8 44 C8 28, 30 4, 30 4Z" fill="url(#miniGrad3)"/>
-                                <ellipse cx="21" cy="36" rx="6" ry="10" fill="rgba(255,255,255,0.55)" transform="rotate(-20 21 36)"/>
-                            </svg>
-                        </div>
-                        <div class="mini-drop md4">
-                            <svg viewBox="0 0 60 72" xmlns="http://www.w3.org/2000/svg">
-                                <defs><radialGradient id="miniGrad4" cx="35%" cy="28%" r="65%"><stop offset="0%" stop-color="#E0F7FF"/><stop offset="100%" stop-color="#56B4D3"/></radialGradient></defs>
-                                <path d="M30 4 C30 4, 52 28, 52 44 C52 57, 42 66, 30 66 C18 66, 8 57, 8 44 C8 28, 30 4, 30 4Z" fill="url(#miniGrad4)"/>
-                                <ellipse cx="21" cy="36" rx="6" ry="10" fill="rgba(255,255,255,0.55)" transform="rotate(-20 21 36)"/>
-                            </svg>
-                        </div>
-                        <div class="mini-drop md5">
-                            <svg viewBox="0 0 60 72" xmlns="http://www.w3.org/2000/svg">
-                                <defs><radialGradient id="miniGrad5" cx="35%" cy="28%" r="65%"><stop offset="0%" stop-color="#E0F7FF"/><stop offset="100%" stop-color="#56B4D3"/></radialGradient></defs>
-                                <path d="M30 4 C30 4, 52 28, 52 44 C52 57, 42 66, 30 66 C18 66, 8 57, 8 44 C8 28, 30 4, 30 4Z" fill="url(#miniGrad5)"/>
-                                <ellipse cx="21" cy="36" rx="6" ry="10" fill="rgba(255,255,255,0.55)" transform="rotate(-20 21 36)"/>
-                            </svg>
-                        </div>
-
-                        <!-- Río natural fluyendo de izquierda-arriba a derecha-abajo -->
+                        <!-- Volcán con río en sus faldas -->
                         <div class="river-wrapper">
-                            <svg class="river-svg" viewBox="0 0 260 300" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="river-svg" viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
-                                    <linearGradient id="riverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <!-- Cielo -->
+                                    <linearGradient id="skyG" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%"   stop-color="#87CEEB"/>
+                                        <stop offset="100%" stop-color="#C8EEFF"/>
+                                    </linearGradient>
+                                    <!-- Volcán -->
+                                    <linearGradient id="volcG" x1="20%" y1="0%" x2="80%" y2="100%">
+                                        <stop offset="0%"   stop-color="#5A4A3A"/>
+                                        <stop offset="40%"  stop-color="#7A6050"/>
+                                        <stop offset="100%" stop-color="#4A7A3A"/>
+                                    </linearGradient>
+                                    <!-- Falda izquierda más oscura -->
+                                    <linearGradient id="slopeL" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%"   stop-color="#4A3A2E"/>
+                                        <stop offset="100%" stop-color="#3D6B2E"/>
+                                    </linearGradient>
+                                    <!-- Vegetación -->
+                                    <linearGradient id="vegG" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%"   stop-color="#5AAB3E"/>
+                                        <stop offset="100%" stop-color="#3D8A28"/>
+                                    </linearGradient>
+                                    <!-- Río -->
+                                    <linearGradient id="rioG" x1="0%" y1="0%" x2="0%" y2="100%">
+                                        <stop offset="0%"   stop-color="#E8F8FF"/>
+                                        <stop offset="50%"  stop-color="#87CEEB"/>
+                                        <stop offset="100%" stop-color="#2196C4"/>
+                                    </linearGradient>
+                                    <!-- Lago/laguna en base -->
+                                    <radialGradient id="lakeG" cx="50%" cy="40%" r="60%">
                                         <stop offset="0%"   stop-color="#C8EEFF"/>
-                                        <stop offset="40%"  stop-color="#87CEEB"/>
                                         <stop offset="100%" stop-color="#1E88C4"/>
-                                    </linearGradient>
-                                    <linearGradient id="bankL" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%"   stop-color="#5D9B4A"/>
-                                        <stop offset="100%" stop-color="#7AB85C"/>
-                                    </linearGradient>
-                                    <linearGradient id="bankR" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%"   stop-color="#4A8A38"/>
-                                        <stop offset="100%" stop-color="#6BA54A"/>
-                                    </linearGradient>
-                                    <filter id="riverBlur">
-                                        <feGaussianBlur stdDeviation="0.8"/>
-                                    </filter>
-                                    <clipPath id="riverClip2">
-                                        <!-- Canal del río: entra arriba-izquierda, curva, sale abajo-derecha -->
-                                        <path d="M30,0 C45,0 55,15 60,30 C70,60 55,85 65,115 C78,150 110,165 130,195 C148,222 152,255 160,300 L195,300 C188,255 185,222 170,195 C153,168 122,153 110,120 C98,90 112,62 102,30 C96,12 82,0 65,0 Z"/>
+                                    </radialGradient>
+                                    <!-- Humo/vapor -->
+                                    <radialGradient id="smokeG" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%"   stop-color="rgba(220,220,220,0.7)"/>
+                                        <stop offset="100%" stop-color="rgba(200,200,200,0)"/>
+                                    </radialGradient>
+                                    <!-- Clip río -->
+                                    <clipPath id="rioClip">
+                                        <path d="M148,95 C152,110 155,130 160,150 C165,172 168,190 172,210 C176,230 178,250 180,270 C181,278 182,290 183,310 L195,310 C194,290 193,278 192,270 C190,250 188,230 184,210 C180,190 177,172 173,150 C168,130 165,110 161,95 Z"/>
                                     </clipPath>
                                 </defs>
 
-                                <!-- Orilla izquierda (vegetación) -->
-                                <path d="M0,0 C20,0 35,12 42,28 C52,55 38,82 48,112 C60,145 90,160 112,188 C130,212 134,248 142,300 L0,300 Z"
-                                      fill="url(#bankL)" opacity="0.85"/>
+                                <!-- Fondo cielo -->
+                                <rect width="280" height="320" fill="url(#skyG)"/>
 
-                                <!-- Orilla derecha (vegetación) -->
-                                <path d="M260,0 L83,0 C96,12 108,0 120,0 C150,0 158,28 158,55 C158,82 145,108 148,138 C152,168 175,185 190,212 C205,238 210,268 215,300 L260,300 Z"
-                                      fill="url(#bankR)" opacity="0.85"/>
+                                <!-- Nubes suaves -->
+                                <ellipse class="cloud c1" cx="40"  cy="30" rx="30" ry="14" fill="rgba(255,255,255,0.75)"/>
+                                <ellipse class="cloud c1" cx="65"  cy="24" rx="22" ry="12" fill="rgba(255,255,255,0.75)"/>
+                                <ellipse class="cloud c2" cx="200" cy="38" rx="28" ry="12" fill="rgba(255,255,255,0.6)"/>
+                                <ellipse class="cloud c2" cx="225" cy="32" rx="20" ry="10" fill="rgba(255,255,255,0.6)"/>
 
-                                <!-- Cuerpo del río -->
-                                <path d="M30,0 C45,0 55,15 60,30 C70,60 55,85 65,115 C78,150 110,165 130,195 C148,222 152,255 160,300 L195,300 C188,255 185,222 170,195 C153,168 122,153 110,120 C98,90 112,62 102,30 C96,12 82,0 65,0 Z"
-                                      fill="url(#riverGrad)"/>
+                                <!-- Volcán - cuerpo principal -->
+                                <path d="M0,320 L0,240 C30,220 60,180 90,160 C110,148 125,140 140,98 L155,98 C155,98 160,115 170,130 C185,152 210,165 240,185 C260,198 275,220 280,240 L280,320 Z"
+                                      fill="url(#volcG)"/>
 
-                                <!-- Brillo sobre el agua -->
-                                <ellipse cx="82" cy="80" rx="14" ry="38" fill="rgba(255,255,255,0.3)" transform="rotate(20 82 80)" filter="url(#riverBlur)"/>
-                                <ellipse cx="138" cy="195" rx="12" ry="30" fill="rgba(255,255,255,0.22)" transform="rotate(15 138 195)" filter="url(#riverBlur)"/>
+                                <!-- Falda izquierda (sombra) -->
+                                <path d="M0,320 L0,260 C25,245 55,215 80,198 C100,184 118,172 138,130 L155,130 C145,155 130,168 112,182 C88,200 58,228 30,250 C18,258 8,272 0,285 Z"
+                                      fill="url(#slopeL)" opacity="0.5"/>
 
-                                <!-- Ondas fluyendo dentro del canal -->
-                                <g clip-path="url(#riverClip2)">
-                                    <!-- Líneas de corriente que siguen la diagonal -->
+                                <!-- Vegetación en faldas -->
+                                <path d="M0,320 L0,260 C20,255 45,245 70,240 C100,234 130,238 160,250 C190,262 220,265 250,260 C265,257 275,252 280,248 L280,320 Z"
+                                      fill="url(#vegG)"/>
+
+                                <!-- Árboles estilizados izquierda -->
+                                <ellipse cx="30"  cy="252" rx="18" ry="12" fill="#4A9A35" opacity="0.9"/>
+                                <ellipse cx="55"  cy="244" rx="16" ry="11" fill="#3D8A2A" opacity="0.85"/>
+                                <ellipse cx="15"  cy="268" rx="14" ry="9"  fill="#5AAB3E" opacity="0.8"/>
+
+                                <!-- Árboles estilizados derecha -->
+                                <ellipse cx="250" cy="254" rx="18" ry="11" fill="#3D8A2A" opacity="0.9"/>
+                                <ellipse cx="268" cy="248" rx="14" ry="9"  fill="#4A9A35" opacity="0.85"/>
+                                <ellipse cx="235" cy="264" rx="16" ry="10" fill="#5AAB3E" opacity="0.8"/>
+
+                                <!-- Cráter (oscuro en la cima) -->
+                                <ellipse cx="148" cy="96" rx="14" ry="6" fill="#2A1E18"/>
+                                <ellipse cx="148" cy="96" rx="10" ry="4" fill="#1A1008"/>
+
+                                <!-- Vapor/humo del cráter animado -->
+                                <ellipse class="vapor v1" cx="148" cy="72" rx="14" ry="10" fill="url(#smokeG)"/>
+                                <ellipse class="vapor v2" cx="144" cy="55" rx="11" ry="9"  fill="url(#smokeG)"/>
+                                <ellipse class="vapor v3" cx="151" cy="40" rx="9"  ry="8"  fill="url(#smokeG)"/>
+
+                                <!-- Río bajando por la falda derecha -->
+                                <path d="M148,95 C152,110 155,130 160,150 C165,172 168,190 172,210 C176,230 178,250 180,270 C181,278 182,290 183,310 L195,310 C194,290 193,278 192,270 C190,250 188,230 184,210 C180,190 177,172 173,150 C168,130 165,110 161,95 Z"
+                                      fill="url(#rioG)"/>
+
+                                <!-- Ondas fluyendo por el río -->
+                                <g clip-path="url(#rioClip)">
                                     <path class="river-wave rw1"
-                                          d="M48,0 C52,25 42,50 50,80 C60,115 88,135 105,165 C122,195 128,230 133,265 C136,280 138,292 140,310"
-                                          fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" stroke-linecap="round"/>
+                                          d="M150,90 C152,110 154,132 158,155 C162,178 166,198 170,220 C174,242 177,262 179,285 C180,295 181,305 182,320"
+                                          fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="2.5" stroke-linecap="round"/>
                                     <path class="river-wave rw2"
-                                          d="M58,0 C62,22 52,48 60,78 C70,112 98,132 115,162 C132,192 138,228 143,263 C146,278 148,292 150,310"
+                                          d="M155,90 C157,112 159,134 163,157 C167,180 171,200 175,222 C179,244 182,264 184,287 C185,297 186,308 187,320"
                                           fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/>
-                                    <path class="river-wave rw3"
-                                          d="M42,0 C46,28 36,54 44,84 C54,118 82,138 99,168 C116,198 122,232 127,268 C130,282 132,295 133,310"
-                                          fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.5" stroke-linecap="round"/>
-
-                                    <!-- Espuma / burbujas en el agua -->
-                                    <circle class="river-foam rf1" cx="55"  cy="40"  r="4"   fill="rgba(255,255,255,0.6)"/>
-                                    <circle class="river-foam rf2" cx="68"  cy="90"  r="3"   fill="rgba(255,255,255,0.5)"/>
-                                    <circle class="river-foam rf3" cx="80"  cy="140" r="5"   fill="rgba(255,255,255,0.45)"/>
-                                    <circle class="river-foam rf4" cx="118" cy="170" r="3.5" fill="rgba(255,255,255,0.55)"/>
-                                    <circle class="river-foam rf5" cx="140" cy="220" r="4"   fill="rgba(255,255,255,0.4)"/>
-                                    <circle class="river-foam rf6" cx="155" cy="268" r="3"   fill="rgba(255,255,255,0.35)"/>
-
-                                    <!-- Pequeñas piedras en el río -->
-                                    <ellipse cx="72"  cy="115" rx="7" ry="4" fill="rgba(100,160,200,0.5)" transform="rotate(15 72 115)"/>
-                                    <ellipse cx="125" cy="185" rx="6" ry="3.5" fill="rgba(80,140,185,0.45)" transform="rotate(-10 125 185)"/>
+                                    <!-- Espuma -->
+                                    <circle class="river-foam rf1" cx="154" cy="120" r="3"   fill="rgba(255,255,255,0.7)"/>
+                                    <circle class="river-foam rf2" cx="163" cy="158" r="2.5" fill="rgba(255,255,255,0.6)"/>
+                                    <circle class="river-foam rf3" cx="170" cy="200" r="3"   fill="rgba(255,255,255,0.55)"/>
+                                    <circle class="river-foam rf4" cx="176" cy="240" r="2"   fill="rgba(255,255,255,0.5)"/>
+                                    <circle class="river-foam rf5" cx="181" cy="275" r="2.5" fill="rgba(255,255,255,0.45)"/>
                                 </g>
 
-                                <!-- Vegetación en las orillas: arbustos -->
-                                <ellipse cx="18"  cy="35"  rx="18" ry="12" fill="#4CAF50" opacity="0.7"/>
-                                <ellipse cx="8"   cy="110" rx="14" ry="10" fill="#388E3C" opacity="0.65"/>
-                                <ellipse cx="22"  cy="180" rx="16" ry="11" fill="#4CAF50" opacity="0.7"/>
-                                <ellipse cx="10"  cy="250" rx="15" ry="10" fill="#388E3C" opacity="0.65"/>
-                                <ellipse cx="235" cy="50"  rx="18" ry="11" fill="#388E3C" opacity="0.65"/>
-                                <ellipse cx="245" cy="130" rx="14" ry="10" fill="#4CAF50" opacity="0.7"/>
-                                <ellipse cx="238" cy="210" rx="17" ry="11" fill="#388E3C" opacity="0.65"/>
-                                <ellipse cx="242" cy="278" rx="15" ry="10" fill="#4CAF50" opacity="0.7"/>
+                                <!-- Brillo en el río -->
+                                <ellipse cx="157" cy="155" rx="4" ry="18" fill="rgba(255,255,255,0.3)" transform="rotate(10 157 155)"/>
+
+                                <!-- Laguna en la base del volcán -->
+                                <ellipse cx="175" cy="298" rx="38" ry="12" fill="url(#lakeG)" opacity="0.85"/>
+                                <ellipse cx="175" cy="298" rx="28" ry="7"  fill="rgba(255,255,255,0.2)"/>
+
+                                <!-- Ondas en la laguna -->
+                                <ellipse class="river-foam rf1" cx="162" cy="297" rx="10" ry="3" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+                                <ellipse class="river-foam rf3" cx="185" cy="300" rx="8"  ry="2" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
                             </svg>
                         </div>
-
-                        <!-- Ondas de impacto en la base -->
-                        <div class="drop-ripple r1"></div>
-                        <div class="drop-ripple r2"></div>
-                        <div class="drop-ripple r3"></div>
                     </div>
                 </div>
             </div>
