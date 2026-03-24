@@ -383,32 +383,61 @@ h4 {
     height: 400px;
 }
 
-/* ── Animación Gota de Agua ── */
+/* ── Animación Río en Movimiento ── */
 .water-anim-container {
     position: relative;
-    width: 280px;
+    width: 300px;
     height: 380px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.water-drop-wrapper {
+.river-wrapper {
     position: relative;
     z-index: 3;
-    animation: dropFloat 3.8s ease-in-out infinite;
+    animation: dropFloat 4s ease-in-out infinite;
     filter: drop-shadow(0 16px 28px rgba(33, 150, 196, 0.5));
 }
 
-.water-drop-svg {
-    width: 170px;
-    height: 210px;
+.river-svg {
+    width: 280px;
+    height: 200px;
+}
+
+/* Ondas del río fluyendo de derecha a izquierda */
+.river-wave {
+    animation: riverFlow 3s linear infinite;
+}
+.rw1 { animation-duration: 3s;   animation-delay: 0s;    }
+.rw2 { animation-duration: 3.8s; animation-delay: -1.2s; }
+.rw3 { animation-duration: 4.5s; animation-delay: -2.2s; }
+
+@keyframes riverFlow {
+    from { transform: translateX(0);    }
+    to   { transform: translateX(-80px); }
+}
+
+/* Espuma/burbujas flotando con el agua */
+.river-foam {
+    animation: foamDrift 3s ease-in-out infinite;
+}
+.rf1 { animation-duration: 3s;   animation-delay: 0s;    }
+.rf2 { animation-duration: 3.5s; animation-delay: -0.8s; }
+.rf3 { animation-duration: 2.8s; animation-delay: -1.5s; }
+.rf4 { animation-duration: 4s;   animation-delay: -0.4s; }
+.rf5 { animation-duration: 3.2s; animation-delay: -2s;   }
+.rf6 { animation-duration: 3.7s; animation-delay: -1s;   }
+
+@keyframes foamDrift {
+    0%, 100% { transform: translateX(0) translateY(0);  opacity: 0.9; }
+    50%       { transform: translateX(-18px) translateY(-4px); opacity: 1; }
 }
 
 @keyframes dropFloat {
     0%, 100% { transform: translateY(0px) scaleX(1);   }
-    40%       { transform: translateY(-22px) scaleX(1.04); }
-    70%       { transform: translateY(-14px) scaleX(0.97); }
+    40%       { transform: translateY(-18px) scaleX(1.03); }
+    70%       { transform: translateY(-10px) scaleX(0.98); }
 }
 
 /* Gotas pequeñas orbitando */
