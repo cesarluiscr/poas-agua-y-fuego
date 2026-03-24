@@ -2523,3 +2523,104 @@ footer {
     transition: background 0.2s;
 }
 .admin-logout:hover { background: rgba(255,80,80,0.1); }
+
+/* ===== ADMIN DASHBOARD EXTENDIDO ===== */
+.admin-header-bar {
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:1rem; padding-bottom:0.75rem;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+    font-size:0.9rem; color:#ccc;
+}
+.admin-tabs {
+    display:flex; gap:0.3rem; flex-wrap:wrap;
+    margin-bottom:1rem;
+}
+.atab {
+    padding:0.4rem 0.75rem; border-radius:8px;
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
+    color:#888; font-size:0.78rem; cursor:pointer; transition:all 0.2s;
+}
+.atab:hover { background:rgba(255,255,255,0.1); color:#fff; }
+.atab.active { background:#7b61ff; border-color:#7b61ff; color:#fff; }
+.atab-content { min-height:160px; }
+
+/* Stats */
+.admin-stats-grid {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0.6rem; margin-bottom:1rem;
+}
+.admin-stat-card {
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);
+    border-radius:10px; padding:0.75rem 0.5rem; text-align:center;
+    display:flex; flex-direction:column; gap:0.2rem;
+}
+.asc-emoji { font-size:1.4rem; }
+.asc-count { font-size:1.5rem; font-weight:700; color:#fff; }
+.asc-label { font-size:0.68rem; color:#888; }
+.admin-storage-bar-wrap { margin-top:0.5rem; }
+.admin-storage-label { font-size:0.78rem; color:#888; display:block; margin-bottom:0.3rem; }
+.admin-storage-bar { height:6px; background:rgba(255,255,255,0.1); border-radius:4px; overflow:hidden; }
+.admin-storage-fill { height:100%; border-radius:4px; transition:width 0.4s; }
+
+/* Páginas */
+.admin-pages-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:0.4rem;
+}
+.admin-page-link {
+    padding:0.45rem 0.5rem; border-radius:8px; font-size:0.78rem; text-decoration:none;
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);
+    color:#ccc; transition:all 0.2s; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.admin-page-link:hover { background:rgba(255,255,255,0.12); color:#fff; }
+.admin-page-link.ext { border-color:rgba(123,97,255,0.3); color:#a78bfa; }
+.admin-page-link.claude { border-color:rgba(123,97,255,0.5); background:rgba(123,97,255,0.1); }
+
+/* Backup / Sistema */
+.admin-tool-desc { color:#888; font-size:0.82rem; margin:0 0 1rem; }
+.admin-tool-row { display:flex; align-items:center; gap:1rem; }
+.admin-tool-btn {
+    padding:0.55rem 1rem; border-radius:9px; border:none;
+    font-size:0.85rem; font-weight:600; cursor:pointer; white-space:nowrap;
+    transition:opacity 0.2s;
+}
+.admin-tool-btn:hover { opacity:0.8; }
+.admin-tool-btn.green { background:#2f9e44; color:#fff; }
+.admin-tool-btn.blue  { background:#1971c2; color:#fff; display:block; }
+.admin-tool-btn.red   { background:#c92a2a; color:#fff; }
+.admin-tool-msg { font-size:0.82rem; margin-top:0.75rem; }
+
+/* Anuncios */
+.admin-textarea {
+    width:100%; min-height:70px; padding:0.75rem;
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15);
+    border-radius:10px; color:#fff; font-size:0.88rem; resize:vertical;
+    margin-bottom:0.75rem; box-sizing:border-box; outline:none;
+}
+.admin-anuncio-preview {
+    background:#FFF200; color:#1A237E; border-radius:8px;
+    padding:0.6rem 1rem; font-size:0.85rem; font-weight:600; margin-top:0.75rem;
+}
+
+/* Sistema */
+.admin-sys-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0.5rem; }
+.admin-sys-btn {
+    padding:0.6rem 0.75rem; border-radius:10px;
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.12);
+    color:#ccc; font-size:0.82rem; cursor:pointer; text-align:left; transition:all 0.2s;
+}
+.admin-sys-btn:hover { background:rgba(255,255,255,0.14); color:#fff; }
+.admin-sys-btn.danger { border-color:rgba(255,80,80,0.4); color:#ff8787; }
+.admin-sys-btn.danger:hover { background:rgba(255,80,80,0.15); }
+.admin-storage-pre {
+    background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.1);
+    border-radius:8px; padding:0.75rem; color:#0f0; font-size:0.72rem;
+    max-height:180px; overflow-y:auto; margin-top:0.75rem; white-space:pre-wrap; word-break:break-all;
+}
+
+/* Banner de anuncio */
+#site-anuncio-bar {
+    position:fixed; top:0; left:0; right:0; z-index:9998;
+    background:#FFF200; color:#1A237E; padding:0.6rem 1.5rem;
+    font-size:0.9rem; font-weight:700; display:flex;
+    align-items:center; justify-content:center; gap:1rem;
+    box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
