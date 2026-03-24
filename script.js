@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Galería de imágenes si existe
             const galeriaHTML = (negocio.imagenes && negocio.imagenes.length > 0)
                 ? `<div class="negocio-galeria">
-                    ${negocio.imagenes.map(img => `<img src="${img}" alt="${negocio.nombre}" loading="lazy">`).join('')}
+                    ${negocio.imagenes.map((img, i) => `<img src="${img}" alt="${negocio.nombre} ${i+1}" loading="lazy" class="negocio-galeria-img" data-imgs='${JSON.stringify(negocio.imagenes)}' data-index="${i}">`).join('')}
                    </div>`
                 : '';
 
@@ -259,6 +259,54 @@ document.addEventListener('DOMContentLoaded', () => {
             negociosGrid.appendChild(card);
         });
     }
+
+    // Lightbox para galería de negocios
+    function createLightbox() {
+        if (document.getElementById('negocio-lightbox')) return;
+        const lb = document.createElement('div');
+        lb.id = 'negocio-lightbox';
+        lb.innerHTML = `
+            <div class="nlb-overlay"></div>
+            <button class="nlb-close">✕</button>
+            <button class="nlb-prev">&#8249;</button>
+            <button class="nlb-next">&#8250;</button>
+            <img class="nlb-img" src="" alt="">
+            <div class="nlb-counter"></div>
+        `;
+        document.body.appendChild(lb);
+
+        let imgs = [], current = 0;
+
+        function show(index) {
+            current = (index + imgs.length) % imgs.length;
+            lb.querySelector('.nlb-img').src = imgs[current];
+            lb.querySelector('.nlb-counter').textContent = `${current + 1} / ${imgs.length}`;
+        }
+
+        lb.querySelector('.nlb-close').addEventListener('click', () => lb.classList.remove('active'));
+        lb.querySelector('.nlb-overlay').addEventListener('click', () => lb.classList.remove('active'));
+        lb.querySelector('.nlb-prev').addEventListener('click', () => show(current - 1));
+        lb.querySelector('.nlb-next').addEventListener('click', () => show(current + 1));
+        document.addEventListener('keydown', e => {
+            if (!lb.classList.contains('active')) return;
+            if (e.key === 'Escape') lb.classList.remove('active');
+            if (e.key === 'ArrowLeft') show(current - 1);
+            if (e.key === 'ArrowRight') show(current + 1);
+        });
+
+        lb._open = function(imgList, index) {
+            imgs = imgList; show(index); lb.classList.add('active');
+        };
+    }
+
+    document.addEventListener('click', function(e) {
+        const img = e.target.closest('.negocio-galeria-img');
+        if (!img) return;
+        createLightbox();
+        const imgs = JSON.parse(img.dataset.imgs);
+        const index = parseInt(img.dataset.index);
+        document.getElementById('negocio-lightbox')._open(imgs, index);
+    });
 
     // Filtros
     filterBtns.forEach(btn => {
