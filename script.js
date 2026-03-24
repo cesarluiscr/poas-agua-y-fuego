@@ -161,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
             facebook: "https://www.facebook.com/share/18Py73sqeq/",
             instagram: "https://www.instagram.com/monte_lunacr?igsh=bXc3dDd4eTYzNGs3",
             tiktok: "https://www.tiktok.com/@monte_lunacr?_r=1&_t=ZS-94uvcxmxtxc",
+            booking: "https://www.booking.com/Share-oHLrJI1",
             direccion: "Poásito, Alajuela",
             logo: "img/monteluna_logo.jpg",
             imagenes: ["img/monteluna_aerea.jpg", "img/monteluna_cabana.jpg", "img/monteluna_interior.jpg"]
@@ -251,6 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${negocio.facebook  ? `<a href="${negocio.facebook}" target="_blank" rel="noopener" class="social-btn fb-btn">📘 Facebook</a>` : ''}
                     ${negocio.instagram ? `<a href="${negocio.instagram}" target="_blank" rel="noopener" class="social-btn ig-btn">📸 Instagram</a>` : ''}
                     ${negocio.tiktok    ? `<a href="${negocio.tiktok}" target="_blank" rel="noopener" class="social-btn tt-btn">🎵 TikTok</a>` : ''}
+                    ${negocio.booking   ? `<a href="${negocio.booking}" target="_blank" rel="noopener" class="social-btn bk-btn">🏨 Reservar en Booking</a>` : ''}
                 </div>` : ''}
             `;
             negociosGrid.appendChild(card);

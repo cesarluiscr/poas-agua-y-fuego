@@ -1596,6 +1596,7 @@ footer {
 .fb-btn  { background: #1877F2; }
 .ig-btn  { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
 .tt-btn  { background: #010101; }
+.bk-btn  { background: #003580; }
 
 .no-negocios {
     grid-column: 1 / -1;
