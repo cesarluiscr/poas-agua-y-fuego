@@ -173,8 +173,9 @@ document.addEventListener('DOMContentLoaded', () => {
             categoria: "servicio",
             emoji: "🧴",
             descripcion: "Venta de productos de limpieza para el hogar y empresas. Atención personalizada por Luis Murillo Vargas.",
-            telefono: "8994-4301",
+            whatsapp: "50689944301",
             correo: "luismurillo21@gmail.com",
+            facebook: "https://www.facebook.com/luis.murillovargas.7?locale=es_LA",
             sitio: "https://www.facebook.com/luis.murillovargas.7?locale=es_LA",
             direccion: "Cantón de Poás"
         }
