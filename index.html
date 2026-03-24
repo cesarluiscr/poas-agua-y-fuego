@@ -394,6 +394,94 @@
         </div>
     </footer>
 
+    <!-- Botón flotante de acceso admin -->
+    <button id="admin-fab" onclick="abrirAdminModal()" title="Acceso Administrador">⚙️</button>
+
+    <!-- Modal de login admin -->
+    <div id="admin-modal" class="admin-overlay" onclick="if(event.target===this)cerrarAdminModal()">
+        <div class="admin-modal-box">
+            <button class="admin-close" onclick="cerrarAdminModal()">×</button>
+            <div class="admin-logo">🔐</div>
+            <h2 class="admin-title">Acceso Administrador</h2>
+            <p class="admin-subtitle">Poás Agua y Fuego</p>
+            <div id="admin-login-form">
+                <input type="text" id="admin-user" class="admin-input" placeholder="Usuario" autocomplete="username">
+                <input type="password" id="admin-pass" class="admin-input" placeholder="Contraseña" autocomplete="current-password">
+                <p id="admin-error" class="admin-error" style="display:none">Usuario o contraseña incorrectos.</p>
+                <button class="admin-btn-login" onclick="verificarAdmin()">Ingresar</button>
+            </div>
+            <div id="admin-panel" style="display:none">
+                <p class="admin-welcome">Bienvenido, <strong id="admin-username-display"></strong> 👋</p>
+                <div class="admin-actions">
+                    <a href="https://claude.ai" target="_blank" rel="noopener" class="admin-action-btn claude-btn">
+                        <span class="admin-action-icon">🤖</span>
+                        <span class="admin-action-text">
+                            <strong>Claude AI</strong>
+                            <small>Dar instrucciones al asistente</small>
+                        </span>
+                    </a>
+                    <a href="https://github.com/cesarluiscr/poas-agua-y-fuego" target="_blank" rel="noopener" class="admin-action-btn github-btn">
+                        <span class="admin-action-icon">🐙</span>
+                        <span class="admin-action-text">
+                            <strong>Repositorio GitHub</strong>
+                            <small>Ver y editar archivos del sitio</small>
+                        </span>
+                    </a>
+                    <a href="https://github.com/cesarluiscr/poas-agua-y-fuego/commits/main" target="_blank" rel="noopener" class="admin-action-btn commits-btn">
+                        <span class="admin-action-icon">📝</span>
+                        <span class="admin-action-text">
+                            <strong>Historial de cambios</strong>
+                            <small>Ver últimas actualizaciones</small>
+                        </span>
+                    </a>
+                </div>
+                <button class="admin-logout" onclick="cerrarSesionAdmin()">Cerrar sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ADMIN_USER = 'cesarluiscr';
+        const ADMIN_PASS = 'Poas2026';
+
+        function abrirAdminModal() {
+            document.getElementById('admin-modal').style.display = 'flex';
+            const sesion = sessionStorage.getItem('admin_auth');
+            if (sesion === 'ok') mostrarPanelAdmin();
+        }
+        function cerrarAdminModal() {
+            document.getElementById('admin-modal').style.display = 'none';
+        }
+        function verificarAdmin() {
+            const u = document.getElementById('admin-user').value.trim();
+            const p = document.getElementById('admin-pass').value;
+            if (u === ADMIN_USER && p === ADMIN_PASS) {
+                sessionStorage.setItem('admin_auth', 'ok');
+                document.getElementById('admin-error').style.display = 'none';
+                mostrarPanelAdmin();
+            } else {
+                document.getElementById('admin-error').style.display = 'block';
+            }
+        }
+        function mostrarPanelAdmin() {
+            document.getElementById('admin-login-form').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'block';
+            document.getElementById('admin-username-display').textContent = ADMIN_USER;
+        }
+        function cerrarSesionAdmin() {
+            sessionStorage.removeItem('admin_auth');
+            document.getElementById('admin-login-form').style.display = 'block';
+            document.getElementById('admin-panel').style.display = 'none';
+            document.getElementById('admin-user').value = '';
+            document.getElementById('admin-pass').value = '';
+            cerrarAdminModal();
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && document.getElementById('admin-modal').style.display === 'flex') {
+                if (document.getElementById('admin-login-form').style.display !== 'none') verificarAdmin();
+            }
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 

@@ -2426,3 +2426,100 @@ footer {
         font-size: 0.9rem;
     }
 }
+/* ===== PANEL DE ADMINISTRADOR ===== */
+#admin-fab {
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(30,30,40,0.7);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #aaa;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 1000;
+    backdrop-filter: blur(6px);
+    transition: background 0.2s, transform 0.2s;
+    display: flex; align-items: center; justify-content: center;
+}
+#admin-fab:hover { background: rgba(50,50,70,0.9); transform: rotate(30deg); color: #fff; }
+
+.admin-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.65);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+}
+.admin-modal-box {
+    background: #1a1a2e;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    color: #fff;
+}
+.admin-close {
+    position: absolute; top: 1rem; right: 1.2rem;
+    background: none; border: none; color: #888;
+    font-size: 1.5rem; cursor: pointer; line-height: 1;
+}
+.admin-close:hover { color: #fff; }
+.admin-logo { font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem; }
+.admin-title { text-align: center; font-size: 1.3rem; margin: 0; }
+.admin-subtitle { text-align: center; color: #888; font-size: 0.85rem; margin: 0.3rem 0 1.5rem; }
+.admin-input {
+    width: 100%; padding: 0.75rem 1rem;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px; color: #fff;
+    font-size: 0.95rem; margin-bottom: 0.75rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.admin-input:focus { border-color: #7b61ff; }
+.admin-input::placeholder { color: #666; }
+.admin-error { color: #ff6b6b; font-size: 0.82rem; margin: -0.3rem 0 0.6rem; }
+.admin-btn-login {
+    width: 100%; padding: 0.8rem;
+    background: linear-gradient(135deg, #7b61ff, #a855f7);
+    border: none; border-radius: 10px;
+    color: #fff; font-size: 1rem; font-weight: 600;
+    cursor: pointer; margin-top: 0.25rem;
+    transition: opacity 0.2s;
+}
+.admin-btn-login:hover { opacity: 0.85; }
+.admin-welcome { text-align: center; color: #ccc; font-size: 0.9rem; margin: 0 0 1.2rem; }
+.admin-actions { display: flex; flex-direction: column; gap: 0.75rem; }
+.admin-action-btn {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.9rem 1rem;
+    border-radius: 12px; text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.2s, transform 0.15s;
+    background: rgba(255,255,255,0.04);
+}
+.admin-action-btn:hover { background: rgba(255,255,255,0.1); transform: translateX(3px); }
+.admin-action-icon { font-size: 1.6rem; flex-shrink: 0; }
+.admin-action-text { display: flex; flex-direction: column; }
+.admin-action-text strong { color: #fff; font-size: 0.95rem; }
+.admin-action-text small { color: #888; font-size: 0.78rem; }
+.claude-btn { border-color: rgba(123,97,255,0.4); }
+.claude-btn:hover { background: rgba(123,97,255,0.15) !important; }
+.github-btn { border-color: rgba(255,255,255,0.2); }
+.commits-btn { border-color: rgba(64,224,208,0.3); }
+.commits-btn:hover { background: rgba(64,224,208,0.1) !important; }
+.admin-logout {
+    width: 100%; margin-top: 1.2rem; padding: 0.6rem;
+    background: none; border: 1px solid rgba(255,80,80,0.3);
+    border-radius: 8px; color: #ff6b6b;
+    font-size: 0.85rem; cursor: pointer;
+    transition: background 0.2s;
+}
+.admin-logout:hover { background: rgba(255,80,80,0.1); }
