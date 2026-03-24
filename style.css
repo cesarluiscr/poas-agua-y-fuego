@@ -1677,6 +1677,7 @@ footer {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
     margin-bottom: 3rem;
+    align-items: start;
 }
 
 .negocio-card {
