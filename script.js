@@ -187,11 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
         servicio:    { emoji: "⚙️", label: "Servicio" }
     };
 
-    // Limpiar datos anteriores y forzar la lista actualizada
-    const stored = JSON.parse(localStorage.getItem('poas_negocios'));
-    const knownIds = DEFAULT_NEGOCIOS.map(n => n.id);
-    if (!stored || !knownIds.every(id => stored.some(n => n.id === id))) {
+    // Control de versión — cambiar este número cada vez que se actualicen negocios por defecto
+    const NEGOCIOS_VERSION = 4;
+    const storedVersion = parseInt(localStorage.getItem('poas_negocios_version') || '0');
+    if (storedVersion < NEGOCIOS_VERSION) {
         localStorage.removeItem('poas_negocios');
+        localStorage.setItem('poas_negocios_version', NEGOCIOS_VERSION);
     }
     let negocios = JSON.parse(localStorage.getItem('poas_negocios')) || DEFAULT_NEGOCIOS;
     let activeFilter = 'all';
