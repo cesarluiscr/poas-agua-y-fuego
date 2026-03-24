@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Control de versión — cambiar este número cada vez que se actualicen negocios por defecto
-    const NEGOCIOS_VERSION = 4;
+    const NEGOCIOS_VERSION = 5;
     const storedVersion = parseInt(localStorage.getItem('poas_negocios_version') || '0');
     if (storedVersion < NEGOCIOS_VERSION) {
         localStorage.removeItem('poas_negocios');
