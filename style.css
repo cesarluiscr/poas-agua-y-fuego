@@ -1028,6 +1028,8 @@ footer {
     gap: 1.5rem;
     background: #FFF200;
     border: 3px solid #1A237E;
+    outline: 3px dashed #000;
+    outline-offset: 6px;
     border-radius: 20px;
     padding: 2rem 2.5rem;
     box-shadow: 0 8px 30px rgba(26, 35, 126, 0.15);
