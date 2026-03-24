@@ -150,6 +150,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // =============================
     const DEFAULT_NEGOCIOS = [
         {
+            id: 1,
+            nombre: "MonteLuna",
+            categoria: "hospedaje",
+            emoji: "🏔️",
+            descripcion: "Cabañas tipo A-frame en medio de la naturaleza, con vistas espectaculares al volcán Poás. Disfruta de una experiencia única rodeada de bosque y tranquilidad en Poásito, Alajuela.",
+            telefono: "",
+            correo: "",
+            sitio: "",
+            direccion: "Poásito, Alajuela",
+            logo: "img/monteluna_logo.jpg",
+            imagenes: ["img/monteluna_aerea.jpg", "img/monteluna_cabana.jpg", "img/monteluna_interior.jpg"]
+        },
+        {
             id: 2,
             nombre: "Productos de Limpieza Don Luis",
             categoria: "servicio",
@@ -200,9 +213,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const emoji = negocio.emoji || meta.emoji;
             const card = document.createElement('div');
             card.className = 'negocio-card';
+
+            // Galería de imágenes si existe
+            const galeriaHTML = (negocio.imagenes && negocio.imagenes.length > 0)
+                ? `<div class="negocio-galeria">
+                    ${negocio.imagenes.map(img => `<img src="${img}" alt="${negocio.nombre}" loading="lazy">`).join('')}
+                   </div>`
+                : '';
+
+            // Logo o emoji en el encabezado
+            const logoHTML = negocio.logo
+                ? `<img src="${negocio.logo}" alt="Logo ${negocio.nombre}" class="negocio-logo">`
+                : `<span class="negocio-emoji">${emoji}</span>`;
+
             card.innerHTML = `
+                ${galeriaHTML}
                 <div class="negocio-card-header">
-                    <span class="negocio-emoji">${emoji}</span>
+                    ${logoHTML}
                     <div>
                         <h4>${negocio.nombre}</h4>
                         <span class="negocio-badge">${meta.label}</span>

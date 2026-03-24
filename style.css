@@ -1439,13 +1439,62 @@ footer {
 .negocio-card {
     background: white;
     border-radius: 16px;
-    padding: 2rem;
+    overflow: hidden;
+    padding: 0;
     box-shadow: var(--shadow-soft);
     border: 1px solid #E2E8E6;
     transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+}
+
+.negocio-card > .negocio-card-header,
+.negocio-card > .negocio-desc,
+.negocio-card > .negocio-meta {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.negocio-card > .negocio-card-header { padding-top: 1.5rem; }
+.negocio-card > .negocio-meta { padding-bottom: 1.5rem; }
+
+/* Galería de fotos del negocio */
+.negocio-galeria {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 160px 160px;
+    gap: 3px;
+    width: 100%;
+    margin-bottom: 1.25rem;
+}
+
+.negocio-galeria img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.negocio-galeria img:first-child {
+    grid-row: span 2;
+}
+
+.negocio-galeria img:hover {
+    transform: scale(1.03);
+}
+
+/* Logo del negocio */
+.negocio-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 2px solid #E2E8E6;
+    background: #fff;
+    padding: 4px;
+    box-shadow: var(--shadow-soft);
+    flex-shrink: 0;
 }
 
 .negocio-card:hover {
@@ -1491,6 +1540,7 @@ footer {
     font-size: 0.95rem;
     line-height: 1.6;
     flex: 1;
+    margin-top: 0.75rem;
 }
 
 .negocio-meta {
