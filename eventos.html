@@ -73,6 +73,11 @@
         }
         .evento-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
 
+        .evento-card-img {
+            width: 100%; height: 200px;
+            object-fit: cover; display: block;
+        }
+
         .evento-card-header {
             padding: 1.4rem 1.4rem 0.8rem;
             display: flex; align-items: flex-start; gap: 1rem;
@@ -371,15 +376,31 @@
         const ADMIN_PIN  = '1234';          // ← Cambiá este PIN
         const STORAGE_KEY = 'poas_eventos';
 
+        // ── Eventos fijos (siempre se muestran) ──────────────────────
+        const DEFAULT_EVENTOS = [
+            {
+                id: 'default-ina-ingles-2026',
+                titulo: 'Curso de Inglés Básico con Herramientas Tecnológicas',
+                categoria: 'educacion',
+                fecha: '2026-04-22',
+                hora: '2:30 pm – 5:15 pm',
+                lugar: 'Municipalidad de Poás (sesión informativa 26 mar)',
+                descripcion: '25 cupos disponibles. Lunes, miércoles y viernes. Inicio de lecciones: 22 de abril 2026. Plataforma TEAMS con profesor en vivo. Inscripciones en línea: www.inainscripcioncursos.ac.cr — Código: 790455. Sesión informativa el 26 de marzo 2026 a las 9:00 am en la Municipalidad de Poás. Presentar original y copia del título mínimo noveno año, portar bolígrafo.',
+                imagen: 'img/ina_curso_ingles.jpeg',
+                _default: true
+            }
+        ];
+
         // ── Estado ───────────────────────────────────────────────────
-        let eventos      = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        const _userEventos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        let eventos = [...DEFAULT_EVENTOS, ..._userEventos.filter(e => !e._default)];
         let filtroActual = 'all';
         let pendingAction = null;           // 'add' | 'delete'
         let pendingDeleteId = null;
 
         // ── Guardar ──────────────────────────────────────────────────
         function saveEventos() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(eventos));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(eventos.filter(e => !e._default)));
         }
 
         // ── Renderizar ───────────────────────────────────────────────
@@ -415,6 +436,7 @@
 
             grid.innerHTML = lista.map(ev => `
                 <div class="evento-card" data-id="${ev.id}">
+                    ${ev.imagen ? `<img class="evento-card-img" src="${ev.imagen}" alt="${ev.titulo}" loading="lazy">` : ''}
                     <div class="evento-card-header">
                         <div>
                             <span class="evento-categoria-badge cat-${ev.categoria}">${catLabels[ev.categoria] || ev.categoria}</span>
