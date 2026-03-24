@@ -162,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
             instagram: "https://www.instagram.com/monte_lunacr?igsh=bXc3dDd4eTYzNGs3",
             tiktok: "https://www.tiktok.com/@monte_lunacr?_r=1&_t=ZS-94uvcxmxtxc",
             booking: "https://www.booking.com/Share-oHLrJI1",
+            waze: "https://ul.waze.com/ul?ll=10.15711832%2C-84.19317842&navigate=yes&zoom=17&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location",
             direccion: "Poásito, Alajuela",
             logo: "img/monteluna_logo.jpg",
             imagenes: ["img/monteluna_aerea.jpg", "img/monteluna_cabana.jpg", "img/monteluna_interior.jpg"]
@@ -188,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Control de versión — cambiar este número cada vez que se actualicen negocios por defecto
-    const NEGOCIOS_VERSION = 5;
+    const NEGOCIOS_VERSION = 6;
     const storedVersion = parseInt(localStorage.getItem('poas_negocios_version') || '0');
     if (storedVersion < NEGOCIOS_VERSION) {
         localStorage.removeItem('poas_negocios');
@@ -254,6 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${negocio.instagram ? `<a href="${negocio.instagram}" target="_blank" rel="noopener" class="social-btn ig-btn">📸 Instagram</a>` : ''}
                     ${negocio.tiktok    ? `<a href="${negocio.tiktok}" target="_blank" rel="noopener" class="social-btn tt-btn">🎵 TikTok</a>` : ''}
                     ${negocio.booking   ? `<a href="${negocio.booking}" target="_blank" rel="noopener" class="social-btn bk-btn">🏨 Reservar en Booking</a>` : ''}
+                    ${negocio.waze      ? `<a href="${negocio.waze}" target="_blank" rel="noopener" class="social-btn wz-btn">📍 Cómo llegar</a>` : ''}
                 </div>` : ''}
             `;
             negociosGrid.appendChild(card);

@@ -1597,6 +1597,7 @@ footer {
 .ig-btn  { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
 .tt-btn  { background: #010101; }
 .bk-btn  { background: #003580; }
+.wz-btn  { background: #33CCFF; color: #000 !important; }
 
 /* ── Lightbox galería negocios ── */
 #negocio-lightbox {
