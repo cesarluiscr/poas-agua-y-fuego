@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <title>Patrimonio Hídrico — Poás Agua y Fuego</title>
+    <meta name="description" content="El patrimonio hídrico del cantón de Poás: acuíferos, ASADAS, ríos y ecosistemas que abastecen la Gran Área Metropolitana.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --agua-deep:    #0a2a4a;
+            --agua-mid:     #1565C0;
+            --agua-light:   #40C4FF;
+            --agua-foam:    #B3E5FC;
+            --agua-green:   #00897B;
+            --agua-text:    #E3F2FD;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--agua-deep); color: var(--agua-text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        /* ── HERO ── */
+        .ph-hero {
+            position: relative;
+            min-height: 55vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            background: linear-gradient(160deg, #0a1628 0%, #0d3b6e 50%, #0a4a6a 100%);
+            overflow: hidden;
+            padding: 6rem 1.5rem 4rem;
+        }
+        .ph-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 80%, rgba(64,196,255,0.18) 0%, transparent 70%);
+        }
+        /* Olas animadas */
+        .ph-waves { position: absolute; bottom: 0; left: 0; width: 100%; }
+        .ph-wave {
+            position: absolute; bottom: 0; left: -100%;
+            width: 300%; height: 80px;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: waveMove 7s linear infinite;
+        }
+        .ph-wave:nth-child(1) { background: var(--agua-light); animation-duration: 7s; height: 70px; }
+        .ph-wave:nth-child(2) { background: var(--agua-foam);  animation-duration: 10s; animation-delay: -3s; height: 55px; opacity: 0.1; }
+        .ph-wave:nth-child(3) { background: var(--agua-mid);   animation-duration: 13s; animation-delay: -6s; height: 90px; opacity: 0.12; }
+        @keyframes waveMove { from { left: -100%; } to { left: 0%; } }
+
+        .ph-hero-content { position: relative; z-index: 2; max-width: 720px; }
+        .ph-hero-icon { font-size: 3.5rem; margin-bottom: 1rem; filter: drop-shadow(0 0 20px rgba(64,196,255,0.6)); }
+        .ph-hero h1 { font-family: 'Outfit', sans-serif; font-size: clamp(2rem,5vw,3.2rem); font-weight: 800; color: #fff; margin-bottom: 0.75rem; line-height: 1.1; }
+        .ph-hero h1 span { color: var(--agua-light); }
+        .ph-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.75); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+        .ph-back-btn {
+            position: absolute; top: 1.5rem; left: 1.5rem; z-index: 10;
+            padding: 0.45rem 1rem; border-radius: 20px;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; text-decoration: none; font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+        .ph-back-btn:hover { background: rgba(255,255,255,0.2); }
+
+        /* ── SECCIONES ── */
+        .ph-section {
+            padding: 5rem 1.5rem;
+        }
+        .ph-section:nth-child(even) { background: rgba(255,255,255,0.03); }
+        .ph-container { max-width: 1100px; margin: 0 auto; }
+        .ph-section-title {
+            font-family: 'Outfit', sans-serif; font-size: clamp(1.5rem,3vw,2rem);
+            font-weight: 700; color: var(--agua-light); margin-bottom: 0.5rem;
+        }
+        .ph-section-title::before { margin-right: 0.5rem; }
+        .ph-section-sub { color: rgba(255,255,255,0.55); font-size: 0.95rem; margin-bottom: 2.5rem; }
+        .ph-divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--agua-light), var(--agua-green)); border-radius: 2px; margin: 0.75rem 0 2rem; }
+
+        /* ── ACUÍFEROS ── */
+        .ph-acuiferos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; }
+        .ph-acuifero-card {
+            background: linear-gradient(145deg, rgba(21,101,192,0.2), rgba(10,42,74,0.6));
+            border: 1px solid rgba(64,196,255,0.2); border-radius: 18px;
+            padding: 2rem; transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .ph-acuifero-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(64,196,255,0.15); }
+        .ph-ac-icon { font-size: 2.2rem; margin-bottom: 0.75rem; }
+        .ph-ac-name { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+        .ph-ac-badge {
+            display: inline-block; padding: 0.2rem 0.75rem; border-radius: 20px;
+            font-size: 0.75rem; font-weight: 600; margin-bottom: 0.75rem;
+            background: rgba(64,196,255,0.15); color: var(--agua-light); border: 1px solid rgba(64,196,255,0.3);
+        }
+        .ph-ac-desc { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6; }
+        .ph-ac-stats { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+        .ph-ac-stat { background: rgba(255,255,255,0.05); border-radius: 8px; padding: 0.4rem 0.75rem; font-size: 0.78rem; color: var(--agua-foam); }
+
+        /* ── RÍOS Y CUENCAS ── */
+        .ph-rios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 1rem; }
+        .ph-rio-card {
+            background: rgba(0,137,123,0.15); border: 1px solid rgba(0,137,123,0.3);
+            border-radius: 14px; padding: 1.25rem;
+            display: flex; align-items: flex-start; gap: 1rem;
+            transition: background 0.2s;
+        }
+        .ph-rio-card:hover { background: rgba(0,137,123,0.25); }
+        .ph-rio-icon { font-size: 1.8rem; flex-shrink: 0; }
+        .ph-rio-name { font-weight: 700; color: #fff; font-size: 0.95rem; margin-bottom: 0.25rem; }
+        .ph-rio-desc { color: rgba(255,255,255,0.6); font-size: 0.82rem; line-height: 1.5; }
+
+        /* ── ASADAS ── */
+        .ph-asadas-intro {
+            background: linear-gradient(135deg, rgba(0,137,123,0.2), rgba(21,101,192,0.15));
+            border: 1px solid rgba(0,137,123,0.3); border-radius: 18px;
+            padding: 2rem; margin-bottom: 2rem;
+        }
+        .ph-asadas-intro p { color: rgba(255,255,255,0.75); line-height: 1.7; font-size: 0.95rem; }
+        .ph-asadas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1rem; }
+        .ph-asada-item {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px; padding: 1rem 1.25rem;
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .ph-asada-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--agua-light); flex-shrink: 0; }
+        .ph-asada-name { color: #fff; font-size: 0.9rem; font-weight: 500; }
+        .ph-asada-zona { color: rgba(255,255,255,0.45); font-size: 0.78rem; }
+
+        /* ── DATOS CLAVE ── */
+        .ph-datos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 1.2rem; }
+        .ph-dato-card {
+            background: linear-gradient(145deg, rgba(64,196,255,0.1), rgba(10,42,74,0.5));
+            border: 1px solid rgba(64,196,255,0.2); border-radius: 16px;
+            padding: 1.5rem; text-align: center;
+        }
+        .ph-dato-num { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 800; color: var(--agua-light); }
+        .ph-dato-label { color: rgba(255,255,255,0.6); font-size: 0.82rem; margin-top: 0.3rem; line-height: 1.4; }
+
+        /* ── AMENAZAS ── */
+        .ph-amenazas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.2rem; }
+        .ph-amenaza-card {
+            background: rgba(198,40,40,0.1); border: 1px solid rgba(198,40,40,0.25);
+            border-radius: 14px; padding: 1.25rem 1.5rem;
+        }
+        .ph-amenaza-card h4 { color: #ef9a9a; font-size: 0.95rem; margin-bottom: 0.4rem; }
+        .ph-amenaza-card p { color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.5; }
+
+        /* ── CTA ── */
+        .ph-cta {
+            text-align: center; padding: 5rem 1.5rem;
+            background: linear-gradient(160deg, #0d3b6e, #0a2a4a);
+        }
+        .ph-cta h2 { font-family: 'Outfit', sans-serif; font-size: 1.8rem; color: #fff; margin-bottom: 0.75rem; }
+        .ph-cta p { color: rgba(255,255,255,0.6); margin-bottom: 2rem; }
+        .ph-cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .ph-cta-btn {
+            padding: 0.75rem 1.75rem; border-radius: 30px; font-weight: 600;
+            text-decoration: none; font-size: 0.95rem; transition: all 0.2s;
+        }
+        .ph-cta-btn.primary { background: var(--agua-mid); color: #fff; }
+        .ph-cta-btn.primary:hover { background: var(--agua-light); color: #0a2a4a; }
+        .ph-cta-btn.outline { border: 2px solid rgba(64,196,255,0.4); color: var(--agua-light); }
+        .ph-cta-btn.outline:hover { background: rgba(64,196,255,0.1); }
+
+        /* Footer simple */
+        .ph-footer { text-align: center; padding: 1.5rem; background: #060f1e; color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .ph-acuiferos-grid { grid-template-columns: 1fr; }
+            .ph-datos-grid { grid-template-columns: repeat(2,1fr); }
+            .ph-cta-btns { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="ph-hero">
+        <a href="index.html#agua" class="ph-back-btn">← Volver al inicio</a>
+        <div class="ph-waves">
+            <div class="ph-wave"></div>
+            <div class="ph-wave"></div>
+            <div class="ph-wave"></div>
+        </div>
+        <div class="ph-hero-content">
+            <div class="ph-hero-icon">💧</div>
+            <h1>Nuestro <span>Patrimonio Hídrico</span></h1>
+            <p>El cantón de Poás es guardián de uno de los recursos más valiosos de Costa Rica: el agua. Sus bosques, ríos y acuíferos abastecen a millones de personas.</p>
+        </div>
+    </section>
+
+    <!-- DATOS CLAVE -->
+    <section class="ph-section">
+        <div class="ph-container">
+            <h2 class="ph-section-title">💡 El agua del Poás en números</h2>
+            <div class="ph-divider"></div>
+            <div class="ph-datos-grid">
+                <div class="ph-dato-card">
+                    <div class="ph-dato-num">3</div>
+                    <div class="ph-dato-label">Acuíferos principales abastecidos</div>
+                </div>
+                <div class="ph-dato-card">
+                    <div class="ph-dato-num">+2M</div>
+                    <div class="ph-dato-label">Personas que dependen del agua del macizo</div>
+                </div>
+                <div class="ph-dato-card">
+                    <div class="ph-dato-num">+15</div>
+                    <div class="ph-dato-label">ASADAS activas en el cantón</div>
+                </div>
+                <div class="ph-dato-card">
+                    <div class="ph-dato-num">2,704 m</div>
+                    <div class="ph-dato-label">Altitud del volcán Poás (zona de recarga)</div>
+                </div>
+                <div class="ph-dato-card">
+                    <div class="ph-dato-num">+5,000 mm</div>
+                    <div class="ph-dato-label">Precipitación anual en el macizo</div>
+                </div>
+                <div class="ph-dato-card">
+                    <div class="ph-dato-num">100%</div>
+                    <div class="ph-dato-label">Cobertura de agua potable en el cantón</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACUÍFEROS -->
+    <section class="ph-section">
+        <div class="ph-container">
+            <h2 class="ph-section-title">🌊 Los Acuíferos del Macizo</h2>
+            <p class="ph-section-sub">El macizo del Poás recarga tres sistemas acuíferos que proveen agua potable a la Gran Área Metropolitana.</p>
+            <div class="ph-divider"></div>
+            <div class="ph-acuiferos-grid">
+
+                <div class="ph-acuifero-card">
+                    <div class="ph-ac-icon">💧</div>
+                    <div class="ph-ac-name">Acuífero Poás</div>
+                    <span class="ph-ac-badge">Zona Alta</span>
+                    <p class="ph-ac-desc">El acuífero más cercano al volcán, alimentado directamente por las lluvias y neblinas del bosque nuboso. Abastece los acueductos comunales de las partes altas del cantón, incluyendo Poásito, San Pedro y comunidades de altura.</p>
+                    <div class="ph-ac-stats">
+                        <span class="ph-ac-stat">🏔️ Zona alta</span>
+                        <span class="ph-ac-stat">🌧️ Alta recarga</span>
+                    </div>
+                </div>
+
+                <div class="ph-acuifero-card">
+                    <div class="ph-ac-icon">🌊</div>
+                    <div class="ph-ac-name">Acuífero Colima</div>
+                    <span class="ph-ac-badge">Gran Área Metropolitana</span>
+                    <p class="ph-ac-desc">Uno de los acuíferos más importantes de Costa Rica. Recibe recarga desde el macizo del Poás y abastece una gran parte del Valle Central. Es fuente clave del SENARA y del AyA para provincias de Heredia y Alajuela.</p>
+                    <div class="ph-ac-stats">
+                        <span class="ph-ac-stat">🏙️ Valle Central</span>
+                        <span class="ph-ac-stat">💦 Alta producción</span>
+                    </div>
+                </div>
+
+                <div class="ph-acuifero-card">
+                    <div class="ph-ac-icon">🫧</div>
+                    <div class="ph-ac-name">Acuífero Barva</div>
+                    <span class="ph-ac-badge">Zona Norte GAM</span>
+                    <p class="ph-ac-desc">Ubicado bajo las faldas del macizo Barva-Poás, este acuífero libre es recargado por la lluvia que se filtra en los suelos volcánicos porosos. Abastece comunidades del norte de la Gran Área Metropolitana y parte de Heredia.</p>
+                    <div class="ph-ac-stats">
+                        <span class="ph-ac-stat">🌿 Suelos volcánicos</span>
+                        <span class="ph-ac-stat">🏘️ Alta demanda</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- RÍOS Y CUENCAS -->
+    <section class="ph-section">
+        <div class="ph-container">
+            <h2 class="ph-section-title">🏞️ Ríos y Cuencas</h2>
+            <p class="ph-section-sub">Del volcán nacen ríos que irrigan el cantón y abastecen comunidades aguas abajo.</p>
+            <div class="ph-divider"></div>
+            <div class="ph-rios-grid">
+                <div class="ph-rio-card">
+                    <div class="ph-rio-icon">🌊</div>
+                    <div>
+                        <div class="ph-rio-name">Río Poás</div>
+                        <div class="ph-rio-desc">Nace en las faldas del volcán. Atraviesa el cantón y sus riberas sustentan agricultura y biodiversidad local.</div>
+                    </div>
+                </div>
+                <div class="ph-rio-card">
+                    <div class="ph-rio-icon">💙</div>
+                    <div>
+                        <div class="ph-rio-name">Río Sarapiquí (naciente)</div>
+                        <div class="ph-rio-desc">Sus cabeceras se originan en el macizo volcánico. Fluye hacia la vertiente Caribe con gran caudal.</div>
+                    </div>
+                </div>
+                <div class="ph-rio-card">
+                    <div class="ph-rio-icon">🌿</div>
+                    <div>
+                        <div class="ph-rio-name">Río Toro</div>
+                        <div class="ph-rio-desc">Afluente que desciende del Poás. Aprovechado en proyectos hidroeléctricos y fuente de agua potable.</div>
+                    </div>
+                </div>
+                <div class="ph-rio-card">
+                    <div class="ph-rio-icon">🔵</div>
+                    <div>
+                        <div class="ph-rio-name">Quebradas y nacientes</div>
+                        <div class="ph-rio-desc">Decenas de quebradas menores y nacientes de agua dulce surten directamente a las ASADAS del cantón.</div>
+                    </div>
+                </div>
+                <div class="ph-rio-card">
+                    <div class="ph-rio-icon">🏔️</div>
+                    <div>
+                        <div class="ph-rio-name">Laguna Botos</div>
+                        <div class="ph-rio-desc">Cráter volcánico inactivo convertido en laguna. Ecosistema único dentro del Parque Nacional Volcán Poás.</div>
+                    </div>
+                </div>
+                <div class="ph-rio-card">
+                    <div class="ph-rio-icon">🌫️</div>
+                    <div>
+                        <div class="ph-rio-name">Bosque Nuboso</div>
+                        <div class="ph-rio-desc">La neblina del bosque a 2.000–2.700 m captura humedad atmosférica y recarga continuamente los acuíferos.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ASADAS -->
+    <section class="ph-section">
+        <div class="ph-container">
+            <h2 class="ph-section-title">🚰 Acueductos Comunales (ASADAS)</h2>
+            <p class="ph-section-sub">Las Asociaciones Administradoras de Acueductos y Alcantarillados son el pilar del acceso al agua en Poás.</p>
+            <div class="ph-divider"></div>
+            <div class="ph-asadas-intro">
+                <p>Las ASADAS del cantón de Poás administran acueductos comunales que llevan agua potable directamente desde las fuentes naturales hasta los hogares. Son organizaciones sin fines de lucro, gestionadas por las propias comunidades con supervisión del AyA (Instituto Costarricense de Acueductos y Alcantarillados). Su labor es fundamental para preservar tanto la calidad del agua como la salud de las nacientes y zonas de recarga.</p>
+            </div>
+            <div class="ph-asadas-grid">
+                <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA de San Pedro de Poás</div><div class="ph-asada-zona">Distrito San Pedro</div></div></div>
+                <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA de Poásito</div><div class="ph-asada-zona">Distrito San Juan</div></div></div>
+                <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA de Carrillos</div><div class="ph-asada-zona">Distrito Carrillos</div></div></div>
+                <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA de Sabana Redonda</div><div class="ph-asada-zona">Distrito Sabana Redonda</div></div></div>
+                <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA de San Luis</div><div class="ph-asada-zona">Zona media</div></div></div>
+                <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA de Calle Zamora</div><div class="ph-asada-zona">Zona sur</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AMENAZAS -->
+    <section class="ph-section">
+        <div class="ph-container">
+            <h2 class="ph-section-title">⚠️ Amenazas al Patrimonio Hídrico</h2>
+            <p class="ph-section-sub">Conocer los riesgos es el primer paso para proteger el agua del cantón.</p>
+            <div class="ph-divider"></div>
+            <div class="ph-amenazas-grid">
+                <div class="ph-amenaza-card">
+                    <h4>🌡️ Cambio climático</h4>
+                    <p>Las variaciones en los patrones de lluvia afectan la recarga de los acuíferos y reducen el caudal de ríos y quebradas en época seca.</p>
+                </div>
+                <div class="ph-amenaza-card">
+                    <h4>🏗️ Urbanización no planificada</h4>
+                    <p>La impermeabilización del suelo por construcciones reduce la infiltración de agua y contamina los mantos acuíferos con aguas residuales.</p>
+                </div>
+                <div class="ph-amenaza-card">
+                    <h4>🌾 Agroquímicos</h4>
+                    <p>El uso excesivo de fertilizantes y plaguicidas en zonas agrícolas de altura puede contaminar nacientes y acuíferos subterráneos.</p>
+                </div>
+                <div class="ph-amenaza-card">
+                    <h4>🌋 Actividad volcánica</h4>
+                    <p>Las erupciones del Poás pueden afectar temporalmente la calidad del agua por acidificación y emisión de gases sulfurosos.</p>
+                </div>
+                <div class="ph-amenaza-card">
+                    <h4>🪵 Deforestación</h4>
+                    <p>La pérdida de cobertura boscosa en las zonas de recarga disminuye la capacidad del suelo para capturar y filtrar el agua de lluvia.</p>
+                </div>
+                <div class="ph-amenaza-card">
+                    <h4>🚯 Contaminación de ríos</h4>
+                    <p>La disposición inadecuada de residuos sólidos y aguas negras en cuencas hidrográficas degrada la calidad del recurso hídrico.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="ph-cta">
+        <h2>💙 Protejamos el agua juntos</h2>
+        <p>El patrimonio hídrico de Poás es responsabilidad de todos. Conocé más sobre el cantón y sus recursos naturales.</p>
+        <div class="ph-cta-btns">
+            <a href="index.html#agua" class="ph-cta-btn primary">← Volver al inicio</a>
+            <a href="quejas.html" class="ph-cta-btn outline">📢 Reportar un problema</a>
+            <a href="plan-regulador.html" class="ph-cta-btn outline">🗺️ Plan Regulador</a>
+        </div>
+    </section>
+
+    <footer class="ph-footer">
+        <p>&copy; 2026 Poás Agua y Fuego — César Luis Quesada Herrera</p>
+    </footer>
+
+</body>
+</html>
