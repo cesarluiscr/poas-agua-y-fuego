@@ -406,8 +406,8 @@ h4 {
 }
 
 .volcan-video {
-    width: 360px;
-    height: 420px;
+    width: 480px;
+    height: 540px;
     border-radius: 18px;
     object-fit: cover;
     display: block;
