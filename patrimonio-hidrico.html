@@ -168,10 +168,39 @@
         /* Footer simple */
         .ph-footer { text-align: center; padding: 1.5rem; background: #060f1e; color: rgba(255,255,255,0.3); font-size: 0.8rem; }
 
+        /* Info cards */
+        .ph-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .ph-info-card {
+            background: linear-gradient(145deg, rgba(21,101,192,0.12), rgba(10,42,74,0.5));
+            border: 1px solid rgba(64,196,255,0.15);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .ph-info-card:hover { border-color: rgba(64,196,255,0.35); transform: translateY(-3px); }
+        .ph-info-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+        .ph-info-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem; font-weight: 700;
+            color: var(--agua-light);
+            margin-bottom: 0.75rem;
+        }
+        .ph-info-card p {
+            color: rgba(255,255,255,0.72);
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+        .ph-info-card strong { color: rgba(255,255,255,0.95); }
+
         /* Responsive */
         @media (max-width: 600px) {
             .ph-acuiferos-grid { grid-template-columns: 1fr; }
             .ph-datos-grid { grid-template-columns: repeat(2,1fr); }
+            .ph-info-grid { grid-template-columns: 1fr; }
             .ph-cta-btns { flex-direction: column; align-items: center; }
         }
     </style>
@@ -341,6 +370,60 @@
                 <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA de Sabana Redonda</div><div class="ph-asada-zona">Distrito Sabana Redonda</div></div></div>
                 <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA de San Luis</div><div class="ph-asada-zona">Zona media</div></div></div>
                 <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA de Calle Zamora</div><div class="ph-asada-zona">Zona sur</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECURSOS HÍDRICOS DETALLADOS -->
+    <section class="ph-section">
+        <div class="ph-container">
+            <h2 class="ph-section-title">📋 Recursos Hídricos del Cantón de Poás</h2>
+            <p class="ph-section-sub">Información técnica y contextual sobre el sistema hídrico del cantón.</p>
+            <div class="ph-divider"></div>
+
+            <div class="ph-info-grid">
+
+                <div class="ph-info-card">
+                    <div class="ph-info-icon">🗺️</div>
+                    <h3 class="ph-info-title">Ubicación y contexto general</h3>
+                    <p>El cantón se localiza en la <strong>subcuenca del río Grande de Tárcoles</strong>, que drena las aguas del Valle Central hasta su desembocadura en el Océano Pacífico. Tiene un área territorial de <strong>73,84 km²</strong>, distribuida en una franja de aproximadamente 15 km de largo por 5 km de ancho, con altitudes que van desde los <strong>600 msnm</strong> en Rincón de Carrillos hasta los <strong>2.838 msnm</strong> en el Parque Nacional Volcán Poás.</p>
+                </div>
+
+                <div class="ph-info-card">
+                    <div class="ph-info-icon">🌊</div>
+                    <h3 class="ph-info-title">Ríos principales y límites</h3>
+                    <p>Los cauces de los ríos <strong>Poasito y Poás</strong> definen el límite este con el cantón de Alajuela, mientras que los ríos <strong>Achiote, Tacares y Prendas</strong> definen el límite oeste con el cantón de Grecia.</p>
+                    <p style="margin-top:0.75rem">Con Grecia, Poás comparte las subcuencas del río Tacares y Prendas — zona de gran abundancia de aguas subterráneas, nacientes y tomas de agua, entre ellas la naciente <strong>Los Chorros</strong>, ubicada en el área protegida del mismo nombre.</p>
+                </div>
+
+                <div class="ph-info-card">
+                    <div class="ph-info-icon">🏔️</div>
+                    <h3 class="ph-info-title">Microcuenca del Río Poás</h3>
+                    <p>Se ubica entre el volcán Barva y el volcán Poás, hasta la confluencia con el río Grande cerca de Alajuela. Posee <strong>alto potencial para la formación de acuíferos de alta calidad</strong>.</p>
+                    <p style="margin-top:0.75rem">En los últimos 14 años, la producción hídrica en la microcuenca ha <strong>aumentado en un 1,6%</strong>, específicamente en la escorrentía y la ganancia hídrica.</p>
+                </div>
+
+                <div class="ph-info-card">
+                    <div class="ph-info-icon">💧</div>
+                    <h3 class="ph-info-title">Acuífero Poás y consumo humano</h3>
+                    <p>El agua para consumo humano proviene de <strong>pozos y manantiales</strong>, principalmente del acuífero Poás. A pesar de la vulnerabilidad intrínseca de este acuífero a la contaminación, en la subcuenca se han desarrollado actividades ganaderas y agrícolas en gran parte del territorio.</p>
+                    <p style="margin-top:0.75rem">Los centros poblacionales utilizan principalmente <strong>tanques sépticos</strong> como sistemas de saneamiento, lo que representa un riesgo de contaminación para el agua subterránea y superficial.</p>
+                </div>
+
+                <div class="ph-info-card">
+                    <div class="ph-info-icon">🌾</div>
+                    <h3 class="ph-info-title">Presiones socioambientales</h3>
+                    <p>La microcuenca tiene una estructura socioeconómica basada en actividades agroproductivas: <strong>ganadería, granjas avícolas, caña, café y cultivos no tradicionales</strong> como flores, fresas y hortalizas, que ejercen presión sobre el recurso hídrico.</p>
+                    <p style="margin-top:0.75rem">Se identificaron <strong>seis presiones socioambientales</strong> de impacto negativo sobre el agua, originadas tanto desde hogares como desde actividades productivas. A pesar de ello, los parámetros de calidad del agua mostraron <strong>cumplimiento mayoritario</strong> con los criterios de calidad establecidos.</p>
+                </div>
+
+                <div class="ph-info-card">
+                    <div class="ph-info-icon">⚡</div>
+                    <h3 class="ph-info-title">Riesgos naturales sobre el agua</h3>
+                    <p>Las <strong>inundaciones rápidas y deslizamientos</strong> se relacionan con la presencia de valles fluviales encañonados con fuertes pendientes en microcuencas alargadas sobre depósitos volcánicos recientes.</p>
+                    <p style="margin-top:0.75rem">Los riesgos identificados van desde <strong>erupciones volcánicas, fallas tectónicas y deslizamientos</strong>, hasta amenazas antrópicas que han causado degradación y contaminación de suelos y aguas superficiales y subterráneas.</p>
+                </div>
+
             </div>
         </div>
     </section>
