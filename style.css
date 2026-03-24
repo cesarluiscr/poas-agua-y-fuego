@@ -386,8 +386,8 @@ h4 {
 /* ── Animación Río en Movimiento ── */
 .water-anim-container {
     position: relative;
-    width: 300px;
-    height: 380px;
+    width: 380px;
+    height: 440px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -406,8 +406,8 @@ h4 {
 }
 
 .volcan-video {
-    width: 260px;
-    height: 300px;
+    width: 360px;
+    height: 420px;
     border-radius: 18px;
     object-fit: cover;
     display: block;
