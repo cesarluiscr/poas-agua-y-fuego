@@ -188,14 +188,12 @@ document.addEventListener('DOMContentLoaded', () => {
         servicio:    { emoji: "⚙️", label: "Servicio" }
     };
 
-    // Control de versión — cambiar este número cada vez que se actualicen negocios por defecto
-    const NEGOCIOS_VERSION = 6;
-    const storedVersion = parseInt(localStorage.getItem('poas_negocios_version') || '0');
-    if (storedVersion < NEGOCIOS_VERSION) {
-        localStorage.removeItem('poas_negocios');
-        localStorage.setItem('poas_negocios_version', NEGOCIOS_VERSION);
-    }
-    let negocios = JSON.parse(localStorage.getItem('poas_negocios')) || DEFAULT_NEGOCIOS;
+    // Los negocios por defecto siempre vienen del código (nunca del localStorage)
+    // Solo se guardan en localStorage los negocios agregados por el admin
+    const defaultIds = DEFAULT_NEGOCIOS.map(n => n.id);
+    const stored = JSON.parse(localStorage.getItem('poas_negocios')) || [];
+    const extraNegocios = stored.filter(n => !defaultIds.includes(n.id));
+    let negocios = [...DEFAULT_NEGOCIOS, ...extraNegocios];
     let activeFilter = 'all';
 
     const negociosGrid = document.getElementById('negociosGrid');
