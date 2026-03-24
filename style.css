@@ -405,6 +405,14 @@ h4 {
     height: 300px;
 }
 
+.volcan-video {
+    width: 260px;
+    height: 300px;
+    border-radius: 18px;
+    object-fit: cover;
+    display: block;
+}
+
 /* Ondas del río bajando por el volcán */
 .river-wave {
     animation: rioDown 2.5s linear infinite;
