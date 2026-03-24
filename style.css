@@ -401,37 +401,37 @@ h4 {
 }
 
 .river-svg {
-    width: 280px;
-    height: 200px;
+    width: 200px;
+    height: 300px;
 }
 
-/* Ondas del río fluyendo de derecha a izquierda */
+/* Ondas fluyendo diagonalmente arriba-izquierda → abajo-derecha */
 .river-wave {
-    animation: riverFlow 3s linear infinite;
+    animation: riverFlowDiag 2.8s linear infinite;
 }
-.rw1 { animation-duration: 3s;   animation-delay: 0s;    }
-.rw2 { animation-duration: 3.8s; animation-delay: -1.2s; }
-.rw3 { animation-duration: 4.5s; animation-delay: -2.2s; }
+.rw1 { animation-duration: 2.8s; animation-delay: 0s;    }
+.rw2 { animation-duration: 3.4s; animation-delay: -1s;   }
+.rw3 { animation-duration: 4s;   animation-delay: -2s;   }
 
-@keyframes riverFlow {
-    from { transform: translateX(0);    }
-    to   { transform: translateX(-80px); }
+@keyframes riverFlowDiag {
+    from { transform: translate(0, 0);      }
+    to   { transform: translate(8px, 40px); }
 }
 
-/* Espuma/burbujas flotando con el agua */
+/* Espuma deslizándose con la corriente diagonal */
 .river-foam {
-    animation: foamDrift 3s ease-in-out infinite;
+    animation: foamDiag 3s ease-in-out infinite;
 }
 .rf1 { animation-duration: 3s;   animation-delay: 0s;    }
-.rf2 { animation-duration: 3.5s; animation-delay: -0.8s; }
-.rf3 { animation-duration: 2.8s; animation-delay: -1.5s; }
-.rf4 { animation-duration: 4s;   animation-delay: -0.4s; }
-.rf5 { animation-duration: 3.2s; animation-delay: -2s;   }
-.rf6 { animation-duration: 3.7s; animation-delay: -1s;   }
+.rf2 { animation-duration: 3.5s; animation-delay: -0.7s; }
+.rf3 { animation-duration: 2.8s; animation-delay: -1.4s; }
+.rf4 { animation-duration: 4s;   animation-delay: -0.3s; }
+.rf5 { animation-duration: 3.3s; animation-delay: -2s;   }
+.rf6 { animation-duration: 3.8s; animation-delay: -1.2s; }
 
-@keyframes foamDrift {
-    0%, 100% { transform: translateX(0) translateY(0);  opacity: 0.9; }
-    50%       { transform: translateX(-18px) translateY(-4px); opacity: 1; }
+@keyframes foamDiag {
+    0%, 100% { transform: translate(0, 0);    opacity: 0.85; }
+    50%       { transform: translate(5px, 18px); opacity: 1;  }
 }
 
 @keyframes dropFloat {
