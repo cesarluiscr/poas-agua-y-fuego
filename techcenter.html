@@ -341,6 +341,80 @@
             to   { top: 100%; }
         }
 
+        /* ABOUT */
+        .tc-about-card {
+            background: var(--tc-glass);
+            border: 1px solid var(--tc-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            backdrop-filter: blur(8px);
+        }
+
+        .tc-about-lead {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            color: var(--tc-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .tc-about-card p {
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* RAZONES */
+        .tc-razones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .tc-razon-card {
+            background: linear-gradient(135deg, rgba(0,212,255,0.05), rgba(155,48,217,0.08));
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .tc-razon-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 0 25px rgba(0,212,255,0.2);
+        }
+
+        .tc-razon-icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+
+        .tc-razon-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.95rem;
+            color: var(--tc-cyan);
+            margin: 0 0 0.75rem;
+        }
+
+        .tc-razon-card p { color: #888; font-size: 0.9rem; line-height: 1.6; margin: 0; }
+
+        /* SLOGAN */
+        .tc-slogan {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(155,48,217,0.1), rgba(0,212,255,0.05));
+            border: 1px solid var(--tc-border);
+            border-radius: 16px;
+            font-size: 1.1rem;
+            color: #ccc;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .tc-slogan strong { color: var(--tc-purple); }
+        .tc-slogan em { color: var(--tc-cyan); font-style: normal; font-weight: 700; }
+
         /* Responsive */
         @media (max-width: 600px) {
             .tc-hero-btns, .tc-contacto-btns { flex-direction: column; align-items: center; }
@@ -384,41 +458,80 @@
         </div>
     </section>
 
-    <!-- SERVICIOS -->
+    <!-- QUIÉNES SOMOS -->
     <section class="tc-section">
-        <h2 class="tc-section-title">Nuestros Servicios</h2>
+        <h2 class="tc-section-title">Bienvenidos a Tech Center CR</h2>
+        <div class="tc-section-line"></div>
+        <div class="tc-about-card">
+            <p class="tc-about-lead">Tu aliado digital en Poás</p>
+            <p>En Tech Center CR, nacimos en el corazón de Poás con una misión clara: acercar la innovación y las soluciones tecnológicas de vanguardia a nuestra comunidad y empresas locales.</p>
+            <p>Entendemos que el mundo actual se mueve rápido, por eso nos especializamos en ofrecer un ecosistema de soluciones integrales diseñadas para potenciar tu productividad y conectividad.</p>
+        </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section class="tc-section" style="padding-top:0;">
+        <h2 class="tc-section-title">Nuestros Servicios Especializados</h2>
         <div class="tc-section-line"></div>
         <div class="tc-servicios-grid">
             <div class="tc-servicio-card">
                 <span class="tc-servicio-icon">🖥️</span>
-                <h3>Soporte Técnico</h3>
-                <p>Reparación y mantenimiento de computadoras, laptops y dispositivos electrónicos.</p>
+                <h3>Soporte Técnico y Reparación</h3>
+                <p>Diagnóstico y mantenimiento profesional de computadoras (laptops y PC), tablets y dispositivos móviles.</p>
+            </div>
+            <div class="tc-servicio-card">
+                <span class="tc-servicio-icon">🛒</span>
+                <h3>Venta de Equipo Tecnológico</h3>
+                <p>Amplio catálogo de hardware, periféricos y accesorios de las mejores marcas del mercado.</p>
+            </div>
+            <div class="tc-servicio-card">
+                <span class="tc-servicio-icon">📡</span>
+                <h3>Redes y Conectividad</h3>
+                <p>Instalación y configuración de redes Wi-Fi, optimización de señal y cableado estructurado para hogares y oficinas.</p>
+            </div>
+            <div class="tc-servicio-card">
+                <span class="tc-servicio-icon">📷</span>
+                <h3>Seguridad Electrónica</h3>
+                <p>Venta e instalación de sistemas de cámaras de vigilancia (CCTV) para que siempre tengás el control de tu seguridad.</p>
+            </div>
+            <div class="tc-servicio-card">
+                <span class="tc-servicio-icon">💡</span>
+                <h3>Asesoría Digital</h3>
+                <p>Consultoría personalizada para empresas que buscan dar el salto a la transformación digital y mejorar sus procesos.</p>
             </div>
             <div class="tc-servicio-card">
                 <span class="tc-servicio-icon">🌐</span>
                 <h3>Desarrollo Web</h3>
-                <p>Creación de sitios web modernos, páginas de negocio y aplicaciones para su empresa.</p>
+                <p>Creación de sitios web modernos, páginas de negocio y aplicaciones para potenciar tu presencia en línea.</p>
             </div>
-            <div class="tc-servicio-card">
-                <span class="tc-servicio-icon">📡</span>
-                <h3>Redes e Internet</h3>
-                <p>Instalación y configuración de redes WiFi, cableado estructurado y routers.</p>
+        </div>
+    </section>
+
+    <!-- POR QUÉ ELEGIRNOS -->
+    <section class="tc-section" style="padding-top:0;">
+        <h2 class="tc-section-title">¿Por qué elegirnos?</h2>
+        <div class="tc-section-line"></div>
+        <div class="tc-razones-grid">
+            <div class="tc-razon-card">
+                <span class="tc-razon-icon">🤝</span>
+                <h3>Cercanía y Confianza</h3>
+                <p>Somos parte de Poás y conocemos las necesidades de nuestra gente.</p>
             </div>
-            <div class="tc-servicio-card">
-                <span class="tc-servicio-icon">🔒</span>
-                <h3>Seguridad Digital</h3>
-                <p>Protección contra virus, respaldos de información y configuración de seguridad.</p>
+            <div class="tc-razon-card">
+                <span class="tc-razon-icon">⚡</span>
+                <h3>Experiencia Técnica</h3>
+                <p>Un equipo capacitado para resolver desde los retos más simples hasta los más complejos.</p>
             </div>
-            <div class="tc-servicio-card">
-                <span class="tc-servicio-icon">☁️</span>
-                <h3>Servicios en la Nube</h3>
-                <p>Configuración de Google Workspace, Microsoft 365 y almacenamiento en la nube.</p>
+            <div class="tc-razon-card">
+                <span class="tc-razon-icon">💬</span>
+                <h3>Trato Humano</h3>
+                <p>Hablamos de tecnología en lenguaje sencillo, brindándote la confianza que necesitás.</p>
             </div>
-            <div class="tc-servicio-card">
-                <span class="tc-servicio-icon">📱</span>
-                <h3>Soporte Móvil</h3>
-                <p>Asistencia técnica para smartphones, tablets y dispositivos móviles.</p>
-            </div>
+        </div>
+        <div class="tc-slogan">
+            <span>En Tech Center CR, no solo arreglamos dispositivos;</span>
+            <strong> construimos puentes hacia el futuro.</strong>
+            <br><em>¡Impulsá tu potencial con nosotros!</em>
         </div>
     </section>
 
