@@ -1701,6 +1701,24 @@ footer {
 .negocio-card > .negocio-card-header { padding-top: 1.5rem; }
 .negocio-card > .negocio-meta { padding-bottom: 0.75rem; }
 
+/* Tarjetas sin galería: padding uniforme, sin espacio vacío */
+.negocio-card-simple {
+    padding: 2rem;
+}
+.negocio-card-simple > .negocio-card-header,
+.negocio-card-simple > .negocio-desc,
+.negocio-card-simple > .negocio-meta {
+    padding-left: 0;
+    padding-right: 0;
+}
+.negocio-card-simple > .negocio-card-header { padding-top: 0; }
+.negocio-card-simple > .negocio-meta { padding-bottom: 0; }
+.negocio-card-simple > .negocio-social {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
 /* Galería de fotos del negocio */
 .negocio-galeria {
     display: grid;

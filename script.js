@@ -231,7 +231,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const meta = CATEGORIA_META[negocio.categoria] || { emoji: "🏢", label: negocio.categoria };
             const emoji = negocio.emoji || meta.emoji;
             const card = document.createElement('div');
-            card.className = 'negocio-card';
+            const tieneGaleria = negocio.imagenes && negocio.imagenes.length > 0;
+            card.className = tieneGaleria ? 'negocio-card' : 'negocio-card negocio-card-simple';
 
             // Galería de imágenes si existe
             const galeriaHTML = (negocio.imagenes && negocio.imagenes.length > 0)
