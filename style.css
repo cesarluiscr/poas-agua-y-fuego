@@ -846,6 +846,247 @@ footer {
     background: linear-gradient(to bottom, #FFFFFF, #F0F4F4);
 }
 
+/* ── Hero secundario (páginas internas) ── */
+.secondary-hero {
+    padding: 7rem 0 3.5rem;
+    color: #fff;
+    text-align: center;
+}
+
+.secondary-hero-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.secondary-hero-icon {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.secondary-hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    margin: 0 0 1rem;
+    color: #fff;
+}
+
+.secondary-hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    line-height: 1.7;
+}
+
+/* ── Página de Quejas interna ── */
+.quejas-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.quejas-tipo-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.75rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    border: 1px solid #E2E8E6;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.quejas-tipo-icon {
+    font-size: 2.2rem;
+}
+
+.quejas-tipo-card h3 {
+    color: #1A237E;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.quejas-tipo-card p {
+    color: #555;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    flex: 1;
+}
+
+.quejas-link-btn {
+    display: inline-block;
+    margin-top: 0.5rem;
+    background: #FFF200;
+    color: #1A237E !important;
+    font-weight: 700;
+    font-size: 0.88rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    border: 2px solid #1A237E;
+    transition: background 0.2s, transform 0.2s;
+    align-self: flex-start;
+}
+
+.quejas-link-btn:hover {
+    background: #1A237E;
+    color: #FFF200 !important;
+    transform: translateY(-2px);
+}
+
+.quejas-form-section {
+    background: #F8F9FF;
+    border: 2px solid #1A237E22;
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.quejas-form-section h2 {
+    color: #1A237E;
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem;
+}
+
+.quejas-form-desc {
+    color: #555;
+    margin-bottom: 1.75rem;
+}
+
+.quejas-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.quejas-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.1rem;
+}
+
+.quejas-form label {
+    font-weight: 600;
+    color: #1A237E;
+    font-size: 0.92rem;
+}
+
+.quejas-form input,
+.quejas-form select,
+.quejas-form textarea {
+    padding: 0.75rem 1rem;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    background: #fff;
+}
+
+.quejas-form input:focus,
+.quejas-form select:focus,
+.quejas-form textarea:focus {
+    outline: none;
+    border-color: #1A237E;
+}
+
+.quejas-submit-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #1A237E;
+    color: #FFF200;
+    font-size: 1.1rem;
+    font-weight: 800;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+    margin-top: 0.5rem;
+}
+
+.quejas-submit-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .quejas-form .form-row { grid-template-columns: 1fr; }
+    .quejas-form-section { padding: 1.75rem 1.25rem; }
+}
+
+/* ── Sección de Quejas / Denuncias ── */
+.quejas-section {
+    padding: 3rem 0 2rem;
+    background: #fff;
+}
+
+.quejas-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: #FFF200;
+    border: 3px solid #1A237E;
+    border-radius: 20px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 8px 30px rgba(26, 35, 126, 0.15);
+}
+
+.quejas-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.quejas-texto {
+    flex: 1;
+}
+
+.quejas-texto h2 {
+    color: #1A237E;
+    font-size: 1.6rem;
+    margin: 0 0 0.4rem;
+}
+
+.quejas-texto p {
+    color: #1A237E;
+    font-size: 1rem;
+    margin: 0;
+    opacity: 0.85;
+}
+
+.quejas-btn {
+    display: inline-block;
+    background: #1A237E;
+    color: #FFF200 !important;
+    font-size: 1.1rem;
+    font-weight: 800;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+    letter-spacing: 0.02em;
+}
+
+.quejas-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(26, 35, 126, 0.4);
+}
+
+@media (max-width: 600px) {
+    .quejas-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.75rem 1.5rem;
+    }
+    .quejas-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
 /* Tarjeta de acceso rápido al Plan Regulador */
 .regulador-preview-section {
     padding: 4rem 0;
