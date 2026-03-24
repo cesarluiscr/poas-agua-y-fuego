@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Center CR | Soluciones Tecnológicas en Poás</title>
+    <meta name="description" content="Tech Center CR — Soporte técnico, desarrollo web y soluciones tecnológicas en el Cantón de Poás, Alajuela, Costa Rica.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ── Variables futuristas ── */
+        :root {
+            --tc-purple: #9B30D9;
+            --tc-purple-dark: #6a0dad;
+            --tc-cyan: #00D4FF;
+            --tc-bg: #06080F;
+            --tc-bg2: #0D1117;
+            --tc-glass: rgba(155, 48, 217, 0.08);
+            --tc-border: rgba(155, 48, 217, 0.3);
+        }
+
+        body { background: var(--tc-bg); color: #E0E0E0; font-family: 'Exo 2', sans-serif; margin: 0; }
+
+        /* Fondo animado de partículas */
+        .tc-bg-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .tc-page { position: relative; z-index: 1; }
+
+        /* NAVBAR */
+        .tc-nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background: rgba(6, 8, 15, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--tc-border);
+        }
+
+        .tc-nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .tc-nav-logo img { height: 40px; width: 40px; object-fit: contain; }
+
+        .tc-nav-logo span {
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--tc-purple);
+            letter-spacing: 0.05em;
+        }
+
+        .tc-nav-back {
+            color: var(--tc-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid var(--tc-cyan);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .tc-nav-back:hover { background: var(--tc-cyan); color: #000; }
+
+        /* HERO */
+        .tc-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+        }
+
+        .tc-hero-content { max-width: 800px; }
+
+        .tc-logo-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .tc-logo-wrapper img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 30px rgba(155, 48, 217, 0.7));
+            animation: tc-float 4s ease-in-out infinite;
+        }
+
+        .tc-logo-ring {
+            position: absolute;
+            inset: -15px;
+            border-radius: 50%;
+            border: 2px solid var(--tc-purple);
+            opacity: 0.4;
+            animation: tc-ring-spin 8s linear infinite;
+        }
+
+        .tc-logo-ring2 {
+            position: absolute;
+            inset: -30px;
+            border-radius: 50%;
+            border: 1px dashed var(--tc-cyan);
+            opacity: 0.2;
+            animation: tc-ring-spin 12s linear infinite reverse;
+        }
+
+        @keyframes tc-float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-15px); }
+        }
+
+        @keyframes tc-ring-spin {
+            from { transform: rotate(0deg); }
+            to   { transform: rotate(360deg); }
+        }
+
+        .tc-hero h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 900;
+            margin: 0 0 0.5rem;
+            background: linear-gradient(90deg, #fff 0%, var(--tc-purple) 50%, var(--tc-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tc-hero-sub {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 0.3em;
+            color: var(--tc-cyan);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .tc-hero-desc {
+            font-size: 1.1rem;
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tc-hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tc-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2rem;
+            background: linear-gradient(135deg, var(--tc-purple-dark), var(--tc-purple));
+            color: #fff;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 20px rgba(155,48,217,0.4);
+        }
+
+        .tc-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(155,48,217,0.7);
+        }
+
+        .tc-btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2rem;
+            border: 2px solid var(--tc-cyan);
+            color: var(--tc-cyan);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .tc-btn-outline:hover { background: var(--tc-cyan); color: #000; }
+
+        /* SERVICIOS */
+        .tc-section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .tc-section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .tc-section-line {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--tc-purple), var(--tc-cyan));
+            margin: 0 auto 3rem;
+            border-radius: 3px;
+        }
+
+        .tc-servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tc-servicio-card {
+            background: var(--tc-glass);
+            border: 1px solid var(--tc-border);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            backdrop-filter: blur(8px);
+        }
+
+        .tc-servicio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 30px rgba(155,48,217,0.3);
+            border-color: var(--tc-purple);
+        }
+
+        .tc-servicio-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .tc-servicio-card h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            color: var(--tc-purple);
+            margin: 0 0 0.75rem;
+        }
+
+        .tc-servicio-card p {
+            font-size: 0.9rem;
+            color: #888;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* CONTACTO */
+        .tc-contacto {
+            background: linear-gradient(135deg, rgba(155,48,217,0.1), rgba(0,212,255,0.05));
+            border: 1px solid var(--tc-border);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 5rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .tc-contacto h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            color: #fff;
+            margin: 0 0 0.5rem;
+        }
+
+        .tc-contacto p {
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        .tc-contacto-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tc-info-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+
+        /* FOOTER */
+        .tc-footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--tc-border);
+            color: #444;
+            font-size: 0.85rem;
+        }
+
+        .tc-footer a { color: var(--tc-purple); text-decoration: none; }
+
+        /* Scan line effect */
+        .tc-scanline {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(90deg, transparent, var(--tc-cyan), transparent);
+            opacity: 0.15;
+            animation: tc-scan 6s linear infinite;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @keyframes tc-scan {
+            from { top: 0; }
+            to   { top: 100%; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .tc-hero-btns, .tc-contacto-btns { flex-direction: column; align-items: center; }
+            .tc-logo-wrapper img { width: 130px; height: 130px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="tc-scanline"></div>
+
+<!-- Fondo animado -->
+<canvas class="tc-bg-canvas" id="tcCanvas"></canvas>
+
+<div class="tc-page">
+
+    <!-- NAV -->
+    <nav class="tc-nav">
+        <a href="directorio-comercial.html" class="tc-nav-logo">
+            <img src="img/techcenter_logo_0.png" alt="Tech Center CR">
+            <span>TECH CENTER CR</span>
+        </a>
+        <a href="directorio-comercial.html" class="tc-nav-back">← Directorio</a>
+    </nav>
+
+    <!-- HERO -->
+    <section class="tc-hero">
+        <div class="tc-hero-content">
+            <div class="tc-logo-wrapper">
+                <div class="tc-logo-ring"></div>
+                <div class="tc-logo-ring2"></div>
+                <img src="img/techcenter_logo_0.png" alt="Tech Center CR Logo">
+            </div>
+            <p class="tc-hero-sub">Cantón de Poás · Alajuela · Costa Rica</p>
+            <h1>Tech Center CR</h1>
+            <p class="tc-hero-desc">Soluciones tecnológicas de vanguardia para empresas y personas del cantón de Poás. Soporte técnico, desarrollo web, redes y mucho más.</p>
+            <div class="tc-hero-btns">
+                <a href="https://wa.me/50687058612" target="_blank" rel="noopener" class="tc-btn-primary">💬 Contactar por WhatsApp</a>
+                <a href="https://www.facebook.com/techcentercr/" target="_blank" rel="noopener" class="tc-btn-outline">📘 Facebook</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section class="tc-section">
+        <h2 class="tc-section-title">Nuestros Servicios</h2>
+        <div class="tc-section-line"></div>
+        <div class="tc-servicios-grid">
+            <div class="tc-servicio-card">
+                <span class="tc-servicio-icon">🖥️</span>
+                <h3>Soporte Técnico</h3>
+                <p>Reparación y mantenimiento de computadoras, laptops y dispositivos electrónicos.</p>
+            </div>
+            <div class="tc-servicio-card">
+                <span class="tc-servicio-icon">🌐</span>
+                <h3>Desarrollo Web</h3>
+                <p>Creación de sitios web modernos, páginas de negocio y aplicaciones para su empresa.</p>
+            </div>
+            <div class="tc-servicio-card">
+                <span class="tc-servicio-icon">📡</span>
+                <h3>Redes e Internet</h3>
+                <p>Instalación y configuración de redes WiFi, cableado estructurado y routers.</p>
+            </div>
+            <div class="tc-servicio-card">
+                <span class="tc-servicio-icon">🔒</span>
+                <h3>Seguridad Digital</h3>
+                <p>Protección contra virus, respaldos de información y configuración de seguridad.</p>
+            </div>
+            <div class="tc-servicio-card">
+                <span class="tc-servicio-icon">☁️</span>
+                <h3>Servicios en la Nube</h3>
+                <p>Configuración de Google Workspace, Microsoft 365 y almacenamiento en la nube.</p>
+            </div>
+            <div class="tc-servicio-card">
+                <span class="tc-servicio-icon">📱</span>
+                <h3>Soporte Móvil</h3>
+                <p>Asistencia técnica para smartphones, tablets y dispositivos móviles.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <div style="padding: 0 2rem;">
+        <div class="tc-contacto">
+            <h2>¿Listo para conectar?</h2>
+            <p>Contacte a César Luis Quesada Herrera y reciba atención personalizada para sus necesidades tecnológicas.</p>
+            <div class="tc-contacto-btns">
+                <a href="https://wa.me/50687058612" target="_blank" rel="noopener" class="tc-btn-primary">💬 WhatsApp: 8705-8612</a>
+                <a href="https://ul.waze.com/ul?ll=10.09587101%2C-84.24263835&navigate=yes&zoom=17" target="_blank" rel="noopener" class="tc-btn-outline">📍 Cómo llegar</a>
+            </div>
+            <div class="tc-info-row">
+                <span>📍</span><span>Cantón de Poás, Alajuela, Costa Rica</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="tc-footer">
+        <p>© 2025 Tech Center CR · César Luis Quesada Herrera · <a href="directorio-comercial.html">Directorio Poás Agua y Fuego</a></p>
+    </footer>
+
+</div>
+
+<!-- Canvas partículas -->
+<script>
+(function() {
+    const canvas = document.getElementById('tcCanvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [];
+
+    function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    }
+
+    function Particle() {
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.r  = Math.random() * 1.5 + 0.3;
+        this.a  = Math.random() * 0.5 + 0.1;
+        this.color = Math.random() > 0.5 ? '155,48,217' : '0,212,255';
+    }
+
+    Particle.prototype.update = function() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0) this.x = W;
+        if (this.x > W) this.x = 0;
+        if (this.y < 0) this.y = H;
+        if (this.y > H) this.y = 0;
+    };
+
+    Particle.prototype.draw = function() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color},${this.a})`;
+        ctx.fill();
+    };
+
+    function init() {
+        particles = [];
+        for (let i = 0; i < 120; i++) particles.push(new Particle());
+    }
+
+    function drawLines() {
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 100) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(155,48,217,${0.12 * (1 - dist/100)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => { p.update(); p.draw(); });
+        drawLines();
+        requestAnimationFrame(animate);
+    }
+
+    resize();
+    init();
+    animate();
+    window.addEventListener('resize', () => { resize(); init(); });
+})();
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

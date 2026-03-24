@@ -168,6 +168,19 @@ document.addEventListener('DOMContentLoaded', () => {
             imagenes: ["img/monteluna_aerea.jpg", "img/monteluna_cabana.jpg", "img/monteluna_interior.jpg"]
         },
         {
+            id: 3,
+            nombre: "Tech Center CR",
+            categoria: "tecnologia",
+            emoji: "💻",
+            descripcion: "Soluciones tecnológicas para el cantón de Poás. Soporte técnico, desarrollo web, redes y servicios informáticos. Atención personalizada por César Luis Quesada Herrera.",
+            whatsapp: "50687058612",
+            facebook: "https://www.facebook.com/techcentercr/",
+            waze: "https://ul.waze.com/ul?ll=10.09587101%2C-84.24263835&navigate=yes&zoom=17&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location",
+            sitio: "techcenter.html",
+            direccion: "Cantón de Poás, Alajuela",
+            logo: "img/techcenter_logo_0.png"
+        },
+        {
             id: 2,
             nombre: "Productos de Limpieza Don Luis",
             categoria: "servicio",
@@ -248,8 +261,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${negocio.correo    ? `<a href="mailto:${negocio.correo}">✉️ ${negocio.correo}</a>` : ''}
                     ${negocio.sitio && !negocio.facebook ? `<a href="${negocio.sitio}" target="_blank" rel="noopener">${negocio.sitio.includes('facebook') ? '📘 Ver en Facebook' : '🌐 ' + negocio.sitio}</a>` : ''}
                 </div>
-                ${(negocio.whatsapp || negocio.facebook || negocio.instagram || negocio.tiktok) ? `
+                ${(negocio.whatsapp || negocio.facebook || negocio.instagram || negocio.tiktok || negocio.waze || negocio.booking || negocio.sitio) ? `
                 <div class="negocio-social">
+                    ${negocio.sitio     ? `<a href="${negocio.sitio}" ${negocio.sitio.startsWith('http') ? 'target="_blank"' : ''} rel="noopener" class="social-btn ver-mas-btn">🌐 Ver más</a>` : ''}
                     ${negocio.whatsapp  ? `<a href="https://wa.me/${negocio.whatsapp}" target="_blank" rel="noopener" class="social-btn wa-btn">💬 WhatsApp</a>` : ''}
                     ${negocio.facebook  ? `<a href="${negocio.facebook}" target="_blank" rel="noopener" class="social-btn fb-btn">📘 Facebook</a>` : ''}
                     ${negocio.instagram ? `<a href="${negocio.instagram}" target="_blank" rel="noopener" class="social-btn ig-btn">📸 Instagram</a>` : ''}
