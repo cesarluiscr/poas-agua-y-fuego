@@ -157,7 +157,6 @@ document.addEventListener('DOMContentLoaded', () => {
             descripcion: "Cabañas tipo A-frame en medio de la naturaleza, con vistas espectaculares al volcán Poás. Disfruta de una experiencia única rodeada de bosque y tranquilidad en Poásito, Alajuela.",
             whatsapp: "50664859189",
             correo: "",
-            sitio: "https://www.facebook.com/share/18Py73sqeq/",
             facebook: "https://www.facebook.com/share/18Py73sqeq/",
             instagram: "https://www.instagram.com/monte_lunacr?igsh=bXc3dDd4eTYzNGs3",
             tiktok: "https://www.tiktok.com/@monte_lunacr?_r=1&_t=ZS-94uvcxmxtxc",
