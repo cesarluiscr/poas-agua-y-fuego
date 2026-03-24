@@ -186,7 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
         hospedaje:   { emoji: "🏨", label: "Hospedaje" },
         tours:       { emoji: "🌋", label: "Tours" },
         tienda:      { emoji: "🛍️", label: "Tienda" },
-        servicio:    { emoji: "⚙️", label: "Servicio" }
+        servicio:    { emoji: "⚙️", label: "Servicio" },
+        tecnologia:  { emoji: "💻", label: "Tecnología" }
     };
 
     // Los negocios por defecto siempre vienen del código (nunca del localStorage)
