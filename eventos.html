@@ -76,6 +76,26 @@
         .evento-card-img {
             width: 100%; height: 200px;
             object-fit: cover; display: block;
+            cursor: zoom-in;
+        }
+
+        /* Lightbox */
+        #ev-lightbox {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.88); z-index: 9999;
+            align-items: center; justify-content: center;
+        }
+        #ev-lightbox.active { display: flex; }
+        #ev-lightbox img {
+            max-width: 92vw; max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+            object-fit: contain;
+        }
+        #ev-lightbox-close {
+            position: fixed; top: 1rem; right: 1.2rem;
+            font-size: 2rem; color: #fff; cursor: pointer;
+            line-height: 1; background: none; border: none;
         }
 
         .evento-card-header {
@@ -558,6 +578,28 @@
 
         // ── Init ─────────────────────────────────────────────────────
         renderEventos();
+
+        // Lightbox para imágenes de eventos
+        document.body.insertAdjacentHTML('beforeend', `
+            <div id="ev-lightbox">
+                <button id="ev-lightbox-close" aria-label="Cerrar">✕</button>
+                <img id="ev-lightbox-img" src="" alt="">
+            </div>
+        `);
+        document.addEventListener('click', e => {
+            const img = e.target.closest('.evento-card-img');
+            if (img) {
+                document.getElementById('ev-lightbox-img').src = img.src;
+                document.getElementById('ev-lightbox').classList.add('active');
+            }
+        });
+        document.getElementById('ev-lightbox').addEventListener('click', e => {
+            if (e.target.id === 'ev-lightbox' || e.target.id === 'ev-lightbox-close')
+                document.getElementById('ev-lightbox').classList.remove('active');
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') document.getElementById('ev-lightbox').classList.remove('active');
+        });
     </script>
 </body>
 </html>
