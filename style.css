@@ -1456,7 +1456,7 @@ footer {
 }
 
 .negocio-card > .negocio-card-header { padding-top: 1.5rem; }
-.negocio-card > .negocio-meta { padding-bottom: 1.5rem; }
+.negocio-card > .negocio-meta { padding-bottom: 0.75rem; }
 
 /* Galería de fotos del negocio */
 .negocio-galeria {
@@ -1562,6 +1562,40 @@ footer {
 .negocio-meta a:hover {
     text-decoration: underline;
 }
+
+/* Botones de redes sociales en negocio-card */
+.negocio-social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem 2rem 1.5rem;
+    border-top: 1px solid #E2E8E6;
+    margin-top: 0.25rem;
+}
+
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+    color: #fff !important;
+}
+
+.social-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+    text-decoration: none !important;
+}
+
+.wa-btn  { background: #25D366; }
+.fb-btn  { background: #1877F2; }
+.ig-btn  { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+.tt-btn  { background: #010101; }
 
 .no-negocios {
     grid-column: 1 / -1;

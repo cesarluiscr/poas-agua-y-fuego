@@ -155,9 +155,12 @@ document.addEventListener('DOMContentLoaded', () => {
             categoria: "hospedaje",
             emoji: "🏔️",
             descripcion: "Cabañas tipo A-frame en medio de la naturaleza, con vistas espectaculares al volcán Poás. Disfruta de una experiencia única rodeada de bosque y tranquilidad en Poásito, Alajuela.",
-            telefono: "",
+            whatsapp: "50664859189",
             correo: "",
-            sitio: "",
+            sitio: "https://www.facebook.com/share/18Py73sqeq/",
+            facebook: "https://www.facebook.com/share/18Py73sqeq/",
+            instagram: "https://www.instagram.com/monte_lunacr?igsh=bXc3dDd4eTYzNGs3",
+            tiktok: "https://www.tiktok.com/@monte_lunacr?_r=1&_t=ZS-94uvcxmxtxc",
             direccion: "Poásito, Alajuela",
             logo: "img/monteluna_logo.jpg",
             imagenes: ["img/monteluna_aerea.jpg", "img/monteluna_cabana.jpg", "img/monteluna_interior.jpg"]
@@ -240,8 +243,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${negocio.direccion ? `<span>📍 ${negocio.direccion}</span>` : ''}
                     ${negocio.telefono  ? `<span>📞 ${negocio.telefono}</span>` : ''}
                     ${negocio.correo    ? `<a href="mailto:${negocio.correo}">✉️ ${negocio.correo}</a>` : ''}
-                    ${negocio.sitio     ? `<a href="${negocio.sitio}" target="_blank" rel="noopener">${negocio.sitio.includes('facebook') ? '📘 Ver en Facebook' : '🌐 ' + negocio.sitio}</a>` : ''}
+                    ${negocio.sitio && !negocio.facebook ? `<a href="${negocio.sitio}" target="_blank" rel="noopener">${negocio.sitio.includes('facebook') ? '📘 Ver en Facebook' : '🌐 ' + negocio.sitio}</a>` : ''}
                 </div>
+                ${(negocio.whatsapp || negocio.facebook || negocio.instagram || negocio.tiktok) ? `
+                <div class="negocio-social">
+                    ${negocio.whatsapp  ? `<a href="https://wa.me/${negocio.whatsapp}" target="_blank" rel="noopener" class="social-btn wa-btn">💬 WhatsApp</a>` : ''}
+                    ${negocio.facebook  ? `<a href="${negocio.facebook}" target="_blank" rel="noopener" class="social-btn fb-btn">📘 Facebook</a>` : ''}
+                    ${negocio.instagram ? `<a href="${negocio.instagram}" target="_blank" rel="noopener" class="social-btn ig-btn">📸 Instagram</a>` : ''}
+                    ${negocio.tiktok    ? `<a href="${negocio.tiktok}" target="_blank" rel="noopener" class="social-btn tt-btn">🎵 TikTok</a>` : ''}
+                </div>` : ''}
             `;
             negociosGrid.appendChild(card);
         });
