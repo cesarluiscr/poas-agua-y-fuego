@@ -213,6 +213,177 @@
                 position: static;
             }
         }
+
+        /* ── Sección MAPRIOT ── */
+        .mapriot-section {
+            background: linear-gradient(180deg, #f0f7f5 0%, #fff 100%);
+            padding: 5rem 0;
+            border-top: 4px solid var(--clr-turquoise);
+        }
+        .mapriot-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        .mapriot-badge {
+            display: inline-block;
+            background: var(--clr-turquoise);
+            color: var(--clr-volcanic-dark);
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+        .mapriot-header h2 {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: 800;
+            color: var(--clr-volcanic-dark);
+            margin-bottom: 0.75rem;
+        }
+        .mapriot-header p {
+            color: var(--clr-text-muted);
+            font-size: 1rem;
+            max-width: 680px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .mapriot-note {
+            background: #e8f5f2;
+            border-left: 4px solid var(--clr-turquoise);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 3rem;
+            font-size: 0.88rem;
+            color: #2d6a5a;
+            line-height: 1.6;
+        }
+        .mapriot-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+        .mapriot-block-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--clr-volcanic-dark);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #d1ede8;
+        }
+        .mapriot-block-title .mb-num {
+            background: var(--clr-turquoise);
+            color: var(--clr-volcanic-dark);
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.82rem; font-weight: 800; flex-shrink: 0;
+        }
+        .mapriot-list {
+            list-style: none;
+            padding: 0; margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+        .mapriot-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            font-size: 0.93rem;
+            color: var(--clr-text-muted);
+            line-height: 1.6;
+        }
+        .mapriot-list li::before {
+            content: "▸";
+            color: var(--clr-turquoise);
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+        .mapriot-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
+        }
+        .mapriot-card {
+            background: #fff;
+            border: 1px solid #d4ede8;
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .mapriot-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.09); }
+        .mapriot-card-icon { font-size: 1.6rem; margin-bottom: 0.6rem; }
+        .mapriot-card h4 {
+            font-size: 0.95rem; font-weight: 700;
+            color: var(--clr-volcanic-dark);
+            margin-bottom: 0.4rem;
+        }
+        .mapriot-card p {
+            font-size: 0.83rem;
+            color: var(--clr-text-muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+        .mapriot-table-wrap { overflow-x: auto; }
+        .mapriot-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+        .mapriot-table th {
+            background: var(--clr-volcanic-dark);
+            color: #fff;
+            padding: 0.7rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .mapriot-table td {
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid #e4eeeb;
+            color: var(--clr-text-muted);
+            vertical-align: top;
+        }
+        .mapriot-table tr:nth-child(even) td { background: #f5faf8; }
+        .mapriot-etapa-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: var(--clr-turquoise); color: var(--clr-volcanic-dark);
+            width: 26px; height: 26px; border-radius: 50%;
+            font-size: 0.78rem; font-weight: 800; flex-shrink: 0;
+        }
+        .mapriot-inst-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1rem;
+        }
+        .mapriot-inst-item {
+            background: #fff;
+            border: 1px solid #d4ede8;
+            border-radius: 10px;
+            padding: 1.1rem;
+        }
+        .mapriot-inst-item strong {
+            display: block;
+            font-size: 0.88rem;
+            color: var(--clr-volcanic-dark);
+            margin-bottom: 0.3rem;
+        }
+        .mapriot-inst-item span {
+            font-size: 0.8rem;
+            color: var(--clr-text-muted);
+            line-height: 1.5;
+        }
+        @media (max-width: 600px) {
+            .mapriot-cards { grid-template-columns: 1fr; }
+            .mapriot-inst-grid { grid-template-columns: 1fr; }
+        }
     </style>
     <!-- Open Graph / Redes Sociales -->
     <meta property="og:type"        content="website">
@@ -374,6 +545,165 @@
                 </div>
 
             </div>
+        </div>
+    </section>
+
+    <!-- MAPRIOT -->
+    <section class="mapriot-section">
+        <div class="container">
+
+            <div class="mapriot-header">
+                <div class="mapriot-badge">INVU · 2025</div>
+                <h2>Manual MAPRIOT — Planes Reguladores como<br>Instrumento de Ordenamiento Territorial</h2>
+                <p>El MAPRIOT es la herramienta técnica del INVU que orienta a los gobiernos municipales en la formulación, actualización y modificación de los Planes Reguladores en Costa Rica.</p>
+            </div>
+
+            <div class="mapriot-note">
+                📋 <strong>Nota oficial:</strong> El MAPRIOT actualiza versiones anteriores del manual (2007, 2018 y 2021). Fue aprobado en Sesión Ordinaria N.° JDINVU-028-2025 del 06 de noviembre de 2025. Aplica a todos los cantones del país, con excepción de las áreas de la Zona Marítimo Terrestre (Ley N.° 6043), Territorios Indígenas, Patrimonio Natural del Estado y Zonas Fronterizas.
+            </div>
+
+            <div class="mapriot-blocks">
+
+                <!-- 1. Objetivo -->
+                <div>
+                    <div class="mapriot-block-title"><span class="mb-num">1</span>Objetivo Principal</div>
+                    <ul class="mapriot-list">
+                        <li>Procurar la seguridad, salubridad, comodidad y bienestar de la comunidad mediante un ordenamiento territorial planificado.</li>
+                        <li>Promover el uso eficiente del suelo y la conservación de recursos naturales, culturales y económicos en entornos urbanos y rurales.</li>
+                        <li>Incorporar criterios de sostenibilidad ambiental, social y económica en la planificación territorial.</li>
+                        <li>Articular los Planes Reguladores con instrumentos de planificación local, regional y nacional.</li>
+                        <li>Fortalecer las capacidades técnicas e institucionales de los equipos planificadores municipales.</li>
+                    </ul>
+                </div>
+
+                <!-- 2. Marco Legal -->
+                <div>
+                    <div class="mapriot-block-title"><span class="mb-num">2</span>Marco Legal y Competencias</div>
+                    <div class="mapriot-cards" style="margin-bottom:1.5rem;">
+                        <div class="mapriot-card">
+                            <div class="mapriot-card-icon">⚖️</div>
+                            <h4>Constitución Política (1949)</h4>
+                            <p>Arts. 169 y 170 — Autonomía y competencia municipal para administrar y planificar el territorio.</p>
+                        </div>
+                        <div class="mapriot-card">
+                            <div class="mapriot-card-icon">🏛️</div>
+                            <h4>Ley Orgánica del INVU, N.° 1788 (1954)</h4>
+                            <p>Otorga al INVU la potestad de planificar el desarrollo urbano y preparar Planes Reguladores.</p>
+                        </div>
+                        <div class="mapriot-card">
+                            <div class="mapriot-card-icon">📜</div>
+                            <h4>Ley de Planificación Urbana, N.° 4240 (1968)</h4>
+                            <p>Ley marco: define el Plan Regulador, su contenido mínimo (Art. 16), procedimiento de aprobación (Art. 17) y los cinco Reglamentos de Desarrollo Urbano (Art. 21).</p>
+                        </div>
+                        <div class="mapriot-card">
+                            <div class="mapriot-card-icon">🌿</div>
+                            <h4>Ley Orgánica del Ambiente, N.° 7554 (1995)</h4>
+                            <p>Introduce el ordenamiento territorial como concepto legal ligado al desarrollo sostenible.</p>
+                        </div>
+                        <div class="mapriot-card">
+                            <div class="mapriot-card-icon">📋</div>
+                            <h4>Ley de Planificación Nacional, N.° 5525 (1974)</h4>
+                            <p>Crea el Sistema Nacional de Planificación e integra la dimensión regional y urbana.</p>
+                        </div>
+                        <div class="mapriot-card">
+                            <div class="mapriot-card-icon">🔬</div>
+                            <h4>Decreto Ejecutivo N.° 44710-MINAE</h4>
+                            <p>Regula la Incorporación de la Variable Ambiental en Planes de Ordenamiento Territorial mediante la metodología EIVA-POT.</p>
+                        </div>
+                    </div>
+                    <div class="mapriot-block-title" style="font-size:1rem;margin-top:1.5rem;">🏢 Instituciones Responsables</div>
+                    <div class="mapriot-inst-grid">
+                        <div class="mapriot-inst-item"><strong>INVU – Dirección de Urbanismo</strong><span>Ente rector: revisa, aprueba y asesora a las municipalidades en la elaboración de Planes Reguladores.</span></div>
+                        <div class="mapriot-inst-item"><strong>Municipalidades / Gobiernos Locales</strong><span>Responsables directos de formular, adoptar y aplicar el Plan Regulador en su cantón.</span></div>
+                        <div class="mapriot-inst-item"><strong>SETENA</strong><span>Verifica y aprueba la Variable Ambiental (Viabilidad Ambiental) de los planes.</span></div>
+                        <div class="mapriot-inst-item"><strong>MIDEPLAN</strong><span>Coordina el Sistema Nacional de Planificación y la dimensión regional.</span></div>
+                        <div class="mapriot-inst-item"><strong>MIIPR</strong><span>Mesa Interinstitucional que genera insumos técnicos y apoya los procesos de formulación y aprobación.</span></div>
+                    </div>
+                </div>
+
+                <!-- 3. Componentes -->
+                <div>
+                    <div class="mapriot-block-title"><span class="mb-num">3</span>Componentes Críticos del Plan Regulador</div>
+                    <div class="mapriot-cards">
+                        <div class="mapriot-card">
+                            <div class="mapriot-card-icon">🔍</div>
+                            <h4>A. Diagnóstico Territorial</h4>
+                            <p>Análisis multidimensional por cinco ejes: Social, Físico-Espacial, Económico, Político-Institucional y Jurídico. Incluye Atlas Cartográfico con mapas temáticos de uso del suelo, vialidad, servicios y asentamientos.</p>
+                        </div>
+                        <div class="mapriot-card">
+                            <div class="mapriot-card-icon">📈</div>
+                            <h4>B. Pronóstico Territorial</h4>
+                            <p>Proyección de tendencias y construcción de escenarios futuros (prospectiva territorial) para anticipar cambios y orientar el desarrollo sostenible.</p>
+                        </div>
+                        <div class="mapriot-card">
+                            <div class="mapriot-card-icon">🎯</div>
+                            <h4>C. Política de Desarrollo Urbano</h4>
+                            <p>Define principios, objetivos de desarrollo urbano, acciones estratégicas y horizonte temporal de planificación.</p>
+                        </div>
+                        <div class="mapriot-card">
+                            <div class="mapriot-card-icon">📑</div>
+                            <h4>D. Reglamentos de Desarrollo Urbano</h4>
+                            <p>5 reglamentos obligatorios (Art. 21, Ley N.° 4240): Zonificación, Fraccionamiento y Urbanizaciones, Construcciones, Mapa Oficial y Renovación Urbana.</p>
+                        </div>
+                        <div class="mapriot-card">
+                            <div class="mapriot-card-icon">🌱</div>
+                            <h4>E. Variable Ambiental (EIVA-POT)</h4>
+                            <p>Índice de Fragilidad Ambiental (IFA), Diagnóstico Ambiental (DAM), Resumen de Información Complementaria (RIC) e Informe de Medidas (IME). Requiere aprobación de SETENA.</p>
+                        </div>
+                        <div class="mapriot-card">
+                            <div class="mapriot-card-icon">🗺️</div>
+                            <h4>F. Mapa Base</h4>
+                            <p>Representación cartográfica georreferenciada en proyección oficial CRTM-05 que integra capas de información del territorio.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Etapas -->
+                <div>
+                    <div class="mapriot-block-title"><span class="mb-num">4</span>Proceso de Elaboración: 7 Etapas</div>
+                    <div class="mapriot-table-wrap">
+                        <table class="mapriot-table">
+                            <thead>
+                                <tr><th>Etapa</th><th>Nombre</th><th>Contenido</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><span class="mapriot-etapa-num">1</span></td><td><strong>Preparación Preliminar</strong></td><td>Designación del Órgano Local de Planificación; gestión financiera; delimitación del área; contratación del Equipo Planificador; elaboración de la Estrategia de Participación Ciudadana con enfoque de género y diversidad.</td></tr>
+                                <tr><td><span class="mapriot-etapa-num">2</span></td><td><strong>Elaboración del Mapa Base</strong></td><td>Recopilación de datos, selección de escalas, integración de capas cartográficas y validación del mapa base.</td></tr>
+                                <tr><td><span class="mapriot-etapa-num">3</span></td><td><strong>Variable Ambiental</strong></td><td>Aplicación de la metodología EIVA-POT (IFA o DAM-RIC-IME) con coordinación ante SETENA.</td></tr>
+                                <tr><td><span class="mapriot-etapa-num">4</span></td><td><strong>Diagnóstico Territorial</strong></td><td>Análisis de la situación actual por ejes temáticos; sistematización de datos y elaboración del atlas cartográfico de diagnóstico.</td></tr>
+                                <tr><td><span class="mapriot-etapa-num">5</span></td><td><strong>Pronóstico Territorial</strong></td><td>Proyección de tendencias y construcción de escenarios futuros; recomendaciones estratégicas.</td></tr>
+                                <tr><td><span class="mapriot-etapa-num">6</span></td><td><strong>Propuesta del Plan</strong></td><td>Formulación de la Política de Desarrollo Urbano y redacción de los Reglamentos de Desarrollo Urbano; atlas cartográfico de propuesta.</td></tr>
+                                <tr><td><span class="mapriot-etapa-num">7</span></td><td><strong>Audiencia Pública</strong></td><td>Convocatoria formal (mínimo 15 días hábiles); recopilación de observaciones ciudadanas; informe de audiencia; consideraciones especiales para Pueblos Indígenas.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top:1.25rem;">
+                        <p style="font-size:0.88rem;color:var(--clr-text-muted);font-weight:600;margin-bottom:0.75rem;">Pasos posteriores a las etapas:</p>
+                        <ul class="mapriot-list">
+                            <li>Remisión al INVU para revisión técnica (criterios para diagnóstico, pronóstico, política y reglamentos).</li>
+                            <li>Aprobación o Denegatoria mediante resolución de la Dirección de Urbanismo del INVU.</li>
+                            <li>Adopción formal por el Concejo Municipal (mayoría absoluta de votos).</li>
+                            <li>Publicación en <em>La Gaceta</em> para su entrada en vigencia.</li>
+                            <li>Seguimiento y Evaluación mediante indicadores de gestión territorial.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 5. Impacto -->
+                <div>
+                    <div class="mapriot-block-title"><span class="mb-num">5</span>Impacto en el Territorio: Control y Desarrollo</div>
+                    <ul class="mapriot-list">
+                        <li><strong>Regulación del uso del suelo:</strong> A través del Reglamento de Zonificación define usos conformes, condicionales, no conformes y prohibidos en cada zona del cantón.</li>
+                        <li><strong>Control de la construcción y fraccionamiento:</strong> Los reglamentos regulan densidades, alturas, coberturas, retiros y tamaños mínimos de lote, controlando la forma e intensidad del desarrollo urbano.</li>
+                        <li><strong>Gestión del riesgo y adaptación climática:</strong> Integra la variable ambiental y considera efectos del cambio climático, áreas de fragilidad y zonas de riesgo, limitando el desarrollo en territorios vulnerables.</li>
+                        <li><strong>Planificación de infraestructura vial y servicios:</strong> El Mapa Oficial y el Mapa de Vialidad determinan la red vial cantonal y las reservas para servicios públicos, parques y facilidades comunales.</li>
+                        <li><strong>Articulación multinivel (planificación en cascada):</strong> Se coordina con el Plan Nacional de Desarrollo Urbano, los Planes de Desarrollo Rural Territorial del INDER y otros instrumentos sectoriales.</li>
+                        <li><strong>Emisión de Certificados de Uso de Suelo y licencias:</strong> Es el instrumento de referencia que la municipalidad utiliza para otorgar permisos y controlar el desarrollo del territorio en tiempo real.</li>
+                        <li><strong>Participación ciudadana vinculante:</strong> La Audiencia Pública garantiza que la comunidad incida en las decisiones territoriales, convirtiendo el plan en un instrumento de gobernanza local.</li>
+                    </ul>
+                </div>
+
+            </div><!-- /mapriot-blocks -->
         </div>
     </section>
 
