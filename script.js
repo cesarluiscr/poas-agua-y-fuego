@@ -188,10 +188,14 @@ document.addEventListener('DOMContentLoaded', () => {
             emoji: "🌿",
             descripcion: "Tienda de productos naturales y macrobióticos en San Pedro de Poás. Semillas de moringa, moringa en polvo, cápsulas y más productos para tu salud y bienestar natural.",
             descripcion_en: "Natural and macrobiotic products store in San Pedro de Poás. Moringa seeds, moringa powder, capsules and more products for your health and natural wellbeing.",
+            whatsapp: "50660793616",
+            telefono: "24480219",
+            correo: "presagioproductosnaturales@hotmail.com",
             facebook: "https://www.facebook.com/presagioproductosnaturales/?locale=es_LA",
             waze: "https://www.waze.com/es-419/live-map/directions/cr/provincia-de-alajuela/san-pedro-de-poas/macrobiotica-presagio?to=place.ChIJN2NI6rT3oI8RWThTt_0rus8",
             direccion: "San Pedro de Poás, Alajuela",
             logo: "img/macrobiotica_presagio_logo.png",
+            bannerAncho: true,
             imagenes: ["img/macrobiotica_presagio_banner.jpg"]
         },
         {
@@ -252,11 +256,19 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = tieneGaleria ? 'negocio-card' : 'negocio-card negocio-card-simple';
 
             // Galería de imágenes si existe
-            const galeriaHTML = (negocio.imagenes && negocio.imagenes.length > 0)
-                ? `<div class="negocio-galeria">
-                    ${negocio.imagenes.map((img, i) => `<img src="${img}" alt="${negocio.nombre} ${i+1}" loading="lazy" class="negocio-galeria-img" data-imgs='${JSON.stringify(negocio.imagenes)}' data-index="${i}">`).join('')}
-                   </div>`
-                : '';
+            let galeriaHTML = '';
+            if (negocio.imagenes && negocio.imagenes.length > 0) {
+                if (negocio.bannerAncho) {
+                    // Banner a ancho completo
+                    galeriaHTML = `<div class="negocio-banner-ancho">
+                        <img src="${negocio.imagenes[0]}" alt="${negocio.nombre}" loading="lazy" class="negocio-galeria-img negocio-banner-img" data-imgs='${JSON.stringify(negocio.imagenes)}' data-index="0">
+                    </div>`;
+                } else {
+                    galeriaHTML = `<div class="negocio-galeria">
+                        ${negocio.imagenes.map((img, i) => `<img src="${img}" alt="${negocio.nombre} ${i+1}" loading="lazy" class="negocio-galeria-img" data-imgs='${JSON.stringify(negocio.imagenes)}' data-index="${i}">`).join('')}
+                    </div>`;
+                }
+            }
 
             // Logo o emoji en el encabezado
             const logoHTML = negocio.logo
@@ -275,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p class="negocio-desc">${isEnglish && negocio.descripcion_en ? negocio.descripcion_en : negocio.descripcion}</p>
                 <div class="negocio-meta">
                     ${negocio.direccion ? `<span>📍 ${negocio.direccion}</span>` : ''}
-                    ${negocio.telefono  ? `<span>📞 ${negocio.telefono}</span>` : ''}
+                    ${negocio.telefono  ? `<a href="tel:+506${negocio.telefono}">📞 ${negocio.telefono.replace(/(\d{4})(\d{4})/,'$1-$2')}</a>` : ''}
                     ${negocio.correo    ? `<a href="mailto:${negocio.correo}">✉️ ${negocio.correo}</a>` : ''}
                 </div>
                 ${(negocio.whatsapp || negocio.facebook || negocio.instagram || negocio.tiktok || negocio.waze || negocio.booking || negocio.sitio) ? `
