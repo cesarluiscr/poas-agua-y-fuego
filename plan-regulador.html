@@ -1,619 +1,931 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan Regulador Cantonal – Poás Agua y Fuego</title>
     <meta name="description" content="Plan Regulador Cantonal de Poás. Zonificación, protección ambiental y normativa de desarrollo local.">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <link rel="stylesheet" href="style.css">
+
     <style>
-        /* ── Página Plan Regulador ── */
+        /* ═══════════════════════════════════════════
+           VARIABLES
+        ═══════════════════════════════════════════ */
+        :root {
+            --pr-navy:      #0D2240;
+            --pr-blue:      #1A56DB;
+            --pr-blue-lt:   #2563EB;
+            --pr-teal:      #0D9488;
+            --pr-gold:      #D4AF37;
+            --pr-bg:        #F3F6FB;
+            --pr-border:    #DDE3EF;
+            --pr-text:      #1E293B;
+            --pr-muted:     #64748B;
+            --pr-white:     #FFFFFF;
+        }
+
+        * { box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--pr-text); background: #fff; }
+
+        /* ═══════════════════════════════════════════
+           HERO
+        ═══════════════════════════════════════════ */
         .pr-hero {
-            min-height: 38vh;
-            background: linear-gradient(135deg, var(--clr-volcanic-dark) 60%, var(--clr-volcanic-gray));
+            position: relative;
+            min-height: 52vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 7rem 1.5rem 4rem;
+            padding: 9rem 1.5rem 5rem;
+            overflow: hidden;
+            background: var(--pr-navy);
         }
-
-        .pr-hero h1 {
-            font-size: clamp(2rem, 6vw, 3.8rem);
-            font-weight: 800;
-            color: #fff;
-            letter-spacing: 1px;
+        .pr-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 70% 80% at 20% 50%, rgba(26,86,219,0.35) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 60% at 80% 30%, rgba(13,148,136,0.20) 0%, transparent 55%);
         }
-
-        .pr-hero h1 span {
-            color: var(--clr-turquoise);
+        /* Grid pattern */
+        .pr-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
         }
-
-        .pr-hero p {
-            color: rgba(240,244,244,0.75);
-            font-size: 1.1rem;
-            margin-top: 0.8rem;
-            max-width: 600px;
-            margin-inline: auto;
+        .pr-hero-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
         }
-
-        .pr-back {
+        .pr-hero-eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--clr-turquoise);
-            text-decoration: none;
+            gap: 0.6rem;
+            background: rgba(26,86,219,0.25);
+            border: 1px solid rgba(99,150,255,0.35);
+            border-radius: 30px;
+            padding: 0.4rem 1.1rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            font-size: 0.95rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(165,199,255,0.95);
+            margin-bottom: 1.5rem;
+        }
+        .pr-hero-eyebrow::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #60A5FA;
+            animation: blink 2s infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+        .pr-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.15;
+            margin: 0 0 1.25rem;
+            letter-spacing: -0.5px;
+        }
+        .pr-hero h1 em {
+            font-style: italic;
+            color: #60A5FA;
+        }
+        .pr-hero-sub {
+            color: rgba(200,215,240,0.82);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin: 0 0 2.5rem;
+            max-width: 580px;
+            margin-inline: auto;
             margin-bottom: 2.5rem;
-            transition: opacity 0.2s;
         }
-
-        .pr-back:hover { opacity: 0.75; }
-
-        .pr-content {
-            background: var(--clr-bg-light);
-            padding: 5rem 0;
-        }
-
-        .pr-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .pr-hero-stats {
+            display: flex;
+            justify-content: center;
             gap: 3rem;
+            flex-wrap: wrap;
+        }
+        .pr-hero-stat { text-align: center; }
+        .pr-hero-stat strong {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+        }
+        .pr-hero-stat span {
+            font-size: 0.75rem;
+            color: rgba(165,199,255,0.75);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.3rem;
+            display: block;
+        }
+        .pr-hero-divider {
+            width: 1px;
+            height: 40px;
+            background: rgba(255,255,255,0.15);
+            align-self: center;
+        }
+
+        /* ═══════════════════════════════════════════
+           BREADCRUMB BAR
+        ═══════════════════════════════════════════ */
+        .pr-breadcrumb {
+            background: var(--pr-white);
+            border-bottom: 1px solid var(--pr-border);
+            padding: 0.75rem 0;
+        }
+        .pr-breadcrumb .container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            color: var(--pr-muted);
+        }
+        .pr-breadcrumb a {
+            color: var(--pr-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .pr-breadcrumb a:hover { text-decoration: underline; }
+        .pr-breadcrumb .sep { color: #CBD5E1; }
+
+        /* ═══════════════════════════════════════════
+           LAYOUT PRINCIPAL
+        ═══════════════════════════════════════════ */
+        .pr-main {
+            background: var(--pr-bg);
+            padding: 3.5rem 0 5rem;
+        }
+        .pr-layout {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 2.5rem;
             align-items: start;
         }
 
-        .pr-info { }
-
-        .pr-info > p {
-            color: var(--clr-text-muted);
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
+        /* ── Sidebar nav ── */
+        .pr-sidenav {
+            position: sticky;
+            top: 90px;
+            background: var(--pr-white);
+            border: 1px solid var(--pr-border);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-
-        .pr-features {
+        .pr-sidenav-header {
+            background: var(--pr-navy);
+            color: #fff;
+            padding: 1rem 1.25rem;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .pr-sidenav a {
             display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            margin-bottom: 2.5rem;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.83rem;
+            color: var(--pr-muted);
+            text-decoration: none;
+            border-left: 3px solid transparent;
+            transition: all 0.15s;
         }
+        .pr-sidenav a:hover,
+        .pr-sidenav a.active {
+            color: var(--pr-blue);
+            border-left-color: var(--pr-blue);
+            background: rgba(26,86,219,0.05);
+        }
+        .pr-sidenav a .sn-icon { font-size: 1rem; }
 
+        /* ── Contenido ── */
+        .pr-body { display: flex; flex-direction: column; gap: 2rem; }
+
+        /* ── Tarjetas de sección ── */
+        .pr-card {
+            background: var(--pr-white);
+            border: 1px solid var(--pr-border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+        .pr-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--pr-border);
+            background: linear-gradient(135deg, #F8FAFF 0%, #EFF4FF 100%);
+        }
+        .pr-card-icon-wrap {
+            width: 44px; height: 44px;
+            background: var(--pr-navy);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        .pr-card-header h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--pr-navy);
+            margin: 0;
+        }
+        .pr-card-header .pr-card-num {
+            margin-left: auto;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--pr-muted);
+            text-transform: uppercase;
+            background: #EEF2FF;
+            padding: 0.25rem 0.65rem;
+            border-radius: 20px;
+        }
+        .pr-card-body { padding: 2rem; }
+
+        /* ═══════════════════════════════════════════
+           COMPONENTES INTERNOS
+        ═══════════════════════════════════════════ */
+
+        /* Feature items con borde azul */
+        .pr-features { display: flex; flex-direction: column; gap: 1rem; }
         .pr-feature-item {
             display: flex;
             align-items: flex-start;
             gap: 1rem;
-            padding: 1.25rem;
-            background: #fff;
+            padding: 1.1rem 1.25rem;
+            background: var(--pr-bg);
+            border-radius: 10px;
+            border-left: 3px solid var(--pr-blue);
+        }
+        .pr-feature-item .fi-icon { font-size: 1.4rem; flex-shrink: 0; }
+        .pr-feature-item h4 { font-size: 0.92rem; font-weight: 700; color: var(--pr-navy); margin: 0 0 0.2rem; }
+        .pr-feature-item p  { font-size: 0.84rem; color: var(--pr-muted); margin: 0; line-height: 1.6; }
+
+        /* Grid de cards pequeñas */
+        .pr-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+        .pr-mini-card {
+            background: var(--pr-bg);
+            border: 1px solid var(--pr-border);
             border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            border-left: 4px solid var(--clr-turquoise);
+            padding: 1.25rem;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
-
-        .pr-feature-item .feature-icon {
-            font-size: 1.8rem;
-            flex-shrink: 0;
-        }
-
-        .pr-feature-item h4 {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--clr-volcanic-dark);
-            margin-bottom: 0.25rem;
-        }
-
-        .pr-feature-item p {
-            font-size: 0.9rem;
-            color: var(--clr-text-muted);
-            margin: 0;
-        }
+        .pr-mini-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+        .pr-mini-card .mc-icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+        .pr-mini-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--pr-navy); margin: 0 0 0.35rem; }
+        .pr-mini-card p  { font-size: 0.8rem; color: var(--pr-muted); line-height: 1.6; margin: 0; text-align: justify; }
 
         /* Tabla de zonificación */
-        .pr-table-section {
-            margin-top: 3rem;
-        }
-
-        .pr-table-section h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--clr-volcanic-dark);
-            margin-bottom: 1rem;
-        }
-
+        .pr-table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--pr-border); }
         .pr-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.92rem;
+            font-size: 0.88rem;
         }
-
-        .pr-table th {
-            background: var(--clr-volcanic-dark);
+        .pr-table thead th {
+            background: var(--pr-navy);
             color: #fff;
-            padding: 0.75rem 1rem;
-            text-align: left;
+            padding: 0.85rem 1.1rem;
             font-weight: 600;
+            text-align: left;
+            white-space: nowrap;
         }
-
-        .pr-table td {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid #E8ECEC;
-            color: var(--clr-text-muted);
+        .pr-table tbody td {
+            padding: 0.8rem 1.1rem;
+            border-bottom: 1px solid var(--pr-border);
+            color: var(--pr-muted);
+            vertical-align: middle;
         }
-
-        .pr-table tr:nth-child(even) td {
-            background: #F4F8F8;
-        }
-
-        .pr-table tr:hover td {
-            background: #E8F5F5;
-        }
+        .pr-table tbody tr:last-child td { border-bottom: none; }
+        .pr-table tbody tr:nth-child(even) td { background: #F8FAFF; }
+        .pr-table tbody tr:hover td { background: #EEF2FF; }
 
         .zona-badge {
             display: inline-block;
-            padding: 0.2rem 0.6rem;
+            padding: 0.22rem 0.65rem;
             border-radius: 6px;
             font-size: 0.78rem;
             font-weight: 700;
+            letter-spacing: 0.05em;
         }
-
-        .zona-residencial  { background: #DBEAFE; color: #1D4ED8; }
-        .zona-comercial    { background: #FEF3C7; color: #92400E; }
-        .zona-protegida    { background: #D1FAE5; color: #065F46; }
-        .zona-industrial   { background: #FEE2E2; color: #991B1B; }
-        .zona-mixta        { background: #EDE9FE; color: #5B21B6; }
+        .zona-residencial { background: #DBEAFE; color: #1D4ED8; }
+        .zona-comercial   { background: #FEF3C7; color: #92400E; }
+        .zona-protegida   { background: #D1FAE5; color: #065F46; }
+        .zona-industrial  { background: #FEE2E2; color: #991B1B; }
+        .zona-mixta       { background: #EDE9FE; color: #5B21B6; }
 
         /* Mapa */
-        .pr-map-panel {
-            position: sticky;
-            top: 90px;
+        .pr-map-wrap {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--pr-border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
-
-        .pr-map-panel img {
-            width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-        }
-
+        .pr-map-wrap img { width: 100%; display: block; }
         .pr-map-caption {
-            font-size: 0.83rem;
-            color: var(--clr-text-muted);
+            padding: 0.75rem 1rem;
+            font-size: 0.78rem;
+            color: var(--pr-muted);
+            background: var(--pr-bg);
             text-align: center;
-            margin-top: 0.75rem;
+            border-top: 1px solid var(--pr-border);
         }
 
-        .btn-doc {
+        /* CTA */
+        .pr-cta-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem; }
+        .pr-btn-primary {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: var(--clr-turquoise);
-            color: var(--clr-volcanic-dark);
-            padding: 0.85rem 1.75rem;
-            border-radius: 10px;
-            font-weight: 700;
+            background: var(--pr-blue);
+            color: #fff;
+            padding: 0.75rem 1.6rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: background 0.2s, transform 0.2s;
         }
-
-        .btn-doc:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,200,180,0.3);
+        .pr-btn-primary:hover { background: var(--pr-blue-lt); transform: translateY(-2px); }
+        .pr-btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid var(--pr-blue);
+            color: var(--pr-blue);
+            padding: 0.75rem 1.6rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            text-decoration: none;
+            background: transparent;
+            transition: all 0.2s;
         }
+        .pr-btn-outline:hover { background: var(--pr-blue); color: #fff; }
 
-        @media (max-width: 768px) {
-            .pr-grid {
-                grid-template-columns: 1fr;
-            }
-            .pr-map-panel {
-                position: static;
-            }
-        }
-
-        /* ── Sección MAPRIOT ── */
+        /* ═══════════════════════════════════════════
+           SECCIÓN MAPRIOT
+        ═══════════════════════════════════════════ */
         .mapriot-section {
-            background: linear-gradient(180deg, #f0f7f5 0%, #fff 100%);
-            padding: 5rem 0;
-            border-top: 4px solid var(--clr-turquoise);
+            background: #fff;
+            padding: 0;
         }
-        .mapriot-header {
+
+        /* Header MAPRIOT */
+        .mapriot-hero {
+            background: linear-gradient(135deg, var(--pr-navy) 0%, #162C50 60%, #0D3D4F 100%);
+            padding: 4rem 0;
             text-align: center;
-            margin-bottom: 3.5rem;
+            position: relative;
+            overflow: hidden;
         }
-        .mapriot-badge {
+        .mapriot-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .mapriot-hero-inner { position: relative; z-index: 1; }
+        .mapriot-pill {
             display: inline-block;
-            background: var(--clr-turquoise);
-            color: var(--clr-volcanic-dark);
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 2px;
+            background: rgba(13,148,136,0.25);
+            border: 1px solid rgba(20,184,166,0.4);
+            color: #5EEAD4;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
             padding: 0.35rem 1rem;
             border-radius: 20px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.25rem;
         }
-        .mapriot-header h2 {
-            font-size: clamp(1.6rem, 4vw, 2.4rem);
-            font-weight: 800;
-            color: var(--clr-volcanic-dark);
-            margin-bottom: 0.75rem;
+        .mapriot-hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            font-weight: 700;
+            color: #fff;
+            margin: 0 0 1rem;
+            line-height: 1.2;
         }
-        .mapriot-header p {
-            color: var(--clr-text-muted);
-            font-size: 1rem;
-            max-width: 680px;
+        .mapriot-hero p {
+            color: rgba(200,220,240,0.8);
+            font-size: 0.97rem;
+            max-width: 640px;
             margin: 0 auto;
-            line-height: 1.7;
+            line-height: 1.75;
         }
-        .mapriot-note {
-            background: #e8f5f2;
-            border-left: 4px solid var(--clr-turquoise);
-            border-radius: 8px;
+
+        /* Nota oficial */
+        .mapriot-nota {
+            background: #FFFBEB;
+            border-left: 4px solid #F59E0B;
+            border-radius: 0 8px 8px 0;
             padding: 1rem 1.5rem;
+            margin-bottom: 2.5rem;
+            font-size: 0.84rem;
+            color: #78350F;
+            line-height: 1.65;
+        }
+
+        /* Bloques MAPRIOT con icono lateral */
+        .mapriot-block {
             margin-bottom: 3rem;
-            font-size: 0.88rem;
-            color: #2d6a5a;
-            line-height: 1.6;
         }
-        .mapriot-blocks {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-        }
-        .mapriot-block-title {
+        .mapriot-block-hd {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--clr-volcanic-dark);
-            margin-bottom: 1.25rem;
-            padding-bottom: 0.6rem;
-            border-bottom: 2px solid #d1ede8;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--pr-border);
         }
-        .mapriot-block-title .mb-num {
-            background: var(--clr-turquoise);
-            color: var(--clr-volcanic-dark);
-            width: 30px; height: 30px;
-            border-radius: 50%;
+        .mapriot-block-num {
+            width: 34px; height: 34px;
+            background: var(--pr-navy);
+            color: #fff;
+            border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 0.82rem; font-weight: 800; flex-shrink: 0;
-        }
-        .mapriot-list {
-            list-style: none;
-            padding: 0; margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.65rem;
-        }
-        .mapriot-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.65rem;
-            font-size: 0.93rem;
-            color: var(--clr-text-muted);
-            line-height: 1.6;
-            text-align: justify;
-        }
-        .mapriot-list li::before {
-            content: "▸";
-            color: var(--clr-turquoise);
-            font-size: 0.9rem;
+            font-size: 0.85rem; font-weight: 800;
             flex-shrink: 0;
-            margin-top: 0.1rem;
         }
-        .mapriot-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.25rem;
-        }
-        .mapriot-card {
-            background: #fff;
-            border: 1px solid #d4ede8;
-            border-radius: 14px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .mapriot-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.09); }
-        .mapriot-card-icon { font-size: 1.6rem; margin-bottom: 0.6rem; }
-        .mapriot-card h4 {
-            font-size: 0.95rem; font-weight: 700;
-            color: var(--clr-volcanic-dark);
-            margin-bottom: 0.4rem;
-        }
-        .mapriot-card p {
-            font-size: 0.83rem;
-            color: var(--clr-text-muted);
-            line-height: 1.6;
-            text-align: justify;
+        .mapriot-block-hd h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--pr-navy);
             margin: 0;
         }
-        .mapriot-table-wrap { overflow-x: auto; }
-        .mapriot-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.88rem;
+
+        /* Lista con bullets */
+        .mapriot-list {
+            list-style: none; padding: 0; margin: 0;
+            display: flex; flex-direction: column; gap: 0.6rem;
         }
-        .mapriot-table th {
-            background: var(--clr-volcanic-dark);
-            color: #fff;
-            padding: 0.7rem 1rem;
-            text-align: left;
-            font-weight: 600;
-            white-space: nowrap;
+        .mapriot-list li {
+            display: flex; align-items: flex-start; gap: 0.7rem;
+            font-size: 0.9rem; color: var(--pr-muted); line-height: 1.65;
         }
-        .mapriot-table td {
-            padding: 0.7rem 1rem;
-            border-bottom: 1px solid #e4eeeb;
-            color: var(--clr-text-muted);
-            vertical-align: top;
+        .mapriot-list li::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--pr-blue);
+            flex-shrink: 0;
+            margin-top: 0.55rem;
         }
-        .mapriot-table tr:nth-child(even) td { background: #f5faf8; }
-        .mapriot-etapa-num {
-            display: inline-flex; align-items: center; justify-content: center;
-            background: var(--clr-turquoise); color: var(--clr-volcanic-dark);
-            width: 26px; height: 26px; border-radius: 50%;
-            font-size: 0.78rem; font-weight: 800; flex-shrink: 0;
-        }
-        .mapriot-inst-grid {
+
+        /* Grid de mini tarjetas para marco legal */
+        .mapriot-law-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 1rem;
         }
+        .mapriot-law-card {
+            background: var(--pr-bg);
+            border: 1px solid var(--pr-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: transform 0.2s;
+        }
+        .mapriot-law-card:hover { transform: translateY(-2px); }
+        .mapriot-law-card .lc-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .mapriot-law-card h4 { font-size: 0.85rem; font-weight: 700; color: var(--pr-navy); margin: 0 0 0.35rem; }
+        .mapriot-law-card p  { font-size: 0.78rem; color: var(--pr-muted); line-height: 1.6; margin: 0; }
+
+        /* Grid instituciones */
+        .mapriot-inst-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.85rem;
+            margin-top: 1.25rem;
+        }
         .mapriot-inst-item {
-            background: #fff;
-            border: 1px solid #d4ede8;
+            background: var(--pr-white);
+            border: 1px solid var(--pr-border);
             border-radius: 10px;
-            padding: 1.1rem;
+            padding: 1rem 1.1rem;
         }
-        .mapriot-inst-item strong {
-            display: block;
-            font-size: 0.88rem;
-            color: var(--clr-volcanic-dark);
-            margin-bottom: 0.3rem;
+        .mapriot-inst-item strong { display: block; font-size: 0.84rem; color: var(--pr-navy); margin-bottom: 0.3rem; }
+        .mapriot-inst-item span  { font-size: 0.78rem; color: var(--pr-muted); line-height: 1.55; }
+
+        /* Timeline de etapas */
+        .mapriot-timeline {
+            position: relative;
+            padding-left: 2.5rem;
         }
-        .mapriot-inst-item span {
-            font-size: 0.8rem;
-            color: var(--clr-text-muted);
-            line-height: 1.5;
+        .mapriot-timeline::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--pr-blue), var(--pr-teal));
+            border-radius: 2px;
+        }
+        .tl-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            background: var(--pr-bg);
+            border: 1px solid var(--pr-border);
+            border-radius: 12px;
+            padding: 1.1rem 1.25rem;
+            transition: border-color 0.2s;
+        }
+        .tl-item:hover { border-color: var(--pr-blue); }
+        .tl-item::before {
+            content: attr(data-step);
+            position: absolute;
+            left: -2.15rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px; height: 24px;
+            background: var(--pr-blue);
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.72rem;
+            font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .tl-item h4 { font-size: 0.9rem; font-weight: 700; color: var(--pr-navy); margin: 0 0 0.3rem; }
+        .tl-item p  { font-size: 0.82rem; color: var(--pr-muted); line-height: 1.6; margin: 0; }
+
+        /* Pasos posteriores */
+        .mapriot-steps-post {
+            background: linear-gradient(135deg, #EFF6FF, #F0FDF4);
+            border: 1px solid #BFDBFE;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .mapriot-steps-post p {
+            font-size: 0.83rem;
+            font-weight: 700;
+            color: var(--pr-navy);
+            margin: 0 0 0.75rem;
+        }
+
+        /* Grid impacto */
+        .mapriot-impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        .mapriot-impact-card {
+            background: var(--pr-bg);
+            border: 1px solid var(--pr-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-top: 3px solid var(--pr-blue);
+        }
+        .mapriot-impact-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+        .mapriot-impact-card .ic-icon { font-size: 1.5rem; margin-bottom: 0.6rem; }
+        .mapriot-impact-card h4 { font-size: 0.88rem; font-weight: 700; color: var(--pr-navy); margin: 0 0 0.35rem; }
+        .mapriot-impact-card p  { font-size: 0.8rem; color: var(--pr-muted); line-height: 1.6; margin: 0; text-align: justify; }
+
+        /* ═══════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════ */
+        @media (max-width: 900px) {
+            .pr-layout { grid-template-columns: 1fr; }
+            .pr-sidenav { position: static; display: none; }
         }
         @media (max-width: 600px) {
-            .mapriot-cards { grid-template-columns: 1fr; }
-            .mapriot-inst-grid { grid-template-columns: 1fr; }
+            .pr-hero h1 { font-size: 1.9rem; }
+            .pr-hero-stats { gap: 1.5rem; }
+            .pr-card-body { padding: 1.25rem; }
+            .mapriot-law-grid { grid-template-columns: 1fr; }
+            .mapriot-impact-grid { grid-template-columns: 1fr; }
         }
     </style>
-    <!-- Open Graph / Redes Sociales -->
+
     <meta property="og:type"        content="website">
     <meta property="og:url"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/plan-regulador.html">
     <meta property="og:title"       content="Plan Regulador – Poás Agua y Fuego">
     <meta property="og:description" content="Información sobre el Plan Regulador del cantón de Poás, Costa Rica.">
     <meta property="og:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/qr_poas.jpg">
-    <meta property="og:image:width"  content="800">
-    <meta property="og:image:height" content="800">
-    <!-- Twitter Card -->
-    <meta name="twitter:card"        content="summary_large_image">
-    <meta name="twitter:title"       content="Plan Regulador – Poás Agua y Fuego">
-    <meta name="twitter:description" content="Información sobre el Plan Regulador del cantón de Poás, Costa Rica.">
-    <meta name="twitter:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/qr_poas.jpg">
 </head>
 
 <body>
 <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">Poás <span>Agua y Fuego</span></div>
-        <ul class="nav-links">
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="index.html#patrimonio">Patrimonio Hídrico</a></li>
-            <li><a href="plan-regulador.html" class="active">Plan Regulador</a></li>
-            <li><a href="index.html#galeria">Galería</a></li>
-            <li><a href="index.html#directorio" style="text-align:center;white-space:normal;line-height:1.3;">Directorio Turístico y<br>Comercial</a></li>
-            <li><a href="index.html#contacto">Contacto</a></li>
-        </ul>
-        <div class="nav-lang">
-            <a href="plan-regulador.html" class="lang-btn active">🇨🇷 ES</a>
-            <a href="plan-regulador-en.html" class="lang-btn">🇺🇸 EN</a>
-        </div>
-        <button class="hamburger" id="hamburger" aria-label="Abrir menú">
-            <span></span><span></span><span></span>
-        </button>
-    </nav>
+<nav class="navbar">
+    <div class="logo">Poás <span>Agua y Fuego</span></div>
+    <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#patrimonio">Patrimonio Hídrico</a></li>
+        <li><a href="plan-regulador.html" class="active">Plan Regulador</a></li>
+        <li><a href="index.html#galeria">Galería</a></li>
+        <li><a href="index.html#directorio" style="text-align:center;white-space:normal;line-height:1.3;">Directorio Turístico y<br>Comercial</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-lang">
+        <a href="plan-regulador.html" class="lang-btn active">🇨🇷 ES</a>
+        <a href="plan-regulador-en.html" class="lang-btn">🇺🇸 EN</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <button class="close-btn" id="closeNav" aria-label="Cerrar menú">✕</button>
+    <a href="index.html" onclick="closeMobileNav()">Inicio</a>
+    <a href="index.html#patrimonio" onclick="closeMobileNav()">Patrimonio Hídrico</a>
+    <a href="plan-regulador.html" onclick="closeMobileNav()">Plan Regulador</a>
+    <a href="index.html#galeria" onclick="closeMobileNav()">Galería</a>
+    <a href="index.html#directorio" onclick="closeMobileNav()">Directorio</a>
+    <a href="index.html#contacto" onclick="closeMobileNav()">Contacto</a>
+</div>
 
-    <!-- Mobile nav overlay -->
-    <div class="mobile-nav" id="mobileNav">
-        <button class="close-btn" id="closeNav" aria-label="Cerrar menú">✕</button>
-        <a href="index.html"               onclick="closeMobileNav()">Inicio</a>
-        <a href="index.html#patrimonio"    onclick="closeMobileNav()">Patrimonio Hídrico</a>
-        <a href="plan-regulador.html"      onclick="closeMobileNav()">Plan Regulador</a>
-        <a href="index.html#galeria"       onclick="closeMobileNav()">Galería</a>
-        <a href="index.html#directorio"    onclick="closeMobileNav()" style="text-align:center;white-space:normal;line-height:1.3;">Directorio Turístico y<br>Comercial</a>
-        <a href="index.html#contacto"      onclick="closeMobileNav()">Contacto</a>
+<!-- ── HERO ─────────────────────────────────── -->
+<section class="pr-hero">
+    <div class="pr-hero-inner">
+        <div class="pr-hero-eyebrow">Municipalidad de Poás · Alajuela · Costa Rica</div>
+        <h1>Plan Regulador<br><em>Cantonal de Poás</em></h1>
+        <p class="pr-hero-sub">El instrumento de planificación que guía el desarrollo sostenible, la protección ambiental y la gestión del territorio en el cantón de Poás.</p>
+        <div class="pr-hero-stats">
+            <div class="pr-hero-stat">
+                <strong>5</strong>
+                <span>Distritos</span>
+            </div>
+            <div class="pr-hero-divider"></div>
+            <div class="pr-hero-stat">
+                <strong>73.84</strong>
+                <span>km² de territorio</span>
+            </div>
+            <div class="pr-hero-divider"></div>
+            <div class="pr-hero-stat">
+                <strong>5</strong>
+                <span>Reglamentos</span>
+            </div>
+            <div class="pr-hero-divider"></div>
+            <div class="pr-hero-stat">
+                <strong>1901</strong>
+                <span>Año de fundación</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── BREADCRUMB ────────────────────────────── -->
+<div class="pr-breadcrumb">
+    <div class="container">
+        <a href="index.html">🏠 Inicio</a>
+        <span class="sep">/</span>
+        <span>Plan Regulador Cantonal</span>
+    </div>
+</div>
+
+<!-- ── CONTENIDO PRINCIPAL ───────────────────── -->
+<section class="pr-main" id="plan-inicio">
+    <div class="container">
+        <div class="pr-layout">
+
+            <!-- Sidebar nav -->
+            <aside class="pr-sidenav">
+                <div class="pr-sidenav-header">Contenido</div>
+                <a href="#sec-que-es" class="sn-link"><span class="sn-icon">📋</span>¿Qué es el Plan?</a>
+                <a href="#sec-zonificacion" class="sn-link"><span class="sn-icon">🗺️</span>Zonificación</a>
+                <a href="#sec-mapa" class="sn-link"><span class="sn-icon">📍</span>Mapa Cantonal</a>
+                <a href="#sec-mapriot" class="sn-link"><span class="sn-icon">📘</span>MAPRIOT</a>
+                <a href="#sec-objetivo" class="sn-link"><span class="sn-icon">🎯</span>Objetivo</a>
+                <a href="#sec-legal" class="sn-link"><span class="sn-icon">⚖️</span>Marco Legal</a>
+                <a href="#sec-componentes" class="sn-link"><span class="sn-icon">🔧</span>Componentes</a>
+                <a href="#sec-etapas" class="sn-link"><span class="sn-icon">📊</span>Etapas</a>
+                <a href="#sec-impacto" class="sn-link"><span class="sn-icon">🏙️</span>Impacto</a>
+                <a href="index.html#contacto" style="border-top:1px solid #EEF2FF; margin-top:0.5rem;"><span class="sn-icon">📬</span>Contacto</a>
+            </aside>
+
+            <!-- Cuerpo -->
+            <div class="pr-body">
+
+                <!-- ¿Qué es? -->
+                <div class="pr-card" id="sec-que-es">
+                    <div class="pr-card-header">
+                        <div class="pr-card-icon-wrap">📋</div>
+                        <h2>¿Qué es el Plan Regulador?</h2>
+                    </div>
+                    <div class="pr-card-body">
+                        <p style="font-size:0.95rem;color:var(--pr-muted);line-height:1.8;margin-bottom:1.5rem;">
+                            El <strong>Plan Regulador</strong> es el instrumento de planificación local que define el uso de la tierra y las normas de desarrollo en nuestro cantón. Su objetivo es garantizar un crecimiento ordenado y sostenible, protegiendo las zonas de recarga hídrica y gestionando el riesgo volcánico.
+                        </p>
+                        <div class="pr-features">
+                            <div class="pr-feature-item">
+                                <span class="fi-icon">🏗️</span>
+                                <div>
+                                    <h4>Zonificación del Suelo</h4>
+                                    <p>Definición de áreas residenciales, comerciales, industriales y de protección para un uso ordenado del territorio.</p>
+                                </div>
+                            </div>
+                            <div class="pr-feature-item">
+                                <span class="fi-icon">🌿</span>
+                                <div>
+                                    <h4>Protección Ambiental</h4>
+                                    <p>Resguardo de bosques, nacientes y corredores biológicos esenciales para la biodiversidad local y las zonas de recarga hídrica.</p>
+                                </div>
+                            </div>
+                            <div class="pr-feature-item">
+                                <span class="fi-icon">🌋</span>
+                                <div>
+                                    <h4>Gestión del Riesgo Volcánico</h4>
+                                    <p>Normativa especial para las zonas de influencia directa del Volcán Poás y sus áreas de restricción.</p>
+                                </div>
+                            </div>
+                            <div class="pr-feature-item">
+                                <span class="fi-icon">💧</span>
+                                <div>
+                                    <h4>Patrimonio Hídrico</h4>
+                                    <p>Protección de acuíferos Poás, Colima y Barva, zonas de recarga y ríos del cantón como recurso estratégico.</p>
+                                </div>
+                            </div>
+                            <div class="pr-feature-item">
+                                <span class="fi-icon">🏘️</span>
+                                <div>
+                                    <h4>Desarrollo Urbano</h4>
+                                    <p>Regulación de construcciones, retiros, alturas y densidades para garantizar la calidad de vida de la comunidad.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pr-cta-row">
+                            <a href="index.html#contacto" class="pr-btn-primary">📬 Contáctenos</a>
+                            <a href="patrimonio-hidrico.html" class="pr-btn-outline">💧 Patrimonio Hídrico</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zonificación -->
+                <div class="pr-card" id="sec-zonificacion">
+                    <div class="pr-card-header">
+                        <div class="pr-card-icon-wrap">🗺️</div>
+                        <h2>Zonas del Cantón</h2>
+                        <span class="pr-card-num">Reglamento de Zonificación</span>
+                    </div>
+                    <div class="pr-card-body">
+                        <div class="pr-table-wrap">
+                            <table class="pr-table">
+                                <thead>
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Zona</th>
+                                        <th>Usos Permitidos</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span class="zona-badge zona-residencial">ZR</span></td>
+                                        <td><strong>Residencial</strong></td>
+                                        <td>Vivienda unifamiliar y bifamiliar</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="zona-badge zona-comercial">ZC</span></td>
+                                        <td><strong>Comercial</strong></td>
+                                        <td>Comercio, servicios y oficinas</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="zona-badge zona-mixta">ZM</span></td>
+                                        <td><strong>Mixta</strong></td>
+                                        <td>Residencial con comercio menor</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="zona-badge zona-industrial">ZI</span></td>
+                                        <td><strong>Industrial</strong></td>
+                                        <td>Agroindustria y talleres</td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="zona-badge zona-protegida">ZP</span></td>
+                                        <td><strong>Protección</strong></td>
+                                        <td>Sin construcción — conservación ambiental</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mapa -->
+                <div class="pr-card" id="sec-mapa">
+                    <div class="pr-card-header">
+                        <div class="pr-card-icon-wrap">📍</div>
+                        <h2>Mapa de Zonificación</h2>
+                    </div>
+                    <div class="pr-card-body">
+                        <div class="pr-map-wrap">
+                            <img src="img/mapa_zonificacion.jpg" alt="Mapa de zonificación del cantón de Poás">
+                            <div class="pr-map-caption">📍 Mapa de zonificación del cantón de Poás — Plan Regulador Vigente</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /pr-body -->
+        </div><!-- /pr-layout -->
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     SECCIÓN MAPRIOT
+══════════════════════════════════════════════ -->
+<section class="mapriot-section" id="sec-mapriot">
+
+    <!-- Hero MAPRIOT -->
+    <div class="mapriot-hero">
+        <div class="container mapriot-hero-inner">
+            <div class="mapriot-pill">INVU · Manual 2025</div>
+            <h2>MAPRIOT — Manual de Planes Reguladores como<br>Instrumento de Ordenamiento Territorial</h2>
+            <p>Herramienta técnica del INVU que orienta a los gobiernos municipales en la formulación, actualización y modificación de los Planes Reguladores en Costa Rica.</p>
+        </div>
     </div>
 
-    <!-- Hero -->
-    <div class="pr-hero">
-        <div>
-            <h1>Plan Regulador <span>Cantonal</span></h1>
-            <p>El instrumento de planificación que guía el desarrollo sostenible del cantón de Poás.</p>
-        </div>
-    </div>
-
-    <!-- Contenido principal -->
-    <section class="pr-content">
-        <div class="container">
-            <a href="index.html" class="pr-back">← Volver al inicio</a>
-
-            <div class="pr-grid">
-
-                <!-- Columna izquierda: información -->
-                <div class="pr-info">
-                    <p>El Plan Regulador es el instrumento de planificación local que define el uso de la tierra y las
-                        normas de desarrollo en nuestro cantón. Su objetivo es garantizar un crecimiento ordenado y
-                        sostenible, protegiendo nuestras zonas de recarga hídrica y gestionando el riesgo volcánico.</p>
-
-                    <div class="pr-features">
-                        <div class="pr-feature-item">
-                            <span class="feature-icon">🏗️</span>
-                            <div>
-                                <h4>Zonificación</h4>
-                                <p>Definición de áreas residenciales, comerciales, industriales y de protección para un uso ordenado del suelo.</p>
-                            </div>
-                        </div>
-                        <div class="pr-feature-item">
-                            <span class="feature-icon">🌿</span>
-                            <div>
-                                <h4>Protección Ambiental</h4>
-                                <p>Resguardo de bosques, nacientes y corredores biológicos esenciales para la biodiversidad local.</p>
-                            </div>
-                        </div>
-                        <div class="pr-feature-item">
-                            <span class="feature-icon">🌋</span>
-                            <div>
-                                <h4>Gestión del Riesgo Volcánico</h4>
-                                <p>Normativa especial para las zonas de influencia directa del Volcán Poás y sus áreas de restricción.</p>
-                            </div>
-                        </div>
-                        <div class="pr-feature-item">
-                            <span class="feature-icon">💧</span>
-                            <div>
-                                <h4>Patrimonio Hídrico</h4>
-                                <p>Protección de acuíferos, zonas de recarga y ríos del cantón como recurso estratégico.</p>
-                            </div>
-                        </div>
-                        <div class="pr-feature-item">
-                            <span class="feature-icon">🏘️</span>
-                            <div>
-                                <h4>Desarrollo Urbano</h4>
-                                <p>Regulación de construcciones, retiros, alturas y densidades para garantizar la calidad de vida.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <p style="margin-bottom: 1rem; color: var(--clr-text-muted); font-size: 0.97rem; line-height: 1.6;">
-                        Si está interesado en participar como ciudadano en el seguimiento del plan regulador. Contáctenos.
-                    </p>
-                    <a href="index.html#contacto" class="btn-doc">📬 Contáctenos</a>
-
-                    <!-- Tabla de zonificación -->
-                    <div class="pr-table-section">
-                        <h3>Zonas del Cantón</h3>
-                        <table class="pr-table">
-                            <thead>
-                                <tr>
-                                    <th>Zona</th>
-                                    <th>Tipo</th>
-                                    <th>Usos permitidos</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><span class="zona-badge zona-residencial">ZR</span></td>
-                                    <td>Residencial</td>
-                                    <td>Vivienda unifamiliar y bifamiliar</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="zona-badge zona-comercial">ZC</span></td>
-                                    <td>Comercial</td>
-                                    <td>Comercio, servicios y oficinas</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="zona-badge zona-mixta">ZM</span></td>
-                                    <td>Mixta</td>
-                                    <td>Residencial con comercio menor</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="zona-badge zona-industrial">ZI</span></td>
-                                    <td>Industrial</td>
-                                    <td>Agroindustria y talleres</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="zona-badge zona-protegida">ZP</span></td>
-                                    <td>Protección</td>
-                                    <td>Sin construcción, conservación</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Columna derecha: mapa -->
-                <div class="pr-map-panel">
-                    <img src="img/mapa_zonificacion.jpg" alt="Mapa de Zonificación del Cantón de Poás">
-                    <p class="pr-map-caption">📍 Mapa de zonificación del cantón de Poás — Plan Regulador Vigente</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- MAPRIOT -->
-    <section class="mapriot-section">
+    <!-- Contenido MAPRIOT -->
+    <div style="background: var(--pr-bg); padding: 4rem 0;">
         <div class="container">
 
-            <div class="mapriot-header">
-                <div class="mapriot-badge">INVU · 2025</div>
-                <h2>Manual MAPRIOT — Planes Reguladores como<br>Instrumento de Ordenamiento Territorial</h2>
-                <p>El MAPRIOT es la herramienta técnica del INVU que orienta a los gobiernos municipales en la formulación, actualización y modificación de los Planes Reguladores en Costa Rica.</p>
+            <div class="mapriot-nota">
+                📋 <strong>Nota oficial:</strong> El MAPRIOT actualiza versiones anteriores del manual (2007, 2018 y 2021), adaptándose a las transformaciones conceptuales, normativas y procedimentales del país. Fue aprobado en Sesión Ordinaria N.° JDINVU-028-2025 del 06 de noviembre de 2025. Aplica a todos los cantones del país, con excepción de las áreas de la Zona Marítimo Terrestre (Ley N.° 6043), Territorios Indígenas, Patrimonio Natural del Estado y Zonas Fronterizas.
             </div>
 
-            <div class="mapriot-note">
-                📋 <strong>Nota oficial:</strong> El MAPRIOT actualiza versiones anteriores del manual (2007, 2018 y 2021). Fue aprobado en Sesión Ordinaria N.° JDINVU-028-2025 del 06 de noviembre de 2025. Aplica a todos los cantones del país, con excepción de las áreas de la Zona Marítimo Terrestre (Ley N.° 6043), Territorios Indígenas, Patrimonio Natural del Estado y Zonas Fronterizas.
+            <!-- 1. Objetivo -->
+            <div class="mapriot-block" id="sec-objetivo">
+                <div class="mapriot-block-hd">
+                    <div class="mapriot-block-num">1</div>
+                    <h3>Objetivo Principal</h3>
+                </div>
+                <ul class="mapriot-list">
+                    <li>Procurar la seguridad, salubridad, comodidad y bienestar de la comunidad mediante un ordenamiento territorial planificado.</li>
+                    <li>Promover el uso eficiente del suelo y la conservación de recursos naturales, culturales y económicos en entornos urbanos y rurales.</li>
+                    <li>Incorporar criterios de sostenibilidad ambiental, social y económica en la planificación territorial.</li>
+                    <li>Articular los Planes Reguladores con instrumentos de planificación local, regional y nacional.</li>
+                    <li>Fortalecer las capacidades técnicas e institucionales de los equipos planificadores municipales.</li>
+                </ul>
             </div>
 
-            <div class="mapriot-blocks">
-
-                <!-- 1. Objetivo -->
-                <div>
-                    <div class="mapriot-block-title"><span class="mb-num">1</span>Objetivo Principal</div>
-                    <ul class="mapriot-list">
-                        <li>Procurar la seguridad, salubridad, comodidad y bienestar de la comunidad mediante un ordenamiento territorial planificado.</li>
-                        <li>Promover el uso eficiente del suelo y la conservación de recursos naturales, culturales y económicos en entornos urbanos y rurales.</li>
-                        <li>Incorporar criterios de sostenibilidad ambiental, social y económica en la planificación territorial.</li>
-                        <li>Articular los Planes Reguladores con instrumentos de planificación local, regional y nacional.</li>
-                        <li>Fortalecer las capacidades técnicas e institucionales de los equipos planificadores municipales.</li>
-                    </ul>
+            <!-- 2. Marco Legal -->
+            <div class="mapriot-block" id="sec-legal">
+                <div class="mapriot-block-hd">
+                    <div class="mapriot-block-num">2</div>
+                    <h3>Marco Legal y Competencias</h3>
+                </div>
+                <div class="mapriot-law-grid">
+                    <div class="mapriot-law-card">
+                        <div class="lc-icon">⚖️</div>
+                        <h4>Constitución Política (1949)</h4>
+                        <p>Arts. 169 y 170 — Autonomía y competencia municipal para administrar y planificar el territorio.</p>
+                    </div>
+                    <div class="mapriot-law-card">
+                        <div class="lc-icon">🏛️</div>
+                        <h4>Ley Orgánica del INVU, N.° 1788 (1954)</h4>
+                        <p>Otorga al INVU la potestad de planificar el desarrollo urbano y preparar Planes Reguladores.</p>
+                    </div>
+                    <div class="mapriot-law-card">
+                        <div class="lc-icon">📜</div>
+                        <h4>Ley de Planificación Urbana, N.° 4240 (1968)</h4>
+                        <p>Ley marco: define el Plan Regulador, su contenido mínimo (Art. 16), procedimiento (Art. 17) y los cinco Reglamentos de Desarrollo Urbano (Art. 21).</p>
+                    </div>
+                    <div class="mapriot-law-card">
+                        <div class="lc-icon">🌿</div>
+                        <h4>Ley Orgánica del Ambiente, N.° 7554 (1995)</h4>
+                        <p>Introduce el ordenamiento territorial como concepto legal ligado al desarrollo sostenible.</p>
+                    </div>
+                    <div class="mapriot-law-card">
+                        <div class="lc-icon">📋</div>
+                        <h4>Ley de Planificación Nacional, N.° 5525 (1974)</h4>
+                        <p>Crea el Sistema Nacional de Planificación e integra la dimensión regional y urbana.</p>
+                    </div>
+                    <div class="mapriot-law-card">
+                        <div class="lc-icon">🔬</div>
+                        <h4>Decreto Ejecutivo N.° 44710-MINAE</h4>
+                        <p>Regula la incorporación de la Variable Ambiental en Planes de Ordenamiento Territorial mediante la metodología EIVA-POT.</p>
+                    </div>
                 </div>
 
-                <!-- 2. Marco Legal -->
-                <div>
-                    <div class="mapriot-block-title"><span class="mb-num">2</span>Marco Legal y Competencias</div>
-                    <div class="mapriot-cards" style="margin-bottom:1.5rem;">
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">⚖️</div>
-                            <h4>Constitución Política (1949)</h4>
-                            <p>Arts. 169 y 170 — Autonomía y competencia municipal para administrar y planificar el territorio.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">🏛️</div>
-                            <h4>Ley Orgánica del INVU, N.° 1788 (1954)</h4>
-                            <p>Otorga al INVU la potestad de planificar el desarrollo urbano y preparar Planes Reguladores.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">📜</div>
-                            <h4>Ley de Planificación Urbana, N.° 4240 (1968)</h4>
-                            <p>Ley marco: define el Plan Regulador, su contenido mínimo (Art. 16), procedimiento de aprobación (Art. 17) y los cinco Reglamentos de Desarrollo Urbano (Art. 21).</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">🌿</div>
-                            <h4>Ley Orgánica del Ambiente, N.° 7554 (1995)</h4>
-                            <p>Introduce el ordenamiento territorial como concepto legal ligado al desarrollo sostenible.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">📋</div>
-                            <h4>Ley de Planificación Nacional, N.° 5525 (1974)</h4>
-                            <p>Crea el Sistema Nacional de Planificación e integra la dimensión regional y urbana.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">🔬</div>
-                            <h4>Decreto Ejecutivo N.° 44710-MINAE</h4>
-                            <p>Regula la Incorporación de la Variable Ambiental en Planes de Ordenamiento Territorial mediante la metodología EIVA-POT.</p>
-                        </div>
-                    </div>
-                    <div class="mapriot-block-title" style="font-size:1rem;margin-top:1.5rem;">🏢 Instituciones Responsables</div>
+                <div style="margin-top:1.75rem;">
+                    <p style="font-size:0.85rem;font-weight:700;color:var(--pr-navy);margin-bottom:0.75rem;">🏢 Instituciones Responsables</p>
                     <div class="mapriot-inst-grid">
                         <div class="mapriot-inst-item"><strong>INVU – Dirección de Urbanismo</strong><span>Ente rector: revisa, aprueba y asesora a las municipalidades en la elaboración de Planes Reguladores.</span></div>
                         <div class="mapriot-inst-item"><strong>Municipalidades / Gobiernos Locales</strong><span>Responsables directos de formular, adoptar y aplicar el Plan Regulador en su cantón.</span></div>
@@ -622,153 +934,187 @@
                         <div class="mapriot-inst-item"><strong>MIIPR</strong><span>Mesa Interinstitucional que genera insumos técnicos y apoya los procesos de formulación y aprobación.</span></div>
                     </div>
                 </div>
-
-                <!-- 3. Componentes -->
-                <div>
-                    <div class="mapriot-block-title"><span class="mb-num">3</span>Componentes Críticos del Plan Regulador</div>
-                    <div class="mapriot-cards">
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">🔍</div>
-                            <h4>A. Diagnóstico Territorial</h4>
-                            <p>Análisis multidimensional por cinco ejes: Social, Físico-Espacial, Económico, Político-Institucional y Jurídico. Incluye Atlas Cartográfico con mapas temáticos de uso del suelo, vialidad, servicios y asentamientos.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">📈</div>
-                            <h4>B. Pronóstico Territorial</h4>
-                            <p>Proyección de tendencias y construcción de escenarios futuros (prospectiva territorial) para anticipar cambios y orientar el desarrollo sostenible.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">🎯</div>
-                            <h4>C. Política de Desarrollo Urbano</h4>
-                            <p>Define principios, objetivos de desarrollo urbano, acciones estratégicas y horizonte temporal de planificación.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">📑</div>
-                            <h4>D. Reglamentos de Desarrollo Urbano</h4>
-                            <p>5 reglamentos obligatorios (Art. 21, Ley N.° 4240): Zonificación, Fraccionamiento y Urbanizaciones, Construcciones, Mapa Oficial y Renovación Urbana.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">🌱</div>
-                            <h4>E. Variable Ambiental (EIVA-POT)</h4>
-                            <p>Índice de Fragilidad Ambiental (IFA), Diagnóstico Ambiental (DAM), Resumen de Información Complementaria (RIC) e Informe de Medidas (IME). Requiere aprobación de SETENA.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">🗺️</div>
-                            <h4>F. Mapa Base</h4>
-                            <p>Representación cartográfica georreferenciada en proyección oficial CRTM-05 que integra capas de información del territorio.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. Etapas -->
-                <div>
-                    <div class="mapriot-block-title"><span class="mb-num">4</span>Proceso de Elaboración: 7 Etapas</div>
-                    <div class="mapriot-table-wrap">
-                        <table class="mapriot-table">
-                            <thead>
-                                <tr><th>Etapa</th><th>Nombre</th><th>Contenido</th></tr>
-                            </thead>
-                            <tbody>
-                                <tr><td><span class="mapriot-etapa-num">1</span></td><td><strong>Preparación Preliminar</strong></td><td>Designación del Órgano Local de Planificación; gestión financiera; delimitación del área; contratación del Equipo Planificador; elaboración de la Estrategia de Participación Ciudadana con enfoque de género y diversidad.</td></tr>
-                                <tr><td><span class="mapriot-etapa-num">2</span></td><td><strong>Elaboración del Mapa Base</strong></td><td>Recopilación de datos, selección de escalas, integración de capas cartográficas y validación del mapa base.</td></tr>
-                                <tr><td><span class="mapriot-etapa-num">3</span></td><td><strong>Variable Ambiental</strong></td><td>Aplicación de la metodología EIVA-POT (IFA o DAM-RIC-IME) con coordinación ante SETENA.</td></tr>
-                                <tr><td><span class="mapriot-etapa-num">4</span></td><td><strong>Diagnóstico Territorial</strong></td><td>Análisis de la situación actual por ejes temáticos; sistematización de datos y elaboración del atlas cartográfico de diagnóstico.</td></tr>
-                                <tr><td><span class="mapriot-etapa-num">5</span></td><td><strong>Pronóstico Territorial</strong></td><td>Proyección de tendencias y construcción de escenarios futuros; recomendaciones estratégicas.</td></tr>
-                                <tr><td><span class="mapriot-etapa-num">6</span></td><td><strong>Propuesta del Plan</strong></td><td>Formulación de la Política de Desarrollo Urbano y redacción de los Reglamentos de Desarrollo Urbano; atlas cartográfico de propuesta.</td></tr>
-                                <tr><td><span class="mapriot-etapa-num">7</span></td><td><strong>Audiencia Pública</strong></td><td>Convocatoria formal (mínimo 15 días hábiles); recopilación de observaciones ciudadanas; informe de audiencia; consideraciones especiales para Pueblos Indígenas.</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div style="margin-top:1.25rem;">
-                        <p style="font-size:0.88rem;color:var(--clr-text-muted);font-weight:600;margin-bottom:0.75rem;">Pasos posteriores a las etapas:</p>
-                        <ul class="mapriot-list">
-                            <li>Remisión al INVU para revisión técnica (criterios para diagnóstico, pronóstico, política y reglamentos).</li>
-                            <li>Aprobación o Denegatoria mediante resolución de la Dirección de Urbanismo del INVU.</li>
-                            <li>Adopción formal por el Concejo Municipal (mayoría absoluta de votos).</li>
-                            <li>Publicación en <em>La Gaceta</em> para su entrada en vigencia.</li>
-                            <li>Seguimiento y Evaluación mediante indicadores de gestión territorial.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- 5. Impacto -->
-                <div>
-                    <div class="mapriot-block-title"><span class="mb-num">5</span>Impacto en el Territorio: Control y Desarrollo</div>
-                    <div class="mapriot-cards">
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">🗺️</div>
-                            <h4>Regulación del uso del suelo</h4>
-                            <p>A través del Reglamento de Zonificación define usos conformes, condicionales, no conformes y prohibidos en cada zona del cantón.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">🏗️</div>
-                            <h4>Control de la construcción y fraccionamiento</h4>
-                            <p>Los reglamentos regulan densidades, alturas, coberturas, retiros y tamaños mínimos de lote, controlando la forma e intensidad del desarrollo urbano.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">🌿</div>
-                            <h4>Gestión del riesgo y adaptación climática</h4>
-                            <p>Integra la variable ambiental y considera efectos del cambio climático, áreas de fragilidad y zonas de riesgo, limitando el desarrollo en territorios vulnerables.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">🛣️</div>
-                            <h4>Planificación de infraestructura vial y servicios</h4>
-                            <p>El Mapa Oficial y el Mapa de Vialidad determinan la red vial cantonal y las reservas para servicios públicos, parques y facilidades comunales.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">🔗</div>
-                            <h4>Articulación multinivel</h4>
-                            <p>Se coordina con el Plan Nacional de Desarrollo Urbano, los Planes de Desarrollo Rural Territorial del INDER y otros instrumentos sectoriales (planificación en cascada).</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">📋</div>
-                            <h4>Certificados de Uso de Suelo y licencias</h4>
-                            <p>Es el instrumento de referencia que la municipalidad utiliza para otorgar permisos y controlar el desarrollo del territorio en tiempo real.</p>
-                        </div>
-                        <div class="mapriot-card">
-                            <div class="mapriot-card-icon">🤝</div>
-                            <h4>Participación ciudadana vinculante</h4>
-                            <p>La Audiencia Pública garantiza que la comunidad incida en las decisiones territoriales, convirtiendo el plan en un instrumento de gobernanza local.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div><!-- /mapriot-blocks -->
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <div class="logo">Poás <span>Agua y Fuego</span></div>
-                <p>Página comunitaria del cantón de Poás, Alajuela, Costa Rica.</p>
             </div>
-            <div class="footer-links">
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="plan-regulador.html">Plan Regulador</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2026 Poás Agua y Fuego. Concepto Visual.</p>
-            <p class="copyright-autor">César Luis Quesada Herrera</p>
-        </div>
-    </footer>
 
-    <script>
-        // Navbar scroll
-        window.addEventListener('scroll', () => {
-            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+            <!-- 3. Componentes -->
+            <div class="mapriot-block" id="sec-componentes">
+                <div class="mapriot-block-hd">
+                    <div class="mapriot-block-num">3</div>
+                    <h3>Componentes Críticos del Plan Regulador</h3>
+                </div>
+                <div class="mapriot-law-grid">
+                    <div class="mapriot-law-card">
+                        <div class="lc-icon">🔍</div>
+                        <h4>A. Diagnóstico Territorial</h4>
+                        <p>Análisis multidimensional por cinco ejes: Social, Físico-Espacial, Económico, Político-Institucional y Jurídico. Incluye Atlas Cartográfico con mapas temáticos.</p>
+                    </div>
+                    <div class="mapriot-law-card">
+                        <div class="lc-icon">📈</div>
+                        <h4>B. Pronóstico Territorial</h4>
+                        <p>Proyección de tendencias y construcción de escenarios futuros (prospectiva territorial) para anticipar cambios y orientar el desarrollo sostenible.</p>
+                    </div>
+                    <div class="mapriot-law-card">
+                        <div class="lc-icon">🎯</div>
+                        <h4>C. Política de Desarrollo Urbano</h4>
+                        <p>Define principios, objetivos de desarrollo urbano, acciones estratégicas y horizonte temporal de planificación.</p>
+                    </div>
+                    <div class="mapriot-law-card">
+                        <div class="lc-icon">📑</div>
+                        <h4>D. Reglamentos de Desarrollo Urbano</h4>
+                        <p>5 reglamentos obligatorios (Art. 21, Ley N.° 4240): Zonificación, Fraccionamiento, Construcciones, Mapa Oficial y Renovación Urbana.</p>
+                    </div>
+                    <div class="mapriot-law-card">
+                        <div class="lc-icon">🌱</div>
+                        <h4>E. Variable Ambiental (EIVA-POT)</h4>
+                        <p>IFA, DAM, RIC e IME. Requiere aprobación de Viabilidad Ambiental por parte de la SETENA.</p>
+                    </div>
+                    <div class="mapriot-law-card">
+                        <div class="lc-icon">🗺️</div>
+                        <h4>F. Mapa Base</h4>
+                        <p>Representación cartográfica georreferenciada en proyección oficial CRTM-05 que integra capas de información del territorio.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Etapas -->
+            <div class="mapriot-block" id="sec-etapas">
+                <div class="mapriot-block-hd">
+                    <div class="mapriot-block-num">4</div>
+                    <h3>Proceso de Elaboración: 7 Etapas</h3>
+                </div>
+                <div class="mapriot-timeline">
+                    <div class="tl-item" data-step="1">
+                        <h4>Preparación Preliminar</h4>
+                        <p>Designación del Órgano Local de Planificación; gestión financiera; delimitación del área; contratación del Equipo Planificador; elaboración de la Estrategia de Participación Ciudadana con enfoque de género y diversidad.</p>
+                    </div>
+                    <div class="tl-item" data-step="2">
+                        <h4>Elaboración del Mapa Base</h4>
+                        <p>Recopilación de datos, selección de escalas, integración de capas cartográficas y validación del mapa base.</p>
+                    </div>
+                    <div class="tl-item" data-step="3">
+                        <h4>Incorporación de la Variable Ambiental</h4>
+                        <p>Aplicación de la metodología EIVA-POT (IFA o DAM-RIC-IME) con coordinación ante SETENA.</p>
+                    </div>
+                    <div class="tl-item" data-step="4">
+                        <h4>Diagnóstico Territorial</h4>
+                        <p>Análisis de la situación actual por ejes temáticos; sistematización de datos y elaboración del atlas cartográfico de diagnóstico.</p>
+                    </div>
+                    <div class="tl-item" data-step="5">
+                        <h4>Pronóstico Territorial</h4>
+                        <p>Proyección de tendencias y construcción de escenarios futuros; recomendaciones estratégicas.</p>
+                    </div>
+                    <div class="tl-item" data-step="6">
+                        <h4>Propuesta del Plan Regulador</h4>
+                        <p>Formulación de la Política de Desarrollo Urbano y redacción de los Reglamentos de Desarrollo Urbano; atlas cartográfico de propuesta.</p>
+                    </div>
+                    <div class="tl-item" data-step="7">
+                        <h4>Audiencia Pública</h4>
+                        <p>Convocatoria formal (mínimo 15 días hábiles); recopilación de observaciones ciudadanas; informe de audiencia; consideraciones especiales para Pueblos Indígenas.</p>
+                    </div>
+                </div>
+                <div class="mapriot-steps-post">
+                    <p>📌 Pasos posteriores a las etapas de elaboración:</p>
+                    <ul class="mapriot-list">
+                        <li>Remisión al INVU para revisión técnica (criterios para diagnóstico, pronóstico, política y reglamentos).</li>
+                        <li>Aprobación o Denegatoria mediante resolución de la Dirección de Urbanismo del INVU.</li>
+                        <li>Adopción formal por el Concejo Municipal (mayoría absoluta de votos).</li>
+                        <li>Publicación en <em>La Gaceta</em> para su entrada en vigencia.</li>
+                        <li>Seguimiento y Evaluación mediante indicadores de gestión territorial.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 5. Impacto -->
+            <div class="mapriot-block" id="sec-impacto">
+                <div class="mapriot-block-hd">
+                    <div class="mapriot-block-num">5</div>
+                    <h3>Impacto en el Territorio: Control y Desarrollo</h3>
+                </div>
+                <div class="mapriot-impact-grid">
+                    <div class="mapriot-impact-card">
+                        <div class="ic-icon">🗺️</div>
+                        <h4>Regulación del uso del suelo</h4>
+                        <p>A través del Reglamento de Zonificación define usos conformes, condicionales, no conformes y prohibidos en cada zona del cantón.</p>
+                    </div>
+                    <div class="mapriot-impact-card">
+                        <div class="ic-icon">🏗️</div>
+                        <h4>Control de construcción y fraccionamiento</h4>
+                        <p>Los reglamentos regulan densidades, alturas, coberturas, retiros y tamaños mínimos de lote, controlando la forma e intensidad del desarrollo urbano.</p>
+                    </div>
+                    <div class="mapriot-impact-card">
+                        <div class="ic-icon">🌿</div>
+                        <h4>Gestión del riesgo y adaptación climática</h4>
+                        <p>Integra la variable ambiental y considera el cambio climático, áreas de fragilidad y zonas de riesgo, limitando el desarrollo en territorios vulnerables.</p>
+                    </div>
+                    <div class="mapriot-impact-card">
+                        <div class="ic-icon">🛣️</div>
+                        <h4>Planificación vial y servicios</h4>
+                        <p>El Mapa Oficial y el Mapa de Vialidad determinan la red vial cantonal y las reservas para servicios públicos, parques y facilidades comunales.</p>
+                    </div>
+                    <div class="mapriot-impact-card">
+                        <div class="ic-icon">🔗</div>
+                        <h4>Articulación multinivel</h4>
+                        <p>Se coordina con el Plan Nacional de Desarrollo Urbano, los Planes de Desarrollo Rural Territorial del INDER y otros instrumentos sectoriales.</p>
+                    </div>
+                    <div class="mapriot-impact-card">
+                        <div class="ic-icon">📋</div>
+                        <h4>Certificados de Uso de Suelo</h4>
+                        <p>Es el instrumento de referencia que la municipalidad utiliza para otorgar permisos y controlar el desarrollo del territorio en tiempo real.</p>
+                    </div>
+                    <div class="mapriot-impact-card">
+                        <div class="ic-icon">🤝</div>
+                        <h4>Participación ciudadana vinculante</h4>
+                        <p>La Audiencia Pública garantiza que la comunidad incida en las decisiones territoriales, convirtiendo el plan en un instrumento de gobernanza local.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /container -->
+    </div>
+
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <div class="logo">Poás <span>Agua y Fuego</span></div>
+            <p>Página comunitaria del cantón de Poás, Alajuela, Costa Rica.</p>
+        </div>
+        <div class="footer-links">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="plan-regulador.html">Plan Regulador</a></li>
+                <li><a href="patrimonio-hidrico.html">Patrimonio Hídrico</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2026 Poás Agua y Fuego. Concepto Visual.</p>
+        <p class="copyright-autor">César Luis Quesada Herrera</p>
+    </div>
+</footer>
+
+<script>
+    window.addEventListener('scroll', () => {
+        document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+        // Highlight active sidebar link
+        const sections = document.querySelectorAll('[id^="sec-"]');
+        const links    = document.querySelectorAll('.pr-sidenav a');
+        let current = '';
+        sections.forEach(s => {
+            if (window.scrollY >= s.offsetTop - 120) current = s.id;
         });
-        // Mobile nav
-        const hamburger = document.getElementById('hamburger');
-        const mobileNav = document.getElementById('mobileNav');
-        const closeNav  = document.getElementById('closeNav');
-        hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
-        closeNav.addEventListener('click',  () => mobileNav.classList.remove('open'));
-        function closeMobileNav() { mobileNav.classList.remove('open'); }
-    </script>
+        links.forEach(l => {
+            l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+        });
+    });
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    const closeNav  = document.getElementById('closeNav');
+    hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+    closeNav.addEventListener('click',  () => mobileNav.classList.remove('open'));
+    function closeMobileNav() { mobileNav.classList.remove('open'); }
+</script>
 </body>
 </html>
