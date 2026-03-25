@@ -50,7 +50,7 @@ body {
 
 .section-title {
     font-family: var(--font-heading);
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     color: var(--clr-volcanic-dark);
     margin-bottom: 2rem;
     text-align: center;
@@ -234,7 +234,7 @@ h4 {
 }
 
 .hero-center h1 {
-    font-size: 4.5rem;
+    font-size: clamp(1.9rem, 6vw, 4.5rem);
     font-weight: 800;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     letter-spacing: 2px;
@@ -354,6 +354,7 @@ h4 {
     display: flex;
     align-items: center;
     gap: 4rem;
+    flex-wrap: wrap;
 }
 
 .water-text {
@@ -376,6 +377,7 @@ h4 {
 
 .water-visual {
     flex: 1;
+    min-width: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2779,4 +2781,192 @@ footer {
 @media (max-width: 600px) {
     .historia-banner-section { padding: 3.5rem 1rem; }
     .historia-banner-title { font-size: 1.8rem; }
+}
+
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE GLOBAL — MEJORAS COMPLETAS
+   Corrige desbordamientos, tipografía y grids
+═══════════════════════════════════════════════════ */
+
+/* ── Tablet 900px ── */
+@media (max-width: 900px) {
+    /* Navbar: reducir gap */
+    .nav-links { gap: 1.1rem; }
+    .nav-links a { font-size: 0.82rem; }
+
+    /* Hero principal */
+    .hero-center h1 { font-size: 3rem; }
+    .hero-content h2 { font-size: 1.5rem; }
+    .hero-content p  { font-size: 0.95rem; }
+
+    /* Video volcán */
+    .volcan-video {
+        width: 320px;
+        height: 360px;
+    }
+    .water-anim-container {
+        width: 100%;
+        max-width: 340px;
+        height: auto;
+        min-height: 380px;
+    }
+
+    /* Galería */
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item[style*="span 3"] { grid-column: span 2 !important; }
+
+    /* Community grid */
+    .community-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .comm-card { padding: 1.75rem; }
+
+    /* Water heritage section */
+    .water-section-content { flex-direction: column; gap: 2rem; }
+    .water-visual { justify-content: center; }
+}
+
+/* ── Móvil 768px ── */
+@media (max-width: 768px) {
+    /* Tipografía */
+    .section-title { font-size: 1.9rem; }
+    .hero-center h1 { font-size: 2.4rem; }
+    .hero-center p  { font-size: 1rem; }
+
+    /* Hero split */
+    .hero-split { padding: 2rem 1.5rem; }
+
+    /* Video volcán */
+    .volcan-video {
+        width: 280px;
+        height: 315px;
+    }
+    .water-anim-container {
+        width: 100%;
+        max-width: 300px;
+        min-height: 330px;
+    }
+    .river-wrapper { animation: none; } /* desactivar float en móvil */
+
+    /* Galería de negocios */
+    .negocio-galeria {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: 180px !important;
+    }
+    .negocio-galeria-img { grid-column: 1 !important; grid-row: auto !important; }
+
+    /* Regulador preview */
+    .regulador-info { padding: 2rem 1.5rem; }
+
+    /* Quejas form */
+    .quejas-form-row { grid-template-columns: 1fr !important; }
+
+    /* Lightbox */
+    .lightbox-close { top: 12px; right: 16px; font-size: 2rem; }
+    .lightbox-caption { font-size: 1rem; margin-top: 10px; }
+
+    /* Alert card */
+    .alert-card { padding: 1.5rem; }
+
+    /* Community cards padding */
+    .comm-card h3 { font-size: 1.4rem; }
+    .park-info p  { font-size: 1rem; }
+}
+
+/* ── Móvil 600px ── */
+@media (max-width: 600px) {
+    /* Container padding */
+    .container { padding: 0 4%; }
+
+    /* Video volcán — pequeño */
+    .volcan-video {
+        width: 240px;
+        height: 270px;
+        border-radius: 12px;
+    }
+    .water-anim-container {
+        max-width: 260px;
+        min-height: 280px;
+    }
+
+    /* Hero center */
+    .hero-center h1 { font-size: 2rem; letter-spacing: 0; }
+    .hero-center p  { font-size: 0.9rem; }
+    .hero-split { padding: 1.5rem 1rem; }
+
+    /* Navbar logo */
+    .logo { font-size: 1.2rem; }
+
+    /* Section titles */
+    .section-title { font-size: 1.65rem; margin-bottom: 1.25rem; }
+
+    /* Cards */
+    .comm-card       { padding: 1.25rem; }
+    .alert-card      { padding: 1.25rem; }
+    .contacto-card   { padding: 1.25rem; }
+    .quejas-card     { padding: 1.25rem 1rem; }
+    .negocio-card    { padding: 1rem; }
+
+    /* Negocio card header/meta */
+    .negocio-card-header,
+    .negocio-card-desc,
+    .negocio-card-meta { padding-left: 1rem !important; padding-right: 1rem !important; }
+
+    /* Galería fotos negocio */
+    .negocio-galeria {
+        grid-template-columns: 1fr !important;
+        grid-template-rows: 160px !important;
+    }
+
+    /* Admin modal */
+    .admin-modal-box { padding: 1.75rem 1.1rem; max-width: calc(100vw - 2rem); }
+
+    /* NLB lightbox */
+    .nlb-close { top: 0.5rem; right: 0.5rem; width: 36px; height: 36px; font-size: 1.1rem; }
+    .nlb-prev  { left: 0.25rem; }
+    .nlb-next  { right: 0.25rem; }
+    .nlb-counter { font-size: 0.75rem; }
+
+    /* Historia banner */
+    .historia-banner-title { font-size: 1.6rem; }
+    .historia-banner-btn   { font-size: 0.82rem; padding: 0.75rem 1.5rem; }
+
+    /* Quejas section */
+    .quejas-section { padding: 1rem; }
+    .quejas-card    { flex-direction: column; text-align: center; gap: 0.5rem; }
+
+    /* Muni banner */
+    .muni-banner    { flex-wrap: wrap; gap: 0.75rem; padding: 0.75rem 1rem; }
+
+    /* Gallery */
+    .gallery-grid { grid-template-columns: 1fr; gap: 0.6rem; }
+    .gallery-item[style*="span 3"] { grid-column: span 1 !important; }
+
+    /* Comunidad grid */
+    .community-grid { grid-template-columns: 1fr; gap: 1rem; }
+
+    /* Regulador tags */
+    .regulador-preview-tags { flex-wrap: wrap; gap: 0.4rem; }
+
+    /* Eventos */
+    .evento-card { padding: 1rem; }
+}
+
+/* ── Móvil pequeño 400px ── */
+@media (max-width: 400px) {
+    html { font-size: 14px; }
+
+    .volcan-video {
+        width: 200px;
+        height: 225px;
+        border-radius: 10px;
+    }
+    .water-anim-container { max-width: 220px; min-height: 240px; }
+
+    .hero-center h1 { font-size: 1.7rem; }
+    .section-title  { font-size: 1.4rem; }
+    .logo           { font-size: 1rem; }
+
+    .negocio-galeria { grid-template-rows: 140px !important; }
+
+    .pr-hero h1 { font-size: 1.6rem; }
+    .mapriot-hero h2 { font-size: 1.4rem; }
 }
