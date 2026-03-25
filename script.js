@@ -182,6 +182,19 @@ document.addEventListener('DOMContentLoaded', () => {
             logo: "img/techcenter_logo_0.png"
         },
         {
+            id: 4,
+            nombre: "Macrobiótica Presagio",
+            categoria: "salud",
+            emoji: "🌿",
+            descripcion: "Tienda de productos naturales y macrobióticos en San Pedro de Poás. Semillas de moringa, moringa en polvo, cápsulas y más productos para tu salud y bienestar natural.",
+            descripcion_en: "Natural and macrobiotic products store in San Pedro de Poás. Moringa seeds, moringa powder, capsules and more products for your health and natural wellbeing.",
+            facebook: "https://www.facebook.com/presagioproductosnaturales/?locale=es_LA",
+            waze: "https://www.waze.com/es-419/live-map/directions/cr/provincia-de-alajuela/san-pedro-de-poas/macrobiotica-presagio?to=place.ChIJN2NI6rT3oI8RWThTt_0rus8",
+            direccion: "San Pedro de Poás, Alajuela",
+            logo: "img/macrobiotica_presagio_logo.png",
+            imagenes: ["img/macrobiotica_presagio_banner.jpg"]
+        },
+        {
             id: 2,
             nombre: "Productos de Limpieza Don Luis",
             categoria: "servicio",
@@ -203,7 +216,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tours:       { emoji: "🌋", label: isEnglish ? "Tours"        : "Tours" },
         tienda:      { emoji: "🛍️", label: isEnglish ? "Shop"         : "Tienda" },
         servicio:    { emoji: "⚙️", label: isEnglish ? "Service"      : "Servicio" },
-        tecnologia:  { emoji: "💻", label: isEnglish ? "Technology"   : "Tecnología" }
+        tecnologia:  { emoji: "💻", label: isEnglish ? "Technology"   : "Tecnología" },
+        salud:       { emoji: "🌿", label: isEnglish ? "Health & Nature" : "Salud Natural" }
     };
 
     // Los negocios por defecto siempre vienen del código (nunca del localStorage)
