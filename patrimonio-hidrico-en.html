@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <title>Hydrological Heritage — Poás Agua y Fuego</title>
+    <meta name="description" content="The hydrological heritage of the Poás canton: aquifers, ASADAs, rivers and ecosystems that supply the Greater Metropolitan Area.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --agua-deep:    #0a2a4a;
+            --agua-mid:     #1565C0;
+            --agua-light:   #40C4FF;
+            --agua-foam:    #B3E5FC;
+            --agua-green:   #00897B;
+            --agua-text:    #E3F2FD;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--agua-deep); color: var(--agua-text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        /* ── HERO ── */
+        .ph-hero {
+            position: relative;
+            min-height: 55vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            background: linear-gradient(160deg, #0a1628 0%, #0d3b6e 50%, #0a4a6a 100%);
+            overflow: hidden;
+            padding: 6rem 1.5rem 4rem;
+        }
+        .ph-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 80%, rgba(64,196,255,0.18) 0%, transparent 70%);
+        }
+        /* Animated waves */
+        .ph-waves { position: absolute; bottom: 0; left: 0; width: 100%; }
+        .ph-wave {
+            position: absolute; bottom: 0; left: -100%;
+            width: 300%; height: 80px;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: waveMove 7s linear infinite;
+        }
+        .ph-wave:nth-child(1) { background: var(--agua-light); animation-duration: 7s; height: 70px; }
+        .ph-wave:nth-child(2) { background: var(--agua-foam);  animation-duration: 10s; animation-delay: -3s; height: 55px; opacity: 0.1; }
+        .ph-wave:nth-child(3) { background: var(--agua-mid);   animation-duration: 13s; animation-delay: -6s; height: 90px; opacity: 0.12; }
+        @keyframes waveMove { from { left: -100%; } to { left: 0%; } }
+
+        .ph-hero-content { position: relative; z-index: 2; max-width: 720px; }
+        .ph-hero-icon { font-size: 3.5rem; margin-bottom: 1rem; filter: drop-shadow(0 0 20px rgba(64,196,255,0.6)); }
+        .ph-hero h1 { font-family: 'Outfit', sans-serif; font-size: clamp(2rem,5vw,3.2rem); font-weight: 800; color: #fff; margin-bottom: 0.75rem; line-height: 1.1; }
+        .ph-hero h1 span { color: var(--agua-light); }
+        .ph-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.75); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+        .ph-back-btn {
+            position: absolute; top: 1.5rem; left: 1.5rem; z-index: 10;
+            padding: 0.45rem 1rem; border-radius: 20px;
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            color: #fff; text-decoration: none; font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+        .ph-back-btn:hover { background: rgba(255,255,255,0.2); }
+
+        /* ── SECTIONS ── */
+        .ph-section {
+            padding: 5rem 1.5rem;
+        }
+        .ph-section:nth-child(even) { background: rgba(255,255,255,0.03); }
+        .ph-container { max-width: 1100px; margin: 0 auto; }
+        .ph-section-title {
+            font-family: 'Outfit', sans-serif; font-size: clamp(1.5rem,3vw,2rem);
+            font-weight: 700; color: var(--agua-light); margin-bottom: 0.5rem;
+        }
+        .ph-section-title::before { margin-right: 0.5rem; }
+        .ph-section-sub { color: rgba(255,255,255,0.55); font-size: 0.95rem; margin-bottom: 2.5rem; }
+        .ph-divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--agua-light), var(--agua-green)); border-radius: 2px; margin: 0.75rem 0 2rem; }
+
+        /* ── AQUIFERS ── */
+        .ph-acuiferos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; }
+        .ph-acuifero-card {
+            background: linear-gradient(145deg, rgba(21,101,192,0.2), rgba(10,42,74,0.6));
+            border: 1px solid rgba(64,196,255,0.2); border-radius: 18px;
+            padding: 2rem; transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .ph-acuifero-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(64,196,255,0.15); }
+        .ph-ac-icon { font-size: 2.2rem; margin-bottom: 0.75rem; }
+        .ph-ac-name { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem; }
+        .ph-ac-badge {
+            display: inline-block; padding: 0.2rem 0.75rem; border-radius: 20px;
+            font-size: 0.75rem; font-weight: 600; margin-bottom: 0.75rem;
+            background: rgba(64,196,255,0.15); color: var(--agua-light); border: 1px solid rgba(64,196,255,0.3);
+        }
+        .ph-ac-desc { color: rgba(255,255,255,0.7); font-size: 0.9rem; line-height: 1.6; }
+        .ph-ac-stats { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+        .ph-ac-stat { background: rgba(255,255,255,0.05); border-radius: 8px; padding: 0.4rem 0.75rem; font-size: 0.78rem; color: var(--agua-foam); }
+
+        /* ── RIVERS & WATERSHEDS ── */
+        .ph-rios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 1rem; }
+        .ph-rio-card {
+            background: rgba(0,137,123,0.15); border: 1px solid rgba(0,137,123,0.3);
+            border-radius: 14px; padding: 1.25rem;
+            display: flex; align-items: flex-start; gap: 1rem;
+            transition: background 0.2s;
+        }
+        .ph-rio-card:hover { background: rgba(0,137,123,0.25); }
+        .ph-rio-icon { font-size: 1.8rem; flex-shrink: 0; }
+        .ph-rio-name { font-weight: 700; color: #fff; font-size: 0.95rem; margin-bottom: 0.25rem; }
+        .ph-rio-desc { color: rgba(255,255,255,0.6); font-size: 0.82rem; line-height: 1.5; }
+
+        /* ── ASADAS ── */
+        .ph-asadas-intro {
+            background: linear-gradient(135deg, rgba(0,137,123,0.2), rgba(21,101,192,0.15));
+            border: 1px solid rgba(0,137,123,0.3); border-radius: 18px;
+            padding: 2rem; margin-bottom: 2rem;
+        }
+        .ph-asadas-intro p { color: rgba(255,255,255,0.75); line-height: 1.7; font-size: 0.95rem; }
+        .ph-asadas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1rem; }
+        .ph-asada-item {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px; padding: 1rem 1.25rem;
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .ph-asada-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--agua-light); flex-shrink: 0; }
+        .ph-asada-name { color: #fff; font-size: 0.9rem; font-weight: 500; }
+        .ph-asada-zona { color: rgba(255,255,255,0.45); font-size: 0.78rem; }
+
+        /* ── KEY DATA ── */
+        .ph-datos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 1.2rem; }
+        .ph-dato-card {
+            background: linear-gradient(145deg, rgba(64,196,255,0.1), rgba(10,42,74,0.5));
+            border: 1px solid rgba(64,196,255,0.2); border-radius: 16px;
+            padding: 1.5rem; text-align: center;
+        }
+        .ph-dato-num { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 800; color: var(--agua-light); }
+        .ph-dato-label { color: rgba(255,255,255,0.6); font-size: 0.82rem; margin-top: 0.3rem; line-height: 1.4; }
+
+        /* ── THREATS ── */
+        .ph-amenazas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1.2rem; }
+        .ph-amenaza-card {
+            background: rgba(198,40,40,0.1); border: 1px solid rgba(198,40,40,0.25);
+            border-radius: 14px; padding: 1.25rem 1.5rem;
+        }
+        .ph-amenaza-card h4 { color: #ef9a9a; font-size: 0.95rem; margin-bottom: 0.4rem; }
+        .ph-amenaza-card p { color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.5; }
+
+        /* ── CTA ── */
+        .ph-cta {
+            text-align: center; padding: 5rem 1.5rem;
+            background: linear-gradient(160deg, #0d3b6e, #0a2a4a);
+        }
+        .ph-cta h2 { font-family: 'Outfit', sans-serif; font-size: 1.8rem; color: #fff; margin-bottom: 0.75rem; }
+        .ph-cta p { color: rgba(255,255,255,0.6); margin-bottom: 2rem; }
+        .ph-cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .ph-cta-btn {
+            padding: 0.75rem 1.75rem; border-radius: 30px; font-weight: 600;
+            text-decoration: none; font-size: 0.95rem; transition: all 0.2s;
+        }
+        .ph-cta-btn.primary { background: var(--agua-mid); color: #fff; }
+        .ph-cta-btn.primary:hover { background: var(--agua-light); color: #0a2a4a; }
+        .ph-cta-btn.outline { border: 2px solid rgba(64,196,255,0.4); color: var(--agua-light); }
+        .ph-cta-btn.outline:hover { background: rgba(64,196,255,0.1); }
+
+        /* Simple footer */
+        .ph-footer { text-align: center; padding: 1.5rem; background: #060f1e; color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+
+        /* Info cards */
+        .ph-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .ph-info-card {
+            background: linear-gradient(145deg, rgba(21,101,192,0.12), rgba(10,42,74,0.5));
+            border: 1px solid rgba(64,196,255,0.15);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: border-color 0.25s, transform 0.25s;
+        }
+        .ph-info-card:hover { border-color: rgba(64,196,255,0.35); transform: translateY(-3px); }
+        .ph-info-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+        .ph-info-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem; font-weight: 700;
+            color: var(--agua-light);
+            margin-bottom: 0.75rem;
+        }
+        .ph-info-card p {
+            color: rgba(255,255,255,0.72);
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+        .ph-info-card strong { color: rgba(255,255,255,0.95); }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .ph-acuiferos-grid { grid-template-columns: 1fr; }
+            .ph-datos-grid { grid-template-columns: repeat(2,1fr); }
+            .ph-info-grid { grid-template-columns: 1fr; }
+            .ph-cta-btns { flex-direction: column; align-items: center; }
+        }
+
+        /* Lang buttons */
+        .nav-lang { display:flex; gap:0.35rem; align-items:center; margin-left:0.5rem; flex-shrink:0; }
+        .lang-btn { background:linear-gradient(135deg,#C0392B,#E74C3C); border:none; color:#fff; padding:0.3rem 0.75rem; border-radius:20px; font-size:0.73rem; font-weight:800; text-decoration:none; transition:filter 0.2s,transform 0.15s; white-space:nowrap; box-shadow:0 2px 8px rgba(231,76,60,.45); letter-spacing:0.3px; }
+        .lang-btn:hover { filter:brightness(1.15); transform:translateY(-1px); }
+        .lang-btn.active { background:linear-gradient(135deg,#0E5E6F,#17A589); box-shadow:0 2px 8px rgba(14,94,111,.5); }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">Poás <span>Water &amp; Fire</span></div>
+        <ul class="nav-links">
+            <li><a href="index-en.html">Home</a></li>
+            <li><a href="patrimonio-hidrico-en.html" class="active">Hydrological Heritage</a></li>
+            <li><a href="plan-regulador-en.html">Land Use Plan</a></li>
+            <li><a href="index-en.html#galeria">Gallery</a></li>
+            <li><a href="index-en.html#turismo" style="text-align:center;white-space:normal;line-height:1.3;">Tourism &amp; Business<br>Directory</a></li>
+            <li><a href="index-en.html#contacto">Contact</a></li>
+        </ul>
+        <div class="nav-lang">
+            <a href="patrimonio-hidrico.html" class="lang-btn">🇨🇷 ES</a>
+            <a href="patrimonio-hidrico-en.html" class="lang-btn active">🇺🇸 EN</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <button class="close-btn" id="closeNav" aria-label="Close menu">✕</button>
+        <a href="index-en.html"                   onclick="closeMobileNav()">Home</a>
+        <a href="patrimonio-hidrico-en.html"       onclick="closeMobileNav()">Hydrological Heritage</a>
+        <a href="plan-regulador-en.html"           onclick="closeMobileNav()">Land Use Plan</a>
+        <a href="index-en.html#galeria"            onclick="closeMobileNav()">Gallery</a>
+        <a href="index-en.html#turismo"            onclick="closeMobileNav()" style="text-align:center;white-space:normal;line-height:1.3;">Tourism &amp; Business<br>Directory</a>
+        <a href="index-en.html#contacto"           onclick="closeMobileNav()">Contact</a>
+        <a href="patrimonio-hidrico.html"          onclick="closeMobileNav()">🇨🇷 Ver en Español</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="ph-hero">
+        <a href="index-en.html#agua" class="ph-back-btn">← Home</a>
+        <div class="ph-waves">
+            <div class="ph-wave"></div>
+            <div class="ph-wave"></div>
+            <div class="ph-wave"></div>
+        </div>
+        <div class="ph-hero-content">
+            <div class="ph-hero-icon">💧</div>
+            <h1>Our <span>Hydrological Heritage</span></h1>
+            <span style="display:block;font-size:0.9rem;color:var(--agua-light);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.75rem;font-weight:600;">Water Canton of Costa Rica</span>
+            <p>The Poás canton is guardian of one of Costa Rica's most valuable resources: water. Its forests, rivers and aquifers supply millions of people.</p>
+        </div>
+    </section>
+
+    <!-- KEY DATA -->
+    <section class="ph-section">
+        <div class="ph-container">
+            <h2 class="ph-section-title">💡 Poás Water by the Numbers</h2>
+            <div class="ph-divider"></div>
+            <div class="ph-datos-grid">
+                <div class="ph-dato-card">
+                    <div class="ph-dato-num">3</div>
+                    <div class="ph-dato-label">Main aquifers recharged</div>
+                </div>
+                <div class="ph-dato-card">
+                    <div class="ph-dato-num">+2M</div>
+                    <div class="ph-dato-label">People who depend on water from the massif</div>
+                </div>
+                <div class="ph-dato-card">
+                    <div class="ph-dato-num">+15</div>
+                    <div class="ph-dato-label">Active ASADAs in the canton</div>
+                </div>
+                <div class="ph-dato-card">
+                    <div class="ph-dato-num">2,704 m</div>
+                    <div class="ph-dato-label">Altitude of Poás volcano (recharge zone)</div>
+                </div>
+                <div class="ph-dato-card">
+                    <div class="ph-dato-num">+5,000 mm</div>
+                    <div class="ph-dato-label">Annual rainfall on the massif</div>
+                </div>
+                <div class="ph-dato-card">
+                    <div class="ph-dato-num">100%</div>
+                    <div class="ph-dato-label">Drinking water coverage in the canton</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AQUIFERS -->
+    <section class="ph-section">
+        <div class="ph-container">
+            <h2 class="ph-section-title">🌊 Aquifers of Poás</h2>
+            <p class="ph-section-sub">The Poás massif recharges three aquifer systems that supply drinking water to the Greater Metropolitan Area.</p>
+            <div class="ph-divider"></div>
+            <div class="ph-acuiferos-grid">
+
+                <div class="ph-acuifero-card">
+                    <div class="ph-ac-icon">💧</div>
+                    <div class="ph-ac-name">Poás Aquifer</div>
+                    <span class="ph-ac-badge">High Zone</span>
+                    <p class="ph-ac-desc">The aquifer closest to the volcano, fed directly by rainfall and mists from the cloud forest. It supplies the communal aqueducts of the upper reaches of the canton, including Poásito, San Pedro and highland communities.</p>
+                    <div class="ph-ac-stats">
+                        <span class="ph-ac-stat">🏔️ High zone</span>
+                        <span class="ph-ac-stat">🌧️ High recharge</span>
+                    </div>
+                </div>
+
+                <div class="ph-acuifero-card">
+                    <div class="ph-ac-icon">🌊</div>
+                    <div class="ph-ac-name">Colima Aquifer</div>
+                    <span class="ph-ac-badge">Greater Metropolitan Area</span>
+                    <p class="ph-ac-desc">One of the most important aquifers in Costa Rica. It receives recharge from the Poás massif and supplies a large part of the Central Valley. It is a key source for SENARA and AyA for the provinces of Heredia and Alajuela.</p>
+                    <div class="ph-ac-stats">
+                        <span class="ph-ac-stat">🏙️ Central Valley</span>
+                        <span class="ph-ac-stat">💦 High output</span>
+                    </div>
+                </div>
+
+                <div class="ph-acuifero-card">
+                    <div class="ph-ac-icon">🫧</div>
+                    <div class="ph-ac-name">Barva Aquifer</div>
+                    <span class="ph-ac-badge">Northern GMA Zone</span>
+                    <p class="ph-ac-desc">Located beneath the slopes of the Barva-Poás massif, this unconfined aquifer is recharged by rain filtering through porous volcanic soils. It supplies communities in the northern Greater Metropolitan Area and part of Heredia.</p>
+                    <div class="ph-ac-stats">
+                        <span class="ph-ac-stat">🌿 Volcanic soils</span>
+                        <span class="ph-ac-stat">🏘️ High demand</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- RIVERS & WATERSHEDS -->
+    <section class="ph-section">
+        <div class="ph-container">
+            <h2 class="ph-section-title">🏞️ Rivers &amp; Watersheds</h2>
+            <p class="ph-section-sub">From the volcano spring rivers that irrigate the canton and supply downstream communities.</p>
+            <div class="ph-divider"></div>
+            <div class="ph-rios-grid">
+                <div class="ph-rio-card">
+                    <div class="ph-rio-icon">🌊</div>
+                    <div>
+                        <div class="ph-rio-name">Poás River</div>
+                        <div class="ph-rio-desc">Originates on the volcano's slopes. It crosses the canton and its banks sustain local agriculture and biodiversity.</div>
+                    </div>
+                </div>
+                <div class="ph-rio-card">
+                    <div class="ph-rio-icon">💙</div>
+                    <div>
+                        <div class="ph-rio-name">Sarapiquí River (headwaters)</div>
+                        <div class="ph-rio-desc">Its headwaters originate in the volcanic massif. It flows toward the Caribbean slope with a large discharge.</div>
+                    </div>
+                </div>
+                <div class="ph-rio-card">
+                    <div class="ph-rio-icon">🌿</div>
+                    <div>
+                        <div class="ph-rio-name">Toro River</div>
+                        <div class="ph-rio-desc">A tributary descending from Poás. Used in hydroelectric projects and a source of drinking water.</div>
+                    </div>
+                </div>
+                <div class="ph-rio-card">
+                    <div class="ph-rio-icon">🔵</div>
+                    <div>
+                        <div class="ph-rio-name">Streams &amp; springs</div>
+                        <div class="ph-rio-desc">Dozens of smaller streams and freshwater springs directly supply the canton's ASADAs.</div>
+                    </div>
+                </div>
+                <div class="ph-rio-card">
+                    <div class="ph-rio-icon">🏔️</div>
+                    <div>
+                        <div class="ph-rio-name">Botos Lagoon</div>
+                        <div class="ph-rio-desc">An inactive volcanic crater turned into a lagoon. A unique ecosystem within Poás Volcano National Park.</div>
+                    </div>
+                </div>
+                <div class="ph-rio-card">
+                    <div class="ph-rio-icon">🌫️</div>
+                    <div>
+                        <div class="ph-rio-name">Cloud Forest</div>
+                        <div class="ph-rio-desc">The forest mist at 2,000–2,700 m captures atmospheric moisture and continuously recharges the aquifers.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ASADAS -->
+    <section class="ph-section">
+        <div class="ph-container">
+            <h2 class="ph-section-title">🚰 Water Management Associations (ASADAs)</h2>
+            <p class="ph-section-sub">The Communal Aqueduct and Sewerage Management Associations are the cornerstone of water access in Poás.</p>
+            <div class="ph-divider"></div>
+            <div class="ph-asadas-intro">
+                <p>The ASADAs of the Poás canton manage communal aqueducts that deliver drinking water directly from natural sources to homes. They are non-profit organisations run by the communities themselves, under the supervision of AyA (Costa Rican Institute of Aqueducts and Sewers). Their work is essential for preserving both water quality and the health of springs and recharge zones.</p>
+            </div>
+            <div class="ph-asadas-grid">
+                <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">Municipalidad de Poás</div><div class="ph-asada-zona">District San Pedro</div></div></div>
+                <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA Santa Rosa</div><div class="ph-asada-zona">Canton of Poás</div></div></div>
+                <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA San Juan Norte</div><div class="ph-asada-zona">District San Juan</div></div></div>
+                <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA Carrillos Alto</div><div class="ph-asada-zona">District Carrillos</div></div></div>
+                <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA Carrillos Bajo</div><div class="ph-asada-zona">District Carrillos</div></div></div>
+                <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA Calle San José</div><div class="ph-asada-zona">Canton of Poás</div></div></div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- DETAILED HYDROLOGICAL RESOURCES -->
+    <section class="ph-section">
+        <div class="ph-container">
+            <h2 class="ph-section-title">📋 Hydrological Resources of the Poás Canton</h2>
+            <p class="ph-section-sub">Technical and contextual information about the canton's water system.</p>
+            <div class="ph-divider"></div>
+
+            <div class="ph-info-grid">
+
+                <div class="ph-info-card">
+                    <div class="ph-info-icon">🗺️</div>
+                    <h3 class="ph-info-title">Location and general context</h3>
+                    <p>The canton is located within the <strong>Grande de Tárcoles River sub-basin</strong>, which drains the Central Valley's waters to its outlet on the Pacific Ocean. It has a territorial area of <strong>73.84 km²</strong>, spread across a strip approximately 15 km long by 5 km wide, with elevations ranging from <strong>600 m a.s.l.</strong> in Rincón de Carrillos to <strong>2,838 m a.s.l.</strong> in Poás Volcano National Park.</p>
+                </div>
+
+                <div class="ph-info-card">
+                    <div class="ph-info-icon">🌊</div>
+                    <h3 class="ph-info-title">Main rivers and boundaries</h3>
+                    <p>The courses of the <strong>Poasito and Poás rivers</strong> define the eastern boundary with the canton of Alajuela, while the <strong>Achiote, Tacares and Prendas rivers</strong> define the western boundary with the canton of Grecia.</p>
+                    <p style="margin-top:0.75rem">With Grecia, Poás shares the sub-basins of the Tacares and Prendas rivers — an area of great abundance of groundwater, springs and water intakes, including the <strong>Los Chorros</strong> spring, located in the protected area of the same name.</p>
+                </div>
+
+                <div class="ph-info-card">
+                    <div class="ph-info-icon">🏔️</div>
+                    <h3 class="ph-info-title">Poás River micro-watershed</h3>
+                    <p>Located between Barva volcano and Poás volcano, down to the confluence with the Grande River near Alajuela. It has <strong>high potential for the formation of high-quality aquifers</strong>.</p>
+                    <p style="margin-top:0.75rem">Over the past 14 years, water production in the micro-watershed has <strong>increased by 1.6%</strong>, specifically in runoff and hydrological gain.</p>
+                </div>
+
+                <div class="ph-info-card">
+                    <div class="ph-info-icon">💧</div>
+                    <h3 class="ph-info-title">Poás Aquifer and human consumption</h3>
+                    <p>Water for human consumption comes from <strong>wells and springs</strong>, primarily from the Poás aquifer. Despite the intrinsic vulnerability of this aquifer to contamination, livestock and agricultural activities have been developed across a large part of the sub-basin's territory.</p>
+                    <p style="margin-top:0.75rem">Population centres primarily use <strong>septic tanks</strong> as sanitation systems, which represents a contamination risk for both groundwater and surface water.</p>
+                </div>
+
+                <div class="ph-info-card">
+                    <div class="ph-info-icon">🌾</div>
+                    <h3 class="ph-info-title">Socio-environmental pressures</h3>
+                    <p>The micro-watershed has a socioeconomic structure based on agro-productive activities: <strong>cattle ranching, poultry farms, sugarcane, coffee and non-traditional crops</strong> such as flowers, strawberries and vegetables, which exert pressure on water resources.</p>
+                    <p style="margin-top:0.75rem"><strong>Six socio-environmental pressures</strong> with a negative impact on water were identified, originating from both households and productive activities. Despite this, water quality parameters showed <strong>majority compliance</strong> with established quality criteria.</p>
+                </div>
+
+                <div class="ph-info-card">
+                    <div class="ph-info-icon">⚡</div>
+                    <h3 class="ph-info-title">Natural risks to water</h3>
+                    <p><strong>Flash floods and landslides</strong> are associated with the presence of deeply incised river valleys with steep slopes in elongated micro-watersheds over recent volcanic deposits.</p>
+                    <p style="margin-top:0.75rem">Identified risks range from <strong>volcanic eruptions, tectonic faults and landslides</strong> to human-induced threats that have caused degradation and contamination of soils and surface and groundwater.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- THREATS -->
+    <section class="ph-section">
+        <div class="ph-container">
+            <h2 class="ph-section-title">⚠️ Threats &amp; Challenges</h2>
+            <p class="ph-section-sub">Understanding the risks is the first step to protecting the canton's water.</p>
+            <div class="ph-divider"></div>
+            <div class="ph-amenazas-grid">
+                <div class="ph-amenaza-card">
+                    <h4>🌡️ Climate change</h4>
+                    <p>Changes in rainfall patterns affect aquifer recharge and reduce river and stream flows during the dry season.</p>
+                </div>
+                <div class="ph-amenaza-card">
+                    <h4>🏗️ Unplanned urbanisation</h4>
+                    <p>Soil sealing from construction reduces water infiltration and contaminates aquifers with wastewater.</p>
+                </div>
+                <div class="ph-amenaza-card">
+                    <h4>🌾 Agrochemicals</h4>
+                    <p>Excessive use of fertilisers and pesticides in highland farming areas can contaminate springs and underground aquifers.</p>
+                </div>
+                <div class="ph-amenaza-card">
+                    <h4>🌋 Volcanic activity</h4>
+                    <p>Eruptions from Poás can temporarily affect water quality through acidification and emission of sulphurous gases.</p>
+                </div>
+                <div class="ph-amenaza-card">
+                    <h4>🪵 Deforestation</h4>
+                    <p>Loss of forest cover in recharge zones reduces the soil's capacity to capture and filter rainwater.</p>
+                </div>
+                <div class="ph-amenaza-card">
+                    <h4>🚯 River pollution</h4>
+                    <p>Improper disposal of solid waste and sewage in river basins degrades the quality of water resources.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="ph-cta">
+        <h2>💙 Let's protect water together</h2>
+        <p>The hydrological heritage of Poás is everyone's responsibility. Learn more about the canton and its natural resources.</p>
+        <div class="ph-cta-btns">
+            <a href="index-en.html#agua" class="ph-cta-btn primary">← Back to Home</a>
+            <a href="quejas-en.html" class="ph-cta-btn outline">📢 Report a problem</a>
+            <a href="plan-regulador-en.html" class="ph-cta-btn outline">🗺️ Land Use Plan</a>
+        </div>
+    </section>
+
+    <footer class="ph-footer">
+        <p>&copy; 2026 Poás Agua y Fuego — César Luis Quesada Herrera</p>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+        });
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        const closeNav  = document.getElementById('closeNav');
+        hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+        closeNav.addEventListener('click',  () => mobileNav.classList.remove('open'));
+        function closeMobileNav() { mobileNav.classList.remove('open'); }
+    </script>
+</body>
+</html>

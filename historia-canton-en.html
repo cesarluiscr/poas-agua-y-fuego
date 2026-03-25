@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History of the Poás Canton | Poás Agua y Fuego</title>
+    <meta name="description" content="Discover the history, nature and culture of the Canton of Poás. From its pre-Hispanic origins to its rich gastronomy and biodiversity.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --historia-gold:   #C8952A;
+            --historia-dark:   #1A0F00;
+            --historia-brown:  #3D2008;
+            --historia-cream:  #F5EDD8;
+            --historia-green:  #2D5016;
+            --historia-light:  #FFF8EE;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--historia-light);
+            color: #2a1800;
+        }
+
+        /* NAV */
+        .hist-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(26,15,0,0.92);
+            backdrop-filter: blur(10px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.9rem 2rem;
+        }
+        .hist-nav-logo { color: var(--historia-gold); font-weight: 700; font-size: 1.1rem; text-decoration: none; }
+        .hist-nav-back {
+            color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem;
+            display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;
+        }
+        .hist-nav-back:hover { color: var(--historia-gold); }
+
+        /* HERO */
+        .hist-hero {
+            min-height: 100vh;
+            background:
+                linear-gradient(to bottom, rgba(26,15,0,0.55) 0%, rgba(26,15,0,0.3) 50%, rgba(26,15,0,0.75) 100%),
+                url('img/crateres_poas.jpg') center/cover no-repeat;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 6rem 2rem 4rem;
+        }
+        .hist-hero-badge {
+            background: var(--historia-gold);
+            color: #1a0f00; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.15em;
+            text-transform: uppercase; padding: 0.35rem 1.1rem; border-radius: 99px;
+            margin-bottom: 1.5rem; display: inline-block;
+        }
+        .hist-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 7vw, 5.5rem);
+            color: #fff; line-height: 1.1; margin-bottom: 1rem;
+        }
+        .hist-hero h1 em { color: var(--historia-gold); font-style: italic; }
+        .hist-hero p {
+            color: rgba(255,255,255,0.85); font-size: clamp(1rem, 2vw, 1.25rem);
+            max-width: 680px; line-height: 1.7; margin-bottom: 2rem;
+        }
+        .hist-hero-founded {
+            background: rgba(200,149,42,0.15); border: 1px solid rgba(200,149,42,0.4);
+            color: var(--historia-gold); padding: 0.6rem 1.5rem; border-radius: 8px;
+            font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em;
+        }
+        .hist-hero-scroll {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,0.5); font-size: 0.8rem; text-align: center; animation: bounce 2s infinite;
+        }
+        @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+        /* CHAPTERS NAV */
+        .hist-chapters {
+            background: var(--historia-brown);
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+            position: sticky; top: 56px; z-index: 50;
+        }
+        .hist-chap-btn {
+            color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.82rem; font-weight: 600;
+            letter-spacing: 0.05em; text-transform: uppercase; padding: 0.9rem 1.5rem;
+            border-bottom: 3px solid transparent; transition: all 0.2s;
+        }
+        .hist-chap-btn:hover { color: var(--historia-gold); border-bottom-color: var(--historia-gold); }
+
+        /* CONTAINER */
+        .hist-container { max-width: 960px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* INTRO SECTION */
+        .hist-intro {
+            background: var(--historia-dark);
+            padding: 5rem 2rem;
+            color: #fff;
+        }
+        .hist-intro-inner {
+            max-width: 800px; margin: 0 auto; text-align: center;
+        }
+        .hist-intro-quote {
+            font-family: 'Playfair Display', serif; font-size: clamp(1.2rem,2.5vw,1.7rem);
+            font-style: italic; color: var(--historia-gold); margin-bottom: 2rem;
+            padding: 1.5rem 2rem; border-left: 3px solid var(--historia-gold);
+            background: rgba(200,149,42,0.06); border-radius: 0 8px 8px 0; text-align: left;
+        }
+        .hist-intro p { color: rgba(255,255,255,0.78); line-height: 1.8; font-size: 1.05rem; margin-bottom: 1.2rem; }
+
+        /* SECTION BLOCKS */
+        .hist-section {
+            padding: 5rem 2rem;
+        }
+        .hist-section:nth-child(even) { background: var(--historia-cream); }
+        .hist-section:nth-child(odd)  { background: var(--historia-light); }
+
+        .hist-section-header {
+            text-align: center; margin-bottom: 3.5rem;
+        }
+        .hist-chapter-label {
+            color: var(--historia-gold); font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem;
+        }
+        .hist-section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            color: var(--historia-dark); margin-bottom: 1rem;
+        }
+        .hist-divider {
+            width: 60px; height: 3px; background: var(--historia-gold);
+            margin: 0 auto;
+        }
+
+        /* TWO COLUMN LAYOUT */
+        .hist-two-col {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center;
+        }
+        .hist-two-col.reverse { direction: rtl; }
+        .hist-two-col.reverse > * { direction: ltr; }
+
+        .hist-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem; color: var(--historia-dark); margin-bottom: 1rem;
+        }
+        .hist-text p {
+            color: #4a3010; line-height: 1.8; font-size: 0.97rem; margin-bottom: 1rem;
+        }
+        .hist-text ul {
+            padding-left: 1.2rem; margin-top: 0.5rem;
+        }
+        .hist-text ul li {
+            color: #4a3010; line-height: 1.8; font-size: 0.97rem; margin-bottom: 0.4rem;
+        }
+
+        .hist-img-wrap {
+            border-radius: 16px; overflow: hidden;
+            box-shadow: 0 12px 40px rgba(26,15,0,0.2);
+            aspect-ratio: 4/3;
+        }
+        .hist-img-wrap img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .hist-img-wrap:hover img { transform: scale(1.04); }
+
+        /* TIMELINE */
+        .hist-timeline {
+            position: relative; padding-left: 2rem;
+            border-left: 3px solid var(--historia-gold);
+            display: flex; flex-direction: column; gap: 2rem;
+            max-width: 700px; margin: 0 auto;
+        }
+        .hist-timeline-item {
+            position: relative;
+        }
+        .hist-timeline-dot {
+            position: absolute; left: -2.45rem; top: 0.3rem;
+            width: 14px; height: 14px; border-radius: 50%;
+            background: var(--historia-gold); border: 3px solid var(--historia-cream);
+            box-shadow: 0 0 0 2px var(--historia-gold);
+        }
+        .hist-timeline-year {
+            color: var(--historia-gold); font-weight: 700; font-size: 0.85rem;
+            letter-spacing: 0.05em; margin-bottom: 0.25rem;
+        }
+        .hist-timeline-title {
+            font-family: 'Playfair Display', serif; font-size: 1.1rem;
+            color: var(--historia-dark); margin-bottom: 0.5rem;
+        }
+        .hist-timeline-text {
+            color: #4a3010; font-size: 0.92rem; line-height: 1.7;
+        }
+
+        /* CARDS GRID */
+        .hist-cards-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;
+        }
+        .hist-card {
+            background: #fff; border-radius: 14px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(26,15,0,0.1);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .hist-card:hover { transform: translateY(-5px); box-shadow: 0 12px 35px rgba(26,15,0,0.15); }
+        .hist-card-img {
+            width: 100%; height: 180px; object-fit: cover;
+        }
+        .hist-card-body { padding: 1.25rem; }
+        .hist-card-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .hist-card-title { font-weight: 700; font-size: 1rem; color: var(--historia-dark); margin-bottom: 0.5rem; }
+        .hist-card-text { color: #5a4020; font-size: 0.88rem; line-height: 1.65; }
+
+        /* GASTRONOMIA ITEMS */
+        .hist-gastro-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;
+        }
+        .hist-gastro-item {
+            background: #fff; border-radius: 12px; padding: 1.25rem;
+            border-left: 4px solid var(--historia-gold);
+            box-shadow: 0 2px 12px rgba(26,15,0,0.07);
+        }
+        .hist-gastro-item h4 { font-weight: 700; font-size: 0.95rem; color: var(--historia-dark); margin-bottom: 0.35rem; }
+        .hist-gastro-item p { font-size: 0.82rem; color: #6a4820; line-height: 1.55; }
+
+        /* FACTS BAR */
+        .hist-facts {
+            background: var(--historia-dark);
+            padding: 3rem 2rem;
+        }
+        .hist-facts-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2rem;
+            max-width: 960px; margin: 0 auto; text-align: center;
+        }
+        .hist-fact-num {
+            font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--historia-gold); font-weight: 700;
+        }
+        .hist-fact-label { color: rgba(255,255,255,0.6); font-size: 0.82rem; margin-top: 0.25rem; }
+
+        /* QUOTE BLOCK */
+        .hist-quote-block {
+            background: var(--historia-brown);
+            padding: 3.5rem 2rem; text-align: center;
+        }
+        .hist-quote-block blockquote {
+            font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            font-style: italic; color: var(--historia-gold);
+            max-width: 700px; margin: 0 auto; line-height: 1.7;
+        }
+        .hist-quote-block cite {
+            display: block; margin-top: 1rem; color: rgba(255,255,255,0.5);
+            font-style: normal; font-size: 0.85rem;
+        }
+
+        /* FOOTER */
+        .hist-footer {
+            background: var(--historia-dark); padding: 2rem;
+            text-align: center; color: rgba(255,255,255,0.3); font-size: 0.8rem;
+        }
+        .hist-footer a { color: var(--historia-gold); text-decoration: none; }
+
+        /* RESPONSIVE */
+        @media (max-width: 700px) {
+            .hist-two-col { grid-template-columns: 1fr; }
+            .hist-two-col.reverse { direction: ltr; }
+            .hist-chapters { top: 52px; }
+            .hist-chap-btn { font-size: 0.72rem; padding: 0.75rem 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="hist-nav">
+    <a href="index.html" class="hist-nav-logo">🌋 Poás Agua y Fuego</a>
+    <div style="display:flex;align-items:center;gap:1.2rem">
+        <a href="index.html" class="hist-nav-back">← Back to Home</a>
+        <div style="display:flex;gap:0.4rem">
+            <a href="historia-canton.html" style="color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.8rem;font-weight:600;padding:0.25rem 0.6rem;border-radius:4px;border:1px solid rgba(255,255,255,0.2)">ES</a>
+            <a href="historia-canton-en.html" style="color:var(--historia-gold);text-decoration:none;font-size:0.8rem;font-weight:600;padding:0.25rem 0.6rem;border-radius:4px;border:1px solid var(--historia-gold);background:rgba(200,149,42,0.12)">EN</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hist-hero">
+    <span class="hist-hero-badge">Canton of Poás · Alajuela · Costa Rica</span>
+    <h1>Poás</h1>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,4vw,3rem);color:#fff;line-height:1.2;margin-bottom:1rem">History, Nature <em>&amp; Culture</em></h1>
+    <p>A territory where colonial history, extraordinary biodiversity and a cultural identity deeply rooted in volcanic soil converge in perfect harmony.</p>
+    <span class="hist-hero-founded">🗓️ Founded October 15, 1901 · Province of Alajuela, Costa Rica</span>
+    <div class="hist-hero-scroll">▼ Scroll to explore</div>
+</header>
+
+<!-- CHAPTERS NAV -->
+<nav class="hist-chapters">
+    <a href="#historia" class="hist-chap-btn">📜 History &amp; Culture</a>
+    <a href="#volcan" class="hist-chap-btn">🌋 The Volcano</a>
+    <a href="#flora" class="hist-chap-btn">🌿 Flora &amp; Fauna</a>
+    <a href="#gastronomia" class="hist-chap-btn">🍓 Gastronomy</a>
+    <a href="#turismo" class="hist-chap-btn">🗺️ Tourism</a>
+</nav>
+
+<!-- INTRO -->
+<div class="hist-intro">
+    <div class="hist-intro-inner">
+        <p class="hist-intro-quote">"Poás is where the earth breathes, water springs from the stones, and life flourishes in every corner."</p>
+        <p>The canton of Poás is one of the most fascinating corners of Costa Rica. Nestled on the slopes of the imposing Central Volcanic Mountain Range, this territory combines in perfect harmony a rich colonial history, extraordinary biodiversity and a cultural identity deeply rooted in the land.</p>
+        <p>Officially known as the <strong style="color:var(--historia-gold)">"Water Canton of Costa Rica"</strong>, Poás possesses an enormous number of natural springs that emerge from the slopes of the volcano that gives it its name, supplying a large portion of the Central Valley.</p>
+    </div>
+</div>
+
+<!-- QUICK FACTS -->
+<div class="hist-facts">
+    <div class="hist-facts-grid">
+        <div><div class="hist-fact-num">1901</div><div class="hist-fact-label">Year founded</div></div>
+        <div><div class="hist-fact-num">5</div><div class="hist-fact-label">Districts: San Pedro, San Juan, San Rafael, Carrillos and Sabana Redonda</div></div>
+        <div><div class="hist-fact-num">73.84</div><div class="hist-fact-label">km² territory</div></div>
+        <div><div class="hist-fact-num">2,708</div><div class="hist-fact-num" style="font-size:1rem;color:rgba(255,255,255,0.6)">masl Poás Volcano</div></div>
+        <div><div class="hist-fact-num">220</div><div class="hist-fact-label">Bird species recorded in the park</div></div>
+    </div>
+</div>
+
+<!-- CHAPTER 1: HISTORY -->
+<section class="hist-section" id="historia">
+    <div class="hist-container">
+        <div class="hist-section-header">
+            <div class="hist-chapter-label">Chapter 1</div>
+            <h2 class="hist-section-title">History &amp; Culture</h2>
+            <div class="hist-divider"></div>
+        </div>
+
+        <div class="hist-two-col" style="margin-bottom:4rem">
+            <div class="hist-text">
+                <h3>Pre-Hispanic Origins</h3>
+                <p>The history of the territory we know today as the canton of Poás stretches back to times before the Spanish conquest. Archaeological investigations at the sites of Río Prendas, Poás, Quebrada Caña, Solís and San Pedro have identified two settlement patterns:</p>
+                <ul>
+                    <li><strong>300 – 800 AD:</strong> Human presence with dispersed villages across the present-day territory.</li>
+                    <li><strong>800 – 1562 AD:</strong> More developed occupation, linked to Chibcha-speaking groups known as the <strong>botos</strong>.</li>
+                </ul>
+                <p>The botos inhabited the slopes of the volcano and their name would also be given to the famous <strong>Laguna Botos</strong>, an extinct crater that today forms part of the National Park.</p>
+            </div>
+            <div class="hist-img-wrap">
+                <img src="img/crateres_poas.jpg" alt="Craters of Poás Volcano" loading="lazy">
+            </div>
+        </div>
+
+        <div class="hist-two-col reverse" style="margin-bottom:4rem">
+            <div class="hist-text">
+                <h3>Colonial Founding and the Name "Poás"</h3>
+                <p>The first document mentioning the hamlet of Poás dates from <strong>1782</strong>, when the parish priest Juan Manuel López del Corral referred to five hamlets in the region: Los Targuases, La Alajuela, Las Ciruelas, Río Grande and Pías.</p>
+                <p>The name "Poás" has several interpretations. Some historians link it to the Latinized form of "pías," referring to thorny plants. Others relate it to the indigenous toponym west of the Poás River.</p>
+                <p>The first colonizers included families such as the <strong>Herrera, Murillo, Chaves and Zamora</strong>.</p>
+            </div>
+            <div class="hist-img-wrap">
+                <img src="img/centro_poas.jpg" alt="Town center of San Pedro de Poás" loading="lazy">
+            </div>
+        </div>
+
+        <div class="hist-section-header" style="margin-bottom:2rem">
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--historia-dark)">Timeline</h3>
+        </div>
+
+        <div class="hist-timeline">
+            <div class="hist-timeline-item">
+                <div class="hist-timeline-dot"></div>
+                <div class="hist-timeline-year">300 – 800 AD</div>
+                <div class="hist-timeline-title">First villages</div>
+                <div class="hist-timeline-text">Human presence with dispersed villages across the territory, according to archaeological investigations.</div>
+            </div>
+            <div class="hist-timeline-item">
+                <div class="hist-timeline-dot"></div>
+                <div class="hist-timeline-year">1663</div>
+                <div class="hist-timeline-title">First recorded mention of the name Poás</div>
+                <div class="hist-timeline-text">Appears recorded for the first time referring to the "Potreros del Pías," between Grecia and Alajuela.</div>
+            </div>
+            <div class="hist-timeline-item">
+                <div class="hist-timeline-dot"></div>
+                <div class="hist-timeline-year">1782</div>
+                <div class="hist-timeline-title">First official document</div>
+                <div class="hist-timeline-text">Parish priest Juan Manuel López del Corral mentions the hamlet of Poás in a letter to the Bishop of Costa Rica.</div>
+            </div>
+            <div class="hist-timeline-item">
+                <div class="hist-timeline-dot"></div>
+                <div class="hist-timeline-year">1901</div>
+                <div class="hist-timeline-title">Creation of the Canton</div>
+                <div class="hist-timeline-text">On October 15, 1901, the canton of Poás is officially established during the administration of President Rafael Iglesias Castro.</div>
+            </div>
+            <div class="hist-timeline-item">
+                <div class="hist-timeline-dot"></div>
+                <div class="hist-timeline-year">1971</div>
+                <div class="hist-timeline-title">Poás Volcano National Park</div>
+                <div class="hist-timeline-text">On January 25, the national park is established, championed by biologist Mario Boza.</div>
+            </div>
+            <div class="hist-timeline-item">
+                <div class="hist-timeline-dot"></div>
+                <div class="hist-timeline-year">2017 – 2018</div>
+                <div class="hist-timeline-title">Eruption and park reopening</div>
+                <div class="hist-timeline-text">An eruption in April 2017 causes temporary closure. The park partially reopens in August 2018 with improved safety measures.</div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- QUOTE -->
+<div class="hist-quote-block">
+    <blockquote>
+        "Poás is one of the oldest towns in Costa Rica, with a truly colonial origin that its inhabitants carry with pride."
+        <cite>— Historian Percy Rodríguez Argüello</cite>
+    </blockquote>
+</div>
+
+<!-- CHAPTER 2: THE VOLCANO -->
+<section class="hist-section" id="volcan">
+    <div class="hist-container">
+        <div class="hist-section-header">
+            <div class="hist-chapter-label">Chapter 2</div>
+            <h2 class="hist-section-title">The Poás Volcano</h2>
+            <div class="hist-divider"></div>
+        </div>
+
+        <div class="hist-two-col" style="margin-bottom:3.5rem">
+            <div class="hist-text">
+                <h3>Geological Description</h3>
+                <p>Poás Volcano is an <strong>active stratovolcano</strong> reaching <strong>2,708 meters</strong> above sea level, located at the heart of the Central Volcanic Mountain Range. Its main crater measures approximately <strong>1.6 km in diameter</strong> and 300 meters in depth, making it one of the largest active craters in the world.</p>
+                <p>The volcanic massif is composed of three distinct craters. The main one houses the famous <strong>Laguna Caliente</strong>, whose sulfur-hypersaturated waters give it a turquoise or grayish hue. The second, extinct crater contains the beautiful <strong>Laguna Botos</strong>, a cold-water lake surrounded by cloud forest.</p>
+                <p>Its origin is due to the subduction of the Cocos Plate beneath the Caribbean Plate, a process that began approximately <strong>one million years ago</strong>.</p>
+            </div>
+            <div class="hist-img-wrap">
+                <img src="img/crater_noche_poas.jpg" alt="Poás Volcano crater at night" loading="lazy">
+            </div>
+        </div>
+
+        <div class="hist-two-col reverse" style="margin-bottom:3.5rem">
+            <div class="hist-text">
+                <h3>Eruption History</h3>
+                <p>Poás Volcano has a documented eruption history dating back to the 19th century. The most notable eruption occurred in <strong>1910</strong>, when an ash column rose to 8,000 meters in height, considered one of the largest phreatic eruptions of the 20th century in Central America.</p>
+                <p>Geothermal activity is permanent: fumaroles emitting sulfur dioxide and water vapor can be observed from the crater. On occasion, <strong>pressure geysers</strong> burst from the lake reaching up to 250 meters in height.</p>
+                <p>In <strong>April 2017</strong>, an eruption of gases, ash and rocks caused significant damage. Following safety improvements, the park partially reopened in August 2018.</p>
+            </div>
+            <div class="hist-img-wrap">
+                <img src="img/erupcion_poas.jpg" alt="Eruption of Poás Volcano" loading="lazy">
+            </div>
+        </div>
+
+        <div class="hist-text" style="max-width:700px;margin:0 auto;text-align:center">
+            <h3 style="text-align:center;margin-bottom:1rem">Poás Volcano National Park</h3>
+            <p>Established on <strong>January 25, 1971</strong>, it covers approximately <strong>65 km²</strong> and is the <strong>most visited national park in Costa Rica</strong>. Visitors can access it every day from 8 a.m. to 4 p.m. through prior online reservation via SINAC.</p>
+            <p style="margin-top:1rem">Its main trails: <strong>Crater Trail</strong> (0.5 km), <strong>Laguna Botos Trail</strong> (1.4 km) and <strong>Escalonia Trail</strong> (1 km) through the cloud forest.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CHAPTER 3: FLORA AND FAUNA -->
+<section class="hist-section" id="flora">
+    <div class="hist-container">
+        <div class="hist-section-header">
+            <div class="hist-chapter-label">Chapter 3</div>
+            <h2 class="hist-section-title">Flora &amp; Fauna</h2>
+            <div class="hist-divider"></div>
+        </div>
+
+        <div class="hist-two-col" style="margin-bottom:3.5rem">
+            <div class="hist-text">
+                <h3>Ecosystems and Flora</h3>
+                <p>The canton is home to a diversity of ecosystems influenced by altitude, volcanic activity and precipitation patterns. Elevation ranges from <strong>800 to 2,708 masl</strong>, generating a climatic gradient that supports extraordinary biodiversity.</p>
+                <p>Among the most emblematic species:</p>
+                <ul>
+                    <li><strong>Poor man's umbrella</strong> (Gunnera insignis): leaves that can reach 2 meters in diameter.</li>
+                    <li><strong>Magnolia poasana:</strong> species endemic to the volcano, a botanical relic.</li>
+                    <li><strong>Oaks</strong> (Quercus): dominant between 2,400 and 2,700 masl.</li>
+                    <li><strong>Endangered orchids:</strong> Acineta chrysantha, Epidendrum polyclamys and others.</li>
+                    <li>Giant ferns, bromeliads and mosses of the cloud forest.</li>
+                </ul>
+            </div>
+            <div class="hist-img-wrap">
+                <img src="img/poas_vegetacion.jpg" alt="Cloud forest vegetation at Poás Volcano" loading="lazy">
+            </div>
+        </div>
+
+        <div class="hist-section-header" style="margin-bottom:2rem">
+            <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--historia-dark)">Notable Wildlife</h3>
+        </div>
+
+        <div class="hist-cards-grid">
+            <div class="hist-card">
+                <div class="hist-card-body">
+                    <div class="hist-card-icon">🦅</div>
+                    <div class="hist-card-title">Resplendent Quetzal</div>
+                    <div class="hist-card-text">Pharomachrus mocinno — jewel of the Mesoamerican forests, regularly sighted in the park's cloud forest.</div>
+                </div>
+            </div>
+            <div class="hist-card">
+                <div class="hist-card-body">
+                    <div class="hist-card-icon">🐦</div>
+                    <div class="hist-card-title">Volcano Hummingbird</div>
+                    <div class="hist-card-text">Selasphorus flamula — high-altitude endemic species with vibrant colors, symbol of the highland ecosystem.</div>
+                </div>
+            </div>
+            <div class="hist-card">
+                <div class="hist-card-body">
+                    <div class="hist-card-icon">🦁</div>
+                    <div class="hist-card-title">Puma</div>
+                    <div class="hist-card-text">Puma concolor — though elusive, the puma inhabits these volcanic slopes alongside coyotes, armadillos and weasels.</div>
+                </div>
+            </div>
+            <div class="hist-card">
+                <div class="hist-card-body">
+                    <div class="hist-card-icon">🐿️</div>
+                    <div class="hist-card-title">Deppe's Squirrel</div>
+                    <div class="hist-card-text">Sciurus deppei — among the 40+ mammal species recorded in the park, many with a high degree of endemism.</div>
+                </div>
+            </div>
+            <div class="hist-card">
+                <div class="hist-card-body">
+                    <div class="hist-card-icon">🎶</div>
+                    <div class="hist-card-title">220 Bird Species</div>
+                    <div class="hist-card-text">At least 30 species endemic to Costa Rica and western Panama, making it a paradise for birdwatching.</div>
+                </div>
+            </div>
+            <div class="hist-card">
+                <div class="hist-card-body">
+                    <div class="hist-card-icon">🌿</div>
+                    <div class="hist-card-title">Cloud Forest</div>
+                    <div class="hist-card-text">A unique ecosystem with constant humidity and cold temperatures. Home to endemic species such as Cestrum poasanum.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CHAPTER 4: GASTRONOMY -->
+<section class="hist-section" id="gastronomia">
+    <div class="hist-container">
+        <div class="hist-section-header">
+            <div class="hist-chapter-label">Chapter 4</div>
+            <h2 class="hist-section-title">Gastronomy</h2>
+            <div class="hist-divider"></div>
+        </div>
+
+        <div class="hist-two-col" style="margin-bottom:3rem">
+            <div class="hist-text">
+                <h3>Poaseño Cuisine</h3>
+                <p>Poaseño cuisine is the reflection of a fertile land and a hard-working people. The foods produced in the canton have unique flavors shaped by the mineral richness of the volcanic soil and the high-altitude climate.</p>
+                <p>Along the road that climbs to the volcano, small businesses and roadside stands offer strawberries, cheeses, jams, biscuits and flowers. This tradition of rural commerce is an integral part of the canton's tourism experience.</p>
+            </div>
+            <div class="hist-img-wrap">
+                <img src="img/tipico_fraijanes.jpg" alt="Traditional cuisine of Fraijanes, Poás" loading="lazy">
+            </div>
+        </div>
+
+        <div class="hist-gastro-grid">
+            <div class="hist-gastro-item">
+                <h4>🥕 Arracache Root Stew</h4>
+                <p>An Andean root grown in cold highland soils, seasoned with local spices. A classic side dish of the Costa Rican casado.</p>
+            </div>
+            <div class="hist-gastro-item">
+                <h4>🍬 Sobaos Candy</h4>
+                <p>A traditional artisan sweet with a soft texture and delicate flavor, considered a regional delicacy.</p>
+            </div>
+            <div class="hist-gastro-item">
+                <h4>🍰 Wedding Cake (Torta de Novios)</h4>
+                <p>A traditional cake prepared for special occasions and community celebrations in the canton.</p>
+            </div>
+            <div class="hist-gastro-item">
+                <h4>🍊 Grapefruit Preserve</h4>
+                <p>An artisan conserve made with fruit harvested from local orchards on the slopes of the volcano.</p>
+            </div>
+            <div class="hist-gastro-item">
+                <h4>🍓 Fresh Strawberries</h4>
+                <p>Grown on the volcanic slopes. Available fresh, as jams, ice creams and artisan desserts.</p>
+            </div>
+            <div class="hist-gastro-item">
+                <h4>🧀 Artisan Cheeses</h4>
+                <p>Dairy farms produce fresh cheeses, sour cream and dairy products using traditional methods.</p>
+            </div>
+            <div class="hist-gastro-item">
+                <h4>☕ High-Altitude Coffee</h4>
+                <p>Grown in volcanic soil, internationally recognized for its balanced acidity, deep aroma and exceptional flavor.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CHAPTER 5: TOURISM -->
+<section class="hist-section" id="turismo">
+    <div class="hist-container">
+        <div class="hist-section-header">
+            <div class="hist-chapter-label">Chapter 5</div>
+            <h2 class="hist-section-title">Tourism</h2>
+            <div class="hist-divider"></div>
+        </div>
+
+        <div class="hist-cards-grid" style="margin-bottom:3rem">
+            <div class="hist-card">
+                <img src="img/laguna_fraijanes.jpg" alt="Fraijanes Lagoon, Poás" class="hist-card-img">
+                <div class="hist-card-body">
+                    <div class="hist-card-icon">🌊</div>
+                    <div class="hist-card-title">Fraijanes Lagoon</div>
+                    <div class="hist-card-text">A picturesque artificial lake surrounded by highland vegetation, ideal for picnics, sport fishing and nature immersion.</div>
+                </div>
+            </div>
+            <div class="hist-card">
+                <div class="hist-card-body">
+                    <div class="hist-card-icon">💦</div>
+                    <div class="hist-card-title">La Paz and San Fernando Waterfalls</div>
+                    <div class="hist-card-text">Spectacular waterfalls accessible from the Varablanca route, among the most visited attractions in the area.</div>
+                </div>
+            </div>
+            <div class="hist-card">
+                <div class="hist-card-body">
+                    <div class="hist-card-icon">🧀</div>
+                    <div class="hist-card-title">Corso Dairy Tours</div>
+                    <div class="hist-card-text">A walk along nature trails with a visit to a dairy, mini farm and artisan cheese factory.</div>
+                </div>
+            </div>
+            <div class="hist-card">
+                <div class="hist-card-body">
+                    <div class="hist-card-icon">☕</div>
+                    <div class="hist-card-title">Coffee Tour Los Volcanes</div>
+                    <div class="hist-card-text">An educational tour about coffee cultivation, harvesting and roasting on the slopes of the volcano. A unique experience on volcanic soil.</div>
+                </div>
+            </div>
+            <div class="hist-card">
+                <div class="hist-card-body">
+                    <div class="hist-card-icon">🎣</div>
+                    <div class="hist-card-title">Fraijanes Trout Fishing</div>
+                    <div class="hist-card-text">Sport fishing experience for trout (Salmo trutta) in a natural high-altitude setting.</div>
+                </div>
+            </div>
+            <div class="hist-card">
+                <div class="hist-card-body">
+                    <div class="hist-card-icon">🛤️</div>
+                    <div class="hist-card-title">Coffee &amp; Volcano Routes</div>
+                    <div class="hist-card-text">Scenic drives through coffee plantations, pastures and rural communities with panoramic views of Poás and Barva volcanoes.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hist-text" style="max-width:720px;margin:0 auto;background:#fff;padding:2rem;border-radius:14px;box-shadow:0 4px 20px rgba(26,15,0,0.08)">
+            <h3 style="text-align:center;margin-bottom:1.25rem">How to Get There</h3>
+            <p><strong>🚗 Route 1:</strong> San José → Alajuela → Fraijanes → Poás Volcano (50 km). The most commonly used, with good signage and services.</p>
+            <p style="margin-top:0.75rem"><strong>🚗 Route 2:</strong> Alajuela → San Pedro de Poás → Fraijanes → Poás Volcano (55 km). Passes through the canton's main city.</p>
+            <p style="margin-top:0.75rem"><strong>🚗 Route 3:</strong> Via Varablanca, connecting the volcano with Puerto Viejo de Sarapiquí.</p>
+            <p style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid #e5d5b0;color:#6a4820;font-size:0.88rem">💡 <strong>Tips:</strong> Bring comfortable clothing, closed-toe shoes and warm layers. Arrive before 9 a.m. for the best views. Book online at SINAC in advance.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL QUOTE -->
+<div class="hist-quote-block">
+    <blockquote>
+        "Poás is the water canton of Costa Rica: from its volcanic depths spring the water, life and history of a community that looks to the future without forgetting its roots."
+        <cite>— Poás: History, Nature and Culture · 2026</cite>
+    </blockquote>
+</div>
+
+<!-- FOOTER -->
+<footer class="hist-footer">
+    <p>© 2026 Poás Agua y Fuego — Canton of Poás, Alajuela, Costa Rica · <a href="index.html">Back to main site</a></p>
+    <p style="margin-top:0.4rem;font-size:0.72rem">Developed by César Luis Quesada Herrera</p>
+</footer>
+
+</body>
+</html>

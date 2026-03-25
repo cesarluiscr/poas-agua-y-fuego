@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints &amp; Reports | Poás Agua y Fuego</title>
+    <meta name="description" content="Complaints and reports section for the community of the Canton of Poás.">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-poas">Poás</span>
+                <span class="logo-agua"> Agua y </span>
+                <span class="logo-fuego">Fuego</span>
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#patrimonio" onclick="closeMobileNav()">Hydrological Heritage</a></li>
+                <li><a href="plan-regulador.html" onclick="closeMobileNav()">Land Use Plan</a></li>
+                <li><a href="index.html#galeria" onclick="closeMobileNav()">Gallery</a></li>
+                <li><a href="index.html#comunidad" onclick="closeMobileNav()">Our Canton</a></li>
+                <li><a href="bolsa-empleo.html" onclick="closeMobileNav()">Job Board</a></li>
+                <li><a href="directorio-comercial.html" onclick="closeMobileNav()" style="text-align:center;white-space:normal;line-height:1.3;">Business Directory</a></li>
+                <li><a href="eventos.html" onclick="closeMobileNav()">Events</a></li>
+                <li><a href="index.html#contacto" onclick="closeMobileNav()">Contact</a></li>
+                <li>
+                    <a href="quejas.html" class="lang-btn">🇨🇷 ES</a>
+                    <a href="quejas-en.html" class="lang-btn active-lang" style="background:linear-gradient(135deg,#1A237E,#283593);">🇺🇸 EN</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="nav-overlay" id="navOverlay" onclick="closeMobileNav()"></div>
+
+    <!-- HERO -->
+    <section class="secondary-hero" style="background: linear-gradient(135deg, #1A237E 0%, #283593 50%, #FFF200 100%);">
+        <div class="container">
+            <div class="secondary-hero-content">
+                <span class="secondary-hero-icon">📢</span>
+                <h1>Reports &amp; Complaints</h1>
+                <p>Your voice matters for improving our community. Report problems, irregularities, or situations affecting the Canton of Poás.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="container" style="padding: 3rem 1rem 5rem;">
+
+        <div class="quejas-info-grid">
+
+            <!-- Report types -->
+            <div class="quejas-tipo-card">
+                <div class="quejas-tipo-icon">🏗️</div>
+                <h3>Works &amp; Infrastructure</h3>
+                <p>Illegal construction, damage to streets, sidewalks, or public infrastructure.</p>
+                <a href="https://www.munipoas.go.cr/" target="_blank" rel="noopener noreferrer" class="quejas-link-btn">Municipality of Poás →</a>
+            </div>
+
+            <div class="quejas-tipo-card">
+                <div class="quejas-tipo-icon">🌿</div>
+                <h3>Environment</h3>
+                <p>River pollution, illegal logging, improper waste management, or damage to protected areas.</p>
+                <a href="https://www.setena.go.cr/" target="_blank" rel="noopener noreferrer" class="quejas-link-btn">SETENA →</a>
+            </div>
+
+            <div class="quejas-tipo-card">
+                <div class="quejas-tipo-icon">🚨</div>
+                <h3>Safety</h3>
+                <p>Suspicious activities, hazardous situations, or emergencies in the canton.</p>
+                <a href="tel:911" class="quejas-link-btn">Call 911 →</a>
+            </div>
+
+            <div class="quejas-tipo-card">
+                <div class="quejas-tipo-icon">💧</div>
+                <h3>Water &amp; Public Services</h3>
+                <p>Problems with drinking water supply, wastewater, or ASADA services.</p>
+                <a href="https://www.aya.go.cr/" target="_blank" rel="noopener noreferrer" class="quejas-link-btn">AyA Costa Rica →</a>
+            </div>
+
+            <div class="quejas-tipo-card">
+                <div class="quejas-tipo-icon">🏛️</div>
+                <h3>Municipal Services</h3>
+                <p>Complaints about services or staff of the Municipality of Poás.</p>
+                <a href="https://www.munipoas.go.cr/" target="_blank" rel="noopener noreferrer" class="quejas-link-btn">Municipality of Poás →</a>
+            </div>
+
+            <div class="quejas-tipo-card">
+                <div class="quejas-tipo-icon">📝</div>
+                <h3>Other Reports</h3>
+                <p>Any other situation affecting the well-being of the Canton of Poás community.</p>
+                <a href="https://wa.me/50687058612" target="_blank" rel="noopener noreferrer" class="quejas-link-btn">Community WhatsApp →</a>
+            </div>
+
+        </div>
+
+        <!-- Complaint form -->
+        <div class="quejas-form-section">
+            <h2>📋 Submit Your Report Directly</h2>
+            <p class="quejas-form-desc">Fill out the form and we will follow up or forward your report to the appropriate authority.</p>
+
+            <form class="quejas-form" id="quejasForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="q-nombre">Name (optional)</label>
+                        <input type="text" id="q-nombre" placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="q-contacto">Phone or email (optional)</label>
+                        <input type="text" id="q-contacto" placeholder="For follow-up">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="q-tipo">Type of report</label>
+                    <select id="q-tipo">
+                        <option value="">-- Select --</option>
+                        <option value="infraestructura">Works &amp; Infrastructure</option>
+                        <option value="ambiente">Environment</option>
+                        <option value="seguridad">Safety</option>
+                        <option value="agua">Water &amp; Public Services</option>
+                        <option value="municipal">Municipal Services</option>
+                        <option value="otro">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="q-ubicacion">Location of the issue</label>
+                    <input type="text" id="q-ubicacion" placeholder="E.g.: Barrio San Juan, in front of the school">
+                </div>
+                <div class="form-group">
+                    <label for="q-descripcion">Description of the complaint or report <span style="color:red">*</span></label>
+                    <textarea id="q-descripcion" rows="5" placeholder="Describe in detail the situation you wish to report..." required></textarea>
+                </div>
+                <button type="submit" class="quejas-submit-btn">📤 Send Report via WhatsApp</button>
+            </form>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Poás Agua y Fuego — Canton of Poás, Alajuela, Costa Rica</p>
+            <p style="margin-top:0.4rem; font-size:0.85rem; opacity:0.7;">Developed by César Luis Quesada Herrera</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('quejasForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nombre    = document.getElementById('q-nombre').value.trim();
+            const contacto  = document.getElementById('q-contacto').value.trim();
+            const tipo      = document.getElementById('q-tipo').value;
+            const ubicacion = document.getElementById('q-ubicacion').value.trim();
+            const desc      = document.getElementById('q-descripcion').value.trim();
+
+            if (!desc) { alert('Please describe the situation to report.'); return; }
+
+            const tipoLabel = document.getElementById('q-tipo').options[document.getElementById('q-tipo').selectedIndex].text;
+
+            let msg = '📢 *DENUNCIA / QUEJA — Poás Agua y Fuego*\n\n';
+            if (nombre)    msg += `👤 Nombre: ${nombre}\n`;
+            if (contacto)  msg += `📞 Contacto: ${contacto}\n`;
+            if (tipo)      msg += `📁 Tipo: ${tipoLabel}\n`;
+            if (ubicacion) msg += `📍 Ubicación: ${ubicacion}\n`;
+            msg += `\n📝 Descripción:\n${desc}`;
+
+            const encoded = encodeURIComponent(msg);
+            window.open(`https://wa.me/50687058612?text=${encoded}`, '_blank');
+        });
+    </script>
+</body>
+</html>
