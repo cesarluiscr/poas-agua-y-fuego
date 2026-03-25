@@ -1643,6 +1643,15 @@ footer {
 }
 
 /* ── Language Switcher (inside navbar) ── */
+.flag-icon {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 2px;
+    margin-right: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    flex-shrink: 0;
+}
+
 .nav-lang {
     display: flex;
     gap: 0.35rem;
