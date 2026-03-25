@@ -647,11 +647,230 @@
     </blockquote>
 </div>
 
+<!-- SECCIÓN: COMPARTE TU HISTORIA -->
+<section class="hist-section" id="comparte" style="background:var(--historia-dark);">
+    <div class="hist-container">
+        <div class="hist-section-header">
+            <div class="hist-chapter-label" style="color:var(--historia-gold)">Comunidad</div>
+            <h2 class="hist-section-title" style="color:#fff">Comparte tu Historia</h2>
+            <div class="hist-divider"></div>
+            <p style="color:rgba(255,255,255,0.65);margin-top:1.25rem;font-size:1rem;line-height:1.7;max-width:580px;margin-inline:auto;">
+                ¿Viviste algo especial en Poás? ¿Conocés una historia del cantón que merece ser contada? Compártila con la comunidad y la publicaremos en esta página.
+            </p>
+        </div>
+
+        <div class="hist-share-form-wrap">
+            <form id="historiaForm" class="hist-share-form">
+
+                <div class="hist-form-row">
+                    <div class="hist-form-group">
+                        <label for="hs-nombre">Nombre completo <span class="req">*</span></label>
+                        <input type="text" id="hs-nombre" placeholder="Su nombre" required>
+                    </div>
+                    <div class="hist-form-group">
+                        <label for="hs-edad">Edad</label>
+                        <input type="number" id="hs-edad" placeholder="Ej: 45" min="1" max="120">
+                    </div>
+                </div>
+
+                <div class="hist-form-row">
+                    <div class="hist-form-group">
+                        <label for="hs-telefono">Teléfono <span class="req">*</span></label>
+                        <input type="tel" id="hs-telefono" placeholder="Ej: 8888-8888" required>
+                    </div>
+                    <div class="hist-form-group">
+                        <label for="hs-correo">Correo electrónico</label>
+                        <input type="email" id="hs-correo" placeholder="correo@ejemplo.com">
+                    </div>
+                </div>
+
+                <div class="hist-form-group">
+                    <label for="hs-comunidad">Comunidad o distrito de Poás</label>
+                    <select id="hs-comunidad">
+                        <option value="">-- Seleccione --</option>
+                        <option>San Pedro de Poás</option>
+                        <option>San Juan</option>
+                        <option>San Rafael</option>
+                        <option>Carrillos</option>
+                        <option>Sabana Redonda</option>
+                        <option>Poasito</option>
+                        <option>Fraijanes</option>
+                        <option>Varablanca</option>
+                        <option>Otra comunidad</option>
+                    </select>
+                </div>
+
+                <div class="hist-form-group">
+                    <label for="hs-titulo">Título de tu historia <span class="req">*</span></label>
+                    <input type="text" id="hs-titulo" placeholder="Ej: El día que el volcán rugió en mi infancia" required>
+                </div>
+
+                <div class="hist-form-group">
+                    <label for="hs-historia">Tu historia <span class="req">*</span></label>
+                    <textarea id="hs-historia" rows="7" placeholder="Escribí tu historia, anécdota o recuerdo del cantón de Poás..." required></textarea>
+                    <div class="hist-char-counter"><span id="hs-count">0</span> / 1500 caracteres</div>
+                </div>
+
+                <div class="hist-form-group">
+                    <label class="hist-check-label">
+                        <input type="checkbox" id="hs-autorizo" required>
+                        <span>Autorizo la publicación de mi historia en este sitio web comunitario <span class="req">*</span></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="hist-submit-btn">
+                    📖 Enviar mi Historia por WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ── Formulario Comparte tu Historia ── */
+    .hist-share-form-wrap {
+        max-width: 680px;
+        margin: 0 auto;
+    }
+    .hist-share-form {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(200,149,42,0.25);
+        border-radius: 20px;
+        padding: 2.5rem;
+    }
+    .hist-form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+    .hist-form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1.25rem;
+    }
+    .hist-form-group label {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: rgba(255,255,255,0.8);
+        margin-bottom: 0.45rem;
+        letter-spacing: 0.03em;
+    }
+    .req { color: var(--historia-gold); }
+    .hist-form-group input,
+    .hist-form-group select,
+    .hist-form-group textarea {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        color: #fff;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.92rem;
+        transition: border-color 0.2s;
+        outline: none;
+        resize: vertical;
+    }
+    .hist-form-group input::placeholder,
+    .hist-form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .hist-form-group select option { background: var(--historia-brown); color: #fff; }
+    .hist-form-group input:focus,
+    .hist-form-group select:focus,
+    .hist-form-group textarea:focus {
+        border-color: var(--historia-gold);
+        background: rgba(200,149,42,0.08);
+    }
+    .hist-char-counter {
+        font-size: 0.75rem;
+        color: rgba(255,255,255,0.35);
+        text-align: right;
+        margin-top: 0.35rem;
+    }
+    .hist-check-label {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start;
+        gap: 0.65rem;
+        cursor: pointer;
+        font-size: 0.83rem !important;
+        color: rgba(255,255,255,0.65) !important;
+    }
+    .hist-check-label input[type="checkbox"] {
+        width: 18px; height: 18px;
+        flex-shrink: 0;
+        margin-top: 0.1rem;
+        accent-color: var(--historia-gold);
+        border-radius: 4px;
+    }
+    .hist-submit-btn {
+        width: 100%;
+        background: linear-gradient(135deg, var(--historia-gold), #a8730f);
+        color: var(--historia-dark);
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        margin-top: 0.5rem;
+    }
+    .hist-submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(200,149,42,0.4);
+    }
+    @media (max-width: 600px) {
+        .hist-form-row { grid-template-columns: 1fr; }
+        .hist-share-form { padding: 1.5rem; }
+    }
+</style>
+
 <!-- FOOTER -->
 <footer class="hist-footer">
     <p>© 2026 · Cantón de Poás, Alajuela, Costa Rica · <a href="index.html">Volver al sitio principal</a></p>
     <p style="margin-top:0.4rem;font-size:0.72rem">Fuentes: Wikipedia, SINAC, Percy Rodríguez Argüello, Eliécer Murillo Esquivel</p>
 </footer>
 
+<script>
+    // Contador de caracteres
+    const textarea = document.getElementById('hs-historia');
+    const counter  = document.getElementById('hs-count');
+    if (textarea) {
+        textarea.addEventListener('input', function() {
+            const len = this.value.length;
+            counter.textContent = len;
+            counter.style.color = len > 1400 ? '#f97316' : 'rgba(255,255,255,0.35)';
+            if (len > 1500) this.value = this.value.substring(0, 1500);
+        });
+    }
+
+    // Envío por WhatsApp
+    document.getElementById('historiaForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nombre    = document.getElementById('hs-nombre').value.trim();
+        const edad      = document.getElementById('hs-edad').value.trim();
+        const telefono  = document.getElementById('hs-telefono').value.trim();
+        const correo    = document.getElementById('hs-correo').value.trim();
+        const comunidad = document.getElementById('hs-comunidad').value;
+        const titulo    = document.getElementById('hs-titulo').value.trim();
+        const historia  = document.getElementById('hs-historia').value.trim();
+
+        if (!document.getElementById('hs-autorizo').checked) {
+            alert('Debe autorizar la publicación para continuar.'); return;
+        }
+
+        let msg = '📖 *HISTORIA DEL CANTÓN — Poás Agua y Fuego*\n\n';
+        msg += `👤 Nombre: ${nombre}\n`;
+        if (edad)      msg += `🎂 Edad: ${edad} años\n`;
+        msg += `📞 Teléfono: ${telefono}\n`;
+        if (correo)    msg += `✉️ Correo: ${correo}\n`;
+        if (comunidad) msg += `📍 Comunidad: ${comunidad}\n`;
+        msg += `\n📌 Título: ${titulo}\n`;
+        msg += `\n📝 Historia:\n${historia}`;
+
+        window.open('https://wa.me/50687058612?text=' + encodeURIComponent(msg), '_blank');
+    });
+</script>
 </body>
 </html>
