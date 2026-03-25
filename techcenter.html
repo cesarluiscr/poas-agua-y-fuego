@@ -79,6 +79,28 @@
 
         .tc-nav-back:hover { background: var(--tc-cyan); color: #000; }
 
+        .tc-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .tc-lang-btn {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.6);
+            transition: all 0.2s;
+        }
+        .tc-lang-btn:hover { border-color: var(--tc-cyan); color: var(--tc-cyan); }
+        .tc-lang-btn.active {
+            background: linear-gradient(135deg, var(--tc-purple), var(--tc-cyan));
+            border-color: transparent;
+            color: #fff;
+        }
+
         /* HERO */
         .tc-hero {
             min-height: 100vh;
@@ -445,7 +467,11 @@
             <img src="img/techcenter_logo_0.png" alt="Tech Center CR">
             <span>TECH CENTER CR</span>
         </a>
-        <a href="directorio-comercial.html" class="tc-nav-back">← Directorio</a>
+        <div class="tc-nav-right">
+            <a href="techcenter.html"    class="tc-lang-btn active">🇨🇷 ES</a>
+            <a href="techcenter-en.html" class="tc-lang-btn">🇺🇸 EN</a>
+            <a href="directorio-comercial.html" class="tc-nav-back">← Directorio</a>
+        </div>
     </nav>
 
     <!-- HERO -->
