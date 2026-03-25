@@ -179,7 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
             waze: "https://ul.waze.com/ul?ll=10.09587101%2C-84.24263835&navigate=yes&zoom=17&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location",
             sitio: "techcenter.html",
             direccion: "Cantón de Poás, Alajuela",
-            logo: "img/techcenter_logo_0.png"
+            logo: "img/techcenter_logo_0.png",
+            bannerLogo: true
         },
         {
             id: 4,
@@ -253,11 +254,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const emoji = negocio.emoji || meta.emoji;
             const card = document.createElement('div');
             const tieneGaleria = negocio.imagenes && negocio.imagenes.length > 0;
-            card.className = tieneGaleria ? 'negocio-card' : 'negocio-card negocio-card-simple';
+            const tieneBannerLogo = negocio.bannerLogo && negocio.logo;
+            card.className = (tieneGaleria || tieneBannerLogo) ? 'negocio-card' : 'negocio-card negocio-card-simple';
 
             // Galería de imágenes si existe
             let galeriaHTML = '';
-            if (negocio.imagenes && negocio.imagenes.length > 0) {
+            if (tieneBannerLogo) {
+                // Logo como banner superior con fondo oscuro
+                galeriaHTML = `<div class="negocio-logo-banner">
+                    <img src="${negocio.logo}" alt="Logo ${negocio.nombre}" class="negocio-logo-banner-img">
+                </div>`;
+            } else if (tieneGaleria) {
                 if (negocio.bannerAncho) {
                     // Banner a ancho completo
                     galeriaHTML = `<div class="negocio-banner-ancho">
@@ -270,8 +277,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Logo o emoji en el encabezado
-            const logoHTML = negocio.logo
+            // Logo o emoji en el encabezado (ocultar logo si ya se muestra como banner)
+            const logoHTML = (!tieneBannerLogo && negocio.logo)
                 ? `<img src="${negocio.logo}" alt="Logo ${negocio.nombre}" class="negocio-logo">`
                 : `<span class="negocio-emoji">${emoji}</span>`;
 
