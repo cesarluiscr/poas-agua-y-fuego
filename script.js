@@ -1,4 +1,4 @@
-// ⬇️ Pegá aquí la URL de tu Google Apps Script después de implementarlo
+// v3 // ⬇️ Pegá aquí la URL de tu Google Apps Script después de implementarlo
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/TU_URL_AQUI/exec';
 
 // ── Hamburger / Mobile Nav ──────────────────────────────────────────
