@@ -9,7 +9,7 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
     <style>
         .dir-hero {
             min-height: 36vh;
@@ -163,7 +163,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
     <script>
         window.addEventListener('scroll', () => document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50));
         const hamburger = document.getElementById('hamburger');
@@ -173,6 +173,6 @@
         closeNav.addEventListener('click',  () => mobileNav.classList.remove('open'));
         function closeMobileNav() { mobileNav.classList.remove('open'); }
     </script>
-    <script src="security.js"></script>
+    <script src="security.js?v=2"></script>
 </body>
 </html>
