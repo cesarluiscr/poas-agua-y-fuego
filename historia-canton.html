@@ -395,24 +395,205 @@
 
         <!-- ARTÍCULOS HISTÓRICOS -->
         <div style="margin-top:4rem">
-            <div class="hist-section-header" style="margin-bottom:2rem">
-                <div class="hist-chapter-label">Artículos del Cantón</div>
+            <div class="hist-section-header" style="margin-bottom:2.5rem">
+                <div class="hist-chapter-label">Archivo del Cantón</div>
                 <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--historia-dark)">Episodios Históricos</h3>
                 <div class="hist-divider" style="margin-top:0.75rem"></div>
             </div>
-            <div class="hist-cards-grid" style="max-width:800px;margin:0 auto">
-                <a href="guerra-civil-poasena.html" style="text-decoration:none">
-                    <div class="hist-card" style="border-top:4px solid #8B2020;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 40px rgba(139,32,32,0.18)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-                        <div class="hist-card-body">
-                            <div class="hist-card-icon">⚔️</div>
-                            <div class="hist-card-title" style="color:#8B2020">La Guerra Civil Poaseña</div>
-                            <div class="hist-card-text">1925–1931 · La fascinante y trágica historia de la guerra fratricida que sumió al cantón en años de violencia, miedo y diáspora. Un episodio que un velo de leyenda nunca ha terminado de descorrer.</div>
-                            <div style="margin-top:1rem;color:#8B2020;font-size:0.82rem;font-weight:700;letter-spacing:0.05em">Leer artículo completo →</div>
+
+            <!-- TARJETA HISTÓRICA: GUERRA CIVIL -->
+            <div style="max-width:680px;margin:0 auto">
+                <a href="guerra-civil-poasena.html" style="text-decoration:none;display:block">
+                    <div class="gc-article-card" onmouseover="this.classList.add('gc-hovered')" onmouseout="this.classList.remove('gc-hovered')">
+
+                        <!-- Sello de archivo -->
+                        <div class="gc-stamp">ARCHIVO<br>HISTÓRICO</div>
+
+                        <!-- Cabecera estilo periódico antiguo -->
+                        <div class="gc-card-masthead">
+                            <div class="gc-card-rule-top"></div>
+                            <div class="gc-card-pub">Crónicas del Cantón de Poás · Alajuela, Costa Rica</div>
+                            <div class="gc-card-rule-double"></div>
+                        </div>
+
+                        <!-- Titular -->
+                        <div class="gc-card-headline">
+                            La Guerra Civil<br><span class="gc-card-headline-em">Poaseña</span>
+                        </div>
+
+                        <!-- Subtítulo de prensa -->
+                        <div class="gc-card-deck">Una Espiral de Violencia Fratricida que Sacudió al Cantón · 1925–1931</div>
+
+                        <div class="gc-card-rule-thin"></div>
+
+                        <!-- Cuerpo en columnas -->
+                        <div class="gc-card-body-cols">
+                            <p class="gc-card-body-text">
+                                <span class="gc-dropcap">H</span>ubo una conjunción de muchos factores: divergencias políticas y religiosas, ansias de poder, caudillismo, negocios frustrados, intrigas y defensa del honor. Alberto "Chele" Murillo, dueño de la planta hidroeléctrica, y el clan "mama Chica" de El Alto se enfrentaron en una guerra que paralizó al pueblo entero.
+                            </p>
+                            <p class="gc-card-body-text">
+                                Desde los disparos en la casa cural de 1923 hasta la muerte de Marcos Rodríguez en 1931, Poás vivió años de toque de queda, crímenes y diáspora. Un velo de leyenda cubre aún hoy a esta época oscura.
+                            </p>
+                        </div>
+
+                        <!-- Pie de tarjeta -->
+                        <div class="gc-card-footer">
+                            <div class="gc-card-rule-thin"></div>
+                            <div class="gc-card-footer-inner">
+                                <span class="gc-card-tag">⚔️ Conflicto Cantonal</span>
+                                <span class="gc-card-tag">📅 1925 – 1931</span>
+                                <span class="gc-card-readmore">Leer crónica completa →</span>
+                            </div>
                         </div>
                     </div>
                 </a>
             </div>
         </div>
+
+        <style>
+            .gc-article-card {
+                position: relative;
+                background:
+                    radial-gradient(ellipse at 10% 90%, rgba(100,60,10,0.12) 0%, transparent 55%),
+                    radial-gradient(ellipse at 90% 10%, rgba(80,40,5,0.10) 0%, transparent 55%),
+                    linear-gradient(160deg, #f7eecf 0%, #efe0b0 40%, #e8d498 100%);
+                border: 2px solid #8b6914;
+                box-shadow:
+                    inset 0 0 0 5px rgba(139,105,20,0.18),
+                    0 8px 40px rgba(30,15,0,0.22),
+                    4px 4px 0 rgba(100,60,10,0.12);
+                padding: 2.2rem 2.4rem 1.6rem;
+                cursor: pointer;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                overflow: visible;
+                /* Bordes con efecto pergamino */
+                border-radius: 3px;
+            }
+            .gc-article-card::before,
+            .gc-article-card::after {
+                content: '';
+                position: absolute;
+                top: 8px; bottom: 8px; left: 8px; right: 8px;
+                border: 1px solid rgba(139,105,20,0.35);
+                border-radius: 2px;
+                pointer-events: none;
+            }
+            .gc-article-card::after {
+                top: 12px; bottom: 12px; left: 12px; right: 12px;
+                border-color: rgba(139,105,20,0.18);
+            }
+            .gc-article-card.gc-hovered {
+                transform: translateY(-5px) rotate(-0.3deg);
+                box-shadow:
+                    inset 0 0 0 5px rgba(139,105,20,0.22),
+                    0 18px 55px rgba(30,15,0,0.28),
+                    6px 6px 0 rgba(100,60,10,0.15);
+            }
+
+            /* Sello de archivo */
+            .gc-stamp {
+                position: absolute;
+                top: 1.2rem; right: 1.6rem;
+                border: 3px solid rgba(139,32,32,0.65);
+                color: rgba(139,32,32,0.65);
+                font-size: 0.58rem; font-weight: 900;
+                letter-spacing: 0.18em; text-transform: uppercase;
+                text-align: center; line-height: 1.5;
+                padding: 0.4rem 0.6rem;
+                border-radius: 4px;
+                transform: rotate(8deg);
+                font-family: 'Outfit', sans-serif;
+                background: transparent;
+                pointer-events: none;
+                z-index: 2;
+            }
+
+            /* Cabecera periódico */
+            .gc-card-masthead { text-align: center; margin-bottom: 1rem; }
+            .gc-card-rule-top {
+                height: 3px;
+                background: linear-gradient(to right, transparent, #5a3a08, #8b6914, #5a3a08, transparent);
+                margin-bottom: 0.45rem;
+            }
+            .gc-card-pub {
+                font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+                color: #5a3a08; font-family: 'Outfit', sans-serif; font-weight: 600;
+            }
+            .gc-card-rule-double {
+                height: 4px;
+                border-top: 1px solid #8b6914;
+                border-bottom: 1px solid #8b6914;
+                margin-top: 0.45rem;
+            }
+            .gc-card-rule-thin {
+                height: 1px;
+                background: linear-gradient(to right, transparent, #8b6914, transparent);
+                margin: 0.75rem 0;
+            }
+
+            /* Titular estilo periódico */
+            .gc-card-headline {
+                font-family: 'Playfair Display', serif;
+                font-size: clamp(1.9rem, 5vw, 3rem);
+                font-weight: 700; line-height: 1.05;
+                color: #1a0a00; text-align: center;
+                margin-bottom: 0.5rem;
+                text-shadow: 1px 1px 0 rgba(100,60,10,0.15);
+            }
+            .gc-card-headline-em {
+                font-style: italic; color: #6b2020;
+            }
+            .gc-card-deck {
+                text-align: center; font-size: 0.8rem; font-weight: 600;
+                letter-spacing: 0.06em; text-transform: uppercase;
+                color: #4a2808; font-family: 'Outfit', sans-serif;
+                margin-bottom: 0.2rem;
+            }
+
+            /* Cuerpo en 2 columnas */
+            .gc-card-body-cols {
+                column-count: 2; column-gap: 1.5rem;
+                column-rule: 1px solid rgba(139,105,20,0.35);
+            }
+            .gc-card-body-text {
+                font-size: 0.875rem; line-height: 1.8;
+                color: #2a1500; text-align: justify;
+                margin-bottom: 0;
+                font-family: 'Outfit', sans-serif;
+                break-inside: avoid;
+            }
+            .gc-dropcap {
+                float: left;
+                font-family: 'Playfair Display', serif;
+                font-size: 3.2rem; line-height: 0.78;
+                margin: 0.05rem 0.3rem 0 0;
+                color: #6b2020; font-weight: 700;
+            }
+
+            /* Pie de tarjeta */
+            .gc-card-footer-inner {
+                display: flex; align-items: center; justify-content: space-between;
+                flex-wrap: wrap; gap: 0.5rem;
+            }
+            .gc-card-tag {
+                font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em;
+                color: #5a3a08; font-family: 'Outfit', sans-serif;
+                background: rgba(139,105,20,0.12); padding: 0.2rem 0.6rem;
+                border-radius: 3px; border: 1px solid rgba(139,105,20,0.3);
+            }
+            .gc-card-readmore {
+                font-size: 0.78rem; font-weight: 700; color: #6b2020;
+                letter-spacing: 0.04em; font-family: 'Outfit', sans-serif;
+                margin-left: auto;
+            }
+
+            /* Responsive */
+            @media (max-width: 580px) {
+                .gc-article-card { padding: 1.5rem 1.3rem 1.2rem; }
+                .gc-card-body-cols { column-count: 1; }
+                .gc-stamp { top: 0.8rem; right: 0.9rem; font-size: 0.52rem; }
+            }
+        </style>
 
     </div>
 </section>
