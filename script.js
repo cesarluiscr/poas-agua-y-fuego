@@ -200,19 +200,18 @@ document.addEventListener('DOMContentLoaded', () => {
             imagenes: ["img/macrobiotica_presagio_banner.jpg"]
         },
         {
-            id: 2,
-            nombre: "Productos de Limpieza Don Luis",
+            id: 5,
+            nombre: "Distribuidora de Productos para Limpieza",
             categoria: "servicio",
             emoji: "🧴",
-            descripcion: "Venta de productos de limpieza para el hogar y empresas. Atención personalizada por Luis Murillo Vargas.",
-            descripcion_en: "Cleaning products for homes and businesses. Personalized service by Luis Murillo Vargas.",
+            descripcion: "Distribución de productos de limpieza para su vehículo, residencia, instituciones, hoteles, fábricas y oficinas. Propietario: Luis Murillo.",
+            descripcion_en: "Cleaning products distributor for vehicles, homes, institutions, hotels, factories and offices. Owner: Luis Murillo.",
             whatsapp: "50689944301",
             telefono: "24486412",
-            facebook: "https://www.facebook.com/luis.murillovargas.7?locale=es_LA",
             correo: "lamva55@hotmail.com",
-            direccion: "Cantón de Poás",
+            direccion: "Cantón de Poás, Alajuela",
             bannerAncho: true,
-            imagenes: ["img/limpieza_don_luis_banner.jpg"]
+            imagenes: ["img/distribuidora_limpieza_banner.jpg"]
         }
     ];
 

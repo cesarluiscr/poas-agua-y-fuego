@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Guerra Civil Poaseña 1925–1931 | Historia de Poás</title>
+    <meta name="description" content="La fascinante y trágica historia de la guerra fratricida poaseña de la década de 1920, que sumió al cantón en años de violencia, miedo y diáspora.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gc-dark:   #0D0A08;
+            --gc-brown:  #2C1A0A;
+            --gc-red:    #8B2020;
+            --gc-gold:   #C8952A;
+            --gc-cream:  #F5EDD8;
+            --gc-light:  #FFF8EE;
+            --gc-text:   #2a1800;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: var(--gc-light); color: var(--gc-text); }
+
+        /* ── NAV ── */
+        .gc-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(13,10,8,0.95); backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.85rem 2rem;
+        }
+        .gc-nav-logo { color: var(--gc-gold); font-weight: 700; font-size: 1rem; text-decoration: none; }
+        .gc-nav-breadcrumb {
+            display: flex; align-items: center; gap: 0.4rem;
+            font-size: 0.82rem; color: rgba(255,255,255,0.55);
+        }
+        .gc-nav-breadcrumb a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+        .gc-nav-breadcrumb a:hover { color: var(--gc-gold); }
+        .gc-nav-breadcrumb span { color: rgba(255,255,255,0.3); }
+
+        /* ── HERO ── */
+        .gc-hero {
+            min-height: 100vh;
+            background:
+                linear-gradient(to bottom, rgba(13,10,8,0.65) 0%, rgba(44,26,10,0.4) 50%, rgba(13,10,8,0.85) 100%),
+                url('img/centro_poas.jpg') center/cover no-repeat fixed;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 7rem 2rem 5rem;
+            position: relative;
+        }
+        .gc-hero-era {
+            background: var(--gc-red); color: #fff;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em;
+            text-transform: uppercase; padding: 0.35rem 1.2rem; border-radius: 99px;
+            margin-bottom: 1.5rem; display: inline-block;
+        }
+        .gc-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 7vw, 5.5rem);
+            color: #fff; line-height: 1.1; margin-bottom: 1rem;
+        }
+        .gc-hero h1 em { color: var(--gc-gold); font-style: italic; }
+        .gc-hero-subtitle {
+            color: rgba(255,255,255,0.82); font-size: clamp(1rem, 2vw, 1.2rem);
+            max-width: 660px; line-height: 1.75; margin-bottom: 2rem;
+        }
+        .gc-hero-dates {
+            display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;
+        }
+        .gc-hero-date {
+            background: rgba(200,149,42,0.12); border: 1px solid rgba(200,149,42,0.35);
+            color: var(--gc-gold); padding: 0.5rem 1.3rem; border-radius: 8px;
+            font-size: 0.88rem; font-weight: 600;
+        }
+        .gc-scroll-hint {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,0.4); font-size: 0.78rem; text-align: center;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+        /* ── CONTENEDOR ── */
+        .gc-container { max-width: 880px; margin: 0 auto; padding: 0 1.5rem; }
+
+        /* ── SECCIÓN BASE ── */
+        .gc-section { padding: 5rem 2rem; }
+        .gc-section:nth-child(even) { background: var(--gc-cream); }
+        .gc-section:nth-child(odd)  { background: var(--gc-light); }
+
+        .gc-section-header { text-align: center; margin-bottom: 3rem; }
+        .gc-chapter-label {
+            color: var(--gc-gold); font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem;
+        }
+        .gc-section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            color: var(--gc-brown); margin-bottom: 0.75rem;
+        }
+        .gc-divider { width: 60px; height: 3px; background: var(--gc-red); margin: 0 auto; }
+
+        /* ── INTRO OSCURA ── */
+        .gc-intro {
+            background: var(--gc-dark); padding: 5rem 2rem; color: #fff;
+        }
+        .gc-intro-inner { max-width: 800px; margin: 0 auto; }
+        .gc-quote-block {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 2.2vw, 1.55rem);
+            font-style: italic; color: var(--gc-gold);
+            padding: 1.5rem 2rem; border-left: 3px solid var(--gc-red);
+            background: rgba(139,32,32,0.1); border-radius: 0 10px 10px 0;
+            margin-bottom: 2.5rem; line-height: 1.7;
+        }
+        .gc-intro-text {
+            color: rgba(255,255,255,0.78); font-size: 1.02rem; line-height: 1.85;
+            margin-bottom: 1.2rem;
+        }
+
+        /* ── PERSONAJES ── */
+        .gc-chars-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .gc-char-card {
+            background: #fff; border-radius: 14px;
+            border-top: 4px solid var(--gc-red);
+            padding: 1.5rem; box-shadow: 0 4px 18px rgba(26,15,0,0.08);
+        }
+        .gc-char-card.gold-top { border-top-color: var(--gc-gold); }
+        .gc-char-card.brown-top { border-top-color: var(--gc-brown); }
+        .gc-char-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+        .gc-char-name {
+            font-family: 'Playfair Display', serif; font-size: 1.05rem;
+            color: var(--gc-brown); margin-bottom: 0.4rem;
+        }
+        .gc-char-role { color: var(--gc-gold); font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem; }
+        .gc-char-desc { color: #5a3a18; font-size: 0.88rem; line-height: 1.65; }
+
+        /* ── TEXTO NARRATIVO ── */
+        .gc-narrative { max-width: 780px; margin: 0 auto; }
+        .gc-narrative p {
+            color: #3a2208; font-size: 1rem; line-height: 1.9;
+            margin-bottom: 1.4rem; text-align: justify;
+        }
+        .gc-narrative p:first-of-type::first-letter {
+            float: left; font-family: 'Playfair Display', serif;
+            font-size: 4rem; line-height: 0.75; margin: 0.1rem 0.5rem 0 0;
+            color: var(--gc-red); font-weight: 700;
+        }
+        .gc-narrative h3 {
+            font-family: 'Playfair Display', serif; font-size: 1.35rem;
+            color: var(--gc-brown); margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem; border-bottom: 2px solid var(--gc-cream);
+        }
+
+        /* ── TIMELINE ── */
+        .gc-timeline {
+            position: relative; padding-left: 2.5rem;
+            border-left: 3px solid var(--gc-red);
+            display: flex; flex-direction: column; gap: 2.5rem;
+            max-width: 760px; margin: 0 auto;
+        }
+        .gc-timeline-item { position: relative; }
+        .gc-timeline-dot {
+            position: absolute; left: -2.9rem; top: 0.3rem;
+            width: 16px; height: 16px; border-radius: 50%;
+            background: var(--gc-red); border: 3px solid var(--gc-light);
+            box-shadow: 0 0 0 2px var(--gc-red);
+        }
+        .gc-timeline-year {
+            color: var(--gc-red); font-weight: 700; font-size: 0.85rem;
+            letter-spacing: 0.08em; margin-bottom: 0.25rem;
+        }
+        .gc-timeline-title {
+            font-family: 'Playfair Display', serif; font-size: 1.1rem;
+            color: var(--gc-brown); margin-bottom: 0.5rem;
+        }
+        .gc-timeline-text { color: #4a3010; font-size: 0.93rem; line-height: 1.75; }
+        .gc-timeline-badge {
+            display: inline-block; background: var(--gc-red); color: #fff;
+            font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+            text-transform: uppercase; padding: 0.2rem 0.7rem; border-radius: 99px;
+            margin-bottom: 0.4rem;
+        }
+        .gc-timeline-badge.neutral { background: var(--gc-brown); }
+
+        /* ── BLOQUE CITA INLINE ── */
+        .gc-pullquote {
+            background: var(--gc-dark); border-radius: 14px; padding: 2rem 2.5rem;
+            margin: 2.5rem 0;
+        }
+        .gc-pullquote blockquote {
+            font-family: 'Playfair Display', serif; font-style: italic;
+            font-size: clamp(1rem, 2vw, 1.3rem); color: var(--gc-gold); line-height: 1.7;
+        }
+        .gc-pullquote cite { display: block; color: rgba(255,255,255,0.5); font-size: 0.82rem; margin-top: 0.75rem; font-style: normal; }
+
+        /* ── CONSECUENCIAS ── */
+        .gc-impact-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;
+        }
+        .gc-impact-card {
+            background: #fff; border-radius: 14px; padding: 1.5rem;
+            border-left: 4px solid var(--gc-red);
+            box-shadow: 0 4px 16px rgba(26,15,0,0.07);
+        }
+        .gc-impact-card.info { border-left-color: var(--gc-gold); }
+        .gc-impact-icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
+        .gc-impact-title { font-weight: 700; color: var(--gc-brown); margin-bottom: 0.4rem; font-size: 0.95rem; }
+        .gc-impact-text { color: #5a3a18; font-size: 0.87rem; line-height: 1.65; }
+
+        /* ── FUENTES ── */
+        .gc-sources {
+            background: var(--gc-brown); color: rgba(255,255,255,0.75);
+            padding: 3rem 2rem; text-align: center;
+        }
+        .gc-sources h3 { font-family: 'Playfair Display', serif; color: var(--gc-gold); font-size: 1.2rem; margin-bottom: 1rem; }
+        .gc-sources p { font-size: 0.88rem; line-height: 1.7; max-width: 660px; margin: 0 auto; }
+        .gc-sources p + p { margin-top: 0.5rem; }
+
+        /* ── NAVEGACIÓN INFERIOR ── */
+        .gc-nav-bottom {
+            background: var(--gc-dark); padding: 3rem 2rem; text-align: center;
+        }
+        .gc-nav-bottom p { color: rgba(255,255,255,0.45); font-size: 0.85rem; margin-bottom: 1.25rem; }
+        .gc-nav-bottom-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .gc-nav-btn {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.65rem 1.4rem; border-radius: 8px; font-size: 0.88rem; font-weight: 600;
+            text-decoration: none; transition: all 0.2s;
+        }
+        .gc-nav-btn.back { background: rgba(200,149,42,0.12); color: var(--gc-gold); border: 1px solid rgba(200,149,42,0.3); }
+        .gc-nav-btn.back:hover { background: rgba(200,149,42,0.2); }
+        .gc-nav-btn.home { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.1); }
+        .gc-nav-btn.home:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 680px) {
+            .gc-nav-breadcrumb { display: none; }
+            .gc-hero { background-attachment: scroll; }
+            .gc-section { padding: 3.5rem 1.25rem; }
+            .gc-intro { padding: 3rem 1.25rem; }
+            .gc-quote-block { padding: 1rem 1.25rem; }
+            .gc-narrative p:first-of-type::first-letter { font-size: 3rem; }
+            .gc-timeline { padding-left: 1.75rem; }
+            .gc-pullquote { padding: 1.25rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVEGACIÓN -->
+<nav class="gc-nav">
+    <a href="index.html" class="gc-nav-logo">🌋 Poás Agua y Fuego</a>
+    <div class="gc-nav-breadcrumb">
+        <a href="historia-canton.html">Historia del Cantón</a>
+        <span>›</span>
+        <span>La Guerra Civil Poaseña</span>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="gc-hero">
+    <div class="gc-hero-era">⚔️ Episodios del Cantón · 1925 – 1931</div>
+    <h1>La Guerra Civil<br><em>Poaseña</em></h1>
+    <p class="gc-hero-subtitle">
+        La fascinante y trágica historia de la guerra fratricida que sumió al cantón de Poás en años de violencia, miedo, exilio y desgracia —un capítulo oscuro que un velo de leyenda nunca ha terminado de descorrer.
+    </p>
+    <div class="gc-hero-dates">
+        <div class="gc-hero-date">📅 1925 · Inicio del conflicto</div>
+        <div class="gc-hero-date">⚰️ 1928 · Asesinato de Alberto Chele</div>
+        <div class="gc-hero-date">🕊️ 1931 · Fin trágico</div>
+    </div>
+    <div class="gc-scroll-hint">↓ Leer historia</div>
+</header>
+
+<!-- INTRO OSCURA -->
+<section class="gc-intro">
+    <div class="gc-container">
+        <div class="gc-intro-inner">
+            <div class="gc-quote-block">
+                "¿Por qué razón nuestro pueblo se vio sumido en una espiral de violencia fratricida, prácticamente una guerra civil, entre 1925 y 1931?"
+            </div>
+            <p class="gc-intro-text">
+                Hubo una conjunción de muchos factores que podría explicar lo ocurrido: <strong style="color:#ffd080">divergencias políticas y religiosas, ansias de poder, caudillismo, negocios frustrados, intrigas, injurias y calumnias, defensa del honor, delitos y crímenes, ignorancia e inconsciencia.</strong>
+            </p>
+            <p class="gc-intro-text">
+                Lo que sigue es un relato basado en los testimonios de don Eliécer Murillo Esquivel —quien fue muy reservado y trata de justificar las acciones por el alcoholismo y la ira— complementado con la interpretación del historiador Percy Rodríguez Argüello y algunos detalles adicionales. Las verdaderas razones siguen sin estar del todo claras, y un velo de leyenda cubre a la época.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- PERSONAJES PRINCIPALES -->
+<section class="gc-section" id="personajes">
+    <div class="gc-container">
+        <div class="gc-section-header">
+            <div class="gc-chapter-label">Los Protagonistas</div>
+            <h2 class="gc-section-title">Personajes Principales</h2>
+            <div class="gc-divider"></div>
+        </div>
+        <div class="gc-chars-grid">
+            <div class="gc-char-card">
+                <div class="gc-char-icon">⚡</div>
+                <div class="gc-char-name">Alberto "Chele" Murillo</div>
+                <div class="gc-char-role">El Caudillo de El Bajo</div>
+                <div class="gc-char-desc">Dueño de la planta hidroeléctrica del cantón. Su finca era un legítimo feudo y sus empleados le eran totalmente fieles. Figura central del conflicto.</div>
+            </div>
+            <div class="gc-char-card gold-top">
+                <div class="gc-char-icon">🌾</div>
+                <div class="gc-char-name">Elicio Murillo Arrieta</div>
+                <div class="gc-char-role">Clan "Mama Chica" · El Alto</div>
+                <div class="gc-char-desc">Vecino de El Alto, miembro del clan de los "mama Chica" —apodados así por ser hijos de Francisca Arrieta. Su negocio fallido con Alberto Chele detonó la guerra abierta.</div>
+            </div>
+            <div class="gc-char-card brown-top">
+                <div class="gc-char-icon">⛪</div>
+                <div class="gc-char-name">Padre Venancio Oña</div>
+                <div class="gc-char-role">Cura Español · San Pedro</div>
+                <div class="gc-char-desc">Sacerdote español que utilizaba el púlpito para atacar a sus adversarios políticos. Su relación tensa con Alberto Chele fue el primer eslabón de la cadena de conflictos.</div>
+            </div>
+            <div class="gc-char-card">
+                <div class="gc-char-icon">🔫</div>
+                <div class="gc-char-name">Marcos Rodríguez</div>
+                <div class="gc-char-role">El Vengador</div>
+                <div class="gc-char-desc">Hermano de Hernán Rodríguez. Ejecutó a Alberto Chele en la feria de Alajuela en 1928. Perseguido por años, su destino final fue trágico: murió por su propia mano en 1931.</div>
+            </div>
+            <div class="gc-char-card gold-top">
+                <div class="gc-char-icon">📖</div>
+                <div class="gc-char-name">Eliécer Murillo Esquivel</div>
+                <div class="gc-char-role">Testigo y Cronista</div>
+                <div class="gc-char-desc">Narrador de los hechos en décadas posteriores. Testigo directo de la época, fue reservado en sus relatos y tendió a explicar los sucesos por el alcoholismo y los arrebatos de ira.</div>
+            </div>
+            <div class="gc-char-card brown-top">
+                <div class="gc-char-icon">🏇</div>
+                <div class="gc-char-name">Ricardo Conejo</div>
+                <div class="gc-char-role">Sobrino de Alberto Chele</div>
+                <div class="gc-char-desc">Sobrino de Alberto Chele. Disparó contra la casa cural desde un caballo en las elecciones de 1923, provocando la maldición y partida del Padre Oña.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ANTECEDENTES -->
+<section class="gc-section" id="antecedentes">
+    <div class="gc-container">
+        <div class="gc-section-header">
+            <div class="gc-chapter-label">Capítulo I</div>
+            <h2 class="gc-section-title">Las Semillas del Conflicto</h2>
+            <div class="gc-divider"></div>
+        </div>
+        <div class="gc-narrative">
+            <p>
+                Al inicio de la década de los veinte, Alberto "Chele" Murillo era el dueño de la planta hidroeléctrica del cantón y vivía en "El Bajo". Su finca era un legítimo feudo y sus empleados le eran totalmente fieles. Pero las divergencias políticas con el cura español Venancio Oña —quien utilizaba el púlpito para atacar a sus adversarios políticos— alejaron a Alberto Chele de "El Alto" y sus vecinos.
+            </p>
+            <p>
+                En una ocasión, el Padre Oña mató a su amada cabra para agasajar con un festín a Alberto Echandi —candidato presidencial en 1923— y el hecho fue ridiculizado en caricaturas de los periódicos de la época. El Padre Oña no era amigo ni de Alberto Chele ni de su gente, entre ellos el abogado apoderado de la municipalidad de Poás.
+            </p>
+
+            <div class="gc-pullquote">
+                <blockquote>"Estando dicho abogado en Poás, le robaron su caballo y lo encerraron en los predios del Padre Oña. Al día siguiente, amaneció trasquilada la bestia… pero no la del abogado, sino la del padre Oña."</blockquote>
+                <cite>— Relato de don Eliécer Murillo Esquivel</cite>
+            </div>
+
+            <p>
+                El Padre maldijo: <em>"La mano culpable de este atropello habrá de caer."</em> En los días posteriores, en un accidente en un trapiche, se le trituró la mano a Chepe Chaves, quien había sido peón de Alberto Chele. Este hecho sirvió para alimentar la imaginación y las habladurías de los poaseños.
+            </p>
+            <h3>El Disparo de las Elecciones</h3>
+            <p>
+                El día de las elecciones de 1923, entre el licor y la emoción, Ricardo Conejo —sobrino de Alberto Chele— disparó contra la casa cural desde un caballo. El Padre Oña abandonó inmediatamente y para siempre a Poás, luego de maldecirlo.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="gc-section" style="background:var(--gc-cream);" id="hechos">
+    <div class="gc-container">
+        <div class="gc-section-header">
+            <div class="gc-chapter-label">Capítulo II</div>
+            <h2 class="gc-section-title">Cronología del Conflicto</h2>
+            <div class="gc-divider"></div>
+            <p style="color:#5a3a18;margin-top:1.25rem;font-size:0.97rem;line-height:1.7;max-width:580px;margin-inline:auto">
+                De la promesa rota al último disparo —seis años que partieron en dos la historia del cantón.
+            </p>
+        </div>
+
+        <div class="gc-timeline">
+            <div class="gc-timeline-item">
+                <div class="gc-timeline-dot"></div>
+                <div class="gc-timeline-badge neutral">Antecedente · 1923</div>
+                <div class="gc-timeline-title">El Disparo contra la Casa Cural</div>
+                <div class="gc-timeline-text">En las elecciones de 1923, Ricardo Conejo dispara contra la casa cural desde un caballo. El Padre Venancio Oña abandona Poás para siempre maldiciendo al pueblo. Las tensiones entre "El Bajo" y "El Alto" se profundizan.</div>
+            </div>
+
+            <div class="gc-timeline-item">
+                <div class="gc-timeline-dot"></div>
+                <div class="gc-timeline-badge">Crisis · 1926</div>
+                <div class="gc-timeline-title">El Negocio Fallido y la Guerra Declarada</div>
+                <div class="gc-timeline-text">Alberto Chele le ofrece a Elicio Murillo Arrieta comprar su finca, pues le interesaba una paja de agua con catarata para una planta eléctrica más potente. Quedaron en verse en Alajuela (1926), pero Elicio no llegó. Alberto no perdonó la burla. Días después, una bala casi alcanza a Alberto Chele en su mecedora —apenas la esquivó al mecerse. La guerra estaba declarada.</div>
+            </div>
+
+            <div class="gc-timeline-item">
+                <div class="gc-timeline-dot"></div>
+                <div class="gc-timeline-badge">1926 · Escalada</div>
+                <div class="gc-timeline-title">Los Alambres y el Disparo a Elicio</div>
+                <div class="gc-timeline-text">Alberto le prohibió el paso por su finca a Elicio, quien hizo caso omiso pues ese atajo le ahorraba caminar una gran distancia. El camino fue cerrado con alambres; Elicio los quitó. Más adelante fue herido de bala en el abdomen y trasladado muy delicado a una clínica en San José, donde se salvó de morir. Se insinuó a Ricardo Conejo como autor, pero nunca hubo pruebas. Los Murillo Arrieta se enardecieron; Alberto Chele les cortó el suministro eléctrico.</div>
+            </div>
+
+            <div class="gc-timeline-item">
+                <div class="gc-timeline-dot"></div>
+                <div class="gc-timeline-badge">1926 · Terror</div>
+                <div class="gc-timeline-title">Toque de Queda y Polarización del Pueblo</div>
+                <div class="gc-timeline-text">La tensión fue creciendo y la comandancia de Alajuela ordenó reforzar la policía poaseña. Se volvieron comunes los pleitos en las cantinas que terminaban con balazos por el menor motivo. Se declaró el toque de queda. El pueblo entero se polarizó. Disminuyó el turismo y muchas familias se vieron obligadas a migrar —la llamada Diáspora Poaseña— hacia Tilarán de Guanacaste, Cot de Oreamuno y otros lugares.</div>
+            </div>
+
+            <div class="gc-timeline-item">
+                <div class="gc-timeline-dot"></div>
+                <div class="gc-timeline-badge">22–23 mayo 1926</div>
+                <div class="gc-timeline-title">La Muerte de Danilo Murillo</div>
+                <div class="gc-timeline-text">En la noche del sábado 22 al domingo 23 de mayo de 1926, los dos bandos se encontraban en una cantina. A las diez de la noche llegó el toque de queda. Una hora y media después, se encontraron armados frente a la esquina sureste del parque de San Pedro. En la confusión de la oscuridad, una bala alcanzó el cuello de Danilo Murillo, sobrino de Alberto Chele, quien murió en el lugar. Los rumores apuntaron a Marcos Rodríguez o a Lalo Murillo como autores. Hernán Rodríguez y Lalo huyeron de Poás.</div>
+            </div>
+
+            <div class="gc-timeline-item">
+                <div class="gc-timeline-dot"></div>
+                <div class="gc-timeline-badge">30–31 dic. 1927</div>
+                <div class="gc-timeline-title">La Emboscada en El Tajo</div>
+                <div class="gc-timeline-text">Elicio Murillo trabajaba como capataz de una cuadrilla de peones en la construcción de la carretera de Poás a Alajuela. Fueron emboscados en el camino: desde lo alto de "El Tajo" dispararon contra el grupo. Elicio se salvó, pero Filadelfo "El Negro Pepo" Simpson y Lalo Murillo fueron heridos de muerte. El rumor apuntó a Lindor Salazar, peón de Alberto Chele, como autor del doble crimen.</div>
+            </div>
+
+            <div class="gc-timeline-item">
+                <div class="gc-timeline-dot"></div>
+                <div class="gc-timeline-badge">31 enero 1928</div>
+                <div class="gc-timeline-title">Muerte de Alberto "Chele" Murillo</div>
+                <div class="gc-timeline-text">El día de la feria del dulce en Alajuela, Alberto Chele se encontraba al costado este del mercado. Un jinete lo mató a sangre fría; uno de los presentes recibió un disparo en la mejilla. El jinete fue Marcos Rodríguez, hermano de Hernán. Hernán se declaró culpable para proteger a su hermano menor, pero luego se demostró que no podía haber sido él.</div>
+            </div>
+
+            <div class="gc-timeline-item">
+                <div class="gc-timeline-dot"></div>
+                <div class="gc-timeline-badge">1928 – 1931 · Epílogo</div>
+                <div class="gc-timeline-title">La Fuga y el Final de Marcos Rodríguez</div>
+                <div class="gc-timeline-text">Marcos Rodríguez huyó, pasó por La Maravilla y Santa Bárbara donde abandonó el caballo. Se dice que estuvo fuera del país. Con los años volvió a su pueblo y se mantuvo relativamente escondido, hasta que la noche del 3 de enero de 1931 fue reconocido en la fiesta de bodas de Lucía Solís y Elías Carballo. Detenido y llevado preso a Alajuela, le dijo al jefe político: <em>"Pedidle a Dios que nunca salga libre."</em></div>
+            </div>
+
+            <div class="gc-timeline-item">
+                <div class="gc-timeline-dot"></div>
+                <div class="gc-timeline-badge">3 setiembre 1931</div>
+                <div class="gc-timeline-title">El Último Acto: Muerte de Marcos Rodríguez</div>
+                <div class="gc-timeline-text">En la noche del 3 de septiembre de 1931, Marcos se escapó de la cárcel. En la puerta del presidio estaba un centinela que se opuso a su huida. Según Percy Rodríguez, Marcos se suicidó porque prefirió morir antes que asesinar a un amigo. El capítulo más oscuro de la historia poaseña llegaba a su fin.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- NARRATIVA FINAL -->
+<section class="gc-section" id="consecuencias">
+    <div class="gc-container">
+        <div class="gc-section-header">
+            <div class="gc-chapter-label">Capítulo III</div>
+            <h2 class="gc-section-title">Consecuencias e Impacto</h2>
+            <div class="gc-divider"></div>
+        </div>
+
+        <div class="gc-impact-grid" style="margin-bottom:3rem">
+            <div class="gc-impact-card">
+                <div class="gc-impact-icon">🏃</div>
+                <div class="gc-impact-title">La Diáspora Poaseña</div>
+                <div class="gc-impact-text">Muchas familias poaseñas se vieron forzadas a abandonar el cantón. Las principales destinos fueron Tilarán de Guanacaste y Cot de Oreamuno, entre otros pueblos.</div>
+            </div>
+            <div class="gc-impact-card info">
+                <div class="gc-impact-icon">📉</div>
+                <div class="gc-impact-title">Deterioro Económico y Turístico</div>
+                <div class="gc-impact-text">El toque de queda, la inseguridad y el desprestigio provocaron una caída notable del turismo y la actividad comercial en el cantón, especialmente en San Pedro.</div>
+            </div>
+            <div class="gc-impact-card">
+                <div class="gc-impact-icon">⚡</div>
+                <div class="gc-impact-title">El Fin del Feudo Eléctrico</div>
+                <div class="gc-impact-text">Con la muerte de Alberto Chele Murillo desapareció el control familiar sobre la planta hidroeléctrica, que había sido el eje del poder económico y político del conflicto.</div>
+            </div>
+            <div class="gc-impact-card info">
+                <div class="gc-impact-icon">🌫️</div>
+                <div class="gc-impact-title">Un Velo de Leyenda</div>
+                <div class="gc-impact-text">Las verdaderas razones y detalles del conflicto siguen sin estar claros. El silencio generacional y las versiones parciales construyeron una historia envuelta en misterio.</div>
+            </div>
+        </div>
+
+        <div class="gc-narrative">
+            <h3>El Pueblo Polarizado</h3>
+            <p>
+                Poás se vio envuelto en una época sombría, de terror, caos y desprestigio, sobre todo para San Pedro. La polarización del pueblo en dos bandos —"El Bajo" y "El Alto"— no fue solo un conflicto entre familias: fue un enfrentamiento de proyectos políticos, económicos y personales que involucró a casi toda la comunidad.
+            </p>
+            <p>
+                La tensión fue tan grande que la comandancia de Alajuela tuvo que reforzar la policía poaseña. Se volvieron comunes los pleitos en cantinas que terminaban con balazos por el menor motivo. El toque de queda era una realidad cotidiana que aterrorizaba a la población.
+            </p>
+            <h3>Reflexión Final</h3>
+            <p>
+                Décadas después, testigos como don Eliécer Murillo Esquivel —muy reservado en sus relatos— y el historiador Percy Rodríguez intentaron reconstruir los hechos. Pero la memoria es selectiva, y lo que queda de esta historia es una mezcla de hechos verificables, testimonios parciales y leyendas que el tiempo ha ido confundiendo.
+            </p>
+            <p>
+                Lo que sí es claro es que Poás, como tantos pueblos costarricenses de la época, no estuvo exento de las pasiones humanas más intensas: el honor, la venganza, el poder y la muerte. Y que de esa oscuridad emergió, con los años, el cantón próspero, hospitalario y natural que conocemos hoy.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- FUENTES -->
+<div class="gc-sources">
+    <div class="gc-container">
+        <h3>📚 Fuentes y Créditos</h3>
+        <p>Este artículo fue elaborado a partir de los relatos orales de <strong>don Eliécer Murillo Esquivel</strong>, testigo directo de la época, y complementado con la investigación histórica del cronista <strong>Percy Rodríguez Argüello</strong>.</p>
+        <p style="margin-top:0.6rem">Documento base: <em>«Guerra civil poaseña: 1925–1931»</em> · Estudio Municipal del Cantón de Poás.</p>
+        <p style="margin-top:0.6rem;color:rgba(255,255,255,0.4);font-size:0.8rem">Transcripción y adaptación web: Poás Agua y Fuego · 2026</p>
+    </div>
+</div>
+
+<!-- NAVEGACIÓN INFERIOR -->
+<div class="gc-nav-bottom">
+    <p>¿Le interesa la historia del cantón?</p>
+    <div class="gc-nav-bottom-links">
+        <a href="historia-canton.html" class="gc-nav-btn back">← Volver a Historia del Cantón</a>
+        <a href="index.html" class="gc-nav-btn home">🌋 Ir al Inicio</a>
+    </div>
+</div>
+
+<script src="security.js?v=3"></script>
+</body>
+</html>
