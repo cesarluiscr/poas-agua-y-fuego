@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +6,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>Eventos  Poás Agua y Fuego</title>
+    <title>Eventos – Poás Agua y Fuego</title>
     <meta name="description" content="Eventos culturales, deportivos y comunitarios del cantón de Poás, Costa Rica.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -14,7 +14,7 @@
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <link rel="stylesheet" href="style.css?v=2">
     <style>
-        /* -- Hero -- */
+        /* ── Hero ── */
         .eventos-hero {
             min-height: 36vh;
             background: linear-gradient(135deg, #1a0533 0%, #3d1068 50%, #0E5E6F 100%);
@@ -30,12 +30,12 @@
         .eventos-hero h1 span { color: var(--clr-turquoise); }
         .eventos-hero p { color: rgba(255,255,255,0.75); font-size: 1.1rem; margin-top: 0.75rem; max-width: 580px; margin-inline: auto; }
 
-        /* -- Main -- */
+        /* ── Main ── */
         .eventos-main { background: #F4F8F8; padding: 4rem 0 6rem; }
         .eventos-back { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--clr-turquoise); text-decoration: none; font-weight: 600; font-size: 0.95rem; margin-bottom: 2.5rem; transition: opacity 0.2s; }
         .eventos-back:hover { opacity: 0.75; }
 
-        /* -- Toolbar -- */
+        /* ── Toolbar ── */
         .eventos-toolbar {
             display: flex; flex-wrap: wrap; gap: 1rem;
             align-items: center; justify-content: space-between;
@@ -60,14 +60,14 @@
         }
         .btn-add-evento:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
-        /* -- Grid -- */
+        /* ── Grid ── */
         .eventos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
-        /* -- Tarjeta -- */
+        /* ── Tarjeta ── */
         .evento-card {
             background: #fff; border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.07);
@@ -141,14 +141,14 @@
         }
         .btn-ev-delete:hover { background: #FECACA; }
 
-        /* -- Sin eventos -- */
+        /* ── Sin eventos ── */
         .no-eventos {
             grid-column: 1/-1; text-align: center;
             padding: 4rem 2rem; color: #888; font-size: 1rem;
         }
         .no-eventos .no-ev-icon { font-size: 3.5rem; display: block; margin-bottom: 1rem; }
 
-        /* -- Modal -- */
+        /* ── Modal ── */
         .modal-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,0.55);
             display: flex; align-items: center; justify-content: center;
@@ -194,7 +194,7 @@
         }
         .btn-modal-save:hover { filter: brightness(1.1); }
 
-        /* -- PIN Modal -- */
+        /* ── PIN Modal ── */
         .pin-modal {
             background: #fff; border-radius: 20px; width: 100%; max-width: 340px;
             padding: 2rem; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
@@ -212,7 +212,7 @@
         .pin-input:focus { outline: none; border-color: var(--clr-turquoise); }
         .pin-error { color: #DC2626; font-size: 0.85rem; margin-top: 0.5rem; display: none; }
 
-        /* -- Lang -- */
+        /* ── Lang ── */
         @media (max-width: 600px) {
             .modal-grid { grid-template-columns: 1fr; }
             .eventos-toolbar { flex-direction: column; align-items: flex-start; }
@@ -225,14 +225,14 @@
     <!-- Open Graph / Redes Sociales -->
     <meta property="og:type"        content="website">
     <meta property="og:url"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/eventos.html">
-    <meta property="og:title"       content="Eventos del Cantón  Poás Agua y Fuego">
+    <meta property="og:title"       content="Eventos del Cantón – Poás Agua y Fuego">
     <meta property="og:description" content="Actividades culturales, deportivas y comunitarias en el cantón de Poás.">
     <meta property="og:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/qr_poas.jpg">
     <meta property="og:image:width"  content="800">
     <meta property="og:image:height" content="800">
     <!-- Twitter Card -->
     <meta name="twitter:card"        content="summary_large_image">
-    <meta name="twitter:title"       content="Eventos del Cantón  Poás Agua y Fuego">
+    <meta name="twitter:title"       content="Eventos del Cantón – Poás Agua y Fuego">
     <meta name="twitter:description" content="Actividades culturales, deportivas y comunitarias en el cantón de Poás.">
     <meta name="twitter:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/qr_poas.jpg">
 </head>
@@ -257,7 +257,7 @@
     </nav>
 
     <div class="mobile-nav" id="mobileNav">
-        <button class="close-btn" id="closeNav">?</button>
+        <button class="close-btn" id="closeNav">✕</button>
         <a href="index.html"                 onclick="closeMobileNav()">Inicio</a>
         <a href="index.html#agua"            onclick="closeMobileNav()">Patrimonio Hídrico</a>
         <a href="directorio-comercial.html"  onclick="closeMobileNav()" style="text-align:center;white-space:normal;line-height:1.3;">Directorio Turístico y<br>Comercial</a>
@@ -265,13 +265,13 @@
         <a href="eventos.html"               onclick="closeMobileNav()">Eventos</a>
         <a href="plan-regulador.html"        onclick="closeMobileNav()">Plan Regulador</a>
         <a href="index.html#contacto"        onclick="closeMobileNav()">Contacto</a>
-        <a href="eventos-en.html"            onclick="closeMobileNav()">???? English</a>
+        <a href="eventos-en.html"            onclick="closeMobileNav()">🇺🇸 English</a>
     </div>
 
     <!-- Hero -->
     <div class="eventos-hero">
         <div class="eventos-hero-content">
-            <h1>?? <span>Eventos</span> del Cantón</h1>
+            <h1>📅 <span>Eventos</span> del Cantón</h1>
             <p>Actividades culturales, deportivas y comunitarias en Poás.</p>
         </div>
     </div>
@@ -279,16 +279,16 @@
     <!-- Main -->
     <section class="eventos-main">
         <div class="container">
-            <a href="index.html" class="eventos-back">? Volver al inicio</a>
+            <a href="index.html" class="eventos-back">← Volver al inicio</a>
 
             <div class="eventos-toolbar">
                 <div class="eventos-filters">
                     <button class="ev-filter-btn active" data-filter="all">Todos</button>
-                    <button class="ev-filter-btn" data-filter="cultural">?? Cultural</button>
-                    <button class="ev-filter-btn" data-filter="deportivo">? Deportivo</button>
-                    <button class="ev-filter-btn" data-filter="comunidad">?? Comunidad</button>
-                    <button class="ev-filter-btn" data-filter="gastronomia">??? Gastronomía</button>
-                    <button class="ev-filter-btn" data-filter="educacion">?? Educación</button>
+                    <button class="ev-filter-btn" data-filter="cultural">🎭 Cultural</button>
+                    <button class="ev-filter-btn" data-filter="deportivo">⚽ Deportivo</button>
+                    <button class="ev-filter-btn" data-filter="comunidad">🤝 Comunidad</button>
+                    <button class="ev-filter-btn" data-filter="gastronomia">🍽️ Gastronomía</button>
+                    <button class="ev-filter-btn" data-filter="educacion">📚 Educación</button>
                 </div>
                 <button class="btn-add-evento" id="btnAddEvento">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M12 5v14M5 12h14"/></svg>
@@ -303,9 +303,9 @@
     <!-- Modal: PIN -->
     <div class="modal-overlay" id="pinOverlay">
         <div class="pin-modal">
-            <h2>?? Acceso Admin</h2>
+            <h2>🔒 Acceso Admin</h2>
             <p>Ingresá el PIN para agregar o eliminar eventos.</p>
-            <input type="password" class="pin-input" id="pinInput" maxlength="6" placeholder="? ? ? ?">
+            <input type="password" class="pin-input" id="pinInput" maxlength="6" placeholder="● ● ● ●">
             <p class="pin-error" id="pinError">PIN incorrecto. Intentá de nuevo.</p>
             <div class="modal-actions">
                 <button class="btn-modal-cancel" id="btnPinCancel">Cancelar</button>
@@ -317,7 +317,7 @@
     <!-- Modal: Formulario nuevo evento -->
     <div class="modal-overlay" id="eventoModal">
         <div class="modal">
-            <h2>? Nuevo Evento</h2>
+            <h2>➕ Nuevo Evento</h2>
             <form id="eventoForm">
                 <div class="modal-grid">
                     <div class="modal-field full">
@@ -340,12 +340,12 @@
                         <label>Categoría *</label>
                         <select id="evCategoria" required>
                             <option value="">Seleccioná una categoría</option>
-                            <option value="cultural">?? Cultural</option>
-                            <option value="deportivo">? Deportivo</option>
-                            <option value="comunidad">?? Comunidad</option>
-                            <option value="gastronomia">??? Gastronomía</option>
-                            <option value="educacion">?? Educación</option>
-                            <option value="otro">?? Otro</option>
+                            <option value="cultural">🎭 Cultural</option>
+                            <option value="deportivo">⚽ Deportivo</option>
+                            <option value="comunidad">🤝 Comunidad</option>
+                            <option value="gastronomia">🍽️ Gastronomía</option>
+                            <option value="educacion">📚 Educación</option>
+                            <option value="otro">📌 Otro</option>
                         </select>
                     </div>
                     <div class="modal-field full">
@@ -385,7 +385,7 @@
     </footer>
 
     <script>
-        // -- Nav ------------------------------------------------------
+        // ── Nav ──────────────────────────────────────────────────────
         window.addEventListener('scroll', () =>
             document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50));
         const hamburger = document.getElementById('hamburger');
@@ -395,42 +395,42 @@
         closeNav.addEventListener('click',  () => mobileNav.classList.remove('open'));
         function closeMobileNav() { mobileNav.classList.remove('open'); }
 
-        // -- Config ---------------------------------------------------
+        // ── Config ───────────────────────────────────────────────────
         const ADMIN_PIN  = '7703';
         const STORAGE_KEY = 'poas_eventos';
 
-        // -- Eventos fijos (siempre se muestran) ----------------------
+        // ── Eventos fijos (siempre se muestran) ──────────────────────
         const DEFAULT_EVENTOS = [
             {
                 id: 'default-ina-ingles-2026',
                 titulo: 'Curso de Inglés Básico con Herramientas Tecnológicas',
                 categoria: 'educacion',
                 fecha: '2026-04-22',
-                hora: '2:30 pm  5:15 pm',
+                hora: '2:30 pm – 5:15 pm',
                 lugar: 'Municipalidad de Poás (sesión informativa 26 mar)',
-                descripcion: '25 cupos disponibles. Lunes, miércoles y viernes. Inicio de lecciones: 22 de abril 2026. Plataforma TEAMS con profesor en vivo. Inscripciones en línea: www.inainscripcioncursos.ac.cr  Código: 790455. Sesión informativa el 26 de marzo 2026 a las 9:00 am en la Municipalidad de Poás. Presentar original y copia del título mínimo noveno año, portar bolígrafo.',
+                descripcion: '25 cupos disponibles. Lunes, miércoles y viernes. Inicio de lecciones: 22 de abril 2026. Plataforma TEAMS con profesor en vivo. Inscripciones en línea: www.inainscripcioncursos.ac.cr — Código: 790455. Sesión informativa el 26 de marzo 2026 a las 9:00 am en la Municipalidad de Poás. Presentar original y copia del título mínimo noveno año, portar bolígrafo.',
                 imagen: 'img/ina_curso_ingles.jpeg',
                 _default: true
             }
         ];
 
-        // -- Estado ---------------------------------------------------
+        // ── Estado ───────────────────────────────────────────────────
         const _userEventos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
         let eventos = [...DEFAULT_EVENTOS, ..._userEventos.filter(e => !e._default)];
         let filtroActual = 'all';
         let pendingAction = null;           // 'add' | 'delete'
         let pendingDeleteId = null;
 
-        // -- Guardar --------------------------------------------------
+        // ── Guardar ──────────────────────────────────────────────────
         function saveEventos() {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(eventos.filter(e => !e._default)));
         }
 
-        // -- Renderizar -----------------------------------------------
+        // ── Renderizar ───────────────────────────────────────────────
         const catLabels = {
-            cultural: '?? Cultural', deportivo: '? Deportivo',
-            comunidad: '?? Comunidad', gastronomia: '??? Gastronomía',
-            educacion: '?? Educación', otro: '?? Otro'
+            cultural: '🎭 Cultural', deportivo: '⚽ Deportivo',
+            comunidad: '🤝 Comunidad', gastronomia: '🍽️ Gastronomía',
+            educacion: '📚 Educación', otro: '📌 Otro'
         };
 
         function formatFecha(fechaStr) {
@@ -451,7 +451,7 @@
             if (lista.length === 0) {
                 grid.innerHTML = `
                     <div class="no-eventos">
-                        <span class="no-ev-icon">??</span>
+                        <span class="no-ev-icon">📅</span>
                         <p>No hay eventos en esta categoría.<br>¡Sé el primero en agregar uno!</p>
                     </div>`;
                 return;
@@ -484,13 +484,13 @@
                         ${ev.descripcion ? `<p class="evento-desc">${ev.descripcion}</p>` : ''}
                     </div>
                     <div class="evento-card-footer">
-                        <button class="btn-ev-delete" onclick="confirmarEliminar('${ev.id}')">?? Eliminar</button>
+                        <button class="btn-ev-delete" onclick="confirmarEliminar('${ev.id}')">🗑 Eliminar</button>
                     </div>
                 </div>
             `).join('');
         }
 
-        // -- Filtros --------------------------------------------------
+        // ── Filtros ──────────────────────────────────────────────────
         document.querySelectorAll('.ev-filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.ev-filter-btn').forEach(b => b.classList.remove('active'));
@@ -500,7 +500,7 @@
             });
         });
 
-        // -- PIN Modal ------------------------------------------------
+        // ── PIN Modal ────────────────────────────────────────────────
         const pinOverlay = document.getElementById('pinOverlay');
         const pinInput   = document.getElementById('pinInput');
         const pinError   = document.getElementById('pinError');
@@ -538,7 +538,7 @@
             }
         }
 
-        // -- Agregar Evento -------------------------------------------
+        // ── Agregar Evento ───────────────────────────────────────────
         document.getElementById('btnAddEvento').addEventListener('click', () => abrirPin('add'));
 
         document.getElementById('btnEventoCancel').addEventListener('click', () => {
@@ -563,7 +563,7 @@
             document.getElementById('eventoForm').reset();
         });
 
-        // -- Eliminar -------------------------------------------------
+        // ── Eliminar ─────────────────────────────────────────────────
         function confirmarEliminar(id) { abrirPin('delete', id); }
 
         function eliminarEvento(id) {
@@ -572,20 +572,20 @@
             renderEventos();
         }
 
-        // -- Cerrar modales al hacer clic afuera ----------------------
+        // ── Cerrar modales al hacer clic afuera ──────────────────────
         [pinOverlay, document.getElementById('eventoModal')].forEach(overlay => {
             overlay.addEventListener('click', e => {
                 if (e.target === overlay) overlay.classList.remove('open');
             });
         });
 
-        // -- Init -----------------------------------------------------
+        // ── Init ─────────────────────────────────────────────────────
         renderEventos();
 
         // Lightbox para imágenes de eventos
         document.body.insertAdjacentHTML('beforeend', `
             <div id="ev-lightbox">
-                <button id="ev-lightbox-close" aria-label="Cerrar">?</button>
+                <button id="ev-lightbox-close" aria-label="Cerrar">✕</button>
                 <img id="ev-lightbox-img" src="" alt="">
             </div>
         `);
