@@ -80,33 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Dynamic Hero effects based on mouse position (Desktop only)
-    const hero = document.querySelector('.hero');
-    const fireSide = document.querySelector('.hero-fire');
-    const waterSide = document.querySelector('.hero-water');
-
-    if (window.innerWidth > 768 && hero && fireSide && waterSide) {
-        hero.addEventListener('mousemove', (e) => {
-            const width = window.innerWidth;
-            const mouseX = e.clientX;
-
-            // Calculate percentage (0 to 100)
-            let percentage = (mouseX / width) * 100;
-
-            // Limit the shifting so one side doesn't disappear completely
-            if (percentage < 20) percentage = 20;
-            if (percentage > 80) percentage = 80;
-
-            fireSide.style.flex = percentage;
-            waterSide.style.flex = 100 - percentage;
-        });
-
-        hero.addEventListener('mouseleave', () => {
-            // Reset to 50/50 when mouse leaves
-            fireSide.style.flex = '1';
-            waterSide.style.flex = '1';
-        });
-    }
 
     // Lightbox Logic
     const lightbox = document.getElementById('lightbox');
