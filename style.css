@@ -2873,6 +2873,143 @@ footer {
     .historia-banner-title { font-size: 1.8rem; }
 }
 
+/* ==========================================
+   Banner Seguridad Ciudadana
+   ========================================== */
+.seguridad-banner-section {
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 1rem;
+    text-align: center;
+    isolation: isolate;
+}
+
+.seguridad-banner-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+        #070E2B 0%,
+        #0D1B3E 30%,
+        #132060 60%,
+        #0D1B3E 80%,
+        #070E2B 100%);
+    z-index: 0;
+}
+
+.seguridad-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(63,94,251,0.22) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 70% at 85% 100%, rgba(26,35,126,0.30) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    z-index: 1;
+}
+
+/* Anillos de radar pulsantes */
+.seguridad-banner-radar {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.seguridad-banner-radar span {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 1px solid rgba(99,131,255,0.35);
+    animation: scRadar 4.5s infinite ease-out;
+}
+.seguridad-banner-radar span:nth-child(1) { animation-delay: 0s; }
+.seguridad-banner-radar span:nth-child(2) { animation-delay: 1.5s; }
+.seguridad-banner-radar span:nth-child(3) { animation-delay: 3s; }
+@keyframes scRadar {
+    0%   { transform: scale(0.8); opacity: 0.8; }
+    100% { transform: scale(5);   opacity: 0;   }
+}
+
+/* Línea decorativa superior */
+.seguridad-banner-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #5C6BC0, rgba(255,255,255,0.4), #5C6BC0, transparent);
+    z-index: 3;
+}
+
+.seguridad-banner-content {
+    position: relative;
+    z-index: 4;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.seguridad-banner-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #90CAF9;
+    border: 1px solid rgba(144,202,249,0.35);
+    border-radius: 30px;
+    padding: 0.35rem 1.25rem;
+    margin-bottom: 1.5rem;
+    background: rgba(144,202,249,0.08);
+}
+
+.seguridad-banner-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    margin: 0 0 1.25rem;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+}
+.seguridad-banner-title em {
+    font-style: italic;
+    color: #90CAF9;
+}
+
+.seguridad-banner-sub {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.04em;
+    margin: 0 0 2.5rem;
+}
+
+.seguridad-banner-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: linear-gradient(135deg, #3F5EFB, #1A237E);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.9rem 2.2rem;
+    border-radius: 50px;
+    box-shadow: 0 6px 30px rgba(63,94,251,0.45);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+.seguridad-banner-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 40px rgba(63,94,251,0.65), 0 0 0 6px rgba(63,94,251,0.12);
+}
+
+@media (max-width: 600px) {
+    .seguridad-banner-section { padding: 3.5rem 1rem; }
+    .seguridad-banner-title { font-size: 1.8rem; }
+}
+
 /* ═══════════════════════════════════════════════════
    RESPONSIVE GLOBAL — MEJORAS COMPLETAS
    Corrige desbordamientos, tipografía y grids
