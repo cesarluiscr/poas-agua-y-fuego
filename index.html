@@ -30,6 +30,25 @@
     <meta name="twitter:title"       content="Poás Agua y Fuego">
     <meta name="twitter:description" content="Plataforma informativa del cantón de Poás, Costa Rica. Patrimonio hídrico, turismo, directorio comercial y más.">
     <meta name="twitter:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/qr_poas.jpg">
+    <!-- Logo hero responsive (inline para evitar caché del CDN) -->
+    <style>
+        @media (max-width: 768px) {
+            .hero-site-logo {
+                top: 1.2rem !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: 115px !important;
+                height: 115px !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-site-logo {
+                width: 95px !important;
+                height: 95px !important;
+                top: 1rem !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
