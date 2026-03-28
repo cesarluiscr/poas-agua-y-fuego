@@ -1103,7 +1103,7 @@ footer {
     transform: translateY(-2px);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
     .quejas-form .form-row { grid-template-columns: 1fr; }
     .quejas-form-section { padding: 1.75rem 1.25rem; }
 }
