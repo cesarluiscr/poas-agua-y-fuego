@@ -5,259 +5,168 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seguridad Ciudadana – Poás Agua y Fuego</title>
     <meta name="description" content="Lineamientos para la formación de grupos comunitarios de vigilancia vecinal en el cantón de Poás, Costa Rica.">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <link rel="stylesheet" href="style.css?v=2">
 
     <style>
         :root {
-            --sc-navy:    #0D1B3E;
+            --sc-navy:    #070E2B;
             --sc-blue:    #1A237E;
             --sc-blue-lt: #283593;
-            --sc-indigo:  #3949AB;
-            --sc-accent:  #5C6BC0;
-            --sc-gold:    #FFD54F;
-            --sc-bg:      #F3F6FB;
+            --sc-indigo:  #3F5EFB;
+            --sc-sky:     #90CAF9;
             --sc-border:  #DDE3F0;
             --sc-text:    #1E293B;
-            --sc-muted:   #64748B;
         }
 
         * { box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; color: var(--sc-text); background: #fff; }
+        body { font-family: 'Inter', sans-serif; color: var(--sc-text); background: #F3F6FB; }
 
-        /* ── HERO ── */
+        /* ══════════════════════════════
+           HERO — mismo estilo que el banner
+        ══════════════════════════════ */
         .sc-hero {
             position: relative;
-            min-height: 50vh;
+            min-height: 52vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 9rem 1.5rem 5rem;
+            padding: 9rem 1.5rem 5.5rem;
             overflow: hidden;
-            background: var(--sc-navy);
+            isolation: isolate;
         }
-        .sc-hero::before {
-            content: '';
+
+        /* Capa 1: fondo navy */
+        .sc-hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg,
+                #070E2B 0%,
+                #0D1B3E 30%,
+                #132060 60%,
+                #0D1B3E 80%,
+                #070E2B 100%);
+            z-index: 0;
+        }
+
+        /* Capa 2: gradientes radiales + patrón */
+        .sc-hero-overlay {
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(90,110,220,0.28) 0%, transparent 65%),
-                radial-gradient(ellipse 50% 70% at 90% 100%, rgba(57,73,171,0.20) 0%, transparent 60%);
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(63,94,251,0.22) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 70% at 85% 100%, rgba(26,35,126,0.30) 0%, transparent 60%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 1;
         }
-        .sc-hero::after {
-            content: '';
+
+        /* Capa 3: anillos de radar */
+        .sc-hero-radar {
             position: absolute;
             inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 2;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        .sc-hero-radar span {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 1px solid rgba(99,131,255,0.35);
+            animation: scRadarPage 4.5s infinite ease-out;
+        }
+        .sc-hero-radar span:nth-child(1) { animation-delay: 0s; }
+        .sc-hero-radar span:nth-child(2) { animation-delay: 1.5s; }
+        .sc-hero-radar span:nth-child(3) { animation-delay: 3s; }
+        @keyframes scRadarPage {
+            0%   { transform: scale(0.8); opacity: 0.8; }
+            100% { transform: scale(5.5); opacity: 0; }
+        }
+
+        /* Línea decorativa superior */
+        .sc-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #5C6BC0, rgba(255,255,255,0.4), #5C6BC0, transparent);
+            z-index: 5;
+        }
+
+        /* Contenido del hero */
         .sc-hero-inner {
             position: relative;
-            z-index: 2;
-            max-width: 780px;
+            z-index: 4;
+            max-width: 760px;
         }
-        .sc-hero-eyebrow {
+        .sc-hero-badge {
             display: inline-block;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: var(--sc-gold);
-            background: rgba(255,213,79,0.1);
-            border: 1px solid rgba(255,213,79,0.25);
-            border-radius: 20px;
-            padding: 0.3rem 1rem;
-            margin-bottom: 1.25rem;
+            color: var(--sc-sky);
+            border: 1px solid rgba(144,202,249,0.35);
+            border-radius: 30px;
+            padding: 0.35rem 1.25rem;
+            margin-bottom: 1.5rem;
+            background: rgba(144,202,249,0.08);
         }
         .sc-hero h1 {
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 5vw, 3.2rem);
-            font-weight: 800;
+            font-weight: 700;
             color: #fff;
-            line-height: 1.1;
-            margin: 0 0 1rem;
+            line-height: 1.15;
+            margin: 0 0 1.25rem;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.6);
         }
-        .sc-hero h1 em { color: var(--sc-gold); font-style: normal; }
+        .sc-hero h1 em {
+            font-style: italic;
+            color: var(--sc-sky);
+        }
         .sc-hero-sub {
-            font-size: clamp(0.95rem, 2vw, 1.1rem);
-            color: rgba(255,255,255,0.72);
-            max-width: 600px;
-            margin: 0 auto 2rem;
+            font-size: clamp(0.9rem, 2vw, 1.05rem);
+            color: rgba(255,255,255,0.62);
+            letter-spacing: 0.02em;
+            margin: 0 0 2rem;
             line-height: 1.65;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
-        .sc-hero-badges {
+        .sc-hero-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.6rem;
             justify-content: center;
         }
-        .sc-hero-badge {
+        .sc-hero-tag {
             font-size: 0.8rem;
             font-weight: 500;
-            background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.18);
-            color: rgba(255,255,255,0.85);
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.16);
+            color: rgba(255,255,255,0.82);
             border-radius: 20px;
             padding: 0.3rem 0.9rem;
         }
 
-        /* ── CONTENIDO ── */
+        /* ══════════════════════════════
+           ÁREA DE CONTENIDO
+        ══════════════════════════════ */
         .sc-content {
             max-width: 900px;
             margin: 0 auto;
             padding: 3.5rem 1.5rem 5rem;
         }
 
-        /* Intro */
-        .sc-intro {
-            background: linear-gradient(135deg, #EEF2FF, #E8EDF8);
-            border-left: 5px solid var(--sc-blue);
-            border-radius: 0 14px 14px 0;
-            padding: 1.75rem 2rem;
-            margin-bottom: 3rem;
-            font-size: 1.05rem;
-            color: #334155;
-            line-height: 1.7;
-        }
-
-        /* Sección */
-        .sc-section {
-            margin-bottom: 2.5rem;
-        }
-        .sc-section-header {
-            display: flex;
-            align-items: center;
-            gap: 0.9rem;
-            margin-bottom: 1.25rem;
-        }
-        .sc-section-num {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 2.2rem;
-            height: 2.2rem;
-            border-radius: 50%;
-            background: var(--sc-blue);
-            color: #fff;
-            font-weight: 700;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-        .sc-section h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--sc-navy);
-            margin: 0;
-        }
-        .sc-card {
-            background: #fff;
-            border: 1px solid var(--sc-border);
-            border-radius: 14px;
-            padding: 1.5rem 1.75rem;
-            box-shadow: 0 2px 10px rgba(13,27,62,0.05);
-        }
-        .sc-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.65rem;
-        }
-        .sc-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.7rem;
-            color: #334155;
-            line-height: 1.55;
-            font-size: 0.97rem;
-        }
-        .sc-list li::before {
-            content: '›';
-            color: var(--sc-indigo);
-            font-size: 1.2rem;
-            font-weight: 700;
-            line-height: 1.3;
-            flex-shrink: 0;
-        }
-
-        /* Sub-sección dentro de una card */
-        .sc-subsection-title {
-            font-weight: 700;
-            color: var(--sc-blue-lt);
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin: 1.25rem 0 0.75rem;
-        }
-        .sc-subsection-title:first-child { margin-top: 0; }
-
-        /* Tabla de roles */
-        .sc-table-wrap {
-            overflow-x: auto;
-            border-radius: 10px;
-            border: 1px solid var(--sc-border);
-            margin-top: 0.5rem;
-        }
-        .sc-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.93rem;
-        }
-        .sc-table thead th {
-            background: var(--sc-navy);
-            color: #fff;
-            padding: 0.8rem 1.2rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .sc-table tbody td {
-            padding: 0.8rem 1.2rem;
-            border-bottom: 1px solid var(--sc-border);
-            color: #334155;
-            vertical-align: top;
-        }
-        .sc-table tbody tr:last-child td { border-bottom: none; }
-        .sc-table tbody tr:nth-child(even) td { background: #F8FAFF; }
-        .sc-table tbody tr:hover td { background: #EEF2FF; }
-        .sc-table td:first-child { font-weight: 600; color: var(--sc-navy); white-space: nowrap; }
-
-        /* Tarjeta de advertencia / principios éticos */
-        .sc-warning-card {
-            background: linear-gradient(135deg, #FFF8E1, #FFFDE7);
-            border: 2px solid #FFD54F;
-            border-radius: 14px;
-            padding: 1.5rem 1.75rem;
-        }
-        .sc-warning-title {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-weight: 700;
-            font-size: 1rem;
-            color: #7C4F00;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-        }
-        .sc-warning-card .sc-list li::before { color: #D97706; }
-        .sc-warning-card .sc-list li { color: #5C3A00; }
-
-        /* Separador */
-        .sc-divider {
-            height: 2px;
-            background: linear-gradient(90deg, var(--sc-blue), rgba(90,110,220,0.1));
-            border-radius: 2px;
-            margin: 2.5rem 0;
-        }
-
-        /* Back link */
+        /* Link volver */
         .sc-back {
             display: inline-flex;
             align-items: center;
@@ -272,11 +181,182 @@
         .sc-back:hover { gap: 0.8rem; }
         .sc-back svg { width: 18px; height: 18px; }
 
+        /* Intro */
+        .sc-intro {
+            background: linear-gradient(135deg, #EEF2FF, #E8EDF8);
+            border-left: 5px solid var(--sc-blue);
+            border-radius: 0 14px 14px 0;
+            padding: 1.75rem 2rem;
+            margin-bottom: 3rem;
+            font-size: 1.03rem;
+            color: #334155;
+            line-height: 1.75;
+        }
+
+        /* Sección */
+        .sc-section { margin-bottom: 2.5rem; }
+
+        .sc-section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            margin-bottom: 1.25rem;
+        }
+        .sc-section-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sc-navy), var(--sc-blue));
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            box-shadow: 0 3px 10px rgba(26,35,126,0.35);
+        }
+        .sc-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--sc-navy);
+            margin: 0;
+        }
+
+        /* Card */
+        .sc-card {
+            background: #fff;
+            border: 1px solid var(--sc-border);
+            border-left: 4px solid var(--sc-blue);
+            border-radius: 0 14px 14px 0;
+            padding: 1.5rem 1.75rem;
+            box-shadow: 0 2px 14px rgba(13,27,62,0.06);
+        }
+
+        /* Lista */
+        .sc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+        .sc-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            color: #334155;
+            line-height: 1.6;
+            font-size: 0.97rem;
+        }
+        .sc-list li::before {
+            content: '›';
+            color: var(--sc-indigo);
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.3;
+            flex-shrink: 0;
+        }
+
+        /* Sub-título dentro de card */
+        .sc-subsection-title {
+            font-weight: 700;
+            color: var(--sc-blue-lt);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin: 1.25rem 0 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .sc-subsection-title:first-child { margin-top: 0; }
+        .sc-subsection-title::before {
+            content: '';
+            display: inline-block;
+            width: 18px;
+            height: 2px;
+            background: var(--sc-indigo);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        /* Tabla de roles */
+        .sc-table-wrap {
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid var(--sc-border);
+            margin-top: 0.5rem;
+        }
+        .sc-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.93rem;
+        }
+        .sc-table thead th {
+            background: linear-gradient(135deg, var(--sc-navy), var(--sc-blue));
+            color: #fff;
+            padding: 0.85rem 1.2rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+        .sc-table tbody td {
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid var(--sc-border);
+            color: #334155;
+            vertical-align: top;
+        }
+        .sc-table tbody tr:last-child td { border-bottom: none; }
+        .sc-table tbody tr:nth-child(even) td { background: #F8FAFF; }
+        .sc-table tbody tr:hover td { background: #EEF2FF; transition: background 0.15s; }
+        .sc-table td:first-child {
+            font-weight: 600;
+            color: var(--sc-navy);
+            white-space: nowrap;
+        }
+
+        /* Tarjeta ética / advertencia */
+        .sc-warning-card {
+            background: linear-gradient(135deg, #FFF8E1, #FFFDE7);
+            border: 2px solid #FFD54F;
+            border-radius: 14px;
+            padding: 1.5rem 1.75rem;
+        }
+        .sc-warning-title {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #7C4F00;
+            margin-bottom: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+        .sc-warning-card .sc-list li::before { color: #D97706; }
+        .sc-warning-card .sc-list li { color: #5C3A00; }
+
+        /* Separador */
+        .sc-divider {
+            height: 2px;
+            background: linear-gradient(90deg, var(--sc-blue), var(--sc-indigo), rgba(63,94,251,0.05));
+            border-radius: 2px;
+            margin: 2.5rem 0;
+        }
+
         /* Responsive */
         @media (max-width: 600px) {
+            .sc-hero { padding: 8rem 1rem 4rem; }
+            .sc-hero h1 { font-size: 1.9rem; }
             .sc-content { padding: 2rem 1.1rem 4rem; }
-            .sc-intro { padding: 1.25rem 1.25rem; font-size: 0.97rem; }
-            .sc-card { padding: 1.25rem 1.25rem; }
+            .sc-intro { padding: 1.25rem; font-size: 0.97rem; }
+            .sc-card { padding: 1.25rem; }
             .sc-table td:first-child { white-space: normal; }
         }
     </style>
@@ -317,16 +397,21 @@
 
 <!-- HERO -->
 <section class="sc-hero">
+    <div class="sc-hero-bg"></div>
+    <div class="sc-hero-overlay"></div>
+    <div class="sc-hero-radar">
+        <span></span><span></span><span></span>
+    </div>
     <div class="sc-hero-inner">
-        <div class="sc-hero-eyebrow">Municipalidad de Poás · Alajuela · Costa Rica</div>
+        <div class="sc-hero-badge">🛡️ Cantón de Poás · Alajuela · Costa Rica</div>
         <h1>Seguridad<br><em>Ciudadana</em></h1>
         <p class="sc-hero-sub">Lineamientos para la formación de grupos comunitarios de vigilancia vecinal: organización, protocolos de actuación y coordinación con las instituciones de seguridad pública.</p>
-        <div class="sc-hero-badges">
-            <span class="sc-hero-badge">🛡️ Prevención del Delito</span>
-            <span class="sc-hero-badge">🤝 Organización Vecinal</span>
-            <span class="sc-hero-badge">📋 Protocolos</span>
-            <span class="sc-hero-badge">⚖️ Marco Legal</span>
-            <span class="sc-hero-badge">📞 Coordinación Institucional</span>
+        <div class="sc-hero-tags">
+            <span class="sc-hero-tag">🛡️ Prevención del Delito</span>
+            <span class="sc-hero-tag">🤝 Organización Vecinal</span>
+            <span class="sc-hero-tag">📋 Protocolos</span>
+            <span class="sc-hero-tag">⚖️ Marco Legal</span>
+            <span class="sc-hero-tag">📞 Coordinación Institucional</span>
         </div>
     </div>
 </section>
@@ -434,7 +519,7 @@
             <h2>Capacitación</h2>
         </div>
         <div class="sc-card">
-            <p style="color:#334155;font-size:0.97rem;margin:0 0 1rem;">Gestionar con la Fuerza Pública o municipalidad talleres sobre:</p>
+            <p style="color:#475569;font-size:0.97rem;margin:0 0 1rem;">Gestionar con la Fuerza Pública o municipalidad talleres sobre:</p>
             <ul class="sc-list">
                 <li>Primeros auxilios básicos.</li>
                 <li>Técnicas de observación y reporte de incidentes.</li>
@@ -561,12 +646,10 @@
 </footer>
 
 <script>
-    // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
         navbar.classList.toggle('nav-scrolled', window.scrollY > 50);
     });
-    // Mobile nav
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobileNav');
     const closeNav  = document.getElementById('closeNav');
