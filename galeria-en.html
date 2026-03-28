@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canton Gallery | Poás Agua y Fuego</title>
+    <meta name="description" content="Photo gallery of the Canton of Poás, Alajuela, Costa Rica. Volcano, landscapes and community.">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --g-dark:  #080810;
+            --g-card:  #10101a;
+            --g-gold:  #C8952A;
+            --g-amber: #e8a83a;
+            --g-text:  rgba(255,255,255,0.88);
+            --g-muted: rgba(255,255,255,0.45);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--g-dark);
+            color: var(--g-text);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* ── HERO ── */
+        .g-hero {
+            position: relative;
+            height: 100vh; min-height: 560px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .g-hero-bg {
+            position: absolute; inset: 0;
+            background: url('img/erupcion_poas.jpg') center 40% / cover no-repeat;
+            transform: scale(1.06);
+            animation: heroZoom 18s ease-in-out infinite alternate;
+        }
+        @keyframes heroZoom {
+            from { transform: scale(1.06); }
+            to   { transform: scale(1.14); }
+        }
+        .g-hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(8,8,16,0.25) 0%,
+                rgba(8,8,16,0.15) 40%,
+                rgba(8,8,16,0.72) 80%,
+                rgba(8,8,16,1)    100%
+            );
+        }
+        .g-hero-content {
+            position: relative; z-index: 2;
+            padding: 0 1.5rem;
+        }
+        .g-hero-badge {
+            display: inline-block;
+            background: rgba(200,149,42,0.18);
+            border: 1px solid rgba(200,149,42,0.5);
+            color: var(--g-gold);
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            padding: 0.38rem 1.1rem; border-radius: 99px;
+            margin-bottom: 1.4rem;
+        }
+        .g-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 9vw, 7rem);
+            color: #fff; line-height: 1.05;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+        .g-hero h1 em { color: var(--g-gold); font-style: italic; }
+        .g-hero-sub {
+            color: rgba(255,255,255,0.7);
+            font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+            letter-spacing: 0.04em;
+        }
+        .g-hero-scroll {
+            position: absolute; bottom: 2.5rem; left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+            color: var(--g-muted); font-size: 0.72rem; letter-spacing: 0.12em;
+            text-transform: uppercase; z-index: 2;
+            animation: scrollBounce 2.2s ease-in-out infinite;
+        }
+        .g-hero-scroll::after {
+            content: '';
+            display: block; width: 1px; height: 36px;
+            background: linear-gradient(to bottom, rgba(200,149,42,0.6), transparent);
+        }
+        @keyframes scrollBounce {
+            0%,100% { transform: translateX(-50%) translateY(0); }
+            50%      { transform: translateX(-50%) translateY(6px); }
+        }
+
+        /* ── FILTROS ── */
+        .g-filters {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(8,8,16,0.88);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            display: flex; gap: 0.5rem; flex-wrap: wrap;
+            justify-content: center; padding: 1rem 1.5rem;
+        }
+        .g-filter-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.55);
+            padding: 0.42rem 1.1rem; border-radius: 99px;
+            font-size: 0.82rem; font-weight: 500;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer; transition: all 0.22s; letter-spacing: 0.03em;
+        }
+        .g-filter-btn:hover {
+            border-color: rgba(200,149,42,0.5);
+            color: var(--g-gold);
+        }
+        .g-filter-btn.active {
+            background: var(--g-gold);
+            border-color: var(--g-gold);
+            color: #0c0c14; font-weight: 700;
+            box-shadow: 0 0 18px rgba(200,149,42,0.35);
+        }
+
+        /* ── SECCIÓN ── */
+        .g-section {
+            padding: 4rem 1.5rem 2rem;
+            max-width: 1200px; margin: 0 auto;
+        }
+        .g-section-header {
+            display: flex; align-items: center; gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .g-section-line {
+            flex: 1; height: 1px;
+            background: linear-gradient(to right, rgba(200,149,42,0.5), transparent);
+        }
+        .g-section-label {
+            color: var(--g-gold); font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase; white-space: nowrap;
+        }
+        .g-section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2.1rem);
+            color: #fff; font-weight: 700;
+        }
+        .g-section-desc {
+            color: var(--g-muted); font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        /* ── GRID EDITORIAL ── */
+        .g-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 0.6rem;
+        }
+
+        .g-photo          { grid-column: span 4; }
+        .g-photo.col-6    { grid-column: span 6; }
+        .g-photo.col-8    { grid-column: span 8; }
+        .g-photo.col-12   { grid-column: span 12; }
+
+        .g-photo {
+            position: relative; overflow: hidden;
+            border-radius: 6px; cursor: pointer;
+            background: #18181f;
+        }
+        .g-photo-inner {
+            width: 100%; height: 100%;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+        }
+        .g-photo.col-12 .g-photo-inner { aspect-ratio: 21/8; }
+        .g-photo.col-8  .g-photo-inner { aspect-ratio: 16/7; }
+        .g-photo.col-6  .g-photo-inner { aspect-ratio: 16/9; }
+
+        .g-photo img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94),
+                        filter 0.3s ease;
+            filter: brightness(0.92);
+        }
+        .g-photo:hover img {
+            transform: scale(1.07);
+            filter: brightness(1.05);
+        }
+
+        .g-caption {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 1.8rem 1rem 0.8rem;
+            background: linear-gradient(to top, rgba(8,8,16,0.85) 0%, transparent 100%);
+            display: flex; align-items: flex-end; justify-content: space-between;
+        }
+        .g-caption-text {
+            font-size: 0.82rem; font-weight: 500;
+            color: rgba(255,255,255,0.88);
+            text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+            line-height: 1.3;
+        }
+        .g-caption-zoom {
+            width: 30px; height: 30px; border-radius: 50%;
+            background: rgba(200,149,42,0.2);
+            border: 1px solid rgba(200,149,42,0.4);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--g-gold); font-size: 0.75rem;
+            opacity: 0; transform: scale(0.8);
+            transition: opacity 0.2s, transform 0.2s;
+            flex-shrink: 0; margin-left: 0.6rem;
+        }
+        .g-photo:hover .g-caption-zoom {
+            opacity: 1; transform: scale(1);
+        }
+
+        .g-cat-tag {
+            position: absolute; top: 0.7rem; left: 0.7rem;
+            background: rgba(8,8,16,0.72);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.7); font-size: 0.65rem; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 0.22rem 0.65rem; border-radius: 99px;
+        }
+
+        /* ── DIVIDER ── */
+        .g-divider {
+            max-width: 1200px; margin: 2rem auto 0;
+            border: none; border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* ── LIGHTBOX ── */
+        .g-lb {
+            display: none; position: fixed; inset: 0; z-index: 9999;
+            background: rgba(4,4,10,0.97);
+            align-items: center; justify-content: center;
+            flex-direction: column;
+        }
+        .g-lb.active { display: flex; }
+
+        .g-lb-close {
+            position: fixed; top: 1.2rem; right: 1.4rem;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+            color: #fff; width: 40px; height: 40px; border-radius: 50%;
+            font-size: 1.3rem; cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+            transition: background 0.2s; z-index: 1;
+        }
+        .g-lb-close:hover { background: rgba(255,255,255,0.16); }
+
+        .g-lb-img-wrap {
+            flex: 1; display: flex; align-items: center; justify-content: center;
+            width: 100%; padding: 4rem 5rem 1rem;
+        }
+        .g-lb-img {
+            max-width: 100%; max-height: 80vh;
+            object-fit: contain; border-radius: 6px;
+            box-shadow: 0 20px 70px rgba(0,0,0,0.7);
+            transition: opacity 0.25s;
+        }
+        .g-lb-img.fading { opacity: 0; }
+
+        .g-lb-caption {
+            color: rgba(255,255,255,0.7); font-size: 0.9rem;
+            padding: 0.8rem 1.5rem 1.5rem; text-align: center;
+            font-family: 'Outfit', sans-serif;
+        }
+        .g-lb-counter {
+            color: var(--g-gold); font-size: 0.75rem;
+            letter-spacing: 0.1em; margin-bottom: 0.3rem;
+        }
+
+        .g-lb-arrow {
+            position: fixed; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.14);
+            color: rgba(255,255,255,0.7); width: 46px; height: 46px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; cursor: pointer; transition: all 0.2s;
+        }
+        .g-lb-arrow:hover { background: rgba(200,149,42,0.18); color: var(--g-gold); border-color: rgba(200,149,42,0.4); }
+        .g-lb-arrow.prev { left: 1.2rem; }
+        .g-lb-arrow.next { right: 1.2rem; }
+
+        .g-footer-spacer { height: 5rem; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 860px) {
+            .g-photo        { grid-column: span 6; }
+            .g-photo.col-6  { grid-column: span 6; }
+            .g-photo.col-8  { grid-column: span 12; }
+            .g-photo.col-12 { grid-column: span 12; }
+            .g-photo.col-12 .g-photo-inner { aspect-ratio: 16/7; }
+            .g-lb-img-wrap  { padding: 4rem 3.5rem 1rem; }
+        }
+        @media (max-width: 560px) {
+            .g-photo, .g-photo.col-6 { grid-column: span 12; }
+            .g-photo .g-photo-inner  { aspect-ratio: 4/3; }
+            .g-lb-img-wrap  { padding: 4rem 1rem 1rem; }
+            .g-lb-arrow     { display: none; }
+            .g-section      { padding: 3rem 1rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index-en.html" class="nav-logo">
+                <span class="logo-poas">Poás</span>
+                <span class="logo-agua"> Agua y </span>
+                <span class="logo-fuego">Fuego</span>
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index-en.html#patrimonio" onclick="closeMobileNav()">Hydrological Heritage</a></li>
+                <li><a href="directorio-comercial-en.html" onclick="closeMobileNav()" style="text-align:center;white-space:normal;line-height:1.3;">Tourism &amp; Business<br>Directory</a></li>
+                <li><a href="bolsa-empleo-en.html" onclick="closeMobileNav()">Jobs</a></li>
+                <li><a href="eventos-en.html" onclick="closeMobileNav()">Events</a></li>
+                <li><a href="plan-regulador-en.html" onclick="closeMobileNav()">Zoning Plan</a></li>
+                <li><a href="galeria-en.html" onclick="closeMobileNav()" class="active">Gallery</a></li>
+                <li><a href="index-en.html#comunidad" onclick="closeMobileNav()">Our Canton</a></li>
+                <li><a href="index-en.html#contacto" onclick="closeMobileNav()">Contact</a></li>
+                <li>
+                    <a href="galeria.html" class="lang-btn"><img class="flag-icon" src="https://flagcdn.com/16x12/cr.png" width="16" height="12" alt="CR"> Español</a>
+                    <a href="galeria-en.html" class="lang-btn active-lang" style="background:linear-gradient(135deg,#1A237E,#283593);"><img class="flag-icon" src="https://flagcdn.com/16x12/us.png" width="16" height="12" alt="US"> English</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="nav-overlay" id="navOverlay" onclick="closeMobileNav()"></div>
+
+    <!-- HERO -->
+    <header class="g-hero">
+        <div class="g-hero-bg"></div>
+        <div class="g-hero-overlay"></div>
+        <div class="g-hero-content">
+            <div class="g-hero-badge">📸 Visual Collection</div>
+            <h1>Canton<br><em>Gallery</em></h1>
+            <p class="g-hero-sub">Volcano · Landscapes · Community</p>
+        </div>
+        <div class="g-hero-scroll">Explore</div>
+    </header>
+
+    <!-- FILTERS -->
+    <div class="g-filters">
+        <button class="g-filter-btn active" onclick="filterGal(this,'all')">All</button>
+        <button class="g-filter-btn" onclick="filterGal(this,'volcan')">🌋 Volcano</button>
+        <button class="g-filter-btn" onclick="filterGal(this,'canton')">🏡 Canton</button>
+        <button class="g-filter-btn" onclick="filterGal(this,'naturaleza')">🌿 Nature</button>
+    </div>
+
+    <main>
+
+        <!-- VOLCANO -->
+        <section class="g-section" data-cat="volcan">
+            <div class="g-section-header">
+                <div>
+                    <div class="g-section-label">🌋 Volcano</div>
+                    <div class="g-section-title">Poás Volcano</div>
+                    <div class="g-section-desc">The active giant of Alajuela, one of the most visited volcanoes in Costa Rica.</div>
+                </div>
+                <div class="g-section-line"></div>
+            </div>
+            <div class="g-grid">
+                <div class="g-photo col-12" onclick="openLb(0)">
+                    <div class="g-photo-inner">
+                        <img src="img/erupcion_poas.jpg" alt="Poás Volcano Eruption" loading="lazy" style="object-position:center 40%">
+                    </div>
+                    <div class="g-cat-tag">Volcano</div>
+                    <div class="g-caption">
+                        <span class="g-caption-text">🌋 Poás Volcano Eruption</span>
+                        <div class="g-caption-zoom">⤢</div>
+                    </div>
+                </div>
+                <div class="g-photo col-8" onclick="openLb(1)">
+                    <div class="g-photo-inner">
+                        <img src="img/crateres_poas.jpg" alt="Aerial view — Main Crater and Laguna Botos" loading="lazy">
+                    </div>
+                    <div class="g-cat-tag">Volcano</div>
+                    <div class="g-caption">
+                        <span class="g-caption-text">🛩️ Main Crater &amp; Laguna Botos</span>
+                        <div class="g-caption-zoom">⤢</div>
+                    </div>
+                </div>
+                <div class="g-photo col-4" onclick="openLb(2)">
+                    <div class="g-photo-inner">
+                        <img src="img/crater_noche_poas.jpg" alt="Poás Volcano crater at night" loading="lazy" style="object-position:center 55%">
+                    </div>
+                    <div class="g-cat-tag">Volcano</div>
+                    <div class="g-caption">
+                        <span class="g-caption-text">🔥 Active crater — night</span>
+                        <div class="g-caption-zoom">⤢</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="g-divider">
+
+        <!-- CANTON -->
+        <section class="g-section" data-cat="canton">
+            <div class="g-section-header">
+                <div>
+                    <div class="g-section-label">🏡 Canton</div>
+                    <div class="g-section-title">Canton of Poás</div>
+                    <div class="g-section-desc">The heart of the canton: its people, its streets and its identity.</div>
+                </div>
+                <div class="g-section-line"></div>
+            </div>
+            <div class="g-grid">
+                <div class="g-photo col-8" onclick="openLb(3)">
+                    <div class="g-photo-inner">
+                        <img src="img/centro_poas.jpg" alt="Aerial view of Poás Town Center" loading="lazy">
+                    </div>
+                    <div class="g-cat-tag">Canton</div>
+                    <div class="g-caption">
+                        <span class="g-caption-text">🏙️ Poás Town Center</span>
+                        <div class="g-caption-zoom">⤢</div>
+                    </div>
+                </div>
+                <div class="g-photo col-4" onclick="openLb(4)">
+                    <div class="g-photo-inner">
+                        <img src="img/letrero_poas.jpg" alt="Poás sign with yellow corteza tree" loading="lazy">
+                    </div>
+                    <div class="g-cat-tag">Canton</div>
+                    <div class="g-caption">
+                        <span class="g-caption-text">🌳 Poás Sign</span>
+                        <div class="g-caption-zoom">⤢</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="g-divider">
+
+        <!-- NATURE -->
+        <section class="g-section" data-cat="naturaleza">
+            <div class="g-section-header">
+                <div>
+                    <div class="g-section-label">🌿 Nature</div>
+                    <div class="g-section-title">Biodiversity &amp; Landscapes</div>
+                    <div class="g-section-desc">Cloud forests, lagoons and the lush flora surrounding the volcano.</div>
+                </div>
+                <div class="g-section-line"></div>
+            </div>
+            <div class="g-grid">
+                <div class="g-photo col-6" onclick="openLb(5)">
+                    <div class="g-photo-inner">
+                        <img src="img/poas_vegetacion.jpg" alt="Cloud forest vegetation at Poás Volcano" loading="lazy">
+                    </div>
+                    <div class="g-cat-tag">Nature</div>
+                    <div class="g-caption">
+                        <span class="g-caption-text">🌿 Cloud Forest</span>
+                        <div class="g-caption-zoom">⤢</div>
+                    </div>
+                </div>
+                <div class="g-photo col-6" onclick="openLb(6)">
+                    <div class="g-photo-inner">
+                        <img src="img/laguna_fraijanes.jpg" alt="Fraijanes Lagoon, Poás" loading="lazy">
+                    </div>
+                    <div class="g-cat-tag">Nature</div>
+                    <div class="g-caption">
+                        <span class="g-caption-text">💧 Fraijanes Lagoon</span>
+                        <div class="g-caption-zoom">⤢</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="g-footer-spacer"></div>
+
+    </main>
+
+    <!-- LIGHTBOX -->
+    <div id="gLb" class="g-lb" onclick="lbBgClose(event)">
+        <button class="g-lb-close" onclick="closeLb()" aria-label="Close">✕</button>
+        <button class="g-lb-arrow prev" onclick="lbNav(-1)" aria-label="Previous">‹</button>
+        <button class="g-lb-arrow next" onclick="lbNav(+1)" aria-label="Next">›</button>
+        <div class="g-lb-img-wrap">
+            <img class="g-lb-img" id="gLbImg" src="" alt="">
+        </div>
+        <div class="g-lb-caption">
+            <div class="g-lb-counter" id="gLbCounter"></div>
+            <div id="gLbCaption"></div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Poás Agua y Fuego — Canton of Poás, Alajuela, Costa Rica</p>
+            <p style="margin-top:0.4rem; font-size:0.85rem; opacity:0.7;">Developed by César Luis Quesada Herrera</p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=2"></script>
+    <script>
+        /* ── PHOTO DATA ── */
+        const PHOTOS = [
+            { src: 'img/erupcion_poas.jpg',    cap: '🌋 Poás Volcano Eruption' },
+            { src: 'img/crateres_poas.jpg',    cap: '🛩️ Aerial View — Main Crater & Laguna Botos' },
+            { src: 'img/crater_noche_poas.jpg',cap: '🔥 Poás Volcano Active Crater at Night' },
+            { src: 'img/centro_poas.jpg',      cap: '🏙️ Poás Town Center' },
+            { src: 'img/letrero_poas.jpg',     cap: '🌳 Poás Sign with Yellow Corteza Tree' },
+            { src: 'img/poas_vegetacion.jpg',  cap: '🌿 Cloud Forest Vegetation at Poás Volcano' },
+            { src: 'img/laguna_fraijanes.jpg', cap: '💧 Fraijanes Lagoon, Poás' },
+        ];
+
+        let currentIdx = 0;
+
+        function openLb(idx) {
+            currentIdx = idx;
+            renderLb();
+            document.getElementById('gLb').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function renderLb() {
+            const img = document.getElementById('gLbImg');
+            img.classList.add('fading');
+            setTimeout(() => {
+                img.src = PHOTOS[currentIdx].src;
+                img.alt = PHOTOS[currentIdx].cap;
+                img.classList.remove('fading');
+            }, 200);
+            document.getElementById('gLbCaption').textContent = PHOTOS[currentIdx].cap;
+            document.getElementById('gLbCounter').textContent = (currentIdx + 1) + ' / ' + PHOTOS.length;
+        }
+        function closeLb() {
+            document.getElementById('gLb').classList.remove('active');
+            document.getElementById('gLbImg').src = '';
+            document.body.style.overflow = '';
+        }
+        function lbBgClose(e) {
+            if (e.target === document.getElementById('gLb')) closeLb();
+        }
+        function lbNav(dir) {
+            currentIdx = (currentIdx + dir + PHOTOS.length) % PHOTOS.length;
+            renderLb();
+        }
+        document.addEventListener('keydown', function(e) {
+            const lb = document.getElementById('gLb');
+            if (!lb.classList.contains('active')) return;
+            if (e.key === 'Escape')      closeLb();
+            if (e.key === 'ArrowRight')  lbNav(+1);
+            if (e.key === 'ArrowLeft')   lbNav(-1);
+        });
+
+        /* ── FILTERS ── */
+        function filterGal(btn, cat) {
+            document.querySelectorAll('.g-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.g-section[data-cat], hr.g-divider').forEach(el => {
+                if (el.tagName === 'HR') { el.style.display = ''; return; }
+                el.style.display = (cat === 'all' || el.dataset.cat === cat) ? '' : 'none';
+            });
+            const dividers = document.querySelectorAll('hr.g-divider');
+            dividers.forEach(hr => {
+                const prev = hr.previousElementSibling;
+                const next = hr.nextElementSibling;
+                const prevHidden = prev && prev.style.display === 'none';
+                const nextHidden = next && next.style.display === 'none';
+                hr.style.display = (prevHidden || nextHidden) ? 'none' : '';
+            });
+        }
+    </script>
+    <script src="security.js?v=2"></script>
+</body>
+</html>
