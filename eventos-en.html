@@ -1,17 +1,17 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events – Poás Water &amp; Fire</title>
-    <meta name="description" content="Cultural, sports and community events in the canton of Poás, Costa Rica.">
+    <title>Events � Po�s Water &amp; Fire</title>
+    <meta name="description" content="Cultural, sports and community events in the canton of Po�s, Costa Rica.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <link rel="stylesheet" href="style.css?v=2">
     <style>
-        /* ── Hero ── */
+        /* -- Hero -- */
         .eventos-hero {
             min-height: 36vh;
             background: linear-gradient(135deg, #1a0533 0%, #3d1068 50%, #0E5E6F 100%);
@@ -27,12 +27,12 @@
         .eventos-hero h1 span { color: var(--clr-turquoise); }
         .eventos-hero p { color: rgba(255,255,255,0.75); font-size: 1.1rem; margin-top: 0.75rem; max-width: 580px; margin-inline: auto; }
 
-        /* ── Main ── */
+        /* -- Main -- */
         .eventos-main { background: #F4F8F8; padding: 4rem 0 6rem; }
         .eventos-back { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--clr-turquoise); text-decoration: none; font-weight: 600; font-size: 0.95rem; margin-bottom: 2.5rem; transition: opacity 0.2s; }
         .eventos-back:hover { opacity: 0.75; }
 
-        /* ── Toolbar ── */
+        /* -- Toolbar -- */
         .eventos-toolbar {
             display: flex; flex-wrap: wrap; gap: 1rem;
             align-items: center; justify-content: space-between;
@@ -57,14 +57,14 @@
         }
         .btn-add-evento:hover { filter: brightness(1.1); transform: translateY(-2px); }
 
-        /* ── Grid ── */
+        /* -- Grid -- */
         .eventos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
-        /* ── Tarjeta ── */
+        /* -- Tarjeta -- */
         .evento-card {
             background: #fff; border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.07);
@@ -113,14 +113,14 @@
         }
         .btn-ev-delete:hover { background: #FECACA; }
 
-        /* ── Sin eventos ── */
+        /* -- Sin eventos -- */
         .no-eventos {
             grid-column: 1/-1; text-align: center;
             padding: 4rem 2rem; color: #888; font-size: 1rem;
         }
         .no-eventos .no-ev-icon { font-size: 3.5rem; display: block; margin-bottom: 1rem; }
 
-        /* ── Modal ── */
+        /* -- Modal -- */
         .modal-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,0.55);
             display: flex; align-items: center; justify-content: center;
@@ -166,7 +166,7 @@
         }
         .btn-modal-save:hover { filter: brightness(1.1); }
 
-        /* ── PIN Modal ── */
+        /* -- PIN Modal -- */
         .pin-modal {
             background: #fff; border-radius: 20px; width: 100%; max-width: 340px;
             padding: 2rem; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
@@ -184,7 +184,7 @@
         .pin-input:focus { outline: none; border-color: var(--clr-turquoise); }
         .pin-error { color: #DC2626; font-size: 0.85rem; margin-top: 0.5rem; display: none; }
 
-        /* ── Lang ── */
+        /* -- Lang -- */
         @media (max-width: 600px) {
             .modal-grid { grid-template-columns: 1fr; }
             .eventos-toolbar { flex-direction: column; align-items: flex-start; }
@@ -197,21 +197,21 @@
     <!-- Open Graph / Redes Sociales -->
     <meta property="og:type"        content="website">
     <meta property="og:url"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/eventos-en.html">
-    <meta property="og:title"       content="Canton Events – Poás Water & Fire">
-    <meta property="og:description" content="Cultural, sports and community activities in Poás canton, Costa Rica.">
+    <meta property="og:title"       content="Canton Events � Po�s Water & Fire">
+    <meta property="og:description" content="Cultural, sports and community activities in Po�s canton, Costa Rica.">
     <meta property="og:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/qr_poas.jpg">
     <meta property="og:image:width"  content="800">
     <meta property="og:image:height" content="800">
     <!-- Twitter Card -->
     <meta name="twitter:card"        content="summary_large_image">
-    <meta name="twitter:title"       content="Canton Events – Poás Water & Fire">
-    <meta name="twitter:description" content="Cultural, sports and community activities in Poás canton, Costa Rica.">
+    <meta name="twitter:title"       content="Canton Events � Po�s Water & Fire">
+    <meta name="twitter:description" content="Cultural, sports and community activities in Po�s canton, Costa Rica.">
     <meta name="twitter:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/qr_poas.jpg">
 </head>
 <body>
 <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">Poás <span>Water &amp; Fire</span></div>
+        <div class="logo">Po�s <span>Water &amp; Fire</span></div>
         <ul class="nav-links">
             <li><a href="index-en.html">Home</a></li>
             <li><a href="index-en.html#agua">Water Heritage</a></li>
@@ -222,14 +222,14 @@
             <li><a href="index-en.html#contacto">Contact</a></li>
         </ul>
         <div class="nav-lang">
-            <a href="eventos.html" class="lang-btn"><img class="flag-icon" src="https://flagcdn.com/16x12/cr.png" width="16" height="12" alt="CR"> Español</a>
+            <a href="eventos.html" class="lang-btn"><img class="flag-icon" src="https://flagcdn.com/16x12/cr.png" width="16" height="12" alt="CR"> Espa�ol</a>
             <a href="eventos-en.html" class="lang-btn active"><img class="flag-icon" src="https://flagcdn.com/16x12/us.png" width="16" height="12" alt="US"> English</a>
         </div>
         <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
     </nav>
 
     <div class="mobile-nav" id="mobileNav">
-        <button class="close-btn" id="closeNav">✕</button>
+        <button class="close-btn" id="closeNav">?</button>
         <a href="index-en.html"                onclick="closeMobileNav()">Home</a>
         <a href="index-en.html#agua"           onclick="closeMobileNav()">Water Heritage</a>
         <a href="directorio-comercial-en.html" onclick="closeMobileNav()" style="text-align:center;white-space:normal;line-height:1.3;">Tourism &amp; Business<br>Directory</a>
@@ -237,30 +237,30 @@
         <a href="eventos-en.html"              onclick="closeMobileNav()">Events</a>
         <a href="plan-regulador-en.html"       onclick="closeMobileNav()">Zoning Plan</a>
         <a href="index-en.html#contacto"       onclick="closeMobileNav()">Contact</a>
-        <a href="eventos.html"                 onclick="closeMobileNav()">🇨🇷 Ver en Español</a>
+        <a href="eventos.html"                 onclick="closeMobileNav()">???? Ver en Espa�ol</a>
     </div>
 
     <!-- Hero -->
     <div class="eventos-hero">
         <div class="eventos-hero-content">
-            <h1>📅 Canton <span>Events</span></h1>
-            <p>Cultural, sports and community activities in Poás.</p>
+            <h1>?? Canton <span>Events</span></h1>
+            <p>Cultural, sports and community activities in Po�s.</p>
         </div>
     </div>
 
     <!-- Main -->
     <section class="eventos-main">
         <div class="container">
-            <a href="index-en.html" class="eventos-back">← Back to Home</a>
+            <a href="index-en.html" class="eventos-back">? Back to Home</a>
 
             <div class="eventos-toolbar">
                 <div class="eventos-filters">
                     <button class="ev-filter-btn active" data-filter="all">All</button>
-                    <button class="ev-filter-btn" data-filter="cultural">🎭 Cultural</button>
-                    <button class="ev-filter-btn" data-filter="deportivo">⚽ Sports</button>
-                    <button class="ev-filter-btn" data-filter="comunidad">🤝 Community</button>
-                    <button class="ev-filter-btn" data-filter="gastronomia">🍽️ Gastronomy</button>
-                    <button class="ev-filter-btn" data-filter="educacion">📚 Education</button>
+                    <button class="ev-filter-btn" data-filter="cultural">?? Cultural</button>
+                    <button class="ev-filter-btn" data-filter="deportivo">? Sports</button>
+                    <button class="ev-filter-btn" data-filter="comunidad">?? Community</button>
+                    <button class="ev-filter-btn" data-filter="gastronomia">??? Gastronomy</button>
+                    <button class="ev-filter-btn" data-filter="educacion">?? Education</button>
                 </div>
                 <button class="btn-add-evento" id="btnAddEvento">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M12 5v14M5 12h14"/></svg>
@@ -275,9 +275,9 @@
     <!-- Modal: PIN -->
     <div class="modal-overlay" id="pinOverlay">
         <div class="pin-modal">
-            <h2>🔒 Admin Access</h2>
+            <h2>?? Admin Access</h2>
             <p>Enter the PIN to add or remove events.</p>
-            <input type="password" class="pin-input" id="pinInput" maxlength="6" placeholder="● ● ● ●">
+            <input type="password" class="pin-input" id="pinInput" maxlength="6" placeholder="? ? ? ?">
             <p class="pin-error" id="pinError">Incorrect PIN. Please try again.</p>
             <div class="modal-actions">
                 <button class="btn-modal-cancel" id="btnPinCancel">Cancel</button>
@@ -289,12 +289,12 @@
     <!-- Modal: New Event Form -->
     <div class="modal-overlay" id="eventoModal">
         <div class="modal">
-            <h2>➕ New Event</h2>
+            <h2>? New Event</h2>
             <form id="eventoForm">
                 <div class="modal-grid">
                     <div class="modal-field full">
                         <label>Event title *</label>
-                        <input type="text" id="evTitulo" placeholder="e.g.: Poás Cultural Fair" required>
+                        <input type="text" id="evTitulo" placeholder="e.g.: Po�s Cultural Fair" required>
                     </div>
                     <div class="modal-field">
                         <label>Date *</label>
@@ -306,18 +306,18 @@
                     </div>
                     <div class="modal-field full">
                         <label>Location *</label>
-                        <input type="text" id="evLugar" placeholder="e.g.: Poás Central Park" required>
+                        <input type="text" id="evLugar" placeholder="e.g.: Po�s Central Park" required>
                     </div>
                     <div class="modal-field full">
                         <label>Category *</label>
                         <select id="evCategoria" required>
                             <option value="">(select a category)</option>
-                            <option value="cultural">🎭 Cultural</option>
-                            <option value="deportivo">⚽ Sports</option>
-                            <option value="comunidad">🤝 Community</option>
-                            <option value="gastronomia">🍽️ Gastronomy</option>
-                            <option value="educacion">📚 Education</option>
-                            <option value="otro">📌 Other</option>
+                            <option value="cultural">?? Cultural</option>
+                            <option value="deportivo">? Sports</option>
+                            <option value="comunidad">?? Community</option>
+                            <option value="gastronomia">??? Gastronomy</option>
+                            <option value="educacion">?? Education</option>
+                            <option value="otro">?? Other</option>
                         </select>
                     </div>
                     <div class="modal-field full">
@@ -337,8 +337,8 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-brand">
-                <div class="logo">Poás <span>Water &amp; Fire</span></div>
-                <p>Information platform for the canton of Poás, Alajuela, Costa Rica.</p>
+                <div class="logo">Po�s <span>Water &amp; Fire</span></div>
+                <p>Information platform for the canton of Po�s, Alajuela, Costa Rica.</p>
             </div>
             <div class="footer-links">
                 <ul>
@@ -351,13 +351,13 @@
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2026 Poás Water &amp; Fire. Visual Concept.</p>
-            <p class="copyright-autor">César Luis Quesada Herrera</p>
+            <p>&copy; 2026 Po�s Water &amp; Fire. Visual Concept.</p>
+            <p class="copyright-autor">C�sar Luis Quesada Herrera</p>
         </div>
     </footer>
 
     <script>
-        // ── Nav ──────────────────────────────────────────────────────
+        // -- Nav ------------------------------------------------------
         window.addEventListener('scroll', () =>
             document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50));
         const hamburger = document.getElementById('hamburger');
@@ -367,26 +367,26 @@
         closeNav.addEventListener('click',  () => mobileNav.classList.remove('open'));
         function closeMobileNav() { mobileNav.classList.remove('open'); }
 
-        // ── Config ───────────────────────────────────────────────────
-        const ADMIN_PIN  = '1234';          // ← Cambiá este PIN
+        // -- Config ---------------------------------------------------
+        const ADMIN_PIN  = '1234';          // ? Cambi� este PIN
         const STORAGE_KEY = 'poas_eventos';
 
-        // ── Estado ───────────────────────────────────────────────────
+        // -- Estado ---------------------------------------------------
         let eventos      = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
         let filtroActual = 'all';
         let pendingAction = null;           // 'add' | 'delete'
         let pendingDeleteId = null;
 
-        // ── Guardar ──────────────────────────────────────────────────
+        // -- Guardar --------------------------------------------------
         function saveEventos() {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(eventos));
         }
 
-        // ── Renderizar ───────────────────────────────────────────────
+        // -- Renderizar -----------------------------------------------
         const catLabels = {
-            cultural: '🎭 Cultural', deportivo: '⚽ Sports',
-            comunidad: '🤝 Community', gastronomia: '🍽️ Gastronomy',
-            educacion: '📚 Education', otro: '📌 Other'
+            cultural: '?? Cultural', deportivo: '? Sports',
+            comunidad: '?? Community', gastronomia: '??? Gastronomy',
+            educacion: '?? Education', otro: '?? Other'
         };
 
         function formatFecha(fechaStr) {
@@ -401,13 +401,13 @@
                 ? eventos
                 : eventos.filter(e => e.categoria === filtroActual);
 
-            // Ordenar por fecha más próxima
+            // Ordenar por fecha m�s pr�xima
             lista.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
 
             if (lista.length === 0) {
                 grid.innerHTML = `
                     <div class="no-eventos">
-                        <span class="no-ev-icon">📅</span>
+                        <span class="no-ev-icon">??</span>
                         <p>No events in this category.<br>Be the first to add one!</p>
                     </div>`;
                 return;
@@ -439,13 +439,13 @@
                         ${ev.descripcion ? `<p class="evento-desc">${ev.descripcion}</p>` : ''}
                     </div>
                     <div class="evento-card-footer">
-                        <button class="btn-ev-delete" onclick="confirmarEliminar('${ev.id}')">🗑 Delete</button>
+                        <button class="btn-ev-delete" onclick="confirmarEliminar('${ev.id}')">?? Delete</button>
                     </div>
                 </div>
             `).join('');
         }
 
-        // ── Filtros ──────────────────────────────────────────────────
+        // -- Filtros --------------------------------------------------
         document.querySelectorAll('.ev-filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.ev-filter-btn').forEach(b => b.classList.remove('active'));
@@ -455,7 +455,7 @@
             });
         });
 
-        // ── PIN Modal ────────────────────────────────────────────────
+        // -- PIN Modal ------------------------------------------------
         const pinOverlay = document.getElementById('pinOverlay');
         const pinInput   = document.getElementById('pinInput');
         const pinError   = document.getElementById('pinError');
@@ -493,7 +493,7 @@
             }
         }
 
-        // ── Agregar Evento ───────────────────────────────────────────
+        // -- Agregar Evento -------------------------------------------
         document.getElementById('btnAddEvento').addEventListener('click', () => abrirPin('add'));
 
         document.getElementById('btnEventoCancel').addEventListener('click', () => {
@@ -518,7 +518,7 @@
             document.getElementById('eventoForm').reset();
         });
 
-        // ── Eliminar ─────────────────────────────────────────────────
+        // -- Eliminar -------------------------------------------------
         function confirmarEliminar(id) { abrirPin('delete', id); }
 
         function eliminarEvento(id) {
@@ -527,16 +527,17 @@
             renderEventos();
         }
 
-        // ── Cerrar modales al hacer clic afuera ──────────────────────
+        // -- Cerrar modales al hacer clic afuera ----------------------
         [pinOverlay, document.getElementById('eventoModal')].forEach(overlay => {
             overlay.addEventListener('click', e => {
                 if (e.target === overlay) overlay.classList.remove('open');
             });
         });
 
-        // ── Init ─────────────────────────────────────────────────────
+        // -- Init -----------------------------------------------------
         renderEventos();
     </script>
     <script src="security.js?v=2"></script>
+<script src="search.js"></script>
 </body>
 </html>
