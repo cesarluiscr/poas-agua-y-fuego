@@ -72,8 +72,10 @@
     <!-- Hero Section: Fuego vs Agua -->
     <header class="hero" id="inicio">
         <div class="hero-split hero-fire">
-            <div class="hero-content" style="align-self:center;padding-bottom:0;">
-                <img src="img/poas_agua_fuego_logo.jpg" alt="Poás Agua y Fuego" class="hero-site-logo" style="width:210px;height:210px;object-fit:cover;object-position:center;border-radius:50%;display:block;margin-bottom:1.2rem;box-shadow:0 0 0 5px rgba(255,255,255,0.28),0 0 0 11px rgba(255,200,50,0.22),0 12px 45px rgba(0,0,0,0.6);flex-shrink:0;">
+            <!-- Logo centrado independiente del texto -->
+            <img src="img/poas_agua_fuego_logo.jpg" alt="Poás Agua y Fuego" class="hero-site-logo" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:210px;height:210px;object-fit:cover;object-position:center;border-radius:50%;z-index:3;box-shadow:0 0 0 5px rgba(255,255,255,0.28),0 0 0 11px rgba(255,200,50,0.22),0 12px 45px rgba(0,0,0,0.6);">
+            <!-- Texto en posición original (fondo) -->
+            <div class="hero-content">
                 <h2>El Pulso de la Tierra</h2>
                 <p>Cráter Principal del Volcán Poás</p>
             </div>
