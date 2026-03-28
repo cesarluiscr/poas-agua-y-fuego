@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería del Cantón | Poás Agua y Fuego</title>
+    <meta name="description" content="Galería fotográfica del Cantón de Poás, Alajuela, Costa Rica. Volcán, paisajes, comunidad y gastronomía.">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ── HERO ── */
+        .galeria-hero {
+            background: linear-gradient(135deg, #0D2035 0%, #1A237E 50%, #8B0000 100%);
+            padding: 8rem 1.5rem 4rem;
+            text-align: center;
+        }
+        .galeria-hero-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .galeria-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.4rem);
+            font-weight: 800; color: #fff; margin-bottom: 0.75rem;
+        }
+        .galeria-hero p {
+            color: rgba(255,255,255,0.75); font-size: 1.1rem;
+            max-width: 600px; margin: 0 auto;
+        }
+
+        /* ── FILTROS DE CATEGORÍA ── */
+        .galeria-filters {
+            background: #f8f9fb;
+            padding: 2rem 1.5rem 1rem;
+            display: flex; gap: 0.75rem; flex-wrap: wrap;
+            justify-content: center; border-bottom: 1px solid #e5e8ed;
+        }
+        .filter-btn {
+            background: #fff; border: 2px solid #d0d5dd;
+            color: #444; padding: 0.45rem 1.2rem; border-radius: 99px;
+            font-size: 0.88rem; font-weight: 600; cursor: pointer;
+            transition: all 0.2s; font-family: 'Montserrat', sans-serif;
+        }
+        .filter-btn:hover { border-color: #1A237E; color: #1A237E; }
+        .filter-btn.active {
+            background: #1A237E; border-color: #1A237E; color: #fff;
+        }
+
+        /* ── SECCIÓN DE CATEGORÍA ── */
+        .galeria-category {
+            padding: 3.5rem 1.5rem;
+        }
+        .galeria-category:nth-child(even) { background: #f4f6fb; }
+        .galeria-category:nth-child(odd)  { background: #fff; }
+
+        .galeria-cat-header {
+            text-align: center; margin-bottom: 2.25rem;
+        }
+        .galeria-cat-label {
+            display: inline-block;
+            background: #1A237E; color: #fff;
+            font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            padding: 0.3rem 1rem; border-radius: 99px;
+            margin-bottom: 0.6rem;
+        }
+        .galeria-cat-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 700; color: #1A237E; margin-bottom: 0.4rem;
+        }
+        .galeria-cat-desc {
+            color: #5a6475; font-size: 0.95rem; max-width: 520px; margin: 0 auto;
+        }
+
+        /* ── GRID ── */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .galeria-item {
+            position: relative; overflow: hidden; border-radius: 12px;
+            cursor: pointer; aspect-ratio: 4/3;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .galeria-item.wide { grid-column: span 3; aspect-ratio: 21/8; }
+        .galeria-item.medium { grid-column: span 2; aspect-ratio: 16/9; }
+        .galeria-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.20);
+        }
+        .galeria-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.4s ease;
+            display: block;
+        }
+        .galeria-item:hover img { transform: scale(1.06); }
+        .galeria-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(13,10,8,0.75) 0%, transparent 55%);
+            display: flex; align-items: flex-end;
+            padding: 1rem 1.1rem;
+            opacity: 0; transition: opacity 0.25s;
+        }
+        .galeria-item:hover .galeria-overlay { opacity: 1; }
+        .galeria-overlay span {
+            color: #fff; font-size: 0.88rem; font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+        }
+
+        /* ── LIGHTBOX ── */
+        .gal-lightbox {
+            display: none; position: fixed; inset: 0; z-index: 9999;
+            background: rgba(0,0,0,0.92); align-items: center; justify-content: center;
+            flex-direction: column; padding: 1rem;
+        }
+        .gal-lightbox.active { display: flex; }
+        .gal-lightbox-img {
+            max-width: 90vw; max-height: 80vh;
+            object-fit: contain; border-radius: 8px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+        }
+        .gal-lightbox-caption {
+            color: rgba(255,255,255,0.85); font-size: 1rem;
+            margin-top: 1rem; text-align: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .gal-lightbox-close {
+            position: fixed; top: 1.25rem; right: 1.5rem;
+            color: rgba(255,255,255,0.7); font-size: 2.5rem;
+            cursor: pointer; line-height: 1; transition: color 0.2s;
+            background: none; border: none;
+        }
+        .gal-lightbox-close:hover { color: #fff; }
+
+        /* ── COUNTER ── */
+        .galeria-counter {
+            text-align: center; padding: 1rem 0 0;
+            color: #8a94a6; font-size: 0.85rem; font-family: 'Montserrat', sans-serif;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+            .galeria-item.wide { grid-column: span 2; aspect-ratio: 16/7; }
+            .galeria-item.medium { grid-column: span 2; }
+        }
+        @media (max-width: 540px) {
+            .galeria-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+            .galeria-item.wide,
+            .galeria-item.medium { grid-column: span 1; aspect-ratio: 4/3; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-poas">Poás</span>
+                <span class="logo-agua"> Agua y </span>
+                <span class="logo-fuego">Fuego</span>
+            </a>
+            <button class="hamburger" id="hamburger" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#patrimonio" onclick="closeMobileNav()">Patrimonio Hídrico</a></li>
+                <li><a href="directorio-comercial.html" onclick="closeMobileNav()" style="text-align:center;white-space:normal;line-height:1.3;">Directorio Turístico y<br>Comercial</a></li>
+                <li><a href="bolsa-empleo.html" onclick="closeMobileNav()">Bolsa de Empleo</a></li>
+                <li><a href="eventos.html" onclick="closeMobileNav()">Eventos</a></li>
+                <li><a href="plan-regulador.html" onclick="closeMobileNav()">Plan Regulador</a></li>
+                <li><a href="galeria.html" onclick="closeMobileNav()" class="active">Galería</a></li>
+                <li><a href="index.html#comunidad" onclick="closeMobileNav()">Nuestro Cantón</a></li>
+                <li><a href="index.html#contacto" onclick="closeMobileNav()">Contacto</a></li>
+                <li>
+                    <a href="galeria.html" class="lang-btn active-lang" style="background:linear-gradient(135deg,#C0392B,#E74C3C);"><img class="flag-icon" src="https://flagcdn.com/16x12/cr.png" width="16" height="12" alt="CR"> Español</a>
+                    <a href="galeria-en.html" class="lang-btn"><img class="flag-icon" src="https://flagcdn.com/16x12/us.png" width="16" height="12" alt="US"> English</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="nav-overlay" id="navOverlay" onclick="closeMobileNav()"></div>
+
+    <!-- HERO -->
+    <section class="galeria-hero">
+        <div class="galeria-hero-icon">📸</div>
+        <h1>Galería del Cantón</h1>
+        <p>Imágenes del Volcán Poás, sus paisajes, comunidad y gastronomía.</p>
+    </section>
+
+    <!-- FILTROS -->
+    <div class="galeria-filters">
+        <button class="filter-btn active" data-filter="all" onclick="filterGaleria(this,'all')">🌐 Todas</button>
+        <button class="filter-btn" data-filter="volcan" onclick="filterGaleria(this,'volcan')">🌋 Volcán</button>
+        <button class="filter-btn" data-filter="canton" onclick="filterGaleria(this,'canton')">🏡 Cantón</button>
+        <button class="filter-btn" data-filter="naturaleza" onclick="filterGaleria(this,'naturaleza')">🌿 Naturaleza</button>
+        <button class="filter-btn" data-filter="gastronomia" onclick="filterGaleria(this,'gastronomia')">🍽️ Gastronomía</button>
+    </div>
+
+    <main>
+
+        <!-- ── VOLCÁN POÁS ── -->
+        <section class="galeria-category" data-category="volcan">
+            <div class="galeria-cat-header">
+                <div class="galeria-cat-label">🌋 Volcán</div>
+                <h2 class="galeria-cat-title">Volcán Poás</h2>
+                <p class="galeria-cat-desc">El coloso de Alajuela, uno de los volcanes activos más visitados de Costa Rica.</p>
+            </div>
+            <div class="galeria-grid">
+                <div class="galeria-item wide" data-caption="🌋 Erupción del Volcán Poás"
+                     onclick="openLightbox('img/erupcion_poas.jpg','🌋 Erupción del Volcán Poás')">
+                    <img src="img/erupcion_poas.jpg" alt="Erupción del Volcán Poás" loading="lazy" style="object-position: center 40%;">
+                    <div class="galeria-overlay"><span>🌋 Erupción del Volcán Poás</span></div>
+                </div>
+                <div class="galeria-item medium" data-caption="🛩️ Vista aérea — Cráter Principal y Laguna Botos"
+                     onclick="openLightbox('img/crateres_poas.jpg','🛩️ Vista aérea — Cráter Principal y Laguna Botos')">
+                    <img src="img/crateres_poas.jpg" alt="Vista aérea de los cráteres del Volcán Poás y Laguna Botos" loading="lazy">
+                    <div class="galeria-overlay"><span>🛩️ Cráter Principal y Laguna Botos</span></div>
+                </div>
+                <div class="galeria-item" data-caption="🔥 Cráter activo de noche"
+                     onclick="openLightbox('img/crater_noche_poas.jpg','🔥 Cráter del Volcán Poás de noche')">
+                    <img src="img/crater_noche_poas.jpg" alt="Cráter del Volcán Poás de noche" loading="lazy" style="object-position: center 55%;">
+                    <div class="galeria-overlay"><span>🔥 Cráter activo — noche</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── CANTÓN ── -->
+        <section class="galeria-category" data-category="canton">
+            <div class="galeria-cat-header">
+                <div class="galeria-cat-label">🏡 Cantón</div>
+                <h2 class="galeria-cat-title">Cantón de Poás</h2>
+                <p class="galeria-cat-desc">El corazón del cantón: su gente, sus calles y su identidad.</p>
+            </div>
+            <div class="galeria-grid">
+                <div class="galeria-item medium" data-caption="🏙️ Vista aérea del Centro de Poás"
+                     onclick="openLightbox('img/centro_poas.jpg','🏙️ Centro del Cantón de Poás')">
+                    <img src="img/centro_poas.jpg" alt="Vista aérea del cantón de Poás" loading="lazy">
+                    <div class="galeria-overlay"><span>🏙️ Centro del Cantón</span></div>
+                </div>
+                <div class="galeria-item" data-caption="🌳 Letrero de Poás con corteza amarilla"
+                     onclick="openLightbox('img/letrero_poas.jpg','🌳 Letrero de Poás con corteza amarilla')">
+                    <img src="img/letrero_poas.jpg" alt="Letrero de Poás con corteza amarilla" loading="lazy">
+                    <div class="galeria-overlay"><span>🌳 Letrero de Poás</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── NATURALEZA ── -->
+        <section class="galeria-category" data-category="naturaleza">
+            <div class="galeria-cat-header">
+                <div class="galeria-cat-label">🌿 Naturaleza</div>
+                <h2 class="galeria-cat-title">Biodiversidad y Paisajes</h2>
+                <p class="galeria-cat-desc">Bosques nubosos, lagunas y la exuberante flora que rodea el volcán.</p>
+            </div>
+            <div class="galeria-grid">
+                <div class="galeria-item medium" data-caption="🌿 Bosque nuboso del Volcán Poás"
+                     onclick="openLightbox('img/poas_vegetacion.jpg','🌿 Vegetación del bosque nuboso del Volcán Poás')">
+                    <img src="img/poas_vegetacion.jpg" alt="Vegetación del bosque nuboso del Volcán Poás" loading="lazy">
+                    <div class="galeria-overlay"><span>🌿 Bosque Nuboso</span></div>
+                </div>
+                <div class="galeria-item" data-caption="💧 Laguna de Fraijanes"
+                     onclick="openLightbox('img/laguna_fraijanes.jpg','💧 Laguna de Fraijanes, Poás')">
+                    <img src="img/laguna_fraijanes.jpg" alt="Laguna de Fraijanes, Poás" loading="lazy">
+                    <div class="galeria-overlay"><span>💧 Laguna de Fraijanes</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── GASTRONOMÍA ── -->
+        <section class="galeria-category" data-category="gastronomia">
+            <div class="galeria-cat-header">
+                <div class="galeria-cat-label">🍽️ Gastronomía</div>
+                <h2 class="galeria-cat-title">Sabores del Cantón</h2>
+                <p class="galeria-cat-desc">La riqueza culinaria poaseña, desde la sopa negra hasta las truchas del río.</p>
+            </div>
+            <div class="galeria-grid">
+                <div class="galeria-item" data-caption="🥘 Restaurante Típico Fraijanes"
+                     onclick="openLightbox('img/tipico_fraijanes.jpg','🥘 Restaurante Típico Fraijanes — Platillos Típicos, Ambiente Familiar')">
+                    <img src="img/tipico_fraijanes.jpg" alt="Restaurante Típico Fraijanes – Platillos Típicos, Ambiente Familiar" loading="lazy">
+                    <div class="galeria-overlay"><span>🥘 Típico Fraijanes</span></div>
+                </div>
+                <div class="galeria-item" data-caption="🏔️ Restaurante y Mirador Lo que tú Quieras"
+                     onclick="openLightbox('img/lo_que_tu_quieras.jpg','🏔️ Restaurante y Mirador Lo que tú Quieras — Poás')">
+                    <img src="img/lo_que_tu_quieras.jpg" alt="Restaurante y Mirador Lo que tú Quieras – Poás" loading="lazy">
+                    <div class="galeria-overlay"><span>🏔️ Mirador Lo que tú Quieras</span></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- LIGHTBOX -->
+    <div id="galLightbox" class="gal-lightbox" onclick="closeLightboxIfBg(event)">
+        <button class="gal-lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">&times;</button>
+        <img class="gal-lightbox-img" id="galLightboxImg" src="" alt="">
+        <div class="gal-lightbox-caption" id="galLightboxCaption"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Poás Agua y Fuego — Cantón de Poás, Alajuela, Costa Rica</p>
+            <p style="margin-top:0.4rem; font-size:0.85rem; opacity:0.7;">Desarrollado por César Luis Quesada Herrera</p>
+        </div>
+    </footer>
+
+    <script src="script.js?v=2"></script>
+    <script>
+        /* ── LIGHTBOX ── */
+        function openLightbox(src, caption) {
+            document.getElementById('galLightboxImg').src = src;
+            document.getElementById('galLightboxImg').alt = caption;
+            document.getElementById('galLightboxCaption').textContent = caption;
+            document.getElementById('galLightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('galLightbox').classList.remove('active');
+            document.getElementById('galLightboxImg').src = '';
+            document.body.style.overflow = '';
+        }
+        function closeLightboxIfBg(e) {
+            if (e.target === document.getElementById('galLightbox')) closeLightbox();
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        /* ── FILTROS ── */
+        function filterGaleria(btn, filter) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.galeria-category').forEach(section => {
+                if (filter === 'all' || section.dataset.category === filter) {
+                    section.style.display = '';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+    </script>
+    <script src="security.js?v=2"></script>
+</body>
+</html>
