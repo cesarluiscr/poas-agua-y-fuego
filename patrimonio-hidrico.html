@@ -278,6 +278,47 @@
             margin-top: 1rem;
         }
 
+        /* ── Citas inline por sección ── */
+        .ph-src {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 1.5rem;
+            padding-top: 0.9rem;
+            border-top: 1px solid rgba(64,196,255,0.12);
+            font-size: 0.76rem;
+        }
+        .ph-src-label {
+            color: rgba(255,255,255,0.38);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-right: 0.2rem;
+        }
+        .ph-src-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: rgba(64,196,255,0.08);
+            border: 1px solid rgba(64,196,255,0.2);
+            color: var(--agua-light);
+            text-decoration: none;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.73rem;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .ph-src-tag:hover { background: rgba(64,196,255,0.18); border-color: rgba(64,196,255,0.45); }
+        .ph-src-tag-plain {
+            color: rgba(255,255,255,0.45);
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.1);
+            cursor: default;
+        }
+        .ph-src-tag-plain:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15); }
+
         /* Responsive */
         @media (max-width: 600px) {
             .ph-acuiferos-grid { grid-template-columns: 1fr; }
@@ -339,6 +380,14 @@
                     <div class="ph-dato-label">Cobertura de agua potable en el cantón</div>
                 </div>
             </div>
+            <div class="ph-src">
+                <span class="ph-src-label">Fuentes:</span>
+                <a href="https://www.senara.go.cr" target="_blank" rel="noopener" class="ph-src-tag">SENARA</a>
+                <a href="https://www.aya.go.cr" target="_blank" rel="noopener" class="ph-src-tag">AyA</a>
+                <a href="https://www.imn.ac.cr" target="_blank" rel="noopener" class="ph-src-tag">IMN</a>
+                <a href="https://www.sinac.go.cr" target="_blank" rel="noopener" class="ph-src-tag">SINAC</a>
+                <a href="https://www.inec.cr" target="_blank" rel="noopener" class="ph-src-tag">INEC</a>
+            </div>
         </div>
     </section>
 
@@ -383,6 +432,11 @@
                     </div>
                 </div>
 
+            </div>
+            <div class="ph-src">
+                <span class="ph-src-label">Fuentes:</span>
+                <a href="https://www.senara.go.cr" target="_blank" rel="noopener" class="ph-src-tag">SENARA</a>
+                <a href="https://www.aya.go.cr" target="_blank" rel="noopener" class="ph-src-tag">AyA</a>
             </div>
         </div>
     </section>
@@ -437,6 +491,11 @@
                     </div>
                 </div>
             </div>
+            <div class="ph-src">
+                <span class="ph-src-label">Fuentes:</span>
+                <a href="https://munipoas.go.cr" target="_blank" rel="noopener" class="ph-src-tag">Municipalidad de Poás</a>
+                <a href="https://www.sinac.go.cr" target="_blank" rel="noopener" class="ph-src-tag">SINAC</a>
+            </div>
         </div>
     </section>
 
@@ -461,6 +520,11 @@
                 <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA Fraijanes</div><div class="ph-asada-zona">Distrito Fraijanes</div></div></div>
                 <div class="ph-asada-item"><div class="ph-asada-dot"></div><div><div class="ph-asada-name">ASADA Calle El Sitio</div><div class="ph-asada-zona">Distrito Fraijanes</div></div></div>
             </div>
+            <div class="ph-src">
+                <span class="ph-src-label">Fuentes:</span>
+                <a href="https://www.aya.go.cr" target="_blank" rel="noopener" class="ph-src-tag">AyA</a>
+                <a href="https://munipoas.go.cr" target="_blank" rel="noopener" class="ph-src-tag">Municipalidad de Poás</a>
+            </div>
         </div>
     </section>
 
@@ -477,6 +541,11 @@
                     <div class="ph-info-icon">🗺️</div>
                     <h3 class="ph-info-title">Ubicación y contexto general</h3>
                     <p>El cantón se localiza en la <strong>subcuenca del río Grande de Tárcoles</strong>, que drena las aguas del Valle Central hasta su desembocadura en el Océano Pacífico. Tiene un área territorial de <strong>73,84 km²</strong>, distribuida en una franja de aproximadamente 15 km de largo por 5 km de ancho, con altitudes que van desde los <strong>600 msnm</strong> en Rincón de Carrillos hasta los <strong>2.838 msnm</strong> en el Parque Nacional Volcán Poás.</p>
+                    <div class="ph-src">
+                        <span class="ph-src-label">Fuente:</span>
+                        <a href="https://www.inec.cr" target="_blank" rel="noopener" class="ph-src-tag">INEC</a>
+                        <a href="https://munipoas.go.cr" target="_blank" rel="noopener" class="ph-src-tag">Municipalidad de Poás</a>
+                    </div>
                 </div>
 
                 <div class="ph-info-card">
@@ -484,6 +553,10 @@
                     <h3 class="ph-info-title">Ríos principales y límites</h3>
                     <p>Los cauces de los ríos <strong>Poasito y Poás</strong> definen el límite este con el cantón de Alajuela, mientras que los ríos <strong>Achiote, Tacares y Prendas</strong> definen el límite oeste con el cantón de Grecia.</p>
                     <p style="margin-top:0.75rem">Con Grecia, Poás comparte las subcuencas del río Tacares y Prendas — zona de gran abundancia de aguas subterráneas, nacientes y tomas de agua, entre ellas la naciente <strong>Los Chorros</strong>, ubicada en el área protegida del mismo nombre.</p>
+                    <div class="ph-src">
+                        <span class="ph-src-label">Fuente:</span>
+                        <a href="https://munipoas.go.cr" target="_blank" rel="noopener" class="ph-src-tag">Plan Regulador — Municipalidad de Poás</a>
+                    </div>
                 </div>
 
                 <div class="ph-info-card">
@@ -491,6 +564,11 @@
                     <h3 class="ph-info-title">Microcuenca del Río Poás</h3>
                     <p>Se ubica entre el volcán Barva y el volcán Poás, hasta la confluencia con el río Grande cerca de Alajuela. Posee <strong>alto potencial para la formación de acuíferos de alta calidad</strong>.</p>
                     <p style="margin-top:0.75rem">En los últimos 14 años, la producción hídrica en la microcuenca ha <strong>aumentado en un 1,6%</strong>, específicamente en la escorrentía y la ganancia hídrica.</p>
+                    <div class="ph-src">
+                        <span class="ph-src-label">Fuente:</span>
+                        <span class="ph-src-tag ph-src-tag-plain">Estudio microcuenca Río Poás — UCR / ITCR</span>
+                        <a href="https://www.senara.go.cr" target="_blank" rel="noopener" class="ph-src-tag">SENARA</a>
+                    </div>
                 </div>
 
                 <div class="ph-info-card">
@@ -498,6 +576,11 @@
                     <h3 class="ph-info-title">Acuífero Poás y consumo humano</h3>
                     <p>El agua para consumo humano proviene de <strong>pozos y manantiales</strong>, principalmente del acuífero Poás. A pesar de la vulnerabilidad intrínseca de este acuífero a la contaminación, en la subcuenca se han desarrollado actividades ganaderas y agrícolas en gran parte del territorio.</p>
                     <p style="margin-top:0.75rem">Los centros poblacionales utilizan principalmente <strong>tanques sépticos</strong> como sistemas de saneamiento, lo que representa un riesgo de contaminación para el agua subterránea y superficial.</p>
+                    <div class="ph-src">
+                        <span class="ph-src-label">Fuente:</span>
+                        <a href="https://www.senara.go.cr" target="_blank" rel="noopener" class="ph-src-tag">SENARA</a>
+                        <a href="https://www.aya.go.cr" target="_blank" rel="noopener" class="ph-src-tag">AyA</a>
+                    </div>
                 </div>
 
                 <div class="ph-info-card">
@@ -505,6 +588,10 @@
                     <h3 class="ph-info-title">Presiones socioambientales</h3>
                     <p>La microcuenca tiene una estructura socioeconómica basada en actividades agroproductivas: <strong>ganadería, granjas avícolas, caña, café y cultivos no tradicionales</strong> como flores, fresas y hortalizas, que ejercen presión sobre el recurso hídrico.</p>
                     <p style="margin-top:0.75rem">Se identificaron <strong>seis presiones socioambientales</strong> de impacto negativo sobre el agua, originadas tanto desde hogares como desde actividades productivas. A pesar de ello, los parámetros de calidad del agua mostraron <strong>cumplimiento mayoritario</strong> con los criterios de calidad establecidos.</p>
+                    <div class="ph-src">
+                        <span class="ph-src-label">Fuente:</span>
+                        <span class="ph-src-tag ph-src-tag-plain">Estudio microcuenca Río Poás — UCR / ITCR</span>
+                    </div>
                 </div>
 
                 <div class="ph-info-card">
@@ -512,6 +599,11 @@
                     <h3 class="ph-info-title">Riesgos naturales sobre el agua</h3>
                     <p>Las <strong>inundaciones rápidas y deslizamientos</strong> se relacionan con la presencia de valles fluviales encañonados con fuertes pendientes en microcuencas alargadas sobre depósitos volcánicos recientes.</p>
                     <p style="margin-top:0.75rem">Los riesgos identificados van desde <strong>erupciones volcánicas, fallas tectónicas y deslizamientos</strong>, hasta amenazas antrópicas que han causado degradación y contaminación de suelos y aguas superficiales y subterráneas.</p>
+                    <div class="ph-src">
+                        <span class="ph-src-label">Fuente:</span>
+                        <a href="https://www.ovsicori.una.ac.cr" target="_blank" rel="noopener" class="ph-src-tag">OVSICORI-UNA</a>
+                        <a href="https://www.cne.go.cr" target="_blank" rel="noopener" class="ph-src-tag">CNE</a>
+                    </div>
                 </div>
 
             </div>
@@ -550,95 +642,15 @@
                     <p>La disposición inadecuada de residuos sólidos y aguas negras en cuencas hidrográficas degrada la calidad del recurso hídrico.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- FUENTES -->
-    <section class="ph-section ph-fuentes-section">
-        <div class="ph-container">
-            <h2 class="ph-section-title">📚 Fuentes de Información</h2>
-            <p class="ph-section-sub">Los datos presentados en esta página provienen de instituciones públicas, estudios técnicos y registros oficiales de Costa Rica.</p>
-            <div class="ph-divider"></div>
-
-            <div class="ph-fuentes-grid">
-
-                <div class="ph-fuente-card">
-                    <div class="ph-fuente-logo">AyA</div>
-                    <div class="ph-fuente-body">
-                        <h4>Instituto Costarricense de Acueductos y Alcantarillados (AyA)</h4>
-                        <p>Registro nacional de ASADAS, cobertura de agua potable, supervisión de acueductos comunales y datos de calidad del agua en el cantón de Poás.</p>
-                        <a href="https://www.aya.go.cr" target="_blank" rel="noopener noreferrer" class="ph-fuente-link">aya.go.cr →</a>
-                    </div>
-                </div>
-
-                <div class="ph-fuente-card">
-                    <div class="ph-fuente-logo">SENARA</div>
-                    <div class="ph-fuente-body">
-                        <h4>Servicio Nacional de Aguas Subterráneas, Riego y Avenamiento (SENARA)</h4>
-                        <p>Estudios de acuíferos Colima, Barva y Poás. Datos de recarga hídrica, producción de agua subterránea y gestión de cuencas en la Gran Área Metropolitana.</p>
-                        <a href="https://www.senara.go.cr" target="_blank" rel="noopener noreferrer" class="ph-fuente-link">senara.go.cr →</a>
-                    </div>
-                </div>
-
-                <div class="ph-fuente-card">
-                    <div class="ph-fuente-logo">IMN</div>
-                    <div class="ph-fuente-body">
-                        <h4>Instituto Meteorológico Nacional (IMN)</h4>
-                        <p>Datos de precipitación anual, patrones climáticos del macizo volcánico Poás–Barva y estimaciones de recarga atmosférica del bosque nuboso.</p>
-                        <a href="https://www.imn.ac.cr" target="_blank" rel="noopener noreferrer" class="ph-fuente-link">imn.ac.cr →</a>
-                    </div>
-                </div>
-
-                <div class="ph-fuente-card">
-                    <div class="ph-fuente-logo">OVSICORI</div>
-                    <div class="ph-fuente-body">
-                        <h4>Observatorio Vulcanológico y Sismológico de Costa Rica (OVSICORI-UNA)</h4>
-                        <p>Monitoreo de la actividad volcánica del Poás y sus efectos sobre la calidad del agua: acidificación, emisión de gases sulfurosos e impacto en cuencas.</p>
-                        <a href="https://www.ovsicori.una.ac.cr" target="_blank" rel="noopener noreferrer" class="ph-fuente-link">ovsicori.una.ac.cr →</a>
-                    </div>
-                </div>
-
-                <div class="ph-fuente-card">
-                    <div class="ph-fuente-logo">SINAC</div>
-                    <div class="ph-fuente-body">
-                        <h4>Sistema Nacional de Áreas de Conservación (SINAC)</h4>
-                        <p>Información del Parque Nacional Volcán Poás, ecosistemas protegidos, Laguna Botos y la zona de amortiguamiento del bosque nuboso como área de recarga hídrica.</p>
-                        <a href="https://www.sinac.go.cr" target="_blank" rel="noopener noreferrer" class="ph-fuente-link">sinac.go.cr →</a>
-                    </div>
-                </div>
-
-                <div class="ph-fuente-card">
-                    <div class="ph-fuente-logo">INEC</div>
-                    <div class="ph-fuente-body">
-                        <h4>Instituto Nacional de Estadística y Censos (INEC)</h4>
-                        <p>Datos territoriales del cantón de Poás: área (73,84 km²), distribución de distritos, población y cobertura de servicios básicos de agua.</p>
-                        <a href="https://www.inec.cr" target="_blank" rel="noopener noreferrer" class="ph-fuente-link">inec.cr →</a>
-                    </div>
-                </div>
-
-                <div class="ph-fuente-card">
-                    <div class="ph-fuente-logo">Muni</div>
-                    <div class="ph-fuente-body">
-                        <h4>Municipalidad de Poás</h4>
-                        <p>Plan Regulador Cantonal, datos de gestión del riesgo, administración del acueducto municipal del distrito San Pedro y registros locales de uso del suelo.</p>
-                        <a href="https://munipoas.go.cr" target="_blank" rel="noopener noreferrer" class="ph-fuente-link">munipoas.go.cr →</a>
-                    </div>
-                </div>
-
-                <div class="ph-fuente-card">
-                    <div class="ph-fuente-logo">UCR<br>TEC</div>
-                    <div class="ph-fuente-body">
-                        <h4>Estudios académicos — UCR / ITCR</h4>
-                        <p>Investigaciones sobre la microcuenca del Río Poás: balance hídrico, presiones socioambientales, calidad del agua subterránea, riesgos naturales e incremento del 1,6 % en escorrentía en los últimos 14 años.</p>
-                    </div>
-                </div>
-
+            <div class="ph-src">
+                <span class="ph-src-label">Fuentes:</span>
+                <a href="https://www.imn.ac.cr" target="_blank" rel="noopener" class="ph-src-tag">IMN</a>
+                <a href="https://www.ovsicori.una.ac.cr" target="_blank" rel="noopener" class="ph-src-tag">OVSICORI-UNA</a>
+                <a href="https://www.senara.go.cr" target="_blank" rel="noopener" class="ph-src-tag">SENARA</a>
+                <a href="https://www.sinac.go.cr" target="_blank" rel="noopener" class="ph-src-tag">SINAC</a>
             </div>
-
-            <p class="ph-fuentes-nota">⚠️ Esta plataforma tiene fines informativos y divulgativos. Los datos pueden variar según la fuente o fecha de publicación. Para información oficial actualizada consultá directamente las instituciones indicadas.</p>
         </div>
     </section>
-
     <!-- CTA -->
     <section class="ph-cta">
         <h2>💙 Protejamos el agua juntos</h2>
