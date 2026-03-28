@@ -683,6 +683,219 @@ h4 {
     background: white;
 }
 
+/* ── Tarjeta Volcán Poás — Estilo Fuego ── */
+.volcan-card {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(180,40,0,0.25), 0 4px 20px rgba(0,0,0,0.3);
+    min-height: 400px;
+}
+
+/* Panel visual izquierdo */
+.volcan-card-visual {
+    position: relative;
+    overflow: hidden;
+    min-height: 380px;
+}
+.volcan-card-img {
+    position: absolute;
+    inset: 0;
+    background: url('img/erupcion_poas.jpg') center 40% / cover no-repeat;
+    transform: scale(1.05);
+    transition: transform 6s ease;
+}
+.volcan-card:hover .volcan-card-img { transform: scale(1.12); }
+
+.volcan-card-lava {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        160deg,
+        rgba(5,0,0,0.15) 0%,
+        rgba(80,10,0,0.55) 40%,
+        rgba(180,40,0,0.82) 70%,
+        rgba(220,70,0,0.92) 100%
+    );
+    z-index: 1;
+}
+
+/* Brasas animadas */
+.volcan-embers {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+}
+.volcan-embers span {
+    position: absolute;
+    bottom: -10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #FFD580, #FF6B00);
+    box-shadow: 0 0 6px 2px rgba(255,120,0,0.6);
+    animation: emberRise var(--dur, 4s) ease-in infinite;
+    animation-delay: var(--del, 0s);
+    opacity: 0;
+}
+.volcan-embers span:nth-child(1)  { left: 12%;  --dur: 3.8s; --del: 0.0s; width: 4px;  height: 4px;  }
+.volcan-embers span:nth-child(2)  { left: 25%;  --dur: 5.1s; --del: 0.7s; width: 6px;  height: 6px;  }
+.volcan-embers span:nth-child(3)  { left: 40%;  --dur: 4.3s; --del: 1.4s; width: 3px;  height: 3px;  }
+.volcan-embers span:nth-child(4)  { left: 55%;  --dur: 6.0s; --del: 0.3s; width: 5px;  height: 5px;  }
+.volcan-embers span:nth-child(5)  { left: 68%;  --dur: 3.5s; --del: 1.9s; width: 4px;  height: 4px;  }
+.volcan-embers span:nth-child(6)  { left: 78%;  --dur: 4.8s; --del: 0.9s; width: 7px;  height: 7px;  }
+.volcan-embers span:nth-child(7)  { left: 88%;  --dur: 5.5s; --del: 2.2s; width: 3px;  height: 3px;  }
+.volcan-embers span:nth-child(8)  { left: 33%;  --dur: 4.0s; --del: 3.1s; width: 5px;  height: 5px;  }
+@keyframes emberRise {
+    0%   { transform: translateY(0)   translateX(0)    scale(1);   opacity: 0;   }
+    10%  { opacity: 1; }
+    50%  { transform: translateY(-55%) translateX(12px) scale(0.85); opacity: 0.9; }
+    100% { transform: translateY(-130%) translateX(-8px) scale(0.4); opacity: 0;  }
+}
+
+.volcan-card-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem 2.2rem;
+    z-index: 3;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+}
+.volcan-badge-activo {
+    display: inline-block;
+    background: rgba(255,60,0,0.85);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 0.6rem;
+    border: 1px solid rgba(255,140,0,0.6);
+    box-shadow: 0 0 12px rgba(255,80,0,0.5);
+}
+.volcan-card-label h3 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.05;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+    margin: 0 0 0.3rem;
+}
+.volcan-card-label h3 em {
+    font-style: normal;
+    color: #FFB347;
+}
+.volcan-card-elev {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Panel derecho: info */
+.volcan-card-info {
+    background: #0F0805;
+    padding: 2.4rem 2.4rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.4rem;
+}
+.volcan-info-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(255,100,0,0.2);
+}
+.volcan-icon-fire { font-size: 2.2rem; line-height: 1; flex-shrink: 0; }
+.volcan-info-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #FFB347;
+    line-height: 1.3;
+}
+.volcan-info-sub {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 0.2rem;
+    line-height: 1.4;
+}
+.volcan-info-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    flex: 1;
+}
+.volcan-info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,100,0,0.12);
+    border-radius: 10px;
+    padding: 0.65rem 0.9rem;
+}
+.volcan-info-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.volcan-info-row div { display: flex; flex-direction: column; gap: 0.1rem; }
+.volcan-info-row strong { color: #FFB347; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.volcan-info-row span  { color: rgba(255,255,255,0.8); font-size: 0.88rem; }
+
+/* Botones */
+.volcan-info-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+.volcan-btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    letter-spacing: 0.3px;
+}
+.volcan-btn-fire {
+    background: linear-gradient(135deg, #C43400, #FF6B00);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(200,60,0,0.4);
+}
+.volcan-btn-fire:hover { filter: brightness(1.15); transform: translateY(-2px); }
+.volcan-btn-cam {
+    background: rgba(255,255,255,0.06);
+    color: #FF9A60;
+    border: 1px solid rgba(255,100,0,0.35);
+}
+.volcan-btn-cam:hover { background: rgba(255,100,0,0.15); transform: translateY(-2px); }
+.volcan-btn-tips {
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.volcan-btn-tips:hover { background: rgba(255,255,255,0.1); color: #fff; transform: translateY(-2px); }
+
+/* Responsive */
+@media (max-width: 820px) {
+    .volcan-card { grid-template-columns: 1fr; }
+    .volcan-card-visual { min-height: 280px; }
+    .volcan-card-label h3 { font-size: 2.2rem; }
+}
+@media (max-width: 480px) {
+    .volcan-card-visual { min-height: 240px; }
+    .volcan-card-info { padding: 1.6rem; }
+    .volcan-card-label h3 { font-size: 1.9rem; }
+    .volcan-card-label { padding: 1.2rem 1.4rem; }
+}
+
 .community-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
