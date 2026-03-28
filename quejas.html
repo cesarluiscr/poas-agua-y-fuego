@@ -104,6 +104,158 @@
 
         </div>
 
+        <!-- ═══════════════════════════════════════
+             DENUNCIAS PUBLICADAS
+        ═══════════════════════════════════════ -->
+        <div class="qp-section">
+            <div class="qp-header">
+                <h2 class="qp-title">📋 Denuncias Recibidas</h2>
+                <p class="qp-subtitle">Quejas enviadas por la comunidad del Cantón de Poás. Las denuncias son canalizadas a las entidades correspondientes.</p>
+            </div>
+
+            <!-- Filtro por categoría -->
+            <div class="qp-filters">
+                <button class="qp-filter active" data-cat="todas">Todas</button>
+                <button class="qp-filter" data-cat="infraestructura">🏗️ Infraestructura</button>
+                <button class="qp-filter" data-cat="ambiente">🌿 Ambiente</button>
+                <button class="qp-filter" data-cat="seguridad">🚨 Seguridad</button>
+                <button class="qp-filter" data-cat="agua">💧 Agua</button>
+            </div>
+
+            <div class="qp-grid" id="qpGrid">
+
+                <!-- DENUNCIA #1 -->
+                <div class="qp-card" data-cat="infraestructura">
+                    <div class="qp-card-top">
+                        <span class="qp-badge qp-badge-infra">🏗️ Obras e Infraestructura</span>
+                        <span class="qp-status qp-status-pendiente">⏳ Pendiente</span>
+                    </div>
+                    <h3 class="qp-card-titulo">Reductor de velocidad urgente — Ruta San Juan Volcán</h3>
+                    <div class="qp-card-meta">
+                        <span>👤 Carlos Vásquez</span>
+                        <span>📍 San Juan Sur</span>
+                        <span>📅 26 marzo 2026</span>
+                    </div>
+                    <p class="qp-card-desc">
+                        Ocupamos urgente reductor ruta San Juan volcán en la salida del EBAIS, pues transitan adultos mayores y niños, y los carros y motos bajan a alta velocidad poniendo en peligro a los peatones.
+                    </p>
+                    <div class="qp-card-footer">
+                        <a href="https://www.munipoas.go.cr/" target="_blank" rel="noopener noreferrer" class="qp-card-link">→ Municipalidad de Poás</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <script>
+            // Filtro de categorías
+            document.querySelectorAll('.qp-filter').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.qp-filter').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const cat = this.dataset.cat;
+                    document.querySelectorAll('.qp-card').forEach(function(card) {
+                        card.style.display = (cat === 'todas' || card.dataset.cat === cat) ? '' : 'none';
+                    });
+                });
+            });
+        </script>
+
+        <style>
+            /* ── Sección quejas publicadas ── */
+            .qp-section { margin: 4rem 0 2rem; }
+            .qp-header { text-align: center; margin-bottom: 2rem; }
+            .qp-title { font-size: 1.6rem; font-weight: 800; color: #1A237E; margin-bottom: 0.4rem; }
+            .qp-subtitle { color: #555; font-size: 0.92rem; max-width: 560px; margin: 0 auto; }
+
+            /* Filtros */
+            .qp-filters {
+                display: flex; flex-wrap: wrap; gap: 0.5rem;
+                justify-content: center; margin-bottom: 2rem;
+            }
+            .qp-filter {
+                padding: 0.35rem 1rem; border-radius: 20px; border: 2px solid #c8d0e8;
+                background: #fff; color: #3a4070; font-size: 0.82rem; font-weight: 600;
+                cursor: pointer; transition: all 0.2s;
+            }
+            .qp-filter.active, .qp-filter:hover {
+                background: #1A237E; color: #fff; border-color: #1A237E;
+            }
+
+            /* Grid de tarjetas */
+            .qp-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 1.5rem;
+            }
+
+            /* Tarjeta */
+            .qp-card {
+                background: #fff; border-radius: 14px;
+                border: 1px solid #e0e4f0;
+                box-shadow: 0 3px 16px rgba(26,35,126,0.07);
+                padding: 1.4rem 1.5rem 1.2rem;
+                display: flex; flex-direction: column; gap: 0.7rem;
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+            .qp-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 10px 30px rgba(26,35,126,0.12);
+            }
+            .qp-card-top {
+                display: flex; justify-content: space-between;
+                align-items: center; flex-wrap: wrap; gap: 0.4rem;
+            }
+
+            /* Badges de categoría */
+            .qp-badge {
+                font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.65rem;
+                border-radius: 20px; letter-spacing: 0.03em;
+            }
+            .qp-badge-infra  { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+            .qp-badge-amb    { background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+            .qp-badge-seg    { background: #fce4ec; color: #b71c1c; border: 1px solid #ef9a9a; }
+            .qp-badge-agua   { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+            .qp-badge-otro   { background: #f3e5f5; color: #6a1b9a; border: 1px solid #ce93d8; }
+
+            /* Estado */
+            .qp-status {
+                font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.65rem;
+                border-radius: 20px;
+            }
+            .qp-status-pendiente { background: #fff8e1; color: #f57f17; border: 1px solid #ffe082; }
+            .qp-status-proceso   { background: #e3f2fd; color: #0d47a1; border: 1px solid #90caf9; }
+            .qp-status-resuelto  { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+
+            /* Contenido */
+            .qp-card-titulo {
+                font-size: 0.97rem; font-weight: 700; color: #1a237e; line-height: 1.35;
+            }
+            .qp-card-meta {
+                display: flex; flex-wrap: wrap; gap: 0.5rem 1rem;
+                font-size: 0.78rem; color: #6070a0;
+            }
+            .qp-card-desc {
+                font-size: 0.875rem; color: #333; line-height: 1.65;
+                flex: 1;
+            }
+            .qp-card-footer {
+                border-top: 1px solid #eef0f8; padding-top: 0.7rem; margin-top: auto;
+            }
+            .qp-card-link {
+                font-size: 0.8rem; font-weight: 700; color: #1A237E;
+                text-decoration: none; transition: color 0.2s;
+            }
+            .qp-card-link:hover { color: #FFF200; }
+
+            @media (max-width: 500px) {
+                .qp-card { padding: 1.1rem 1rem; }
+                .qp-title { font-size: 1.3rem; }
+            }
+        </style>
+
+        <hr style="border:none;border-top:2px solid #e8ecf8;margin:3rem 0 2rem">
+
         <!-- Formulario de queja -->
         <div class="quejas-form-section">
             <h2>📋 Envíe su Queja Directamente</h2>
