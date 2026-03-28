@@ -2924,6 +2924,14 @@ footer {
     /* Hero split */
     .hero-split { padding: 2rem 1.5rem; }
 
+    /* Logo hero — centrar horizontalmente en móvil */
+    .hero-site-logo {
+        left: 50% !important;
+        transform: translateX(-50%) translateY(-50%) !important;
+        width: 160px !important;
+        height: 160px !important;
+    }
+
     /* Video volcán */
     .volcan-video {
         width: 280px;
@@ -3022,6 +3030,9 @@ footer {
     /* Quejas section */
     .quejas-section { padding: 1rem; }
     .quejas-card    { flex-direction: column; text-align: center; gap: 0.5rem; }
+
+    /* Mini drops — ocultar en móvil para evitar desbordamiento */
+    .md1,.md2,.md3,.md4,.md5 { display: none; }
 
     /* Muni banner */
     .muni-banner    { flex-wrap: wrap; gap: 0.75rem; padding: 0.75rem 1rem; }
