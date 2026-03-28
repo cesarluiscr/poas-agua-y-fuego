@@ -2924,12 +2924,13 @@ footer {
     /* Hero split */
     .hero-split { padding: 2rem 1.5rem; }
 
-    /* Logo hero — centrar horizontalmente en móvil */
+    /* Logo hero — arriba centrado en móvil, sin solapar el texto */
     .hero-site-logo {
+        top: 1.2rem !important;
         left: 50% !important;
-        transform: translateX(-50%) translateY(-50%) !important;
-        width: 160px !important;
-        height: 160px !important;
+        transform: translateX(-50%) !important;
+        width: 120px !important;
+        height: 120px !important;
     }
 
     /* Video volcán */
