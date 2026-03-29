@@ -162,6 +162,21 @@
         .ph-amenaza-card h4 { color: #ef9a9a; font-size: 0.95rem; margin-bottom: 0.4rem; }
         .ph-amenaza-card p { color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.5; }
 
+        /* ── MAPAS ── */
+        .ph-maps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .ph-map-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(64,196,255,0.15); border-radius: 16px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+        .ph-map-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+        .ph-map-card img { width: 100%; height: auto; display: block; cursor: zoom-in; transition: transform 0.4s; }
+        .ph-map-card:hover img { transform: scale(1.02); }
+        .ph-map-info { padding: 1.25rem 1.5rem 1.5rem; }
+        .ph-map-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--agua-light); margin-bottom: 0.4rem; }
+        .ph-map-title { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.6rem; line-height: 1.35; }
+        .ph-map-desc { font-size: 0.83rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+        .ph-map-lb { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; padding: 1rem; cursor: zoom-out; }
+        .ph-map-lb.active { display: flex; }
+        .ph-map-lb img { max-width: 92vw; max-height: 92vh; border-radius: 8px; object-fit: contain; }
+        .ph-map-lb-close { position: absolute; top: 1rem; right: 1.5rem; font-size: 2.2rem; color: #fff; cursor: pointer; background: none; border: none; line-height: 1; }
+
         /* ── CTA ── */
         .ph-cta {
             text-align: center; padding: 5rem 1.5rem;
@@ -403,7 +418,7 @@
                     <div class="ph-ac-icon">💧</div>
                     <div class="ph-ac-name">Acuífero Poás</div>
                     <span class="ph-ac-badge">Zona Alta</span>
-                    <p class="ph-ac-desc">Uno de los acuíferos más importantes de Costa Rica. Recibe recarga desde el macizo Poás-Barva y abastece una gran parte del Valle Central. Es fuente clave del SENARA y del AyA para provincias de Heredia y Alajuela.</p>
+                    <p class="ph-ac-desc">Acuífero localizado en la parte alta del cantón, en la zona más cercana al volcán Poás. Es la principal fuente de agua para las ASADAS y comunidades locales, a través de pozos y manantiales. Se recarga gracias a los suelos volcánicos porosos y el bosque nuboso, pero presenta alta vulnerabilidad a la contaminación por actividades agrícolas y ganaderas en la subcuenca.</p>
                     <div class="ph-ac-stats">
                         <span class="ph-ac-stat">🏔️ Zona alta</span>
                         <span class="ph-ac-stat">🌧️ Alta recarga</span>
@@ -661,6 +676,51 @@
             </div>
         </div>
     </section>
+    <!-- MAPAS -->
+    <section class="ph-section">
+        <div class="ph-container">
+            <h2 class="ph-section-title">🗺️ Cartografía Hídrica</h2>
+            <p class="ph-section-sub">Mapas técnicos sobre la cuenca, zonas de recarga y biodiversidad del cantón de Poás.</p>
+            <div class="ph-divider"></div>
+            <div class="ph-maps-grid">
+
+                <div class="ph-map-card">
+                    <img src="img/mapa_subcuenca_poas.jpg" alt="Ubicación Subcuenca Río Poás, poblados principales" onclick="openMapLb(this)" loading="lazy">
+                    <div class="ph-map-info">
+                        <div class="ph-map-label">🏞️ Cuenca hidrográfica</div>
+                        <div class="ph-map-title">Subcuenca Río Poás — Poblados principales</div>
+                        <p class="ph-map-desc">Muestra la delimitación de la subcuenca del Río Poás, sus principales afluentes (Río Poasito, Quebrada Tigre, Río Tacares, Río Tatacón) y los poblados dentro de ella: Poasito, Fraijanes, San Juan, San Pedro y Carrillos. Divide la cuenca en sectores alto, medio y bajo. Fuente: Servicio OGC-SNIT / IGN, escala 1:120 000.</p>
+                    </div>
+                </div>
+
+                <div class="ph-map-card">
+                    <img src="img/mapa_recarga_nitratos.jpg" alt="Altura de Recarga del agua subterránea e índice de contaminación por nitratos" onclick="openMapLb(this)" loading="lazy">
+                    <div class="ph-map-info">
+                        <div class="ph-map-label">💧 Acuíferos y calidad</div>
+                        <div class="ph-map-title">Recarga hídrica e índice de contaminación por nitratos (NPI)</div>
+                        <p class="ph-map-desc">Identifica las zonas de recarga del agua subterránea sobre la cota 1 675 m.s.n.m. y el nivel de contaminación por nitratos en 21 puntos de muestreo (RP01–RP21), clasificados de limpio a significativo. Refleja la presión de actividades agrícolas y ganaderas sobre los acuíferos. Escala 1:140 000.</p>
+                    </div>
+                </div>
+
+                <div class="ph-map-card">
+                    <img src="img/mapa_corredor_garcimunioz.jpg" alt="Áreas verdes dentro del Corredor Biológico Interurbano Garcimuñoz, 2024" onclick="openMapLb(this)" loading="lazy">
+                    <div class="ph-map-info">
+                        <div class="ph-map-label">🌿 Biodiversidad</div>
+                        <div class="ph-map-title">Corredor Biológico Interurbano Garcimuñoz (2024)</div>
+                        <p class="ph-map-desc">Delimita las áreas verdes y de cobertura boscosa dentro del Corredor Biológico Interurbano Garcimuñoz, que atraviesa la subcuenca del Poás. Este corredor cumple una función clave de conectividad ecológica y protección de zonas de recarga hídrica. Fuente: SNIT, cartografía 1:5 000. Elaborado por Alejandra Alvarado y Zairy Vargas, octubre 2024.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox mapas -->
+    <div class="ph-map-lb" id="mapLb" onclick="closeMapLb()">
+        <button class="ph-map-lb-close" onclick="closeMapLb()">✕</button>
+        <img id="mapLbImg" src="" alt="">
+    </div>
+
     <!-- CTA -->
     <section class="ph-cta">
         <h2>💙 Protejamos el agua juntos</h2>
@@ -678,5 +738,20 @@
 
     <script src="security.js?v=2"></script>
 <script src="search.js"></script>
+<script>
+    function openMapLb(img) {
+        document.getElementById('mapLbImg').src = img.src;
+        document.getElementById('mapLbImg').alt = img.alt;
+        document.getElementById('mapLb').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMapLb() {
+        document.getElementById('mapLb').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeMapLb();
+    });
+</script>
 </body>
 </html>
