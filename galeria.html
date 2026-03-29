@@ -427,6 +427,16 @@
                         <div class="g-caption-zoom">⤢</div>
                     </div>
                 </div>
+                <div class="g-photo col-12" onclick="openLb(3)">
+                    <div class="g-photo-inner">
+                        <img src="img/crater_poas_gases.jpg" alt="Cráter del Volcán Poás con gases y vapor" loading="lazy" style="object-position:center 50%">
+                    </div>
+                    <div class="g-cat-tag">Volcán</div>
+                    <div class="g-caption">
+                        <span class="g-caption-text">💨 Cráter Principal — gases y vapor volcánico</span>
+                        <div class="g-caption-zoom">⤢</div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -443,7 +453,7 @@
                 <div class="g-section-line"></div>
             </div>
             <div class="g-grid">
-                <div class="g-photo col-8" onclick="openLb(3)">
+                <div class="g-photo col-8" onclick="openLb(4)">
                     <div class="g-photo-inner">
                         <img src="img/centro_poas.jpg" alt="Vista aérea del Centro de Poás" loading="lazy">
                     </div>
@@ -453,7 +463,7 @@
                         <div class="g-caption-zoom">⤢</div>
                     </div>
                 </div>
-                <div class="g-photo col-4" onclick="openLb(4)">
+                <div class="g-photo col-4" onclick="openLb(5)">
                     <div class="g-photo-inner">
                         <img src="img/letrero_poas.jpg" alt="Letrero de Poás con corteza amarilla" loading="lazy">
                     </div>
@@ -479,7 +489,7 @@
                 <div class="g-section-line"></div>
             </div>
             <div class="g-grid">
-                <div class="g-photo col-6" onclick="openLb(5)">
+                <div class="g-photo col-6" onclick="openLb(6)">
                     <div class="g-photo-inner">
                         <img src="img/poas_vegetacion.jpg" alt="Vegetación del bosque nuboso del Volcán Poás" loading="lazy">
                     </div>
@@ -489,13 +499,33 @@
                         <div class="g-caption-zoom">⤢</div>
                     </div>
                 </div>
-                <div class="g-photo col-6" onclick="openLb(6)">
+                <div class="g-photo col-6" onclick="openLb(7)">
                     <div class="g-photo-inner">
                         <img src="img/laguna_fraijanes.jpg" alt="Laguna de Fraijanes, Poás" loading="lazy">
                     </div>
                     <div class="g-cat-tag">Naturaleza</div>
                     <div class="g-caption">
                         <span class="g-caption-text">💧 Laguna de Fraijanes</span>
+                        <div class="g-caption-zoom">⤢</div>
+                    </div>
+                </div>
+                <div class="g-photo col-12" onclick="openLb(8)">
+                    <div class="g-photo-inner">
+                        <img src="img/laguna_botos_2.jpg" alt="Laguna Botos, Volcán Poás" loading="lazy" style="object-position:center 60%">
+                    </div>
+                    <div class="g-cat-tag">Naturaleza</div>
+                    <div class="g-caption">
+                        <span class="g-caption-text">🏞️ Laguna Botos — Volcán Poás</span>
+                        <div class="g-caption-zoom">⤢</div>
+                    </div>
+                </div>
+                <div class="g-photo col-12" onclick="openLb(9)">
+                    <div class="g-photo-inner">
+                        <img src="img/laguna_botos_postal.jpg" alt="Laguna Botos — postal" loading="lazy" style="object-position:center 60%">
+                    </div>
+                    <div class="g-cat-tag">Naturaleza</div>
+                    <div class="g-caption">
+                        <span class="g-caption-text">💌 Laguna Botos — vista postal</span>
                         <div class="g-caption-zoom">⤢</div>
                     </div>
                 </div>
@@ -532,13 +562,16 @@
     <script>
         /* ── DATOS DE FOTOS ── */
         const PHOTOS = [
-            { src: 'img/erupcion_poas.jpg',    cap: '🌋 Erupción del Volcán Poás' },
-            { src: 'img/crateres_poas.jpg',    cap: '🛩️ Vista aérea — Cráter Principal y Laguna Botos' },
-            { src: 'img/crater_noche_poas.jpg',cap: '🔥 Cráter del Volcán Poás de noche' },
-            { src: 'img/centro_poas.jpg',      cap: '🏙️ Centro del Cantón de Poás' },
-            { src: 'img/letrero_poas.jpg',     cap: '🌳 Letrero de Poás con corteza amarilla' },
-            { src: 'img/poas_vegetacion.jpg',  cap: '🌿 Vegetación del bosque nuboso del Volcán Poás' },
-            { src: 'img/laguna_fraijanes.jpg', cap: '💧 Laguna de Fraijanes, Poás' },
+            { src: 'img/erupcion_poas.jpg',       cap: '🌋 Erupción del Volcán Poás' },
+            { src: 'img/crateres_poas.jpg',       cap: '🛩️ Vista aérea — Cráter Principal y Laguna Botos' },
+            { src: 'img/crater_noche_poas.jpg',   cap: '🔥 Cráter del Volcán Poás de noche' },
+            { src: 'img/crater_poas_gases.jpg',   cap: '💨 Cráter Principal — gases y vapor volcánico' },
+            { src: 'img/centro_poas.jpg',         cap: '🏙️ Centro del Cantón de Poás' },
+            { src: 'img/letrero_poas.jpg',        cap: '🌳 Letrero de Poás con corteza amarilla' },
+            { src: 'img/poas_vegetacion.jpg',     cap: '🌿 Vegetación del bosque nuboso del Volcán Poás' },
+            { src: 'img/laguna_fraijanes.jpg',    cap: '💧 Laguna de Fraijanes, Poás' },
+            { src: 'img/laguna_botos_2.jpg',      cap: '🏞️ Laguna Botos — Volcán Poás' },
+            { src: 'img/laguna_botos_postal.jpg', cap: '💌 Laguna Botos — vista postal' },
         ];
 
         let currentIdx = 0;
