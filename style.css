@@ -320,6 +320,41 @@ h1 .logo-agua {
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     letter-spacing: 2px;
 }
+.hero-title-split {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .15em;
+    text-shadow: none;
+    line-height: 1;
+}
+.hero-title-poas {
+    font-size: clamp(2.4rem, 8vw, 5.5rem);
+    font-weight: 900;
+    letter-spacing: .06em;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    line-height: 1;
+}
+.hero-title-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
+    gap: .3em;
+    font-size: clamp(1.4rem, 5vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: .04em;
+    line-height: 1;
+}
+.hero-title-row .logo-agua { flex: 0 0 auto; text-align: left; }
+.hero-title-row .logo-fuego { flex: 0 0 auto; text-align: right; }
+.hero-title-y {
+    flex: 1;
+    text-align: center;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+    font-size: .8em;
+}
 
 .hero-center p {
     font-size: 1.2rem;
