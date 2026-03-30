@@ -165,6 +165,115 @@
             .empleo-modern-footer { flex-direction: column; align-items: flex-start; }
             .empleo-modern-btn { width: 100%; justify-content: center; }
         }
+
+        /* ── Eventos del Cantón — tarjeta moderna ── */
+        .eventos-modern {
+            position: relative;
+            background: linear-gradient(135deg, #1a0533 0%, #2d1060 55%, #1a0a3e 100%);
+            border: 1px solid rgba(167,139,250,0.2);
+            border-radius: 22px;
+            padding: 2.4rem 2.4rem 2rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(167,139,250,0.08);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .eventos-modern:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(167,139,250,0.2);
+        }
+        .eventos-modern::before {
+            content: '';
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 240px; height: 240px;
+            background: radial-gradient(circle, rgba(167,139,250,0.13) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .eventos-modern-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+        .eventos-modern-badge {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            border-radius: 14px;
+            width: 56px; height: 56px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(168,85,247,0.4);
+        }
+        .eventos-modern-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #c084fc;
+            margin-bottom: 0.25rem;
+        }
+        .eventos-modern-title {
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: #faf5ff;
+            line-height: 1.2;
+            margin: 0;
+        }
+        .eventos-modern-desc {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            margin: 0;
+        }
+        .eventos-modern-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .eventos-chip {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(167,139,250,0.2);
+            border-radius: 50px;
+            padding: 0.3rem 0.85rem;
+            font-size: 0.78rem;
+            color: #ddd6fe;
+            font-weight: 500;
+        }
+        .eventos-modern-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .eventos-modern-stat {
+            color: #64748b;
+            font-size: 0.78rem;
+        }
+        .eventos-modern-stat strong { color: #c084fc; font-size: 1rem; }
+        .eventos-modern-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+            box-shadow: 0 4px 14px rgba(168,85,247,0.4);
+            white-space: nowrap;
+        }
+        .eventos-modern-btn:hover { opacity: 0.88; transform: translateX(3px); }
+        @media (max-width: 600px) {
+            .eventos-modern { padding: 1.6rem 1.4rem 1.4rem; }
+            .eventos-modern-footer { flex-direction: column; align-items: flex-start; }
+            .eventos-modern-btn { width: 100%; justify-content: center; }
+        }
     </style>
 </head>
 
@@ -290,19 +399,25 @@
             </div>
 
             <!-- Eventos -->
-            <div class="regulador-preview-card" id="eventos">
-                <div class="regulador-preview-icon">📅</div>
-                <div class="regulador-preview-text">
-                    <h2>Eventos del Cantón</h2>
-                    <p>Actividades culturales, deportivas y comunitarias en Poás. Agregá y consultá eventos fácilmente.</p>
-                    <ul class="regulador-preview-tags">
-                        <li>🎭 Culturales</li>
-                        <li>⚽ Deportivos</li>
-                        <li>🤝 Comunidad</li>
-                        <li>🍽️ Gastronomía</li>
-                    </ul>
+            <div class="eventos-modern" id="eventos">
+                <div class="eventos-modern-top">
+                    <div class="eventos-modern-badge">📅</div>
+                    <div>
+                        <div class="eventos-modern-label">Agenda comunitaria</div>
+                        <h2 class="eventos-modern-title">Eventos del Cantón</h2>
+                    </div>
                 </div>
-                <a href="eventos.html" class="btn-primary regulador-preview-btn">Ver Eventos →</a>
+                <p class="eventos-modern-desc">Actividades culturales, deportivas y comunitarias en Poás. Agregá y consultá eventos fácilmente.</p>
+                <div class="eventos-modern-chips">
+                    <span class="eventos-chip">🎭 Culturales</span>
+                    <span class="eventos-chip">⚽ Deportivos</span>
+                    <span class="eventos-chip">🤝 Comunidad</span>
+                    <span class="eventos-chip">🍽️ Gastronomía</span>
+                </div>
+                <div class="eventos-modern-footer">
+                    <span class="eventos-modern-stat">Eventos activos en <strong>Poás</strong></span>
+                    <a href="eventos.html" class="eventos-modern-btn">Ver eventos →</a>
+                </div>
             </div>
 
             <!-- Directorio Turístico y Comercial -->
