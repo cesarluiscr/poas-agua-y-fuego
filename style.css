@@ -99,18 +99,32 @@ h4 {
     font-weight: 300;
 }
 .logo-agua {
-    background: linear-gradient(135deg, #38bdf8, #0284c7);
+    background: linear-gradient(180deg,
+        #e0f7ff 0%,
+        #67e8f9 20%,
+        #06b6d4 50%,
+        #0369a1 80%,
+        #0c4a6e 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 700;
+    filter: drop-shadow(0 0 8px rgba(6,182,212,0.55));
 }
 .logo-fuego {
-    background: linear-gradient(135deg, #fb923c, #dc2626);
+    background: linear-gradient(180deg,
+        #fff9c4 0%,
+        #fde047 15%,
+        #fb923c 40%,
+        #ef4444 70%,
+        #991b1b 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     font-weight: 700;
+    filter: drop-shadow(0 0 10px rgba(251,146,60,0.65));
 }
 
 .nav-links {
