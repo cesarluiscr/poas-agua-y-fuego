@@ -243,6 +243,11 @@ h1 .logo-fuego {
     flex-direction: column;
     align-items: center;
 }
+.hero-content-right {
+    align-items: flex-end;
+    text-align: right;
+    padding-right: 2.5rem;
+}
 
 /* Logo principal del sitio en el hero */
 .hero-site-logo {
