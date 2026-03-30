@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Seguridad: no indexar, no cachear, no embeber en frames -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Referrer-Policy" content="no-referrer">
+    <title>Panel — Poás</title>
+    <link rel="stylesheet" href="style.css?v=2">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #0d0d1a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #fff;
+            padding: 1rem;
+        }
+        #admin-wrap {
+            width: 100%;
+            max-width: 680px;
+        }
+        #admin-login-wrap {
+            max-width: 360px;
+            margin: 0 auto;
+            background: #1a1a2e;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 18px;
+            padding: 2.5rem 2rem;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #555;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #888; }
+        #admin-panel-wrap {
+            background: #1a1a2e;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 18px;
+            padding: 2rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="admin-wrap">
+
+    <!-- ── LOGIN ── -->
+    <div id="admin-login-wrap">
+        <div class="admin-logo">🔐</div>
+        <h2 class="admin-title">Acceso Administrador</h2>
+        <p class="admin-subtitle">Poás Agua y Fuego</p>
+        <input type="text"     id="admin-user" class="admin-input" placeholder="Usuario"     autocomplete="username">
+        <input type="password" id="admin-pass" class="admin-input" placeholder="Contraseña" autocomplete="current-password">
+        <p id="admin-error" class="admin-error" style="display:none"></p>
+        <button class="admin-btn-login" onclick="verificarAdmin()">Ingresar</button>
+        <a href="index.html" class="back-link">← Volver al sitio</a>
+    </div>
+
+    <!-- ── DASHBOARD ── -->
+    <div id="admin-panel-wrap">
+        <div class="admin-header-bar">
+            <span>⚙️ Panel Admin — <strong id="admin-username-display">Admin</strong></span>
+            <button class="admin-logout" onclick="cerrarSesionAdmin()">Salir</button>
+        </div>
+
+        <!-- TABS -->
+        <div class="admin-tabs">
+            <button class="atab active" onclick="adminTab('estadisticas',this)">📊 Stats</button>
+            <button class="atab" onclick="adminTab('paginas',this)">🌐 Páginas</button>
+            <button class="atab" onclick="adminTab('backup',this)">💾 Backup</button>
+            <button class="atab" onclick="adminTab('anuncios',this)">📢 Anuncio</button>
+            <button class="atab" onclick="adminTab('sistema',this)">🔧 Sistema</button>
+        </div>
+
+        <!-- TAB: ESTADÍSTICAS -->
+        <div id="atab-estadisticas" class="atab-content">
+            <div class="admin-stats-grid" id="admin-stats-grid"></div>
+            <div class="admin-storage-bar-wrap">
+                <span class="admin-storage-label" id="admin-storage-label">localStorage: calculando...</span>
+                <div class="admin-storage-bar"><div id="admin-storage-fill" class="admin-storage-fill"></div></div>
+            </div>
+        </div>
+
+        <!-- TAB: PÁGINAS -->
+        <div id="atab-paginas" class="atab-content" style="display:none">
+            <div class="admin-pages-grid">
+                <a href="index.html" class="admin-page-link">🏠 Inicio</a>
+                <a href="index-en.html" class="admin-page-link">🇺🇸 Inicio EN</a>
+                <a href="plan-regulador.html" class="admin-page-link">🗺️ Plan Regulador</a>
+                <a href="plan-regulador-en.html" class="admin-page-link">🗺️ Plan Regulador EN</a>
+                <a href="directorio-comercial.html" class="admin-page-link">🛍️ Directorio</a>
+                <a href="directorio-comercial-en.html" class="admin-page-link">🛍️ Directorio EN</a>
+                <a href="bolsa-empleo.html" class="admin-page-link">💼 Bolsa Empleo</a>
+                <a href="bolsa-empleo-en.html" class="admin-page-link">💼 Bolsa EN</a>
+                <a href="eventos.html" class="admin-page-link">📅 Eventos</a>
+                <a href="eventos-en.html" class="admin-page-link">📅 Eventos EN</a>
+                <a href="patrimonio-hidrico.html" class="admin-page-link">💧 Patrimonio Hídrico</a>
+                <a href="galeria.html" class="admin-page-link">📸 Galería</a>
+                <a href="ruta-gastronomica.html" class="admin-page-link">🍽️ Ruta Gastronómica</a>
+                <a href="quejas.html" class="admin-page-link">📢 Denuncias</a>
+                <a href="seguridad-ciudadana.html" class="admin-page-link">🛡️ Seguridad</a>
+                <a href="techcenter.html" class="admin-page-link">💻 Tech Center CR</a>
+            </div>
+            <div style="margin-top:1rem;border-top:1px solid rgba(255,255,255,0.08);padding-top:1rem;">
+                <p style="color:#888;font-size:0.8rem;margin-bottom:0.6rem;">Gestión externa</p>
+                <div class="admin-pages-grid">
+                    <a href="https://github.com/cesarluiscr/poas-agua-y-fuego" target="_blank" rel="noopener noreferrer" class="admin-page-link ext">🐙 Repositorio</a>
+                    <a href="https://github.com/cesarluiscr/poas-agua-y-fuego/commits/main" target="_blank" rel="noopener noreferrer" class="admin-page-link ext">📝 Commits</a>
+                    <a href="https://github.com/cesarluiscr/poas-agua-y-fuego/actions" target="_blank" rel="noopener noreferrer" class="admin-page-link ext">🚀 Despliegue</a>
+                    <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="admin-page-link ext claude">🤖 Claude AI</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: BACKUP -->
+        <div id="atab-backup" class="atab-content" style="display:none">
+            <p class="admin-tool-desc">Exporta o importa todos los datos del sitio almacenados localmente.</p>
+            <div class="admin-tool-row">
+                <button class="admin-tool-btn green" onclick="exportarBackup()">📤 Exportar JSON</button>
+                <span style="color:#888;font-size:0.8rem">Descarga un archivo con todos los datos (negocios, empleos, eventos).</span>
+            </div>
+            <div class="admin-tool-row" style="margin-top:1rem">
+                <label class="admin-tool-btn blue" style="cursor:pointer">
+                    📥 Importar JSON
+                    <input type="file" accept=".json" style="display:none" onchange="importarBackup(this)">
+                </label>
+                <span style="color:#888;font-size:0.8rem">Restaura datos desde un backup. Reemplaza los datos actuales.</span>
+            </div>
+            <div id="backup-msg" class="admin-tool-msg" style="display:none"></div>
+        </div>
+
+        <!-- TAB: ANUNCIO -->
+        <div id="atab-anuncios" class="atab-content" style="display:none">
+            <p class="admin-tool-desc">Muestra un banner de anuncio en la parte superior del sitio.</p>
+            <textarea id="anuncio-texto" class="admin-textarea" placeholder="Ej: ⚠️ Mantenimiento programado el sábado a las 10am."></textarea>
+            <div class="admin-tool-row" style="gap:0.5rem;flex-wrap:wrap">
+                <button class="admin-tool-btn green" onclick="publicarAnuncio()">📢 Publicar anuncio</button>
+                <button class="admin-tool-btn red" onclick="eliminarAnuncio()">🗑️ Quitar anuncio</button>
+            </div>
+            <div id="anuncio-preview" class="admin-anuncio-preview" style="display:none"></div>
+            <p id="anuncio-msg" style="display:none;font-size:0.82rem;margin-top:0.5rem"></p>
+        </div>
+
+        <!-- TAB: SISTEMA -->
+        <div id="atab-sistema" class="atab-content" style="display:none">
+            <div class="admin-sys-grid">
+                <button class="admin-sys-btn" onclick="recargarSitio()">🔄 Recargar página</button>
+                <button class="admin-sys-btn" onclick="limpiarCacheNegocios()">🏪 Reset negocios</button>
+                <button class="admin-sys-btn" onclick="limpiarCacheEmpleos()">💼 Reset empleos</button>
+                <button class="admin-sys-btn" onclick="limpiarCacheEventos()">📅 Reset eventos</button>
+                <button class="admin-sys-btn danger" onclick="limpiarTodoStorage()">⚠️ Limpiar TODO storage</button>
+                <button class="admin-sys-btn" onclick="copiarURL()">🔗 Copiar URL sitio</button>
+                <button class="admin-sys-btn" onclick="verStorage()">🗄️ Ver storage completo</button>
+                <button class="admin-sys-btn" onclick="imprimirPagina()">🖨️ Imprimir página</button>
+            </div>
+            <div id="sistema-msg" class="admin-tool-msg" style="display:none"></div>
+            <pre id="storage-preview" class="admin-storage-pre" style="display:none"></pre>
+        </div>
+
+    </div><!-- fin admin-panel-wrap -->
+</div><!-- fin admin-wrap -->
+
+<script>
+/* ===== AUTH ===== */
+const ADMIN_USER_H = '2ec64195006618e33298ccfc2a7161940205873148a9a03f9b7a701e287b631b';
+const ADMIN_HASH   = '6844168ed8cacd5b7ec99c675e0fa267fc93a988fed80366903a24f8e6336ae6';
+const MAX_INTENTOS = 5, BLOQUEO_MS = 5 * 60 * 1000;
+
+async function sha256(t) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+function obtenerIntentos() {
+    const d = JSON.parse(localStorage.getItem('admin_lock') || '{"n":0,"t":0}');
+    if (Date.now() - d.t > BLOQUEO_MS) { localStorage.removeItem('admin_lock'); return {n:0,t:0}; }
+    return d;
+}
+function registrarIntento(ok) {
+    if (ok) { localStorage.removeItem('admin_lock'); return; }
+    const d = obtenerIntentos();
+    localStorage.setItem('admin_lock', JSON.stringify({n: d.n+1, t: Date.now()}));
+}
+function mostrarError(msg) {
+    const el = document.getElementById('admin-error');
+    el.textContent = msg; el.style.display = 'block';
+}
+async function verificarAdmin() {
+    const d = obtenerIntentos();
+    if (d.n >= MAX_INTENTOS) { mostrarError('Acceso bloqueado.'); return; }
+    const u = document.getElementById('admin-user').value.trim();
+    const p = document.getElementById('admin-pass').value;
+    if (await sha256(u) === ADMIN_USER_H && await sha256(p) === ADMIN_HASH) {
+        registrarIntento(true);
+        sessionStorage.setItem('admin_auth', 'ok');
+        document.getElementById('admin-error').style.display = 'none';
+        mostrarPanelAdmin();
+    } else {
+        registrarIntento(false);
+        const r = MAX_INTENTOS - obtenerIntentos().n;
+        mostrarError(r > 0 ? `Incorrecto. Intentos restantes: ${r}` : 'Bloqueado 5 min.');
+    }
+}
+function mostrarPanelAdmin() {
+    document.getElementById('admin-login-wrap').style.display = 'none';
+    document.getElementById('admin-panel-wrap').style.display = 'block';
+    cargarEstadisticas();
+    cargarAnuncioActual();
+}
+function cerrarSesionAdmin() {
+    sessionStorage.removeItem('admin_auth');
+    document.getElementById('admin-login-wrap').style.display = 'block';
+    document.getElementById('admin-panel-wrap').style.display = 'none';
+    document.getElementById('admin-user').value = '';
+    document.getElementById('admin-pass').value = '';
+}
+document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && document.getElementById('admin-login-wrap').style.display !== 'none')
+        verificarAdmin();
+});
+
+/* ===== TABS ===== */
+function adminTab(id, btn) {
+    document.querySelectorAll('.atab-content').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.atab').forEach(el => el.classList.remove('active'));
+    document.getElementById('atab-' + id).style.display = 'block';
+    btn.classList.add('active');
+    if (id === 'estadisticas') cargarEstadisticas();
+}
+
+/* ===== ESTADÍSTICAS ===== */
+function cargarEstadisticas() {
+    const keys = [
+        {k:'poas_negocios_extras', label:'Negocios extra', emoji:'🏪'},
+        {k:'poas_empleos',         label:'Empleos',        emoji:'💼'},
+        {k:'poas_eventos',         label:'Eventos',        emoji:'📅'},
+        {k:'site_anuncio',         label:'Anuncio activo', emoji:'📢'},
+    ];
+    const grid = document.getElementById('admin-stats-grid');
+    grid.innerHTML = keys.map(({k, label, emoji}) => {
+        let val = localStorage.getItem(k), count = '—';
+        try { const arr = JSON.parse(val); count = Array.isArray(arr) ? arr.length : (val ? '✔' : '✗'); }
+        catch(e) { count = val ? '✔' : '✗'; }
+        return `<div class="admin-stat-card"><span class="asc-emoji">${emoji}</span><span class="asc-count">${count}</span><span class="asc-label">${label}</span></div>`;
+    }).join('');
+    let total = 0;
+    for (let k in localStorage) { if (localStorage.hasOwnProperty(k)) total += (localStorage[k].length + k.length) * 2; }
+    const kb = (total / 1024).toFixed(1);
+    const pct = Math.min(100, (total / (5 * 1024 * 1024)) * 100).toFixed(1);
+    document.getElementById('admin-storage-label').textContent = `localStorage: ${kb} KB / 5 MB (${pct}%)`;
+    document.getElementById('admin-storage-fill').style.width = pct + '%';
+    document.getElementById('admin-storage-fill').style.background = pct > 80 ? '#ff6b6b' : pct > 50 ? '#ffa94d' : '#69db7c';
+}
+
+/* ===== BACKUP ===== */
+function exportarBackup() {
+    const data = {};
+    for (let k in localStorage) { if (localStorage.hasOwnProperty(k)) data[k] = localStorage[k]; }
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `poas_backup_${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    mostrarMensaje('backup-msg', '✅ Backup exportado.', 'green');
+}
+function importarBackup(input) {
+    const file = input.files[0]; if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+        try {
+            const data = JSON.parse(e.target.result);
+            Object.keys(data).forEach(k => localStorage.setItem(k, data[k]));
+            mostrarMensaje('backup-msg', `✅ Importado: ${Object.keys(data).length} entradas.`, 'green');
+            cargarEstadisticas();
+        } catch(err) { mostrarMensaje('backup-msg', '❌ Archivo inválido.', 'red'); }
+    };
+    reader.readAsText(file);
+}
+
+/* ===== ANUNCIOS ===== */
+function cargarAnuncioActual() {
+    const txt = localStorage.getItem('site_anuncio');
+    if (txt) { document.getElementById('anuncio-texto').value = txt; mostrarPreviewAnuncio(txt); }
+}
+function publicarAnuncio() {
+    const txt = document.getElementById('anuncio-texto').value.trim();
+    if (!txt) { document.getElementById('anuncio-msg').textContent = 'Escriba un mensaje.'; document.getElementById('anuncio-msg').style.display = 'block'; return; }
+    localStorage.setItem('site_anuncio', txt);
+    mostrarPreviewAnuncio(txt);
+    document.getElementById('anuncio-msg').textContent = '✅ Anuncio publicado. Se mostrará en index.html al recargar.';
+    document.getElementById('anuncio-msg').style.color = '#69db7c';
+    document.getElementById('anuncio-msg').style.display = 'block';
+}
+function eliminarAnuncio() {
+    localStorage.removeItem('site_anuncio');
+    document.getElementById('anuncio-texto').value = '';
+    document.getElementById('anuncio-preview').style.display = 'none';
+    document.getElementById('anuncio-msg').textContent = '🗑️ Anuncio eliminado.';
+    document.getElementById('anuncio-msg').style.color = '#ffa94d';
+    document.getElementById('anuncio-msg').style.display = 'block';
+}
+function mostrarPreviewAnuncio(txt) {
+    const el = document.getElementById('anuncio-preview');
+    el.textContent = txt; el.style.display = 'block';
+}
+
+/* ===== SISTEMA ===== */
+function recargarSitio() { location.reload(true); }
+function limpiarCacheNegocios() {
+    localStorage.removeItem('poas_negocios'); localStorage.removeItem('poas_negocios_extras'); localStorage.removeItem('NEGOCIOS_VERSION');
+    mostrarMensaje('sistema-msg', '✅ Datos de negocios reseteados.', 'green'); cargarEstadisticas();
+}
+function limpiarCacheEmpleos() {
+    localStorage.removeItem('poas_empleos');
+    mostrarMensaje('sistema-msg', '✅ Datos de empleos reseteados.', 'green'); cargarEstadisticas();
+}
+function limpiarCacheEventos() {
+    localStorage.removeItem('poas_eventos');
+    mostrarMensaje('sistema-msg', '✅ Datos de eventos reseteados.', 'green'); cargarEstadisticas();
+}
+function limpiarTodoStorage() {
+    if (!confirm('¿Limpiar TODO el localStorage? Esta acción no se puede deshacer.')) return;
+    localStorage.clear();
+    mostrarMensaje('sistema-msg', '⚠️ localStorage limpiado completamente.', 'orange'); cargarEstadisticas();
+}
+function copiarURL() {
+    navigator.clipboard.writeText('https://cesarluiscr.github.io/poas-agua-y-fuego/').then(() => mostrarMensaje('sistema-msg', '✅ URL copiada.', 'green'));
+}
+function verStorage() {
+    const pre = document.getElementById('storage-preview');
+    if (pre.style.display !== 'none') { pre.style.display = 'none'; return; }
+    const data = {};
+    for (let k in localStorage) { if (localStorage.hasOwnProperty(k)) { try { data[k] = JSON.parse(localStorage[k]); } catch(e) { data[k] = localStorage[k]; } } }
+    pre.textContent = JSON.stringify(data, null, 2);
+    pre.style.display = 'block';
+}
+function imprimirPagina() { window.print(); }
+function mostrarMensaje(id, msg, color) {
+    const el = document.getElementById(id);
+    el.textContent = msg;
+    el.style.color = color === 'green' ? '#69db7c' : color === 'red' ? '#ff6b6b' : '#ffa94d';
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 3500);
+}
+
+/* ===== AUTO-LOGIN si sesión activa ===== */
+document.addEventListener('DOMContentLoaded', () => {
+    const d = obtenerIntentos();
+    if (d.n >= MAX_INTENTOS) {
+        const r = Math.ceil((BLOQUEO_MS - (Date.now() - d.t)) / 60000);
+        mostrarError(`Demasiados intentos fallidos. Intente en ${r} min.`);
+        document.querySelectorAll('#admin-login-wrap input, #admin-login-wrap button.admin-btn-login').forEach(el => el.disabled = true);
+    }
+    if (sessionStorage.getItem('admin_auth') === 'ok') mostrarPanelAdmin();
+});
+</script>
+</body>
+</html>
