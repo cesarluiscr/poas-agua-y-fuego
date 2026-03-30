@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Safety – Poás Agua y Fuego</title>
+    <meta name="description" content="Guidelines for forming community neighbourhood watch groups in the canton of Poás, Costa Rica.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta property="og:type"         content="website">
+    <meta property="og:site_name"     content="Poás Agua y Fuego">
+    <meta property="og:title"         content="Community Safety | Poás Agua y Fuego">
+    <meta property="og:description"   content="Community neighbourhood watch guidelines for the canton of Poás.">
+    <meta property="og:url"           content="https://cesarluiscr.github.io/poas-agua-y-fuego/seguridad-ciudadana-en.html">
+    <meta property="og:image"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/poas_og_v3.png">
+    <meta property="og:image:width"   content="1200">
+    <meta property="og:image:height"  content="630">
+    <meta property="og:image:type"    content="image/png">
+    <meta property="og:locale"        content="en_US">
+    <meta name="twitter:card"         content="summary_large_image">
+    <meta name="twitter:title"        content="Community Safety | Poás Agua y Fuego">
+    <meta name="twitter:description"  content="Community neighbourhood watch guidelines for the canton of Poás.">
+    <meta name="twitter:image"        content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/poas_og_v3.png">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <link rel="stylesheet" href="style.css?v=2">
+
+    <style>
+        :root {
+            --sc-navy:    #070E2B;
+            --sc-blue:    #1A237E;
+            --sc-blue-lt: #283593;
+            --sc-indigo:  #3F5EFB;
+            --sc-sky:     #90CAF9;
+            --sc-border:  #DDE3F0;
+            --sc-text:    #1E293B;
+        }
+
+        * { box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--sc-text); background: #F3F6FB; }
+
+        .sc-hero {
+            position: relative;
+            min-height: 52vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 9rem 1.5rem 5.5rem;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .sc-hero-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #070E2B 0%, #0D1B3E 30%, #132060 60%, #0D1B3E 80%, #070E2B 100%);
+            z-index: 0;
+        }
+        .sc-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(63,94,251,0.22) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 70% at 85% 100%, rgba(26,35,126,0.30) 0%, transparent 60%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 1;
+        }
+        .sc-hero-radar {
+            position: absolute; inset: 0; z-index: 2;
+            pointer-events: none; display: flex; align-items: center; justify-content: center;
+        }
+        .sc-hero-radar span {
+            position: absolute; width: 180px; height: 180px;
+            border-radius: 50%; border: 1px solid rgba(99,131,255,0.35);
+            animation: scRadarPage 4.5s infinite ease-out;
+        }
+        .sc-hero-radar span:nth-child(1) { animation-delay: 0s; }
+        .sc-hero-radar span:nth-child(2) { animation-delay: 1.5s; }
+        .sc-hero-radar span:nth-child(3) { animation-delay: 3s; }
+        @keyframes scRadarPage {
+            0%   { transform: scale(0.8); opacity: 0.8; }
+            100% { transform: scale(5.5); opacity: 0; }
+        }
+        .sc-hero::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #5C6BC0, rgba(255,255,255,0.4), #5C6BC0, transparent);
+            z-index: 5;
+        }
+        .sc-hero-inner { position: relative; z-index: 4; max-width: 760px; }
+        .sc-hero-badge {
+            display: inline-block; font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.18em; text-transform: uppercase; color: var(--sc-sky);
+            border: 1px solid rgba(144,202,249,0.35); border-radius: 30px;
+            padding: 0.35rem 1.25rem; margin-bottom: 1.5rem;
+            background: rgba(144,202,249,0.08);
+        }
+        .sc-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; color: #fff;
+            line-height: 1.15; margin: 0 0 1.25rem;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+        }
+        .sc-hero h1 em { font-style: italic; color: var(--sc-sky); }
+        .sc-hero-sub {
+            font-size: clamp(0.9rem, 2vw, 1.05rem); color: rgba(255,255,255,0.62);
+            letter-spacing: 0.02em; margin: 0 0 2rem; line-height: 1.65;
+            max-width: 600px; margin-left: auto; margin-right: auto;
+        }
+        .sc-hero-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+        .sc-hero-tag {
+            font-size: 0.8rem; font-weight: 500;
+            background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.16);
+            color: rgba(255,255,255,0.82); border-radius: 20px; padding: 0.3rem 0.9rem;
+        }
+
+        .sc-content { max-width: 900px; margin: 0 auto; padding: 3.5rem 1.5rem 5rem; }
+
+        .sc-back {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            color: var(--sc-blue); font-weight: 600; font-size: 0.9rem;
+            text-decoration: none; margin-bottom: 2.5rem; transition: gap 0.2s;
+        }
+        .sc-back:hover { gap: 0.8rem; }
+        .sc-back svg { width: 18px; height: 18px; }
+
+        .sc-intro {
+            background: linear-gradient(135deg, #EEF2FF, #E8EDF8);
+            border-left: 5px solid var(--sc-blue); border-radius: 0 14px 14px 0;
+            padding: 1.75rem 2rem; margin-bottom: 3rem;
+            font-size: 1.03rem; color: #334155; line-height: 1.75;
+        }
+
+        .sc-section { margin-bottom: 2.5rem; }
+        .sc-section-header { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 1.25rem; }
+        .sc-section-num {
+            display: flex; align-items: center; justify-content: center;
+            width: 2.2rem; height: 2.2rem; border-radius: 50%;
+            background: linear-gradient(135deg, var(--sc-navy), var(--sc-blue));
+            color: #fff; font-weight: 700; font-size: 0.9rem; flex-shrink: 0;
+            box-shadow: 0 3px 10px rgba(26,35,126,0.35);
+        }
+        .sc-section h2 {
+            font-family: 'Outfit', sans-serif; font-size: 1.3rem;
+            font-weight: 700; color: var(--sc-navy); margin: 0;
+        }
+
+        .sc-card {
+            background: #fff; border: 1px solid var(--sc-border);
+            border-left: 4px solid var(--sc-blue); border-radius: 0 14px 14px 0;
+            padding: 1.5rem 1.75rem; box-shadow: 0 2px 14px rgba(13,27,62,0.06);
+        }
+
+        .sc-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.65rem; }
+        .sc-list li { display: flex; align-items: flex-start; gap: 0.7rem; color: #334155; line-height: 1.6; font-size: 0.97rem; }
+        .sc-list li::before { content: '›'; color: var(--sc-indigo); font-size: 1.25rem; font-weight: 700; line-height: 1.3; flex-shrink: 0; }
+
+        .sc-subsection-title {
+            font-weight: 700; color: var(--sc-blue-lt); font-size: 0.85rem;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            margin: 1.25rem 0 0.75rem; display: flex; align-items: center; gap: 0.4rem;
+        }
+        .sc-subsection-title:first-child { margin-top: 0; }
+        .sc-subsection-title::before {
+            content: ''; display: inline-block; width: 18px; height: 2px;
+            background: var(--sc-indigo); border-radius: 2px; flex-shrink: 0;
+        }
+
+        .sc-table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--sc-border); margin-top: 0.5rem; }
+        .sc-table { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+        .sc-table thead th {
+            background: linear-gradient(135deg, var(--sc-navy), var(--sc-blue));
+            color: #fff; padding: 0.85rem 1.2rem; text-align: left;
+            font-weight: 600; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.07em;
+        }
+        .sc-table tbody td { padding: 0.8rem 1.2rem; border-bottom: 1px solid var(--sc-border); color: #334155; vertical-align: top; }
+        .sc-table tbody tr:last-child td { border-bottom: none; }
+        .sc-table tbody tr:nth-child(even) td { background: #F8FAFF; }
+        .sc-table tbody tr:hover td { background: #EEF2FF; transition: background 0.15s; }
+        .sc-table td:first-child { font-weight: 600; color: var(--sc-navy); white-space: nowrap; }
+
+        .sc-warning-card {
+            background: linear-gradient(135deg, #FFF8E1, #FFFDE7);
+            border: 2px solid #FFD54F; border-radius: 14px; padding: 1.5rem 1.75rem;
+        }
+        .sc-warning-title {
+            display: flex; align-items: center; gap: 0.6rem;
+            font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1rem;
+            color: #7C4F00; margin-bottom: 1.1rem; text-transform: uppercase; letter-spacing: 0.07em;
+        }
+        .sc-warning-card .sc-list li::before { color: #D97706; }
+        .sc-warning-card .sc-list li { color: #5C3A00; }
+
+        .sc-divider {
+            height: 2px;
+            background: linear-gradient(90deg, var(--sc-blue), var(--sc-indigo), rgba(63,94,251,0.05));
+            border-radius: 2px; margin: 2.5rem 0;
+        }
+
+        @media (max-width: 600px) {
+            .sc-hero { padding: 8rem 1rem 4rem; }
+            .sc-hero h1 { font-size: 1.9rem; }
+            .sc-content { padding: 2rem 1.1rem 4rem; }
+            .sc-intro { padding: 1.25rem; font-size: 0.97rem; }
+            .sc-card { padding: 1.25rem; }
+            .sc-table td:first-child { white-space: normal; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="navbar">
+    <div class="logo">Poás <span>Agua y Fuego</span></div>
+    <ul class="nav-links">
+        <li><a href="index-en.html">Home</a></li>
+        <li><a href="patrimonio-hidrico-en.html">Water Heritage</a></li>
+        <li><a href="directorio-comercial-en.html" style="text-align:center;white-space:normal;line-height:1.3;">Tourism &amp; Business<br>Directory</a></li>
+        <li><a href="bolsa-empleo-en.html">Job Board</a></li>
+        <li><a href="eventos-en.html">Events</a></li>
+        <li><a href="plan-regulador-en.html">Land Use Plan</a></li>
+        <li><a href="seguridad-ciudadana-en.html" class="active">Safety</a></li>
+        <li><a href="index-en.html#contacto">Contact</a></li>
+    </ul>
+    <div class="nav-lang">
+        <a href="seguridad-ciudadana.html" class="lang-btn"><img class="flag-icon" src="https://flagcdn.com/16x12/cr.png" width="16" height="12" alt="CR"> Español</a>
+        <a href="seguridad-ciudadana-en.html" class="lang-btn active-lang" style="background:linear-gradient(135deg,#1A237E,#283593);"><img class="flag-icon" src="https://flagcdn.com/16x12/us.png" width="16" height="12" alt="US"> English</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+    <button class="close-btn" id="closeNav" aria-label="Close menu">✕</button>
+    <a href="index-en.html" onclick="closeMobileNav()">Home</a>
+    <a href="patrimonio-hidrico-en.html" onclick="closeMobileNav()">Water Heritage</a>
+    <a href="directorio-comercial-en.html" onclick="closeMobileNav()">Tourism &amp; Business Directory</a>
+    <a href="bolsa-empleo-en.html" onclick="closeMobileNav()">Job Board</a>
+    <a href="eventos-en.html" onclick="closeMobileNav()">Events</a>
+    <a href="plan-regulador-en.html" onclick="closeMobileNav()">Land Use Plan</a>
+    <a href="seguridad-ciudadana-en.html" onclick="closeMobileNav()">Community Safety</a>
+    <a href="index-en.html#contacto" onclick="closeMobileNav()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section class="sc-hero">
+    <div class="sc-hero-bg"></div>
+    <div class="sc-hero-overlay"></div>
+    <div class="sc-hero-radar">
+        <span></span><span></span><span></span>
+    </div>
+    <div class="sc-hero-inner">
+        <div class="sc-hero-badge">🛡️ Canton of Poás · Alajuela · Costa Rica</div>
+        <h1>Community<br><em>Safety</em></h1>
+        <p class="sc-hero-sub">Guidelines for forming community neighbourhood watch groups: organisation, action protocols and coordination with public safety institutions.</p>
+        <div class="sc-hero-tags">
+            <span class="sc-hero-tag">🛡️ Crime Prevention</span>
+            <span class="sc-hero-tag">🤝 Neighbourhood Organisation</span>
+            <span class="sc-hero-tag">📋 Protocols</span>
+            <span class="sc-hero-tag">⚖️ Legal Framework</span>
+            <span class="sc-hero-tag">📞 Institutional Coordination</span>
+        </div>
+    </div>
+</section>
+
+<!-- CONTENT -->
+<main class="sc-content">
+
+    <a href="index-en.html#seguridad" class="sc-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to home
+    </a>
+
+    <!-- Introduction -->
+    <p class="sc-intro">
+        Community safety groups are voluntary community organisations whose primary goal is to complement — never replace — the work of the Public Force and State institutions in crime prevention and peaceful coexistence.<br><br>
+        This document establishes the fundamental guidelines for the formation, organisation, operation and sustainability of these groups, with special emphasis on the legal framework, ethical conduct and inter-institutional coordination.
+    </p>
+
+    <!-- 1. Legal Framework -->
+    <div class="sc-section">
+        <div class="sc-section-header">
+            <div class="sc-section-num">1</div>
+            <h2>Foundations &amp; Legal Framework</h2>
+        </div>
+        <div class="sc-card">
+            <ul class="sc-list">
+                <li>Verify the country/municipality's regulatory framework: in Costa Rica, community safety committees coordinate with the Ministry of Public Security and municipalities.</li>
+                <li>Register with the relevant institution: the canton's police station, the municipality, or both.</li>
+                <li>Establish internal regulations that define functions, responsibilities and limits of action.</li>
+                <li>Make clear from the outset that the group complements — does not replace — the Public Force.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 2. Internal Organisation -->
+    <div class="sc-section">
+        <div class="sc-section-header">
+            <div class="sc-section-num">2</div>
+            <h2>Internal Organisation</h2>
+        </div>
+        <div class="sc-card">
+            <p class="sc-subsection-title">Recommended basic structure</p>
+            <div class="sc-table-wrap">
+                <table class="sc-table">
+                    <thead>
+                        <tr>
+                            <th>Role</th>
+                            <th>Main function</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>General coordinator</td>
+                            <td>Liaison with authorities and group spokesperson</td>
+                        </tr>
+                        <tr>
+                            <td>Secretary</td>
+                            <td>Record of minutes, incidents and communications</td>
+                        </tr>
+                        <tr>
+                            <td>Treasurer</td>
+                            <td>Fund management if applicable</td>
+                        </tr>
+                        <tr>
+                            <td>Sector leaders</td>
+                            <td>Coverage by assigned quadrants or streets</td>
+                        </tr>
+                        <tr>
+                            <td>Communications officer</td>
+                            <td>Management of WhatsApp groups and social media</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="sc-subsection-title" style="margin-top:1.5rem;">Operational guidelines</p>
+            <ul class="sc-list">
+                <li>Define a minimum number of participants per geographic sector.</li>
+                <li>Hold regular meetings (at least monthly).</li>
+                <li>Rotate leadership roles to avoid concentration of power.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 3. Recruitment -->
+    <div class="sc-section">
+        <div class="sc-section-header">
+            <div class="sc-section-num">3</div>
+            <h2>Recruitment &amp; Member Profile</h2>
+        </div>
+        <div class="sc-card">
+            <ul class="sc-list">
+                <li>Must be a resident of the community.</li>
+                <li>Adults only, with no criminal record.</li>
+                <li>Voluntary commitment and confidentiality agreement.</li>
+                <li>Onboarding process with a data form and introduction to the group.</li>
+                <li>Explicitly exclude people with conflicts of interest or ties to illegal activities.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 4. Training -->
+    <div class="sc-section">
+        <div class="sc-section-header">
+            <div class="sc-section-num">4</div>
+            <h2>Training</h2>
+        </div>
+        <div class="sc-card">
+            <p style="color:#475569;font-size:0.97rem;margin:0 0 1rem;">Arrange workshops with the Public Force or municipality on:</p>
+            <ul class="sc-list">
+                <li>Basic first aid.</li>
+                <li>Incident observation and reporting techniques.</li>
+                <li>Human rights and limits of civilian action.</li>
+                <li>Neighbourhood conflict management.</li>
+                <li>Responsible use of social media in safety contexts.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 5. Operational Protocols -->
+    <div class="sc-section">
+        <div class="sc-section-header">
+            <div class="sc-section-num">5</div>
+            <h2>Operational Protocols</h2>
+        </div>
+        <div class="sc-card">
+            <p class="sc-subsection-title">During an incident</p>
+            <ul class="sc-list">
+                <li><strong>Observe</strong> — do not intervene physically.</li>
+                <li>Report immediately to <strong>911</strong> or the local station.</li>
+                <li>Document: time, description, licence plates if applicable.</li>
+                <li>Notify the group coordinator.</li>
+                <li>Log in the community incident register.</li>
+            </ul>
+            <p class="sc-subsection-title" style="margin-top:1.5rem;">Patrols &amp; surveillance</p>
+            <ul class="sc-list">
+                <li>Always patrol in pairs or groups, <strong>never alone</strong>.</li>
+                <li>At agreed times communicated to the police station.</li>
+                <li>Wear visible identification (vest, badge).</li>
+                <li>Never carry weapons or detain people.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 6. Communication -->
+    <div class="sc-section">
+        <div class="sc-section-header">
+            <div class="sc-section-num">6</div>
+            <h2>Communication &amp; Tools</h2>
+        </div>
+        <div class="sc-card">
+            <ul class="sc-list">
+                <li>Create segmented WhatsApp groups: one operational (coordinators) and one informational (residents in general).</li>
+                <li>Establish clear rules: do not spread rumours, do not post photos of minors or unconfirmed suspects.</li>
+                <li>Keep an incident log (physical or digital).</li>
+                <li>Connect with any municipal reporting app or platform if available.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 7. Institutional Coordination -->
+    <div class="sc-section">
+        <div class="sc-section-header">
+            <div class="sc-section-num">7</div>
+            <h2>Institutional Coordination</h2>
+        </div>
+        <div class="sc-card">
+            <ul class="sc-list">
+                <li>Assign a Public Force liaison officer as a permanent contact.</li>
+                <li>Participate in Canton Safety Committees if they exist.</li>
+                <li>Report periodic statistics to the municipality.</li>
+                <li>Request institutional support for training, materials or visibility.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="sc-divider"></div>
+
+    <!-- 8. Ethical Principles -->
+    <div class="sc-section">
+        <div class="sc-section-header">
+            <div class="sc-section-num">8</div>
+            <h2>Non-negotiable Ethical Principles</h2>
+        </div>
+        <div class="sc-warning-card">
+            <div class="sc-warning-title">
+                <span>⚠️</span> Lines that must never be crossed
+            </div>
+            <ul class="sc-list">
+                <li>No member may act as a law enforcement agent or detain, search or intimidate people.</li>
+                <li>Racial profiling or discriminatory surveillance is prohibited.</li>
+                <li>Residents' personal information is strictly confidential.</li>
+                <li>Zero tolerance for vigilante justice.</li>
+                <li>Internal conflicts are not aired on social media.</li>
+                <li>The group must remain apolitical and non-partisan at all times.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 9. Sustainability -->
+    <div class="sc-section">
+        <div class="sc-section-header">
+            <div class="sc-section-num">9</div>
+            <h2>Group Sustainability</h2>
+        </div>
+        <div class="sc-card">
+            <ul class="sc-list">
+                <li>Celebrate achievements and acknowledge voluntary participation.</li>
+                <li>Renew commitments annually.</li>
+                <li>Evaluate impact with simple indicators: incidents reported, police response, perception of safety.</li>
+                <li>Remain apolitical and non-partisan at all times.</li>
+            </ul>
+        </div>
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="container footer-content">
+        <div class="footer-brand">
+            <h3>Poás Agua y Fuego</h3>
+            <p>Canton information platform. The balance between fire and water.</p>
+        </div>
+        <div class="footer-links">
+            <ul>
+                <li><a href="index-en.html">Home</a></li>
+                <li><a href="plan-regulador-en.html">Land Use Plan</a></li>
+                <li><a href="seguridad-ciudadana-en.html">Community Safety</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('nav-scrolled', window.scrollY > 50);
+    });
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    const closeNav  = document.getElementById('closeNav');
+    hamburger.addEventListener('click', () => {
+        mobileNav.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    });
+    function closeMobileNav() {
+        mobileNav.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    closeNav.addEventListener('click', closeMobileNav);
+</script>
+
+<script src="search.js"></script>
+</body>
+</html>
