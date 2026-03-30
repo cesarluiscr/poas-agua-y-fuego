@@ -49,6 +49,122 @@
                 top: 0.8rem !important;
             }
         }
+
+        /* ── Bolsa de Empleo — tarjeta moderna ── */
+        .empleo-modern {
+            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #0f2942 100%);
+            border: 1px solid rgba(99,179,237,0.2);
+            border-radius: 22px;
+            padding: 2.4rem 2.4rem 2rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(99,179,237,0.08);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .empleo-modern:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(99,179,237,0.18);
+        }
+        /* Glow de fondo */
+        .empleo-modern::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 260px; height: 260px;
+            background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .empleo-modern-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+        .empleo-modern-badge {
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            border-radius: 14px;
+            width: 56px; height: 56px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(14,165,233,0.35);
+        }
+        .empleo-modern-heading {
+            flex: 1;
+        }
+        .empleo-modern-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #38bdf8;
+            margin-bottom: 0.25rem;
+        }
+        .empleo-modern-title {
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: #f0f9ff;
+            line-height: 1.2;
+            margin: 0;
+        }
+        .empleo-modern-desc {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            margin: 0;
+        }
+        .empleo-modern-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .empleo-chip {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px;
+            padding: 0.3rem 0.85rem;
+            font-size: 0.78rem;
+            color: #cbd5e1;
+            font-weight: 500;
+        }
+        .empleo-modern-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .empleo-modern-stat {
+            color: #64748b;
+            font-size: 0.78rem;
+        }
+        .empleo-modern-stat strong {
+            color: #38bdf8;
+            font-size: 1rem;
+        }
+        .empleo-modern-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+            box-shadow: 0 4px 14px rgba(14,165,233,0.4);
+            white-space: nowrap;
+        }
+        .empleo-modern-btn:hover { opacity: 0.88; transform: translateX(3px); }
+        @media (max-width: 600px) {
+            .empleo-modern { padding: 1.6rem 1.4rem 1.4rem; }
+            .empleo-modern-footer { flex-direction: column; align-items: flex-start; }
+            .empleo-modern-btn { width: 100%; justify-content: center; }
+        }
     </style>
 </head>
 
@@ -152,18 +268,25 @@
         <div class="container" style="display:flex; flex-direction:column; gap:1.5rem;">
 
             <!-- Bolsa de Empleo -->
-            <div class="regulador-preview-card">
-                <div class="regulador-preview-icon">💼</div>
-                <div class="regulador-preview-text">
-                    <h2>Bolsa de Empleo</h2>
-                    <p>Oportunidades laborales en el cantón de Poás. ¿Buscás trabajo o querés publicar una plaza?</p>
-                    <ul class="regulador-preview-tags">
-                        <li>🔍 Buscar empleo</li>
-                        <li>📢 Publicar plaza</li>
-                        <li>🤝 Talento local</li>
-                    </ul>
+            <div class="empleo-modern">
+                <div class="empleo-modern-top">
+                    <div class="empleo-modern-badge">💼</div>
+                    <div class="empleo-modern-heading">
+                        <div class="empleo-modern-label">Oportunidades laborales</div>
+                        <h2 class="empleo-modern-title">Bolsa de Empleo</h2>
+                    </div>
                 </div>
-                <a href="bolsa-empleo.html" class="btn-primary regulador-preview-btn">Ver Bolsa de Empleo →</a>
+                <p class="empleo-modern-desc">Conectá con empleadores del cantón de Poás. Publicá tu plaza o encontrá trabajo cerca de vos.</p>
+                <div class="empleo-modern-chips">
+                    <span class="empleo-chip">🔍 Buscar empleo</span>
+                    <span class="empleo-chip">📢 Publicar plaza</span>
+                    <span class="empleo-chip">🤝 Talento local</span>
+                    <span class="empleo-chip">📍 Cantón de Poás</span>
+                </div>
+                <div class="empleo-modern-footer">
+                    <span class="empleo-modern-stat">Oportunidades disponibles en <strong>tu zona</strong></span>
+                    <a href="bolsa-empleo.html" class="empleo-modern-btn">Ver empleos →</a>
+                </div>
             </div>
 
             <!-- Eventos -->
