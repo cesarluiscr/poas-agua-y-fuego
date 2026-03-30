@@ -96,8 +96,21 @@ h4 {
 }
 
 .logo span {
-    color: var(--clr-forest-green);
     font-weight: 300;
+}
+.logo-agua {
+    background: linear-gradient(135deg, #38bdf8, #0284c7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+.logo-fuego {
+    background: linear-gradient(135deg, #fb923c, #dc2626);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
 }
 
 .nav-links {
