@@ -274,6 +274,223 @@
             .eventos-modern-footer { flex-direction: column; align-items: flex-start; }
             .eventos-modern-btn { width: 100%; justify-content: center; }
         }
+
+        /* ── Directorio Turístico y Comercial — tarjeta moderna ── */
+        .directorio-modern {
+            position: relative;
+            background: linear-gradient(135deg, #021d10 0%, #063b1e 55%, #042916 100%);
+            border: 1px solid rgba(52,211,153,0.2);
+            border-radius: 22px;
+            padding: 2.4rem 2.4rem 2rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(52,211,153,0.08);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .directorio-modern:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(52,211,153,0.2);
+        }
+        .directorio-modern::before {
+            content: '';
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 240px; height: 240px;
+            background: radial-gradient(circle, rgba(52,211,153,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .directorio-modern-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+        .directorio-modern-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 14px;
+            width: 56px; height: 56px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(16,185,129,0.4);
+        }
+        .directorio-modern-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #34d399;
+            margin-bottom: 0.25rem;
+        }
+        .directorio-modern-title {
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: #f0fdf4;
+            line-height: 1.2;
+            margin: 0;
+        }
+        .directorio-modern-desc {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            margin: 0;
+        }
+        .directorio-modern-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .directorio-chip {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(52,211,153,0.2);
+            border-radius: 50px;
+            padding: 0.3rem 0.85rem;
+            font-size: 0.78rem;
+            color: #a7f3d0;
+            font-weight: 500;
+        }
+        .directorio-modern-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .directorio-modern-stat {
+            color: #64748b;
+            font-size: 0.78rem;
+        }
+        .directorio-modern-stat strong { color: #34d399; font-size: 1rem; }
+        .directorio-modern-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+            box-shadow: 0 4px 14px rgba(16,185,129,0.4);
+            white-space: nowrap;
+        }
+        .directorio-modern-btn:hover { opacity: 0.88; transform: translateX(3px); }
+        @media (max-width: 600px) {
+            .directorio-modern { padding: 1.6rem 1.4rem 1.4rem; }
+            .directorio-modern-footer { flex-direction: column; align-items: flex-start; }
+            .directorio-modern-btn { width: 100%; justify-content: center; }
+        }
+
+        /* ── Plan Regulador Modern Card ── */
+        .regulador-modern {
+            background: linear-gradient(135deg, #1a0a2e 0%, #2d1254 55%, #1e0a3c 100%);
+            border: 1px solid rgba(167,139,250,0.2);
+            border-radius: 22px;
+            padding: 2.4rem 2.4rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform .25s ease, box-shadow .25s ease;
+            box-shadow: 0 8px 32px rgba(139,92,246,0.15);
+        }
+        .regulador-modern:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(139,92,246,0.28);
+        }
+        .regulador-modern::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 20%, rgba(139,92,246,0.12) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .regulador-modern-top {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .regulador-modern-badge {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            box-shadow: 0 4px 14px rgba(139,92,246,0.4);
+            border-radius: 14px;
+            width: 52px; height: 52px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+        .regulador-modern-label {
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: #a78bfa;
+            margin-bottom: .15rem;
+        }
+        .regulador-modern-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #f5f3ff;
+            margin: 0;
+            line-height: 1.25;
+        }
+        .regulador-modern-desc {
+            font-size: .93rem;
+            color: #c4b5fd;
+            line-height: 1.6;
+            margin: 0 0 1.1rem;
+        }
+        .regulador-modern-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .45rem;
+            margin-bottom: 1.4rem;
+        }
+        .regulador-chip {
+            background: rgba(139,92,246,0.18);
+            border: 1px solid rgba(167,139,250,0.3);
+            color: #ddd6fe;
+            border-radius: 999px;
+            padding: .28rem .85rem;
+            font-size: .78rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .regulador-modern-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .regulador-modern-stat {
+            font-size: .82rem;
+            color: #a78bfa;
+            font-weight: 500;
+        }
+        .regulador-modern-stat strong { color: #c4b5fd; font-size: 1rem; }
+        .regulador-modern-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            box-shadow: 0 4px 14px rgba(139,92,246,0.4);
+            color: #fff;
+            font-weight: 700;
+            font-size: .88rem;
+            padding: .65rem 1.4rem;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: opacity .2s, transform .2s;
+            white-space: nowrap;
+        }
+        .regulador-modern-btn:hover { opacity: 0.88; transform: translateX(3px); }
+        @media (max-width: 600px) {
+            .regulador-modern { padding: 1.6rem 1.4rem 1.4rem; }
+            .regulador-modern-footer { flex-direction: column; align-items: flex-start; }
+            .regulador-modern-btn { width: 100%; justify-content: center; }
+        }
     </style>
 </head>
 
@@ -421,19 +638,25 @@
             </div>
 
             <!-- Directorio Turístico y Comercial -->
-            <div class="regulador-preview-card" id="turismo">
-                <div class="regulador-preview-icon">🛍️</div>
-                <div class="regulador-preview-text">
-                    <h2 style="text-align:center;white-space:normal;line-height:1.3;">Directorio Turístico y<br>Comercial</h2>
-                    <p>Negocios y servicios del cantón de Poás. Restaurantes, hospedaje, tours, tiendas y más.</p>
-                    <ul class="regulador-preview-tags">
-                        <li>🍽️ Restaurantes</li>
-                        <li>🏨 Hospedaje</li>
-                        <li>🌋 Tours</li>
-                        <li>🍓 Ruta Gastronómica</li>
-                    </ul>
+            <div class="directorio-modern" id="turismo">
+                <div class="directorio-modern-top">
+                    <div class="directorio-modern-badge">🛍️</div>
+                    <div>
+                        <div class="directorio-modern-label">Negocios y turismo</div>
+                        <h2 class="directorio-modern-title">Directorio Turístico y Comercial</h2>
+                    </div>
                 </div>
-                <a href="directorio-comercial.html" class="btn-primary regulador-preview-btn">Ver Directorio →</a>
+                <p class="directorio-modern-desc">Negocios y servicios del cantón de Poás. Restaurantes, hospedaje, tours, tiendas y más.</p>
+                <div class="directorio-modern-chips">
+                    <span class="directorio-chip">🍽️ Restaurantes</span>
+                    <span class="directorio-chip">🏨 Hospedaje</span>
+                    <span class="directorio-chip">🌋 Tours</span>
+                    <span class="directorio-chip">🍓 Ruta Gastronómica</span>
+                </div>
+                <div class="directorio-modern-footer">
+                    <span class="directorio-modern-stat">Negocios en <strong>Poás</strong></span>
+                    <a href="directorio-comercial.html" class="directorio-modern-btn">Ver directorio →</a>
+                </div>
             </div>
 
         </div>
@@ -442,19 +665,25 @@
     <!-- Plan Regulador – Acceso rápido -->
     <section id="regulador" class="regulador-preview-section">
         <div class="container">
-            <div class="regulador-preview-card">
-                <div class="regulador-preview-icon">🗺️</div>
-                <div class="regulador-preview-text">
-                    <h2>Plan Regulador Cantonal</h2>
-                    <p>Consulta la zonificación, normas de desarrollo, protección ambiental y gestión del riesgo volcánico del cantón de Poás.</p>
-                    <ul class="regulador-preview-tags">
-                        <li>🏗️ Zonificación</li>
-                        <li>🌿 Protección Ambiental</li>
-                        <li>🌋 Riesgo Volcánico</li>
-                        <li>💧 Patrimonio Hídrico</li>
-                    </ul>
+            <div class="regulador-modern">
+                <div class="regulador-modern-top">
+                    <div class="regulador-modern-badge">🗺️</div>
+                    <div>
+                        <div class="regulador-modern-label">Planificación territorial</div>
+                        <h2 class="regulador-modern-title">Plan Regulador Cantonal</h2>
+                    </div>
                 </div>
-                <a href="plan-regulador.html" class="btn-primary regulador-preview-btn">Ver Plan Regulador →</a>
+                <p class="regulador-modern-desc">Consulta la zonificación, normas de desarrollo, protección ambiental y gestión del riesgo volcánico del cantón de Poás.</p>
+                <div class="regulador-modern-chips">
+                    <span class="regulador-chip">🏗️ Zonificación</span>
+                    <span class="regulador-chip">🌿 Protección Ambiental</span>
+                    <span class="regulador-chip">🌋 Riesgo Volcánico</span>
+                    <span class="regulador-chip">💧 Patrimonio Hídrico</span>
+                </div>
+                <div class="regulador-modern-footer">
+                    <span class="regulador-modern-stat">Ordenamiento en <strong>Poás</strong></span>
+                    <a href="plan-regulador.html" class="regulador-modern-btn">Ver plan regulador →</a>
+                </div>
             </div>
         </div>
     </section>
