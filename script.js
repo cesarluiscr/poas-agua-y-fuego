@@ -274,13 +274,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 ${(negocio.whatsapp || negocio.facebook || negocio.instagram || negocio.tiktok || negocio.waze || negocio.booking || negocio.sitio) ? `
                 <div class="negocio-social">
-                    ${negocio.sitio     ? `<a href="${negocio.sitio}" ${negocio.sitio.startsWith('http') ? 'target="_blank"' : ''} rel="noopener" class="social-btn ver-mas-btn">🌐 ${isEnglish ? 'See more' : 'Ver más'}</a>` : ''}
-                    ${negocio.whatsapp  ? `<a href="https://wa.me/${negocio.whatsapp}" target="_blank" rel="noopener" class="social-btn wa-btn">💬 WhatsApp</a>` : ''}
-                    ${negocio.facebook  ? `<a href="${negocio.facebook}" target="_blank" rel="noopener" class="social-btn fb-btn">📘 Facebook</a>` : ''}
-                    ${negocio.instagram ? `<a href="${negocio.instagram}" target="_blank" rel="noopener" class="social-btn ig-btn">📸 Instagram</a>` : ''}
-                    ${negocio.tiktok    ? `<a href="${negocio.tiktok}" target="_blank" rel="noopener" class="social-btn tt-btn">🎵 TikTok</a>` : ''}
-                    ${negocio.booking   ? `<a href="${negocio.booking}" target="_blank" rel="noopener" class="social-btn bk-btn">🏨 ${isEnglish ? 'Book on Booking' : 'Reservar en Booking'}</a>` : ''}
-                    ${negocio.waze      ? `<a href="${negocio.waze}" target="_blank" rel="noopener" class="social-btn wz-btn">📍 ${isEnglish ? 'Get directions' : 'Cómo llegar'}</a>` : ''}
+                    ${negocio.sitio     ? `<a href="${negocio.sitio}" ${negocio.sitio.startsWith('http') ? 'target="_blank"' : ''} rel="noopener noreferrer" class="social-btn ver-mas-btn">🌐 ${isEnglish ? 'See more' : 'Ver más'}</a>` : ''}
+                    ${negocio.whatsapp  ? `<a href="https://wa.me/${negocio.whatsapp}" target="_blank" rel="noopener noreferrer" class="social-btn wa-btn">💬 WhatsApp</a>` : ''}
+                    ${negocio.facebook  ? `<a href="${negocio.facebook}" target="_blank" rel="noopener noreferrer" class="social-btn fb-btn">📘 Facebook</a>` : ''}
+                    ${negocio.instagram ? `<a href="${negocio.instagram}" target="_blank" rel="noopener noreferrer" class="social-btn ig-btn">📸 Instagram</a>` : ''}
+                    ${negocio.tiktok    ? `<a href="${negocio.tiktok}" target="_blank" rel="noopener noreferrer" class="social-btn tt-btn">🎵 TikTok</a>` : ''}
+                    ${negocio.booking   ? `<a href="${negocio.booking}" target="_blank" rel="noopener noreferrer" class="social-btn bk-btn">🏨 ${isEnglish ? 'Book on Booking' : 'Reservar en Booking'}</a>` : ''}
+                    ${negocio.waze      ? `<a href="${negocio.waze}" target="_blank" rel="noopener noreferrer" class="social-btn wz-btn">📍 ${isEnglish ? 'Get directions' : 'Cómo llegar'}</a>` : ''}
                 </div>` : ''}
             `;
             negociosGrid.appendChild(card);

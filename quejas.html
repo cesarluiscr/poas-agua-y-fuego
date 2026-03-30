@@ -20,6 +20,7 @@
     <meta name="twitter:title"        content="Quejas y Denuncias | Poás Agua y Fuego">
     <meta name="twitter:description"  content="Reportá problemas e irregularidades en el cantón de Poás.">
     <meta name="twitter:image"        content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/poas_og_v3.png">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <link rel="stylesheet" href="style.css?v=2">
@@ -328,24 +329,27 @@
 
     <script src="script.js?v=2"></script>
     <script>
+        function sanitizarCampo(s, max) {
+            return s.replace(/<[^>]*>/g, '').replace(/[*_~`[\]]/g, '').trim().slice(0, max);
+        }
         document.getElementById('quejasForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const nombre    = document.getElementById('q-nombre').value.trim();
-            const contacto  = document.getElementById('q-contacto').value.trim();
+            const nombre    = sanitizarCampo(document.getElementById('q-nombre').value.trim(), 100);
+            const contacto  = sanitizarCampo(document.getElementById('q-contacto').value.trim(), 100);
             const tipo      = document.getElementById('q-tipo').value;
-            const ubicacion = document.getElementById('q-ubicacion').value.trim();
-            const desc      = document.getElementById('q-descripcion').value.trim();
+            const ubicacion = sanitizarCampo(document.getElementById('q-ubicacion').value.trim(), 200);
+            const desc      = sanitizarCampo(document.getElementById('q-descripcion').value.trim(), 1000);
 
             if (!desc) { alert('Por favor describa la situación a reportar.'); return; }
 
-            const tipoLabel = document.getElementById('q-tipo').options[document.getElementById('q-tipo').selectedIndex].text;
+            const tipoLabel = sanitizarCampo(document.getElementById('q-tipo').options[document.getElementById('q-tipo').selectedIndex].text, 80);
 
-            let msg = '📢 *DENUNCIA / QUEJA — Poás Agua y Fuego*\n\n';
-            if (nombre)    msg += `👤 Nombre: ${nombre}\n`;
-            if (contacto)  msg += `📞 Contacto: ${contacto}\n`;
-            if (tipo)      msg += `📁 Tipo: ${tipoLabel}\n`;
-            if (ubicacion) msg += `📍 Ubicación: ${ubicacion}\n`;
-            msg += `\n📝 Descripción:\n${desc}`;
+            let msg = '📢 QUEJA — Cantón de Poás\n\n';
+            if (nombre)    msg += `Nombre: ${nombre}\n`;
+            if (contacto)  msg += `Contacto: ${contacto}\n`;
+            if (tipo)      msg += `Tipo: ${tipoLabel}\n`;
+            if (ubicacion) msg += `Ubicación: ${ubicacion}\n`;
+            msg += `\nDescripción:\n${desc}`;
 
             const encoded = encodeURIComponent(msg);
             window.open(`https://wa.me/50687058612?text=${encoded}`, '_blank');

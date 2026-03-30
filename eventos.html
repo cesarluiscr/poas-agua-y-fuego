@@ -10,6 +10,7 @@
     <meta name="description" content="Eventos culturales, deportivos y comunitarios del cantón de Poás, Costa Rica.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <link rel="stylesheet" href="style.css?v=2">
@@ -396,8 +397,13 @@
         function closeMobileNav() { mobileNav.classList.remove('open'); }
 
         // ── Config ───────────────────────────────────────────────────
-        const ADMIN_PIN  = '7703';
+        const ADMIN_PIN_H = '706a70c1f003240fa9abcf1a0d47610647d7d438719b2f5cd6d56505dc9ffdc5';
         const STORAGE_KEY = 'poas_eventos';
+
+        async function sha256(t) {
+            const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+        }
 
         // ── Eventos fijos (siempre se muestran) ──────────────────────
         const DEFAULT_EVENTOS = [
@@ -522,8 +528,8 @@
         document.getElementById('btnPinOk').addEventListener('click', verificarPin);
         pinInput.addEventListener('keydown', e => { if (e.key === 'Enter') verificarPin(); });
 
-        function verificarPin() {
-            if (pinInput.value === ADMIN_PIN) {
+        async function verificarPin() {
+            if (await sha256(pinInput.value) === ADMIN_PIN_H) {
                 pinOverlay.classList.remove('open');
                 if (pendingAction === 'add') {
                     document.getElementById('eventoModal').classList.add('open');

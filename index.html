@@ -14,6 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap"
         rel="stylesheet">
     <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <link rel="stylesheet" href="style.css?v=2">
@@ -600,8 +601,8 @@
 
     <script>
     /* ===== ADMIN CORE ===== */
-    const ADMIN_USER = 'cesarluiscr';
-    const ADMIN_HASH = '6844168ed8cacd5b7ec99c675e0fa267fc93a988fed80366903a24f8e6336ae6';
+    const ADMIN_USER_H = '2ec64195006618e33298ccfc2a7161940205873148a9a03f9b7a701e287b631b';
+    const ADMIN_HASH   = '6844168ed8cacd5b7ec99c675e0fa267fc93a988fed80366903a24f8e6336ae6';
     const MAX_INTENTOS = 5, BLOQUEO_MS = 5 * 60 * 1000;
 
     async function sha256(t) {
@@ -634,7 +635,7 @@
         if (d.n >= MAX_INTENTOS) { mostrarError('Acceso bloqueado.'); return; }
         const u = document.getElementById('admin-user').value.trim();
         const p = document.getElementById('admin-pass').value;
-        if (u===ADMIN_USER && await sha256(p)===ADMIN_HASH) {
+        if (await sha256(u)===ADMIN_USER_H && await sha256(p)===ADMIN_HASH) {
             registrarIntento(true);
             sessionStorage.setItem('admin_auth','ok');
             document.getElementById('admin-error').style.display='none';
@@ -651,7 +652,7 @@
     function mostrarPanelAdmin() {
         document.getElementById('admin-login-form').style.display='none';
         document.getElementById('admin-panel').style.display='block';
-        document.getElementById('admin-username-display').textContent=ADMIN_USER;
+        document.getElementById('admin-username-display').textContent='Admin';
         document.getElementById('admin-modal-box').style.maxWidth='660px';
         cargarEstadisticas();
         cargarAnuncioActual();
