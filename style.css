@@ -246,7 +246,7 @@ h1 .logo-fuego {
 .hero-content-right {
     align-items: flex-end;
     text-align: right;
-    padding-right: 2.5rem;
+    margin-left: auto;
 }
 
 /* Logo principal del sitio en el hero */
