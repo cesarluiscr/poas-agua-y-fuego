@@ -110,7 +110,34 @@
             letter-spacing: .08em; padding: .18rem .65rem;
             border-radius: 999px; margin-bottom: .5rem;
         }
-        .hist-foto-caption p { color: #c9b99a; font-size: 0.82rem; line-height: 1.5; margin: 0; }
+        .hist-foto-caption p { color: #c9b99a; font-size: 0.82rem; line-height: 1.5; margin: 0 0 .7rem; }
+        .hist-foto-caption-row { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+        .btn-wa-share {
+            display: inline-flex; align-items: center; gap: .35rem;
+            background: #25d366; color: #fff;
+            font-size: 0.72rem; font-weight: 700;
+            padding: .28rem .75rem; border-radius: 999px;
+            text-decoration: none; white-space: nowrap;
+            transition: background .2s, transform .2s;
+            flex-shrink: 0;
+        }
+        .btn-wa-share:hover { background: #1ebe5d; transform: scale(1.05); }
+        .btn-wa-share svg { width: 13px; height: 13px; fill: #fff; }
+        /* WhatsApp en lightbox */
+        .lightbox-footer {
+            position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: .6rem;
+        }
+        .lightbox-caption { position: static; transform: none; }
+        .btn-wa-lightbox {
+            display: inline-flex; align-items: center; gap: .4rem;
+            background: #25d366; color: #fff;
+            font-size: 0.82rem; font-weight: 700;
+            padding: .4rem 1.1rem; border-radius: 999px;
+            text-decoration: none;
+            transition: background .2s;
+        }
+        .btn-wa-lightbox:hover { background: #1ebe5d; }
 
         /* LIGHTBOX */
         .lightbox {
@@ -178,6 +205,12 @@
             <div class="hist-foto-caption">
                 <span class="hist-foto-year">1975</span>
                 <p>Costado Norte del Templo de San Pedro de Poás</p>
+                <div class="hist-foto-caption-row">
+                    <a class="btn-wa-share" href="#" onclick="compartirWA('Costado Norte del Templo de San Pedro de Poás — 1975');return false;">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.126 1.533 5.86L.057 23.428a.5.5 0 0 0 .609.61l5.57-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 0 1-5.032-1.388l-.36-.214-3.733.99.992-3.728-.235-.374A9.808 9.808 0 0 1 2.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+                        Compartir
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -189,6 +222,12 @@
             <div class="hist-foto-caption">
                 <span class="hist-foto-year">C. 1950s</span>
                 <p>Antigua plaza de deportes — domingo después de la Misa de Nueve. Al fondo el antiguo Palacio Municipal</p>
+                <div class="hist-foto-caption-row">
+                    <a class="btn-wa-share" href="#" onclick="compartirWA('Antigua plaza de deportes de San Pedro de Poás — c. 1950s. Al fondo el antiguo Palacio Municipal');return false;">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.126 1.533 5.86L.057 23.428a.5.5 0 0 0 .609.61l5.57-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 0 1-5.032-1.388l-.36-.214-3.733.99.992-3.728-.235-.374A9.808 9.808 0 0 1 2.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+                        Compartir
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -200,6 +239,12 @@
             <div class="hist-foto-caption">
                 <span class="hist-foto-year">1971</span>
                 <p>Vista panorámica costado Norte del Parque de San Pedro</p>
+                <div class="hist-foto-caption-row">
+                    <a class="btn-wa-share" href="#" onclick="compartirWA('Vista panorámica costado Norte del Parque de San Pedro de Poás — 1971');return false;">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.126 1.533 5.86L.057 23.428a.5.5 0 0 0 .609.61l5.57-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 0 1-5.032-1.388l-.36-.214-3.733.99.992-3.728-.235-.374A9.808 9.808 0 0 1 2.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+                        Compartir
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -211,6 +256,12 @@
             <div class="hist-foto-caption">
                 <span class="hist-foto-year">1971</span>
                 <p>Vista panorámica del Parque de San Pedro de Poás. Al fondo la Escuela Pedro Aguirre</p>
+                <div class="hist-foto-caption-row">
+                    <a class="btn-wa-share" href="#" onclick="compartirWA('Vista panorámica del Parque de San Pedro de Poás — 1971. Al fondo la Escuela Pedro Aguirre');return false;">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.126 1.533 5.86L.057 23.428a.5.5 0 0 0 .609.61l5.57-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 0 1-5.032-1.388l-.36-.214-3.733.99.992-3.728-.235-.374A9.808 9.808 0 0 1 2.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+                        Compartir
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -222,6 +273,12 @@
             <div class="hist-foto-caption">
                 <span class="hist-foto-year">1970</span>
                 <p>Panorámica de San Pedro de Poás</p>
+                <div class="hist-foto-caption-row">
+                    <a class="btn-wa-share" href="#" onclick="compartirWA('Panorámica de San Pedro de Poás — 1970');return false;">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.126 1.533 5.86L.057 23.428a.5.5 0 0 0 .609.61l5.57-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 0 1-5.032-1.388l-.36-.214-3.733.99.992-3.728-.235-.374A9.808 9.808 0 0 1 2.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+                        Compartir
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -232,7 +289,13 @@
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <button class="lightbox-close" onclick="closeLightbox()">×</button>
     <img id="lightbox-img" src="" alt="">
-    <div class="lightbox-caption" id="lightbox-caption"></div>
+    <div class="lightbox-footer" onclick="event.stopPropagation()">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+        <a class="btn-wa-lightbox" id="lightbox-wa" href="#" target="_blank" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.557 4.126 1.533 5.86L.057 23.428a.5.5 0 0 0 .609.61l5.57-1.476A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 0 1-5.032-1.388l-.36-.214-3.733.99.992-3.728-.235-.374A9.808 9.808 0 0 1 2.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+            Compartir por WhatsApp
+        </a>
+    </div>
 </div>
 
 <!-- FOOTER -->
@@ -241,10 +304,19 @@
 </footer>
 
 <script>
+    const PAGE_URL = 'https://cesarluiscr.github.io/poas-agua-y-fuego/historia-imagenes.html';
+
+    function compartirWA(caption) {
+        const texto = '🖼️ *Historia en Imágenes — Cantón de Poás*\n\n' + caption + '\n\n' + PAGE_URL;
+        window.open('https://wa.me/?text=' + encodeURIComponent(texto), '_blank', 'noopener,noreferrer');
+    }
+
     function openLightbox(img, caption) {
         document.getElementById('lightbox-img').src = img.src;
         document.getElementById('lightbox-img').alt = img.alt;
         document.getElementById('lightbox-caption').textContent = caption;
+        const texto = '🖼️ *Historia en Imágenes — Cantón de Poás*\n\n' + caption + '\n\n' + PAGE_URL;
+        document.getElementById('lightbox-wa').href = 'https://wa.me/?text=' + encodeURIComponent(texto);
         document.getElementById('lightbox').classList.add('active');
     }
     function closeLightbox() {
