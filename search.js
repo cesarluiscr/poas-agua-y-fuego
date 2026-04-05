@@ -71,6 +71,13 @@
             tags: 'historia cantón orígenes colonial tradiciones prehispánico patrimonio fundación 1901'
         },
         {
+            title: 'Historia en Imágenes',
+            desc: 'Fotografías históricas del cantón de Poás: parque, templo, calles y comunidades',
+            url: 'historia-imagenes.html',
+            icon: '📷',
+            tags: 'fotos históricas imágenes antiguas archivo parque templo san pedro comunidad 1970 1971 1975'
+        },
+        {
             title: 'Guerra Civil Poaseña 1948',
             desc: 'La participación de Poás en la guerra civil costarricense de 1948',
             url: 'guerra-civil-poasena.html',
