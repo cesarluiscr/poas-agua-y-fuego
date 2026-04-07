@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title"       content="Biblioteca Pública Municipal | Poás Agua y Fuego">
+    <meta property="og:description" content='Historia de la Biblioteca Pública Municipal "Prof. Eliécer Murillo Esquivel" del cantón de Poás, Alajuela, Costa Rica.'>
+    <meta property="og:url"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/biblioteca-publica.html">
+    <meta name="description"        content='Historia de la Biblioteca Pública Municipal "Prof. Eliécer Murillo Esquivel" de San Pedro de Poás. Reseña recopilada por Olga Martha Chaves Chaves, Directora 1998-2018.'>
+    <title>Biblioteca Pública Municipal | Cantón de Poás</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold:   #C8952A;
+            --dark:   #0a0e1a;
+            --brown:  #1a1400;
+            --cream:  #e8e0cc;
+            --blue:   #2563eb;
+            --blue-light: #60a5fa;
+            --blue-glow:  rgba(37,99,235,0.18);
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Outfit', sans-serif; background: #080c18; color: #c9c0aa; }
+
+        /* ── NAV ── */
+        .bib-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(8,12,24,0.96);
+            backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.85rem 2rem;
+            border-bottom: 1px solid rgba(200,149,42,0.15);
+        }
+        .bib-nav-logo {
+            color: var(--gold); font-weight: 700; font-size: 1rem;
+            text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .bib-nav-back {
+            color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.88rem;
+            display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;
+        }
+        .bib-nav-back:hover { color: var(--gold); }
+
+        /* ── HERO ── */
+        .bib-hero {
+            background:
+                linear-gradient(180deg, rgba(8,12,24,0.6) 0%, rgba(8,12,24,0.85) 70%, #080c18 100%),
+                linear-gradient(135deg, #0a1628 0%, #0f2244 50%, #081228 100%);
+            padding: 8.5rem 2rem 5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(200,149,42,0.12);
+            position: relative;
+            overflow: hidden;
+        }
+        .bib-hero::before {
+            content: '📚';
+            position: absolute;
+            font-size: 28rem;
+            opacity: 0.025;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .bib-hero-badge {
+            display: inline-block;
+            background: rgba(37,99,235,0.15);
+            border: 1px solid rgba(96,165,250,0.3);
+            color: var(--blue-light);
+            font-size: 0.72rem; font-weight: 700; letter-spacing: .12em;
+            text-transform: uppercase; padding: .35rem 1.1rem; border-radius: 999px;
+            margin-bottom: 1.5rem;
+        }
+        .bib-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 3.4rem);
+            color: #fff;
+            margin-bottom: 0.6rem;
+            line-height: 1.2;
+        }
+        .bib-hero h1 em {
+            color: var(--gold);
+            font-style: italic;
+            display: block;
+            font-size: 0.78em;
+        }
+        .bib-hero-sub {
+            color: #9db0cc; font-size: 1rem; max-width: 620px;
+            margin: 1rem auto 0; line-height: 1.7;
+        }
+        .bib-hero-meta {
+            margin-top: 2rem;
+            display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+        }
+        .bib-meta-item {
+            display: flex; align-items: center; gap: 0.5rem;
+            color: rgba(255,255,255,0.5); font-size: 0.82rem;
+        }
+        .bib-meta-item span { color: var(--gold); }
+
+        /* ── CHAPTERS NAV ── */
+        .bib-chapters {
+            background: #0d1220;
+            display: flex; justify-content: center; flex-wrap: wrap;
+            position: sticky; top: 54px; z-index: 50;
+            border-bottom: 1px solid rgba(37,99,235,0.15);
+        }
+        .bib-chap-btn {
+            color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.78rem;
+            font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+            padding: 0.85rem 1.4rem;
+            border-bottom: 3px solid transparent; transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .bib-chap-btn:hover { color: var(--blue-light); border-bottom-color: var(--blue-light); }
+
+        /* ── FACTS BAR ── */
+        .bib-facts {
+            background: linear-gradient(135deg, #0d1628, #0f1f40);
+            display: flex; justify-content: center; flex-wrap: wrap;
+            gap: 0; border-bottom: 1px solid rgba(37,99,235,0.12);
+        }
+        .bib-fact {
+            padding: 2rem 2.5rem; text-align: center;
+            border-right: 1px solid rgba(37,99,235,0.12);
+            flex: 1; min-width: 140px;
+        }
+        .bib-fact:last-child { border-right: none; }
+        .bib-fact-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem; font-weight: 700; color: var(--gold);
+        }
+        .bib-fact-label { color: rgba(255,255,255,0.5); font-size: 0.78rem; margin-top: 0.3rem; line-height: 1.4; }
+
+        /* ── CONTAINER ── */
+        .bib-container { max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
+
+        /* ── SECTION ── */
+        .bib-section { padding: 5rem 0; }
+        .bib-section + .bib-section { border-top: 1px solid rgba(37,99,235,0.08); }
+
+        .bib-section-header { text-align: center; margin-bottom: 3.5rem; }
+        .bib-chapter-label {
+            color: var(--blue-light); font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem;
+        }
+        .bib-section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            color: #fff; margin-bottom: 1rem;
+        }
+        .bib-divider {
+            width: 48px; height: 3px;
+            background: linear-gradient(90deg, var(--blue), var(--gold));
+            margin: 0 auto; border-radius: 99px;
+        }
+
+        /* ── TWO-COL ── */
+        .bib-two-col {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 3.5rem; align-items: start;
+        }
+        .bib-two-col.reverse { direction: rtl; }
+        .bib-two-col.reverse > * { direction: ltr; }
+
+        .bib-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem; color: #fff; margin-bottom: 0.9rem; line-height: 1.3;
+        }
+        .bib-text p {
+            color: #9db0cc; line-height: 1.85; font-size: 0.96rem; margin-bottom: 1rem;
+        }
+        .bib-text p:last-child { margin-bottom: 0; }
+        .bib-text strong { color: var(--cream); }
+        .bib-text ul { padding-left: 1.2rem; margin-top: 0.5rem; }
+        .bib-text ul li { color: #9db0cc; line-height: 1.8; font-size: 0.96rem; margin-bottom: 0.4rem; }
+
+        /* ── HIGHLIGHT BOX ── */
+        .bib-highlight {
+            background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(200,149,42,0.08));
+            border: 1px solid rgba(37,99,235,0.25);
+            border-left: 4px solid var(--blue);
+            border-radius: 14px;
+            padding: 1.75rem 1.75rem;
+        }
+        .bib-highlight h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem; color: #fff; margin-bottom: 0.8rem;
+        }
+        .bib-highlight p { color: #9db0cc; line-height: 1.8; font-size: 0.94rem; }
+        .bib-highlight strong { color: var(--gold); }
+
+        /* ── TIMELINE ── */
+        .bib-timeline { position: relative; padding-left: 2rem; }
+        .bib-timeline::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--blue), transparent);
+        }
+        .bib-tl-item { position: relative; margin-bottom: 2rem; }
+        .bib-tl-item::before {
+            content: ''; position: absolute; left: -2.45rem; top: 0.35rem;
+            width: 14px; height: 14px; border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 0 3px rgba(200,149,42,0.25);
+        }
+        .bib-tl-year {
+            color: var(--gold); font-weight: 700; font-size: 0.85rem;
+            letter-spacing: 0.05em; margin-bottom: 0.25rem;
+        }
+        .bib-tl-title {
+            font-weight: 700; font-size: 1rem; color: #fff; margin-bottom: 0.35rem;
+        }
+        .bib-tl-text { color: #9db0cc; font-size: 0.91rem; line-height: 1.7; }
+
+        /* ── PEOPLE GRID ── */
+        .bib-people-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
+        }
+        .bib-person-card {
+            background: rgba(13,18,32,0.8);
+            border: 1px solid rgba(37,99,235,0.18);
+            border-radius: 12px; padding: 1.2rem 1.2rem;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .bib-person-card:hover {
+            border-color: rgba(96,165,250,0.4);
+            transform: translateY(-3px);
+        }
+        .bib-person-icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .bib-person-name { font-weight: 700; font-size: 0.9rem; color: #fff; line-height: 1.3; }
+        .bib-person-role { color: rgba(255,255,255,0.45); font-size: 0.75rem; margin-top: 0.2rem; }
+
+        /* ── BUILDING FEATURES ── */
+        .bib-features-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+        }
+        .bib-feature {
+            background: rgba(13,18,32,0.7);
+            border: 1px solid rgba(37,99,235,0.15);
+            border-radius: 12px; padding: 1.2rem;
+            display: flex; align-items: flex-start; gap: 0.75rem;
+        }
+        .bib-feature-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .bib-feature-text { color: #9db0cc; font-size: 0.88rem; line-height: 1.5; }
+        .bib-feature-text strong { color: #fff; display: block; font-size: 0.9rem; margin-bottom: 0.2rem; }
+
+        /* ── QUOTE ── */
+        .bib-quote {
+            background: linear-gradient(135deg, #0d1628 0%, #0f2244 100%);
+            border-top: 1px solid rgba(37,99,235,0.15);
+            border-bottom: 1px solid rgba(37,99,235,0.15);
+            padding: 4rem 2rem; text-align: center;
+        }
+        .bib-quote blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-style: italic; color: var(--cream);
+            max-width: 780px; margin: 0 auto;
+            line-height: 1.7;
+        }
+        .bib-quote cite {
+            display: block; margin-top: 1.2rem;
+            color: rgba(255,255,255,0.4); font-style: normal; font-size: 0.85rem;
+        }
+
+        /* ── FOOTER ── */
+        .bib-footer {
+            background: #050810; color: rgba(255,255,255,0.35);
+            text-align: center; padding: 1.8rem 2rem; font-size: 0.78rem;
+            border-top: 1px solid rgba(37,99,235,0.1);
+        }
+        .bib-footer a { color: var(--gold); text-decoration: none; }
+        .bib-footer a:hover { color: var(--blue-light); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .bib-two-col { grid-template-columns: 1fr; gap: 2rem; }
+            .bib-two-col.reverse { direction: ltr; }
+            .bib-people-grid { grid-template-columns: repeat(2, 1fr); }
+            .bib-features-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 560px) {
+            .bib-nav { padding: 0.8rem 1rem; }
+            .bib-hero { padding: 7rem 1.2rem 3.5rem; }
+            .bib-fact { padding: 1.4rem 1.2rem; }
+            .bib-people-grid { grid-template-columns: 1fr; }
+            .bib-features-grid { grid-template-columns: 1fr; }
+            .bib-section { padding: 3.5rem 0; }
+            .bib-chap-btn { font-size: 0.7rem; padding: 0.7rem 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="bib-nav">
+    <a href="index.html" class="bib-nav-logo">🌋 Poás Agua y Fuego</a>
+    <a href="historia-canton.html" class="bib-nav-back">← Historia del Cantón</a>
+</nav>
+
+<!-- HERO -->
+<div class="bib-hero">
+    <div class="bib-hero-badge">📚 Patrimonio Cultural · San Pedro de Poás</div>
+    <h1>
+        Biblioteca Pública Municipal
+        <em>"Prof. Eliécer Murillo Esquivel"</em>
+    </h1>
+    <p class="bib-hero-sub">Más de cinco décadas de historia al servicio de la cultura, el conocimiento y el desarrollo comunitario del cantón de Poás.</p>
+    <div class="bib-hero-meta">
+        <div class="bib-meta-item"><span>📅</span> Fundada en 1971</div>
+        <div class="bib-meta-item"><span>🏛️</span> Edificio propio desde 2012</div>
+        <div class="bib-meta-item"><span>📐</span> 658 m² de instalaciones</div>
+    </div>
+</div>
+
+<!-- CHAPTERS NAV -->
+<nav class="bib-chapters">
+    <a href="#origenes"    class="bib-chap-btn">📖 Orígenes</a>
+    <a href="#crecimiento" class="bib-chap-btn">🕰️ Crecimiento</a>
+    <a href="#edificio"    class="bib-chap-btn">🏛️ Nuevo Edificio</a>
+    <a href="#personas"    class="bib-chap-btn">👥 Personas Clave</a>
+</nav>
+
+<!-- FACTS BAR -->
+<div class="bib-facts">
+    <div class="bib-fact">
+        <div class="bib-fact-num">1971</div>
+        <div class="bib-fact-label">Año de<br>inauguración</div>
+    </div>
+    <div class="bib-fact">
+        <div class="bib-fact-num">2012</div>
+        <div class="bib-fact-label">Edificio propio<br>inaugurado</div>
+    </div>
+    <div class="bib-fact">
+        <div class="bib-fact-num">658</div>
+        <div class="bib-fact-label">m² del nuevo<br>edificio</div>
+    </div>
+    <div class="bib-fact">
+        <div class="bib-fact-num">430</div>
+        <div class="bib-fact-label">Personas capacitadas<br>en informática</div>
+    </div>
+    <div class="bib-fact">
+        <div class="bib-fact-num">+50</div>
+        <div class="bib-fact-label">Años al servicio<br>de Poás</div>
+    </div>
+</div>
+
+<!-- SECCIÓN 1: ORÍGENES -->
+<section class="bib-section" id="origenes">
+    <div class="bib-container">
+        <div class="bib-section-header">
+            <div class="bib-chapter-label">Capítulo 1</div>
+            <h2 class="bib-section-title">Los Orígenes</h2>
+            <div class="bib-divider"></div>
+        </div>
+
+        <div class="bib-two-col" style="margin-bottom:3.5rem">
+            <div class="bib-text">
+                <h3>El Movimiento Juvenil Poaseño</h3>
+                <p>En <strong>setiembre de 1971</strong>, con motivo del septuagésimo aniversario de la fundación del cantón, un grupo de jóvenes de la comunidad conocido como el <strong>Movimiento Juvenil Poaseño</strong> tomó la iniciativa de programar, como acto cultural central, la inauguración de una biblioteca pública para Poás.</p>
+                <p>Entre los impulsores de este sueño se encontraban <strong>Pedro Rojas Castro, Mario Murillo Chaves, María Eugenia Ugalde, Ricardo Arroyo y Claudio Arrollo</strong>, quienes comenzaron a recoger libros en la comunidad para formar el acervo inicial.</p>
+                <p>El <strong>domingo 17 de octubre de 1971</strong>, el señor Presidente de la República, <strong>José Figueres Ferrer</strong>, inauguró oficialmente la biblioteca, dándole al cantón de Poás un espacio cultural sin precedentes.</p>
+            </div>
+            <div class="bib-highlight">
+                <h3>El Nombre que la Historia Merecía</h3>
+                <p>En sesión ordinaria <strong>No. 42, artículo 5</strong>, celebrada el <strong>6 de noviembre de 1971</strong>, el Comité Pro-Instalación propuso bautizar la biblioteca con el nombre de <strong style="color:var(--gold)">"Eliécer Murillo Esquivel"</strong>, en homenaje a uno de los hijos más ilustres del cantón.</p>
+                <p>Sin embargo, en ese momento no fue posible oficializarlo, pues el señor Murillo aún vivía. La biblioteca recibiría formalmente ese nombre décadas después, en cumplimiento de la normativa y en merecido reconocimiento a su legado.</p>
+            </div>
+        </div>
+
+        <div class="bib-two-col reverse">
+            <div class="bib-text">
+                <h3>Apertura al Público: Enero 1972</h3>
+                <p>La biblioteca abrió sus puertas al público en <strong>enero de 1972</strong>, instalada en la <strong>segunda planta de la Municipalidad</strong>, en la sala de sesiones, acondicionada especialmente para ese fin. Se conformó entonces una Junta Administrativa integrada por miembros prominentes del cantón.</p>
+                <p>El acervo bibliográfico inicial se nutrió de una <strong>campaña parroquial de donación</strong> de libros, que la comunidad depositó frente a la iglesia. Con los fondos recaudados —<strong>quinientos mil colones</strong>— el señor Pedro Rojas y la señora Zoila Vargas viajaron a la Librería Universal para adquirir más títulos, entre ellos obras del escritor costarricense <strong>José León Sánchez</strong>.</p>
+                <p>Ese mismo año, la biblioteca se <strong>oficializó</strong> y pasó a formar parte de la <em>Dirección General de Bibliotecas del Ministerio de Cultura, Juventud y Deportes</em>, garantizando su continuidad institucional.</p>
+            </div>
+            <div class="bib-text">
+                <h3>Primera Junta Administrativa</h3>
+                <ul>
+                    <li>Eliécer Murillo Esquivel</li>
+                    <li>Ademar Murillo Murillo</li>
+                    <li>Gilda Ma. Gamboa</li>
+                    <li>Abrahán Esquivel Chavarría</li>
+                    <li>Claudio Arrollo Hernández</li>
+                    <li>Gilberto Murillo Porras</li>
+                </ul>
+                <p style="margin-top:1.2rem">El <strong>Prof. Gerardo Vega Gómez</strong> fue el primer bibliotecario remunerado por el Ministerio de Cultura, Juventud y Deportes. Ejerció el cargo durante <strong>diez años</strong> bajo la coordinación de la señora <strong>Vera Violeta Acuña</strong>, supervisora nacional de bibliotecas públicas.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN 2: CRECIMIENTO -->
+<section class="bib-section" id="crecimiento">
+    <div class="bib-container">
+        <div class="bib-section-header">
+            <div class="bib-chapter-label">Capítulo 2</div>
+            <h2 class="bib-section-title">Crecimiento y Adversidades</h2>
+            <div class="bib-divider"></div>
+        </div>
+
+        <div class="bib-two-col" style="margin-bottom:3.5rem">
+            <div class="bib-timeline">
+                <div class="bib-tl-item">
+                    <div class="bib-tl-year">1972</div>
+                    <div class="bib-tl-title">Oficialización</div>
+                    <div class="bib-tl-text">La biblioteca se integra a la Dirección General de Bibliotecas del Ministerio de Cultura, Juventud y Deportes.</div>
+                </div>
+                <div class="bib-tl-item">
+                    <div class="bib-tl-year">1975</div>
+                    <div class="bib-tl-title">Primer traslado</div>
+                    <div class="bib-tl-text">La biblioteca se muda a un segundo piso ubicado 100 metros al norte y 50 metros al oeste del Templo Católico, en un edificio alquilado por el Ministerio al señor Fernando Rodríguez Murillo.</div>
+                </div>
+                <div class="bib-tl-item">
+                    <div class="bib-tl-year">1989</div>
+                    <div class="bib-tl-title">Asociación de Amigos</div>
+                    <div class="bib-tl-text">El 21 de agosto se funda la <em>Asociación de Amigos de la Biblioteca Pública de San Pedro de Poás</em>, conformada por 17 miembros de la comunidad, con el objetivo de proyectarla a todo el cantón sin distinción ideológica, política, religiosa ni social.</div>
+                </div>
+                <div class="bib-tl-item">
+                    <div class="bib-tl-year">1993–1994</div>
+                    <div class="bib-tl-title">Cierre temporal</div>
+                    <div class="bib-tl-text">La biblioteca permanece cerrada por falta de personal, marcando uno de los momentos más difíciles de su historia.</div>
+                </div>
+                <div class="bib-tl-item">
+                    <div class="bib-tl-year">1995–1998</div>
+                    <div class="bib-tl-title">Reapertura parcial</div>
+                    <div class="bib-tl-text">La señora <strong>Lidia Ma. Murillo Montero</strong> trabaja medio tiempo como encargada, manteniendo viva la llama de la biblioteca.</div>
+                </div>
+                <div class="bib-tl-item">
+                    <div class="bib-tl-year">15 febrero 1998</div>
+                    <div class="bib-tl-title">Nueva dirección</div>
+                    <div class="bib-tl-text">La señora <strong>Olga Martha Chaves Chaves</strong> es trasladada desde la Biblioteca Nacional para asumir la Dirección, trabajando en equipo con Lidia Murillo Montero a tiempo completo.</div>
+                </div>
+                <div class="bib-tl-item">
+                    <div class="bib-tl-year">1999</div>
+                    <div class="bib-tl-title">Lote para nueva sede</div>
+                    <div class="bib-tl-text">La Municipalidad, bajo el Alcalde <strong>Víctor Manuel Rodríguez Salazar</strong>, dona un lote de <strong>929.89 m²</strong> ubicado 800 metros al sur del parque central, en el distrito de San Juan, para construir el futuro edificio de la biblioteca.</div>
+                </div>
+                <div class="bib-tl-item">
+                    <div class="bib-tl-year">2000</div>
+                    <div class="bib-tl-title">Centro de Inteligencia (CECI)</div>
+                    <div class="bib-tl-text">Se inaugura el CECI con <strong>6 computadoras</strong> para capacitación en informática. En 2014 se amplía con 6 equipos más. Hasta 2018 se han capacitado aproximadamente <strong>430 personas</strong>, incluyendo adultos mayores.</div>
+                </div>
+                <div class="bib-tl-item">
+                    <div class="bib-tl-year">9 abril 2001</div>
+                    <div class="bib-tl-title">Aprobación legislativa</div>
+                    <div class="bib-tl-text">El Lic. Everardo Rodríguez, diputado PUSC, presenta y logra la aprobación del proyecto de donación de los inmuebles ante la Asamblea Legislativa. Publicado en La Gaceta.</div>
+                </div>
+                <div class="bib-tl-item">
+                    <div class="bib-tl-year">30 marzo 2004</div>
+                    <div class="bib-tl-title">Traspaso oficial</div>
+                    <div class="bib-tl-text">El Alcalde <strong>Carlos Soto Alpízar</strong> formaliza el traspaso de los inmuebles al Ministerio de Cultura y Juventud ante el Registro Nacional mediante escritura pública.</div>
+                </div>
+                <div class="bib-tl-item">
+                    <div class="bib-tl-year">2009</div>
+                    <div class="bib-tl-title">Diseño del edificio</div>
+                    <div class="bib-tl-text">Estudiantes de la <strong>Escuela de Arquitectura de la UCR</strong>, en calidad de trabajo comunal, elaboran los planos bajo la supervisión de la Arq. Viviana Vives (SINABI).</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="bib-highlight" style="margin-bottom:1.5rem">
+                    <h3>📋 Gestión del Lote Municipal</h3>
+                    <p>El vecino <strong>Francisco Murillo M.</strong> del Barrio El Carmen lideró la recolección de firmas de los vecinos para avalar la donación de dos bienes inmuebles de la Urbanización BoniMur. El proyecto fue tramitado mediante la <strong>Ley 8099 del 22 de marzo de 2001</strong> y el <strong>Acuerdo Municipal No. 19</strong>, sesión ordinaria No. 10 del 3 de julio de 2003.</p>
+                </div>
+                <div class="bib-highlight" style="border-left-color: var(--gold); border-color: rgba(200,149,42,0.25)">
+                    <h3 style="color:var(--gold)">✏️ Pro-Construcción</h3>
+                    <p>En <strong>2007</strong>, la Directora <strong>Olga Martha Chaves Chaves</strong> elaboró el proyecto de pro-construcción que impulsaría la materialización del nuevo edificio.</p>
+                    <p style="margin-top:.75rem">La constructora encargada de la ejecución fue la <strong>Industria Constructora del Poás S.A.</strong>, bajo la responsabilidad del <strong>Ing. Henry Rodríguez</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN 3: NUEVO EDIFICIO -->
+<section class="bib-section" id="edificio" style="background:linear-gradient(180deg, #0a0f1e 0%, #080c18 100%)">
+    <div class="bib-container">
+        <div class="bib-section-header">
+            <div class="bib-chapter-label">Capítulo 3</div>
+            <h2 class="bib-section-title">El Nuevo Edificio</h2>
+            <div class="bib-divider"></div>
+            <p style="color:#9db0cc;margin-top:1.2rem;max-width:600px;margin-inline:auto;line-height:1.7">
+                El sueño de una sede propia se hizo realidad el <strong style="color:#fff">9 de mayo de 2012</strong>, cuando se inauguró el moderno edificio de <strong style="color:var(--gold)">660 m²</strong> con una inversión de <strong style="color:var(--gold)">₡165.000.000</strong>.
+            </p>
+        </div>
+
+        <div class="bib-two-col" style="margin-bottom:3.5rem">
+            <div class="bib-text">
+                <h3>Construcción e Inauguración</h3>
+                <p>En <strong>2011</strong> se inició la construcción del edificio de la Biblioteca Pública de Poás con presupuesto estatal, durante la administración de la Presidenta <strong>Lic. Laura Chinchilla Miranda</strong>, con el apoyo del Ministro de Cultura y Juventud <strong>Manuel Obregón López</strong> y la gestión fundamental de la Directora del SINABI, <strong>Lic. Olga Rodríguez Chaves</strong>.</p>
+                <p>El <strong>9 de mayo de 2012</strong>, la nueva sede fue inaugurada en una emotiva ceremonia con presencia de autoridades nacionales, municipales, instituciones educativas, familiares del Prof. Eliécer Murillo Esquivel y la comunidad en general.</p>
+                <p>En ese mismo año, mediante <strong>Acuerdo No. 7057-10-2012</strong> de la Comisión de Cultura de Poás —presidida por la señora <strong>Yolanda Alvarado Chaves</strong>— se oficializó el nombre completo: <em>"Biblioteca Pública Municipal Prof. Eliécer Murillo Esquivel"</em>, honrando así la propuesta original de 1971.</p>
+            </div>
+            <div class="bib-text">
+                <h3>Presentes en la Inauguración</h3>
+                <ul>
+                    <li><strong>Manuel Obregón López</strong> — Ministro de Cultura y Juventud</li>
+                    <li><strong>Olga Rodríguez Chaves</strong> — Directora del SINABI</li>
+                    <li><strong>José Joaquín Brenes Vega</strong> — Alcalde Municipal de Poás</li>
+                    <li><strong>Sofía Murillo M.</strong> — Vicealcaldesa</li>
+                    <li><strong>Olga Martha Chaves Chaves</strong> — Directora de la Biblioteca</li>
+                    <li><strong>Lidia Murillo Montero</strong> — Asistente de Dirección</li>
+                    <li><strong>Pbro. Carlos Bolaños</strong></li>
+                    <li>Familiares del Prof. Eliécer Murillo Esquivel</li>
+                    <li>Representantes de colegios, escuelas e instituciones del cantón</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bib-section-header" style="margin-bottom:2rem">
+            <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.4rem">Instalaciones del Nuevo Edificio</h3>
+        </div>
+        <div class="bib-features-grid">
+            <div class="bib-feature">
+                <div class="bib-feature-icon">📚</div>
+                <div class="bib-feature-text"><strong>Sala Bibliográfica</strong>Amplia sala principal donde se encuentra el acervo bibliográfico del cantón.</div>
+            </div>
+            <div class="bib-feature">
+                <div class="bib-feature-icon">🔬</div>
+                <div class="bib-feature-text"><strong>Salas de Estudio e Investigación</strong>Espacios dedicados para consulta y trabajo académico individual.</div>
+            </div>
+            <div class="bib-feature">
+                <div class="bib-feature-icon">👶</div>
+                <div class="bib-feature-text"><strong>Sala Infantil</strong>Espacio diseñado especialmente para niños y niñas del cantón.</div>
+            </div>
+            <div class="bib-feature">
+                <div class="bib-feature-icon">💻</div>
+                <div class="bib-feature-text"><strong>Dos Laboratorios de Cómputo</strong>Con 12 computadoras en total para capacitación y acceso digital de la comunidad.</div>
+            </div>
+            <div class="bib-feature">
+                <div class="bib-feature-icon">🎭</div>
+                <div class="bib-feature-text"><strong>Mezzanine Multifuncional</strong>Para talleres, cursos, conversatorios, charlas y exposiciones culturales.</div>
+            </div>
+            <div class="bib-feature">
+                <div class="bib-feature-icon">🌿</div>
+                <div class="bib-feature-text"><strong>Terracita y Zonas Verdes</strong>Espacios al aire libre que complementan el ambiente cultural del edificio.</div>
+            </div>
+            <div class="bib-feature">
+                <div class="bib-feature-icon">🍽️</div>
+                <div class="bib-feature-text"><strong>Cocina-Comedor</strong>Para el servicio del personal y apoyo en actividades institucionales.</div>
+            </div>
+            <div class="bib-feature">
+                <div class="bib-feature-icon">♿</div>
+                <div class="bib-feature-text"><strong>Accesibilidad</strong>El edificio cumple con los requerimientos de la <strong>Ley 7600</strong> de igualdad de oportunidades para personas con discapacidad.</div>
+            </div>
+            <div class="bib-feature">
+                <div class="bib-feature-icon">🏛️</div>
+                <div class="bib-feature-text"><strong>Áreas de Oficinas</strong>Espacios administrativos para el personal directivo y de apoyo de la biblioteca.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN 4: PERSONAS CLAVE -->
+<section class="bib-section" id="personas">
+    <div class="bib-container">
+        <div class="bib-section-header">
+            <div class="bib-chapter-label">Capítulo 4</div>
+            <h2 class="bib-section-title">Personas que Construyeron este Legado</h2>
+            <div class="bib-divider"></div>
+            <p style="color:#9db0cc;margin-top:1.2rem;max-width:580px;margin-inline:auto;line-height:1.7">
+                La historia de la biblioteca es, ante todo, la historia de las personas que creyeron en ella.
+            </p>
+        </div>
+
+        <div class="bib-people-grid">
+            <div class="bib-person-card">
+                <div class="bib-person-icon">📖</div>
+                <div class="bib-person-name">Prof. Eliécer Murillo Esquivel</div>
+                <div class="bib-person-role">Ilustre hijo de Poás · Epónimo de la biblioteca</div>
+            </div>
+            <div class="bib-person-card">
+                <div class="bib-person-icon">👩‍💼</div>
+                <div class="bib-person-name">Olga Martha Chaves Chaves</div>
+                <div class="bib-person-role">Directora, 1998–2018 · Autora de la reseña histórica</div>
+            </div>
+            <div class="bib-person-card">
+                <div class="bib-person-icon">👩‍💼</div>
+                <div class="bib-person-name">Lidia Ma. Murillo Montero</div>
+                <div class="bib-person-role">Asistente de Dirección · Guardiana de la biblioteca en tiempos difíciles</div>
+            </div>
+            <div class="bib-person-card">
+                <div class="bib-person-icon">🎓</div>
+                <div class="bib-person-name">Prof. Gerardo Vega Gómez</div>
+                <div class="bib-person-role">Primer bibliotecario remunerado · 10 años de servicio</div>
+            </div>
+            <div class="bib-person-card">
+                <div class="bib-person-icon">🤝</div>
+                <div class="bib-person-name">Pedro Rojas Castro</div>
+                <div class="bib-person-role">Movimiento Juvenil Poaseño · Cofundador</div>
+            </div>
+            <div class="bib-person-card">
+                <div class="bib-person-icon">🤝</div>
+                <div class="bib-person-name">Mario Murillo Chaves</div>
+                <div class="bib-person-role">Movimiento Juvenil Poaseño · Cofundador</div>
+            </div>
+            <div class="bib-person-card">
+                <div class="bib-person-icon">🏛️</div>
+                <div class="bib-person-name">Víctor Manuel Rodríguez Salazar</div>
+                <div class="bib-person-role">Alcalde de Poás 1999–2000 · Gestionó la donación del lote</div>
+            </div>
+            <div class="bib-person-card">
+                <div class="bib-person-icon">📐</div>
+                <div class="bib-person-name">Lic. Olga Rodríguez Chaves</div>
+                <div class="bib-person-role">Directora SINABI 2010–2014 · Impulsó la construcción del edificio</div>
+            </div>
+            <div class="bib-person-card">
+                <div class="bib-person-icon">🏗️</div>
+                <div class="bib-person-name">Ing. Henry Rodríguez</div>
+                <div class="bib-person-role">Industria Constructora del Poás S.A. · Constructor del edificio</div>
+            </div>
+        </div>
+
+        <div style="margin-top:3rem">
+            <p style="color:#9db0cc;font-size:0.9rem;text-align:center;margin-bottom:1.5rem;opacity:0.7">Otros bibliotecarios que sirvieron a la comunidad</p>
+            <div class="bib-people-grid">
+                <div class="bib-person-card">
+                    <div class="bib-person-name">Rosibel Fonseca</div>
+                    <div class="bib-person-role">Bibliotecaria</div>
+                </div>
+                <div class="bib-person-card">
+                    <div class="bib-person-name">Ma. Soledad Vargas Monge</div>
+                    <div class="bib-person-role">Bibliotecaria</div>
+                </div>
+                <div class="bib-person-card">
+                    <div class="bib-person-name">Emilia Rodríguez Meléndez</div>
+                    <div class="bib-person-role">Bibliotecaria</div>
+                </div>
+                <div class="bib-person-card">
+                    <div class="bib-person-name">Alicia Murillo Solís</div>
+                    <div class="bib-person-role">Bibliotecaria</div>
+                </div>
+                <div class="bib-person-card">
+                    <div class="bib-person-name">María de los Ángeles Chaves Ugalde</div>
+                    <div class="bib-person-role">Bibliotecaria</div>
+                </div>
+                <div class="bib-person-card">
+                    <div class="bib-person-name">Lidieth Vega Castro</div>
+                    <div class="bib-person-role">Bibliotecaria</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CITA FINAL -->
+<div class="bib-quote">
+    <blockquote>
+        "La fe y la esperanza nunca se perdieron. Sueño hecho realidad. Gracias a Dios por tantas bendiciones."
+        <cite>— Olga Martha Chaves Chaves, Directora · Reseña Histórica, 2018</cite>
+    </blockquote>
+</div>
+
+<!-- FOOTER -->
+<footer class="bib-footer">
+    <p>© 2026 · Reseña histórica recopilada por <strong>Olga Martha Chaves Chaves</strong>, Directora de la Biblioteca Pública Municipal de Poás, 1998–2018</p>
+    <p style="margin-top:0.4rem">
+        <a href="historia-canton.html">Historia del Cantón</a> ·
+        <a href="index.html">Poás Agua y Fuego</a>
+    </p>
+</footer>
+
+<script src="security.js?v=2"></script>
+</body>
+</html>

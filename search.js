@@ -78,6 +78,13 @@
             tags: 'fotos históricas imágenes antiguas archivo parque templo san pedro comunidad 1970 1971 1975'
         },
         {
+            title: 'Biblioteca Pública Municipal',
+            desc: 'Historia de la Biblioteca "Prof. Eliécer Murillo Esquivel" de San Pedro de Poás',
+            url: 'biblioteca-publica.html',
+            icon: '📚',
+            tags: 'biblioteca pública municipal eliécer murillo esquivel libros cultura conocimiento 1971 2012 sinabi lectura'
+        },
+        {
             title: 'Guerra Civil Poaseña 1948',
             desc: 'La participación de Poás en la guerra civil costarricense de 1948',
             url: 'guerra-civil-poasena.html',
