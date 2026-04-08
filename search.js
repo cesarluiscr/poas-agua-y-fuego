@@ -78,8 +78,8 @@
             tags: 'fotos históricas imágenes antiguas archivo parque templo san pedro comunidad 1970 1971 1975'
         },
         {
-            title: 'Biblioteca Pública Municipal',
-            desc: 'Historia de la Biblioteca "Prof. Eliécer Murillo Esquivel" de San Pedro de Poás',
+            title: 'Biblioteca Pública del Cantón de Poás',
+            desc: 'Historia de la Biblioteca Pública "Prof. Eliécer Murillo Esquivel" del Cantón de Poás',
             url: 'biblioteca-publica.html',
             icon: '📚',
             tags: 'biblioteca pública municipal eliécer murillo esquivel libros cultura conocimiento 1971 2012 sinabi lectura'
