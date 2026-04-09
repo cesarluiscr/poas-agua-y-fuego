@@ -37,7 +37,9 @@ if (hamburger && mobileNav) {
     // Marcar el enlace activo según la página actual
     (function markActiveNavLink() {
         const currentPage = location.pathname.split('/').pop() || 'index.html';
-        mobileNav.querySelectorAll('a[href]').forEach(link => {
+        const linksContainer = document.querySelector('.mobile-nav-links');
+        if (!linksContainer) return;
+        linksContainer.querySelectorAll('a[href]').forEach(link => {
             const linkPage = (link.getAttribute('href') || '').split('#')[0];
             if (linkPage && linkPage === currentPage) {
                 link.classList.add('nav-active');

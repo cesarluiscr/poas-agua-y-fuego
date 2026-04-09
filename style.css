@@ -2693,7 +2693,8 @@ footer {
     padding: .6rem 0;
 }
 
-.mobile-nav a {
+/* ── Enlaces de navegación (solo dentro de .mobile-nav-links) ── */
+.mobile-nav-links a {
     display: flex;
     align-items: center;
     gap: .75rem;
@@ -2705,23 +2706,22 @@ footer {
     padding: .75rem 1.4rem;
     border-left: 3px solid transparent;
     transition: color .18s, background .18s, border-color .18s;
-    position: relative;
 }
 
-.mobile-nav a:hover,
-.mobile-nav a:focus-visible {
+.mobile-nav-links a:hover,
+.mobile-nav-links a:focus-visible {
     color: #C8952A;
     background: rgba(200,149,42,0.08);
     border-left-color: #C8952A;
     outline: none;
 }
 
-.mobile-nav a:active {
+.mobile-nav-links a:active {
     background: rgba(200,149,42,0.15);
 }
 
 /* Ítem de la página actual */
-.mobile-nav a.nav-active {
+.mobile-nav-links a.nav-active {
     color: #C8952A;
     background: rgba(200,149,42,0.1);
     border-left-color: #C8952A;
