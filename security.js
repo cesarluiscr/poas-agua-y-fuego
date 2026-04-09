@@ -10,7 +10,9 @@
     const ALLOWED_SCRIPT_HOSTS = [
         'script.google.com',
         'fonts.googleapis.com',
-        'flagcdn.com'
+        'flagcdn.com',
+        'unpkg.com',
+        'cdn.jsdelivr.net'
     ];
     const RL_PREFIX = 'poas_rl_';
 
@@ -265,12 +267,12 @@
             csp.httpEquiv = 'Content-Security-Policy';
             csp.content = [
                 "default-src 'self'",
-                "script-src 'self' 'unsafe-inline' https://script.google.com",
-                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-                "font-src 'self' https://fonts.gstatic.com",
+                "script-src 'self' 'unsafe-inline' https://script.google.com https://unpkg.com https://cdn.jsdelivr.net",
+                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net",
+                "font-src 'self' https://fonts.gstatic.com https://unpkg.com",
                 "img-src 'self' data: https: blob:",
                 "media-src 'self' blob:",
-                "connect-src 'self' https://script.google.com",
+                "connect-src 'self' https://script.google.com https://api.open-meteo.com https://nominatim.openstreetmap.org",
                 "frame-src 'none'",
                 "frame-ancestors 'none'",
                 "object-src 'none'",
