@@ -106,6 +106,13 @@
             tags: 'quejas denuncias reportar problemas irregularidades comunidad'
         },
         {
+            title: 'Cómo Llegar al Cantón',
+            desc: 'Rutas, mapa interactivo y transporte para llegar a Poás',
+            url: 'como-llegar.html',
+            icon: '🗺️',
+            tags: 'cómo llegar mapa rutas transporte autobús auto carretera acceso'
+        },
+        {
             title: 'Contacto',
             desc: 'WhatsApp, redes sociales y formas de contacto',
             url: 'index.html#contacto',

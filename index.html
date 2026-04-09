@@ -18,6 +18,9 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <!-- Open Graph / Redes Sociales -->
     <meta property="og:type"        content="website">
     <meta property="og:url"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/index.html">
@@ -491,6 +494,209 @@
             .regulador-modern-footer { flex-direction: column; align-items: flex-start; }
             .regulador-modern-btn { width: 100%; justify-content: center; }
         }
+
+        /* ── ALERTA VOLCÁNICA + ESTADÍSTICAS ── */
+        .volcan-alerta-bar {
+            display: flex; align-items: center; justify-content: center;
+            gap: 1rem; flex-wrap: wrap;
+            padding: .6rem 2rem;
+            font-size: .82rem; font-weight: 600;
+            letter-spacing: .04em;
+        }
+        .volcan-alerta-bar.nivel-verde  { background: linear-gradient(90deg,#052e16,#064e22,#052e16); border-bottom: 2px solid #16a34a; color:#bbf7d0; }
+        .volcan-alerta-bar.nivel-amarillo{ background: linear-gradient(90deg,#422006,#713f12,#422006); border-bottom: 2px solid #ca8a04; color:#fef08a; }
+        .volcan-alerta-bar.nivel-naranja { background: linear-gradient(90deg,#431407,#9a3412,#431407); border-bottom: 2px solid #ea580c; color:#fed7aa; }
+        .volcan-alerta-bar.nivel-rojo    { background: linear-gradient(90deg,#3f0606,#991b1b,#3f0606); border-bottom: 2px solid #dc2626; color:#fecaca; }
+        .alerta-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; animation: pulseDot 1.8s infinite; }
+        .nivel-verde  .alerta-dot { background:#22c55e; box-shadow:0 0 8px #22c55e; }
+        .nivel-amarillo .alerta-dot { background:#eab308; box-shadow:0 0 8px #eab308; }
+        .nivel-naranja  .alerta-dot { background:#f97316; box-shadow:0 0 8px #f97316; }
+        .nivel-rojo     .alerta-dot { background:#ef4444; box-shadow:0 0 8px #ef4444; }
+        @keyframes pulseDot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+        .alerta-label { opacity:.65; }
+        .alerta-nivel { font-weight:800; text-transform:uppercase; letter-spacing:.1em; }
+        .alerta-link {
+            color:inherit; opacity:.7; text-decoration:none; font-size:.75rem;
+            border: 1px solid currentColor; border-radius:999px; padding:.15rem .7rem;
+            transition:opacity .2s;
+        }
+        .alerta-link:hover { opacity:1; }
+
+        /* ── ESTADÍSTICAS DEL CANTÓN ── */
+        .canton-stats {
+            background: linear-gradient(135deg,#0a0e1a,#0d1428);
+            border-bottom: 1px solid rgba(200,149,42,0.12);
+            display: flex; justify-content: center; flex-wrap: wrap;
+        }
+        .canton-stat {
+            padding: 1.6rem 2.4rem; text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.06);
+            flex: 1; min-width: 130px;
+        }
+        .canton-stat:last-child { border-right: none; }
+        .canton-stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem; font-weight: 700; color: #C8952A;
+        }
+        .canton-stat-label { color: rgba(255,255,255,0.45); font-size: .73rem; margin-top:.25rem; line-height:1.4; }
+        @media(max-width:600px){ .canton-stat { padding:1.1rem 1rem; } .canton-stat-num { font-size:1.5rem; } }
+
+        /* ── CLIMA EN TIEMPO REAL ── */
+        .clima-section {
+            background: linear-gradient(135deg,#040d1a,#081428);
+            padding: 3.5rem 2rem;
+            border-bottom: 1px solid rgba(37,99,235,0.12);
+        }
+        .clima-inner { max-width:960px; margin:0 auto; }
+        .clima-header { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap; }
+        .clima-title { font-size:1.2rem; font-weight:700; color:#fff; }
+        .clima-subtitle { color:rgba(255,255,255,0.45); font-size:.8rem; margin-top:.15rem; }
+        .clima-badge {
+            background:rgba(37,99,235,0.15); border:1px solid rgba(96,165,250,0.3);
+            color:#60a5fa; font-size:.7rem; font-weight:700; letter-spacing:.1em;
+            text-transform:uppercase; padding:.25rem .8rem; border-radius:999px;
+        }
+        .clima-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+        .clima-card {
+            background:rgba(255,255,255,0.04); border:1px solid rgba(37,99,235,0.18);
+            border-radius:14px; padding:1.2rem 1rem; text-align:center;
+            transition:border-color .2s;
+        }
+        .clima-card:hover { border-color:rgba(96,165,250,0.4); }
+        .clima-card-icon { font-size:1.8rem; margin-bottom:.4rem; }
+        .clima-card-val { font-size:1.5rem; font-weight:800; color:#fff; line-height:1; }
+        .clima-card-lbl { color:rgba(255,255,255,0.45); font-size:.73rem; margin-top:.3rem; }
+        .clima-card-unit { font-size:.85rem; font-weight:400; color:rgba(255,255,255,0.5); }
+        .clima-loading { text-align:center; color:rgba(255,255,255,0.35); font-size:.9rem; padding:2rem; }
+        .clima-error  { text-align:center; color:rgba(251,146,60,0.7); font-size:.85rem; padding:1rem; }
+        .clima-src { text-align:right; color:rgba(255,255,255,0.25); font-size:.7rem; margin-top:.75rem; }
+        .clima-src a { color:#60a5fa; text-decoration:none; }
+        @media(max-width:600px){ .clima-cards { grid-template-columns:repeat(2,1fr); } }
+
+        /* ── NOTICIAS / ANUNCIOS ── */
+        .noticias-section { background:#080c14; padding:4rem 2rem; }
+        .noticias-inner { max-width:1060px; margin:0 auto; }
+        .noticias-header { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem; }
+        .noticias-title { font-family:'Playfair Display',serif; font-size:1.7rem; color:#fff; }
+        .noticias-ver-mas { color:#C8952A; font-size:.82rem; font-weight:600; text-decoration:none; transition:opacity .2s; }
+        .noticias-ver-mas:hover { opacity:.7; }
+        .noticias-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+        .noticia-card {
+            background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
+            border-radius:16px; padding:1.5rem; display:flex; flex-direction:column; gap:.75rem;
+            transition:border-color .2s, transform .2s;
+        }
+        .noticia-card:hover { border-color:rgba(200,149,42,0.35); transform:translateY(-3px); }
+        .noticia-badge {
+            display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.1em;
+            text-transform:uppercase; padding:.2rem .7rem; border-radius:999px;
+        }
+        .noticia-badge.volcán  { background:rgba(220,38,38,.15); color:#fca5a5; border:1px solid rgba(220,38,38,.25); }
+        .noticia-badge.turismo { background:rgba(16,185,129,.12); color:#6ee7b7; border:1px solid rgba(16,185,129,.2); }
+        .noticia-badge.comunidad{ background:rgba(200,149,42,.12); color:#fcd34d; border:1px solid rgba(200,149,42,.2); }
+        .noticia-fecha { color:rgba(255,255,255,.35); font-size:.75rem; }
+        .noticia-titulo { color:#fff; font-weight:700; font-size:1rem; line-height:1.35; }
+        .noticia-desc { color:rgba(255,255,255,.5); font-size:.85rem; line-height:1.6; flex:1; }
+        .noticia-link { color:#C8952A; font-size:.8rem; font-weight:600; text-decoration:none; margin-top:auto; }
+        .noticia-link:hover { text-decoration:underline; }
+        @media(max-width:768px){ .noticias-grid { grid-template-columns:1fr; } }
+
+        /* ── MAPA LEAFLET ── */
+        .mapa-section { background:#06090f; padding:4rem 2rem 0; }
+        .mapa-inner { max-width:1060px; margin:0 auto; }
+        .mapa-header { margin-bottom:1.5rem; }
+        .mapa-title { font-family:'Playfair Display',serif; font-size:1.7rem; color:#fff; margin-bottom:.4rem; }
+        .mapa-sub { color:rgba(255,255,255,.45); font-size:.9rem; }
+        #mapa-canton {
+            height:440px; border-radius:16px;
+            border:1px solid rgba(200,149,42,.25);
+            box-shadow:0 8px 32px rgba(0,0,0,.5);
+        }
+        .mapa-leyenda {
+            display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1rem; padding-bottom:3rem;
+        }
+        .mapa-ley-item {
+            display:flex; align-items:center; gap:.4rem;
+            font-size:.78rem; color:rgba(255,255,255,.55);
+        }
+        .mapa-ley-dot { font-size:1rem; line-height:1; }
+
+        /* ── BOTÓN FLOTANTE EMERGENCIAS ── */
+        .emer-fab {
+            position:fixed; bottom:1.8rem; right:1.8rem; z-index:999;
+            width:52px; height:52px; border-radius:50%;
+            background:linear-gradient(135deg,#dc2626,#991b1b);
+            border:none; cursor:pointer; display:flex; align-items:center; justify-content:center;
+            font-size:1.4rem; box-shadow:0 4px 20px rgba(220,38,38,0.55);
+            transition:transform .2s, box-shadow .2s;
+        }
+        .emer-fab:hover { transform:scale(1.12); box-shadow:0 6px 28px rgba(220,38,38,0.75); }
+        .emer-fab-tooltip {
+            position:absolute; right:calc(100% + .6rem); top:50%; transform:translateY(-50%);
+            background:rgba(0,0,0,0.85); color:#fff; font-size:.72rem; white-space:nowrap;
+            padding:.3rem .7rem; border-radius:8px; pointer-events:none;
+            opacity:0; transition:opacity .2s;
+        }
+        .emer-fab:hover .emer-fab-tooltip { opacity:1; }
+        .emer-modal-overlay {
+            display:none; position:fixed; inset:0; z-index:1000;
+            background:rgba(0,0,0,0.75); backdrop-filter:blur(6px);
+            align-items:center; justify-content:center;
+        }
+        .emer-modal-overlay.open { display:flex; }
+        .emer-modal {
+            background:#0f1520; border:1px solid rgba(220,38,38,0.3);
+            border-radius:20px; padding:2rem 2rem 1.5rem; max-width:380px; width:90%;
+            box-shadow:0 20px 60px rgba(0,0,0,0.6);
+        }
+        .emer-modal-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem; }
+        .emer-modal-title { font-weight:800; color:#fff; font-size:1.1rem; }
+        .emer-modal-close { background:none; border:none; color:rgba(255,255,255,0.5); font-size:1.4rem; cursor:pointer; line-height:1; }
+        .emer-modal-close:hover { color:#fff; }
+        .emer-numero {
+            display:flex; align-items:center; justify-content:space-between;
+            padding:.8rem 1rem; border-radius:12px; margin-bottom:.6rem;
+            background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);
+            text-decoration:none; transition:background .2s;
+        }
+        .emer-numero:hover { background:rgba(255,255,255,0.08); }
+        .emer-numero-left { display:flex; align-items:center; gap:.75rem; }
+        .emer-numero-icon { font-size:1.3rem; }
+        .emer-numero-name { color:#fff; font-size:.88rem; font-weight:600; }
+        .emer-numero-sub  { color:rgba(255,255,255,.4); font-size:.72rem; }
+        .emer-numero-tel  { color:#C8952A; font-weight:800; font-size:1rem; }
+        .emer-modal-note  { text-align:center; color:rgba(255,255,255,.3); font-size:.7rem; margin-top:1rem; }
+
+        /* ── Alias de clases (compatibilidad) ── */
+        .clima-sub { color:rgba(255,255,255,0.45); font-size:.85rem; margin-bottom:1.8rem; }
+        .clima-card-value { font-size:1.5rem; font-weight:800; color:#fff; line-height:1; }
+        .clima-card-label { color:rgba(255,255,255,0.45); font-size:.73rem; margin-top:.3rem; }
+        .clima-fuente { text-align:center; color:rgba(255,255,255,0.3); font-size:.75rem; margin-top:1rem; }
+        h2.clima-title { font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#fff; margin-bottom:.3rem; }
+        .noticias-sub { color:rgba(255,255,255,0.45); font-size:.9rem; margin-bottom:2rem; }
+        .noticia-card-title { color:#fff; font-weight:700; font-size:1rem; line-height:1.35; }
+        .noticia-card-body  { color:rgba(255,255,255,.5); font-size:.85rem; line-height:1.6; flex:1; }
+        .noticia-card-link  { color:#C8952A; font-size:.8rem; font-weight:600; text-decoration:none; margin-top:auto; }
+        .noticia-card-link:hover { text-decoration:underline; }
+        .noticia-badge-info    { background:rgba(37,99,235,.15);  color:#93c5fd; border:1px solid rgba(96,165,250,.3); }
+        .noticia-badge-cultura { background:rgba(16,185,129,.12); color:#6ee7b7; border:1px solid rgba(16,185,129,.25); }
+        .noticia-badge-empleo  { background:rgba(200,149,42,.12); color:#fcd34d; border:1px solid rgba(200,149,42,.25); }
+        h2.mapa-title { font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#fff; margin-bottom:.3rem; }
+        .mapa-leyenda { display:flex; flex-wrap:wrap; gap:1.2rem; margin-top:1rem; padding-bottom:3rem; color:rgba(255,255,255,.5); font-size:.82rem; }
+        /* Emergency contact list */
+        .emer-contact-list { display:flex; flex-direction:column; gap:.5rem; }
+        .emer-contact-item {
+            display:flex; align-items:center; justify-content:space-between;
+            padding:.75rem 1rem; border-radius:12px;
+            background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07);
+            text-decoration:none; transition:background .2s;
+        }
+        .emer-contact-item:hover { background:rgba(255,255,255,0.08); }
+        .emer-911 { border-color:rgba(220,38,38,.3); background:rgba(220,38,38,.08); }
+        .emer-911:hover { background:rgba(220,38,38,.15); }
+        .emer-contact-num  { color:#C8952A; font-weight:800; font-size:1rem; }
+        .emer-contact-name { color:rgba(255,255,255,.7); font-size:.85rem; }
+        .emer-911 .emer-contact-num { color:#fca5a5; font-size:1.2rem; }
     </style>
 </head>
 
@@ -505,6 +711,8 @@
             <li><a href="bolsa-empleo.html">Bolsa de Empleo</a></li>
             <li><a href="eventos.html">Eventos</a></li>
             <li><a href="plan-regulador.html">Plan Regulador</a></li>
+            <li><a href="seguridad-ciudadana.html">Seguridad</a></li>
+            <li><a href="como-llegar.html">Cómo Llegar</a></li>
             <li><a href="galeria.html">Galería</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -527,6 +735,8 @@
         <a href="bolsa-empleo.html"            onclick="closeMobileNav()">Bolsa de Empleo</a>
         <a href="eventos.html"                 onclick="closeMobileNav()">Eventos</a>
         <a href="plan-regulador.html"          onclick="closeMobileNav()">Plan Regulador</a>
+        <a href="seguridad-ciudadana.html"     onclick="closeMobileNav()">Seguridad Ciudadana</a>
+        <a href="como-llegar.html"             onclick="closeMobileNav()">Cómo Llegar</a>
         <a href="galeria.html"                  onclick="closeMobileNav()">Galería</a>
         <a href="#contacto"                    onclick="closeMobileNav()">Contacto</a>
     </nav>
@@ -562,6 +772,36 @@
         </div>
     </header>
 
+    <!-- ── Barra de Alerta Volcánica ── -->
+    <div id="volcan-alerta-bar" class="volcan-alerta-bar nivel-verde" role="alert" aria-live="polite">
+        <span class="alerta-dot" id="alerta-dot"></span>
+        <span id="alerta-texto">🌋 Volcán Poás — Nivel de Alerta: <strong id="alerta-nivel">Verde</strong> · Actividad normal. Acceso al Parque Nacional según horario SINAC.</span>
+        <a href="https://www.ovsicori.una.ac.cr/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;white-space:nowrap;font-size:.78rem;">Ver OVSICORI →</a>
+    </div>
+
+    <!-- ── Estadísticas del Cantón ── -->
+    <div class="canton-stats">
+        <div class="canton-stat">
+            <div class="canton-stat-num" data-target="37000" data-suffix="">37,000+</div>
+            <div class="canton-stat-label">Habitantes</div>
+        </div>
+        <div class="canton-stat">
+            <div class="canton-stat-num">5</div>
+            <div class="canton-stat-label">Distritos</div>
+        </div>
+        <div class="canton-stat">
+            <div class="canton-stat-num">9</div>
+            <div class="canton-stat-label">ASADAS</div>
+        </div>
+        <div class="canton-stat">
+            <div class="canton-stat-num">2,708 m</div>
+            <div class="canton-stat-label">Cima del Volcán</div>
+        </div>
+        <div class="canton-stat">
+            <div class="canton-stat-num">1901</div>
+            <div class="canton-stat-label">Año de Fundación</div>
+        </div>
+    </div>
 
     <!-- Patrimonio Hídrico -->
     <section id="agua" class="water-heritage-section">
@@ -811,6 +1051,80 @@
         </div>
     </section>
 
+    <!-- ── Clima en Tiempo Real ── -->
+    <section class="clima-section" id="clima">
+        <div class="container">
+            <h2 class="clima-title">🌤️ Clima en el Cantón de Poás</h2>
+            <p class="clima-sub">Datos meteorológicos en tiempo real · Zona volcánica · Open-Meteo API</p>
+            <div class="clima-cards" id="clima-cards">
+                <div class="clima-card">
+                    <div class="clima-card-icon">🌡️</div>
+                    <div class="clima-card-value" id="clima-temp">—</div>
+                    <div class="clima-card-label">Temperatura</div>
+                </div>
+                <div class="clima-card">
+                    <div class="clima-card-icon">💧</div>
+                    <div class="clima-card-value" id="clima-hum">—</div>
+                    <div class="clima-card-label">Humedad</div>
+                </div>
+                <div class="clima-card">
+                    <div class="clima-card-icon">🌧️</div>
+                    <div class="clima-card-value" id="clima-lluvia">—</div>
+                    <div class="clima-card-label">Precipitación</div>
+                </div>
+                <div class="clima-card">
+                    <div class="clima-card-icon">💨</div>
+                    <div class="clima-card-value" id="clima-viento">—</div>
+                    <div class="clima-card-label">Viento</div>
+                </div>
+            </div>
+            <p class="clima-fuente" id="clima-fuente">Cargando datos…</p>
+        </div>
+    </section>
+
+    <!-- ── Noticias y Anuncios Comunitarios ── -->
+    <section class="noticias-section" id="noticias">
+        <div class="container">
+            <h2 class="noticias-title">📢 Noticias y Anuncios Comunitarios</h2>
+            <p class="noticias-sub">Información actualizada para los vecinos y visitantes del cantón de Poás</p>
+            <div class="noticias-grid">
+                <article class="noticia-card">
+                    <div class="noticia-badge noticia-badge-info">Información</div>
+                    <h3 class="noticia-card-title">Apertura del Parque Nacional Volcán Poás</h3>
+                    <p class="noticia-card-body">El Parque Nacional Volcán Poás mantiene su horario de 8:00 a.m. a 4:00 p.m. Se requiere reserva electrónica previa a través del portal SINAC.</p>
+                    <a href="https://serviciosenlinea.sinac.go.cr/" target="_blank" rel="noopener noreferrer" class="noticia-card-link">Reservar entrada →</a>
+                </article>
+                <article class="noticia-card">
+                    <div class="noticia-badge noticia-badge-cultura">Cultura</div>
+                    <h3 class="noticia-card-title">Ruta Gastronómica Poaseña</h3>
+                    <p class="noticia-card-body">Descubrí los sabores auténticos del cantón: chorreado, sopa negra, tamales y más platillos típicos en nuestros restaurantes locales.</p>
+                    <a href="ruta-gastronomica.html" class="noticia-card-link">Explorar ruta →</a>
+                </article>
+                <article class="noticia-card">
+                    <div class="noticia-badge noticia-badge-empleo">Empleo</div>
+                    <h3 class="noticia-card-title">Bolsa de Empleo Activa</h3>
+                    <p class="noticia-card-body">Nuevas oportunidades laborales disponibles en el cantón. Inscribí tu hoja de vida o publicá una oferta de trabajo para conectar con talento local.</p>
+                    <a href="bolsa-empleo.html" class="noticia-card-link">Ver ofertas →</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Mapa Interactivo del Cantón ── -->
+    <section class="mapa-section" id="mapa">
+        <div class="container">
+            <h2 class="mapa-title">🗺️ Mapa del Cantón de Poás</h2>
+            <p class="mapa-sub">Explorá los distritos, puntos de interés y servicios del cantón</p>
+            <div id="mapa-canton"></div>
+            <div class="mapa-leyenda">
+                <span>🌋 Volcán Poás</span>
+                <span>🏛️ Centro de San Pedro</span>
+                <span>🏘️ Distritos</span>
+                <span>🌿 Áreas Naturales</span>
+            </div>
+        </div>
+    </section>
+
     <!-- Banner Historia del Cantón -->
     <section class="historia-banner-section">
         <div class="historia-banner-bg"></div>
@@ -973,6 +1287,176 @@
     }
     document.addEventListener('DOMContentLoaded', renderAnuncioBanner);
     </script>
+    <!-- ── Botón Flotante de Emergencias ── -->
+    <button class="emer-fab" id="emer-fab" aria-label="Números de emergencia">
+        🚨
+        <span class="emer-fab-tooltip">Emergencias</span>
+    </button>
+
+    <!-- Modal de Emergencias -->
+    <div class="emer-modal-overlay" id="emer-modal-overlay" role="dialog" aria-modal="true" aria-label="Números de emergencia en Costa Rica">
+        <div class="emer-modal">
+            <div class="emer-modal-header">
+                <span class="emer-modal-title">🚨 Números de Emergencia</span>
+                <button class="emer-modal-close" id="emer-modal-close" aria-label="Cerrar">×</button>
+            </div>
+            <div class="emer-contact-list">
+                <a href="tel:911" class="emer-contact-item emer-911">
+                    <span class="emer-contact-num">911</span>
+                    <span class="emer-contact-name">Emergencias Generales</span>
+                </a>
+                <a href="tel:1118" class="emer-contact-item">
+                    <span class="emer-contact-num">1118</span>
+                    <span class="emer-contact-name">Bomberos Costa Rica</span>
+                </a>
+                <a href="tel:128" class="emer-contact-item">
+                    <span class="emer-contact-num">128</span>
+                    <span class="emer-contact-name">Cruz Roja</span>
+                </a>
+                <a href="tel:1176" class="emer-contact-item">
+                    <span class="emer-contact-num">1176</span>
+                    <span class="emer-contact-name">Fuerza Pública</span>
+                </a>
+                <a href="tel:2461-2210" class="emer-contact-item">
+                    <span class="emer-contact-num">2461-2210</span>
+                    <span class="emer-contact-name">OIJ Alajuela</span>
+                </a>
+                <a href="tel:2482-2222" class="emer-contact-item">
+                    <span class="emer-contact-num">2482-2222</span>
+                    <span class="emer-contact-name">EBAIS San Pedro de Poás</span>
+                </a>
+            </div>
+            <p class="emer-modal-note">Presioná el número para llamar directamente · Costa Rica</p>
+        </div>
+    </div>
+
+    <!-- ── Leaflet JS ── -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLcE=" crossorigin="anonymous"></script>
+
+    <script>
+    /* ════════════════════════════════════════════════
+       1. Nivel de Alerta Volcánica (actualizar manualmente)
+       Valores posibles: 'verde', 'amarillo', 'naranja', 'rojo'
+       ════════════════════════════════════════════════ */
+    const NIVEL_ALERTA_VOLCAN = 'verde';
+
+    (function initAlertaVolcan() {
+        const bar  = document.getElementById('volcan-alerta-bar');
+        const dot  = document.getElementById('alerta-dot');
+        const nivelEl = document.getElementById('alerta-nivel');
+        if (!bar) return;
+
+        const cfg = {
+            verde:    { label:'Verde',    desc:'Actividad normal. Acceso al Parque Nacional según horario SINAC.', dotColor:'#16a34a' },
+            amarillo: { label:'Amarillo', desc:'Actividad elevada. Siga indicaciones de OVSICORI y SINAC.',       dotColor:'#ca8a04' },
+            naranja:  { label:'Naranja',  desc:'Actividad significativa. Acceso restringido. Manténgase informado.', dotColor:'#ea580c' },
+            rojo:     { label:'Rojo',     desc:'Peligro inmediato. Siga instrucciones de las autoridades.',        dotColor:'#dc2626' }
+        };
+
+        const nivel = (NIVEL_ALERTA_VOLCAN || 'verde').toLowerCase();
+        const c = cfg[nivel] || cfg.verde;
+
+        bar.className = 'volcan-alerta-bar nivel-' + nivel;
+        if (dot) dot.style.background = c.dotColor;
+        if (nivelEl) nivelEl.textContent = c.label;
+        document.getElementById('alerta-texto').innerHTML =
+            '🌋 Volcán Poás — Nivel de Alerta: <strong>' + c.label + '</strong> · ' + c.desc;
+    })();
+
+    /* ════════════════════════════════════════════════
+       2. Clima en Tiempo Real — Open-Meteo (sin API key)
+       ════════════════════════════════════════════════ */
+    (function fetchClima() {
+        const url = 'https://api.open-meteo.com/v1/forecast' +
+            '?latitude=10.1&longitude=-84.23' +
+            '&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,weather_code' +
+            '&timezone=America%2FCosta_Rica';
+
+        const weatherDesc = {
+            0:'☀️ Despejado', 1:'🌤️ Mayormente despejado', 2:'⛅ Parcialmente nublado', 3:'☁️ Nublado',
+            45:'🌫️ Niebla', 48:'🌫️ Niebla con escarcha', 51:'🌦️ Llovizna ligera', 61:'🌧️ Lluvia ligera',
+            63:'🌧️ Lluvia moderada', 65:'🌧️ Lluvia intensa', 80:'🌦️ Aguacero', 81:'🌧️ Aguacero moderado',
+            95:'⛈️ Tormenta', 96:'⛈️ Tormenta con granizo'
+        };
+
+        fetch(url)
+            .then(r => r.json())
+            .then(data => {
+                const c = data.current;
+                const desc = weatherDesc[c.weather_code] || '🌡️ Variable';
+                document.getElementById('clima-temp').textContent   = c.temperature_2m + '°C';
+                document.getElementById('clima-hum').textContent    = c.relative_humidity_2m + '%';
+                document.getElementById('clima-lluvia').textContent = c.precipitation + ' mm';
+                document.getElementById('clima-viento').textContent = c.wind_speed_10m + ' km/h';
+                document.getElementById('clima-fuente').textContent =
+                    desc + ' · Actualizado: ' + new Date().toLocaleTimeString('es-CR', {hour:'2-digit',minute:'2-digit'}) + ' · Fuente: Open-Meteo';
+            })
+            .catch(() => {
+                document.getElementById('clima-fuente').textContent = 'No se pudo cargar la información meteorológica.';
+            });
+    })();
+
+    /* ════════════════════════════════════════════════
+       3. Mapa Leaflet del Cantón de Poás
+       ════════════════════════════════════════════════ */
+    (function initMapa() {
+        if (!document.getElementById('mapa-canton')) return;
+        if (typeof L === 'undefined') return;
+
+        const map = L.map('mapa-canton', {
+            center: [10.12, -84.23],
+            zoom: 12,
+            zoomControl: true,
+            scrollWheelZoom: false
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 18
+        }).addTo(map);
+
+        const puntos = [
+            { coords: [10.1995, -84.2270], icon: '🌋', titulo: 'Volcán Poás', desc: 'Parque Nacional Volcán Poás · 2,708 m.s.n.m.' },
+            { coords: [10.0968, -84.2289], icon: '🏛️', titulo: 'San Pedro de Poás', desc: 'Centro del cantón · Municipalidad de Poás' },
+            { coords: [10.1580, -84.2350], icon: '🌿', titulo: 'Fraijanes', desc: 'Distrito de Fraijanes · Zona agrícola y turística' },
+            { coords: [10.1100, -84.2700], icon: '🏘️', titulo: 'Sabana Redonda', desc: 'Distrito de Sabana Redonda' },
+            { coords: [10.1350, -84.2100], icon: '🏘️', titulo: 'Carrillos', desc: 'Distrito de Carrillos' },
+            { coords: [10.0750, -84.2550], icon: '🏘️', titulo: 'Güítite', desc: 'Distrito de Güítite' }
+        ];
+
+        puntos.forEach(p => {
+            const icon = L.divIcon({
+                html: '<div style="font-size:1.6rem;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))">' + p.icon + '</div>',
+                className: '',
+                iconSize: [32, 32],
+                iconAnchor: [16, 16]
+            });
+            L.marker(p.coords, { icon })
+                .addTo(map)
+                .bindPopup('<strong>' + p.titulo + '</strong><br><span style="font-size:.85rem;color:#555">' + p.desc + '</span>');
+        });
+    })();
+
+    /* ════════════════════════════════════════════════
+       4. Botón Flotante de Emergencias
+       ════════════════════════════════════════════════ */
+    (function initEmerFab() {
+        const fab     = document.getElementById('emer-fab');
+        const overlay = document.getElementById('emer-modal-overlay');
+        const closeBtn= document.getElementById('emer-modal-close');
+        if (!fab || !overlay) return;
+
+        fab.addEventListener('click', () => overlay.classList.add('open'));
+        closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+        overlay.addEventListener('click', e => {
+            if (e.target === overlay) overlay.classList.remove('open');
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') overlay.classList.remove('open');
+        });
+    })();
+    </script>
+
     <script src="script.js?v=2"></script>
     <script src="security.js?v=2"></script>
 <script src="search.js"></script>

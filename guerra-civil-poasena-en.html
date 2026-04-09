@@ -275,6 +275,27 @@
             .gc-timeline { padding-left: 1.75rem; }
             .gc-pullquote { padding: 1.25rem 1.5rem; }
         }
+
+        /* BREADCRUMB */
+        .breadcrumb {
+            position: fixed;
+            top: 54px;
+            left: 0; right: 0;
+            z-index: 90;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(8px);
+            padding: 0.35rem 2rem;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .breadcrumb a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: #C8952A; }
+        .breadcrumb-sep { opacity: 0.4; }
+        .breadcrumb-current { color: #C8952A; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -296,6 +317,13 @@
         </a>
     </div>
 </nav>
+<div class="breadcrumb">
+    <a href="index-en.html">🏠 Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <a href="historia-canton-en.html">Canton History</a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Poás Civil War 1948</span>
+</div>
 
 <!-- HERO -->
 <header class="gc-hero">

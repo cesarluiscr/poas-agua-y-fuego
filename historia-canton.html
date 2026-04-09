@@ -289,6 +289,27 @@
             .hist-chapters { top: 52px; }
             .hist-chap-btn { font-size: 0.72rem; padding: 0.75rem 0.9rem; }
         }
+
+        /* BREADCRUMB */
+        .breadcrumb {
+            position: fixed;
+            top: 54px;
+            left: 0; right: 0;
+            z-index: 90;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(8px);
+            padding: 0.35rem 2rem;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .breadcrumb a { color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: #C8952A; }
+        .breadcrumb-sep { opacity: 0.4; }
+        .breadcrumb-current { color: #C8952A; font-weight: 600; }
     </style>
 </head>
 <body>
@@ -298,6 +319,11 @@
     <a href="index.html" class="hist-nav-logo">🌋 Poás Agua y Fuego</a>
     <a href="index.html" class="hist-nav-back">← Volver al inicio</a>
 </nav>
+<div class="breadcrumb">
+    <a href="index.html">🏠 Inicio</a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">Historia del Cantón</span>
+</div>
 
 <!-- HERO -->
 <header class="hist-hero">
@@ -312,6 +338,7 @@
 <nav class="hist-chapters">
     <a href="historia-imagenes.html" class="hist-chap-btn">🖼️ Historia en Imágenes</a>
     <a href="biblioteca-publica.html" class="hist-chap-btn">📚 Biblioteca Pública</a>
+    <a href="guerra-civil-poasena.html" class="hist-chap-btn">⚔️ Guerra Civil 1948</a>
     <a href="#historia" class="hist-chap-btn">📜 Historia</a>
     <a href="#volcan" class="hist-chap-btn">🌋 El Volcán</a>
     <a href="#flora" class="hist-chap-btn">🌿 Flora y Fauna</a>
