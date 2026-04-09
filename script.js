@@ -1,5 +1,10 @@
-// v3 // ⬇️ Pegá aquí la URL de tu Google Apps Script después de implementarlo
+// v3 // ⬇️ Reemplazá TU_URL_AQUI con la URL de tu Google Apps Script desplegado
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/TU_URL_AQUI/exec';
+
+// Valida que la URL esté configurada antes de usarla
+function isAppsScriptConfigured() {
+    return APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes('TU_URL_AQUI');
+}
 
 // ── Hamburger / Mobile Nav ──────────────────────────────────────────
 const hamburger  = document.querySelector('.hamburger');
@@ -76,22 +81,26 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
 
             try {
-                // Enviar datos a Google Sheets vía Apps Script
-                // mode: 'no-cors' es necesario para evitar errores CORS con Google Apps Script
+                if (!isAppsScriptConfigured()) {
+                    throw new Error('Google Apps Script no configurado. Contactá al administrador.');
+                }
+
+                // mode: 'no-cors' es necesario con Google Apps Script (limitación de la plataforma).
+                // No podemos leer la respuesta, pero el envío llega si la URL es correcta.
                 await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify(data)
                 });
 
-                // Con no-cors no podemos leer la respuesta, asumimos éxito
                 registerForm.reset();
                 registerSuccess.classList.remove('hidden');
                 setTimeout(() => registerSuccess.classList.add('hidden'), 6000);
 
             } catch (err) {
                 console.error('Error al enviar inscripción:', err);
-                alert('Hubo un problema al inscribirte. Por favor intenta de nuevo.');
+                alert(err.message || 'Hubo un problema al inscribirte. Por favor intenta de nuevo.');
             } finally {
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
@@ -230,6 +239,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const negociosGrid = document.getElementById('negociosGrid');
     const filterBtns   = document.querySelectorAll('.filter-btn');
 
+    /* Escapa HTML para evitar XSS en datos de negocios (incluye los del localStorage) */
+    function escH(str) {
+        return String(str || '')
+            .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+    /* Valida URLs — solo permite http/https y tel: mailto: */
+    function safeUrl(url) {
+        if (!url) return '#';
+        const u = String(url).trim();
+        return /^(https?:|tel:|mailto:)/.test(u) ? u : '#';
+    }
+
     function renderNegocios() {
         if (!negociosGrid) return;
         const filtered = activeFilter === 'all'
@@ -281,25 +303,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="negocio-card-header">
                     ${logoHTML}
                     <div>
-                        <h4>${negocio.nombre}</h4>
-                        <span class="negocio-badge">${meta.label}</span>
+                        <h4>${escH(negocio.nombre)}</h4>
+                        <span class="negocio-badge">${escH(meta.label)}</span>
                     </div>
                 </div>
-                <p class="negocio-desc">${isEnglish && negocio.descripcion_en ? negocio.descripcion_en : negocio.descripcion}</p>
+                <p class="negocio-desc">${escH(isEnglish && negocio.descripcion_en ? negocio.descripcion_en : negocio.descripcion)}</p>
                 <div class="negocio-meta">
-                    ${negocio.direccion ? `<span>📍 ${negocio.direccion}</span>` : ''}
-                    ${negocio.telefono  ? `<a href="tel:+506${negocio.telefono}">📞 ${negocio.telefono.replace(/(\d{4})(\d{4})/,'$1-$2')}</a>` : ''}
-                    ${negocio.correo    ? `<a href="mailto:${negocio.correo}">✉️ ${negocio.correo}</a>` : ''}
+                    ${negocio.direccion ? `<span>📍 ${escH(negocio.direccion)}</span>` : ''}
+                    ${negocio.telefono  ? `<a href="tel:+506${escH(negocio.telefono)}">📞 ${escH(negocio.telefono.replace(/(\d{4})(\d{4})/,'$1-$2'))}</a>` : ''}
+                    ${negocio.correo    ? `<a href="mailto:${escH(negocio.correo)}">✉️ ${escH(negocio.correo)}</a>` : ''}
                 </div>
                 ${(negocio.whatsapp || negocio.facebook || negocio.instagram || negocio.tiktok || negocio.waze || negocio.booking || negocio.sitio) ? `
                 <div class="negocio-social">
-                    ${negocio.sitio     ? `<a href="${negocio.sitio}" ${negocio.sitio.startsWith('http') ? 'target="_blank"' : ''} rel="noopener noreferrer" class="social-btn ver-mas-btn">🌐 ${isEnglish ? 'See more' : 'Ver más'}</a>` : ''}
-                    ${negocio.whatsapp  ? `<a href="https://wa.me/${negocio.whatsapp}" target="_blank" rel="noopener noreferrer" class="social-btn wa-btn">💬 WhatsApp</a>` : ''}
-                    ${negocio.facebook  ? `<a href="${negocio.facebook}" target="_blank" rel="noopener noreferrer" class="social-btn fb-btn">📘 Facebook</a>` : ''}
-                    ${negocio.instagram ? `<a href="${negocio.instagram}" target="_blank" rel="noopener noreferrer" class="social-btn ig-btn">📸 Instagram</a>` : ''}
-                    ${negocio.tiktok    ? `<a href="${negocio.tiktok}" target="_blank" rel="noopener noreferrer" class="social-btn tt-btn">🎵 TikTok</a>` : ''}
-                    ${negocio.booking   ? `<a href="${negocio.booking}" target="_blank" rel="noopener noreferrer" class="social-btn bk-btn">🏨 ${isEnglish ? 'Book on Booking' : 'Reservar en Booking'}</a>` : ''}
-                    ${negocio.waze      ? `<a href="${negocio.waze}" target="_blank" rel="noopener noreferrer" class="social-btn wz-btn">📍 ${isEnglish ? 'Get directions' : 'Cómo llegar'}</a>` : ''}
+                    ${negocio.sitio     ? `<a href="${safeUrl(negocio.sitio)}" ${negocio.sitio.startsWith('http') ? 'target="_blank"' : ''} rel="noopener noreferrer" class="social-btn ver-mas-btn">🌐 ${isEnglish ? 'See more' : 'Ver más'}</a>` : ''}
+                    ${negocio.whatsapp  ? `<a href="https://wa.me/${escH(negocio.whatsapp)}" target="_blank" rel="noopener noreferrer" class="social-btn wa-btn">💬 WhatsApp</a>` : ''}
+                    ${negocio.facebook  ? `<a href="${safeUrl(negocio.facebook)}" target="_blank" rel="noopener noreferrer" class="social-btn fb-btn">📘 Facebook</a>` : ''}
+                    ${negocio.instagram ? `<a href="${safeUrl(negocio.instagram)}" target="_blank" rel="noopener noreferrer" class="social-btn ig-btn">📸 Instagram</a>` : ''}
+                    ${negocio.tiktok    ? `<a href="${safeUrl(negocio.tiktok)}" target="_blank" rel="noopener noreferrer" class="social-btn tt-btn">🎵 TikTok</a>` : ''}
+                    ${negocio.booking   ? `<a href="${safeUrl(negocio.booking)}" target="_blank" rel="noopener noreferrer" class="social-btn bk-btn">🏨 ${isEnglish ? 'Book on Booking' : 'Reservar en Booking'}</a>` : ''}
+                    ${negocio.waze      ? `<a href="${safeUrl(negocio.waze)}" target="_blank" rel="noopener noreferrer" class="social-btn wz-btn">📍 ${isEnglish ? 'Get directions' : 'Cómo llegar'}</a>` : ''}
                 </div>` : ''}
             `;
             negociosGrid.appendChild(card);

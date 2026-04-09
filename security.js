@@ -272,13 +272,17 @@
                 "font-src 'self' https://fonts.gstatic.com https://unpkg.com",
                 "img-src 'self' data: https: blob:",
                 "media-src 'self' blob:",
-                "connect-src 'self' https://script.google.com https://api.open-meteo.com https://nominatim.openstreetmap.org",
+                "connect-src 'self' https://script.google.com https://api.open-meteo.com https://nominatim.openstreetmap.org https://tile.openstreetmap.org",
+                "worker-src blob: 'self'",
                 "frame-src 'none'",
                 "frame-ancestors 'none'",
                 "object-src 'none'",
                 "base-uri 'self'",
                 "form-action 'self' https://script.google.com"
             ].join('; ');
+            /* NOTA: 'unsafe-inline' en script-src puede eliminarse una vez que admin.html
+               no tenga más inline handlers. Actualmente admin.html usa event listeners,
+               pero otras páginas pueden tener scripts inline. Revisar antes de quitar. */
             document.head.insertBefore(csp, document.head.firstChild);
         }
         if (!document.querySelector('meta[name="referrer"]')) {

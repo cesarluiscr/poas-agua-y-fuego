@@ -68,7 +68,7 @@
         <input type="text"     id="admin-user" class="admin-input" placeholder="Usuario"     autocomplete="username">
         <input type="password" id="admin-pass" class="admin-input" placeholder="Contraseña" autocomplete="current-password">
         <p id="admin-error" class="admin-error" style="display:none"></p>
-        <button class="admin-btn-login" onclick="verificarAdmin()">Ingresar</button>
+        <button class="admin-btn-login" id="btn-ingresar">Ingresar</button>
         <a href="index.html" class="back-link">← Volver al sitio</a>
     </div>
 
@@ -76,16 +76,16 @@
     <div id="admin-panel-wrap">
         <div class="admin-header-bar">
             <span>⚙️ Panel Admin — <strong id="admin-username-display">Admin</strong></span>
-            <button class="admin-logout" onclick="cerrarSesionAdmin()">Salir</button>
+            <button class="admin-logout" id="btn-salir">Salir</button>
         </div>
 
         <!-- TABS -->
         <div class="admin-tabs">
-            <button class="atab active" onclick="adminTab('estadisticas',this)">📊 Stats</button>
-            <button class="atab" onclick="adminTab('paginas',this)">🌐 Páginas</button>
-            <button class="atab" onclick="adminTab('backup',this)">💾 Backup</button>
-            <button class="atab" onclick="adminTab('anuncios',this)">📢 Anuncio</button>
-            <button class="atab" onclick="adminTab('sistema',this)">🔧 Sistema</button>
+            <button class="atab active" data-tab="estadisticas">📊 Stats</button>
+            <button class="atab" data-tab="paginas">🌐 Páginas</button>
+            <button class="atab" data-tab="backup">💾 Backup</button>
+            <button class="atab" data-tab="anuncios">📢 Anuncio</button>
+            <button class="atab" data-tab="sistema">🔧 Sistema</button>
         </div>
 
         <!-- TAB: ESTADÍSTICAS -->
@@ -132,13 +132,13 @@
         <div id="atab-backup" class="atab-content" style="display:none">
             <p class="admin-tool-desc">Exporta o importa todos los datos del sitio almacenados localmente.</p>
             <div class="admin-tool-row">
-                <button class="admin-tool-btn green" onclick="exportarBackup()">📤 Exportar JSON</button>
+                <button class="admin-tool-btn green" id="btn-exportar">📤 Exportar JSON</button>
                 <span style="color:#888;font-size:0.8rem">Descarga un archivo con todos los datos (negocios, empleos, eventos).</span>
             </div>
             <div class="admin-tool-row" style="margin-top:1rem">
                 <label class="admin-tool-btn blue" style="cursor:pointer">
                     📥 Importar JSON
-                    <input type="file" accept=".json" style="display:none" onchange="importarBackup(this)">
+                    <input type="file" accept=".json" style="display:none" id="input-importar">
                 </label>
                 <span style="color:#888;font-size:0.8rem">Restaura datos desde un backup. Reemplaza los datos actuales.</span>
             </div>
@@ -150,8 +150,8 @@
             <p class="admin-tool-desc">Muestra un banner de anuncio en la parte superior del sitio.</p>
             <textarea id="anuncio-texto" class="admin-textarea" placeholder="Ej: ⚠️ Mantenimiento programado el sábado a las 10am."></textarea>
             <div class="admin-tool-row" style="gap:0.5rem;flex-wrap:wrap">
-                <button class="admin-tool-btn green" onclick="publicarAnuncio()">📢 Publicar anuncio</button>
-                <button class="admin-tool-btn red" onclick="eliminarAnuncio()">🗑️ Quitar anuncio</button>
+                <button class="admin-tool-btn green" id="btn-publicar-anuncio">📢 Publicar anuncio</button>
+                <button class="admin-tool-btn red" id="btn-eliminar-anuncio">🗑️ Quitar anuncio</button>
             </div>
             <div id="anuncio-preview" class="admin-anuncio-preview" style="display:none"></div>
             <p id="anuncio-msg" style="display:none;font-size:0.82rem;margin-top:0.5rem"></p>
@@ -160,14 +160,14 @@
         <!-- TAB: SISTEMA -->
         <div id="atab-sistema" class="atab-content" style="display:none">
             <div class="admin-sys-grid">
-                <button class="admin-sys-btn" onclick="recargarSitio()">🔄 Recargar página</button>
-                <button class="admin-sys-btn" onclick="limpiarCacheNegocios()">🏪 Reset negocios</button>
-                <button class="admin-sys-btn" onclick="limpiarCacheEmpleos()">💼 Reset empleos</button>
-                <button class="admin-sys-btn" onclick="limpiarCacheEventos()">📅 Reset eventos</button>
-                <button class="admin-sys-btn danger" onclick="limpiarTodoStorage()">⚠️ Limpiar TODO storage</button>
-                <button class="admin-sys-btn" onclick="copiarURL()">🔗 Copiar URL sitio</button>
-                <button class="admin-sys-btn" onclick="verStorage()">🗄️ Ver storage completo</button>
-                <button class="admin-sys-btn" onclick="imprimirPagina()">🖨️ Imprimir página</button>
+                <button class="admin-sys-btn" id="btn-recargar">🔄 Recargar página</button>
+                <button class="admin-sys-btn" id="btn-reset-negocios">🏪 Reset negocios</button>
+                <button class="admin-sys-btn" id="btn-reset-empleos">💼 Reset empleos</button>
+                <button class="admin-sys-btn" id="btn-reset-eventos">📅 Reset eventos</button>
+                <button class="admin-sys-btn danger" id="btn-reset-todo">⚠️ Limpiar TODO storage</button>
+                <button class="admin-sys-btn" id="btn-copiar-url">🔗 Copiar URL sitio</button>
+                <button class="admin-sys-btn" id="btn-ver-storage">🗄️ Ver storage completo</button>
+                <button class="admin-sys-btn" id="btn-imprimir">🖨️ Imprimir página</button>
             </div>
             <div id="sistema-msg" class="admin-tool-msg" style="display:none"></div>
             <pre id="storage-preview" class="admin-storage-pre" style="display:none"></pre>
@@ -177,7 +177,15 @@
 </div><!-- fin admin-wrap -->
 
 <script>
-/* ===== AUTH ===== */
+/* ===== AUTH =====
+ * AVISO DE SEGURIDAD: Este panel usa autenticación client-side sobre un sitio estático.
+ * Los hashes están en el código fuente y son visibles. Esta implementación es adecuada
+ * solo para gestión de contenido no sensible (anuncios, listas locales).
+ * Para datos sensibles, usar autenticación server-side (OAuth, backend propio).
+ *
+ * Los hashes a continuación son SHA-256 del usuario/contraseña.
+ * Para cambiar credenciales: sha256('nueva_contraseña') en la consola del navegador.
+ */
 const ADMIN_USER_H = '2ec64195006618e33298ccfc2a7161940205873148a9a03f9b7a701e287b631b';
 const ADMIN_HASH   = '6844168ed8cacd5b7ec99c675e0fa267fc93a988fed80366903a24f8e6336ae6';
 const MAX_INTENTOS = 5, BLOQUEO_MS = 5 * 60 * 1000;
@@ -256,7 +264,9 @@ function cargarEstadisticas() {
         let val = localStorage.getItem(k), count = '—';
         try { const arr = JSON.parse(val); count = Array.isArray(arr) ? arr.length : (val ? '✔' : '✗'); }
         catch(e) { count = val ? '✔' : '✗'; }
-        return `<div class="admin-stat-card"><span class="asc-emoji">${emoji}</span><span class="asc-count">${count}</span><span class="asc-label">${label}</span></div>`;
+        // Sanitizar count para evitar XSS desde localStorage
+        const safeCount = String(count).replace(/[<>"'&]/g, c => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','&':'&amp;'}[c]));
+        return `<div class="admin-stat-card"><span class="asc-emoji">${emoji}</span><span class="asc-count">${safeCount}</span><span class="asc-label">${label}</span></div>`;
     }).join('');
     let total = 0;
     for (let k in localStorage) { if (localStorage.hasOwnProperty(k)) total += (localStorage[k].length + k.length) * 2; }
@@ -357,6 +367,53 @@ function mostrarMensaje(id, msg, color) {
     el.style.display = 'block';
     setTimeout(() => el.style.display = 'none', 3500);
 }
+
+/* ===== EVENT LISTENERS (reemplaza todos los onclick inline) ===== */
+document.addEventListener('DOMContentLoaded', function() {
+    // Login / logout
+    const btnIngresar = document.getElementById('btn-ingresar');
+    if (btnIngresar) btnIngresar.addEventListener('click', verificarAdmin);
+
+    const btnSalir = document.getElementById('btn-salir');
+    if (btnSalir) btnSalir.addEventListener('click', cerrarSesionAdmin);
+
+    // Tabs — usa data-tab attribute
+    document.querySelectorAll('.atab[data-tab]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            adminTab(this.dataset.tab, this);
+        });
+    });
+
+    // Backup
+    const btnExportar = document.getElementById('btn-exportar');
+    if (btnExportar) btnExportar.addEventListener('click', exportarBackup);
+
+    const inputImportar = document.getElementById('input-importar');
+    if (inputImportar) inputImportar.addEventListener('change', function() { importarBackup(this); });
+
+    // Anuncios
+    const btnPublicar = document.getElementById('btn-publicar-anuncio');
+    if (btnPublicar) btnPublicar.addEventListener('click', publicarAnuncio);
+
+    const btnEliminar = document.getElementById('btn-eliminar-anuncio');
+    if (btnEliminar) btnEliminar.addEventListener('click', eliminarAnuncio);
+
+    // Sistema
+    const sysMap = {
+        'btn-recargar':       recargarSitio,
+        'btn-reset-negocios': limpiarCacheNegocios,
+        'btn-reset-empleos':  limpiarCacheEmpleos,
+        'btn-reset-eventos':  limpiarCacheEventos,
+        'btn-reset-todo':     limpiarTodoStorage,
+        'btn-copiar-url':     copiarURL,
+        'btn-ver-storage':    verStorage,
+        'btn-imprimir':       imprimirPagina
+    };
+    Object.entries(sysMap).forEach(function([id, fn]) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('click', fn);
+    });
+});
 
 /* ===== AUTO-LOGIN si sesión activa ===== */
 document.addEventListener('DOMContentLoaded', () => {

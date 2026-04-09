@@ -163,13 +163,26 @@
         list.innerHTML = results.map(item => resultHTML(item)).join('');
     }
 
+    /* Sanitiza texto antes de interpolarlo en innerHTML */
+    function esc(str) {
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
     function resultHTML(item) {
+        /* item.url viene del SEARCH_INDEX hardcodeado — solo permitir rutas relativas */
+        const safeUrl = /^[a-zA-Z0-9_\-./]+\.html(#[a-zA-Z0-9_\-]*)?$/.test(item.url)
+            ? item.url : '#';
         return `
-            <a href="${item.url}" class="search-result-item">
-                <span class="search-result-icon">${item.icon}</span>
+            <a href="${esc(safeUrl)}" class="search-result-item">
+                <span class="search-result-icon">${esc(item.icon)}</span>
                 <div class="search-result-text">
-                    <strong>${item.title}</strong>
-                    <span>${item.desc}</span>
+                    <strong>${esc(item.title)}</strong>
+                    <span>${esc(item.desc)}</span>
                 </div>
                 <svg class="search-result-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>`;
