@@ -2562,6 +2562,18 @@ footer {
     transform: scale(0.82);
 }
 
+.hamburger-label {
+    display: none;
+    font-style: normal;
+    font-size: .6rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--clr-volcanic-dark);
+    line-height: 1;
+    margin-top: 1px;
+}
+
 .hamburger span {
     display: block;
     width: 26px;
@@ -2793,6 +2805,10 @@ footer {
 
     .hamburger {
         display: flex;
+    }
+
+    .hamburger-label {
+        display: block;
     }
 
     /* Section spacing */
