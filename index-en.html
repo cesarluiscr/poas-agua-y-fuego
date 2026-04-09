@@ -15,6 +15,9 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <!-- Open Graph / Redes Sociales -->
     <meta property="og:type"        content="website">
     <meta property="og:url"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/index-en.html">
@@ -35,36 +38,61 @@
     <nav class="navbar">
         <div class="logo">Poás <span><span class="logo-agua">Water</span> & <span class="logo-fuego">Fire</span></span></div>
         <ul class="nav-links">
+            <li><a href="index-en.html">Home</a></li>
             <li><a href="patrimonio-hidrico-en.html">Water Heritage</a></li>
             <li><a href="historia-canton-en.html">Canton History</a></li>
-            <li><a href="directorio-comercial-en.html">Tourism Directory</a></li>
+            <li><a href="directorio-comercial-en.html">Tourism &amp; Business Directory</a></li>
             <li><a href="bolsa-empleo-en.html">Jobs</a></li>
             <li><a href="eventos-en.html">Events</a></li>
             <li><a href="plan-regulador-en.html">Zoning Plan</a></li>
+            <li><a href="seguridad-ciudadana.html">Security</a></li>
+            <li><a href="como-llegar.html">How to Get Here</a></li>
             <li><a href="galeria-en.html">Gallery</a></li>
-            <li><a href="#comunidad">Community</a></li>
             <li><a href="#contacto">Contact</a></li>
         </ul>
         <div class="nav-lang">
             <a href="index.html" class="lang-btn"><img class="flag-icon" src="https://flagcdn.com/16x12/cr.png" width="16" height="12" alt="CR"> Español</a>
             <a href="index-en.html" class="lang-btn active"><img class="flag-icon" src="https://flagcdn.com/16x12/us.png" width="16" height="12" alt="US"> English</a>
         </div>
-        <div class="hamburger" id="hamburger">
-            <span></span><span></span><span></span>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+            <em class="hamburger-label">Menu</em>
         </div>
     </nav>
 
     <!-- Mobile Navigation Drawer -->
     <nav class="mobile-nav" id="mobileNav">
-        <a href="patrimonio-hidrico-en.html"    onclick="closeMobileNav()">Water Heritage</a>
-        <a href="historia-canton-en.html"       onclick="closeMobileNav()">Canton History</a>
-        <a href="directorio-comercial-en.html"  onclick="closeMobileNav()">Tourism Directory</a>
-        <a href="bolsa-empleo-en.html"          onclick="closeMobileNav()">Jobs</a>
-        <a href="eventos-en.html"               onclick="closeMobileNav()">Events</a>
-        <a href="plan-regulador-en.html"        onclick="closeMobileNav()">Zoning Plan</a>
-        <a href="galeria-en.html"               onclick="closeMobileNav()">Gallery</a>
-        <a href="#comunidad"                    onclick="closeMobileNav()">Community</a>
-        <a href="#contacto"                     onclick="closeMobileNav()">Contact</a>
+        <div class="mobile-nav-panel" id="mobileNavPanel">
+            <div class="mobile-nav-header">
+                <span class="mobile-nav-logo">Poás <span>Water &amp; Fire</span></span>
+                <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">×</button>
+            </div>
+            <div class="mobile-nav-links">
+                <a href="index-en.html"              onclick="closeMobileNav()">🏠 Home</a>
+                <div class="mobile-nav-sep"></div>
+                <a href="patrimonio-hidrico-en.html" onclick="closeMobileNav()">💧 Water Heritage</a>
+                <a href="historia-canton-en.html"    onclick="closeMobileNav()">📜 Canton History</a>
+                <a href="galeria-en.html"            onclick="closeMobileNav()">📷 Gallery</a>
+                <div class="mobile-nav-sep"></div>
+                <a href="directorio-comercial-en.html" onclick="closeMobileNav()">🛍️ Tourism &amp; Business Directory</a>
+                <a href="bolsa-empleo-en.html"       onclick="closeMobileNav()">💼 Jobs</a>
+                <a href="eventos-en.html"            onclick="closeMobileNav()">📅 Events</a>
+                <a href="ruta-gastronomica-en.html"  onclick="closeMobileNav()">🍽️ Gastronomic Route</a>
+                <div class="mobile-nav-sep"></div>
+                <a href="plan-regulador-en.html"     onclick="closeMobileNav()">🗺️ Zoning Plan</a>
+                <a href="seguridad-ciudadana.html"   onclick="closeMobileNav()">🛡️ Public Safety</a>
+                <a href="como-llegar.html"           onclick="closeMobileNav()">🚗 How to Get Here</a>
+                <div class="mobile-nav-sep"></div>
+                <a href="#contacto"                  onclick="closeMobileNav()">📬 Contact</a>
+            </div>
+            <div class="mobile-nav-lang">
+                <a href="index.html" class="mobile-lang-btn"><img src="https://flagcdn.com/16x12/cr.png" width="16" height="12" alt="CR"> Español</a>
+                <a href="index-en.html" class="mobile-lang-btn mobile-lang-active"><img src="https://flagcdn.com/16x12/us.png" width="16" height="12" alt="US"> English</a>
+            </div>
+            <div class="mobile-nav-footer">Poás Canton · Alajuela · Costa Rica</div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
@@ -94,6 +122,37 @@
             <a href="#agua" class="scroll-down">Explore ▼</a>
         </div>
     </header>
+
+    <!-- ── Volcano Alert Bar ── -->
+    <div id="volcan-alerta-bar" class="volcan-alerta-bar nivel-verde" role="alert" aria-live="polite">
+        <span class="alerta-dot" id="alerta-dot"></span>
+        <span id="alerta-texto">🌋 Poás Volcano — Alert Level: <strong id="alerta-nivel">Green</strong> · Normal activity. National Park access per SINAC schedule.</span>
+        <a href="https://www.ovsicori.una.ac.cr/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;white-space:nowrap;font-size:.78rem;">See OVSICORI →</a>
+    </div>
+
+    <!-- ── Canton Statistics ── -->
+    <div class="canton-stats">
+        <div class="canton-stat">
+            <div class="canton-stat-num">37,000+</div>
+            <div class="canton-stat-label">Residents</div>
+        </div>
+        <div class="canton-stat">
+            <div class="canton-stat-num">5</div>
+            <div class="canton-stat-label">Districts</div>
+        </div>
+        <div class="canton-stat">
+            <div class="canton-stat-num">9</div>
+            <div class="canton-stat-label">ASADAS</div>
+        </div>
+        <div class="canton-stat">
+            <div class="canton-stat-num">2,708 m</div>
+            <div class="canton-stat-label">Volcano Summit</div>
+        </div>
+        <div class="canton-stat">
+            <div class="canton-stat-num">1901</div>
+            <div class="canton-stat-label">Founded</div>
+        </div>
+    </div>
 
     <!-- Water Heritage -->
     <section id="agua" class="water-heritage-section">
@@ -191,6 +250,80 @@
         <img class="lightbox-content" id="lightbox-img">
         <div id="lightbox-caption" class="lightbox-caption"></div>
     </div>
+
+    <!-- ── Real-Time Weather ── -->
+    <section class="clima-section" id="clima">
+        <div class="container">
+            <h2 class="clima-title">🌤️ Weather in Poás Canton</h2>
+            <p class="clima-sub">Real-time meteorological data · Volcanic zone · Open-Meteo API</p>
+            <div class="clima-cards" id="clima-cards">
+                <div class="clima-card">
+                    <div class="clima-card-icon">🌡️</div>
+                    <div class="clima-card-value" id="clima-temp">—</div>
+                    <div class="clima-card-label">Temperature</div>
+                </div>
+                <div class="clima-card">
+                    <div class="clima-card-icon">💧</div>
+                    <div class="clima-card-value" id="clima-hum">—</div>
+                    <div class="clima-card-label">Humidity</div>
+                </div>
+                <div class="clima-card">
+                    <div class="clima-card-icon">🌧️</div>
+                    <div class="clima-card-value" id="clima-lluvia">—</div>
+                    <div class="clima-card-label">Precipitation</div>
+                </div>
+                <div class="clima-card">
+                    <div class="clima-card-icon">💨</div>
+                    <div class="clima-card-value" id="clima-viento">—</div>
+                    <div class="clima-card-label">Wind</div>
+                </div>
+            </div>
+            <p class="clima-fuente" id="clima-fuente">Loading data…</p>
+        </div>
+    </section>
+
+    <!-- ── News & Community Announcements ── -->
+    <section class="noticias-section" id="noticias">
+        <div class="container">
+            <h2 class="noticias-title">📢 News &amp; Community Announcements</h2>
+            <p class="noticias-sub">Updated information for residents and visitors of Poás canton</p>
+            <div class="noticias-grid">
+                <article class="noticia-card">
+                    <div class="noticia-badge noticia-badge-info">Information</div>
+                    <h3 class="noticia-card-title">Poás Volcano National Park Access</h3>
+                    <p class="noticia-card-body">The National Park maintains its schedule 8:00 a.m. to 4:00 p.m. Prior electronic reservation required through the SINAC portal.</p>
+                    <a href="https://serviciosenlinea.sinac.go.cr/" target="_blank" rel="noopener noreferrer" class="noticia-card-link">Book tickets →</a>
+                </article>
+                <article class="noticia-card">
+                    <div class="noticia-badge noticia-badge-cultura">Culture</div>
+                    <h3 class="noticia-card-title">Poás Gastronomic Route</h3>
+                    <p class="noticia-card-body">Discover authentic flavors of the canton: chorreado, black bean soup, tamales and more traditional dishes at our local restaurants.</p>
+                    <a href="ruta-gastronomica-en.html" class="noticia-card-link">Explore route →</a>
+                </article>
+                <article class="noticia-card">
+                    <div class="noticia-badge noticia-badge-empleo">Jobs</div>
+                    <h3 class="noticia-card-title">Active Jobs Board</h3>
+                    <p class="noticia-card-body">New employment opportunities available in the canton. Submit your resume or post a job offer to connect with local talent.</p>
+                    <a href="bolsa-empleo-en.html" class="noticia-card-link">See listings →</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Interactive Canton Map ── -->
+    <section class="mapa-section" id="mapa">
+        <div class="container">
+            <h2 class="mapa-title">🗺️ Poás Canton Map</h2>
+            <p class="mapa-sub">Explore the districts, points of interest and services of the canton</p>
+            <div id="mapa-canton"></div>
+            <div class="mapa-leyenda">
+                <span>🌋 Poás Volcano</span>
+                <span>🏛️ San Pedro Center</span>
+                <span>🏘️ Districts</span>
+                <span>🌿 Natural Areas</span>
+            </div>
+        </div>
+    </section>
 
     <!-- Community -->
     <section id="comunidad" class="community-section">
@@ -390,15 +523,133 @@
         </div>
     </footer>
 
-    <script src="script.js?v=2"></script>
+    <!-- ── Emergency FAB ── -->
+    <button class="emer-fab" id="emer-fab" aria-label="Emergency numbers">
+        🚨
+        <span class="emer-fab-tooltip">Emergencies</span>
+    </button>
+
+    <div class="emer-modal-overlay" id="emer-modal-overlay" role="dialog" aria-modal="true" aria-label="Emergency numbers in Costa Rica">
+        <div class="emer-modal">
+            <div class="emer-modal-header">
+                <span class="emer-modal-title">🚨 Emergency Numbers</span>
+                <button class="emer-modal-close" id="emer-modal-close" aria-label="Close">×</button>
+            </div>
+            <div class="emer-contact-list">
+                <a href="tel:911" class="emer-contact-item emer-911">
+                    <span class="emer-contact-num">911</span>
+                    <span class="emer-contact-name">General Emergencies</span>
+                </a>
+                <a href="tel:1118" class="emer-contact-item">
+                    <span class="emer-contact-num">1118</span>
+                    <span class="emer-contact-name">Fire Department</span>
+                </a>
+                <a href="tel:1176" class="emer-contact-item">
+                    <span class="emer-contact-num">1176</span>
+                    <span class="emer-contact-name">National Police</span>
+                </a>
+                <a href="tel:2461-2210" class="emer-contact-item">
+                    <span class="emer-contact-num">2461-2210</span>
+                    <span class="emer-contact-name">OIJ Alajuela</span>
+                </a>
+                <a href="tel:24485000" class="emer-contact-item">
+                    <span class="emer-contact-num">2448-5000</span>
+                    <span class="emer-contact-name">EBAIS San Pedro de Poás</span>
+                </a>
+            </div>
+            <p class="emer-modal-note">Tap a number to call directly · Costa Rica</p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <script>
-        // Mobile nav
-        const hamburger = document.getElementById('hamburger');
-        const mobileNav = document.getElementById('mobileNav');
-        hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
-        function closeMobileNav() { mobileNav.classList.remove('open'); }
+/* Volcano Alert Level — update manually: 'verde', 'amarillo', 'naranja', 'rojo' */
+const NIVEL_ALERTA_VOLCAN = 'verde';
+
+(function initAlertaVolcan() {
+    const bar = document.getElementById('volcan-alerta-bar');
+    const nivelEl = document.getElementById('alerta-nivel');
+    if (!bar) return;
+    const cfg = {
+        verde:    { label:'Green',    desc:'Normal activity. National Park access per SINAC schedule.' },
+        amarillo: { label:'Yellow',   desc:'Elevated activity. Follow OVSICORI and SINAC guidelines.' },
+        naranja:  { label:'Orange',   desc:'Significant activity. Restricted access. Stay informed.' },
+        rojo:     { label:'Red',      desc:'Immediate danger. Follow authority instructions.' }
+    };
+    const nivel = (NIVEL_ALERTA_VOLCAN || 'verde').toLowerCase();
+    const c = cfg[nivel] || cfg.verde;
+    bar.className = 'volcan-alerta-bar nivel-' + nivel;
+    if (nivelEl) nivelEl.textContent = c.label;
+    document.getElementById('alerta-texto').innerHTML =
+        '🌋 Poás Volcano — Alert Level: <strong>' + c.label + '</strong> · ' + c.desc;
+})();
+
+(function fetchClima() {
+    const url = 'https://api.open-meteo.com/v1/forecast' +
+        '?latitude=10.1&longitude=-84.23' +
+        '&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,weather_code' +
+        '&timezone=America%2FCosta_Rica';
+    const weatherDesc = {
+        0:'☀️ Clear', 1:'🌤️ Mostly clear', 2:'⛅ Partly cloudy', 3:'☁️ Cloudy',
+        45:'🌫️ Fog', 51:'🌦️ Light drizzle', 61:'🌧️ Light rain',
+        63:'🌧️ Moderate rain', 80:'🌦️ Showers', 95:'⛈️ Thunderstorm'
+    };
+    fetch(url)
+        .then(r => r.json())
+        .then(data => {
+            const c = data.current;
+            const desc = weatherDesc[c.weather_code] || '🌡️ Variable';
+            document.getElementById('clima-temp').textContent   = c.temperature_2m + '°C';
+            document.getElementById('clima-hum').textContent    = c.relative_humidity_2m + '%';
+            document.getElementById('clima-lluvia').textContent = c.precipitation + ' mm';
+            document.getElementById('clima-viento').textContent = c.wind_speed_10m + ' km/h';
+            document.getElementById('clima-fuente').textContent =
+                desc + ' · Updated: ' + new Date().toLocaleTimeString('en-CR', {hour:'2-digit',minute:'2-digit'}) + ' · Source: Open-Meteo';
+        })
+        .catch(() => {
+            document.getElementById('clima-fuente').textContent = 'Weather data unavailable.';
+        });
+})();
+
+(function initMapa() {
+    if (!document.getElementById('mapa-canton')) return;
+    if (typeof L === 'undefined') return;
+    const map = L.map('mapa-canton', { center: [10.12, -84.23], zoom: 12, scrollWheelZoom: false });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: 18
+    }).addTo(map);
+    const puntos = [
+        { coords: [10.1995, -84.2270], icon: '🌋', titulo: 'Poás Volcano', desc: 'Poás Volcano National Park · 2,708 m.a.s.l.' },
+        { coords: [10.0968, -84.2289], icon: '🏛️', titulo: 'San Pedro de Poás', desc: 'Canton center · Poás Municipality' },
+        { coords: [10.1580, -84.2350], icon: '🌿', titulo: 'Fraijanes', desc: 'Fraijanes District · Agricultural & tourist area' },
+        { coords: [10.1100, -84.2700], icon: '🏘️', titulo: 'Sabana Redonda', desc: 'Sabana Redonda District' },
+        { coords: [10.1350, -84.2100], icon: '🏘️', titulo: 'Carrillos', desc: 'Carrillos District' },
+        { coords: [10.0750, -84.2550], icon: '🏘️', titulo: 'Güítite', desc: 'Güítite District' }
+    ];
+    puntos.forEach(p => {
+        const icon = L.divIcon({ html: '<div style="font-size:1.6rem;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))">' + p.icon + '</div>', className: '', iconSize: [32,32], iconAnchor: [16,16] });
+        L.marker(p.coords, { icon }).addTo(map).bindPopup('<strong>' + p.titulo + '</strong><br><span style="font-size:.85rem;color:#555">' + p.desc + '</span>');
+    });
+    setTimeout(() => map.invalidateSize(), 300);
+    const obs = new IntersectionObserver(entries => { if (entries[0].isIntersecting) { map.invalidateSize(); obs.disconnect(); } }, { threshold: 0.1 });
+    obs.observe(document.getElementById('mapa-canton'));
+})();
+
+(function initEmerFab() {
+    const fab = document.getElementById('emer-fab');
+    const overlay = document.getElementById('emer-modal-overlay');
+    const closeBtn = document.getElementById('emer-modal-close');
+    if (!fab || !overlay) return;
+    fab.addEventListener('click', () => overlay.classList.add('open'));
+    closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') overlay.classList.remove('open'); });
+})();
     </script>
+
+    <script src="script.js?v=2"></script>
     <script src="security.js?v=2"></script>
-<script src="search.js"></script>
+    <script src="search.js"></script>
 </body>
 </html>
