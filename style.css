@@ -2601,82 +2601,135 @@ footer {
 .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-/* Mobile nav drawer */
+/* ── Mobile nav — backdrop ── */
 .mobile-nav {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(47, 54, 53, 0.97);
-    backdrop-filter: blur(16px);
+    background: rgba(0, 0, 0, 0.55);
     z-index: 1050;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.25rem;
-    overflow-y: auto;
-    padding: 4.5rem 1.5rem 1.5rem;
-    box-sizing: border-box;
+    backdrop-filter: blur(3px);
 }
 
 .mobile-nav.open {
-    display: flex;
-    animation: fadeIn 0.25s ease;
+    display: block;
+    animation: backdropIn 0.25s ease forwards;
 }
 
-@keyframes fadeIn {
+@keyframes backdropIn {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
 
-.mobile-nav a {
-    color: var(--clr-text-light);
-    text-decoration: none;
-    font-family: var(--font-heading);
-    font-size: clamp(0.95rem, 4vh, 1.25rem);
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    width: 100%;
-    max-width: 320px;
-    text-align: center;
-    padding: .4rem 1.5rem;
-    border-radius: 999px;
-    border: 2px solid transparent;
-    position: relative;
-    transition: color .22s, background .22s, border-color .22s, transform .18s;
+/* ── Panel lateral ── */
+.mobile-nav-panel {
+    position: fixed;
+    top: 0; right: 0;
+    width: min(80vw, 300px);
+    height: 100%;
+    background: #1a2020;
+    border-left: 1px solid rgba(200,149,42,0.2);
+    box-shadow: -8px 0 40px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    z-index: 1051;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+    overflow: hidden;
 }
 
-/* Resaltado al hacer hover / tap */
+.mobile-nav.open .mobile-nav-panel {
+    transform: translateX(0);
+}
+
+/* Cabecera del panel */
+.mobile-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.2rem;
+    border-bottom: 1px solid rgba(200,149,42,0.15);
+    flex-shrink: 0;
+}
+
+.mobile-nav-logo {
+    font-weight: 800;
+    font-size: 1rem;
+    color: #fff;
+    letter-spacing: .5px;
+}
+
+.mobile-nav-logo span { color: #C8952A; }
+
+.mobile-nav-close {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: .2rem .4rem;
+    border-radius: 6px;
+    transition: color .2s, background .2s;
+}
+.mobile-nav-close:hover { color: #fff; background: rgba(255,255,255,0.08); }
+
+/* Lista de enlaces */
+.mobile-nav-links {
+    overflow-y: auto;
+    flex: 1;
+    padding: .6rem 0;
+}
+
+.mobile-nav a {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    color: rgba(255,255,255,0.82);
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .75rem 1.4rem;
+    border-left: 3px solid transparent;
+    transition: color .18s, background .18s, border-color .18s;
+    position: relative;
+}
+
 .mobile-nav a:hover,
 .mobile-nav a:focus-visible {
     color: #C8952A;
-    background: rgba(200, 149, 42, 0.12);
-    border-color: rgba(200, 149, 42, 0.35);
-    transform: scale(1.04);
+    background: rgba(200,149,42,0.08);
+    border-left-color: #C8952A;
     outline: none;
 }
 
-/* Feedback táctil al presionar */
 .mobile-nav a:active {
-    transform: scale(0.97);
-    background: rgba(200, 149, 42, 0.22);
+    background: rgba(200,149,42,0.15);
 }
 
 /* Ítem de la página actual */
 .mobile-nav a.nav-active {
     color: #C8952A;
-    background: rgba(200, 149, 42, 0.14);
-    border-color: rgba(200, 149, 42, 0.5);
+    background: rgba(200,149,42,0.1);
+    border-left-color: #C8952A;
+    font-weight: 700;
 }
 
-.mobile-nav a.nav-active::after {
-    content: '•';
-    position: absolute;
-    right: .9rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: .6rem;
-    color: #C8952A;
-    opacity: .8;
+/* Separador visual entre grupos */
+.mobile-nav-sep {
+    height: 1px;
+    background: rgba(255,255,255,0.07);
+    margin: .4rem 1.2rem;
+}
+
+/* Pie del panel */
+.mobile-nav-footer {
+    padding: 1rem 1.4rem;
+    border-top: 1px solid rgba(200,149,42,0.12);
+    color: rgba(255,255,255,0.25);
+    font-size: .72rem;
+    flex-shrink: 0;
 }
 
 /* =====================

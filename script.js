@@ -6,24 +6,30 @@ const hamburger  = document.querySelector('.hamburger');
 const mobileNav  = document.getElementById('mobileNav');
 
 function closeMobileNav() {
+    if (!hamburger || !mobileNav) return;
     hamburger.classList.remove('open');
     mobileNav.classList.remove('open');
     document.body.style.overflow = '';
 }
 
 if (hamburger && mobileNav) {
+    // Abrir al presionar hamburger
     hamburger.addEventListener('click', () => {
         const isOpen = hamburger.classList.toggle('open');
         mobileNav.classList.toggle('open', isOpen);
         document.body.style.overflow = isOpen ? 'hidden' : '';
     });
 
-    // Close on backdrop click
+    // Cerrar al tocar el backdrop (fuera del panel)
     mobileNav.addEventListener('click', (e) => {
-        if (e.target === mobileNav) closeMobileNav();
+        if (!e.target.closest('#mobileNavPanel')) closeMobileNav();
     });
 
-    // Close on Escape key
+    // Cerrar con el botón X del panel
+    const closeBtn = document.getElementById('mobileNavClose');
+    if (closeBtn) closeBtn.addEventListener('click', closeMobileNav);
+
+    // Cerrar con Escape
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeMobileNav();
     });
