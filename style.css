@@ -164,21 +164,48 @@ h1 .logo-fuego {
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 0.65rem;
+    gap: 0.5rem;
     align-items: center;
 }
 
 .nav-links a {
     text-decoration: none;
     color: var(--clr-volcanic-gray);
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.78rem;
-    transition: color 0.3s;
+    padding: .3rem .6rem;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    transition: color .25s, background .25s, transform .2s;
 }
 
-.nav-links a:hover {
-    color: var(--clr-turquoise-dark);
+/* Línea inferior animada */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 50%;
+    width: 0; height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: width .25s, left .25s;
 }
+
+.nav-links a:hover::after { width: 80%; left: 10%; }
+.nav-links a:hover { transform: translateY(-2px); }
+
+/* Color individual por posición */
+.nav-links li:nth-child(1) a:hover { color: #2563eb; background: rgba(37,99,235,.07); }   /* Inicio — azul */
+.nav-links li:nth-child(2) a:hover { color: #0ea5e9; background: rgba(14,165,233,.07); }   /* Patrimonio — celeste */
+.nav-links li:nth-child(3) a:hover { color: #C8952A; background: rgba(200,149,42,.08); }   /* Historia — dorado */
+.nav-links li:nth-child(4) a:hover { color: #10b981; background: rgba(16,185,129,.07); }   /* Directorio — verde */
+.nav-links li:nth-child(5) a:hover { color: #8b5cf6; background: rgba(139,92,246,.07); }   /* Empleo — violeta */
+.nav-links li:nth-child(6) a:hover { color: #f59e0b; background: rgba(245,158,11,.07); }   /* Eventos — ámbar */
+.nav-links li:nth-child(7) a:hover { color: #64748b; background: rgba(100,116,139,.07); }  /* Plan — gris azulado */
+.nav-links li:nth-child(8) a:hover { color: #ef4444; background: rgba(239,68,68,.07); }    /* Seguridad — rojo */
+.nav-links li:nth-child(9) a:hover { color: #06b6d4; background: rgba(6,182,212,.07); }    /* Cómo llegar — cyan */
+.nav-links li:nth-child(10) a:hover { color: #ec4899; background: rgba(236,72,153,.07); }  /* Galería — rosa */
+.nav-links li:nth-child(11) a:hover { color: #22c55e; background: rgba(34,197,94,.07); }   /* Contacto — verde lima */
 
 .btn-primary {
     background: linear-gradient(135deg, var(--clr-turquoise), var(--clr-forest-light));
