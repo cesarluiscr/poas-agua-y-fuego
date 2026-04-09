@@ -27,6 +27,17 @@ if (hamburger && mobileNav) {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeMobileNav();
     });
+
+    // Marcar el enlace activo según la página actual
+    (function markActiveNavLink() {
+        const currentPage = location.pathname.split('/').pop() || 'index.html';
+        mobileNav.querySelectorAll('a[href]').forEach(link => {
+            const linkPage = (link.getAttribute('href') || '').split('#')[0];
+            if (linkPage && linkPage === currentPage) {
+                link.classList.add('nav-active');
+            }
+        });
+    })();
 }
 
 document.addEventListener('DOMContentLoaded', () => {

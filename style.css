@@ -2603,11 +2603,45 @@ footer {
     font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: 1px;
-    transition: color 0.2s;
+    padding: .45rem 1.8rem;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    position: relative;
+    transition: color .22s, background .22s, border-color .22s, transform .18s;
 }
 
-.mobile-nav a:hover {
-    color: var(--clr-turquoise);
+/* Resaltado al hacer hover / tap */
+.mobile-nav a:hover,
+.mobile-nav a:focus-visible {
+    color: #C8952A;
+    background: rgba(200, 149, 42, 0.12);
+    border-color: rgba(200, 149, 42, 0.35);
+    transform: scale(1.04);
+    outline: none;
+}
+
+/* Feedback táctil al presionar */
+.mobile-nav a:active {
+    transform: scale(0.97);
+    background: rgba(200, 149, 42, 0.22);
+}
+
+/* Ítem de la página actual */
+.mobile-nav a.nav-active {
+    color: #C8952A;
+    background: rgba(200, 149, 42, 0.14);
+    border-color: rgba(200, 149, 42, 0.5);
+}
+
+.mobile-nav a.nav-active::after {
+    content: '•';
+    position: absolute;
+    right: .9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: .6rem;
+    color: #C8952A;
+    opacity: .8;
 }
 
 /* =====================
