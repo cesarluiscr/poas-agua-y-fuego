@@ -1400,7 +1400,8 @@ footer {
 
 /* ── Hero secundario (páginas internas) ── */
 .secondary-hero {
-    padding: 7rem 0 3.5rem;
+    /* 7rem = espacio suficiente por encima del navbar fijo de 2 filas (~90px) */
+    padding: clamp(5rem, 10vw, 7rem) 0 3.5rem;
     color: #fff;
     text-align: center;
 }
@@ -1913,7 +1914,9 @@ footer {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+    /* Una columna a partir de 600px: las tarjetas de contacto
+       son demasiado anchas para mostrarse en 2 cols en phones */
     .contacto-grid {
         grid-template-columns: 1fr;
     }
@@ -2769,7 +2772,9 @@ footer {
     z-index: 1051;
     transform: translateX(100%);
     transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-    overflow: hidden;
+    /* clip en lugar de hidden: contiene el panel visualmente sin
+       impedir que .mobile-nav-links haga scroll interno */
+    overflow: clip;
 }
 
 .mobile-nav.open .mobile-nav-panel {
@@ -2915,23 +2920,20 @@ footer {
     }
 }
 
+/* ── Navbar: hamburger en tablet y móvil (≤1100px) ──────────────────
+   El nav de dos filas necesita al menos ~1100px para caber cómodamente.
+   Por debajo se usa el menú hamburger lateral.
+───────────────────────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+    .nav-links  { display: none; }
+    .hamburger  { display: flex; }
+    .hamburger-label { display: block; }
+}
+
 /* =====================
    Responsive — Mobile
    ===================== */
 @media (max-width: 768px) {
-
-    /* Navbar */
-    .nav-links {
-        display: none;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .hamburger-label {
-        display: block;
-    }
 
     /* Section spacing */
     .info-section,
@@ -3651,10 +3653,6 @@ footer {
 
 /* ── Tablet 900px ── */
 @media (max-width: 900px) {
-    /* Navbar: ocultar separadores y quiebre de fila en tablet/móvil */
-    .nav-links li + li::before { display: none; }
-    .nav-links .nav-row-break { display: none; }
-    .nav-links a { font-size: 0.78rem; padding: .3rem .4rem; }
 
     /* Hero principal */
     .hero-center h1 { font-size: 3rem; }
