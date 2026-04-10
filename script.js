@@ -54,7 +54,7 @@ if (hamburger && mobileNav) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Navbar sticky scroll effect
+    // ── Navbar sticky scroll effect ─────────────────────────────────────
     const navbar = document.querySelector('.navbar');
     if (navbar) {
         const onScroll = () => {
@@ -64,9 +64,77 @@ document.addEventListener('DOMContentLoaded', () => {
                 navbar.classList.remove('nav-scrolled');
             }
         };
-        // Passive listener → mejor rendimiento en móvil
         window.addEventListener('scroll', onScroll, { passive: true });
         onScroll(); // aplicar estado inicial sin esperar el primer scroll
+    }
+
+    // ── Smooth Scroll con offset por navbar fijo ────────────────────────
+    /**
+     * Devuelve la altura actual del navbar (o 0 si no existe).
+     * Se recalcula en cada llamada para manejar el cambio de tamaño
+     * entre estado normal y nav-scrolled.
+     */
+    function getNavOffset() {
+        const nav = document.querySelector('.navbar');
+        return nav ? nav.getBoundingClientRect().height + 8 : 8;
+    }
+
+    /**
+     * Desplaza suavemente hasta el elemento indicado,
+     * compensando la altura del navbar fijo.
+     * Respeta prefers-reduced-motion del usuario.
+     */
+    function smoothScrollTo(target) {
+        if (!target) return;
+        const top = target.getBoundingClientRect().top + window.scrollY - getNavOffset();
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: Math.max(0, top), behavior: prefersReduced ? 'auto' : 'smooth' });
+    }
+
+    // Interceptar TODOS los <a href="#..."> de la página
+    document.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a[href]');
+        if (!anchor) return;
+
+        const href = anchor.getAttribute('href') || '';
+
+        // Solo enlaces ancla de la misma página: "#id" o "paginaActual.html#id"
+        let hash = '';
+        if (href.startsWith('#')) {
+            hash = href.slice(1);
+        } else {
+            // "archivo.html#seccion" → solo si apunta a la página actual
+            const [filePart, hashPart] = href.split('#');
+            if (hashPart) {
+                const currentFile = location.pathname.split('/').pop() || 'index.html';
+                if (!filePart || filePart === currentFile) {
+                    hash = hashPart;
+                }
+            }
+        }
+
+        if (!hash) return; // deja que el browser maneje los demás links
+
+        const target = document.getElementById(hash);
+        if (!target) return; // ID no existe en esta página
+
+        e.preventDefault();
+        smoothScrollTo(target);
+
+        // Actualizar la URL sin recargar la página
+        history.pushState(null, '', '#' + hash);
+
+        // Cerrar menú móvil si está abierto
+        closeMobileNav();
+    });
+
+    // Scroll suave al cargar la página si la URL tiene un #hash
+    if (location.hash) {
+        const target = document.getElementById(location.hash.slice(1));
+        if (target) {
+            // Pequeño delay para que el layout esté completamente renderizado
+            setTimeout(() => smoothScrollTo(target), 120);
+        }
     }
 
     // Registration form logic

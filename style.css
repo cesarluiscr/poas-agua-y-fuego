@@ -32,7 +32,24 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    /* Altura del navbar fijo — usada por scroll-margin-top para que
+       las secciones no queden tapadas al navegar por anclas */
+    --navbar-h: 70px;
 }
+
+/* Respetar preferencia de movimiento reducido (accesibilidad) */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+}
+
+/* Todas las secciones/elementos con ID reciben un margen de scroll
+   igual a la altura del navbar + 8px buffer.
+   Aplica tanto a clics en anclas, navegación por teclado y
+   "Find in page" del navegador — sin necesidad de JS. */
+[id] {
+    scroll-margin-top: calc(var(--navbar-h) + 8px);
+}
+
 
 body {
     font-family: var(--font-body);
