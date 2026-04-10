@@ -275,21 +275,26 @@ h1 .logo-fuego {
 
 /* Color individual por posición */
 .nav-links li:nth-child(1) a:hover { color: #2563eb; background: rgba(37,99,235,.07); }   /* Inicio — azul */
-/* Fila 1 */
-.nav-links li:nth-child(1) a:hover  { color: #2563eb; background: rgba(37,99,235,.07); }   /* Inicio — azul */
-.nav-links li:nth-child(2) a:hover  { color: #0ea5e9; background: rgba(14,165,233,.07); }  /* Patrimonio — celeste */
-.nav-links li:nth-child(3) a:hover  { color: #C8952A; background: rgba(200,149,42,.08); }  /* Historia — dorado */
-.nav-links li:nth-child(4) a:hover  { color: #10b981; background: rgba(16,185,129,.07); }  /* Directorio — verde */
-.nav-links li:nth-child(5) a:hover  { color: #8b5cf6; background: rgba(139,92,246,.07); }  /* Empleo — violeta */
-.nav-links li:nth-child(6) a:hover  { color: #f59e0b; background: rgba(245,158,11,.07); }  /* Eventos — ámbar */
-/* nth-child(7) es el nav-row-break → sin hover */
-/* Fila 2 */
-.nav-links li:nth-child(8) a:hover  { color: #f97316; background: rgba(249,115,22,.07); }  /* Gastronomía — naranja */
-.nav-links li:nth-child(9) a:hover  { color: #64748b; background: rgba(100,116,139,.07); } /* Plan — gris azulado */
-.nav-links li:nth-child(10) a:hover { color: #ef4444; background: rgba(239,68,68,.07); }   /* Seguridad — rojo */
-.nav-links li:nth-child(11) a:hover { color: #06b6d4; background: rgba(6,182,212,.07); }   /* Cómo llegar — cyan */
-.nav-links li:nth-child(12) a:hover { color: #ec4899; background: rgba(236,72,153,.07); }  /* Galería — rosa */
-.nav-links li:nth-child(13) a:hover { color: #22c55e; background: rgba(34,197,94,.07); }   /* Contacto — verde lima */
+/* Color individual por posición — Fila 1 (ítems 1–9) */
+.nav-links li:nth-child(1)  a:hover { color: #2563eb; background: rgba(37,99,235,.07); }   /* Inicio — azul */
+.nav-links li:nth-child(2)  a:hover { color: #0ea5e9; background: rgba(14,165,233,.07); }  /* Patrimonio — celeste */
+.nav-links li:nth-child(3)  a:hover { color: #C8952A; background: rgba(200,149,42,.08); }  /* Historia — dorado */
+.nav-links li:nth-child(4)  a:hover { color: #d97706; background: rgba(217,119,6,.07); }   /* Imágenes Históricas — ámbar */
+.nav-links li:nth-child(5)  a:hover { color: #7c3aed; background: rgba(124,58,237,.07); }  /* Biblioteca — violeta */
+.nav-links li:nth-child(6)  a:hover { color: #dc2626; background: rgba(220,38,38,.07); }   /* Guerra Civil — rojo */
+.nav-links li:nth-child(7)  a:hover { color: #ec4899; background: rgba(236,72,153,.07); }  /* Galería — rosa */
+.nav-links li:nth-child(8)  a:hover { color: #f97316; background: rgba(249,115,22,.07); }  /* Gastronomía — naranja */
+.nav-links li:nth-child(9)  a:hover { color: #0891b2; background: rgba(8,145,178,.07); }   /* Tech Center — cyan oscuro */
+/* nth-child(10) = nav-row-break → sin hover */
+/* Color individual por posición — Fila 2 (ítems 11–18) */
+.nav-links li:nth-child(11) a:hover { color: #10b981; background: rgba(16,185,129,.07); }  /* Directorio — verde */
+.nav-links li:nth-child(12) a:hover { color: #8b5cf6; background: rgba(139,92,246,.07); }  /* Empleo — violeta */
+.nav-links li:nth-child(13) a:hover { color: #f59e0b; background: rgba(245,158,11,.07); }  /* Eventos — ámbar */
+.nav-links li:nth-child(14) a:hover { color: #64748b; background: rgba(100,116,139,.07); } /* Plan Regulador — gris */
+.nav-links li:nth-child(15) a:hover { color: #ef4444; background: rgba(239,68,68,.07); }   /* Seguridad — rojo */
+.nav-links li:nth-child(16) a:hover { color: #06b6d4; background: rgba(6,182,212,.07); }   /* Cómo Llegar — cyan */
+.nav-links li:nth-child(17) a:hover { color: #e11d48; background: rgba(225,29,72,.07); }   /* Quejas — carmesí */
+.nav-links li:nth-child(18) a:hover { color: #22c55e; background: rgba(34,197,94,.07); }   /* Contacto — verde lima */
 
 .btn-primary {
     background: linear-gradient(135deg, var(--clr-turquoise), var(--clr-forest-light));
