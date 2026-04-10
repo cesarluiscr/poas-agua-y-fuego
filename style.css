@@ -32,9 +32,8 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
-    /* Altura del navbar fijo — usada por scroll-margin-top para que
-       las secciones no queden tapadas al navegar por anclas */
-    --navbar-h: 70px;
+    /* Altura del navbar fijo (dos filas) — usada por scroll-margin-top */
+    --navbar-h: 90px;
 }
 
 /* Respetar preferencia de movimiento reducido (accesibilidad) */
@@ -89,8 +88,9 @@ h4 {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 1rem 2%;
+    padding: 0.55rem 2%;
     display: flex;
+    flex-wrap: wrap;              /* permite que nav-links crezca en altura */
     justify-content: space-between;
     align-items: center;
     /* Estado inicial: semi-transparente sobre el hero oscuro */
@@ -110,7 +110,7 @@ h4 {
 
 /* Estado al hacer scroll: opaco, compacto y con sombra definida */
 .nav-scrolled {
-    padding: 0.6rem 2%;
+    padding: 0.4rem 2%;
     background: rgba(248, 250, 249, 0.97);
     border-bottom: 1px solid rgba(64, 224, 208, 0.3);
     box-shadow:
@@ -201,10 +201,28 @@ h1 .logo-fuego {
 
 .nav-links {
     display: flex;
+    flex-wrap: wrap;              /* permite dos filas */
+    justify-content: center;
     list-style: none;
     gap: 0;
     align-items: center;
+    row-gap: 1px;                 /* espacio mínimo entre filas */
 }
+
+/* Quiebre de fila — ocupa el 100% del ancho y empuja el resto */
+.nav-links .nav-row-break {
+    flex-basis: 100%;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    /* Línea decorativa teal tenue entre las dos filas */
+    border-top: 1px solid rgba(64, 224, 208, 0.25);
+    pointer-events: none;
+}
+/* El quiebre no debe mostrar separador propio */
+.nav-links .nav-row-break::before { display: none !important; }
+/* El primer ítem tras el quiebre tampoco lleva separador a su izquierda */
+.nav-links .nav-row-break + li::before { display: none !important; }
 
 /* Separador vertical entre ítems del menú desktop */
 .nav-links li {
@@ -257,16 +275,21 @@ h1 .logo-fuego {
 
 /* Color individual por posición */
 .nav-links li:nth-child(1) a:hover { color: #2563eb; background: rgba(37,99,235,.07); }   /* Inicio — azul */
-.nav-links li:nth-child(2) a:hover { color: #0ea5e9; background: rgba(14,165,233,.07); }   /* Patrimonio — celeste */
-.nav-links li:nth-child(3) a:hover { color: #C8952A; background: rgba(200,149,42,.08); }   /* Historia — dorado */
-.nav-links li:nth-child(4) a:hover { color: #10b981; background: rgba(16,185,129,.07); }   /* Directorio — verde */
-.nav-links li:nth-child(5) a:hover { color: #8b5cf6; background: rgba(139,92,246,.07); }   /* Empleo — violeta */
-.nav-links li:nth-child(6) a:hover { color: #f59e0b; background: rgba(245,158,11,.07); }   /* Eventos — ámbar */
-.nav-links li:nth-child(7) a:hover { color: #64748b; background: rgba(100,116,139,.07); }  /* Plan — gris azulado */
-.nav-links li:nth-child(8) a:hover { color: #ef4444; background: rgba(239,68,68,.07); }    /* Seguridad — rojo */
-.nav-links li:nth-child(9) a:hover { color: #06b6d4; background: rgba(6,182,212,.07); }    /* Cómo llegar — cyan */
-.nav-links li:nth-child(10) a:hover { color: #ec4899; background: rgba(236,72,153,.07); }  /* Galería — rosa */
-.nav-links li:nth-child(11) a:hover { color: #22c55e; background: rgba(34,197,94,.07); }   /* Contacto — verde lima */
+/* Fila 1 */
+.nav-links li:nth-child(1) a:hover  { color: #2563eb; background: rgba(37,99,235,.07); }   /* Inicio — azul */
+.nav-links li:nth-child(2) a:hover  { color: #0ea5e9; background: rgba(14,165,233,.07); }  /* Patrimonio — celeste */
+.nav-links li:nth-child(3) a:hover  { color: #C8952A; background: rgba(200,149,42,.08); }  /* Historia — dorado */
+.nav-links li:nth-child(4) a:hover  { color: #10b981; background: rgba(16,185,129,.07); }  /* Directorio — verde */
+.nav-links li:nth-child(5) a:hover  { color: #8b5cf6; background: rgba(139,92,246,.07); }  /* Empleo — violeta */
+.nav-links li:nth-child(6) a:hover  { color: #f59e0b; background: rgba(245,158,11,.07); }  /* Eventos — ámbar */
+/* nth-child(7) es el nav-row-break → sin hover */
+/* Fila 2 */
+.nav-links li:nth-child(8) a:hover  { color: #f97316; background: rgba(249,115,22,.07); }  /* Gastronomía — naranja */
+.nav-links li:nth-child(9) a:hover  { color: #64748b; background: rgba(100,116,139,.07); } /* Plan — gris azulado */
+.nav-links li:nth-child(10) a:hover { color: #ef4444; background: rgba(239,68,68,.07); }   /* Seguridad — rojo */
+.nav-links li:nth-child(11) a:hover { color: #06b6d4; background: rgba(6,182,212,.07); }   /* Cómo llegar — cyan */
+.nav-links li:nth-child(12) a:hover { color: #ec4899; background: rgba(236,72,153,.07); }  /* Galería — rosa */
+.nav-links li:nth-child(13) a:hover { color: #22c55e; background: rgba(34,197,94,.07); }   /* Contacto — verde lima */
 
 .btn-primary {
     background: linear-gradient(135deg, var(--clr-turquoise), var(--clr-forest-light));
@@ -3624,8 +3647,9 @@ footer {
 
 /* ── Tablet 900px ── */
 @media (max-width: 900px) {
-    /* Navbar: ocultar separadores, reducir padding */
+    /* Navbar: ocultar separadores y quiebre de fila en tablet/móvil */
     .nav-links li + li::before { display: none; }
+    .nav-links .nav-row-break { display: none; }
     .nav-links a { font-size: 0.78rem; padding: .3rem .4rem; }
 
     /* Hero principal */
