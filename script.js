@@ -137,6 +137,79 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // ── Parallax Engine ─────────────────────────────────────────────────
+    /**
+     * Efecto parallax sutil para secciones con fondos de imagen/gradiente.
+     * Usa requestAnimationFrame para 60fps sin jank.
+     * Se desactiva automáticamente si prefers-reduced-motion está activo
+     * o si el ancho de pantalla es < 768px (rendimiento móvil).
+     *
+     * Capas configuradas:
+     *  • Hero Fuego   — pseudo-elemento ::before vía CSS custom property
+     *  • Hero Agua    — pseudo-elemento ::before vía CSS custom property
+     *  • Historia banner bg
+     *  • Seguridad banner bg
+     */
+    (function initParallax() {
+        // No ejecutar si el usuario prefiere movimiento reducido
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        const LAYERS = [
+            // { selector, speed, prop }
+            // prop = 'var' → actualiza --parallax-y en el elemento padre (para ::before)
+            // prop = 'transform' → aplica transform directamente al elemento
+            { selector: '.hero-fire',         speed: 0.18, prop: 'var' },
+            { selector: '.hero-water',        speed: 0.14, prop: 'var' },   // velocidad distinta → efecto divergente
+            { selector: '.historia-banner-bg',speed: 0.22, prop: 'transform' },
+            { selector: '.seguridad-banner-bg',speed: 0.20, prop: 'transform' },
+        ];
+
+        // Precalcular referencias al DOM
+        const layers = LAYERS.map(cfg => ({
+            el: document.querySelector(cfg.selector),
+            speed: cfg.speed,
+            prop: cfg.prop,
+        })).filter(l => l.el !== null);
+
+        if (!layers.length) return;
+
+        let rafId = null;
+        let lastScroll = -1;
+
+        function tick() {
+            rafId = null;
+            const scrollY = window.scrollY;
+            if (scrollY === lastScroll) return; // sin cambios, no hacer nada
+            lastScroll = scrollY;
+
+            // Desactivar en pantallas pequeñas (evitar jank en móvil)
+            if (window.innerWidth < 768) return;
+
+            layers.forEach(({ el, speed, prop }) => {
+                const rect = el.getBoundingClientRect();
+                // Desplazamiento relativo al centro de la sección
+                const sectionMid  = rect.top + rect.height / 2;
+                const viewportMid = window.innerHeight / 2;
+                const offset = (sectionMid - viewportMid) * speed;
+                const px = `${offset.toFixed(2)}px`;
+
+                if (prop === 'var') {
+                    // Pseudo-elemento ::before hereda la custom property del padre
+                    el.style.setProperty('--parallax-y', px);
+                } else {
+                    el.style.transform = `translateY(${px})`;
+                }
+            });
+        }
+
+        function onScroll() {
+            if (!rafId) rafId = requestAnimationFrame(tick);
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        tick(); // estado inicial
+    })();
+
     // Registration form logic
     const registerForm = document.getElementById('registerForm');
     const registerSuccess = document.getElementById('registerSuccess');
