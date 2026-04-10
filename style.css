@@ -2970,7 +2970,8 @@ footer {
     .hero-center {
         position: static;
         transform: none;
-        padding: 5.5rem 1.5rem 2.5rem;
+        /* padding-top extra para que el navbar fijo no tape "Poás" en móvil */
+        padding: 7.5rem 1.5rem 2.5rem;
         background: linear-gradient(135deg, var(--clr-volcanic-dark), var(--clr-volcanic-gray));
         text-align: center;
         order: -1;
@@ -3090,7 +3091,7 @@ footer {
     }
 
     .hero-center {
-        padding: 5rem 1rem 2rem;
+        padding: 7rem 1rem 2rem;
     }
 
     .hero-center h1 {
