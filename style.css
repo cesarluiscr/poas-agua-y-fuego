@@ -67,7 +67,7 @@ h4 {
 }
 
 
-/* Navbar */
+/* Navbar — sticky con efecto de scroll */
 .navbar {
     position: fixed;
     top: 0;
@@ -76,16 +76,36 @@ h4 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(248, 250, 249, 0.9);
-    backdrop-filter: blur(10px);
+    /* Estado inicial: semi-transparente sobre el hero oscuro */
+    background: rgba(248, 250, 249, 0.45);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     z-index: 1000;
-    border-bottom: 1px solid rgba(74, 85, 83, 0.1);
-    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    /* Barra de acento superior (color marca) */
+    box-shadow: inset 0 3px 0 0 rgba(64, 224, 208, 0.55);
+    transition:
+        background   0.4s ease,
+        box-shadow   0.4s ease,
+        padding      0.3s ease,
+        border-color 0.4s ease;
 }
 
+/* Estado al hacer scroll: opaco, compacto y con sombra definida */
 .nav-scrolled {
-    padding: 0.8rem 5%;
-    box-shadow: var(--shadow-soft);
+    padding: 0.6rem 2%;
+    background: rgba(248, 250, 249, 0.97);
+    border-bottom: 1px solid rgba(64, 224, 208, 0.3);
+    box-shadow:
+        inset 0 3px 0 0 var(--clr-turquoise),          /* barra teal superior */
+        0 4px 24px rgba(0, 0, 0, 0.10),                 /* sombra suave */
+        0 1px 4px  rgba(47, 54, 53, 0.08);              /* línea base */
+}
+
+/* Logo se reduce ligeramente al hacer scroll */
+.nav-scrolled .logo {
+    font-size: 1.25rem;
+    transition: font-size 0.3s ease;
 }
 
 .logo {
@@ -93,6 +113,7 @@ h4 {
     font-size: 1.5rem;
     font-weight: 800;
     color: var(--clr-volcanic-dark);
+    transition: font-size 0.3s ease;
 }
 
 .logo span {
@@ -2081,12 +2102,12 @@ footer {
     color: #fff;
 }
 
-/* Navbar con scroll */
-.navbar.scrolled .lang-btn {
+/* Navbar con scroll — botones de idioma */
+.navbar.nav-scrolled .lang-btn {
     background: linear-gradient(135deg, #C0392B, #E74C3C);
     color: #fff;
 }
-.navbar.scrolled .lang-btn.active {
+.navbar.nav-scrolled .lang-btn.active {
     background: linear-gradient(135deg, #0E5E6F, #17A589);
     color: #fff;
 }

@@ -54,15 +54,20 @@ if (hamburger && mobileNav) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Navbar scroll effect
+    // Navbar sticky scroll effect
     const navbar = document.querySelector('.navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('nav-scrolled');
-        } else {
-            navbar.classList.remove('nav-scrolled');
-        }
-    });
+    if (navbar) {
+        const onScroll = () => {
+            if (window.scrollY > 30) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        };
+        // Passive listener → mejor rendimiento en móvil
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll(); // aplicar estado inicial sin esperar el primer scroll
+    }
 
     // Registration form logic
     const registerForm = document.getElementById('registerForm');
