@@ -835,37 +835,68 @@
 
     <!-- Patrimonio Hídrico -->
     <section id="agua" class="water-heritage-section">
-        <div class="container">
-            <div class="water-content">
-                <div class="water-text">
-                    <h2 class="section-title">Nuestro Patrimonio Hídrico</h2>
-                    <p>El macizo del Poás no solo es un gigante de fuego, es el pulmón húmedo de la región. El entorno
-                        de bosque nuboso actúa como una esponja gigante, capturando la humedad y alimentando las
-                        reservas subterráneas.</p>
-                    <ul class="water-facts">
-                        <li>
-                            <strong>💧 Área de recarga crítica:</strong> El macizo del Poás funciona como una "torre de
-                            agua", permitiendo la filtración que alimenta los acuíferos Poás, Colima y Barva, principales
-                            fuentes de agua potable para la Gran Área Metropolitana.
-                        </li>
-                        <li>🌲 Ecosistema único que regula el clima local.</li>
-                        <li>🚰 Fuente directa de acueductos comunitarios locales (ASADAS).</li>
-                    </ul>
-                    <a href="patrimonio-hidrico.html" class="btn-conocer-mas">💧 Conocer más →</a>
-                </div>
-                <div class="water-visual">
-                    <div class="water-anim-container">
 
-                        <!-- Volcán animado en video -->
-                        <div class="river-wrapper">
-                            <video class="river-svg volcan-video" autoplay loop muted playsinline>
-                                <source src="img/volcan_rio_animado.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                    </div>
+        <!-- Ola superior -->
+        <div class="water-wave-top" aria-hidden="true">
+            <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,0 L0,0 Z" fill="#1A2020"/>
+            </svg>
+        </div>
+
+        <!-- Burbujas decorativas -->
+        <div class="water-bubbles" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+        </div>
+
+        <div class="container water-inner">
+
+            <!-- Encabezado -->
+            <div class="water-header">
+                <span class="water-badge">💧 Cantón de Poás · Costa Rica</span>
+                <h2 class="water-title">Nuestro <em>Patrimonio Hídrico</em></h2>
+                <p class="water-lead">El macizo del Poás no solo es un gigante de fuego — es el <strong>pulmón húmedo</strong> de la región. Su bosque nuboso captura la humedad y alimenta las reservas que abastecen a millones.</p>
+            </div>
+
+            <!-- Tarjetas de datos -->
+            <div class="water-cards">
+                <div class="water-card">
+                    <div class="water-card-icon">🏔️</div>
+                    <h3>Torre de Agua</h3>
+                    <p>El macizo alimenta los acuíferos <strong>Poás, Colima y Barva</strong>, principales fuentes de agua potable para la Gran Área Metropolitana.</p>
+                </div>
+                <div class="water-card water-card--accent">
+                    <div class="water-card-icon">🌲</div>
+                    <h3>Ecosistema Único</h3>
+                    <p>El bosque nuboso actúa como esponja gigante, <strong>regulando el clima local</strong> y manteniendo la biodiversidad del cantón.</p>
+                </div>
+                <div class="water-card">
+                    <div class="water-card-icon">🚰</div>
+                    <h3>Acueductos Comunales</h3>
+                    <p>Fuente directa de <strong>9 ASADAS</strong> que proveen agua potable a las comunidades del cantón de Poás.</p>
                 </div>
             </div>
+
+            <!-- Video + CTA -->
+            <div class="water-media">
+                <div class="water-video-wrap">
+                    <div class="water-video-glow" aria-hidden="true"></div>
+                    <video class="water-video" autoplay loop muted playsinline>
+                        <source src="img/volcan_rio_animado.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <a href="patrimonio-hidrico.html" class="btn-conocer-mas">💧 Explorar Patrimonio Hídrico →</a>
+            </div>
+
         </div>
+
+        <!-- Ola inferior -->
+        <div class="water-wave-bottom" aria-hidden="true">
+            <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,40 C240,0 480,80 720,40 C960,0 1200,80 1440,40 L1440,80 L0,80 Z" fill="#F8FAF9"/>
+            </svg>
+        </div>
+
     </section>
 
     <!-- Preview Cards: Bolsa de Empleo + Eventos + Directorio Turístico y Comercial -->

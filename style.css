@@ -609,78 +609,202 @@ h1 .logo-fuego {
 }
 
 /* Patrimonio Hídrico */
+/* ═══════════════════════════════════════════════
+   SECCIÓN PATRIMONIO HÍDRICO — rediseño completo
+═══════════════════════════════════════════════ */
 .water-heritage-section {
-    padding: 6rem 0;
-    background: linear-gradient(135deg, var(--clr-forest-dark), var(--clr-volcanic-dark));
-    background-color: var(--clr-volcanic-dark);
-    /* Fallback */
-    color: white;
     position: relative;
+    padding: 0;
+    background: linear-gradient(180deg,
+        #071520 0%,
+        #0b2237 35%,
+        #0a3a4a 70%,
+        #083040 100%);
+    color: #fff;
     overflow: hidden;
 }
 
-.water-heritage-section .section-title {
+/* ── Olas decorativas ── */
+.water-wave-top,
+.water-wave-bottom {
+    display: block;
+    line-height: 0;
+    overflow: hidden;
+}
+.water-wave-top  { margin-bottom: -2px; }
+.water-wave-bottom { margin-top: -2px; }
+.water-wave-top  svg,
+.water-wave-bottom svg { width: 100%; height: 80px; display: block; }
+
+/* ── Burbujas flotantes ── */
+.water-bubbles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+.water-bubbles span {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(64, 224, 208, 0.08);
+    border: 1px solid rgba(64, 224, 208, 0.15);
+    animation: bubbleRise 10s infinite ease-in-out;
+}
+.water-bubbles span:nth-child(1) { width:80px;  height:80px;  left:8%;   bottom:10%; animation-duration:12s; animation-delay:0s;   }
+.water-bubbles span:nth-child(2) { width:40px;  height:40px;  left:20%;  bottom:5%;  animation-duration:9s;  animation-delay:2s;   }
+.water-bubbles span:nth-child(3) { width:60px;  height:60px;  left:55%;  bottom:8%;  animation-duration:14s; animation-delay:4s;   }
+.water-bubbles span:nth-child(4) { width:30px;  height:30px;  left:75%;  bottom:15%; animation-duration:8s;  animation-delay:1s;   }
+.water-bubbles span:nth-child(5) { width:90px;  height:90px;  left:85%;  bottom:5%;  animation-duration:16s; animation-delay:3s;   }
+.water-bubbles span:nth-child(6) { width:50px;  height:50px;  left:40%;  bottom:3%;  animation-duration:11s; animation-delay:5s;   }
+@keyframes bubbleRise {
+    0%   { transform: translateY(0)   scale(1);    opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.6; }
+    100% { transform: translateY(-420px) scale(1.1); opacity: 0; }
+}
+
+/* ── Layout interno ── */
+.water-inner {
+    position: relative;
+    z-index: 1;
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+/* ── Encabezado ── */
+.water-header {
+    text-align: center;
+    max-width: 700px;
+}
+.water-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
     color: var(--clr-turquoise);
-    text-align: left;
-}
-
-.water-content {
-    display: flex;
-    align-items: center;
-    gap: 4rem;
-    flex-wrap: wrap;
-}
-
-.water-text {
-    flex: 1;
-}
-
-.water-facts {
-    list-style: none;
-    margin-top: 2rem;
-}
-
-.water-facts li {
+    background: rgba(64,224,208,.12);
+    border: 1px solid rgba(64,224,208,.3);
+    border-radius: 30px;
+    padding: .3rem 1rem;
     margin-bottom: 1rem;
-    font-size: 1.1rem;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1rem;
-    border-radius: 8px;
-    border-left: 4px solid var(--clr-turquoise);
+}
+.water-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+.water-title em {
+    font-style: normal;
+    background: linear-gradient(90deg, #40E0D0, #22d3ee, #7dd3fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.water-lead {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,.78);
 }
 
-.water-visual {
-    flex: 1;
-    min-width: 0;
+/* ── Tarjetas de datos ── */
+.water-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+}
+.water-card {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(64,224,208,.15);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: transform .3s, box-shadow .3s, border-color .3s;
+}
+.water-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(64,224,208,.15);
+    border-color: rgba(64,224,208,.4);
+}
+.water-card--accent {
+    background: rgba(64,224,208,.1);
+    border-color: rgba(64,224,208,.35);
+    box-shadow: 0 0 30px rgba(64,224,208,.08);
+}
+.water-card-icon {
+    font-size: 2.4rem;
+    margin-bottom: .8rem;
+    display: block;
+}
+.water-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: .6rem;
+    color: #7dd3fc;
+}
+.water-card p {
+    font-size: .9rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,.72);
+}
+
+/* ── Video + CTA ── */
+.water-media {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    gap: 2rem;
+}
+.water-video-wrap {
     position: relative;
-    height: 400px;
+    display: inline-block;
 }
-
-/* ── Animación Río en Movimiento ── */
-.water-anim-container {
+.water-video-glow {
+    position: absolute;
+    inset: -20px;
+    border-radius: 28px;
+    background: radial-gradient(ellipse at center,
+        rgba(64,224,208,.25) 0%,
+        transparent 70%);
+    animation: glowPulse 3s ease-in-out infinite;
+    pointer-events: none;
+}
+@keyframes glowPulse {
+    0%, 100% { opacity: .6; transform: scale(1);   }
+    50%       { opacity: 1;  transform: scale(1.04); }
+}
+.water-video {
+    width: 420px;
+    max-width: 90vw;
+    height: auto;
+    border-radius: 20px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid rgba(64,224,208,.25);
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
     position: relative;
-    width: 380px;
-    height: 440px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    z-index: 1;
 }
 
-.river-wrapper {
-    position: relative;
-    z-index: 3;
-    animation: dropFloat 4s ease-in-out infinite;
-    filter: drop-shadow(0 16px 28px rgba(33, 150, 196, 0.5));
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .water-cards { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+    .water-cards { grid-template-columns: 1fr; }
+    .water-video  { width: 100%; }
 }
 
-.river-svg {
-    width: 260px;
-    height: 300px;
-}
-
+/* Mantener clase .volcan-video para compatibilidad con otras páginas */
 .volcan-video {
     width: 480px;
     height: 540px;
@@ -2902,15 +3026,6 @@ footer {
    Responsive — Tablet
    ===================== */
 @media (max-width: 900px) {
-    .water-content {
-        flex-direction: column;
-        gap: 2rem;
-    }
-
-    .water-visual {
-        height: 280px;
-    }
-
     .community-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
