@@ -4173,3 +4173,183 @@ footer {
     #search-input { font-size: 0.97rem; }
     .search-esc-hint { display: none; }
 }
+
+/* ══════════════════════════════════════════════════
+   SECCIÓN AGRICULTURA
+   ══════════════════════════════════════════════════ */
+
+.agri-section {
+    background: linear-gradient(160deg, #0f2b1a 0%, #1a3d28 40%, #0d2416 100%);
+    padding: 5rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.agri-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2334a853' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.agri-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    position: relative;
+}
+
+.agri-badge {
+    display: inline-block;
+    background: rgba(52, 168, 83, 0.15);
+    border: 1px solid rgba(52, 168, 83, 0.35);
+    color: #6fcf8a;
+    padding: 0.35rem 1.1rem;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.agri-header .section-title {
+    color: #fff;
+    margin-bottom: 1.25rem;
+}
+
+.agri-header .section-title em {
+    color: #6fcf8a;
+    font-style: normal;
+}
+
+.agri-intro {
+    max-width: 740px;
+    margin: 0 auto;
+    color: rgba(255,255,255,0.75);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Grid de dos columnas */
+.agri-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.agri-col-header {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.75rem 1.1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.agri-col-trad {
+    background: linear-gradient(90deg, rgba(139, 90, 43, 0.25), rgba(139, 90, 43, 0.08));
+    border: 1px solid rgba(139, 90, 43, 0.4);
+}
+
+.agri-col-new {
+    background: linear-gradient(90deg, rgba(52, 168, 83, 0.2), rgba(52, 168, 83, 0.06));
+    border: 1px solid rgba(52, 168, 83, 0.35);
+}
+
+.agri-col-icon {
+    font-size: 1.4rem;
+}
+
+.agri-col-header h3 {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Tarjetas de cultivos */
+.agri-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.agri-card {
+    display: flex;
+    gap: 1rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.agri-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(52, 168, 83, 0.25);
+}
+
+.agri-card-emoji {
+    font-size: 1.8rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.agri-card-body h4 {
+    color: #e8f5e0;
+    font-size: 0.92rem;
+    font-weight: 700;
+    margin: 0 0 0.3rem;
+}
+
+.agri-card-body p {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.85rem;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* Campo Ferial destacado */
+.agri-ferial {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: linear-gradient(120deg, rgba(255, 200, 0, 0.12), rgba(255, 160, 0, 0.06));
+    border: 1px solid rgba(255, 200, 0, 0.3);
+    border-radius: 18px;
+    padding: 1.5rem 2rem;
+    position: relative;
+}
+
+.agri-ferial-icon {
+    font-size: 2.8rem;
+    flex-shrink: 0;
+}
+
+.agri-ferial-text h3 {
+    color: #FFD700;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 0.4rem;
+}
+
+.agri-ferial-text p {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .agri-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+    .agri-section { padding: 3.5rem 1rem; }
+    .agri-ferial { flex-direction: column; text-align: center; padding: 1.25rem; }
+}
