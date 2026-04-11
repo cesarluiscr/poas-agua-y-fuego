@@ -1,10 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poás – Water & Fire | Cantón de Poás, Costa Rica</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Poás – Water &amp; Fire | Cantón de Poás, Costa Rica</title>
     <meta name="description"
         content="Community platform about Poás Volcano, Costa Rica. Water heritage, zoning plan, tourism, business directory and more.">
     <link
@@ -15,28 +18,374 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <!-- Open Graph / Redes Sociales -->
+    <!-- Open Graph -->
     <meta property="og:type"        content="website">
     <meta property="og:url"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/index-en.html">
-    <meta property="og:title"       content="Poás Water & Fire">
+    <meta property="og:title"       content="Poás Water &amp; Fire">
     <meta property="og:description" content="Community platform for Poás canton, Costa Rica. Water heritage, tourism, business directory and more.">
     <meta property="og:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/poas_og_v3.png">
     <meta property="og:image:width"  content="1200">
     <meta property="og:image:height" content="630">
     <!-- Twitter Card -->
     <meta name="twitter:card"        content="summary_large_image">
-    <meta name="twitter:title"       content="Poás Water & Fire">
+    <meta name="twitter:title"       content="Poás Water &amp; Fire">
     <meta name="twitter:description" content="Community platform for Poás canton, Costa Rica. Water heritage, tourism, business directory and more.">
     <meta name="twitter:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/poas_og_v3.png">
+    <!-- Hero logo responsive + inline component styles -->
+    <style>
+        @media (max-width: 768px) {
+            .hero-site-logo {
+                top: 1rem !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: 170px !important;
+                height: 170px !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-site-logo {
+                width: 145px !important;
+                height: 145px !important;
+                top: 0.8rem !important;
+            }
+        }
+
+        /* ── Jobs Board — modern card ── */
+        .empleo-modern {
+            position: relative;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #0f2942 100%);
+            border: 1px solid rgba(99,179,237,0.2);
+            border-radius: 22px;
+            padding: 2.4rem 2.4rem 2rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(99,179,237,0.08);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .empleo-modern:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(99,179,237,0.18);
+        }
+        .empleo-modern::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 260px; height: 260px;
+            background: radial-gradient(circle, rgba(56,189,248,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .empleo-modern-top { display: flex; align-items: flex-start; gap: 1.2rem; }
+        .empleo-modern-badge {
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            border-radius: 14px; width: 56px; height: 56px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(14,165,233,0.35);
+        }
+        .empleo-modern-heading { flex: 1; }
+        .empleo-modern-label {
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+            text-transform: uppercase; color: #38bdf8; margin-bottom: 0.25rem;
+        }
+        .empleo-modern-title { font-size: 1.55rem; font-weight: 800; color: #f0f9ff; line-height: 1.2; margin: 0; }
+        .empleo-modern-desc { color: #94a3b8; font-size: 0.9rem; line-height: 1.65; margin: 0; }
+        .empleo-modern-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .empleo-chip {
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px; padding: 0.3rem 0.85rem;
+            font-size: 0.78rem; color: #cbd5e1; font-weight: 500;
+        }
+        .empleo-modern-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+        .empleo-modern-stat { color: #64748b; font-size: 0.78rem; }
+        .empleo-modern-stat strong { color: #38bdf8; font-size: 1rem; }
+        .empleo-modern-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+            color: #fff; font-weight: 700; font-size: 0.9rem;
+            padding: 0.7rem 1.5rem; border-radius: 50px; text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+            box-shadow: 0 4px 14px rgba(14,165,233,0.4); white-space: nowrap;
+        }
+        .empleo-modern-btn:hover { opacity: 0.88; transform: translateX(3px); }
+        @media (max-width: 600px) {
+            .empleo-modern { padding: 1.6rem 1.4rem 1.4rem; }
+            .empleo-modern-footer { flex-direction: column; align-items: flex-start; }
+            .empleo-modern-btn { width: 100%; justify-content: center; }
+        }
+
+        /* ── Events — modern card ── */
+        .eventos-modern {
+            position: relative;
+            background: linear-gradient(135deg, #1a0533 0%, #2d1060 55%, #1a0a3e 100%);
+            border: 1px solid rgba(167,139,250,0.2);
+            border-radius: 22px; padding: 2.4rem 2.4rem 2rem; overflow: hidden;
+            display: flex; flex-direction: column; gap: 1.4rem;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(167,139,250,0.08);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .eventos-modern:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(167,139,250,0.2);
+        }
+        .eventos-modern::before {
+            content: ''; position: absolute; top: -50px; right: -50px;
+            width: 240px; height: 240px;
+            background: radial-gradient(circle, rgba(167,139,250,0.13) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .eventos-modern-top { display: flex; align-items: flex-start; gap: 1.2rem; }
+        .eventos-modern-badge {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            border-radius: 14px; width: 56px; height: 56px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(168,85,247,0.4);
+        }
+        .eventos-modern-label {
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+            text-transform: uppercase; color: #c084fc; margin-bottom: 0.25rem;
+        }
+        .eventos-modern-title { font-size: 1.55rem; font-weight: 800; color: #faf5ff; line-height: 1.2; margin: 0; }
+        .eventos-modern-desc { color: #94a3b8; font-size: 0.9rem; line-height: 1.65; margin: 0; }
+        .eventos-modern-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .eventos-chip {
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(167,139,250,0.2);
+            border-radius: 50px; padding: 0.3rem 0.85rem;
+            font-size: 0.78rem; color: #ddd6fe; font-weight: 500;
+        }
+        .eventos-modern-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+        .eventos-modern-stat { color: #64748b; font-size: 0.78rem; }
+        .eventos-modern-stat strong { color: #c084fc; font-size: 1rem; }
+        .eventos-modern-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            color: #fff; font-weight: 700; font-size: 0.9rem;
+            padding: 0.7rem 1.5rem; border-radius: 50px; text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+            box-shadow: 0 4px 14px rgba(168,85,247,0.4); white-space: nowrap;
+        }
+        .eventos-modern-btn:hover { opacity: 0.88; transform: translateX(3px); }
+        @media (max-width: 600px) {
+            .eventos-modern { padding: 1.6rem 1.4rem 1.4rem; }
+            .eventos-modern-footer { flex-direction: column; align-items: flex-start; }
+            .eventos-modern-btn { width: 100%; justify-content: center; }
+        }
+
+        /* ── Tourism Directory — modern card ── */
+        .directorio-modern {
+            position: relative;
+            background: linear-gradient(135deg, #021d10 0%, #063b1e 55%, #042916 100%);
+            border: 1px solid rgba(52,211,153,0.2);
+            border-radius: 22px; padding: 2.4rem 2.4rem 2rem; overflow: hidden;
+            display: flex; flex-direction: column; gap: 1.4rem;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.25), 0 0 0 1px rgba(52,211,153,0.08);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .directorio-modern:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.3), 0 0 0 1px rgba(52,211,153,0.2);
+        }
+        .directorio-modern::before {
+            content: ''; position: absolute; top: -50px; right: -50px;
+            width: 240px; height: 240px;
+            background: radial-gradient(circle, rgba(52,211,153,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .directorio-modern-top { display: flex; align-items: flex-start; gap: 1.2rem; }
+        .directorio-modern-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 14px; width: 56px; height: 56px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(16,185,129,0.4);
+        }
+        .directorio-modern-label {
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+            text-transform: uppercase; color: #34d399; margin-bottom: 0.25rem;
+        }
+        .directorio-modern-title { font-size: 1.55rem; font-weight: 800; color: #f0fdf4; line-height: 1.2; margin: 0; }
+        .directorio-modern-desc { color: #94a3b8; font-size: 0.9rem; line-height: 1.65; margin: 0; }
+        .directorio-modern-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .directorio-chip {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(52,211,153,0.2);
+            border-radius: 50px; padding: 0.3rem 0.85rem;
+            font-size: 0.78rem; color: #a7f3d0; font-weight: 500;
+        }
+        .directorio-modern-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+        .directorio-modern-stat { color: #64748b; font-size: 0.78rem; }
+        .directorio-modern-stat strong { color: #34d399; font-size: 1rem; }
+        .directorio-modern-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff; font-weight: 700; font-size: 0.9rem;
+            padding: 0.7rem 1.5rem; border-radius: 50px; text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+            box-shadow: 0 4px 14px rgba(16,185,129,0.4); white-space: nowrap;
+        }
+        .directorio-modern-btn:hover { opacity: 0.88; transform: translateX(3px); }
+        @media (max-width: 600px) {
+            .directorio-modern { padding: 1.6rem 1.4rem 1.4rem; }
+            .directorio-modern-footer { flex-direction: column; align-items: flex-start; }
+            .directorio-modern-btn { width: 100%; justify-content: center; }
+        }
+
+        /* ── Zoning Plan — amber modern card ── */
+        .regulador-modern {
+            background: linear-gradient(135deg, #0f0800 0%, #2a1500 55%, #180d00 100%);
+            border: 1px solid rgba(251,191,36,0.2);
+            border-radius: 22px; padding: 2.4rem 2.4rem 2rem;
+            position: relative; overflow: hidden;
+            transition: transform .25s ease, box-shadow .25s ease;
+            box-shadow: 0 8px 32px rgba(245,158,11,0.13);
+        }
+        .regulador-modern:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(245,158,11,0.26);
+        }
+        .regulador-modern::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 75% 15%, rgba(245,158,11,0.10) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .regulador-modern-top { display: flex; align-items: center; gap: 1.1rem; margin-bottom: 1rem; }
+        .regulador-modern-badge {
+            background: linear-gradient(135deg, #f59e0b, #b45309);
+            box-shadow: 0 4px 14px rgba(245,158,11,0.45);
+            border-radius: 14px; width: 52px; height: 52px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; flex-shrink: 0;
+        }
+        .regulador-modern-label {
+            font-size: .75rem; font-weight: 700; letter-spacing: .08em;
+            text-transform: uppercase; color: #fbbf24; margin-bottom: .15rem;
+        }
+        .regulador-modern-title { font-size: 1.25rem; font-weight: 800; color: #fffbeb; margin: 0; line-height: 1.25; }
+        .regulador-modern-desc { font-size: .93rem; color: #fde68a; line-height: 1.6; margin: 0 0 1.1rem; }
+        .regulador-modern-chips { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.4rem; }
+        .regulador-chip {
+            background: rgba(245,158,11,0.15); border: 1px solid rgba(251,191,36,0.3);
+            color: #fcd34d; border-radius: 999px; padding: .28rem .85rem;
+            font-size: .78rem; font-weight: 600; white-space: nowrap;
+        }
+        .regulador-modern-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .regulador-modern-stat { font-size: .82rem; color: #fbbf24; font-weight: 500; }
+        .regulador-modern-stat strong { color: #fde68a; font-size: 1rem; }
+        .regulador-modern-btn {
+            display: inline-flex; align-items: center; gap: .4rem;
+            background: linear-gradient(135deg, #f59e0b, #b45309);
+            box-shadow: 0 4px 14px rgba(245,158,11,0.45);
+            color: #1c0f00; font-weight: 800; font-size: .88rem;
+            padding: .65rem 1.4rem; border-radius: 999px; text-decoration: none;
+            transition: opacity .2s, transform .2s; white-space: nowrap;
+        }
+        .regulador-modern-btn:hover { opacity: 0.88; transform: translateX(3px); }
+        @media (max-width: 600px) {
+            .regulador-modern { padding: 1.6rem 1.4rem 1.4rem; }
+            .regulador-modern-footer { flex-direction: column; align-items: flex-start; }
+            .regulador-modern-btn { width: 100%; justify-content: center; }
+        }
+
+        /* ── Volcano Alert Bar + Canton Stats ── */
+        .volcan-alerta-bar {
+            display: flex; align-items: center; justify-content: center;
+            gap: 1rem; flex-wrap: wrap; padding: .6rem 2rem;
+            font-size: .82rem; font-weight: 600; letter-spacing: .04em;
+        }
+        .volcan-alerta-bar.nivel-verde   { background: linear-gradient(90deg,#052e16,#064e22,#052e16); border-bottom: 2px solid #16a34a; color:#bbf7d0; }
+        .volcan-alerta-bar.nivel-amarillo{ background: linear-gradient(90deg,#422006,#713f12,#422006); border-bottom: 2px solid #ca8a04; color:#fef08a; }
+        .volcan-alerta-bar.nivel-naranja { background: linear-gradient(90deg,#431407,#9a3412,#431407); border-bottom: 2px solid #ea580c; color:#fed7aa; }
+        .volcan-alerta-bar.nivel-rojo    { background: linear-gradient(90deg,#3f0606,#991b1b,#3f0606); border-bottom: 2px solid #dc2626; color:#fecaca; }
+        .alerta-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; animation: pulseDot 1.8s infinite; }
+        .nivel-verde   .alerta-dot { background:#22c55e; box-shadow:0 0 8px #22c55e; }
+        .nivel-amarillo .alerta-dot { background:#eab308; box-shadow:0 0 8px #eab308; }
+        .nivel-naranja  .alerta-dot { background:#f97316; box-shadow:0 0 8px #f97316; }
+        .nivel-rojo     .alerta-dot { background:#ef4444; box-shadow:0 0 8px #ef4444; }
+        @keyframes pulseDot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+
+        /* Canton Stats */
+        .canton-stats {
+            background: linear-gradient(135deg,#0a0e1a,#0d1428);
+            border-bottom: 1px solid rgba(200,149,42,0.12);
+            display: flex; justify-content: center; flex-wrap: wrap;
+        }
+        .canton-stat { padding: 1.6rem 2.4rem; text-align: center; border-right: 1px solid rgba(255,255,255,0.06); flex: 1; min-width: 130px; }
+        .canton-stat:last-child { border-right: none; }
+        .canton-stat-num { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; color: #C8952A; }
+        .canton-stat-label { color: rgba(255,255,255,0.45); font-size: .73rem; margin-top:.25rem; line-height:1.4; }
+        @media(max-width:600px){ .canton-stat { padding:1.1rem 1rem; } .canton-stat-num { font-size:1.5rem; } }
+
+        /* ── Weather ── */
+        .clima-section { background: linear-gradient(135deg,#040d1a,#081428); padding: 3.5rem 2rem; border-bottom: 1px solid rgba(37,99,235,0.12); }
+        .clima-title { font-size:1.2rem; font-weight:700; color:#fff; }
+        .clima-sub { color:rgba(255,255,255,0.45); font-size:.85rem; margin-bottom:1.8rem; }
+        .clima-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
+        .clima-card { background:rgba(255,255,255,0.04); border:1px solid rgba(37,99,235,0.18); border-radius:14px; padding:1.2rem 1rem; text-align:center; transition:border-color .2s; }
+        .clima-card:hover { border-color:rgba(96,165,250,0.4); }
+        .clima-card-icon { font-size:1.8rem; margin-bottom:.4rem; }
+        .clima-card-value { font-size:1.5rem; font-weight:800; color:#fff; line-height:1; }
+        .clima-card-label { color:rgba(255,255,255,0.45); font-size:.73rem; margin-top:.3rem; }
+        .clima-fuente { text-align:center; color:rgba(255,255,255,0.3); font-size:.75rem; margin-top:1rem; }
+        h2.clima-title { font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#fff; margin-bottom:.3rem; }
+        @media(max-width:600px){ .clima-cards { grid-template-columns:repeat(2,1fr); } }
+
+        /* ── News ── */
+        .noticias-section { background:#080c14; padding:4rem 2rem; }
+        .noticias-title { font-family:'Playfair Display',serif; font-size:1.7rem; color:#fff; }
+        .noticias-sub { color:rgba(255,255,255,0.45); font-size:.9rem; margin-bottom:2rem; }
+        .noticias-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+        .noticia-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:16px; padding:1.5rem; display:flex; flex-direction:column; gap:.75rem; transition:border-color .2s, transform .2s; }
+        .noticia-card:hover { border-color:rgba(200,149,42,0.35); transform:translateY(-3px); }
+        .noticia-badge { display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:.2rem .7rem; border-radius:999px; }
+        .noticia-badge-info    { background:rgba(37,99,235,.15);  color:#93c5fd; border:1px solid rgba(96,165,250,.3); }
+        .noticia-badge-cultura { background:rgba(16,185,129,.12); color:#6ee7b7; border:1px solid rgba(16,185,129,.25); }
+        .noticia-badge-empleo  { background:rgba(200,149,42,.12); color:#fcd34d; border:1px solid rgba(200,149,42,.25); }
+        .noticia-card-title { color:#fff; font-weight:700; font-size:1rem; line-height:1.35; }
+        .noticia-card-body  { color:rgba(255,255,255,.5); font-size:.85rem; line-height:1.6; flex:1; }
+        .noticia-card-link  { color:#C8952A; font-size:.8rem; font-weight:600; text-decoration:none; margin-top:auto; }
+        .noticia-card-link:hover { text-decoration:underline; }
+        @media(max-width:768px){ .noticias-grid { grid-template-columns:1fr; } }
+
+        /* ── Map ── */
+        .mapa-section { background:#06090f; padding:4rem 2rem 0; }
+        h2.mapa-title { font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#fff; margin-bottom:.3rem; }
+        .mapa-sub { color:rgba(255,255,255,.45); font-size:.9rem; }
+        #mapa-canton { height:440px; border-radius:16px; border:1px solid rgba(200,149,42,.25); box-shadow:0 8px 32px rgba(0,0,0,.5); }
+        .mapa-leyenda { display:flex; flex-wrap:wrap; gap:1.2rem; margin-top:1rem; padding-bottom:3rem; color:rgba(255,255,255,.5); font-size:.82rem; }
+
+        /* ── Emergency FAB ── */
+        .emer-fab { position:fixed; bottom:1.8rem; right:1.8rem; z-index:999; width:52px; height:52px; border-radius:50%; background:linear-gradient(135deg,#dc2626,#991b1b); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:1.4rem; box-shadow:0 4px 20px rgba(220,38,38,0.55); transition:transform .2s, box-shadow .2s; }
+        .emer-fab:hover { transform:scale(1.12); box-shadow:0 6px 28px rgba(220,38,38,0.75); }
+        .emer-fab-tooltip { position:absolute; right:calc(100% + .6rem); top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.85); color:#fff; font-size:.72rem; white-space:nowrap; padding:.3rem .7rem; border-radius:8px; pointer-events:none; opacity:0; transition:opacity .2s; }
+        .emer-fab:hover .emer-fab-tooltip { opacity:1; }
+        .emer-modal-overlay { display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.75); backdrop-filter:blur(6px); align-items:center; justify-content:center; }
+        .emer-modal-overlay.open { display:flex; }
+        .emer-modal { background:#0f1520; border:1px solid rgba(220,38,38,0.3); border-radius:20px; padding:2rem 2rem 1.5rem; max-width:380px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+        .emer-modal-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem; }
+        .emer-modal-title { font-weight:800; color:#fff; font-size:1.1rem; }
+        .emer-modal-close { background:none; border:none; color:rgba(255,255,255,0.5); font-size:1.4rem; cursor:pointer; line-height:1; }
+        .emer-modal-close:hover { color:#fff; }
+        .emer-contact-list { display:flex; flex-direction:column; gap:.5rem; }
+        .emer-contact-item { display:flex; align-items:center; justify-content:space-between; padding:.75rem 1rem; border-radius:12px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); text-decoration:none; transition:background .2s; }
+        .emer-contact-item:hover { background:rgba(255,255,255,0.08); }
+        .emer-911 { border-color:rgba(220,38,38,.3); background:rgba(220,38,38,.08); }
+        .emer-911:hover { background:rgba(220,38,38,.15); }
+        .emer-contact-num  { color:#C8952A; font-weight:800; font-size:1rem; }
+        .emer-contact-name { color:rgba(255,255,255,.7); font-size:.85rem; }
+        .emer-911 .emer-contact-num { color:#fca5a5; font-size:1.2rem; }
+        .emer-modal-note  { text-align:center; color:rgba(255,255,255,.3); font-size:.7rem; margin-top:1rem; }
+    </style>
 </head>
 
 <body>
 <!-- Navbar -->
     <nav class="navbar">
-        <div class="logo">Poás <span><span class="logo-agua">Water</span> & <span class="logo-fuego">Fire</span></span></div>
+        <div class="logo">Poás <span><span class="logo-agua">Water</span> &amp; <span class="logo-fuego">Fire</span></span></div>
         <ul class="nav-links">
             <!-- Row 1 — Heritage, culture & history -->
             <li><a href="index-en.html">Home</a></li>
@@ -90,7 +439,7 @@
                 <a href="ruta-gastronomica-en.html"  onclick="closeMobileNav()">🍽️ Gastronomic Route</a>
                 <div class="mobile-nav-sep"></div>
                 <a href="plan-regulador-en.html"     onclick="closeMobileNav()">🗺️ Zoning Plan</a>
-                <a href="seguridad-ciudadana.html"   onclick="closeMobileNav()">🛡️ Public Safety</a>
+                <a href="seguridad-ciudadana-en.html" onclick="closeMobileNav()">🛡️ Public Safety</a>
                 <a href="como-llegar.html"           onclick="closeMobileNav()">🚗 How to Get Here</a>
                 <div class="mobile-nav-sep"></div>
                 <a href="#contacto"                  onclick="closeMobileNav()">📬 Contact</a>
@@ -106,13 +455,14 @@
     <!-- Hero Section -->
     <header class="hero" id="inicio">
         <div class="hero-split hero-fire">
+            <img src="img/poas_agua_fuego_logo.png" alt="Poás Water &amp; Fire" class="hero-site-logo" style="position:absolute;top:50%;left:4rem;transform:translateY(-50%);width:210px;height:210px;object-fit:cover;object-position:center;border-radius:50%;z-index:3;box-shadow:0 0 0 5px rgba(255,255,255,0.28),0 0 0 11px rgba(255,200,50,0.22),0 12px 45px rgba(0,0,0,0.6);animation:none;transition:none;pointer-events:none;">
             <div class="hero-content">
                 <h2>The Earth's Pulse</h2>
                 <p>Main Crater of Poás Volcano</p>
             </div>
         </div>
         <div class="hero-split hero-water">
-            <div class="hero-content">
+            <div class="hero-content hero-content-right">
                 <h2>Mirror of the Sky</h2>
                 <p>The serenity of Laguna Botos</p>
             </div>
@@ -122,7 +472,7 @@
                 <span class="hero-title-poas">Poás</span>
                 <span class="hero-title-row">
                     <span class="logo-agua">Water</span>
-                    <span class="hero-title-y">&</span>
+                    <span class="hero-title-y">&amp;</span>
                     <span class="logo-fuego">Fire</span>
                 </span>
             </h1>
@@ -162,58 +512,172 @@
         </div>
     </div>
 
-    <!-- Water Heritage -->
+    <!-- ── Water Heritage ── -->
     <section id="agua" class="water-heritage-section">
-        <div class="container">
-            <div class="water-content">
-                <div class="water-text">
-                    <h2 class="section-title">Our Water Heritage</h2>
-                    <p>The Poás massif is not only a giant of fire — it is the humid lung of the region. The cloud
-                        forest acts as a giant sponge, capturing moisture and feeding underground water reserves.</p>
-                    <ul class="water-facts">
-                        <li>
-                            <strong>💧 Critical recharge area:</strong> The Poás massif functions as a "water tower",
-                            allowing filtration that feeds the Colima and Barva aquifers, the main drinking water
-                            sources for the Greater Metropolitan Area.
-                        </li>
-                        <li>🌲 Unique ecosystem that regulates the local climate.</li>
-                        <li>🚰 Direct source for local community water systems (ASADAS).</li>
-                    </ul>
+
+        <!-- Top wave -->
+        <div class="water-wave-top" aria-hidden="true">
+            <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,0 L0,0 Z" fill="#1A2020"/>
+            </svg>
+        </div>
+
+        <!-- Decorative bubbles -->
+        <div class="water-bubbles" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <span></span><span></span><span></span>
+        </div>
+
+        <div class="container water-inner">
+
+            <!-- Header -->
+            <div class="water-header">
+                <span class="water-badge">💧 Poás Canton · Costa Rica</span>
+                <h2 class="water-title">Our <em>Water Heritage</em></h2>
+                <p class="water-lead">The Poás massif is not only a giant of fire — it is the <strong>humid lung</strong> of the region. Its cloud forest captures moisture and feeds the reserves that supply millions of people.</p>
+            </div>
+
+            <!-- Data cards -->
+            <div class="water-cards">
+                <div class="water-card">
+                    <div class="water-card-icon">🏔️</div>
+                    <h3>Water Tower</h3>
+                    <p>The massif feeds the <strong>Poás, Colima and Barva aquifers</strong>, the main drinking water sources for the Greater Metropolitan Area.</p>
                 </div>
-                <div class="water-visual">
-                    <div class="water-anim-container">
-                        <div class="river-wrapper">
-                            <video class="river-svg volcan-video" autoplay loop muted playsinline>
-                                <source src="img/volcan_rio_animado.mp4" type="video/mp4">
-                            </video>
-                        </div>
+                <div class="water-card water-card--accent">
+                    <div class="water-card-icon">🌲</div>
+                    <h3>Unique Ecosystem</h3>
+                    <p>The cloud forest acts as a giant sponge, <strong>regulating the local climate</strong> and maintaining the canton's biodiversity.</p>
+                </div>
+                <div class="water-card">
+                    <div class="water-card-icon">🚰</div>
+                    <h3>Community Aqueducts</h3>
+                    <p>Direct source for <strong>9 ASADAS</strong> that provide drinking water to all communities in Poás canton.</p>
+                </div>
+            </div>
+
+            <!-- Video + CTA -->
+            <div class="water-media">
+                <div class="water-video-wrap">
+                    <div class="water-video-glow" aria-hidden="true"></div>
+                    <video class="water-video" autoplay loop muted playsinline>
+                        <source src="img/volcan_rio_animado.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <a href="patrimonio-hidrico-en.html" class="btn-conocer-mas">💧 Explore Water Heritage →</a>
+            </div>
+
+        </div>
+
+        <!-- Bottom wave -->
+        <div class="water-wave-bottom" aria-hidden="true">
+            <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,40 C240,0 480,80 720,40 C960,0 1200,80 1440,40 L1440,80 L0,80 Z" fill="#F8FAF9"/>
+            </svg>
+        </div>
+
+    </section>
+
+    <!-- ── Preview Cards: Jobs + Events + Directory ── -->
+    <section class="regulador-preview-section" id="empleo">
+        <div class="container" style="display:flex; flex-direction:column; gap:1.5rem;">
+
+            <!-- Jobs Board -->
+            <div class="empleo-modern">
+                <div class="empleo-modern-top">
+                    <div class="empleo-modern-badge">💼</div>
+                    <div class="empleo-modern-heading">
+                        <div class="empleo-modern-label">Employment opportunities</div>
+                        <h2 class="empleo-modern-title">Jobs Board</h2>
                     </div>
                 </div>
+                <p class="empleo-modern-desc">Connect with employers in Poás canton. Post your position or find work near you.</p>
+                <div class="empleo-modern-chips">
+                    <span class="empleo-chip">🔍 Find a job</span>
+                    <span class="empleo-chip">📢 Post a position</span>
+                    <span class="empleo-chip">🤝 Local talent</span>
+                    <span class="empleo-chip">📍 Poás Canton</span>
+                </div>
+                <div class="empleo-modern-footer">
+                    <span class="empleo-modern-stat">Opportunities available in <strong>your area</strong></span>
+                    <a href="bolsa-empleo-en.html" class="empleo-modern-btn">View jobs →</a>
+                </div>
             </div>
+
+            <!-- Events -->
+            <div class="eventos-modern" id="eventos">
+                <div class="eventos-modern-top">
+                    <div class="eventos-modern-badge">📅</div>
+                    <div>
+                        <div class="eventos-modern-label">Community calendar</div>
+                        <h2 class="eventos-modern-title">Canton Events</h2>
+                    </div>
+                </div>
+                <p class="eventos-modern-desc">Cultural, sports and community activities in Poás. Easily add and browse upcoming events.</p>
+                <div class="eventos-modern-chips">
+                    <span class="eventos-chip">🎭 Cultural</span>
+                    <span class="eventos-chip">⚽ Sports</span>
+                    <span class="eventos-chip">🤝 Community</span>
+                    <span class="eventos-chip">🍽️ Gastronomy</span>
+                </div>
+                <div class="eventos-modern-footer">
+                    <span class="eventos-modern-stat">Active events in <strong>Poás</strong></span>
+                    <a href="eventos-en.html" class="eventos-modern-btn">View events →</a>
+                </div>
+            </div>
+
+            <!-- Tourism & Business Directory -->
+            <div class="directorio-modern" id="turismo">
+                <div class="directorio-modern-top">
+                    <div class="directorio-modern-badge">🛍️</div>
+                    <div>
+                        <div class="directorio-modern-label">Businesses &amp; tourism</div>
+                        <h2 class="directorio-modern-title">Tourism &amp; Business Directory</h2>
+                    </div>
+                </div>
+                <p class="directorio-modern-desc">Businesses and services in Poás canton. Restaurants, lodging, tours, shops and more.</p>
+                <div class="directorio-modern-chips">
+                    <span class="directorio-chip">🍽️ Restaurants</span>
+                    <span class="directorio-chip">🏨 Lodging</span>
+                    <span class="directorio-chip">🌋 Tours</span>
+                    <span class="directorio-chip">🍓 Gastronomic Route</span>
+                </div>
+                <div class="directorio-modern-footer">
+                    <span class="directorio-modern-stat">Businesses in <strong>Poás</strong></span>
+                    <a href="directorio-comercial-en.html" class="directorio-modern-btn">View directory →</a>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- Zoning Plan -->
+    <!-- ── Zoning Plan – Quick Access ── -->
     <section id="regulador" class="regulador-preview-section">
         <div class="container">
-            <div class="regulador-preview-card">
-                <div class="regulador-preview-icon">🗺️</div>
-                <div class="regulador-preview-text">
-                    <h2>Canton Zoning Plan</h2>
-                    <p>Explore the land use zoning, development regulations, environmental protection and volcanic risk management for Poás canton.</p>
-                    <ul class="regulador-preview-tags">
-                        <li>🏗️ Zoning</li>
-                        <li>🌿 Environmental Protection</li>
-                        <li>🌋 Volcanic Risk</li>
-                        <li>💧 Water Heritage</li>
-                    </ul>
+            <div class="regulador-modern">
+                <div class="regulador-modern-top">
+                    <div class="regulador-modern-badge">🗺️</div>
+                    <div>
+                        <div class="regulador-modern-label">Land use planning</div>
+                        <h2 class="regulador-modern-title">Canton Zoning Plan</h2>
+                    </div>
                 </div>
-                <a href="plan-regulador-en.html" class="btn-primary regulador-preview-btn">View Zoning Plan →</a>
+                <p class="regulador-modern-desc">Explore the land use zoning, development regulations, environmental protection and volcanic risk management for Poás canton.</p>
+                <div class="regulador-modern-chips">
+                    <span class="regulador-chip">🏗️ Zoning</span>
+                    <span class="regulador-chip">🌿 Environmental Protection</span>
+                    <span class="regulador-chip">🌋 Volcanic Risk</span>
+                    <span class="regulador-chip">💧 Water Heritage</span>
+                </div>
+                <div class="regulador-modern-footer">
+                    <span class="regulador-modern-stat">Planning in <strong>Poás</strong></span>
+                    <a href="plan-regulador-en.html" class="regulador-modern-btn">View zoning plan →</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Photo Gallery -->
+    <!-- ── Photo Gallery ── -->
     <section id="galeria" class="gallery-section">
         <div class="container">
             <h2 class="section-title">Poás in Images</h2>
@@ -227,9 +691,9 @@
                 </div>
 
                 <!-- Row 2: 3 equal photos -->
-                <div class="gallery-item" data-caption="🛩️ Aerial View — Main Crater & Laguna Botos">
+                <div class="gallery-item" data-caption="🛩️ Aerial View — Main Crater &amp; Laguna Botos">
                     <img src="img/crateres_poas.jpg" alt="Aerial view of Poás Volcano craters and Laguna Botos">
-                    <div class="gallery-overlay"><span>🛩️ Main Crater & Laguna Botos</span></div>
+                    <div class="gallery-overlay"><span>🛩️ Main Crater &amp; Laguna Botos</span></div>
                 </div>
 
                 <div class="gallery-item" data-caption="🏙️ Poás Town Center">
@@ -258,6 +722,68 @@
         <img class="lightbox-content" id="lightbox-img">
         <div id="lightbox-caption" class="lightbox-caption"></div>
     </div>
+
+    <!-- ── Community / Volcano Card ── -->
+    <section id="comunidad" class="community-section">
+        <div class="container">
+            <h2 class="section-title">Poás Community</h2>
+
+            <div class="volcan-card">
+                <!-- Left panel: photo + lava gradient -->
+                <div class="volcan-card-visual">
+                    <div class="volcan-card-img"></div>
+                    <div class="volcan-card-lava"></div>
+                    <div class="volcan-embers">
+                        <span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                        <span></span><span></span>
+                    </div>
+                    <div class="volcan-card-label">
+                        <span class="volcan-badge-activo">🔴 ACTIVE</span>
+                        <h3>Poás<br><em>Volcano</em></h3>
+                        <p class="volcan-card-elev">2,708 m.a.s.l. · Alajuela, Costa Rica</p>
+                    </div>
+                </div>
+
+                <!-- Right panel: practical info -->
+                <div class="volcan-card-info">
+                    <div class="volcan-info-header">
+                        <span class="volcan-icon-fire">🌋</span>
+                        <div>
+                            <div class="volcan-info-title">Poás Volcano National Park</div>
+                            <div class="volcan-info-sub">SINAC · Central Volcanic Mountain Range Conservation Area</div>
+                        </div>
+                    </div>
+
+                    <div class="volcan-info-rows">
+                        <div class="volcan-info-row">
+                            <span class="volcan-info-icon">🕗</span>
+                            <div><strong>Hours</strong><span>Mon – Sun &nbsp;8:00 am – 4:00 pm</span></div>
+                        </div>
+                        <div class="volcan-info-row">
+                            <span class="volcan-info-icon">🎫</span>
+                            <div><strong>Entry</strong><span>Prior electronic reservation required</span></div>
+                        </div>
+                        <div class="volcan-info-row">
+                            <span class="volcan-info-icon">💰</span>
+                            <div><strong>Adult fee</strong><span>₡1,130 nationals &nbsp;/&nbsp; $18 foreigners</span></div>
+                        </div>
+                        <div class="volcan-info-row">
+                            <span class="volcan-info-icon">🧒</span>
+                            <div><strong>Children under 6</strong><span>Free admission</span></div>
+                        </div>
+                    </div>
+
+                    <div class="volcan-info-btns">
+                        <a href="https://serviciosenlinea.sinac.go.cr/" target="_blank" rel="noopener noreferrer" class="volcan-btn volcan-btn-fire">🎟️ Buy Tickets</a>
+                        <a href="https://www.ovsicori.una.ac.cr/index.php/vulcanologia/camara-volcanes-2/camara-crater-v-poas" target="_blank" rel="noopener noreferrer" class="volcan-btn volcan-btn-cam">📷 Live Camera</a>
+                        <a href="https://360.cr/pnvolcanpoas/" target="_blank" rel="noopener noreferrer" class="volcan-btn volcan-btn-tips">🌐 360° Tour</a>
+                        <a href="ruta-gastronomica-en.html#consejos-volcan" class="volcan-btn volcan-btn-tips">📝 Visit Tips</a>
+                    </div>
+                </div>
+            </div><!-- /volcan-card -->
+        </div>
+    </section>
 
     <!-- ── Real-Time Weather ── -->
     <section class="clima-section" id="clima">
@@ -333,132 +859,68 @@
         </div>
     </section>
 
-    <!-- Community -->
-    <section id="comunidad" class="community-section">
+    <!-- ── Canton History Banner ── -->
+    <section class="historia-banner-section">
+        <div class="historia-banner-bg"></div>
+        <div class="historia-banner-overlay"></div>
+        <div class="historia-banner-particles">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="historia-banner-content">
+            <div class="historia-banner-badge">✦ Founded October 15, 1901 ✦</div>
+            <h2 class="historia-banner-title">Discover the History<br><em>of Our Canton</em></h2>
+            <p class="historia-banner-sub">Pre-Hispanic origins · Colonial era · Poás Volcano · Flora &amp; Fauna · Gastronomy</p>
+            <a href="historia-canton-en.html" class="historia-banner-btn">
+                <span>Explore History</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── Public Safety Banner ── -->
+    <section class="seguridad-banner-section" id="seguridad">
+        <div class="seguridad-banner-bg"></div>
+        <div class="seguridad-banner-overlay"></div>
+        <div class="seguridad-banner-radar">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="seguridad-banner-content">
+            <div class="seguridad-banner-badge">🛡️ Poás Canton · Costa Rica</div>
+            <h2 class="seguridad-banner-title">Public<br><em>Safety</em></h2>
+            <p class="seguridad-banner-sub">Guidelines · Neighborhood Organization · Protocols · Legal Framework · Institutional Coordination</p>
+            <a href="seguridad-ciudadana-en.html" class="seguridad-banner-btn">
+                <span>View Guidelines</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ── Complaints Section ── -->
+    <section class="quejas-section" id="quejas">
         <div class="container">
-            <h2 class="section-title">Poás Community</h2>
-            <div class="community-grid">
-                <!-- National Park -->
-                <div class="comm-card park-info">
-                    <h3>🌋 Poás Volcano National Park</h3>
-                    <p><strong>Hours:</strong> Monday to Sunday, 8:00 am – 4:00 pm</p>
-                    <p><strong>Entry:</strong> Prior electronic reservation required.</p>
-                    <p><strong>Adult fee:</strong> ₡1,130 nationals / $18 foreigners</p>
-                    <p><strong>Children under 6:</strong> Free admission</p>
-                    <div class="ticket-buttons">
-                        <a href="https://serviciosenlinea.sinac.go.cr/" target="_blank" rel="noopener noreferrer" class="btn-outline">🎟️ Buy Tickets</a>
-                        <a href="https://www.ovsicori.una.ac.cr/index.php/vulcanologia/camara-volcanes-2/camara-crater-v-poas" target="_blank" rel="noopener noreferrer" class="btn-outline" style="margin-top:0.6rem;background:rgba(255,80,50,0.12);border-color:#FF6B4A;color:#FF6B4A;">📷 Live Crater Camera</a>
-                        <a href="https://360.cr/pnvolcanpoas/" target="_blank" rel="noopener noreferrer" class="btn-outline" style="margin-top:0.6rem;background:rgba(64,196,255,0.12);border-color:#40C4FF;color:#40C4FF;">🌐 360° Virtual Tour</a>
-                        <a href="ruta-gastronomica-en.html#consejos-volcan" class="btn-outline" style="margin-top:0.6rem;background:rgba(135,206,235,0.15);border-color:#87CEEB;color:#87CEEB;">📝 Tips for visiting the Volcano</a>
-                    </div>
+            <div class="quejas-card">
+                <div class="quejas-icon">📢</div>
+                <div class="quejas-texto">
+                    <h2>Something to report?</h2>
+                    <p>Report problems, irregularities or situations affecting our community. Your voice matters.</p>
                 </div>
-                <!-- Local Market -->
-                <div class="comm-card local-products">
-                    <h3>Local Market</h3>
-                    <div class="products-list">
-                        <div class="product-item">
-                            <span class="emoji">🍓</span>
-                            <div>
-                                <h4>Poás Strawberries</h4>
-                                <p>Harvested on the slopes of the volcano.</p>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <span class="emoji">🧀</span>
-                            <div>
-                                <h4>Artisan Cheeses</h4>
-                                <p>Premium dairy from highland farms.</p>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <span class="emoji">☕</span>
-                            <div>
-                                <h4>High-Altitude Coffee</h4>
-                                <p>Rich aroma nurtured by volcanic soils.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <a href="quejas-en.html" class="quejas-btn">File a Complaint!</a>
             </div>
         </div>
     </section>
 
-    <!-- Jobs Board -->
-    <section id="empleo" class="empleo-section">
-        <div class="container">
-            <h2 class="section-title">Jobs Board</h2>
-            <p class="subtitle">Employment opportunities in Poás canton. Looking for work or want to post a position?</p>
-            <div class="empleo-grid">
-                <div class="empleo-card">
-                    <div class="empleo-icon">💼</div>
-                    <div class="empleo-body">
-                        <h3>Looking for a job?</h3>
-                        <p>Contact us via WhatsApp or social media and we'll guide you about available opportunities in the canton.</p>
-                        <a href="#contacto" class="empleo-btn">Contact us →</a>
-                    </div>
-                </div>
-                <div class="empleo-card">
-                    <div class="empleo-icon">🏢</div>
-                    <div class="empleo-body">
-                        <h3>Have a position available?</h3>
-                        <p>Post your job offer for free and reach candidates from Poás canton.</p>
-                        <a href="#contacto" class="empleo-btn">Post a job →</a>
-                    </div>
-                </div>
-                <div class="empleo-card empleo-card--highlight">
-                    <div class="empleo-icon">📋</div>
-                    <div class="empleo-body">
-                        <h3>No active positions</h3>
-                        <p>There are no offers posted at the moment. Follow us on social media to be the first to know.</p>
-                        <a href="#contacto" class="empleo-btn">Follow us →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tourism &amp; Business Directory -->
-    <section id="turismo" class="turismo-section">
-        <div class="container">
-            <h2 class="section-title" style="text-align:center;white-space:normal;line-height:1.3;">Tourism &amp; Business<br>Directory</h2>
-            <p class="subtitle">Businesses and services in Poás canton.</p>
-            <div class="turismo-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="restaurante">🍽️ Restaurants</button>
-                <button class="filter-btn" data-filter="hospedaje">🏨 Lodging</button>
-                <button class="filter-btn" data-filter="tours">🌋 Tours</button>
-                <button class="filter-btn" data-filter="tienda">🛍️ Shops</button>
-                <button class="filter-btn" data-filter="servicio">⚙️ Services</button>
-            </div>
-            <div class="negocios-grid" id="negociosGrid"></div>
-
-            <!-- Gastronomic Route Banner -->
-            <div class="ruta-gastronomica-banner">
-                <div class="ruta-banner-content">
-                    <span class="ruta-banner-icon">🍓</span>
-                    <div>
-                        <h3>Poás Gastronomic Route</h3>
-                        <p>Discover iconic dishes, restaurants with views and the best stops in the canton.</p>
-                    </div>
-                </div>
-                <a href="ruta-gastronomica-en.html" class="btn-primary ruta-banner-btn">View Gastronomic Route →</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact & Social Media -->
+    <!-- ── Contact & Social Media ── -->
     <section id="contacto" class="contacto-section">
         <div class="container">
             <h2 class="section-title">Contact Us</h2>
             <p class="subtitle">Follow us on social media or write to us directly on WhatsApp.</p>
+
             <div class="contacto-grid">
 
                 <!-- WhatsApp -->
                 <a href="https://wa.me/50687058612" target="_blank" rel="noopener noreferrer" class="contacto-card whatsapp-card">
                     <div class="contacto-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                        </svg>
+                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
                     </div>
                     <div class="contacto-info">
                         <h3>WhatsApp</h3>
@@ -470,9 +932,7 @@
                 <!-- Facebook -->
                 <a href="https://www.facebook.com/profile.php?id=61577824591706" target="_blank" rel="noopener noreferrer" class="contacto-card facebook-card">
                     <div class="contacto-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
+                        <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
                     </div>
                     <div class="contacto-info">
                         <h3>Facebook</h3>
@@ -484,13 +944,11 @@
                 <!-- Instagram -->
                 <a href="https://instagram.com/TUPERFIL" target="_blank" rel="noopener noreferrer" class="contacto-card instagram-card">
                     <div class="contacto-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                        </svg>
+                        <i class="fa-brands fa-instagram" aria-hidden="true"></i>
                     </div>
                     <div class="contacto-info">
                         <h3>Instagram</h3>
-                        <p>Photos & content</p>
+                        <p>Photos &amp; content</p>
                         <span class="contacto-link">@PoasAguayFuego</span>
                     </div>
                 </a>
@@ -498,9 +956,7 @@
                 <!-- TikTok -->
                 <a href="https://www.tiktok.com/@csarluisquesadahe" target="_blank" rel="noopener noreferrer" class="contacto-card tiktok-card">
                     <div class="contacto-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/>
-                        </svg>
+                        <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
                     </div>
                     <div class="contacto-info">
                         <h3>TikTok</h3>
@@ -508,6 +964,7 @@
                         <span class="contacto-link">@PoasAguayFuego</span>
                     </div>
                 </a>
+
             </div>
         </div>
     </section>
@@ -515,18 +972,24 @@
     <footer>
         <div class="container footer-content">
             <div class="footer-brand">
-                <h3>Poás <span class="logo-agua">Water</span> & <span class="logo-fuego">Fire</span></h3>
+                <h3>Poás <span class="logo-agua">Water</span> &amp; <span class="logo-fuego">Fire</span></h3>
                 <p>Community information platform. The balance between fire and water.</p>
             </div>
             <div class="footer-links">
                 <ul>
                     <li><a href="#inicio">Home</a></li>
+                    <li><a href="patrimonio-hidrico-en.html">Water Heritage</a></li>
+                    <li><a href="historia-canton-en.html">History</a></li>
+                    <li><a href="galeria-en.html">Gallery</a></li>
                     <li><a href="plan-regulador-en.html">Zoning Plan</a></li>
+                    <li><a href="seguridad-ciudadana-en.html">Public Safety</a></li>
+                    <li><a href="como-llegar.html">How to Get Here</a></li>
+                    <li><a href="#contacto">Contact</a></li>
                 </ul>
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2026 Poás Water & Fire. Visual Concept.</p>
+            <p>&copy; 2026 Poás Water &amp; Fire. Visual Concept.</p>
             <p class="copyright-autor">César Luis Quesada Herrera</p>
         </div>
     </footer>
@@ -580,10 +1043,10 @@ const NIVEL_ALERTA_VOLCAN = 'verde';
     const nivelEl = document.getElementById('alerta-nivel');
     if (!bar) return;
     const cfg = {
-        verde:    { label:'Green',    desc:'Normal activity. National Park access per SINAC schedule.' },
-        amarillo: { label:'Yellow',   desc:'Elevated activity. Follow OVSICORI and SINAC guidelines.' },
-        naranja:  { label:'Orange',   desc:'Significant activity. Restricted access. Stay informed.' },
-        rojo:     { label:'Red',      desc:'Immediate danger. Follow authority instructions.' }
+        verde:    { label: 'Green',  desc: 'Normal activity. National Park access per SINAC schedule.' },
+        amarillo: { label: 'Yellow', desc: 'Elevated activity. Follow OVSICORI and SINAC guidelines.' },
+        naranja:  { label: 'Orange', desc: 'Significant activity. Restricted access. Stay informed.' },
+        rojo:     { label: 'Red',    desc: 'Immediate danger. Follow authority instructions.' }
     };
     const nivel = (NIVEL_ALERTA_VOLCAN || 'verde').toLowerCase();
     const c = cfg[nivel] || cfg.verde;
@@ -628,12 +1091,12 @@ const NIVEL_ALERTA_VOLCAN = 'verde';
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: 18
     }).addTo(map);
     const puntos = [
-        { coords: [10.1995, -84.2270], icon: '🌋', titulo: 'Poás Volcano', desc: 'Poás Volcano National Park · 2,708 m.a.s.l.' },
+        { coords: [10.1995, -84.2270], icon: '🌋', titulo: 'Poás Volcano',      desc: 'Poás Volcano National Park · 2,708 m.a.s.l.' },
         { coords: [10.0968, -84.2289], icon: '🏛️', titulo: 'San Pedro de Poás', desc: 'Canton center · Poás Municipality' },
-        { coords: [10.1580, -84.2350], icon: '🌿', titulo: 'Fraijanes', desc: 'Fraijanes District · Agricultural & tourist area' },
-        { coords: [10.1100, -84.2700], icon: '🏘️', titulo: 'Sabana Redonda', desc: 'Sabana Redonda District' },
-        { coords: [10.1350, -84.2100], icon: '🏘️', titulo: 'Carrillos', desc: 'Carrillos District' },
-        { coords: [10.0750, -84.2550], icon: '🏘️', titulo: 'Güítite', desc: 'Güítite District' }
+        { coords: [10.1580, -84.2350], icon: '🌿', titulo: 'Fraijanes',          desc: 'Fraijanes District · Agricultural &amp; tourist area' },
+        { coords: [10.1100, -84.2700], icon: '🏘️', titulo: 'Sabana Redonda',    desc: 'Sabana Redonda District' },
+        { coords: [10.1350, -84.2100], icon: '🏘️', titulo: 'Carrillos',         desc: 'Carrillos District' },
+        { coords: [10.0750, -84.2550], icon: '🏘️', titulo: 'Güítite',           desc: 'Güítite District' }
     ];
     puntos.forEach(p => {
         const icon = L.divIcon({ html: '<div style="font-size:1.6rem;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.5))">' + p.icon + '</div>', className: '', iconSize: [32,32], iconAnchor: [16,16] });

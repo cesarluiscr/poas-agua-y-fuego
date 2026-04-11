@@ -2005,6 +2005,12 @@ footer {
     height: 100%;
 }
 
+.contacto-icon i {
+    font-size: 1.75rem;
+    line-height: 1;
+    color: currentColor;
+}
+
 .contacto-info h3 {
     font-size: 1.15rem;
     font-weight: 700;

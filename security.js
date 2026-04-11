@@ -268,8 +268,8 @@
             csp.content = [
                 "default-src 'self'",
                 "script-src 'self' 'unsafe-inline' https://script.google.com https://unpkg.com https://cdn.jsdelivr.net",
-                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net",
-                "font-src 'self' https://fonts.gstatic.com https://unpkg.com",
+                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com",
+                "font-src 'self' https://fonts.gstatic.com https://unpkg.com https://cdnjs.cloudflare.com",
                 "img-src 'self' data: https: blob:",
                 "media-src 'self' blob:",
                 "connect-src 'self' https://script.google.com https://api.open-meteo.com https://nominatim.openstreetmap.org https://tile.openstreetmap.org",
