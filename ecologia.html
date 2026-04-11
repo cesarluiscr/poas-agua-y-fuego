@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta property="og:type"         content="website">
+    <meta property="og:site_name"    content="Poás Agua y Fuego">
+    <meta property="og:title"        content="Ecología y Ecobarrio | Poás Agua y Fuego">
+    <meta property="og:description"  content="Guía del Modelo Ecobarrio: asentamientos humanos sostenibles, inclusivos y resilientes en el cantón de Poás, Costa Rica.">
+    <meta property="og:url"          content="https://cesarluiscr.github.io/poas-agua-y-fuego/ecologia.html">
+    <meta property="og:image"        content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/poas_og_v3.png">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type"   content="image/png">
+    <meta property="og:locale"       content="es_CR">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Ecología y Ecobarrio | Poás Agua y Fuego">
+    <meta name="twitter:description" content="Guía del Modelo Ecobarrio: asentamientos humanos sostenibles, inclusivos y resilientes en el cantón de Poás, Costa Rica.">
+    <meta name="twitter:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/poas_og_v3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecología y Ecobarrio | Poás Agua y Fuego</title>
+    <meta name="description" content="Guía del Modelo Ecobarrio: asentamientos humanos sostenibles, inclusivos y resilientes en el cantón de Poás, Costa Rica.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ec-dark:     #0d2818;
+            --ec-dark2:    #1a4a2e;
+            --ec-green:    #2ecc71;
+            --ec-green2:   #27ae60;
+            --ec-teal:     #1abc9c;
+            --ec-cream:    #f0faf4;
+            --ec-cream2:   #e0f5ea;
+            --ec-gold:     #f1c40f;
+            --ec-gold-dim: #c9a800;
+            --ec-text:     #0f2d1b;
+            --ec-muted:    #3d6b52;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--ec-cream);
+            color: var(--ec-text);
+        }
+
+        /* ── NAV ── */
+        .ec-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(13, 40, 24, 0.94);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.85rem 2rem;
+            border-bottom: 1px solid rgba(46, 204, 113, 0.18);
+        }
+        .ec-nav-back {
+            color: rgba(255,255,255,0.72); text-decoration: none; font-size: 0.88rem;
+            display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;
+            font-weight: 500;
+        }
+        .ec-nav-back:hover { color: var(--ec-green); }
+        .ec-nav-logo {
+            color: var(--ec-green); font-weight: 700; font-size: 1.05rem;
+            text-decoration: none; letter-spacing: 0.01em;
+        }
+        .ec-nav-label {
+            color: var(--ec-gold); font-size: 0.85rem; font-weight: 600;
+            display: flex; align-items: center; gap: 0.35rem;
+            border: 1px solid rgba(241, 196, 15, 0.38); border-radius: 999px;
+            padding: 0.3rem 0.9rem;
+        }
+
+        /* ── HERO ── */
+        .ec-hero {
+            min-height: 100vh;
+            background:
+                linear-gradient(160deg, rgba(13,40,24,0.97) 0%, rgba(26,74,46,0.90) 45%, rgba(10,30,18,0.96) 100%),
+                repeating-linear-gradient(
+                    60deg,
+                    transparent,
+                    transparent 28px,
+                    rgba(46,204,113,0.04) 28px,
+                    rgba(46,204,113,0.04) 56px
+                );
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 7rem 2rem 5rem;
+            position: relative; overflow: hidden;
+        }
+        .ec-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 65% 55% at 15% 25%, rgba(46,204,113,0.14) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 45% at 85% 75%, rgba(26,188,156,0.10) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 35% at 50% 10%, rgba(39,174,96,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .ec-hero-leaf-bg {
+            position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+            opacity: 0.05; font-size: 8rem; line-height: 1;
+            display: flex; flex-wrap: wrap; align-items: flex-start; gap: 2rem;
+            padding: 1rem; filter: blur(1.5px);
+        }
+        .ec-hero-badge {
+            background: linear-gradient(135deg, var(--ec-green), var(--ec-teal));
+            color: #fff; font-weight: 700; font-size: 0.73rem; letter-spacing: 0.16em;
+            text-transform: uppercase; padding: 0.35rem 1.2rem; border-radius: 99px;
+            margin-bottom: 1.6rem; display: inline-block; position: relative;
+            box-shadow: 0 4px 20px rgba(46,204,113,0.35);
+        }
+        .ec-hero h1 {
+            font-size: clamp(2.4rem, 7vw, 5rem);
+            color: #fff; line-height: 1.1; margin-bottom: 1rem;
+            font-weight: 800; position: relative;
+        }
+        .ec-hero h1 span { color: var(--ec-green); }
+        .ec-hero-subtitle {
+            color: var(--ec-gold); font-size: clamp(0.95rem, 2vw, 1.18rem);
+            font-weight: 400; margin-bottom: 1.6rem; position: relative;
+            font-style: italic;
+        }
+        .ec-hero p {
+            color: rgba(255,255,255,0.80); font-size: clamp(0.93rem, 2vw, 1.12rem);
+            max-width: 680px; line-height: 1.78; position: relative;
+        }
+        .ec-hero-scroll {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,0.38); font-size: 0.78rem; text-align: center;
+            animation: ec-bounce 2.4s infinite;
+        }
+        @keyframes ec-bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50%       { transform: translateX(-50%) translateY(9px); }
+        }
+
+        /* ── SHARED LAYOUT ── */
+        .ec-container { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+        .ec-section-label {
+            color: var(--ec-green2); font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem;
+        }
+        .ec-section-title {
+            font-size: clamp(1.65rem, 3.5vw, 2.55rem);
+            font-weight: 800; line-height: 1.2; margin-bottom: 0.9rem;
+        }
+        .ec-divider {
+            width: 56px; height: 3px; border-radius: 99px;
+            background: var(--ec-green); margin: 0 auto 1.5rem;
+        }
+        .ec-divider.left { margin: 0 0 1.5rem; }
+
+        /* ── SECTION 1: PROPÓSITO ── */
+        .ec-proposito {
+            background: var(--ec-cream);
+            padding: 5.5rem 2rem;
+        }
+        .ec-proposito-header {
+            text-align: center; margin-bottom: 3rem;
+        }
+        .ec-proposito-header .ec-section-title { color: var(--ec-dark); }
+        .ec-proposito-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 900px; margin: 0 auto;
+        }
+        .ec-proposito-card {
+            background: #fff;
+            border: 1px solid rgba(46,204,113,0.2);
+            border-radius: 18px;
+            padding: 2.2rem;
+            box-shadow: 0 4px 24px rgba(13,40,24,0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .ec-proposito-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 36px rgba(13,40,24,0.14);
+        }
+        .ec-card-icon {
+            font-size: 2.8rem; margin-bottom: 1rem; display: block;
+        }
+        .ec-card-title {
+            font-size: 1.15rem; font-weight: 700; color: var(--ec-dark2);
+            margin-bottom: 0.7rem;
+        }
+        .ec-card-text {
+            color: var(--ec-muted); line-height: 1.75; font-size: 0.97rem;
+        }
+
+        /* ── SECTION 2: ESTRUCTURA ── */
+        .ec-estructura {
+            background: var(--ec-dark2);
+            padding: 5.5rem 2rem;
+        }
+        .ec-estructura-header {
+            text-align: center; margin-bottom: 1rem;
+        }
+        .ec-estructura-header .ec-section-label { color: var(--ec-teal); }
+        .ec-estructura-header .ec-section-title { color: #fff; }
+        .ec-estructura-sub {
+            text-align: center; margin-bottom: 3.5rem;
+        }
+        .ec-estructura-sub span {
+            display: inline-block;
+            background: rgba(46,204,113,0.15);
+            border: 1px solid rgba(46,204,113,0.3);
+            color: var(--ec-green);
+            font-weight: 700; font-size: 1.05rem;
+            padding: 0.5rem 1.6rem; border-radius: 99px;
+            letter-spacing: 0.03em;
+        }
+        .ec-theme-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.4rem;
+        }
+        .ec-theme-card {
+            border-radius: 16px;
+            padding: 1.6rem 1.4rem;
+            position: relative; overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            cursor: default;
+        }
+        .ec-theme-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+        }
+        .ec-theme-letter {
+            font-size: 2.6rem; font-weight: 900; opacity: 0.18;
+            position: absolute; top: 0.6rem; right: 0.9rem;
+            line-height: 1; font-style: italic;
+        }
+        .ec-theme-name {
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em;
+            text-transform: uppercase; margin-bottom: 0.5rem; opacity: 0.85;
+        }
+        .ec-theme-title {
+            font-size: 1rem; font-weight: 700; line-height: 1.25; margin-bottom: 0.6rem;
+        }
+        .ec-theme-desc {
+            font-size: 0.84rem; line-height: 1.6; opacity: 0.82;
+        }
+        /* Color variants */
+        .ec-theme-a { background: linear-gradient(135deg, #1e5c2e, #2d7a42); color: #c8f5d8; }
+        .ec-theme-b { background: linear-gradient(135deg, #155e4a, #1d7a60); color: #b8f0e0; }
+        .ec-theme-c { background: linear-gradient(135deg, #0d3d2a, #1a5c3e); color: #aaf0cc; }
+        .ec-theme-d { background: linear-gradient(135deg, #0f4a38, #18664f); color: #aaede2; }
+        .ec-theme-e { background: linear-gradient(135deg, #1a4d1a, #247a24); color: #c2f5c2; }
+        .ec-theme-f { background: linear-gradient(135deg, #2a3d1a, #3d5a22); color: #d4f0a8; }
+        .ec-theme-g { background: linear-gradient(135deg, #1a3030, #234848); color: #a8eee8; }
+        .ec-theme-h { background: linear-gradient(135deg, #1a2a4a, #26406e); color: #b8d4f8; }
+
+        /* ── SECTION 3: ENFOQUES TRANSVERSALES ── */
+        .ec-enfoques {
+            background: var(--ec-cream);
+            padding: 5.5rem 2rem;
+        }
+        .ec-enfoques-header {
+            text-align: center; margin-bottom: 3rem;
+        }
+        .ec-enfoques-header .ec-section-title { color: var(--ec-dark); }
+        .ec-enfoques-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 980px; margin: 0 auto;
+        }
+        .ec-enfoque-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2.4rem;
+            box-shadow: 0 4px 28px rgba(13,40,24,0.09);
+            border-top: 4px solid transparent;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .ec-enfoque-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 42px rgba(13,40,24,0.15);
+        }
+        .ec-enfoque-card:first-child { border-top-color: var(--ec-green); }
+        .ec-enfoque-card:last-child  { border-top-color: var(--ec-teal); }
+        .ec-enfoque-icon {
+            font-size: 2.4rem; margin-bottom: 0.9rem; display: block;
+        }
+        .ec-enfoque-title {
+            font-size: 1.2rem; font-weight: 800; color: var(--ec-dark2);
+            margin-bottom: 0.8rem;
+        }
+        .ec-enfoque-text {
+            color: var(--ec-muted); line-height: 1.75; font-size: 0.96rem;
+            margin-bottom: 1rem;
+        }
+        .ec-enfoque-pills {
+            display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;
+        }
+        .ec-enfoque-pill {
+            background: var(--ec-cream2);
+            color: var(--ec-dark2); font-size: 0.78rem; font-weight: 600;
+            padding: 0.28rem 0.75rem; border-radius: 99px;
+            border: 1px solid rgba(46,204,113,0.25);
+        }
+
+        /* ── SECTION 4: CRITERIOS ── */
+        .ec-criterios {
+            background: var(--ec-dark);
+            padding: 5.5rem 2rem;
+        }
+        .ec-criterios-header {
+            text-align: center; margin-bottom: 3rem;
+        }
+        .ec-criterios-header .ec-section-label { color: var(--ec-teal); }
+        .ec-criterios-header .ec-section-title { color: #fff; }
+        .ec-criterios-header .ec-divider { background: var(--ec-gold); }
+        .ec-criterios-list {
+            max-width: 820px; margin: 0 auto;
+            display: flex; flex-direction: column; gap: 1.1rem;
+        }
+        .ec-criterio-item {
+            display: flex; align-items: flex-start; gap: 1.1rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(46,204,113,0.15);
+            border-radius: 14px;
+            padding: 1.2rem 1.5rem;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .ec-criterio-item:hover {
+            background: rgba(46,204,113,0.09);
+            border-color: rgba(46,204,113,0.35);
+        }
+        .ec-criterio-num {
+            min-width: 2.1rem; height: 2.1rem;
+            background: linear-gradient(135deg, var(--ec-green), var(--ec-teal));
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 800; color: #fff;
+            flex-shrink: 0; margin-top: 0.05rem;
+        }
+        .ec-criterio-text {
+            color: rgba(255,255,255,0.88); font-size: 0.97rem; line-height: 1.65;
+        }
+        .ec-criterio-check {
+            color: var(--ec-green); font-size: 1rem; margin-right: 0.3rem;
+        }
+
+        /* ── SECTION 5: PROCESO ── */
+        .ec-proceso {
+            background: var(--ec-cream);
+            padding: 5.5rem 2rem;
+        }
+        .ec-proceso-header {
+            text-align: center; margin-bottom: 3.5rem;
+        }
+        .ec-proceso-header .ec-section-title { color: var(--ec-dark); }
+        .ec-steps {
+            display: flex; align-items: flex-start; gap: 0;
+            max-width: 1040px; margin: 0 auto;
+            overflow-x: auto; padding-bottom: 1rem;
+        }
+        .ec-step {
+            flex: 1; min-width: 160px;
+            display: flex; flex-direction: column; align-items: center;
+            text-align: center; position: relative;
+        }
+        .ec-step-icon-wrap {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--ec-green2), var(--ec-teal));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.9rem; margin-bottom: 1rem;
+            box-shadow: 0 6px 24px rgba(46,204,113,0.35);
+            position: relative; z-index: 2;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .ec-step:hover .ec-step-icon-wrap {
+            transform: scale(1.1);
+            box-shadow: 0 10px 32px rgba(46,204,113,0.5);
+        }
+        .ec-step-title {
+            font-size: 0.88rem; font-weight: 700; color: var(--ec-dark2);
+            margin-bottom: 0.5rem; line-height: 1.2;
+        }
+        .ec-step-desc {
+            font-size: 0.79rem; color: var(--ec-muted); line-height: 1.55;
+            padding: 0 0.3rem;
+        }
+        .ec-step-arrow {
+            width: 40px; align-self: flex-start; margin-top: 1.85rem;
+            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--ec-green2); font-size: 1.4rem; opacity: 0.55;
+        }
+
+        /* ── SECTION 6: CONTEXTO CR ── */
+        .ec-contexto {
+            background: linear-gradient(160deg, #0a2a1a 0%, #12402a 50%, #0d3520 100%);
+            padding: 5.5rem 2rem;
+        }
+        .ec-contexto-header {
+            text-align: center; margin-bottom: 3rem;
+        }
+        .ec-contexto-header .ec-section-label { color: var(--ec-teal); }
+        .ec-contexto-header .ec-section-title { color: #fff; }
+        .ec-contexto-header .ec-divider { background: var(--ec-teal); }
+        .ec-stat-chips {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .ec-stat-chip {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(26,188,156,0.3);
+            border-radius: 16px; padding: 1.4rem 2rem; text-align: center;
+            min-width: 180px; flex: 1; max-width: 220px;
+            transition: background 0.25s, border-color 0.25s, transform 0.25s;
+        }
+        .ec-stat-chip:hover {
+            background: rgba(26,188,156,0.12);
+            border-color: rgba(26,188,156,0.55);
+            transform: translateY(-4px);
+        }
+        .ec-stat-chip-num {
+            font-size: 2.1rem; font-weight: 900; color: var(--ec-teal);
+            line-height: 1; margin-bottom: 0.4rem;
+        }
+        .ec-stat-chip-label {
+            font-size: 0.81rem; color: rgba(255,255,255,0.72); font-weight: 500; line-height: 1.35;
+        }
+        .ec-contexto-text {
+            max-width: 740px; margin: 0 auto; text-align: center;
+            color: rgba(255,255,255,0.78); font-size: 1.02rem; line-height: 1.8;
+        }
+        .ec-contexto-text strong { color: var(--ec-green); }
+
+        /* ── SECTION 7: LECCIONES DE FRANCIA ── */
+        .ec-francia {
+            background: var(--ec-cream);
+            padding: 5.5rem 2rem;
+        }
+        .ec-francia-header {
+            text-align: center; margin-bottom: 3rem;
+        }
+        .ec-francia-header .ec-section-title { color: var(--ec-dark); }
+        .ec-francia-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 980px; margin: 0 auto;
+        }
+        .ec-francia-card {
+            background: #fff;
+            border: 1px solid rgba(46,204,113,0.18);
+            border-radius: 16px;
+            padding: 1.8rem 1.6rem;
+            box-shadow: 0 3px 18px rgba(13,40,24,0.07);
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+        }
+        .ec-francia-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 36px rgba(13,40,24,0.13);
+            border-color: rgba(46,204,113,0.45);
+        }
+        .ec-francia-emoji {
+            font-size: 2.2rem; margin-bottom: 0.7rem; display: block;
+        }
+        .ec-francia-loc {
+            font-size: 0.88rem; font-weight: 800; color: var(--ec-dark2);
+            margin-bottom: 0.45rem; letter-spacing: 0.01em;
+        }
+        .ec-francia-desc {
+            font-size: 0.84rem; color: var(--ec-muted); line-height: 1.65;
+        }
+
+        /* ── SECTION 8: CONCLUSIÓN ── */
+        .ec-conclusion {
+            background: linear-gradient(160deg, #0d2818 0%, #1a4a2e 60%, #0d2818 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        .ec-conclusion-header {
+            margin-bottom: 3rem;
+        }
+        .ec-conclusion-header .ec-section-label { color: var(--ec-teal); }
+        .ec-conclusion-header .ec-section-title { color: #fff; }
+        .ec-quote-block {
+            max-width: 780px; margin: 0 auto 3rem;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(46,204,113,0.2);
+            border-left: 5px solid var(--ec-green);
+            border-radius: 16px;
+            padding: 2.5rem 2.8rem;
+            position: relative;
+        }
+        .ec-quote-block::before {
+            content: '"';
+            position: absolute; top: 0.5rem; left: 1.5rem;
+            font-size: 5rem; color: var(--ec-green); opacity: 0.18;
+            font-family: Georgia, serif; line-height: 1;
+        }
+        .ec-quote-text {
+            color: rgba(255,255,255,0.9); font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.82; font-style: italic; font-weight: 400;
+            position: relative; z-index: 1;
+        }
+        .ec-context-pills {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 0.9rem;
+        }
+        .ec-context-pill {
+            background: rgba(46,204,113,0.12);
+            border: 1px solid rgba(46,204,113,0.28);
+            color: var(--ec-green);
+            font-size: 0.88rem; font-weight: 600;
+            padding: 0.5rem 1.4rem; border-radius: 99px;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .ec-context-pill:hover {
+            background: rgba(46,204,113,0.22);
+            border-color: rgba(46,204,113,0.5);
+        }
+
+        /* ── BACK BUTTON ── */
+        .ec-back-section {
+            background: var(--ec-cream);
+            padding: 3.5rem 2rem;
+            text-align: center;
+        }
+        .ec-back-btn {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            background: linear-gradient(135deg, var(--ec-green2), var(--ec-teal));
+            color: #fff; text-decoration: none;
+            font-size: 1rem; font-weight: 700;
+            padding: 0.9rem 2.2rem; border-radius: 99px;
+            box-shadow: 0 6px 24px rgba(39,174,96,0.38);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .ec-back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px rgba(39,174,96,0.5);
+        }
+
+        /* ── FOOTER ── */
+        .ec-footer {
+            background: var(--ec-dark);
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 1.6rem 2rem;
+            font-size: 0.85rem;
+        }
+        .ec-footer strong { color: rgba(255,255,255,0.75); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .ec-theme-grid { grid-template-columns: repeat(2, 1fr); }
+            .ec-enfoques-grid { grid-template-columns: 1fr; }
+            .ec-proposito-grid { grid-template-columns: 1fr; }
+            .ec-francia-grid { grid-template-columns: repeat(2, 1fr); }
+            .ec-steps { flex-wrap: wrap; justify-content: center; gap: 2rem; }
+            .ec-step-arrow { display: none; }
+            .ec-step { min-width: 140px; max-width: 180px; }
+        }
+        @media (max-width: 600px) {
+            .ec-nav { padding: 0.75rem 1rem; }
+            .ec-nav-logo { font-size: 0.9rem; }
+            .ec-nav-back { font-size: 0.8rem; }
+            .ec-nav-label { font-size: 0.76rem; padding: 0.25rem 0.65rem; }
+            .ec-theme-grid { grid-template-columns: 1fr; }
+            .ec-francia-grid { grid-template-columns: 1fr; }
+            .ec-stat-chips { flex-direction: column; align-items: center; }
+            .ec-stat-chip { max-width: 100%; width: 100%; }
+            .ec-quote-block { padding: 2rem 1.6rem; }
+            .ec-proposito-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── NAV ── -->
+    <nav class="ec-nav">
+        <a href="index.html" class="ec-nav-back">← Inicio</a>
+        <a href="index.html" class="ec-nav-logo">Poás Agua y Fuego</a>
+        <div class="ec-nav-label">🌿 Ecología</div>
+    </nav>
+
+    <!-- ── HERO ── -->
+    <section class="ec-hero">
+        <div class="ec-hero-leaf-bg" aria-hidden="true">
+            🌿🌱🍃🌿🌱🍃🌿🌱🍃🌿🌱🍃🌿🌱🍃🌿🌱🍃🌿🌱🍃🌿🌱🍃🌿🌱🍃🌿🌱🍃
+        </div>
+        <div class="ec-hero-badge">🌿 Cantón de Poás · Costa Rica</div>
+        <h1>Ecología del <span>Cantón</span></h1>
+        <p class="ec-hero-subtitle">Hacia un futuro sostenible, inclusivo y resiliente</p>
+        <p>
+            El <strong style="color:#fff;">Modelo Ecobarrio</strong> propone transformar los asentamientos humanos del cantón de Poás en comunidades vivas donde la sostenibilidad ambiental, la equidad social y la innovación urbana se integran como un solo tejido. Esta guía presenta su estructura, criterios y proceso de aplicación para un desarrollo territorial verdaderamente regenerativo.
+        </p>
+        <div class="ec-hero-scroll">▼</div>
+    </section>
+
+    <!-- ── SECTION 1: PROPÓSITO GENERAL ── -->
+    <section class="ec-proposito">
+        <div class="ec-container">
+            <div class="ec-proposito-header">
+                <div class="ec-section-label">Fundamento</div>
+                <h2 class="ec-section-title">Propósito General</h2>
+                <div class="ec-divider"></div>
+            </div>
+            <div class="ec-proposito-grid">
+                <div class="ec-proposito-card">
+                    <span class="ec-card-icon">🎯</span>
+                    <div class="ec-card-title">Objetivo central</div>
+                    <p class="ec-card-text">
+                        Contribuir al cumplimiento de los <strong>Objetivos de Desarrollo Sostenible (ODS)</strong> de la ONU y los compromisos del <strong>Acuerdo de París</strong>, promoviendo asentamientos humanos que integran equidad, resiliencia climática e identidad cultural como ejes del diseño urbano y territorial del cantón de Poás.
+                    </p>
+                </div>
+                <div class="ec-proposito-card">
+                    <span class="ec-card-icon">🏘️</span>
+                    <div class="ec-card-title">Enfoque</div>
+                    <p class="ec-card-text">
+                        El <strong>barrio como célula urbana</strong> es la unidad básica de intervención: un espacio donde las personas conviven, se organizan y construyen colectivamente un entorno seguro y sostenible. Este enfoque prioriza la escala humana, la proximidad de servicios y la participación activa de la comunidad en las decisiones que dan forma a su territorio.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SECTION 2: ESTRUCTURA DEL MODELO ── -->
+    <section class="ec-estructura">
+        <div class="ec-container">
+            <div class="ec-estructura-header">
+                <div class="ec-section-label">Marco metodológico</div>
+                <h2 class="ec-section-title" style="color:#fff;">Estructura del Modelo Ecobarrio</h2>
+            </div>
+            <div class="ec-estructura-sub">
+                <span>8 temas · 28 objetivos · 83 criterios</span>
+            </div>
+            <div class="ec-theme-grid">
+
+                <div class="ec-theme-card ec-theme-a">
+                    <div class="ec-theme-letter">A</div>
+                    <div class="ec-theme-name">Tema A</div>
+                    <div class="ec-theme-title">Economía</div>
+                    <p class="ec-theme-desc">Favorecer economías locales y dinamismo económico inclusivo que fortalezca a las comunidades desde adentro.</p>
+                </div>
+
+                <div class="ec-theme-card ec-theme-b">
+                    <div class="ec-theme-letter">B</div>
+                    <div class="ec-theme-name">Tema B</div>
+                    <div class="ec-theme-title">Calidad del Entorno</div>
+                    <p class="ec-theme-desc">Equilibrio urbano, prevención de impactos negativos y espacios públicos seguros, accesibles y vitales.</p>
+                </div>
+
+                <div class="ec-theme-card ec-theme-c">
+                    <div class="ec-theme-letter">C</div>
+                    <div class="ec-theme-name">Tema C</div>
+                    <div class="ec-theme-title">Medioambiente y Biodiversidad</div>
+                    <p class="ec-theme-desc">Protección de suelos, resiliencia climática, conservación de hábitats y corredores biológicos.</p>
+                </div>
+
+                <div class="ec-theme-card ec-theme-d">
+                    <div class="ec-theme-letter">D</div>
+                    <div class="ec-theme-name">Tema D</div>
+                    <div class="ec-theme-title">Recursos</div>
+                    <p class="ec-theme-desc">Gestión integral de residuos, sobriedad energética y gestión hídrica en ciclo cerrado.</p>
+                </div>
+
+                <div class="ec-theme-card ec-theme-e">
+                    <div class="ec-theme-letter">E</div>
+                    <div class="ec-theme-name">Tema E</div>
+                    <div class="ec-theme-title">Movilidad</div>
+                    <p class="ec-theme-desc">Accesibilidad universal y movilidad sostenible orientada al desarrollo orientado al transporte (DOT).</p>
+                </div>
+
+                <div class="ec-theme-card ec-theme-f">
+                    <div class="ec-theme-letter">F</div>
+                    <div class="ec-theme-name">Tema F</div>
+                    <div class="ec-theme-title">Población</div>
+                    <p class="ec-theme-desc">Participación ciudadana activa, identidad local y apropiación comunitaria del espacio construido.</p>
+                </div>
+
+                <div class="ec-theme-card ec-theme-g">
+                    <div class="ec-theme-letter">G</div>
+                    <div class="ec-theme-name">Tema G</div>
+                    <div class="ec-theme-title">Política y Gobernanza</div>
+                    <p class="ec-theme-desc">Compromiso de actores institucionales, factibilidad de implementación y evaluación continua de resultados.</p>
+                </div>
+
+                <div class="ec-theme-card ec-theme-h">
+                    <div class="ec-theme-letter">H</div>
+                    <div class="ec-theme-name">Tema H</div>
+                    <div class="ec-theme-title">Tecnología</div>
+                    <p class="ec-theme-desc">Servicios digitales, ciudad inteligente y reducción de la brecha digital con perspectiva de género.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SECTION 3: ENFOQUES TRANSVERSALES ── -->
+    <section class="ec-enfoques">
+        <div class="ec-container">
+            <div class="ec-enfoques-header">
+                <div class="ec-section-label">Transversalidad</div>
+                <h2 class="ec-section-title">Enfoques Transversales</h2>
+                <div class="ec-divider"></div>
+            </div>
+            <div class="ec-enfoques-grid">
+
+                <div class="ec-enfoque-card">
+                    <span class="ec-enfoque-icon">♀️</span>
+                    <div class="ec-enfoque-title">Enfoque de Género e Interseccionalidad</div>
+                    <p class="ec-enfoque-text">
+                        La transversalidad de género no es un añadido, sino el eje que articula todo el modelo. Reconoce que las personas experimentan las ciudades de manera diferenciada según su género, y que esa diferencia se cruza con otras condiciones de vida: <strong>discapacidad, migración, ruralidad y etnia</strong>. Este enfoque permite identificar múltiples formas de discriminación que se superponen y potencian entre sí.
+                    </p>
+                    <p class="ec-enfoque-text">
+                        La especificidad del enfoque exige diseñar respuestas concretas para necesidades concretas, evitando soluciones universalistas que invisibilizan desigualdades estructurales.
+                    </p>
+                    <div class="ec-enfoque-pills">
+                        <span class="ec-enfoque-pill">Inclusión</span>
+                        <span class="ec-enfoque-pill">Autonomía</span>
+                        <span class="ec-enfoque-pill">Empoderamiento</span>
+                        <span class="ec-enfoque-pill">Participación</span>
+                        <span class="ec-enfoque-pill">Seguridad</span>
+                    </div>
+                </div>
+
+                <div class="ec-enfoque-card">
+                    <span class="ec-enfoque-icon">⚖️</span>
+                    <div class="ec-enfoque-title">Derechos Humanos</div>
+                    <p class="ec-enfoque-text">
+                        El Ecobarrio se construye desde la <strong>inclusión en la diversidad</strong>: el derecho a la ciudad es universal, y su ejercicio efectivo requiere remover las barreras físicas, sociales y simbólicas que limitan el acceso de personas en situación de vulnerabilidad.
+                    </p>
+                    <p class="ec-enfoque-text">
+                        Los espacios accesibles, diseñados con perspectiva de género, benefician a toda la comunidad: a personas con movilidad reducida, a quienes cuidan a otras personas, a la infancia y a la vejez. La accesibilidad universal no es una concesión, sino una condición para la dignidad compartida.
+                    </p>
+                    <div class="ec-enfoque-pills">
+                        <span class="ec-enfoque-pill">Accesibilidad universal</span>
+                        <span class="ec-enfoque-pill">Dignidad</span>
+                        <span class="ec-enfoque-pill">No discriminación</span>
+                        <span class="ec-enfoque-pill">Diversidad</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SECTION 4: CRITERIOS PRIORIZADOS ── -->
+    <section class="ec-criterios">
+        <div class="ec-container">
+            <div class="ec-criterios-header">
+                <div class="ec-section-label">Implementación</div>
+                <h2 class="ec-section-title">10 Criterios Priorizados</h2>
+                <div class="ec-divider"></div>
+            </div>
+            <div class="ec-criterios-list">
+
+                <div class="ec-criterio-item">
+                    <div class="ec-criterio-num">1</div>
+                    <div class="ec-criterio-text"><span class="ec-criterio-check">✓</span>Economía local con producción a cargo de <strong style="color:#2ecc71;">mujeres emprendedoras</strong> como motor del desarrollo comunitario sostenible.</div>
+                </div>
+
+                <div class="ec-criterio-item">
+                    <div class="ec-criterio-num">2</div>
+                    <div class="ec-criterio-text"><span class="ec-criterio-check">✓</span>Gestión integral de residuos con <strong style="color:#2ecc71;">sensibilización ciudadana</strong> permanente y sistemas de separación en la fuente.</div>
+                </div>
+
+                <div class="ec-criterio-item">
+                    <div class="ec-criterio-num">3</div>
+                    <div class="ec-criterio-text"><span class="ec-criterio-check">✓</span>Dotación de espacios multiuso con <strong style="color:#2ecc71;">distancias accesibles para mujeres cuidadoras</strong>, reduciendo tiempos de desplazamiento.</div>
+                </div>
+
+                <div class="ec-criterio-item">
+                    <div class="ec-criterio-num">4</div>
+                    <div class="ec-criterio-text"><span class="ec-criterio-check">✓</span>Implementación de <strong style="color:#2ecc71;">sistemas de saneamiento y gestión de aguas residuales</strong> con estándares ambientales de excelencia.</div>
+                </div>
+
+                <div class="ec-criterio-item">
+                    <div class="ec-criterio-num">5</div>
+                    <div class="ec-criterio-text"><span class="ec-criterio-check">✓</span>Conexiones accesibles a empleos, educación y salud con <strong style="color:#2ecc71;">movilidad sostenible</strong> y transporte seguro para todas las personas.</div>
+                </div>
+
+                <div class="ec-criterio-item">
+                    <div class="ec-criterio-num">6</div>
+                    <div class="ec-criterio-text"><span class="ec-criterio-check">✓</span>Fomento de prácticas colectivas y <strong style="color:#2ecc71;">liderazgo de mujeres en la toma de decisiones</strong> territoriales y de planificación.</div>
+                </div>
+
+                <div class="ec-criterio-item">
+                    <div class="ec-criterio-num">7</div>
+                    <div class="ec-criterio-text"><span class="ec-criterio-check">✓</span>Colaboración interinstitucional con <strong style="color:#2ecc71;">responsabilidad social, ambiental y de género</strong> como criterio vinculante.</div>
+                </div>
+
+                <div class="ec-criterio-item">
+                    <div class="ec-criterio-num">8</div>
+                    <div class="ec-criterio-text"><span class="ec-criterio-check">✓</span>Promoción de acceso colectivo a tecnologías digitales considerando <strong style="color:#2ecc71;">brecha de género</strong> y condiciones socioeconómicas.</div>
+                </div>
+
+                <div class="ec-criterio-item">
+                    <div class="ec-criterio-num">9</div>
+                    <div class="ec-criterio-text"><span class="ec-criterio-check">✓</span>Análisis de <strong style="color:#2ecc71;">costos globales y riesgos financieros</strong> para garantizar la viabilidad a largo plazo de cada intervención.</div>
+                </div>
+
+                <div class="ec-criterio-item">
+                    <div class="ec-criterio-num">10</div>
+                    <div class="ec-criterio-text"><span class="ec-criterio-check">✓</span>Adaptación y mitigación al <strong style="color:#2ecc71;">cambio climático</strong> integradas en el diseño arquitectónico y la operación de todos los proyectos.</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SECTION 5: PROCESO DE APLICACIÓN ── -->
+    <section class="ec-proceso">
+        <div class="ec-container">
+            <div class="ec-proceso-header">
+                <div class="ec-section-label">Metodología</div>
+                <h2 class="ec-section-title">Proceso de Aplicación</h2>
+                <div class="ec-divider"></div>
+            </div>
+            <div class="ec-steps">
+
+                <div class="ec-step">
+                    <div class="ec-step-icon-wrap">🔍</div>
+                    <div class="ec-step-title">Estudios Previos</div>
+                    <p class="ec-step-desc">Análisis de sitio, estudios ambientales, sociales y técnicos que sustentan la intervención.</p>
+                </div>
+
+                <div class="ec-step-arrow">→</div>
+
+                <div class="ec-step">
+                    <div class="ec-step-icon-wrap">📋</div>
+                    <div class="ec-step-title">Programa</div>
+                    <p class="ec-step-desc">Definición de componentes espaciales y organizacionales del proyecto.</p>
+                </div>
+
+                <div class="ec-step-arrow">→</div>
+
+                <div class="ec-step">
+                    <div class="ec-step-icon-wrap">📐</div>
+                    <div class="ec-step-title">Diseño</div>
+                    <p class="ec-step-desc">Proceso interdisciplinario para dar forma física a los requerimientos del Ecobarrio.</p>
+                </div>
+
+                <div class="ec-step-arrow">→</div>
+
+                <div class="ec-step">
+                    <div class="ec-step-icon-wrap">🏗️</div>
+                    <div class="ec-step-title">Construcción</div>
+                    <p class="ec-step-desc">Ejecución según especificaciones Ecobarrio con control de calidad ambiental y social.</p>
+                </div>
+
+                <div class="ec-step-arrow">→</div>
+
+                <div class="ec-step">
+                    <div class="ec-step-icon-wrap">⚙️</div>
+                    <div class="ec-step-title">Operación y Mantenimiento</div>
+                    <p class="ec-step-desc">Habitabilidad, interacciones comunitarias y procesos cíclicos de mejora continua.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SECTION 6: CONTEXTO COSTARRICENSE ── -->
+    <section class="ec-contexto">
+        <div class="ec-container">
+            <div class="ec-contexto-header">
+                <div class="ec-section-label">Realidad Nacional</div>
+                <h2 class="ec-section-title">Contexto Costarricense</h2>
+                <div class="ec-divider"></div>
+            </div>
+            <div class="ec-stat-chips">
+                <div class="ec-stat-chip">
+                    <div class="ec-stat-chip-num">82%</div>
+                    <div class="ec-stat-chip-label">población urbana en Costa Rica (2022)</div>
+                </div>
+                <div class="ec-stat-chip">
+                    <div class="ec-stat-chip-num">7.1%</div>
+                    <div class="ec-stat-chip-label">emisiones de GEI atribuidas al sector construcción</div>
+                </div>
+                <div class="ec-stat-chip">
+                    <div class="ec-stat-chip-num">60%</div>
+                    <div class="ec-stat-chip-label">vivienda social del total de construcción habitacional</div>
+                </div>
+                <div class="ec-stat-chip">
+                    <div class="ec-stat-chip-num">−35%</div>
+                    <div class="ec-stat-chip-label">reducción en entrega de bonos familiares de vivienda</div>
+                </div>
+            </div>
+            <p class="ec-contexto-text">
+                Costa Rica enfrenta un <strong>déficit habitacional creciente</strong> en un contexto de acelerada urbanización. La reducción de bonos de vivienda, la presión sobre suelo urbano y las exigencias climáticas hacen urgente la adopción de <strong>modelos innovadores</strong> como el Ecobarrio, que integren sostenibilidad, equidad e inclusión en cada etapa del desarrollo habitacional.
+            </p>
+        </div>
+    </section>
+
+    <!-- ── SECTION 7: LECCIONES DE FRANCIA ── -->
+    <section class="ec-francia">
+        <div class="ec-container">
+            <div class="ec-francia-header">
+                <div class="ec-section-label">Referentes internacionales</div>
+                <h2 class="ec-section-title">Lecciones de Francia</h2>
+                <div class="ec-divider"></div>
+                <p style="color:var(--ec-muted); font-size:1rem; max-width:620px; margin: 0 auto; line-height:1.7;">
+                    El modelo ÉcoQuartier francés ofrece experiencias concretas que iluminan el camino para Poás.
+                </p>
+            </div>
+            <div class="ec-francia-grid">
+
+                <div class="ec-francia-card">
+                    <span class="ec-francia-emoji">💧</span>
+                    <div class="ec-francia-loc">Les Arondes</div>
+                    <p class="ec-francia-desc">Integración del recurso hídrico como eje estructurante del diseño urbano, con gestión en ciclo integral y espacios de agua abiertos a la comunidad.</p>
+                </div>
+
+                <div class="ec-francia-card">
+                    <span class="ec-francia-emoji">🏙️</span>
+                    <div class="ec-francia-loc">Camille Claudel</div>
+                    <p class="ec-francia-desc">Lucha contra la expansión urbana dispersa mediante densificación inteligente, mezcla de usos y alta calidad del espacio público.</p>
+                </div>
+
+                <div class="ec-francia-card">
+                    <span class="ec-francia-emoji">🏭</span>
+                    <div class="ec-francia-loc">Novaciéries</div>
+                    <p class="ec-francia-desc">Recuperación de patrimonio industrial con usos mixtos, nuevas centralidades y memoria del lugar como valor añadido.</p>
+                </div>
+
+                <div class="ec-francia-card">
+                    <span class="ec-francia-emoji">🤝</span>
+                    <div class="ec-francia-loc">Desjoyaux</div>
+                    <p class="ec-francia-desc">Vivienda participativa y cooperativa con altos estándares de sostenibilidad y decisiones colectivas sobre el diseño.</p>
+                </div>
+
+                <div class="ec-francia-card">
+                    <span class="ec-francia-emoji">🌿</span>
+                    <div class="ec-francia-loc">Hauts de Feuillis</div>
+                    <p class="ec-francia-desc">Casas pasivas con materiales ecológicos locales y diseño bioclimático que minimizan la demanda energética desde el origen.</p>
+                </div>
+
+                <div class="ec-francia-card">
+                    <span class="ec-francia-emoji">🏆</span>
+                    <div class="ec-francia-loc">Clichy-Batignolles</div>
+                    <p class="ec-francia-desc">Proyectos de gran escala con certificación ÉcoQuartier, referente europeo de desarrollo urbano ambicioso y sistémico.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ── SECTION 8: CONCLUSIÓN ── -->
+    <section class="ec-conclusion">
+        <div class="ec-container">
+            <div class="ec-conclusion-header">
+                <div class="ec-section-label">Visión</div>
+                <h2 class="ec-section-title" style="color:#fff;">Conclusión</h2>
+                <div class="ec-divider" style="background:var(--ec-teal);"></div>
+            </div>
+            <div class="ec-quote-block">
+                <p class="ec-quote-text">
+                    El Ecobarrio es una comunidad habitada por personas diversas que trabajan organizadamente, con sentido de pertenencia, para construir un espacio seguro, inclusivo y en armonía con la naturaleza, adaptado al futuro y regenerativo.
+                </p>
+            </div>
+            <div class="ec-context-pills">
+                <span class="ec-context-pill">Renovación de áreas deterioradas</span>
+                <span class="ec-context-pill">Áreas en consolidación</span>
+                <span class="ec-context-pill">Nuevos desarrollos</span>
+                <span class="ec-context-pill">Diversas geografías</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── BACK BUTTON ── -->
+    <section class="ec-back-section">
+        <a href="index.html" class="ec-back-btn">← Volver al Inicio</a>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer class="ec-footer">
+        <strong>© 2026 Poás Agua y Fuego</strong> · César Luis Quesada Herrera
+    </footer>
+
+    <script src="security.js?v=2"></script>
+</body>
+</html>
