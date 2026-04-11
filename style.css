@@ -2327,17 +2327,19 @@ footer {
     .logo {
         flex-shrink: 0;
     }
-    /* Botones de idioma: solo bandera */
+    /* Botones de idioma: emoji + sin texto */
     .nav-lang {
         display: flex;
         gap: 0.25rem;
         flex-shrink: 0;
     }
     .lang-btn {
-        padding: 0.3rem 0.4rem;
+        font-size: 1.15rem;    /* emoji visible */
+        padding: 0.2rem 0.35rem;
+        line-height: 1;
     }
     .lang-btn .lang-label {
-        display: none;         /* oculta texto, deja solo la bandera */
+        display: none;         /* oculta texto, deja solo el emoji */
     }
     /* Hamburger siempre pegado a la derecha */
     .hamburger {
