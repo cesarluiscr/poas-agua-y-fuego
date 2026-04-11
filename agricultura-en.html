@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta property="og:type"         content="website">
+    <meta property="og:site_name"     content="Poás Agua y Fuego">
+    <meta property="og:title"         content="Canton Agriculture | Poás Agua y Fuego">
+    <meta property="og:description"   content="High-altitude coffee, strawberries, ornamental plants and dairy farming: the agricultural wealth of Poás canton, Alajuela, Costa Rica.">
+    <meta property="og:url"           content="https://cesarluiscr.github.io/poas-agua-y-fuego/agricultura-en.html">
+    <meta property="og:image"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/poas_og_v3.png">
+    <meta property="og:image:width"   content="1200">
+    <meta property="og:image:height"  content="630">
+    <meta property="og:image:type"    content="image/png">
+    <meta property="og:locale"        content="en_US">
+    <meta name="twitter:card"         content="summary_large_image">
+    <meta name="twitter:title"        content="Canton Agriculture | Poás Agua y Fuego">
+    <meta name="twitter:description"  content="High-altitude coffee, strawberries, ornamental plants and dairy farming: the agricultural wealth of Poás canton, Alajuela, Costa Rica.">
+    <meta name="twitter:image"        content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/poas_og_v3.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canton Agriculture | Poás Agua y Fuego</title>
+    <meta name="description" content="Discover the agricultural wealth of Poás Canton: high-altitude coffee, dairy farming, strawberries, ornamental plants and the canton farmers market.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ag-dark:        #0f2b1a;
+            --ag-dark2:       #1a3d28;
+            --ag-green:       #34a853;
+            --ag-light-green: #6fcf8a;
+            --ag-gold:        #FFD700;
+            --ag-gold-dim:    #c9a800;
+            --ag-cream:       #f8fdf4;
+            --ag-cream2:      #edf7e6;
+            --ag-text:        #1b3324;
+            --ag-muted:       #4a6b55;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--ag-cream);
+            color: var(--ag-text);
+        }
+
+        /* ── NAV ── */
+        .ag-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(15, 43, 26, 0.93);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.85rem 2rem;
+            border-bottom: 1px solid rgba(52, 168, 83, 0.18);
+        }
+        .ag-nav-back {
+            color: rgba(255,255,255,0.72); text-decoration: none; font-size: 0.88rem;
+            display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;
+            font-weight: 500;
+        }
+        .ag-nav-back:hover { color: var(--ag-gold); }
+        .ag-nav-logo {
+            color: var(--ag-light-green); font-weight: 700; font-size: 1.05rem;
+            text-decoration: none; letter-spacing: 0.01em;
+        }
+        .ag-nav-label {
+            color: var(--ag-gold); font-size: 0.85rem; font-weight: 600;
+            display: flex; align-items: center; gap: 0.35rem;
+            border: 1px solid rgba(255, 215, 0, 0.35); border-radius: 999px;
+            padding: 0.3rem 0.9rem;
+        }
+
+        /* ── HERO ── */
+        .ag-hero {
+            min-height: 100vh;
+            background:
+                linear-gradient(160deg, rgba(15,43,26,0.97) 0%, rgba(26,61,40,0.88) 45%, rgba(10,35,18,0.95) 100%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 30px,
+                    rgba(52,168,83,0.04) 30px,
+                    rgba(52,168,83,0.04) 60px
+                );
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 7rem 2rem 5rem;
+            position: relative; overflow: hidden;
+        }
+        .ag-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 60% 50% at 20% 30%, rgba(52,168,83,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 80% 70%, rgba(111,207,138,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .ag-hero-leaf-bg {
+            position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+            opacity: 0.06;
+            font-size: 9rem; line-height: 1;
+            display: flex; flex-wrap: wrap; align-items: flex-start; gap: 2rem;
+            padding: 1rem;
+            filter: blur(1px);
+        }
+        .ag-hero-badge {
+            background: var(--ag-gold);
+            color: #0f2b1a; font-weight: 700; font-size: 0.73rem; letter-spacing: 0.16em;
+            text-transform: uppercase; padding: 0.35rem 1.2rem; border-radius: 99px;
+            margin-bottom: 1.6rem; display: inline-block; position: relative;
+        }
+        .ag-hero h1 {
+            font-size: clamp(2.5rem, 7vw, 5.2rem);
+            color: #fff; line-height: 1.1; margin-bottom: 1rem;
+            font-weight: 800; position: relative;
+        }
+        .ag-hero h1 span { color: var(--ag-light-green); }
+        .ag-hero-subtitle {
+            color: var(--ag-gold); font-size: clamp(0.95rem, 2vw, 1.15rem);
+            font-weight: 500; margin-bottom: 1.5rem; position: relative;
+            font-style: italic;
+        }
+        .ag-hero p {
+            color: rgba(255,255,255,0.80); font-size: clamp(0.95rem, 2vw, 1.15rem);
+            max-width: 660px; line-height: 1.75; position: relative;
+        }
+        .ag-hero-scroll {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,0.4); font-size: 0.78rem; text-align: center;
+            animation: ag-bounce 2.2s infinite;
+        }
+        @keyframes ag-bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50%       { transform: translateX(-50%) translateY(9px); }
+        }
+
+        /* ── SHARED LAYOUT ── */
+        .ag-container { max-width: 1060px; margin: 0 auto; padding: 0 1.5rem; }
+        .ag-section-label {
+            color: var(--ag-green); font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem;
+        }
+        .ag-section-title {
+            font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+            font-weight: 800; line-height: 1.2; margin-bottom: 0.9rem;
+        }
+        .ag-divider {
+            width: 56px; height: 3px; border-radius: 99px;
+            background: var(--ag-green); margin: 0 auto 1.5rem;
+        }
+        .ag-divider.left { margin: 0 0 1.5rem; }
+
+        /* ── INTRO SECTION ── */
+        .ag-intro {
+            background: var(--ag-cream);
+            padding: 5.5rem 2rem;
+        }
+        .ag-intro-inner {
+            max-width: 820px; margin: 0 auto; text-align: center;
+        }
+        .ag-intro-inner .ag-section-title { color: var(--ag-dark); }
+        .ag-intro-inner .ag-divider { background: var(--ag-green); }
+        .ag-intro p {
+            color: var(--ag-muted); line-height: 1.85; font-size: 1.05rem; margin-bottom: 1.15rem;
+        }
+        .ag-intro p strong { color: var(--ag-dark2); }
+        .ag-stat-row {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        .ag-stat {
+            background: #fff; border: 1px solid rgba(52,168,83,0.2);
+            border-radius: 14px; padding: 1.3rem 2rem; text-align: center;
+            box-shadow: 0 2px 12px rgba(15,43,26,0.07); min-width: 150px;
+        }
+        .ag-stat-num {
+            font-size: 2rem; font-weight: 800; color: var(--ag-dark2); line-height: 1;
+        }
+        .ag-stat-num span { color: var(--ag-green); }
+        .ag-stat-desc {
+            font-size: 0.82rem; color: var(--ag-muted); margin-top: 0.3rem; font-weight: 500;
+        }
+
+        /* ── CULTIVOS TRADICIONALES ── */
+        .ag-tradicionales {
+            background: var(--ag-dark);
+            padding: 5.5rem 2rem;
+        }
+        .ag-trad-header {
+            text-align: center; margin-bottom: 3.5rem;
+        }
+        .ag-trad-header .ag-section-label { color: var(--ag-light-green); }
+        .ag-trad-header .ag-section-title { color: #fff; }
+        .ag-trad-header .ag-divider { background: var(--ag-gold); }
+
+        .ag-trad-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+        .ag-trad-card {
+            background: var(--ag-dark2);
+            border: 1px solid rgba(111,207,138,0.15);
+            border-radius: 16px; padding: 2rem 1.8rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .ag-trad-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 36px rgba(0,0,0,0.35);
+            border-color: rgba(111,207,138,0.4);
+        }
+        .ag-card-emoji {
+            font-size: 2.8rem; margin-bottom: 1rem; display: block;
+        }
+        .ag-card-title {
+            font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 0.4rem;
+        }
+        .ag-card-subtitle {
+            font-size: 0.78rem; font-weight: 600; color: var(--ag-light-green);
+            letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;
+        }
+        .ag-card-text {
+            color: rgba(255,255,255,0.72); line-height: 1.75; font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        .ag-card-tags {
+            display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;
+        }
+        .ag-tag {
+            background: rgba(52,168,83,0.18); color: var(--ag-light-green);
+            border: 1px solid rgba(52,168,83,0.3);
+            font-size: 0.74rem; font-weight: 600; padding: 0.25rem 0.7rem;
+            border-radius: 99px; letter-spacing: 0.05em;
+        }
+        .ag-tag.gold {
+            background: rgba(255,215,0,0.12); color: var(--ag-gold);
+            border-color: rgba(255,215,0,0.3);
+        }
+        .ag-card-highlight {
+            background: rgba(255,215,0,0.08); border-left: 3px solid var(--ag-gold);
+            color: rgba(255,255,255,0.80); font-size: 0.88rem; line-height: 1.65;
+            padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; margin-top: 1rem;
+        }
+
+        /* ── CULTIVOS NO TRADICIONALES ── */
+        .ag-notradicionales {
+            background: var(--ag-cream2);
+            padding: 5.5rem 2rem;
+        }
+        .ag-notrad-header {
+            text-align: center; margin-bottom: 3.5rem;
+        }
+        .ag-notrad-header .ag-section-title { color: var(--ag-dark); }
+
+        .ag-notrad-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.6rem;
+        }
+        .ag-notrad-card {
+            background: #fff;
+            border: 1px solid rgba(52,168,83,0.15);
+            border-radius: 16px; padding: 1.8rem 1.6rem;
+            box-shadow: 0 3px 18px rgba(15,43,26,0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .ag-notrad-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 32px rgba(15,43,26,0.14);
+            border-color: rgba(52,168,83,0.4);
+        }
+        .ag-notrad-card .ag-card-emoji { font-size: 2.4rem; }
+        .ag-notrad-card .ag-card-title { color: var(--ag-dark); }
+        .ag-notrad-card .ag-card-subtitle { color: var(--ag-green); }
+        .ag-notrad-card .ag-card-text { color: var(--ag-muted); }
+        .ag-notrad-card .ag-tag {
+            background: rgba(52,168,83,0.10); color: var(--ag-dark2);
+            border-color: rgba(52,168,83,0.25);
+        }
+        .ag-notrad-accent {
+            background: rgba(52,168,83,0.08); border-left: 3px solid var(--ag-green);
+            color: var(--ag-dark2); font-size: 0.88rem; line-height: 1.65;
+            padding: 0.75rem 1rem; border-radius: 0 8px 8px 0; margin-top: 1rem;
+        }
+
+        /* ── CAMPO FERIAL ── */
+        .ag-ferial {
+            background: linear-gradient(135deg, #1a3d28 0%, #0f2b1a 40%, #1c3a10 100%);
+            padding: 5.5rem 2rem;
+            position: relative; overflow: hidden;
+        }
+        .ag-ferial::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 70% 60% at 10% 50%, rgba(255,215,0,0.07) 0%, transparent 65%),
+                radial-gradient(ellipse 50% 80% at 90% 20%, rgba(52,168,83,0.10) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .ag-ferial-inner {
+            position: relative;
+            max-width: 860px; margin: 0 auto; text-align: center;
+        }
+        .ag-ferial-icon {
+            font-size: 5rem; margin-bottom: 1.2rem; display: block;
+            filter: drop-shadow(0 4px 16px rgba(255,215,0,0.3));
+        }
+        .ag-ferial-badge {
+            display: inline-block; background: rgba(255,215,0,0.12);
+            border: 1px solid rgba(255,215,0,0.35); color: var(--ag-gold);
+            font-size: 0.73rem; font-weight: 700; letter-spacing: 0.18em;
+            text-transform: uppercase; padding: 0.35rem 1.1rem; border-radius: 99px;
+            margin-bottom: 1.4rem;
+        }
+        .ag-ferial h2 {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 800; color: #fff; margin-bottom: 1.2rem; line-height: 1.2;
+        }
+        .ag-ferial h2 span { color: var(--ag-gold); }
+        .ag-ferial-desc {
+            color: rgba(255,255,255,0.78); font-size: 1.05rem; line-height: 1.8;
+            max-width: 680px; margin: 0 auto 2.5rem;
+        }
+        .ag-ferial-stats {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .ag-ferial-stat {
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px; padding: 1.4rem 2rem; text-align: center;
+            min-width: 160px; backdrop-filter: blur(4px);
+        }
+        .ag-ferial-stat-num {
+            font-size: 2.2rem; font-weight: 800; color: var(--ag-gold); line-height: 1;
+        }
+        .ag-ferial-stat-desc {
+            font-size: 0.82rem; color: rgba(255,255,255,0.65); margin-top: 0.35rem; font-weight: 500;
+        }
+
+        /* ── BACK BUTTON ── */
+        .ag-back-section {
+            background: var(--ag-cream);
+            padding: 3.5rem 2rem; text-align: center;
+        }
+        .ag-back-btn {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            background: var(--ag-dark2); color: #fff; text-decoration: none;
+            font-size: 1rem; font-weight: 600; padding: 0.85rem 2rem;
+            border-radius: 99px; transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 18px rgba(15,43,26,0.2);
+        }
+        .ag-back-btn:hover {
+            background: var(--ag-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(15,43,26,0.3);
+        }
+
+        /* ── FOOTER ── */
+        .ag-footer {
+            background: var(--ag-dark);
+            padding: 1.8rem 2rem; text-align: center;
+            color: rgba(255,255,255,0.45); font-size: 0.82rem;
+            border-top: 1px solid rgba(52,168,83,0.15);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 640px) {
+            .ag-nav { padding: 0.75rem 1rem; }
+            .ag-nav-logo { font-size: 0.9rem; }
+            .ag-nav-back { font-size: 0.82rem; }
+            .ag-nav-label { font-size: 0.78rem; padding: 0.25rem 0.7rem; }
+
+            .ag-hero { padding: 6rem 1.25rem 4rem; }
+            .ag-intro { padding: 3.5rem 1.25rem; }
+            .ag-tradicionales,
+            .ag-notradicionales,
+            .ag-ferial { padding: 3.5rem 1.25rem; }
+            .ag-trad-grid,
+            .ag-notrad-grid { grid-template-columns: 1fr; }
+            .ag-ferial-stats { gap: 1rem; }
+            .ag-ferial-stat { min-width: 140px; }
+            .ag-stat-row { gap: 1rem; }
+        }
+
+        @media (min-width: 641px) and (max-width: 900px) {
+            .ag-notrad-grid { grid-template-columns: 1fr 1fr; }
+            .ag-trad-grid   { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════════ NAV ═══════════════════ -->
+    <nav class="ag-nav" aria-label="Main navigation">
+        <a href="index-en.html" class="ag-nav-back">← Home</a>
+        <a href="index-en.html" class="ag-nav-logo">Poás Agua y Fuego</a>
+        <span class="ag-nav-label">🌱 Agriculture</span>
+    </nav>
+
+    <!-- ═══════════════════ HERO ═══════════════════ -->
+    <section class="ag-hero" aria-label="Hero - Canton Agriculture">
+        <div class="ag-hero-leaf-bg" aria-hidden="true">
+            🌿🌱🍃🌿🌱🍃🌿🌱🍃🌿🌱🍃🌿🌱🍃🌿🌱🍃🌿🌱🍃🌿🌱🍃
+        </div>
+        <div class="ag-hero-badge">🌱 Poás Canton · Costa Rica</div>
+        <h1>Canton <span>Agriculture</span></h1>
+        <p class="ag-hero-subtitle">Where volcanic soil nourishes life and tradition</p>
+        <p>
+            On the slopes of Poás volcano, more than a thousand metres above sea level, thousands of
+            farming families cultivate the land with dedication and inherited knowledge. Poás canton
+            is an agricultural mosaic of great richness: high-altitude coffee, fresh milk, strawberries,
+            ferns and organic vegetables coexist beneath the cloud cover of the central volcanic range.
+        </p>
+        <div class="ag-hero-scroll" aria-hidden="true">▼ Explore</div>
+    </section>
+
+    <!-- ═══════════════════ INTRO ═══════════════════ -->
+    <section class="ag-intro" id="intro">
+        <div class="ag-intro-inner">
+            <p class="ag-section-label">The canton by the numbers</p>
+            <h2 class="ag-section-title">Smallholding and organic quality</h2>
+            <div class="ag-divider"></div>
+            <p>
+                The agrarian structure of Poás canton is characterised by <strong>smallholding</strong>:
+                the vast majority of agricultural operations have fewer than 4 hectares. This reality
+                is not a limitation, but the foundation of a careful, diversified production deeply
+                rooted in Costa Rican identity.
+            </p>
+            <p>
+                The <strong>volcanic soil</strong> of the area, rich in minerals and with constant
+                humidity guaranteed by orographic clouds, produces crops of exceptional quality. Both
+                coffee and strawberries, ferns and organic vegetables from the canton are recognised
+                for their flavour, freshness and the unique microclimate conditions on the volcano's
+                slopes.
+            </p>
+            <p>
+                Agriculture in Poás is also synonymous with <strong>family economy</strong>:
+                between 80 and 90% of the labour force in the main productive sectors is family-based,
+                which ensures that the wealth generated stays within the territory and strengthens the
+                social fabric of each district.
+            </p>
+            <div class="ag-stat-row">
+                <div class="ag-stat">
+                    <div class="ag-stat-num"><span>&lt;</span>4 ha</div>
+                    <div class="ag-stat-desc">Typical farm size (smallholding)</div>
+                </div>
+                <div class="ag-stat">
+                    <div class="ag-stat-num">80<span>%+</span></div>
+                    <div class="ag-stat-desc">Family labour in coffee</div>
+                </div>
+                <div class="ag-stat">
+                    <div class="ag-stat-num">+1<span>,</span>200 m</div>
+                    <div class="ag-stat-desc">Altitude of high-altitude coffee</div>
+                </div>
+                <div class="ag-stat">
+                    <div class="ag-stat-num">6</div>
+                    <div class="ag-stat-desc">Districts with agricultural vocation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ CULTIVOS TRADICIONALES ═══════════════════ -->
+    <section class="ag-tradicionales" id="tradicionales">
+        <div class="ag-container">
+            <div class="ag-trad-header">
+                <p class="ag-section-label">Roots of the canton</p>
+                <h2 class="ag-section-title">Traditional Crops</h2>
+                <div class="ag-divider"></div>
+                <p style="color:rgba(255,255,255,0.65); max-width:620px; margin:0 auto; font-size:0.97rem; line-height:1.75;">
+                    Three economic pillars have defined the productive identity of the canton for
+                    generations, shaping the landscape, culture and daily life of its inhabitants.
+                </p>
+            </div>
+            <div class="ag-trad-grid">
+
+                <!-- COFFEE -->
+                <div class="ag-trad-card">
+                    <span class="ag-card-emoji">☕</span>
+                    <h3 class="ag-card-title">High-Altitude Coffee</h3>
+                    <p class="ag-card-subtitle">San Pedro · San Rafael · San Juan</p>
+                    <p class="ag-card-text">
+                        Coffee is the canton's quintessential agricultural symbol. Grown in the upper
+                        districts at more than 1,200 metres above sea level, it develops slowly thanks
+                        to cool nights, building a concentration of sugars and aromas impossible to
+                        replicate in lower-lying areas.
+                    </p>
+                    <p class="ag-card-text">
+                        The volcanic soil, rich in minerals such as phosphorus, potassium and nitrogen,
+                        gives the bean a bright acidity and a robust body that sets it apart in both
+                        national and international markets.
+                    </p>
+                    <div class="ag-card-highlight">
+                        Bold, acidic and aromatic — Poás coffee is considered a "specialty coffee"
+                        for its singular cup profile.
+                    </div>
+                    <div class="ag-card-tags">
+                        <span class="ag-tag">+1,200 masl</span>
+                        <span class="ag-tag">Volcanic soil</span>
+                        <span class="ag-tag gold">80–90% family labour</span>
+                        <span class="ag-tag">Export</span>
+                    </div>
+                </div>
+
+                <!-- DAIRY -->
+                <div class="ag-trad-card">
+                    <span class="ag-card-emoji">🐄</span>
+                    <h3 class="ag-card-title">Dairy Farming</h3>
+                    <p class="ag-card-subtitle">Highlands · +1,300 masl</p>
+                    <p class="ag-card-text">
+                        In the highest parts of the canton, where pasture stays green and fresh
+                        year-round, dairy farming is a long-standing tradition. Holstein breeds
+                        dominate family farms, well-adapted to the cool, humid climate of the
+                        volcano's slopes.
+                    </p>
+                    <p class="ag-card-text">
+                        Production is not limited to fluid milk: the canton's dairy products enjoy
+                        national recognition. Fresh cheese, palmito cheese, artisan mozzarella and
+                        Poás sour cream are products with their own identity.
+                    </p>
+                    <div class="ag-card-highlight">
+                        The canton's sour cream and fresh cheeses enjoy national recognition,
+                        present in markets and fairs throughout the country.
+                    </div>
+                    <div class="ag-card-tags">
+                        <span class="ag-tag">+1,300 masl</span>
+                        <span class="ag-tag">Holstein breed</span>
+                        <span class="ag-tag gold">Artisan cheeses</span>
+                        <span class="ag-tag">Recognised sour cream</span>
+                    </div>
+                </div>
+
+                <!-- SUGARCANE -->
+                <div class="ag-trad-card">
+                    <span class="ag-card-emoji">🎋</span>
+                    <h3 class="ag-card-title">Sugarcane</h3>
+                    <p class="ag-card-subtitle">Carrillos · Lowland zone</p>
+                    <p class="ag-card-text">
+                        For decades, sugarcane was the canton's most important economic driver.
+                        Community sugar mills were social gathering points and the main source of
+                        livelihood for entire families across multiple districts.
+                    </p>
+                    <p class="ag-card-text">
+                        Today production is concentrated mainly in the district of Carrillos, in the
+                        canton's lowland zone, where the warmer climate favours the crop. However,
+                        urban expansion and residential development have put pressure on cultivable
+                        land, gradually reducing the area under cultivation.
+                    </p>
+                    <div class="ag-card-highlight">
+                        The sugar mill was for generations a community symbol and cultural identity
+                        of Poás, now undergoing transformation.
+                    </div>
+                    <div class="ag-card-tags">
+                        <span class="ag-tag">Carrillos</span>
+                        <span class="ag-tag">Lowland zone</span>
+                        <span class="ag-tag gold">Historical driver</span>
+                        <span class="ag-tag">Sugar mill tradition</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ CULTIVOS NO TRADICIONALES ═══════════════════ -->
+    <section class="ag-notradicionales" id="no-tradicionales">
+        <div class="ag-container">
+            <div class="ag-notrad-header">
+                <p class="ag-section-label" style="color:var(--ag-green);">Innovation and diversification</p>
+                <h2 class="ag-section-title">Non-Traditional Crops</h2>
+                <div class="ag-divider"></div>
+                <p style="color:var(--ag-muted); max-width:620px; margin:0 auto; font-size:0.97rem; line-height:1.75;">
+                    The adaptability of Poás producers is reflected in a range of innovative
+                    agricultural activities that have conquered national and international markets.
+                </p>
+            </div>
+            <div class="ag-notrad-grid">
+
+                <!-- STRAWBERRIES -->
+                <div class="ag-notrad-card">
+                    <span class="ag-card-emoji">🍓</span>
+                    <h3 class="ag-card-title">Strawberries</h3>
+                    <p class="ag-card-subtitle">National pioneers</p>
+                    <p class="ag-card-text">
+                        Poás is recognised as one of the pioneering areas in strawberry cultivation
+                        at the national level. The conditions in the upper part of the canton —cool
+                        temperatures, high relative humidity and well-drained volcanic soil— are ideal
+                        for producing strawberries of excellent quality and flavour.
+                    </p>
+                    <p class="ag-card-text">
+                        The canton's strawberry production is characterised by a high level of
+                        technology: automated irrigation systems, efficient water infrastructure and
+                        greenhouses that allow controlled production throughout the year.
+                    </p>
+                    <div class="ag-notrad-accent">
+                        Automated irrigation infrastructure and shade houses have raised the
+                        productivity and export quality of Poás strawberries.
+                    </div>
+                    <div class="ag-card-tags">
+                        <span class="ag-tag">Upper zone</span>
+                        <span class="ag-tag">Automated irrigation</span>
+                        <span class="ag-tag">High technology level</span>
+                    </div>
+                </div>
+
+                <!-- ORNAMENTALS -->
+                <div class="ag-notrad-card">
+                    <span class="ag-card-emoji">🌿</span>
+                    <h3 class="ag-card-title">Ornamental Plants and Ferns</h3>
+                    <p class="ag-card-subtitle">Sabana Redonda · Export</p>
+                    <p class="ag-card-text">
+                        The cultivation of ornamental plants and ferns has become the main source of
+                        employment in Sabana Redonda, generating thousands of jobs in the district
+                        and its surroundings.
+                    </p>
+                    <p class="ag-card-text">
+                        This activity has a strong <strong style="color:var(--ag-dark2);">gender equity</strong>
+                        component: the workforce is predominantly female, making the ornamental sector
+                        an engine of economic inclusion for women in the canton's rural communities.
+                    </p>
+                    <div class="ag-notrad-accent">
+                        Ferns and foliage from Poás are exported to markets in North America and
+                        Europe, positioning the canton in international floriculture.
+                    </div>
+                    <div class="ag-card-tags">
+                        <span class="ag-tag">Sabana Redonda</span>
+                        <span class="ag-tag">Export</span>
+                        <span class="ag-tag">Female employment</span>
+                    </div>
+                </div>
+
+                <!-- POULTRY -->
+                <div class="ag-notrad-card">
+                    <span class="ag-card-emoji">🐔</span>
+                    <h3 class="ag-card-title">Poultry Farms</h3>
+                    <p class="ag-card-subtitle">San Rafael · Sabana Redonda · Northern zone</p>
+                    <p class="ag-card-text">
+                        Poultry farming has experienced significant growth in the canton over recent
+                        years. The modern poultry houses of San Rafael and Sabana Redonda, and the
+                        northern zone of the canton in general, host medium-scale operations with
+                        state-of-the-art technology.
+                    </p>
+                    <p class="ag-card-text">
+                        Automated ventilation systems, temperature control and strict sanitary
+                        management allow Poás producers to compete with demanding quality standards
+                        in the national market.
+                    </p>
+                    <div class="ag-notrad-accent">
+                        Strong recent growth in the sector, with investments in modern poultry house
+                        infrastructure in the northern zone of the canton.
+                    </div>
+                    <div class="ag-card-tags">
+                        <span class="ag-tag">Northern zone</span>
+                        <span class="ag-tag">Modern poultry houses</span>
+                        <span class="ag-tag">Accelerated growth</span>
+                    </div>
+                </div>
+
+                <!-- VEGETABLES -->
+                <div class="ag-notrad-card">
+                    <span class="ag-card-emoji">🥬</span>
+                    <h3 class="ag-card-title">Organic Vegetables and Sod</h3>
+                    <p class="ag-card-subtitle">Upper zone · Carrillos</p>
+                    <p class="ag-card-text">
+                        In the upper part of the canton, high-quality organic vegetables are produced:
+                        tomatoes, sweet peppers, celery and organic lettuce grown without agrochemicals,
+                        taking advantage of the natural fertility of the volcanic soil and the permanent
+                        humidity of the area.
+                    </p>
+                    <p class="ag-card-text">
+                        In the lowland zone, the district of Carrillos stands out for the cultivation
+                        of sod (turf grass) for landscaping and gardening, with a distribution network
+                        reaching provinces as far away as <strong style="color:var(--ag-dark2);">Guanacaste</strong>,
+                        supplying residential, tourism and municipal projects.
+                    </p>
+                    <div class="ag-notrad-accent">
+                        Sod from Carrillos is sold as far as Guanacaste; organic vegetables from the
+                        upper zone supply farmers markets and supermarkets.
+                    </div>
+                    <div class="ag-card-tags">
+                        <span class="ag-tag">Organic</span>
+                        <span class="ag-tag">Carrillos</span>
+                        <span class="ag-tag">National distribution</span>
+                        <span class="ag-tag">Tomato · Pepper · Celery</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ CAMPO FERIAL ═══════════════════ -->
+    <section class="ag-ferial" id="campo-ferial">
+        <div class="ag-ferial-inner">
+            <span class="ag-ferial-icon">🏪</span>
+            <div class="ag-ferial-badge">Agricultural infrastructure</div>
+            <h2>Canton <span>Farmers Market</span></h2>
+            <p class="ag-ferial-desc">
+                The Poás Canton Farmers Market is a hygienic, safe and covered space where more than
+                60 local producers gather to offer their products directly to consumers, eliminating
+                middlemen and guaranteeing fair prices for both sellers and buyers.
+            </p>
+            <p class="ag-ferial-desc" style="margin-bottom:0;">
+                With an investment exceeding <strong style="color:var(--ag-gold);">₡807 millones</strong>,
+                the market infrastructure represents the commitment of the Municipality of Poás to
+                strengthening the local agricultural sector. The space facilitates direct marketing,
+                shortens the value chain and stimulates the economy of the canton's agricultural districts.
+            </p>
+            <div class="ag-ferial-stats">
+                <div class="ag-ferial-stat">
+                    <div class="ag-ferial-stat-num">+60</div>
+                    <div class="ag-ferial-stat-desc">Active producers</div>
+                </div>
+                <div class="ag-ferial-stat">
+                    <div class="ag-ferial-stat-num">₡807M</div>
+                    <div class="ag-ferial-stat-desc">Infrastructure investment</div>
+                </div>
+                <div class="ag-ferial-stat">
+                    <div class="ag-ferial-stat-num">100%</div>
+                    <div class="ag-ferial-stat-desc">Covered and hygienic space</div>
+                </div>
+                <div class="ag-ferial-stat">
+                    <div class="ag-ferial-stat-num">0</div>
+                    <div class="ag-ferial-stat-desc">Middlemen in direct sales</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ BACK BUTTON ═══════════════════ -->
+    <section class="ag-back-section">
+        <a href="index-en.html" class="ag-back-btn">← Back to Home</a>
+    </section>
+
+    <!-- ═══════════════════ FOOTER ═══════════════════ -->
+    <footer class="ag-footer">
+        © 2026 Poás Agua y Fuego · César Luis Quesada Herrera
+    </footer>
+
+    <script src="security.js?v=2"></script>
+</body>
+</html>
