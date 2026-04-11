@@ -2334,12 +2334,10 @@ footer {
         flex-shrink: 0;
     }
     .lang-btn {
-        font-size: 0;          /* oculta texto */
         padding: 0.3rem 0.4rem;
-        gap: 0;
     }
-    .lang-btn .flag-icon {
-        display: inline-block; /* mantiene solo la bandera */
+    .lang-btn .lang-label {
+        display: none;         /* oculta texto, deja solo la bandera */
     }
     /* Hamburger siempre pegado a la derecha */
     .hamburger {
