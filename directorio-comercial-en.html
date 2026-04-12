@@ -182,30 +182,13 @@
     <script>
         window.addEventListener('scroll', () => document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50));
         // ── Mobile Nav ──
-(function() {
-    const hamburger = document.getElementById('hamburger');
-    const mobileNav = document.getElementById('mobileNav');
-    function closeMobileNav() {
-        if (!hamburger || !mobileNav) return;
-        hamburger.classList.remove('open');
-        mobileNav.classList.remove('open');
-        document.body.style.overflow = '';
-    }
-    window.closeMobileNav = closeMobileNav;
-    if (hamburger && mobileNav) {
-        hamburger.addEventListener('click', () => {
-            const isOpen = hamburger.classList.toggle('open');
-            mobileNav.classList.toggle('open', isOpen);
-            document.body.style.overflow = isOpen ? 'hidden' : '';
-        });
-        mobileNav.addEventListener('click', (e) => {
-            if (!e.target.closest('#mobileNavPanel')) closeMobileNav();
-        });
-        const closeBtn = document.getElementById('mobileNavClose');
-        if (closeBtn) closeBtn.addEventListener('click', closeMobileNav);
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobileNav(); });
-    }
-})();
+window.closeMobileNav = function() {
+    const h = document.getElementById('hamburger');
+    const m = document.getElementById('mobileNav');
+    if (h) h.classList.remove('open');
+    if (m) m.classList.remove('open');
+    document.body.style.overflow = '';
+};
     </script>
     <script src="security.js?v=2"></script>
 <script src="search.js"></script>
