@@ -362,32 +362,29 @@
 
     <!-- Mobile Nav Drawer -->
     <nav class="mobile-nav" id="mobileNav">
-        <div class="mobile-nav-panel" id="mobileNavPanel">
-            <div class="mobile-nav-header">
-                <span class="mobile-nav-logo">Poás <span>Agua y Fuego</span></span>
-                <button class="mobile-nav-close" id="mobileNavClose" aria-label="Cerrar menú">×</button>
-            </div>
-            <div class="mobile-nav-links">
-                <a href="index.html"               onclick="closeMobileNav()">🏠 Inicio</a>
-                <div class="mobile-nav-sep"></div>
-                <a href="patrimonio-hidrico.html"  onclick="closeMobileNav()">💧 Patrimonio Hídrico</a>
-                <a href="historia-canton.html"     onclick="closeMobileNav()">📜 Historia del Cantón</a>
-                <a href="galeria.html"             onclick="closeMobileNav()">📷 Galería</a>
-                <div class="mobile-nav-sep"></div>
-                <a href="directorio-comercial.html" onclick="closeMobileNav()">🛍️ Directorio Turístico y Comercial</a>
-                <a href="bolsa-empleo.html"        onclick="closeMobileNav()">💼 Bolsa de Empleo</a>
-                <a href="eventos.html"             onclick="closeMobileNav()">📅 Eventos</a>
-                <div class="mobile-nav-sep"></div>
-                <a href="plan-regulador.html"      onclick="closeMobileNav()">🗺️ Plan Regulador</a>
-                <a href="index.html#contacto"      onclick="closeMobileNav()">📬 Contacto</a>
-            </div>
-            <div class="mobile-nav-lang">
-                <a href="galeria.html" class="mobile-lang-btn mobile-lang-active">🇨🇷 Español</a>
-                <a href="galeria-en.html" class="mobile-lang-btn">🇺🇸 English</a>
-            </div>
-            <div class="mobile-nav-footer">Cantón de Poás · Alajuela · Costa Rica</div>
+    <div class="mobile-nav-panel" id="mobileNavPanel">
+        <div class="mobile-nav-header">
+            <span class="mobile-nav-logo">Poás <span>Agua y Fuego</span></span>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Cerrar menú">×</button>
         </div>
-    </nav>
+        <div class="mobile-nav-links">
+            <a href="index.html" onclick="closeMobileNav()">🏠 Inicio</a>
+            <a href="patrimonio-hidrico.html" onclick="closeMobileNav()">Patrimonio Hídrico</a>
+            <a href="historia-canton.html" onclick="closeMobileNav()">Historia del Cantón</a>
+            <a href="galeria.html" onclick="closeMobileNav()">Galería</a>
+            <a href="directorio-comercial.html" onclick="closeMobileNav()">Directorio Turístico y Comercial</a>
+            <a href="bolsa-empleo.html" onclick="closeMobileNav()">Bolsa de Empleo</a>
+            <a href="eventos.html" onclick="closeMobileNav()">Eventos</a>
+            <a href="plan-regulador.html" onclick="closeMobileNav()">Plan Regulador</a>
+            <a href="index.html#contacto" onclick="closeMobileNav()">Contacto</a>
+        </div>
+        <div class="mobile-nav-lang">
+            <a href="galeria.html" onclick="closeMobileNav()">🇨🇷 Español</a>
+            <a href="galeria-en.html" onclick="closeMobileNav()">🇺🇸 English</a>
+        </div>
+        <div class="mobile-nav-footer">Cantón de Poás · Alajuela · Costa Rica</div>
+    </div>
+</nav>
 
     <!-- HERO -->
     <header class="g-hero">
@@ -757,13 +754,31 @@
         }
     </script>
     <script>
-        const _ham = document.getElementById('hamburger');
-        const _mn  = document.getElementById('mobileNav');
-        const _mnc = document.getElementById('mobileNavClose');
-        if (_ham) _ham.addEventListener('click', () => { _ham.classList.add('open'); _mn.classList.add('open'); });
-        if (_mnc) _mnc.addEventListener('click', closeMobileNav);
-        _mn && _mn.addEventListener('click', e => { if (e.target === _mn) closeMobileNav(); });
-        function closeMobileNav() { _ham && _ham.classList.remove('open'); _mn && _mn.classList.remove('open'); }
+        // ── Mobile Nav ──
+(function() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    function closeMobileNav() {
+        if (!hamburger || !mobileNav) return;
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    window.closeMobileNav = closeMobileNav;
+    if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', () => {
+            const isOpen = hamburger.classList.toggle('open');
+            mobileNav.classList.toggle('open', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+        mobileNav.addEventListener('click', (e) => {
+            if (!e.target.closest('#mobileNavPanel')) closeMobileNav();
+        });
+        const closeBtn = document.getElementById('mobileNavClose');
+        if (closeBtn) closeBtn.addEventListener('click', closeMobileNav);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobileNav(); });
+    }
+})();
     </script>
     <script src="security.js?v=2"></script>
 <script src="search.js"></script>

@@ -67,18 +67,28 @@
         <div class="hamburger" id="hamburger"><span></span><span></span><span></span><em class="hamburger-label">Menu</em></div>
     </nav>
 
-    <div class="mobile-nav" id="mobileNav">
-        <button class="close-btn" id="mobileNavClose">✕</button>
-        <div class="mobile-nav-panel">
-        <a href="index-en.html"                    onclick="closeMobileNav()">Home</a>
-        <a href="index-en.html#agua"               onclick="closeMobileNav()">Water Heritage</a>
-        <a href="directorio-comercial-en.html"     onclick="closeMobileNav()" style="text-align:center;white-space:normal;line-height:1.3;">Tourism &amp; Business<br>Directory</a>
-        <a href="bolsa-empleo-en.html"             onclick="closeMobileNav()">Jobs Board</a>
-        <a href="eventos-en.html"                  onclick="closeMobileNav()">Events</a>
-        <a href="plan-regulador-en.html"           onclick="closeMobileNav()">Zoning Plan</a>
-        <a href="index-en.html#contacto"           onclick="closeMobileNav()">Contact</a>
-        <a href="directorio-comercial.html"        onclick="closeMobileNav()">🇨🇷 Ver en Español</a>
+    <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-panel" id="mobileNavPanel">
+        <div class="mobile-nav-header">
+            <span class="mobile-nav-logo">Poás <span>Water &amp; Fire</span></span>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">×</button>
         </div>
+        <div class="mobile-nav-links">
+            <a href="index-en.html" onclick="closeMobileNav()">🏠 Home</a>
+            <a href="index-en.html#agua" onclick="closeMobileNav()">Water Heritage</a>
+            <a href="directorio-comercial-en.html" onclick="closeMobileNav()">Tourism &amp; Business Directory</a>
+            <a href="bolsa-empleo-en.html" onclick="closeMobileNav()">Jobs Board</a>
+            <a href="eventos-en.html" onclick="closeMobileNav()">Events</a>
+            <a href="plan-regulador-en.html" onclick="closeMobileNav()">Zoning Plan</a>
+            <a href="index-en.html#contacto" onclick="closeMobileNav()">Contact</a>
+        </div>
+        <div class="mobile-nav-lang">
+            <a href="directorio-comercial.html" onclick="closeMobileNav()">🇨🇷 Español</a>
+            <a href="directorio-comercial-en.html" onclick="closeMobileNav()">🇺🇸 English</a>
+        </div>
+        <div class="mobile-nav-footer">Poás Canton · Alajuela · Costa Rica</div>
+    </div>
+</nav>
     </div>
 
     <div class="dir-hero">
@@ -171,13 +181,31 @@
     <script src="script.js?v=2"></script>
     <script>
         window.addEventListener('scroll', () => document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50));
-        const _ham = document.getElementById('hamburger');
-        const _mn  = document.getElementById('mobileNav');
-        const _mnc = document.getElementById('mobileNavClose');
-        if (_ham) _ham.addEventListener('click', () => { _ham.classList.add('open'); _mn.classList.add('open'); });
-        if (_mnc) _mnc.addEventListener('click', closeMobileNav);
-        _mn && _mn.addEventListener('click', e => { if (e.target === _mn) closeMobileNav(); });
-        function closeMobileNav() { _ham && _ham.classList.remove('open'); _mn && _mn.classList.remove('open'); }
+        // ── Mobile Nav ──
+(function() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    function closeMobileNav() {
+        if (!hamburger || !mobileNav) return;
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    window.closeMobileNav = closeMobileNav;
+    if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', () => {
+            const isOpen = hamburger.classList.toggle('open');
+            mobileNav.classList.toggle('open', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+        mobileNav.addEventListener('click', (e) => {
+            if (!e.target.closest('#mobileNavPanel')) closeMobileNav();
+        });
+        const closeBtn = document.getElementById('mobileNavClose');
+        if (closeBtn) closeBtn.addEventListener('click', closeMobileNav);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobileNav(); });
+    }
+})();
     </script>
     <script src="security.js?v=2"></script>
 <script src="search.js"></script>
