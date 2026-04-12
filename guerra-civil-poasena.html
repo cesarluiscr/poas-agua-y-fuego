@@ -316,7 +316,20 @@
             🇺🇸 <span class="lang-label">EN</span>
         </a>
     </div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span><em class="hamburger-label">Menú</em></div>
 </nav>
+<div class="mobile-nav" id="mobileNav">
+    <button class="close-btn" id="mobileNavClose">✕</button>
+    <div class="mobile-nav-panel">
+    <a href="index.html"                onclick="closeMobileNav()">Inicio</a>
+    <a href="historia-canton.html"      onclick="closeMobileNav()">Historia del Cantón</a>
+    <a href="directorio-comercial.html" onclick="closeMobileNav()">Directorio Turístico y Comercial</a>
+    <a href="bolsa-empleo.html"         onclick="closeMobileNav()">Bolsa de Empleo</a>
+    <a href="eventos.html"              onclick="closeMobileNav()">Eventos</a>
+    <a href="index.html#contacto"       onclick="closeMobileNav()">Contacto</a>
+    <a href="guerra-civil-poasena-en.html" onclick="closeMobileNav()">🇺🇸 English</a>
+    </div>
+</div>
 <div class="breadcrumb">
     <a href="index.html">🏠 Inicio</a>
     <span class="breadcrumb-sep">›</span>
@@ -588,5 +601,14 @@
 </div>
 
 <script src="security.js?v=3"></script>
+<script>
+    const _ham = document.getElementById('hamburger');
+    const _mn  = document.getElementById('mobileNav');
+    const _mnc = document.getElementById('mobileNavClose');
+    if (_ham) _ham.addEventListener('click', () => { _ham.classList.add('open'); _mn.classList.add('open'); });
+    if (_mnc) _mnc.addEventListener('click', closeMobileNav);
+    _mn && _mn.addEventListener('click', e => { if (e.target === _mn) closeMobileNav(); });
+    function closeMobileNav() { _ham && _ham.classList.remove('open'); _mn && _mn.classList.remove('open'); }
+</script>
 </body>
 </html>

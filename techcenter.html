@@ -483,11 +483,26 @@
             <span>TECH CENTER CR</span>
         </a>
         <div class="tc-nav-right">
-            <a href="techcenter.html"    class="tc-lang-btn active">🇨🇷 <span class="lang-label">Español</span></a>
-            <a href="techcenter-en.html" class="tc-lang-btn">🇺🇸 <span class="lang-label">English</span></a>
+            <div class="nav-lang">
+                <a href="techcenter.html"    class="lang-btn active">🇨🇷 <span class="lang-label">Español</span></a>
+                <a href="techcenter-en.html" class="lang-btn">🇺🇸 <span class="lang-label">English</span></a>
+            </div>
             <a href="directorio-comercial.html" class="tc-nav-back">← Directorio</a>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span><em class="hamburger-label">Menú</em></div>
         </div>
     </nav>
+    <div class="mobile-nav" id="mobileNav">
+        <button class="close-btn" id="mobileNavClose">✕</button>
+        <div class="mobile-nav-panel">
+        <a href="index.html"                onclick="closeMobileNav()">Inicio</a>
+        <a href="directorio-comercial.html" onclick="closeMobileNav()">Directorio Turístico y Comercial</a>
+        <a href="bolsa-empleo.html"         onclick="closeMobileNav()">Bolsa de Empleo</a>
+        <a href="eventos.html"              onclick="closeMobileNav()">Eventos</a>
+        <a href="plan-regulador.html"       onclick="closeMobileNav()">Plan Regulador</a>
+        <a href="index.html#contacto"       onclick="closeMobileNav()">Contacto</a>
+        <a href="techcenter-en.html"        onclick="closeMobileNav()">🇺🇸 English</a>
+        </div>
+    </div>
 
     <!-- HERO -->
     <section class="tc-hero">
@@ -686,5 +701,14 @@
 <script src="script.js?v=2"></script>
     <script src="security.js?v=2"></script>
 <script src="search.js"></script>
+<script>
+    const _ham = document.getElementById('hamburger');
+    const _mn  = document.getElementById('mobileNav');
+    const _mnc = document.getElementById('mobileNavClose');
+    if (_ham) _ham.addEventListener('click', () => { _ham.classList.add('open'); _mn.classList.add('open'); });
+    if (_mnc) _mnc.addEventListener('click', closeMobileNav);
+    _mn && _mn.addEventListener('click', e => { if (e.target === _mn) closeMobileNav(); });
+    function closeMobileNav() { _ham && _ham.classList.remove('open'); _mn && _mn.classList.remove('open'); }
+</script>
 </body>
 </html>

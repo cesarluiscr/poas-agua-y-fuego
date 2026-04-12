@@ -497,8 +497,21 @@
                 <a href="techcenter.html" class="lang-btn">🇨🇷 <span class="lang-label">Español</span></a>
                 <a href="techcenter-en.html" class="lang-btn active">🇺🇸 <span class="lang-label">English</span></a>
             </div>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span><em class="hamburger-label">Menu</em></div>
         </div>
     </nav>
+    <div class="mobile-nav" id="mobileNav">
+        <button class="close-btn" id="mobileNavClose">✕</button>
+        <div class="mobile-nav-panel">
+        <a href="index-en.html"                onclick="closeMobileNav()">Home</a>
+        <a href="directorio-comercial-en.html" onclick="closeMobileNav()">Tourism &amp; Business Directory</a>
+        <a href="bolsa-empleo-en.html"         onclick="closeMobileNav()">Jobs Board</a>
+        <a href="eventos-en.html"              onclick="closeMobileNav()">Events</a>
+        <a href="plan-regulador-en.html"       onclick="closeMobileNav()">Zoning Plan</a>
+        <a href="index-en.html#contacto"       onclick="closeMobileNav()">Contact</a>
+        <a href="techcenter.html"              onclick="closeMobileNav()">🇨🇷 Ver en Español</a>
+        </div>
+    </div>
 
     <!-- HERO -->
     <section class="tc-hero">
@@ -697,5 +710,14 @@
 <script src="script.js?v=2"></script>
     <script src="security.js?v=2"></script>
 <script src="search.js"></script>
+<script>
+    const _ham = document.getElementById('hamburger');
+    const _mn  = document.getElementById('mobileNav');
+    const _mnc = document.getElementById('mobileNavClose');
+    if (_ham) _ham.addEventListener('click', () => { _ham.classList.add('open'); _mn.classList.add('open'); });
+    if (_mnc) _mnc.addEventListener('click', closeMobileNav);
+    _mn && _mn.addEventListener('click', e => { if (e.target === _mn) closeMobileNav(); });
+    function closeMobileNav() { _ham && _ham.classList.remove('open'); _mn && _mn.classList.remove('open'); }
+</script>
 </body>
 </html>
