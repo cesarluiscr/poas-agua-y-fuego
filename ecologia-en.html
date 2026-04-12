@@ -573,10 +573,11 @@
             .ec-proposito-grid { grid-template-columns: 1fr; }
         }
 
-        /* ── Mobile nav fixes ── */
+        /* ── Mobile ── */
         .ec-nav { overflow: visible; }
         @media (max-width: 1100px) {
-            .nav-lang { display: none !important; }
+            .ec-nav-logo, .ec-nav-label, .nav-lang { display: none !important; }
+            .ec-nav { justify-content: space-between; padding: 0.7rem 1.2rem; }
         }
     </style>
 </head>

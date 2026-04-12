@@ -298,10 +298,11 @@
         .breadcrumb-sep { opacity: 0.4; }
         .breadcrumb-current { color: #C8952A; font-weight: 600; }
 
-        /* ── Mobile nav fixes ── */
+        /* ── Mobile ── */
         .gc-nav { overflow: visible; }
         @media (max-width: 1100px) {
-            .nav-lang { display: none !important; }
+            .gc-nav-breadcrumb, .gc-nav-lang, .nav-lang { display: none !important; }
+            .gc-nav { justify-content: space-between; padding: 0.7rem 1.2rem; }
         }
     </style>
 </head>
