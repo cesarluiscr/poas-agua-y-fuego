@@ -4353,3 +4353,27 @@ footer {
     .agri-section { padding: 3.5rem 1rem; }
     .agri-ferial { flex-direction: column; text-align: center; padding: 1.25rem; }
 }
+
+/* ── Legacy mobile-nav: flat links directly inside .mobile-nav ──────────
+   Used by bolsa-empleo, directorio, eventos, ruta-gastronomica,
+   plan-regulador, seguridad-ciudadana (no .mobile-nav-panel structure)
+──────────────────────────────────────────────────────────────────── */
+.mobile-nav > .close-btn {
+    position: absolute;
+    top: 1.2rem; right: 1.5rem;
+    background: none; border: none;
+    color: rgba(255,255,255,0.85); font-size: 2rem;
+    cursor: pointer; z-index: 2; line-height: 1;
+}
+.mobile-nav > .close-btn:hover { color: #fff; }
+.mobile-nav > a {
+    display: block;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    font-size: 0.95rem; font-weight: 600;
+    border-bottom: 1px solid rgba(255,255,255,0.09);
+    transition: background 0.15s, color 0.15s;
+}
+.mobile-nav > a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.mobile-nav > a:first-of-type { margin-top: 4rem; }
