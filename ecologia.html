@@ -24,6 +24,7 @@
     <title>Ecología y Ecobarrio | Poás Agua y Fuego</title>
     <meta name="description" content="Guía del Modelo Ecobarrio: asentamientos humanos sostenibles, inclusivos y resilientes en el cantón de Poás, Costa Rica.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2">
     <style>
         :root {
             --ec-dark:     #0d2818;
@@ -570,6 +571,12 @@
             .ec-stat-chip { max-width: 100%; width: 100%; }
             .ec-quote-block { padding: 2rem 1.6rem; }
             .ec-proposito-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── Mobile nav fixes ── */
+        .ec-nav { overflow: visible; }
+        @media (max-width: 1100px) {
+            .nav-lang { display: none !important; }
         }
     </style>
 </head>
