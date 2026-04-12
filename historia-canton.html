@@ -24,6 +24,7 @@
     <title>Historia del Cantón de Poás | Poás Agua y Fuego</title>
     <meta name="description" content="Descubrí la historia, naturaleza y cultura del Cantón de Poás. Desde sus orígenes prehispánicos hasta su rica gastronomía y biodiversidad.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2">
     <style>
         :root {
             --historia-gold:   #C8952A;
@@ -62,6 +63,11 @@
             padding: .3rem .9rem; transition: background 0.2s, color 0.2s;
         }
         .hist-nav-galeria:hover { background: var(--historia-gold); color: #1a0f00; }
+        @media (max-width: 1100px) {
+            .hist-nav-logo, .hist-nav-back, .hist-nav-galeria { display: none !important; }
+            .hist-nav { justify-content: space-between; padding: 0.7rem 1.2rem; }
+            .hist-nav .nav-lang { margin-left: auto; }
+        }
 
         /* HERO */
         .hist-hero {
@@ -318,6 +324,39 @@
 <nav class="hist-nav">
     <a href="index.html" class="hist-nav-logo">🌋 Poás Agua y Fuego</a>
     <a href="index.html" class="hist-nav-back">← Volver al inicio</a>
+    <div class="nav-lang">
+        <a href="historia-canton.html" class="lang-btn active">🇨🇷 <span class="lang-label">Español</span></a>
+        <a href="historia-canton-en.html" class="lang-btn">🇺🇸 <span class="lang-label">English</span></a>
+    </div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span><em class="hamburger-label">Menú</em></div>
+</nav>
+<nav class="mobile-nav" id="mobileNav">
+<div class="mobile-nav-panel" id="mobileNavPanel">
+    <div class="mobile-nav-header">
+        <span class="mobile-nav-logo">Poás <span>Agua y Fuego</span></span>
+        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Cerrar menú">×</button>
+    </div>
+    <div class="mobile-nav-links">
+        <a href="index.html">🏠 Inicio</a>
+        <a href="galeria.html">🖼️ Galería</a>
+        <a href="historia-canton.html" class="active">📖 Historia del Cantón</a>
+        <a href="agricultura.html">🌱 Agricultura</a>
+        <a href="ecologia.html">🌿 Ecología</a>
+        <a href="patrimonio-hidrico.html">💧 Patrimonio Hídrico</a>
+        <a href="plan-regulador.html">🏗️ Plan Regulador</a>
+        <a href="ruta-gastronomica.html">🍽️ Ruta Gastronómica</a>
+        <a href="eventos.html">📅 Eventos</a>
+        <a href="directorio-comercial.html">🏪 Directorio Comercial</a>
+        <a href="bolsa-empleo.html">💼 Bolsa de Empleo</a>
+        <a href="seguridad-ciudadana.html">🛡️ Seguridad Ciudadana</a>
+        <a href="quejas.html">📢 Quejas y Sugerencias</a>
+    </div>
+    <div class="mobile-nav-lang">
+        <a href="historia-canton.html" class="lang-btn active">🇨🇷 Español</a>
+        <a href="historia-canton-en.html" class="lang-btn">🇺🇸 English</a>
+    </div>
+    <div class="mobile-nav-footer">Cantón de Poás · Alajuela · Costa Rica</div>
+</div>
 </nav>
 <div class="breadcrumb">
     <a href="index.html">🏠 Inicio</a>
@@ -1173,5 +1212,27 @@
     });
 </script>
     <script src="security.js?v=2"></script>
+    <script>
+    (function(){
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+        window.closeMobileNav = function(){
+            if (!hamburger || !mobileNav) return;
+            hamburger.classList.remove('open');
+            mobileNav.classList.remove('open');
+        };
+        if (hamburger && mobileNav) {
+            hamburger.addEventListener('click', () => {
+                const isOpen = hamburger.classList.toggle('open');
+                mobileNav.classList.toggle('open', isOpen);
+            });
+            if (mobileNavClose) mobileNavClose.addEventListener('click', window.closeMobileNav);
+            mobileNav.addEventListener('click', e => {
+                if (!e.target.closest('#mobileNavPanel')) window.closeMobileNav();
+            });
+        }
+    })();
+    </script>
 </body>
 </html>

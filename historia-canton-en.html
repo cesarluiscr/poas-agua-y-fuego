@@ -24,6 +24,7 @@
     <title>History of the Poás Canton | Poás Agua y Fuego</title>
     <meta name="description" content="Discover the history, nature and culture of the Canton of Poás. From its pre-Hispanic origins to its rich gastronomy and biodiversity.">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2">
     <style>
         :root {
             --historia-gold:   #C8952A;
@@ -55,6 +56,11 @@
             display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;
         }
         .hist-nav-back:hover { color: var(--historia-gold); }
+        @media (max-width: 1100px) {
+            .hist-nav-logo, .hist-nav-back { display: none !important; }
+            .hist-nav { justify-content: space-between; padding: 0.7rem 1.2rem; }
+            .hist-nav .nav-lang { margin-left: auto; }
+        }
 
         /* HERO */
         .hist-hero {
@@ -310,13 +316,40 @@
 <!-- NAVBAR -->
 <nav class="hist-nav">
     <a href="index-en.html" class="hist-nav-logo">🌋 Poás Water &amp; Fire</a>
-    <div style="display:flex;align-items:center;gap:1.2rem">
-        <a href="index.html" class="hist-nav-back">← Back to Home</a>
-        <div style="display:flex;gap:0.4rem">
-            <a href="historia-canton.html" style="color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.8rem;font-weight:600;padding:0.25rem 0.6rem;border-radius:4px;border:1px solid rgba(255,255,255,0.2)">ES</a>
-            <a href="historia-canton-en.html" style="color:var(--historia-gold);text-decoration:none;font-size:0.8rem;font-weight:600;padding:0.25rem 0.6rem;border-radius:4px;border:1px solid var(--historia-gold);background:rgba(200,149,42,0.12)">EN</a>
-        </div>
+    <a href="index-en.html" class="hist-nav-back">← Back to Home</a>
+    <div class="nav-lang">
+        <a href="historia-canton.html" class="lang-btn">🇨🇷 <span class="lang-label">Español</span></a>
+        <a href="historia-canton-en.html" class="lang-btn active">🇺🇸 <span class="lang-label">English</span></a>
     </div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span><em class="hamburger-label">Menu</em></div>
+</nav>
+<nav class="mobile-nav" id="mobileNav">
+<div class="mobile-nav-panel" id="mobileNavPanel">
+    <div class="mobile-nav-header">
+        <span class="mobile-nav-logo">Poás <span>Water &amp; Fire</span></span>
+        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">×</button>
+    </div>
+    <div class="mobile-nav-links">
+        <a href="index-en.html">🏠 Home</a>
+        <a href="galeria-en.html">🖼️ Gallery</a>
+        <a href="historia-canton-en.html" class="active">📖 Canton History</a>
+        <a href="agricultura-en.html">🌱 Agriculture</a>
+        <a href="ecologia-en.html">🌿 Ecology</a>
+        <a href="patrimonio-hidrico-en.html">💧 Water Heritage</a>
+        <a href="plan-regulador-en.html">🏗️ Regulatory Plan</a>
+        <a href="ruta-gastronomica-en.html">🍽️ Gastronomic Route</a>
+        <a href="eventos-en.html">📅 Events</a>
+        <a href="directorio-comercial-en.html">🏪 Business Directory</a>
+        <a href="bolsa-empleo-en.html">💼 Job Board</a>
+        <a href="seguridad-ciudadana-en.html">🛡️ Public Safety</a>
+        <a href="quejas-en.html">📢 Feedback</a>
+    </div>
+    <div class="mobile-nav-lang">
+        <a href="historia-canton.html" class="lang-btn">🇨🇷 Español</a>
+        <a href="historia-canton-en.html" class="lang-btn active">🇺🇸 English</a>
+    </div>
+    <div class="mobile-nav-footer">Cantón de Poás · Alajuela · Costa Rica</div>
+</div>
 </nav>
 <div class="breadcrumb">
     <a href="index-en.html">🏠 Home</a>
@@ -707,5 +740,27 @@
 </footer>
 
     <script src="security.js?v=2"></script>
+    <script>
+    (function(){
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavClose = document.getElementById('mobileNavClose');
+        window.closeMobileNav = function(){
+            if (!hamburger || !mobileNav) return;
+            hamburger.classList.remove('open');
+            mobileNav.classList.remove('open');
+        };
+        if (hamburger && mobileNav) {
+            hamburger.addEventListener('click', () => {
+                const isOpen = hamburger.classList.toggle('open');
+                mobileNav.classList.toggle('open', isOpen);
+            });
+            if (mobileNavClose) mobileNavClose.addEventListener('click', window.closeMobileNav);
+            mobileNav.addEventListener('click', e => {
+                if (!e.target.closest('#mobileNavPanel')) window.closeMobileNav();
+            });
+        }
+    })();
+    </script>
 </body>
 </html>
