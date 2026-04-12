@@ -395,7 +395,8 @@
         .ag-nav { overflow: visible; }
         @media (max-width: 1100px) {
             .ag-nav-logo, .ag-nav-label { display: none !important; }
-            .ag-nav { justify-content: space-between; padding: 0.7rem 1.2rem; }
+            .ag-nav { justify-content: space-between; padding: 0.7rem 1.2rem; gap: 0.5rem; }
+            .ag-nav .nav-lang { margin-left: auto; }
         }
     </style>
 </head>
@@ -406,7 +407,7 @@
         <a href="index-en.html" class="ag-nav-back">← Home</a>
         <a href="index-en.html" class="ag-nav-logo">Poás Agua y Fuego</a>
         <span class="ag-nav-label">🌱 Agriculture</span>
-        <div class="nav-lang" style="margin-left:auto;">
+        <div class="nav-lang">
             <a href="agricultura.html" class="lang-btn">🇨🇷 <span class="lang-label">Español</span></a>
             <a href="agricultura-en.html" class="lang-btn active">🇺🇸 <span class="lang-label">English</span></a>
         </div>
