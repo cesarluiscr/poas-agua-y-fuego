@@ -59,9 +59,9 @@
         .hist-nav-back:hover { color: var(--historia-gold); }
         @media (max-width: 1100px) {
             .hist-nav { height: auto; padding: 0.7rem 1.2rem; }
-            .hist-nav-logo { display: none; }
+            .hist-nav-logo { display: none !important; }
             .hist-nav .nav-lang { display: flex !important; }
-            .hist-nav .hamburger { display: flex !important; }
+            .hist-nav .hamburger { display: flex !important; margin-left: auto; }
         }
 
         /* HERO */
@@ -318,11 +318,11 @@
 <!-- NAVBAR -->
 <nav class="hist-nav">
     <a href="index.html" class="hist-nav-logo">🌋 Poás Agua y Fuego</a>
-    <div class="nav-lang">
+    <div class="nav-lang" style="display: flex; gap: 0.35rem; align-items: center;">
         <a href="historia-canton.html" class="lang-btn active">🇨🇷 <span class="lang-label">Español</span></a>
         <a href="historia-canton-en.html" class="lang-btn">🇺🇸 <span class="lang-label">English</span></a>
     </div>
-    <div class="hamburger" id="hamburger"><span></span><span></span><span></span><em class="hamburger-label">Menú</em></div>
+    <div class="hamburger" id="hamburger" style="display: none; flex-direction: column; gap: 5px; cursor: pointer;"><span style="width: 26px; height: 3px; background: #C8952A; border-radius: 2px;"></span><span style="width: 26px; height: 3px; background: #C8952A; border-radius: 2px;"></span><span style="width: 26px; height: 3px; background: #C8952A; border-radius: 2px;"></span><em class="hamburger-label">Menú</em></div>
 </nav>
 <nav class="mobile-nav" id="mobileNav">
 <div class="mobile-nav-panel" id="mobileNavPanel">
