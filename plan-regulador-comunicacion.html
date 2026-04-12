@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Comunicación para Planes Reguladores – Poás Agua y Fuego</title>
+    <meta name="description" content="Resumen de la Guía de Comunicación del INVU para la gestión de planes reguladores municipales en el cantón de Poás.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <link rel="stylesheet" href="style.css?v=2">
+    <style>
+        :root {
+            --pr-navy:   #0D2240;
+            --pr-blue:   #1A56DB;
+            --pr-teal:   #0D9488;
+            --pr-gold:   #D4AF37;
+            --pr-bg:     #F3F6FB;
+            --pr-text:   #1E293B;
+            --pr-muted:  #64748B;
+        }
+        * { box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--pr-text); background: #fff; margin: 0; }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            min-height: 46vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            padding: 9rem 1.5rem 5rem;
+            background: linear-gradient(135deg, #0D2240 0%, #1A3560 50%, #0D9488 100%);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 70% 30%, rgba(26,86,219,0.25), transparent 65%);
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 720px; }
+        .hero-badge {
+            display: inline-block; background: rgba(212,175,55,0.18); border: 1px solid rgba(212,175,55,0.5);
+            color: #D4AF37; font-size: 0.73rem; font-weight: 700; letter-spacing: 0.14em;
+            text-transform: uppercase; padding: 0.35rem 1.1rem; border-radius: 99px; margin-bottom: 1.4rem;
+        }
+        .hero h1 { font-family: 'Outfit', sans-serif; font-size: clamp(1.9rem,5vw,3.2rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 1rem; }
+        .hero h1 span { color: #D4AF37; }
+        .hero p { color: rgba(255,255,255,0.78); font-size: 1.05rem; line-height: 1.7; max-width: 580px; margin: 0 auto; }
+        .hero-source { margin-top: 1.5rem; color: rgba(255,255,255,0.5); font-size: 0.82rem; }
+
+        /* ── LAYOUT ── */
+        .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+        .back-link {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            color: var(--pr-blue); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            margin: 2.5rem 0 2rem; transition: opacity 0.2s;
+        }
+        .back-link:hover { opacity: 0.7; }
+
+        /* ── INTRO ── */
+        .intro-box {
+            background: var(--pr-bg); border-left: 4px solid var(--pr-blue);
+            border-radius: 0 12px 12px 0; padding: 1.6rem 1.8rem; margin-bottom: 3rem;
+            font-size: 1.02rem; line-height: 1.75; color: var(--pr-text);
+        }
+
+        /* ── SECTIONS ── */
+        .section { margin-bottom: 3.5rem; }
+        .section-header {
+            display: flex; align-items: center; gap: 0.9rem;
+            margin-bottom: 1.4rem; padding-bottom: 0.85rem;
+            border-bottom: 2px solid var(--pr-bg);
+        }
+        .section-icon {
+            width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; background: var(--pr-bg);
+        }
+        .section-title { font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--pr-navy); }
+        .section-num { font-size: 0.78rem; color: var(--pr-muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+
+        /* ── OBJETIVO GENERAL ── */
+        .goal-card {
+            background: linear-gradient(135deg, var(--pr-navy), #1A3560);
+            color: #fff; border-radius: 14px; padding: 1.8rem 2rem;
+            font-size: 1.05rem; line-height: 1.75; margin-bottom: 1.5rem;
+            position: relative; overflow: hidden;
+        }
+        .goal-card::before {
+            content: '🎯';
+            position: absolute; right: 1.5rem; top: 1rem;
+            font-size: 3rem; opacity: 0.12;
+        }
+
+        /* ── OBJETIVOS ESPECÍFICOS ── */
+        .obj-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.85rem; }
+        .obj-list li {
+            display: flex; align-items: flex-start; gap: 0.85rem;
+            background: var(--pr-bg); border-radius: 10px; padding: 1rem 1.2rem;
+            font-size: 0.95rem; line-height: 1.6;
+        }
+        .obj-num {
+            min-width: 28px; height: 28px; border-radius: 50%;
+            background: var(--pr-blue); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.78rem; font-weight: 700; flex-shrink: 0; margin-top: 0.1rem;
+        }
+
+        /* ── MENSAJES CLAVE ── */
+        .msg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+        .msg-card {
+            border: 1px solid #DDE3EF; border-radius: 12px; padding: 1.2rem 1.3rem;
+            background: #fff; position: relative;
+        }
+        .msg-card .quote {
+            font-size: 0.82rem; font-weight: 700; color: var(--pr-blue);
+            text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem;
+        }
+        .msg-card p { font-size: 0.93rem; line-height: 1.6; color: var(--pr-text); margin: 0; font-style: italic; }
+        .msg-card .desc { font-style: normal; color: var(--pr-muted); margin-top: 0.4rem; font-size: 0.87rem; }
+
+        /* ── CANALES ── */
+        .canal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .canal-card {
+            background: var(--pr-bg); border-radius: 12px; padding: 1.2rem;
+            text-align: center; font-size: 0.9rem; font-weight: 600; color: var(--pr-navy);
+        }
+        .canal-icon { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
+        .canal-card p { font-size: 0.82rem; font-weight: 400; color: var(--pr-muted); margin-top: 0.35rem; }
+
+        /* ── BENEFICIOS ── */
+        .benefit-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.8rem; list-style: none; padding: 0; margin: 0; }
+        .benefit-list li {
+            display: flex; align-items: flex-start; gap: 0.6rem;
+            background: var(--pr-bg); border-radius: 8px; padding: 0.75rem 1rem;
+            font-size: 0.9rem; line-height: 1.5;
+        }
+        .benefit-list li::before { content: '✅'; flex-shrink: 0; }
+
+        /* ── RECOMENDACIONES ── */
+        .rec-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+        .rec-list li {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            padding: 0.85rem 1.1rem; background: #fff; border-left: 3px solid var(--pr-teal);
+            border-radius: 0 8px 8px 0; font-size: 0.93rem; line-height: 1.6;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .rec-list li::before { content: '→'; color: var(--pr-teal); font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+
+        /* ── CTA ── */
+        .cta-box {
+            background: linear-gradient(135deg, var(--pr-teal), #0a7a70);
+            color: #fff; border-radius: 16px; padding: 2rem 2.2rem;
+            display: flex; flex-wrap: wrap; gap: 1.5rem;
+            align-items: center; justify-content: space-between;
+            margin: 3rem 0 4rem;
+        }
+        .cta-box h3 { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .cta-box p { font-size: 0.93rem; opacity: 0.88; margin: 0; }
+        .cta-btn {
+            display: inline-block; background: #fff; color: var(--pr-teal);
+            font-weight: 700; font-size: 0.9rem; padding: 0.7rem 1.5rem;
+            border-radius: 99px; text-decoration: none; white-space: nowrap;
+            transition: transform 0.2s;
+        }
+        .cta-btn:hover { transform: scale(1.04); }
+
+        /* ── FOOTER ── */
+        .page-footer {
+            background: var(--pr-navy); color: rgba(255,255,255,0.55);
+            text-align: center; padding: 2rem 1.5rem; font-size: 0.82rem;
+        }
+
+        @media (max-width: 640px) {
+            .msg-grid, .canal-grid, .benefit-list { grid-template-columns: 1fr; }
+            .cta-box { flex-direction: column; }
+            .hero h1 { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar" id="navbar">
+    <div class="logo">Poás <span>Agua y Fuego</span></div>
+    <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="plan-regulador.html" class="active">Plan Regulador</a></li>
+        <li><a href="directorio-comercial.html">Directorio</a></li>
+        <li><a href="bolsa-empleo.html">Empleo</a></li>
+        <li><a href="eventos.html">Eventos</a></li>
+    </ul>
+    <div class="nav-lang">
+        <a href="plan-regulador-comunicacion.html" class="lang-btn active">🇨🇷 <span class="lang-label">Español</span></a>
+        <a href="plan-regulador-comunicacion-en.html" class="lang-btn">🇺🇸 <span class="lang-label">English</span></a>
+    </div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span><em class="hamburger-label">Menú</em></div>
+</nav>
+<nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-panel" id="mobileNavPanel">
+        <div class="mobile-nav-header">
+            <span class="mobile-nav-logo">Poás <span>Agua y Fuego</span></span>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Cerrar menú">×</button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html" onclick="closeMobileNav()">🏠 Inicio</a>
+            <a href="patrimonio-hidrico.html" onclick="closeMobileNav()">💧 Patrimonio Hídrico</a>
+            <a href="historia-canton.html" onclick="closeMobileNav()">📜 Historia del Cantón</a>
+            <a href="galeria.html" onclick="closeMobileNav()">📷 Galería</a>
+            <a href="directorio-comercial.html" onclick="closeMobileNav()">🛍️ Directorio Turístico y Comercial</a>
+            <a href="bolsa-empleo.html" onclick="closeMobileNav()">💼 Bolsa de Empleo</a>
+            <a href="eventos.html" onclick="closeMobileNav()">📅 Eventos</a>
+            <a href="ruta-gastronomica.html" onclick="closeMobileNav()">🍽️ Ruta Gastronómica</a>
+            <a href="agricultura.html" onclick="closeMobileNav()">🌱 Agricultura</a>
+            <a href="ecologia.html" onclick="closeMobileNav()">🌿 Ecología</a>
+            <a href="plan-regulador.html" onclick="closeMobileNav()">🗺️ Plan Regulador</a>
+            <a href="seguridad-ciudadana.html" onclick="closeMobileNav()">🛡️ Seguridad Ciudadana</a>
+            <a href="index.html#contacto" onclick="closeMobileNav()">📬 Contacto</a>
+        </div>
+        <div class="mobile-nav-lang">
+            <a href="plan-regulador-comunicacion.html" onclick="closeMobileNav()">🇨🇷 Español</a>
+            <a href="plan-regulador-comunicacion-en.html" onclick="closeMobileNav()">🇺🇸 English</a>
+        </div>
+        <div class="mobile-nav-footer">Cantón de Poás · Alajuela · Costa Rica</div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">🗺️ Plan Regulador · Tema secundario</div>
+        <h1>Guía de <span>Comunicación</span><br>para Planes Reguladores</h1>
+        <p>Cómo informar, involucrar y construir confianza con la comunidad durante el proceso de implementación del Plan Regulador Municipal.</p>
+        <p class="hero-source">Fuente: Instituto Nacional de Vivienda y Urbanismo (INVU) · Costa Rica</p>
+    </div>
+</div>
+
+<div class="container">
+    <a href="plan-regulador.html" class="back-link">← Volver al Plan Regulador</a>
+
+    <!-- INTRO -->
+    <div class="intro-box">
+        Un plan de comunicación estratégica crea una base sólida para difundir el Plan Regulador a las audiencias correctas, usando los canales adecuados. Cada municipio puede identificar objetivos concretos e implementar medidas adaptadas a su realidad local, respondiendo el <strong>quién, qué, cuándo, dónde y cómo</strong> de su comunicación.
+    </div>
+
+    <!-- OBJETIVO GENERAL -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">🎯</div>
+            <div>
+                <div class="section-num">Sección 2</div>
+                <div class="section-title">Objetivo General</div>
+            </div>
+        </div>
+        <div class="goal-card">
+            Informar y sensibilizar a la comunidad sobre los planes reguladores, promoviendo su comprensión, participación activa y colaboración en su implementación, para asegurar el desarrollo urbano ordenado, sostenible y alineado con las necesidades y expectativas locales.
+        </div>
+
+        <ul class="obj-list">
+            <li><div class="obj-num">1</div>Explicar de manera clara los contenidos y objetivos del plan regulador y cómo afectará el desarrollo urbano y la vida cotidiana.</li>
+            <li><div class="obj-num">2</div>Fomentar la participación activa a través de consultas públicas, reuniones informativas y encuestas para recoger opiniones ciudadanas.</li>
+            <li><div class="obj-num">3</div>Aclarar el proceso de implementación y plazos previstos, para que los ciudadanos conozcan las etapas del plan.</li>
+            <li><div class="obj-num">4</div>Establecer canales de comunicación eficaces para mantener informada a la población sobre el progreso y cambios.</li>
+            <li><div class="obj-num">5</div>Ofrecer herramientas educativas para que los ciudadanos puedan interpretar documentos técnicos y normativas.</li>
+        </ul>
+    </div>
+
+    <!-- MENSAJES CLAVE -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">💬</div>
+            <div>
+                <div class="section-num">Sección 4</div>
+                <div class="section-title">Mensajes Clave para la Comunidad</div>
+            </div>
+        </div>
+        <div class="msg-grid">
+            <div class="msg-card">
+                <div class="quote">Futuro sostenible</div>
+                <p>"Un futuro urbano más próspero y sostenible"</p>
+                <p class="desc">Los planes reguladores aseguran un desarrollo ordenado que respeta el medio ambiente y mejora la calidad de vida.</p>
+            </div>
+            <div class="msg-card">
+                <div class="quote">Participación ciudadana</div>
+                <p>"Tu voz es importante en la construcción del cantón que queremos"</p>
+                <p class="desc">El plan regulador es una oportunidad para que la comunidad participe en la planificación de su futuro.</p>
+            </div>
+            <div class="msg-card">
+                <div class="quote">Seguridad y acceso</div>
+                <p>"Un cantón creciente, seguro y accesible"</p>
+                <p class="desc">Un buen plan previene problemas como sobrepoblación, falta de servicios y degradación del entorno.</p>
+            </div>
+            <div class="msg-card">
+                <div class="quote">Calidad de vida</div>
+                <p>"Mejor calidad de vida para todos"</p>
+                <p class="desc">El ordenamiento territorial contribuye a un entorno más saludable, accesible y justo para todas las personas.</p>
+            </div>
+            <div class="msg-card">
+                <div class="quote">Medio ambiente</div>
+                <p>"Protejamos nuestros recursos naturales para las futuras generaciones"</p>
+                <p class="desc">Un plan regulador equilibra el desarrollo urbano con la conservación del medio ambiente.</p>
+            </div>
+            <div class="msg-card">
+                <div class="quote">Transparencia</div>
+                <p>"Transparencia y participación: la clave del éxito"</p>
+                <p class="desc">La implementación se basa en la transparencia y la participación ciudadana para que todos los sectores sean escuchados.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CANALES -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">📡</div>
+            <div>
+                <div class="section-num">Sección 5 y 6</div>
+                <div class="section-title">Canales de Comunicación y Prensa</div>
+            </div>
+        </div>
+        <p style="margin-bottom:1.2rem;color:var(--pr-muted);font-size:0.95rem;line-height:1.65;">La carencia de información oportuna puede generar oposición a los procesos de ordenamiento territorial. Se recomienda identificar actores clave en cada barrio y distrito para que sean replicadores del mensaje.</p>
+        <div class="canal-grid">
+            <div class="canal-card">
+                <span class="canal-icon">📻</span>
+                Radio regional
+                <p>Entrevistas, cápsulas informativas y cuñas. El medio más efectivo en zonas rurales.</p>
+            </div>
+            <div class="canal-card">
+                <span class="canal-icon">📺</span>
+                Televisión local
+                <p>Entrevistas con líderes del proyecto y vecinos beneficiados.</p>
+            </div>
+            <div class="canal-card">
+                <span class="canal-icon">📰</span>
+                Prensa escrita
+                <p>Artículos de fondo, infografías y entrevistas con expertos.</p>
+            </div>
+            <div class="canal-card">
+                <span class="canal-icon">📱</span>
+                Redes sociales
+                <p>Facebook, WhatsApp e Instagram. Videos con mensajes clave de líderes comunales.</p>
+            </div>
+            <div class="canal-card">
+                <span class="canal-icon">📩</span>
+                SMS masivos
+                <p>Para comunidades sin acceso a redes. Entre ¢8–¢9 por mensaje.</p>
+            </div>
+            <div class="canal-card">
+                <span class="canal-icon">🚗</span>
+                Giras comunales
+                <p>Visitas casa a casa y reuniones en salones comunales cada semana o quincena.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- BENEFICIOS -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">✅</div>
+            <div>
+                <div class="section-num">Sección 8 – Conclusiones</div>
+                <div class="section-title">Beneficios de un Plan Regulador</div>
+            </div>
+        </div>
+        <ul class="benefit-list">
+            <li>Definir dónde se pueden construir edificaciones residenciales y comerciales</li>
+            <li>Diseñar las salidas y accesos de las redes viales</li>
+            <li>Mejorar la localización de las viviendas</li>
+            <li>Definir qué actividades se pueden realizar en un área</li>
+            <li>Facilitar las inversiones en el cantón</li>
+            <li>Fortalecer el desarrollo urbano y rural</li>
+            <li>Promover el ecoturismo y el agroturismo</li>
+            <li>Fomentar la generación de empleo y emprendimientos locales</li>
+            <li>Proteger la vida de las personas ante amenazas naturales</li>
+        </ul>
+    </div>
+
+    <!-- RECOMENDACIONES -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">💡</div>
+            <div>
+                <div class="section-num">Sección 9</div>
+                <div class="section-title">Recomendaciones del INVU</div>
+            </div>
+        </div>
+        <ul class="rec-list">
+            <li>Definir el mensaje, alcance y estrategia para comunicar los beneficios del plan regulador en cada comunidad.</li>
+            <li>Generar un sentido de pertenencia y "visión comunal" de desarrollo que obtendrá cada zona con el plan.</li>
+            <li>Destacar los beneficios en temas de generación de empleo para los habitantes del cantón.</li>
+            <li>Promover apertura, transparencia y confianza para evitar desinformación y malentendidos.</li>
+            <li>Incluir en el pliego de contratación un experto en comunicación y presupuesto para la difusión del plan.</li>
+        </ul>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+        <div>
+            <h3>¿Quiere conocer el Plan Regulador de Poás?</h3>
+            <p>Consulte los detalles del plan, zonificación, normativas y participación ciudadana.</p>
+        </div>
+        <a href="plan-regulador.html" class="cta-btn">Ver Plan Regulador →</a>
+    </div>
+</div>
+
+<footer class="page-footer">
+    <p>Fuente: <strong>Guía de comunicación para la gestión de planes reguladores municipales</strong> · INVU · Costa Rica</p>
+    <p style="margin-top:0.4rem;">© 2026 Poás Agua y Fuego · César Luis Quesada Herrera</p>
+</footer>
+
+<script>
+(function() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    function closeMobileNav() {
+        if (hamburger) hamburger.classList.remove('open');
+        if (mobileNav) mobileNav.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    window.closeMobileNav = closeMobileNav;
+    if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', () => {
+            const isOpen = hamburger.classList.toggle('open');
+            mobileNav.classList.toggle('open', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+        mobileNav.addEventListener('click', e => { if (!e.target.closest('#mobileNavPanel')) closeMobileNav(); });
+        document.getElementById('mobileNavClose').addEventListener('click', closeMobileNav);
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileNav(); });
+    }
+    window.addEventListener('scroll', () => document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 50));
+})();
+</script>
+<script src="security.js?v=2"></script>
+</body>
+</html>
