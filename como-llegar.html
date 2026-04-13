@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2">
     <style>
         /* ── VARIABLES ── */
         :root {
@@ -56,7 +57,7 @@
         /* ── BREADCRUMB ── */
         .breadcrumb {
             position: fixed;
-            top: 54px;
+            top: 72px;
             left: 0; right: 0;
             z-index: 50;
             background: #0d1220;
@@ -298,14 +299,152 @@
         }
         .leaflet-popup-tip { background: #0d1220; }
         .leaflet-popup-content strong { color: var(--gold); }
+
+        /* Force navbar/menu visibility in case external styles are not loaded */
+        .navbar {
+            z-index: 9999 !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            display: flex !important;
+            flex-wrap: wrap !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            padding: 0.55rem 2% !important;
+            background: rgba(8, 12, 24, 0.95) !important;
+            border-bottom: 1px solid rgba(200, 149, 42, 0.25) !important;
+        }
+        .nav-links {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 0.35rem !important;
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        .nav-links li {
+            display: flex !important;
+        }
+        .nav-links a,
+        .navbar .logo,
+        .navbar .lang-btn,
+        .hamburger,
+        .hamburger-label {
+            color: #ffffff !important;
+        }
+        .nav-links a {
+            text-decoration: none !important;
+            padding: 0.35rem 0.65rem !important;
+            border-radius: 6px !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+        }
+        .hamburger {
+            display: none !important;
+            gap: 0.35rem !important;
+            align-items: center !important;
+            cursor: pointer !important;
+            background: rgba(255, 255, 255, 0.08) !important;
+            border-radius: 12px !important;
+            padding: 0.35rem 0.75rem !important;
+        }
+        .hamburger span {
+            width: 1.2rem !important;
+            height: 2px !important;
+            background: #ffffff !important;
+            border-radius: 999px !important;
+            display: block !important;
+        }
+        .nav-lang {
+            display: flex !important;
+            gap: 0.35rem !important;
+            align-items: center !important;
+        }
+        .mobile-nav {
+            z-index: 10000 !important;
+        }
+        @media (max-width: 1100px) {
+            .nav-links {
+                display: none !important;
+            }
+            .hamburger {
+                display: flex !important;
+            }
+        }
     </style>
+    <script defer src="script.js?v=2"></script>
 </head>
 <body>
 
-    <!-- NAV -->
-    <nav class="cl-nav">
-        <a href="index.html" class="cl-nav-logo">🌋 Poás Agua y Fuego</a>
-        <a href="index.html" class="cl-nav-back">← Volver al inicio</a>
+    <nav id="navbar" class="navbar" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;padding:0.75rem 1.5rem;background:#0b4f6c;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+        <div class="logo" style="color:#ffffff;font-weight:700;font-size:1.15rem;">Poás <span style="color:#C8952A;">Agua y Fuego</span></div>
+        <ul class="nav-links" style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.35rem;align-items:center;list-style:none;margin:0;padding:0;">
+            <li><a href="index.html" style="color:#fff;text-decoration:none;padding:0.35rem 0.65rem;border-radius:6px;">Inicio</a></li>
+            <li><a href="patrimonio-hidrico.html">Patrimonio Hídrico</a></li>
+            <li><a href="historia-canton.html">Historia</a></li>
+            <li><a href="historia-imagenes.html">Imágenes</a></li>
+            <li><a href="directorio-comercial.html">Directorio</a></li>
+            <li><a href="galeria.html">Galería</a></li>
+            <li><a href="ruta-gastronomica.html">Gastronomía</a></li>
+            <li><a href="agricultura.html">Agricultura</a></li>
+            <li><a href="ecologia.html">Ecología</a></li>
+            <li><a href="techcenter.html">Tech Center</a></li>
+            <li class="nav-row-break" aria-hidden="true"></li>
+            <li><a href="bolsa-empleo.html">Empleo</a></li>
+            <li><a href="eventos.html">Eventos</a></li>
+            <li><a href="plan-regulador.html">Plan Regulador</a></li>
+            <li><a href="seguridad-ciudadana.html">Seguridad</a></li>
+            <li><a href="como-llegar.html" class="active">Cómo Llegar</a></li>
+            <li><a href="quejas.html">Quejas</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <div class="nav-lang">
+            <a href="como-llegar.html" class="lang-btn active">🇨🇷 <span class="lang-label">Español</span></a>
+            <a href="index-en.html" class="lang-btn">🇺🇸 <span class="lang-label">English</span></a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+            <em class="hamburger-label">Menú</em>
+        </div>
+    </nav>
+
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-panel" id="mobileNavPanel">
+            <div class="mobile-nav-header">
+                <span class="mobile-nav-logo">Poás <span>Agua y Fuego</span></span>
+                <button class="mobile-nav-close" id="mobileNavClose" aria-label="Cerrar menú">×</button>
+            </div>
+            <div class="mobile-nav-links">
+                <a href="index.html" onclick="closeMobileNav()">🏠 Inicio</a>
+                <div class="mobile-nav-sep"></div>
+                <a href="patrimonio-hidrico.html" onclick="closeMobileNav()">💧 Patrimonio Hídrico</a>
+                <a href="historia-canton.html" onclick="closeMobileNav()">📜 Historia del Cantón</a>
+                <a href="historia-imagenes.html" onclick="closeMobileNav()">📷 Imágenes</a>
+                <a href="directorio-comercial.html" onclick="closeMobileNav()">🛍️ Directorio Turístico y Comercial</a>
+                <a href="galeria.html" onclick="closeMobileNav()">📸 Galería</a>
+                <a href="ruta-gastronomica.html" onclick="closeMobileNav()">🍽️ Ruta Gastronómica</a>
+                <a href="agricultura.html" onclick="closeMobileNav()">🌱 Agricultura</a>
+                <a href="ecologia.html" onclick="closeMobileNav()">🌿 Ecología</a>
+                <a href="techcenter.html" onclick="closeMobileNav()">💻 Tech Center</a>
+                <div class="mobile-nav-sep"></div>
+                <a href="bolsa-empleo.html" onclick="closeMobileNav()">💼 Bolsa de Empleo</a>
+                <a href="eventos.html" onclick="closeMobileNav()">📅 Eventos</a>
+                <a href="plan-regulador.html" onclick="closeMobileNav()">🗺️ Plan Regulador</a>
+                <a href="seguridad-ciudadana.html" onclick="closeMobileNav()">🛡️ Seguridad Ciudadana</a>
+                <a href="como-llegar.html" onclick="closeMobileNav()">🚗 Cómo Llegar</a>
+                <a href="quejas.html" onclick="closeMobileNav()">📝 Quejas</a>
+                <a href="#contacto" onclick="closeMobileNav()">📬 Contacto</a>
+            </div>
+            <div class="mobile-nav-lang">
+                <a href="como-llegar.html" onclick="closeMobileNav()">🇨🇷 Español</a>
+                <a href="index-en.html" onclick="closeMobileNav()">🇺🇸 English</a>
+            </div>
+            <div class="mobile-nav-footer">Cantón de Poás · Alajuela · Costa Rica</div>
+        </div>
     </nav>
 
     <!-- BREADCRUMB -->
