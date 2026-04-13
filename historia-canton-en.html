@@ -42,28 +42,6 @@
             color: #2a1800;
         }
 
-        /* NAV */
-        .hist-nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            background: rgba(26,15,0,0.92);
-            backdrop-filter: blur(10px);
-            display: flex; align-items: center; justify-content: flex-start;
-            padding: 0.9rem 2rem;
-            height: 50px; gap: 1rem;
-        }
-        .hist-nav-logo { color: var(--historia-gold); font-weight: 700; font-size: 1.1rem; text-decoration: none; margin-right: auto; }
-        .hist-nav-back {
-            color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem;
-            display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;
-        }
-        .hist-nav-back:hover { color: var(--historia-gold); }
-        @media (max-width: 1100px) {
-            .hist-nav { min-height: 50px; padding: 0.7rem 1.2rem; }
-            .hist-nav-logo { display: none !important; }
-            .hist-nav .nav-lang { display: flex !important; }
-            .hist-nav .hamburger { display: flex !important; margin-left: auto; }
-        }
-
         /* HERO */
         .hist-hero {
             min-height: 100vh;
@@ -316,13 +294,28 @@
 <body>
 
 <!-- NAVBAR -->
-<nav class="hist-nav">
-    <a href="index-en.html" class="hist-nav-logo">🌋 Poás Water &amp; Fire</a>
-    <div class="nav-lang" style="display: flex; gap: 0.35rem; align-items: center;">
+<nav class="navbar">
+    <div class="logo">Poás <span><span class="logo-agua">Water</span> &amp; <span class="logo-fuego">Fire</span></span></div>
+    <ul class="nav-links">
+        <li><a href="index-en.html">Home</a></li>
+        <li><a href="patrimonio-hidrico-en.html">Water Heritage</a></li>
+        <li><a href="historia-canton-en.html" class="active">History</a></li>
+        <li><a href="agricultura-en.html">Agriculture</a></li>
+        <li><a href="ecologia-en.html">Ecology</a></li>
+        <li><a href="galeria-en.html">Gallery</a></li>
+        <li><a href="ruta-gastronomica-en.html">Gastronomy</a></li>
+        <li><a href="eventos-en.html">Events</a></li>
+        <li><a href="directorio-comercial-en.html">Directory</a></li>
+        <li><a href="bolsa-empleo-en.html">Jobs</a></li>
+        <li><a href="seguridad-ciudadana-en.html">Safety</a></li>
+        <li><a href="quejas-en.html">Feedback</a></li>
+        <li><a href="plan-regulador-en.html">Regulatory Plan</a></li>
+    </ul>
+    <div class="nav-lang">
         <a href="historia-canton.html" class="lang-btn">🇨🇷 <span class="lang-label">Español</span></a>
         <a href="historia-canton-en.html" class="lang-btn active">🇺🇸 <span class="lang-label">English</span></a>
     </div>
-    <div class="hamburger" id="hamburger" style="display: none; flex-direction: column; gap: 5px; cursor: pointer;"><span style="width: 26px; height: 3px; background: #C8952A; border-radius: 2px;"></span><span style="width: 26px; height: 3px; background: #C8952A; border-radius: 2px;"></span><span style="width: 26px; height: 3px; background: #C8952A; border-radius: 2px;"></span><em class="hamburger-label">Menu</em></div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span><em class="hamburger-label">Menu</em></div>
 </nav>
 <nav class="mobile-nav" id="mobileNav">
 <div class="mobile-nav-panel" id="mobileNavPanel">
