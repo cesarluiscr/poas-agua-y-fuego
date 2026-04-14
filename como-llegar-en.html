@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="description" content="How to reach Poás canton and Poás Volcano from San José, Alajuela and Varablanca with route guidance, distances and practical tips.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cesarluiscr.github.io/poas-agua-y-fuego/como-llegar-en.html">
+    <meta property="og:title" content="How to Get Here | Poás Water & Fire">
+    <meta property="og:description" content="Routes, distances and reference points for visiting Poás Volcano, San Pedro de Poás and nearby communities.">
+    <meta property="og:site_name" content="Poás Water & Fire">
+    <title>How to Get Here | Poás Water & Fire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <style>
+        /* ── VARIABLES ── */
+        :root {
+            --gold:  #C8952A;
+            --dark:  #080c18;
+            --blue:  #2563eb;
+            --cream: #e8e0cc;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #080c18;
+            color: #c9b99a;
+        }
+
+        /* ── NAV ── */
+        .cl-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(8,12,24,0.96);
+            backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.85rem 2rem;
+            border-bottom: 1px solid rgba(200,149,42,0.15);
+        }
+        .cl-nav-logo {
+            color: var(--gold); font-weight: 700; font-size: 1rem;
+            text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .cl-nav-back {
+            color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.88rem;
+            display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;
+        }
+        .cl-nav-back:hover { color: var(--gold); }
+
+        /* ── BREADCRUMB ── */
+        .breadcrumb {
+            position: fixed;
+            top: 72px;
+            left: 0; right: 0;
+            z-index: 50;
+            background: #0d1220;
+            border-bottom: 1px solid rgba(200,149,42,0.1);
+            padding: 0.55rem 2rem;
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.78rem;
+        }
+        .breadcrumb a {
+            color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s;
+        }
+        .breadcrumb a:hover { color: var(--gold); }
+        .breadcrumb-sep { color: rgba(255,255,255,0.25); }
+        .breadcrumb-current { color: var(--gold); font-weight: 600; }
+
+        /* ── HERO ── */
+        .cl-hero {
+            background:
+                linear-gradient(180deg, rgba(8,12,24,0.55) 0%, rgba(8,12,24,0.80) 65%, #080c18 100%),
+                linear-gradient(135deg, #060b1a 0%, #0c1e3c 50%, #080e22 100%);
+            padding: 9.5rem 2rem 5.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(200,149,42,0.12);
+            position: relative;
+            overflow: hidden;
+        }
+        .cl-hero::before {
+            content: '🗺️';
+            position: absolute;
+            font-size: 26rem;
+            opacity: 0.025;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .cl-hero-badge {
+            display: inline-block;
+            background: rgba(200,149,42,0.12);
+            border: 1px solid rgba(200,149,42,0.35);
+            color: var(--gold);
+            font-size: 0.72rem; font-weight: 700; letter-spacing: .12em;
+            text-transform: uppercase; padding: .35rem 1.1rem; border-radius: 999px;
+            margin-bottom: 1.5rem;
+        }
+        .cl-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5.5vw, 3.8rem);
+            color: #fff;
+            margin-bottom: 1rem;
+            line-height: 1.15;
+        }
+        .cl-hero-sub {
+            color: #9db0cc; font-size: 1rem; max-width: 640px;
+            margin: 0 auto 2rem; line-height: 1.7;
+        }
+        .cl-hero-meta {
+            display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;
+        }
+        .cl-meta-item {
+            display: flex; align-items: center; gap: 0.45rem;
+            color: rgba(255,255,255,0.5); font-size: 0.82rem;
+        }
+        .cl-meta-item strong { color: var(--gold); }
+
+        /* ── SECTION COMMONS ── */
+        .cl-section {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        .cl-section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .cl-section-sub {
+            color: #7a8fa6; font-size: 0.92rem; margin-bottom: 2.5rem;
+        }
+
+        /* ── ROUTES GRID ── */
+        .cl-rutas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        @media (max-width: 900px) {
+            .cl-rutas-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .cl-rutas-grid { grid-template-columns: 1fr; }
+            .cl-hero { padding: 8.5rem 1.25rem 4rem; }
+            .cl-section { padding: 3rem 1.25rem; }
+            .cl-nav { padding: 0.85rem 1.25rem; }
+            .breadcrumb { padding: 0.55rem 1.25rem; }
+            .cl-hero-meta { gap: 1rem; }
+            .cl-consejos-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 480px) {
+            .cl-consejos-grid { grid-template-columns: 1fr !important; }
+        }
+
+        .cl-ruta-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(200,149,42,0.15);
+            border-left: 4px solid var(--gold);
+            border-radius: 12px;
+            padding: 1.8rem 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+        .cl-ruta-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(200,149,42,0.12);
+            border-color: rgba(200,149,42,0.35);
+        }
+        .cl-ruta-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        .cl-ruta-label {
+            font-size: 0.68rem; font-weight: 700; letter-spacing: .14em;
+            text-transform: uppercase; color: var(--gold);
+            margin-bottom: 0.4rem;
+        }
+        .cl-ruta-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem; color: #fff;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        .cl-ruta-path {
+            font-size: 0.78rem; color: #6b7fa0;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        .cl-ruta-stats {
+            display: flex; gap: 1rem; flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .cl-ruta-stat {
+            background: rgba(200,149,42,0.08);
+            border: 1px solid rgba(200,149,42,0.2);
+            border-radius: 6px;
+            padding: 0.3rem 0.7rem;
+            font-size: 0.75rem; color: var(--gold); font-weight: 600;
+        }
+        .cl-ruta-desc {
+            font-size: 0.88rem; color: #8fa0b4; line-height: 1.65;
+        }
+
+        /* ── MAP ── */
+        .cl-mapa-wrap {
+            background: linear-gradient(180deg, #080c18 0%, #0a101e 100%);
+            border-top: 1px solid rgba(200,149,42,0.1);
+            border-bottom: 1px solid rgba(200,149,42,0.1);
+        }
+        #mapa {
+            height: 500px;
+            border-radius: 16px;
+            border: 1px solid rgba(200,149,42,0.3);
+            overflow: hidden;
+        }
+        .cl-leyenda {
+            display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem;
+            margin-top: 1.2rem;
+        }
+        .cl-leyenda-item {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-size: 0.8rem; color: #8fa0b4;
+        }
+        .cl-leyenda-dot {
+            width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.25);
+        }
+
+        /* ── TIPS ── */
+        .cl-consejos-bg {
+            background: #0a0f1e;
+            border-top: 1px solid rgba(200,149,42,0.08);
+        }
+        .cl-consejos-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+        }
+        .cl-consejo-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(200,149,42,0.12);
+            border-radius: 12px;
+            padding: 1.5rem 1.25rem;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .cl-consejo-card:hover {
+            border-color: rgba(200,149,42,0.3);
+            transform: translateY(-3px);
+        }
+        .cl-consejo-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+        .cl-consejo-card h4 {
+            font-size: 0.9rem; font-weight: 700; color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        .cl-consejo-card p {
+            font-size: 0.83rem; color: #7a8fa6; line-height: 1.6;
+        }
+
+        /* ── FOOTER ── */
+        .cl-footer {
+            background: #05080f;
+            border-top: 1px solid rgba(200,149,42,0.1);
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: 0.83rem;
+            color: rgba(255,255,255,0.3);
+        }
+        .cl-footer a {
+            color: var(--gold); text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .cl-footer a:hover { opacity: 0.75; }
+
+        .cl-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(200,149,42,0.2), transparent);
+            margin: 0;
+        }
+
+        .leaflet-popup-content-wrapper {
+            background: #0d1220;
+            border: 1px solid rgba(200,149,42,0.3);
+            color: #c9b99a;
+            border-radius: 10px;
+        }
+        .leaflet-popup-tip { background: #0d1220; }
+        .leaflet-popup-content strong { color: var(--gold); }
+    </style>
+    <script defer src="script.js?v=2"></script>
+</head>
+<body>
+    <nav class="navbar" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;padding:0.75rem 1.5rem;background:#0b4f6c;box-shadow:0 4px 16px rgba(0,0,0,0.25);">
+        <div class="logo" style="color:#fff;font-weight:700;font-size:1.15rem;">Poás <span style="color:#C8952A;">Water &amp; Fire</span></div>
+        <ul class="nav-links" style="display:flex;flex-wrap:wrap;justify-content:center;gap:0.35rem;align-items:center;list-style:none;margin:0;padding:0;">
+            <li><a href="index-en.html" style="color:#fff;text-decoration:none;padding:0.35rem 0.65rem;border-radius:6px;">Home</a></li>
+            <li><a href="patrimonio-hidrico-en.html">Water Heritage</a></li>
+            <li><a href="historia-canton-en.html">History</a></li>
+            <li><a href="historia-imagenes-en.html">Historic Photos</a></li>
+            <li><a href="directorio-comercial-en.html">Tourism &amp; Business Directory</a></li>
+            <li><a href="galeria-en.html">Gallery</a></li>
+            <li><a href="ruta-gastronomica-en.html">Gastronomy</a></li>
+            <li><a href="agricultura-en.html">Agriculture</a></li>
+            <li><a href="ecologia-en.html">Ecology</a></li>
+            <li><a href="techcenter-en.html">Tech Center</a></li>
+            <li class="nav-row-break" aria-hidden="true"></li>
+            <li><a href="bolsa-empleo-en.html">Jobs</a></li>
+            <li><a href="eventos-en.html">Events</a></li>
+            <li><a href="plan-regulador-en.html">Zoning Plan</a></li>
+            <li><a href="seguridad-ciudadana-en.html">Public Safety</a></li>
+            <li><a href="como-llegar-en.html" class="active">How to Get Here</a></li>
+            <li><a href="quejas-en.html">Complaints</a></li>
+            <li><a href="#contacto">Contact</a></li>
+        </ul>
+        <div class="nav-lang">
+            <a href="como-llegar.html" class="lang-btn">🇨🇷 <span class="lang-label">Español</span></a>
+            <a href="index-en.html" class="lang-btn active">🇺🇸 <span class="lang-label">English</span></a>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+            <em class="hamburger-label">Menu</em>
+        </div>
+    </nav>
+
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-panel" id="mobileNavPanel">
+            <div class="mobile-nav-header">
+                <span class="mobile-nav-logo">Poás <span>Water &amp; Fire</span></span>
+                <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">×</button>
+            </div>
+            <div class="mobile-nav-links">
+                <a href="index-en.html" onclick="closeMobileNav()">🏠 Home</a>
+                <div class="mobile-nav-sep"></div>
+                <a href="patrimonio-hidrico-en.html" onclick="closeMobileNav()">💧 Water Heritage</a>
+                <a href="historia-canton-en.html" onclick="closeMobileNav()">📜 Canton History</a>
+                <a href="historia-imagenes-en.html" onclick="closeMobileNav()">📷 Historic Photos</a>
+                <a href="directorio-comercial-en.html" onclick="closeMobileNav()">🛍️ Tourism &amp; Business Directory</a>
+                <a href="galeria-en.html" onclick="closeMobileNav()">📸 Gallery</a>
+                <a href="ruta-gastronomica-en.html" onclick="closeMobileNav()">🍽️ Gastronomic Route</a>
+                <a href="agricultura-en.html" onclick="closeMobileNav()">🌱 Agriculture</a>
+                <a href="ecologia-en.html" onclick="closeMobileNav()">🌿 Ecology</a>
+                <a href="techcenter-en.html" onclick="closeMobileNav()">💻 Tech Center</a>
+                <div class="mobile-nav-sep"></div>
+                <a href="bolsa-empleo-en.html" onclick="closeMobileNav()">💼 Jobs</a>
+                <a href="eventos-en.html" onclick="closeMobileNav()">📅 Events</a>
+                <a href="plan-regulador-en.html" onclick="closeMobileNav()">🗺️ Zoning Plan</a>
+                <a href="seguridad-ciudadana-en.html" onclick="closeMobileNav()">🛡️ Public Safety</a>
+                <a href="como-llegar-en.html" onclick="closeMobileNav()">🚗 How to Get Here</a>
+                <div class="mobile-nav-sep"></div>
+                <a href="#contacto" onclick="closeMobileNav()">📬 Contact</a>
+            </div>
+            <div class="mobile-nav-lang">
+                <a href="como-llegar.html" onclick="closeMobileNav()">🇨🇷 Español</a>
+                <a href="index-en.html" onclick="closeMobileNav()" class="mobile-lang-active">🇺🇸 English</a>
+            </div>
+            <div class="mobile-nav-footer">Poás Canton · Alajuela · Costa Rica</div>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <a href="index-en.html">🏠 Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb-current">How to Get Here</span>
+    </div>
+
+    <header class="cl-hero">
+        <div class="cl-hero-badge">🗺️ Travel Guide · Poás Canton</div>
+        <h1>How to Get Here</h1>
+        <p class="cl-hero-sub">Route guidance, distances and reference points for visiting Poás Volcano, San Pedro de Poás and the surrounding communities.</p>
+        <div class="cl-hero-meta">
+            <div class="cl-meta-item"><strong>📍</strong> 50 km from San José</div>
+            <div class="cl-meta-item"><strong>⏱️</strong> 1h from Alajuela</div>
+            <div class="cl-meta-item"><strong>🚗</strong> Mountain road access</div>
+        </div>
+    </header>
+
+    <div class="cl-divider"></div>
+
+    <section class="cl-section">
+        <h2 class="cl-section-title">Main Access Routes</h2>
+        <p class="cl-section-sub">Three routes to reach the canton from different regions of Costa Rica.</p>
+
+        <div class="cl-rutas-grid">
+            <div class="cl-ruta-card">
+                <span class="cl-ruta-icon">🛣️</span>
+                <div class="cl-ruta-label">Route 1 — The most popular</div>
+                <h3>From San José</h3>
+                <div class="cl-ruta-path">San José → Alajuela → Fraijanes → Poás Volcano</div>
+                <div class="cl-ruta-stats">
+                    <span class="cl-ruta-stat">📏 50 km</span>
+                    <span class="cl-ruta-stat">⏱️ 1h 10 min</span>
+                </div>
+                <p class="cl-ruta-desc">Take the General Cañas Highway to Alajuela. At the La Joya intersection, follow the road toward Fraijanes. Continue up the mountain following signs to the National Park.</p>
+            </div>
+            <div class="cl-ruta-card">
+                <span class="cl-ruta-icon">🏘️</span>
+                <div class="cl-ruta-label">Route 2 — Through the canton seat</div>
+                <h3>From Alajuela</h3>
+                <div class="cl-ruta-path">Alajuela → San Pedro de Poás → Fraijanes → Poás Volcano</div>
+                <div class="cl-ruta-stats">
+                    <span class="cl-ruta-stat">📏 45 km</span>
+                    <span class="cl-ruta-stat">⏱️ 55 min</span>
+                </div>
+                <p class="cl-ruta-desc">Depart from central Alajuela heading north on the route to San Pedro de Poás. Continue through Fraijanes toward the National Park entrance.</p>
+            </div>
+            <div class="cl-ruta-card">
+                <span class="cl-ruta-icon">🌿</span>
+                <div class="cl-ruta-label">Route 3 — From Varablanca / Sarapiquí</div>
+                <h3>From the Caribbean</h3>
+                <div class="cl-ruta-path">Puerto Viejo de Sarapiquí → Varablanca → Poás Volcano</div>
+                <div class="cl-ruta-stats">
+                    <span class="cl-ruta-stat">📏 65 km</span>
+                    <span class="cl-ruta-stat">⏱️ 1h 30 min</span>
+                </div>
+                <p class="cl-ruta-desc">Scenic route from the Caribbean. Connects to Puerto Viejo de Sarapiquí via Route 126 and passes through Varablanca with impressive mountain views.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="cl-divider"></div>
+
+    <div class="cl-mapa-wrap">
+        <section class="cl-section">
+            <h2 class="cl-section-title">🗺️ Interactive Map of Poás Canton</h2>
+            <p class="cl-section-sub">Key points, access routes and communities.</p>
+            <div id="mapa"></div>
+            <div class="cl-leyenda">
+                <div class="cl-leyenda-item"><div class="cl-leyenda-dot" style="background:#dc2626;"></div>Poás Volcano</div>
+                <div class="cl-leyenda-item"><div class="cl-leyenda-dot" style="background:#2563eb;"></div>Laguna Botos</div>
+                <div class="cl-leyenda-item"><div class="cl-leyenda-dot" style="background:#C8952A;"></div>San Pedro de Poás</div>
+                <div class="cl-leyenda-item"><div class="cl-leyenda-dot" style="background:#16a34a;"></div>Fraijanes</div>
+                <div class="cl-leyenda-item"><div class="cl-leyenda-dot" style="background:#7c3aed;"></div>Poasito</div>
+                <div class="cl-leyenda-item"><div class="cl-leyenda-dot" style="background:#0891b2;"></div>Varablanca</div>
+            </div>
+        </section>
+    </div>
+
+    <div class="cl-divider"></div>
+
+    <div class="cl-consejos-bg">
+        <section class="cl-section">
+            <h2 class="cl-section-title">Practical Tips</h2>
+            <p class="cl-section-sub">What to know before visiting.</p>
+
+            <div class="cl-consejos-grid">
+                <div class="cl-consejo-card">
+                    <span class="cl-consejo-icon">🌡️</span>
+                    <h4>Temperature</h4>
+                    <p>Between 7 °C and 18 °C at the volcano. Bring warm clothing even during the dry season.</p>
+                </div>
+                <div class="cl-consejo-card">
+                    <span class="cl-consejo-icon">☁️</span>
+                    <h4>Weather</h4>
+                    <p>Best to visit before 10 a.m. Clouds usually increase in the afternoon and can block the crater view.</p>
+                </div>
+                <div class="cl-consejo-card">
+                    <span class="cl-consejo-icon">🅿️</span>
+                    <h4>Parking</h4>
+                    <p>Parking is available inside the park. Arrive early in high season to secure a space.</p>
+                </div>
+                <div class="cl-consejo-card">
+                    <span class="cl-consejo-icon">🎟️</span>
+                    <h4>Reservations</h4>
+                    <p>You must reserve online with SINAC before visiting the volcano. Entry is not allowed without a reservation.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="cl-footer">
+        <p>© 2026 · <a href="historia-canton-en.html">Canton History</a> · <a href="index-en.html">Poás Water &amp; Fire</a></p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const poasVolcan  = [10.1995, -84.2270];
+        const lagunaBotos = [10.2020, -84.2310];
+        const sanPedro    = [10.0968, -84.2289];
+        const fraijanes   = [10.1600, -84.2350];
+        const poasito     = [10.1800, -84.2200];
+        const varablanca  = [10.2100, -84.1800];
+
+        const map = L.map('mapa', {
+            center: [10.15, -84.23],
+            zoom: 12,
+            zoomControl: true,
+            scrollWheelZoom: false
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 18
+        }).addTo(map);
+
+        function crearIcono(emoji, color) {
+            return L.divIcon({
+                className: '',
+                html: `<div style="background:${color};border:3px solid #fff;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 2px 8px rgba(0,0,0,0.4)">${emoji}</div>`,
+                iconSize: [36, 36],
+                iconAnchor: [18, 18]
+            });
+        }
+
+        L.marker(poasVolcan, { icon: crearIcono('🌋', '#dc2626') })
+            .addTo(map)
+            .bindPopup('<strong>Poás Volcano</strong><br>2,708 m.a.s.l.<br>National Park · SINAC');
+
+        L.marker(lagunaBotos, { icon: crearIcono('💧', '#2563eb') })
+            .addTo(map)
+            .bindPopup('<strong>Laguna Botos</strong><br>Extinct crater lake<br>Unique ecosystem');
+
+        L.marker(sanPedro, { icon: crearIcono('🏛️', '#C8952A') })
+            .addTo(map)
+            .bindPopup('<strong>San Pedro de Poás</strong><br>Canton seat<br>Public library · Central Park');
+
+        L.marker(fraijanes, { icon: crearIcono('🍓', '#16a34a') })
+            .addTo(map)
+            .bindPopup('<strong>Fraijanes</strong><br>Gastronomic route<br>Laguna de Fraijanes');
+
+        L.marker(poasito, { icon: crearIcono('🏘️', '#7c3aed') })
+            .addTo(map)
+            .bindPopup('<strong>Poasito</strong><br>Highland community<br>Main volcano access');
+
+        L.marker(varablanca, { icon: crearIcono('🌿', '#0891b2') })
+            .addTo(map)
+            .bindPopup('<strong>Varablanca</strong><br>Route from Sarapiquí<br>Panoramic views');
+    </script>
+    <script src="security.js?v=2"></script>
+</body>
+</html>
