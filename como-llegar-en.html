@@ -33,6 +33,14 @@
             color: #c9b99a;
         }
 
+        @media (max-width: 1100px) {
+            .navbar { flex-wrap: nowrap !important; justify-content: flex-start !important; gap: 0.3rem !important; }
+            .nav-links { display: none !important; }
+            .hamburger { display: flex !important; }
+            .hamburger-label { display: block !important; }
+            .nav-lang { display: flex !important; }
+        }
+
         /* ── NAV ── */
         .cl-nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
