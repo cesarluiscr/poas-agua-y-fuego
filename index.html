@@ -387,6 +387,15 @@
             .directorio-modern-footer { flex-direction: column; align-items: flex-start; }
             .directorio-modern-btn { width: 100%; justify-content: center; }
         }
+        #empleo,
+        #eventos,
+        #turismo,
+        .regulador-preview-section,
+        .empleo-modern,
+        .eventos-modern,
+        .directorio-modern {
+            display: none !important;
+        }
 
         /* ── Plan Regulador Modern Card — paleta ámbar/dorada ── */
         .regulador-modern {
@@ -574,34 +583,6 @@
         .clima-src a { color:#60a5fa; text-decoration:none; }
         @media(max-width:600px){ .clima-cards { grid-template-columns:repeat(2,1fr); } }
 
-        /* ── NOTICIAS / ANUNCIOS ── */
-        .noticias-section { background:#080c14; padding:4rem 2rem; }
-        .noticias-inner { max-width:1060px; margin:0 auto; }
-        .noticias-header { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2rem; }
-        .noticias-title { font-family:'Playfair Display',serif; font-size:1.7rem; color:#fff; }
-        .noticias-ver-mas { color:#C8952A; font-size:.82rem; font-weight:600; text-decoration:none; transition:opacity .2s; }
-        .noticias-ver-mas:hover { opacity:.7; }
-        .noticias-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
-        .noticia-card {
-            background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
-            border-radius:16px; padding:1.5rem; display:flex; flex-direction:column; gap:.75rem;
-            transition:border-color .2s, transform .2s;
-        }
-        .noticia-card:hover { border-color:rgba(200,149,42,0.35); transform:translateY(-3px); }
-        .noticia-badge {
-            display:inline-block; font-size:.68rem; font-weight:700; letter-spacing:.1em;
-            text-transform:uppercase; padding:.2rem .7rem; border-radius:999px;
-        }
-        .noticia-badge.volcán  { background:rgba(220,38,38,.15); color:#fca5a5; border:1px solid rgba(220,38,38,.25); }
-        .noticia-badge.turismo { background:rgba(16,185,129,.12); color:#6ee7b7; border:1px solid rgba(16,185,129,.2); }
-        .noticia-badge.comunidad{ background:rgba(200,149,42,.12); color:#fcd34d; border:1px solid rgba(200,149,42,.2); }
-        .noticia-fecha { color:rgba(255,255,255,.35); font-size:.75rem; }
-        .noticia-titulo { color:#fff; font-weight:700; font-size:1rem; line-height:1.35; }
-        .noticia-desc { color:rgba(255,255,255,.5); font-size:.85rem; line-height:1.6; flex:1; }
-        .noticia-link { color:#C8952A; font-size:.8rem; font-weight:600; text-decoration:none; margin-top:auto; }
-        .noticia-link:hover { text-decoration:underline; }
-        @media(max-width:768px){ .noticias-grid { grid-template-columns:1fr; } }
-
         /* ── MAPA LEAFLET ── */
         .mapa-section { background:#06090f; padding:4rem 2rem 0; }
         .mapa-inner { max-width:1060px; margin:0 auto; }
@@ -674,14 +655,6 @@
         .clima-card-label { color:rgba(255,255,255,0.45); font-size:.73rem; margin-top:.3rem; }
         .clima-fuente { text-align:center; color:rgba(255,255,255,0.3); font-size:.75rem; margin-top:1rem; }
         h2.clima-title { font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#fff; margin-bottom:.3rem; }
-        .noticias-sub { color:rgba(255,255,255,0.45); font-size:.9rem; margin-bottom:2rem; }
-        .noticia-card-title { color:#fff; font-weight:700; font-size:1rem; line-height:1.35; }
-        .noticia-card-body  { color:rgba(255,255,255,.5); font-size:.85rem; line-height:1.6; flex:1; }
-        .noticia-card-link  { color:#C8952A; font-size:.8rem; font-weight:600; text-decoration:none; margin-top:auto; }
-        .noticia-card-link:hover { text-decoration:underline; }
-        .noticia-badge-info    { background:rgba(37,99,235,.15);  color:#93c5fd; border:1px solid rgba(96,165,250,.3); }
-        .noticia-badge-cultura { background:rgba(16,185,129,.12); color:#6ee7b7; border:1px solid rgba(16,185,129,.25); }
-        .noticia-badge-empleo  { background:rgba(200,149,42,.12); color:#fcd34d; border:1px solid rgba(200,149,42,.25); }
         h2.mapa-title { font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#fff; margin-bottom:.3rem; }
         .mapa-leyenda { display:flex; flex-wrap:wrap; gap:1.2rem; margin-top:1rem; padding-bottom:3rem; color:rgba(255,255,255,.5); font-size:.82rem; }
         /* Emergency contact list */
@@ -763,6 +736,7 @@
                 <div class="mobile-nav-sep"></div>
                 <a href="plan-regulador.html"       onclick="closeMobileNav()">🗺️ Plan Regulador</a>
                 <a href="seguridad-ciudadana.html"  onclick="closeMobileNav()">🛡️ Seguridad Ciudadana</a>
+                <a href="quejas.html"               onclick="closeMobileNav()">📢 Quejas</a>
                 <a href="como-llegar.html"          onclick="closeMobileNav()">🚗 Cómo Llegar</a>
                 <div class="mobile-nav-sep"></div>
                 <a href="#contacto"                 onclick="closeMobileNav()">📬 Contacto</a>
@@ -877,79 +851,6 @@
             </svg>
         </div>
 
-    </section>
-
-    <!-- Preview Cards: Bolsa de Empleo + Eventos + Directorio Turístico y Comercial -->
-    <section class="regulador-preview-section" id="empleo">
-        <div class="container" style="display:flex; flex-direction:column; gap:1.5rem;">
-
-            <!-- Bolsa de Empleo -->
-            <div class="empleo-modern">
-                <div class="empleo-modern-top">
-                    <div class="empleo-modern-badge">💼</div>
-                    <div class="empleo-modern-heading">
-                        <div class="empleo-modern-label">Oportunidades laborales</div>
-                        <h2 class="empleo-modern-title">Bolsa de Empleo</h2>
-                    </div>
-                </div>
-                <p class="empleo-modern-desc">Conectá con empleadores del cantón de Poás. Publicá tu plaza o encontrá trabajo cerca de vos.</p>
-                <div class="empleo-modern-chips">
-                    <span class="empleo-chip">🔍 Buscar empleo</span>
-                    <span class="empleo-chip">📢 Publicar plaza</span>
-                    <span class="empleo-chip">🤝 Talento local</span>
-                    <span class="empleo-chip">📍 Cantón de Poás</span>
-                </div>
-                <div class="empleo-modern-footer">
-                    <span class="empleo-modern-stat">Oportunidades disponibles en <strong>tu zona</strong></span>
-                    <a href="bolsa-empleo.html" class="empleo-modern-btn">Ver empleos →</a>
-                </div>
-            </div>
-
-            <!-- Eventos -->
-            <div class="eventos-modern" id="eventos">
-                <div class="eventos-modern-top">
-                    <div class="eventos-modern-badge">📅</div>
-                    <div>
-                        <div class="eventos-modern-label">Agenda comunitaria</div>
-                        <h2 class="eventos-modern-title">Eventos del Cantón</h2>
-                    </div>
-                </div>
-                <p class="eventos-modern-desc">Actividades culturales, deportivas y comunitarias en Poás. Agregá y consultá eventos fácilmente.</p>
-                <div class="eventos-modern-chips">
-                    <span class="eventos-chip">🎭 Culturales</span>
-                    <span class="eventos-chip">⚽ Deportivos</span>
-                    <span class="eventos-chip">🤝 Comunidad</span>
-                    <span class="eventos-chip">🍽️ Gastronomía</span>
-                </div>
-                <div class="eventos-modern-footer">
-                    <span class="eventos-modern-stat">Eventos activos en <strong>Poás</strong></span>
-                    <a href="eventos.html" class="eventos-modern-btn">Ver eventos →</a>
-                </div>
-            </div>
-
-            <!-- Directorio Turístico y Comercial -->
-            <div class="directorio-modern" id="turismo">
-                <div class="directorio-modern-top">
-                    <div class="directorio-modern-badge">🛍️</div>
-                    <div>
-                        <div class="directorio-modern-label">Negocios y turismo</div>
-                        <h2 class="directorio-modern-title">Directorio Turístico y Comercial</h2>
-                    </div>
-                </div>
-                <p class="directorio-modern-desc">Negocios y servicios del cantón de Poás. Restaurantes, hospedaje, tours, tiendas y más.</p>
-                <div class="directorio-modern-chips">
-                    <span class="directorio-chip">🍽️ Restaurantes</span>
-                    <span class="directorio-chip">🏨 Hospedaje</span>
-                    <span class="directorio-chip">🌋 Tours</span>
-                    <span class="directorio-chip">🍓 Ruta Gastronómica</span>
-                </div>
-                <div class="directorio-modern-footer">
-                    <span class="directorio-modern-stat">Negocios en <strong>Poás</strong></span>
-                    <a href="directorio-comercial.html" class="directorio-modern-btn">Ver directorio →</a>
-                </div>
-            </div>
-
-        </div>
     </section>
 
     <!-- Galería de Fotos -->
@@ -1094,34 +995,6 @@
                 </div>
             </div>
             <p class="clima-fuente" id="clima-fuente">Cargando datos…</p>
-        </div>
-    </section>
-
-    <!-- ── Noticias y Anuncios Comunitarios ── -->
-    <section class="noticias-section" id="noticias">
-        <div class="container">
-            <h2 class="noticias-title">📢 Noticias y Anuncios Comunitarios</h2>
-            <p class="noticias-sub">Información actualizada para los vecinos y visitantes del cantón de Poás</p>
-            <div class="noticias-grid">
-                <article class="noticia-card">
-                    <div class="noticia-badge noticia-badge-info">Información</div>
-                    <h3 class="noticia-card-title">Apertura del Parque Nacional Volcán Poás</h3>
-                    <p class="noticia-card-body">El Parque Nacional Volcán Poás mantiene su horario de 8:00 a.m. a 4:00 p.m. Se requiere reserva electrónica previa a través del portal SINAC.</p>
-                    <a href="https://serviciosenlinea.sinac.go.cr/" target="_blank" rel="noopener noreferrer" class="noticia-card-link">Reservar entrada →</a>
-                </article>
-                <article class="noticia-card">
-                    <div class="noticia-badge noticia-badge-cultura">Cultura</div>
-                    <h3 class="noticia-card-title">Ruta Gastronómica Poaseña</h3>
-                    <p class="noticia-card-body">Descubrí los sabores auténticos del cantón: chorreado, sopa negra, tamales y más platillos típicos en nuestros restaurantes locales.</p>
-                    <a href="ruta-gastronomica.html" class="noticia-card-link">Explorar ruta →</a>
-                </article>
-                <article class="noticia-card">
-                    <div class="noticia-badge noticia-badge-empleo">Empleo</div>
-                    <h3 class="noticia-card-title">Bolsa de Empleo Activa</h3>
-                    <p class="noticia-card-body">Nuevas oportunidades laborales disponibles en el cantón. Inscribí tu hoja de vida o publicá una oferta de trabajo para conectar con talento local.</p>
-                    <a href="bolsa-empleo.html" class="noticia-card-link">Ver ofertas →</a>
-                </article>
-            </div>
         </div>
     </section>
 
@@ -1337,6 +1210,16 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
+    (function removePreviewCards() {
+        const selectors = [
+            '#empleo', '#eventos', '#turismo', '.regulador-preview-section',
+            '.empleo-modern', '.eventos-modern', '.directorio-modern'
+        ];
+        selectors.forEach(selector => {
+            document.querySelectorAll(selector).forEach(el => el.remove());
+        });
+    })();
+
     /* ════════════════════════════════════════════════
        1. Nivel de Alerta Volcánica (actualizar manualmente)
        Valores posibles: 'verde', 'amarillo', 'naranja', 'rojo'
