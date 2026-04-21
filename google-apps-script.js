@@ -19,6 +19,15 @@
  * ============================================================
  */
 
+function sanitizeForSheet(value) {
+  var str = String(value || '').trim();
+  return /^[=+\-@]/.test(str) ? "'" + str : str;
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet()
@@ -40,10 +49,16 @@ function doPost(e) {
     var data = JSON.parse(e.postData.contents);
 
     var fecha     = Utilities.formatDate(new Date(), 'America/Costa_Rica', 'dd/MM/yyyy HH:mm:ss');
-    var nombre    = data.nombreCompleto || data.nombre || '';
-    var correo    = data.correo || data.email || '';
-    var distrito  = data.distrito || '';
-    var interes   = data.interes || '';
+    var nombre    = sanitizeForSheet(data.nombreCompleto || data.nombre || '');
+    var correo    = sanitizeForSheet(data.correo || data.email || '');
+    var distrito  = sanitizeForSheet(data.distrito || '');
+    var interes   = sanitizeForSheet(data.interes || '');
+
+    if (!nombre || !correo || !isValidEmail(correo)) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ success: false, error: 'Datos inválidos. Nombre y correo son obligatorios.' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
 
     // Agregar la nueva fila
     sheet.appendRow([fecha, nombre, correo, distrito, interes]);
