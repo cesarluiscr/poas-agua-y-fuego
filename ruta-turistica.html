@@ -305,9 +305,256 @@
             box-shadow: 0 10px 24px rgba(0,0,0,0.3);
         }
 
+        /* ── Publicación destacada: Finca Koki ── */
+        .fk-featured {
+            background: linear-gradient(160deg, #ffffff 0%, #EFF8F1 100%);
+            border: 1px solid #D6EADD;
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 16px 48px rgba(12,42,24,0.13);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fk-featured::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #7BE495, #2E9E5B, #14603A);
+        }
+
+        .fk-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: #14603A;
+            color: #DBF3E3;
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            padding: 0.35rem 0.95rem;
+            border-radius: 20px;
+            margin-bottom: 1.25rem;
+        }
+
+        .fk-header {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            margin-bottom: 1.75rem;
+            flex-wrap: wrap;
+        }
+
+        .fk-logo {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            background: #fff;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            flex-shrink: 0;
+        }
+
+        .fk-title {
+            font-size: clamp(1.7rem, 5vw, 2.4rem);
+            font-weight: 800;
+            color: #0C2A18;
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+
+        .fk-tagline {
+            color: #2E9E5B;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .fk-hero-img {
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-bottom: 1.75rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+        }
+
+        .fk-hero-img img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .fk-hero-caption {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            background: linear-gradient(transparent, rgba(6,32,18,0.82));
+            color: #fff;
+            padding: 1.75rem 1.5rem 1.1rem;
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+
+        .fk-intro {
+            color: #3A4A40;
+            font-size: 1rem;
+            line-height: 1.75;
+            margin-bottom: 2rem;
+        }
+
+        .fk-subtitle {
+            font-size: 1.18rem;
+            font-weight: 800;
+            color: #14603A;
+            margin: 2.25rem 0 1.1rem;
+        }
+
+        .fk-activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .fk-act {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.1);
+        }
+
+        .fk-act img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s;
+        }
+
+        .fk-act:hover img { transform: scale(1.08); }
+
+        .fk-act span {
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            background: linear-gradient(transparent, rgba(6,32,18,0.85));
+            color: #fff;
+            padding: 1.1rem 0.6rem 0.6rem;
+            font-weight: 700;
+            font-size: 0.82rem;
+            text-align: center;
+        }
+
+        .fk-note {
+            background: #EAF7EF;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            color: #14603A;
+            font-size: 0.9rem;
+            line-height: 1.75;
+            margin-top: 1.25rem;
+            font-weight: 500;
+        }
+
+        .fk-note strong { color: #0C2A18; }
+
+        .fk-price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+            gap: 1rem;
+        }
+
+        .fk-price {
+            background: #fff;
+            border: 1px solid #D6EADD;
+            border-radius: 14px;
+            padding: 1.3rem 1rem;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.05);
+        }
+
+        .fk-price h5 {
+            font-size: 0.9rem;
+            color: #0C2A18;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .fk-price-amt {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #14603A;
+        }
+
+        .fk-price-amt.free { color: #2E9E5B; }
+
+        .fk-price small {
+            display: block;
+            color: #55665C;
+            font-size: 0.78rem;
+            margin-top: 0.4rem;
+            line-height: 1.45;
+        }
+
+        .fk-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .fk-info {
+            background: linear-gradient(135deg, #0C2A18, #14603A);
+            color: #fff;
+            border-radius: 14px;
+            padding: 1.5rem;
+        }
+
+        .fk-info h5 {
+            color: #7BE495;
+            font-weight: 700;
+            font-size: 0.98rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .fk-info p {
+            color: rgba(255,255,255,0.85);
+            font-size: 0.88rem;
+            line-height: 1.65;
+        }
+
+        .fk-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 2rem;
+        }
+
+        .fk-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.35rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .fk-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.18); }
+
+        .fk-btn-wa  { background: #25D366; color: #fff; }
+        .fk-btn-tel { background: #14603A; color: #fff; }
+        .fk-btn-web { background: #7BE495; color: #063D22; }
+        .fk-btn-ig  { background: #0C2A18; color: #fff; }
+
         @media (max-width: 600px) {
             .exp-card { flex-direction: column; gap: 0.75rem; }
             .rt-cta { padding: 2rem 1.5rem; }
+            .fk-featured { padding: 1.5rem; }
+            .fk-hero-img img { height: 220px; }
         }
     </style>
     <!-- Open Graph / Redes Sociales -->
@@ -380,6 +627,82 @@
     <section class="rt-main">
         <div class="container">
             <a href="directorio-comercial.html" class="rt-back">← Volver al Directorio Turístico y Comercial</a>
+
+            <!-- ═══ PUBLICACIÓN DESTACADA: FINCA KOKI ═══ -->
+            <div class="fk-featured">
+                <div class="fk-badge">⭐ Destacado · Ecoturismo</div>
+
+                <div class="fk-header">
+                    <img class="fk-logo" src="img/finca_koki_logo.jpg" alt="Logo de Finca Koki – Aventura Natural">
+                    <div>
+                        <h2 class="fk-title">Finca Koki</h2>
+                        <p class="fk-tagline">AVENTURA NATURAL · Ecoturismo para toda la familia</p>
+                    </div>
+                </div>
+
+                <div class="fk-hero-img">
+                    <img src="img/finca_koki_hero.jpg" alt="Recorrido entre bosque y naturaleza en Finca Koki">
+                    <span class="fk-hero-caption">🌿 Un día de aventura entre lagunas, cataratas, senderos y bosque</span>
+                </div>
+
+                <p class="fk-intro">Finca Koki es un destino de <strong>ecoturismo y aventura al aire libre</strong> pensado para disfrutar en familia, con amigos o en grupo. Con un solo <strong>Pase del Día</strong> tenés acceso a decenas de actividades acuáticas, terrestres y de naturaleza rodeado de paisajes verdes, ríos y cataratas. Un espacio para reconectar con la naturaleza de forma responsable y divertida.</p>
+
+                <!-- Actividades incluidas -->
+                <h3 class="fk-subtitle">🌿 Actividades incluidas en el Pase del Día</h3>
+                <div class="fk-activities-grid">
+                    <div class="fk-act"><img src="img/finca_koki_kayak.jpg" alt="Kayak en Finca Koki"><span>🛶 Kayak</span></div>
+                    <div class="fk-act"><img src="img/finca_koki_paddle.jpg" alt="Paddle board en Finca Koki"><span>🏄 Paddle Board</span></div>
+                    <div class="fk-act"><img src="img/finca_koki_tubing.jpg" alt="Tubing en Finca Koki"><span>🎢 Tubing 1 y 2</span></div>
+                    <div class="fk-act"><img src="img/finca_koki_tirolesa.jpg" alt="Tirolesa en Finca Koki"><span>🌉 Tirolesa</span></div>
+                    <div class="fk-act"><img src="img/finca_koki_puente.jpg" alt="Puente colgante en Finca Koki"><span>🌁 Puente Colgante</span></div>
+                    <div class="fk-act"><img src="img/finca_koki_senderos.jpg" alt="Senderos en Finca Koki"><span>🥾 9 km de Senderos</span></div>
+                    <div class="fk-act"><img src="img/finca_koki_pozas.jpg" alt="Pozas y cataratas en Finca Koki"><span>💦 Pozas y Cataratas</span></div>
+                    <div class="fk-act"><img src="img/finca_koki_pesca.jpg" alt="Pesca recreativa en Finca Koki"><span>🎣 Pesca</span></div>
+                    <div class="fk-act"><img src="img/finca_koki_obstaculos.jpg" alt="Carrera de obstáculos en Finca Koki"><span>🏃 Carrera de Obstáculos</span></div>
+                </div>
+                <p class="fk-note">Además incluye: 🚴 <strong>Bicicleta acuática</strong> · 🚜 <strong>Tour en Chapulín</strong> · ⚡ <strong>Tour Hidroeléctrica</strong> · ₿ <strong>Tour Bitcoin</strong> · 🐐 <strong>Nuestra Granja</strong>. Las actividades autoguiadas y la carrera de obstáculos deben realizarse siguiendo siempre las indicaciones del guía. Menores de 18 años siempre acompañados de un adulto.</p>
+
+                <!-- Actividades adicionales -->
+                <h3 class="fk-subtitle">🏕️ Actividades adicionales (no incluidas en el pase)</h3>
+                <div class="fk-activities-grid">
+                    <div class="fk-act"><img src="img/finca_koki_hero.jpg" alt="Tour a caballo en Finca Koki"><span>🐴 Tour a Caballo</span></div>
+                    <div class="fk-act"><img src="img/finca_koki_paintball.jpg" alt="Paintball en Finca Koki"><span>🔫 Paintball</span></div>
+                </div>
+                <p class="fk-note">También disponibles bajo reserva: 🏕️ <strong>Camping</strong> · 🏡 <strong>Ranchos</strong>.</p>
+
+                <!-- Precios -->
+                <h3 class="fk-subtitle">🎟️ Pase del Día</h3>
+                <div class="fk-price-grid">
+                    <div class="fk-price"><h5>Normal</h5><div class="fk-price-amt">₡7.000</div><small>11 – 64 años</small></div>
+                    <div class="fk-price"><h5>Adulto Mayor</h5><div class="fk-price-amt">₡3.500</div><small>65+ años</small></div>
+                    <div class="fk-price"><h5>Niños</h5><div class="fk-price-amt">₡3.500</div><small>5 – 10 años</small></div>
+                    <div class="fk-price"><h5>Menores de 5</h5><div class="fk-price-amt free">GRATIS</div><small>Menores de 5 años</small></div>
+                    <div class="fk-price"><h5>Cumpleañeros</h5><div class="fk-price-amt free">GRATIS</div><small>El mismo día, 3 días antes o después</small></div>
+                    <div class="fk-price"><h5>Capacidades diferentes</h5><div class="fk-price-amt free">GRATIS</div><small>Entrada sin costo</small></div>
+                </div>
+
+                <!-- Info práctica -->
+                <div class="fk-info-grid">
+                    <div class="fk-info">
+                        <h5>🕖 Horario</h5>
+                        <p>Siempre abiertos: de lunes a lunes y todos los feriados, de 7:00 a.m. a 5:00 p.m.</p>
+                    </div>
+                    <div class="fk-info">
+                        <h5>🎉 Eventos y Grupos</h5>
+                        <p>Preparamos eventos para grupos educativos, empresariales, adultos mayores y sociales: bodas, cumpleaños, baby showers y más.</p>
+                    </div>
+                </div>
+
+                <!-- Contacto -->
+                <div class="fk-contact">
+                    <a href="https://wa.me/50687811049" target="_blank" rel="noopener noreferrer" class="fk-btn fk-btn-wa">💬 WhatsApp 8781-1049</a>
+                    <a href="tel:+50687475889" class="fk-btn fk-btn-tel">📞 8747-5889</a>
+                    <a href="https://www.fincakoki.com" target="_blank" rel="noopener noreferrer" class="fk-btn fk-btn-web">🌐 fincakoki.com</a>
+                    <a href="https://www.instagram.com/fincakoki" target="_blank" rel="noopener noreferrer" class="fk-btn fk-btn-ig">📷 @Fincakoki</a>
+                </div>
+            </div>
+
+            <hr class="rt-divider">
 
             <!-- ATRACTIVOS NATURALES -->
             <div class="rt-section-label">🌋 Imperdibles</div>
