@@ -34,7 +34,16 @@
     '.fs-fab .fs-minus{font-size:15px;}' +
     '.fs-fab .fs-plus{font-size:22px;}' +
     '.fs-fab .fs-label{font-size:12px;min-width:34px;text-align:center;opacity:.9;}' +
-    '.fs-fab button[disabled]{opacity:.35;cursor:default;}';
+    '.fs-fab button[disabled]{opacity:.35;cursor:default;}' +
+    /* Pista de menú (flecha) */
+    '.mh-tip{position:fixed;z-index:99997;transform:translateX(-50%);pointer-events:none;font-family:sans-serif;}' +
+    '.mh-tip.mh-hide{opacity:0;transition:opacity .35s ease;pointer-events:none;}' +
+    '.mh-inner{display:flex;flex-direction:column;align-items:center;pointer-events:auto;' +
+      'animation:mhBounce 1.1s ease-in-out infinite;}' +
+    '.mh-arrow{font-size:32px;line-height:1;color:#FF5A5F;text-shadow:0 2px 6px rgba(0,0,0,.35);}' +
+    '.mh-label{margin-top:1px;background:#FF5A5F;color:#fff;font-size:12.5px;font-weight:700;' +
+      'padding:6px 12px;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,.3);white-space:nowrap;cursor:pointer;}' +
+    '@keyframes mhBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}';
 
   var style = document.createElement('style');
   style.textContent = css;
@@ -296,12 +305,52 @@
     refresh();
   }
 
+  /* ================================================================= */
+  /*  3) PISTA DE MENÚ (flecha que señala el botón)                    */
+  /* ================================================================= */
+  function buildMenuHint() {
+    var DONE = 'poas-menu-hint-done';
+    try { if (localStorage.getItem(DONE)) return; } catch (e) {}
+
+    var ham = document.querySelector('.hamburger');
+    if (!ham) return;
+    // Solo si el botón es visible (en móvil). En escritorio suele estar oculto.
+    if (!ham.offsetWidth && !ham.offsetHeight) return;
+
+    var tip = document.createElement('div');
+    tip.className = 'mh-tip';
+    tip.innerHTML = '<div class="mh-inner"><div class="mh-arrow">▲</div>' +
+      '<div class="mh-label">¡Aquí está el menú!</div></div>';
+    document.body.appendChild(tip);
+
+    function place() {
+      var r = ham.getBoundingClientRect();
+      tip.style.left = (r.left + r.width / 2) + 'px';
+      tip.style.top = (r.bottom + 6) + 'px';
+    }
+    place();
+
+    function hide() { tip.classList.add('mh-hide'); }
+    function done() {
+      try { localStorage.setItem(DONE, '1'); } catch (e) {}
+      hide();
+      setTimeout(function () { if (tip.parentNode) tip.parentNode.removeChild(tip); }, 400);
+    }
+
+    ham.addEventListener('click', done);
+    tip.addEventListener('click', done);
+    window.addEventListener('resize', place);
+    window.addEventListener('scroll', place, { passive: true });
+    setTimeout(hide, 10000); // se atenúa sola tras 10 s (volverá a mostrarse hasta que abran el menú)
+  }
+
   /* ----------------------------------------------------------------- */
   /*  Inicialización                                                    */
   /* ----------------------------------------------------------------- */
   function init() {
     markImages(document);
     buildFontControl();
+    buildMenuHint();
     if (window.MutationObserver) {
       var mo = new MutationObserver(function (muts) {
         for (var i = 0; i < muts.length; i++) {
