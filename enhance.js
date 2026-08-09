@@ -1,6 +1,6 @@
 /*
  * enhance.js — Mejoras de accesibilidad para Poás Agua y Fuego
- *  1) Ampliar imágenes al tocarlas (lightbox con zoom por pellizco y doble toque).
+ *  1) Ampliar imágenes al tocarlas (lightbox centrado con zoom por pellizco y doble toque).
  *  2) Control para aumentar / disminuir el tamaño de la letra (persistente).
  *
  * Autónomo: inyecta su propio CSS. Solo requiere <script src="enhance.js"></script>.
@@ -12,17 +12,17 @@
   /*  Estilos                                                           */
   /* ----------------------------------------------------------------- */
   var css = '' +
-    '.pz-overlay{position:fixed;inset:0;z-index:999999;background:rgba(0,0,0,.93);' +
+    '.pz-overlay{position:fixed;inset:0;z-index:999999;background:rgba(0,0,0,.94);' +
       'display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s ease;' +
       'touch-action:none;overflow:hidden;-webkit-user-select:none;user-select:none;}' +
     '.pz-overlay.pz-open{opacity:1;}' +
-    '.pz-overlay img{max-width:100%;max-height:100%;transform-origin:0 0;will-change:transform;' +
-      '-webkit-user-drag:none;user-drag:none;pointer-events:none;}' +
+    '.pz-overlay img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center center;' +
+      'will-change:transform;-webkit-user-drag:none;user-drag:none;pointer-events:none;display:block;}' +
     '.pz-close{position:fixed;top:12px;right:14px;z-index:1000000;width:46px;height:46px;border:none;' +
       'border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:26px;line-height:46px;' +
       'text-align:center;cursor:pointer;padding:0;}' +
     '.pz-hint{position:fixed;bottom:18px;left:0;right:0;text-align:center;color:rgba(255,255,255,.85);' +
-      'font-size:.85rem;pointer-events:none;font-family:sans-serif;}' +
+      'font-size:.85rem;pointer-events:none;font-family:sans-serif;padding:0 12px;}' +
     'img.pz-able{cursor:zoom-in;}' +
     /* Control de tamaño de letra */
     '.fs-fab{position:fixed;left:14px;bottom:16px;z-index:99998;display:flex;align-items:center;gap:6px;' +
@@ -42,10 +42,13 @@
 
   /* ================================================================= */
   /*  1) LIGHTBOX DE IMÁGENES CON ZOOM                                 */
+  /*  Modelo: la imagen se centra sola (flex + object-fit:contain).    */
+  /*  El zoom se aplica con transform desde el CENTRO.                 */
   /* ================================================================= */
   var overlay, imgEl, closeBtn, hintEl;
-  var scale = 1, tx = 0, ty = 0, baseScale = 1;
-  var natW = 0, natH = 0, fitScale = 1;
+  var scale = 1, tx = 0, ty = 0;          // estado de la transformación
+  var natW = 0, natH = 0;                  // tamaño natural de la imagen
+  var MIN = 1, MAX = 6;
 
   function buildOverlay() {
     overlay = document.createElement('div');
@@ -80,77 +83,80 @@
     setupGestures();
   }
 
+  // Tamaño con el que se dibuja la imagen ajustada al viewport (object-fit:contain).
+  function fittedSize() {
+    var vw = window.innerWidth, vh = window.innerHeight;
+    if (!natW || !natH) return { w: vw, h: vh };
+    var ar = natW / natH, arV = vw / vh, w, h;
+    if (ar > arV) { w = vw; h = vw / ar; } else { h = vh; w = vh * ar; }
+    return { w: w, h: h };
+  }
+
   function applyTransform() {
     imgEl.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
   }
 
-  function centerImage() {
-    // Ajusta la imagen al viewport y la centra.
-    var vw = window.innerWidth, vh = window.innerHeight;
-    fitScale = Math.min(vw / natW, vh / natH, 1);
-    scale = fitScale;
-    baseScale = fitScale;
-    tx = (vw - natW * scale) / 2;
-    ty = (vh - natH * scale) / 2;
+  function reset() {
+    scale = 1; tx = 0; ty = 0;
     applyTransform();
+  }
+
+  function clampPan() {
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var f = fittedSize();
+    var maxX = Math.max(0, (f.w * scale - vw) / 2);
+    var maxY = Math.max(0, (f.h * scale - vh) / 2);
+    tx = Math.min(maxX, Math.max(-maxX, tx));
+    ty = Math.min(maxY, Math.max(-maxY, ty));
   }
 
   function openLightbox(src, alt) {
     if (!overlay) buildOverlay();
     hintEl.style.display = '';
-    var loader = new Image();
-    loader.onload = function () {
-      natW = loader.naturalWidth || loader.width;
-      natH = loader.naturalHeight || loader.height;
-      imgEl.style.width = natW + 'px';
-      imgEl.style.height = natH + 'px';
-      imgEl.src = src;
-      imgEl.alt = alt || '';
-      centerImage();
-      overlay.style.display = 'flex';
-      requestAnimationFrame(function () { overlay.classList.add('pz-open'); });
-      document.documentElement.style.overflow = 'hidden';
+    natW = 0; natH = 0;
+    reset();
+    imgEl.alt = alt || '';
+    imgEl.onload = function () {
+      natW = imgEl.naturalWidth || imgEl.width;
+      natH = imgEl.naturalHeight || imgEl.height;
+      reset();
     };
-    loader.src = src;
+    imgEl.src = src;
+    overlay.style.display = 'flex';
+    requestAnimationFrame(function () { overlay.classList.add('pz-open'); });
+    document.documentElement.style.overflow = 'hidden';
   }
 
   function closeLightbox() {
     if (!overlay) return;
     overlay.classList.remove('pz-open');
     document.documentElement.style.overflow = '';
-    setTimeout(function () { overlay.style.display = 'none'; }, 200);
-  }
-
-  function clampPan() {
-    var vw = window.innerWidth, vh = window.innerHeight;
-    var w = natW * scale, h = natH * scale;
-    if (w <= vw) { tx = (vw - w) / 2; }
-    else { tx = Math.min(0, Math.max(vw - w, tx)); }
-    if (h <= vh) { ty = (vh - h) / 2; }
-    else { ty = Math.min(0, Math.max(vh - h, ty)); }
+    setTimeout(function () { overlay.style.display = 'none'; imgEl.src = ''; }, 200);
   }
 
   function setupGestures() {
     var pointers = {};
-    var startDist = 0, startScale = 1, startMid = { x: 0, y: 0 };
-    var startTx = 0, startTy = 0;
+    var startDist = 0, startScale = 1;
+    var startTx = 0, startTy = 0, startMid = { x: 0, y: 0 };
     var panStart = null;
     var lastTap = 0;
 
-    function ptArr() { return Object.keys(pointers).map(function (k) { return pointers[k]; }); }
+    function pts() { return Object.keys(pointers).map(function (k) { return pointers[k]; }); }
+    function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+    function mid(a, b) { return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }; }
 
     overlay.addEventListener('pointerdown', function (e) {
       if (e.target === closeBtn) return;
       pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
-      overlay.setPointerCapture(e.pointerId);
-      var pts = ptArr();
-      if (pts.length === 2) {
-        startDist = dist(pts[0], pts[1]);
+      try { overlay.setPointerCapture(e.pointerId); } catch (err) {}
+      var p = pts();
+      if (p.length === 2) {
+        startDist = dist(p[0], p[1]);
         startScale = scale;
-        startMid = mid(pts[0], pts[1]);
+        startMid = mid(p[0], p[1]);
         startTx = tx; startTy = ty;
         panStart = null;
-      } else if (pts.length === 1) {
+      } else if (p.length === 1) {
         panStart = { x: e.clientX, y: e.clientY, tx: tx, ty: ty };
       }
     });
@@ -158,18 +164,17 @@
     overlay.addEventListener('pointermove', function (e) {
       if (!pointers[e.pointerId]) return;
       pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
-      var pts = ptArr();
-      if (pts.length === 2) {
-        var d = dist(pts[0], pts[1]);
-        var newScale = Math.min(Math.max(startScale * (d / startDist), fitScale), 8);
-        // Zoom hacia el punto medio del pellizco.
-        var m = startMid;
-        tx = m.x - (m.x - startTx) * (newScale / startScale);
-        ty = m.y - (m.y - startTy) * (newScale / startScale);
-        scale = newScale;
+      var p = pts();
+      if (p.length === 2 && startDist > 0) {
+        var d = dist(p[0], p[1]);
+        scale = Math.min(MAX, Math.max(MIN, startScale * (d / startDist)));
+        // Mantener el punto medio del pellizco relativamente estable.
+        var m = mid(p[0], p[1]);
+        tx = startTx + (m.x - startMid.x);
+        ty = startTy + (m.y - startMid.y);
         clampPan();
         applyTransform();
-      } else if (pts.length === 1 && panStart && scale > fitScale + 0.001) {
+      } else if (p.length === 1 && panStart && scale > MIN + 0.001) {
         tx = panStart.tx + (e.clientX - panStart.x);
         ty = panStart.ty + (e.clientY - panStart.y);
         clampPan();
@@ -179,31 +184,24 @@
 
     function onUp(e) {
       delete pointers[e.pointerId];
-      var pts = ptArr();
-      if (pts.length < 2) { startDist = 0; }
-      if (pts.length === 1) {
-        panStart = { x: pts[0].x, y: pts[0].y, tx: tx, ty: ty };
-      } else if (pts.length === 0) {
-        panStart = null;
-      }
+      var p = pts();
+      if (p.length < 2) startDist = 0;
+      if (p.length === 1) panStart = { x: p[0].x, y: p[0].y, tx: tx, ty: ty };
+      else if (p.length === 0) panStart = null;
     }
     overlay.addEventListener('pointerup', onUp);
     overlay.addEventListener('pointercancel', onUp);
 
-    // Doble toque / doble clic para acercar-alejar.
+    // Doble toque / doble clic para acercar y alejar.
     overlay.addEventListener('pointerup', function (e) {
       if (e.target === closeBtn || e.target === overlay) return;
       var now = Date.now();
       if (now - lastTap < 300) {
         hintEl.style.display = 'none';
-        if (scale > fitScale + 0.01) {
-          centerImage();
+        if (scale > MIN + 0.01) {
+          reset();
         } else {
-          var target = Math.min(fitScale * 3, 6);
-          var f = target / scale;
-          tx = e.clientX - (e.clientX - tx) * f;
-          ty = e.clientY - (e.clientY - ty) * f;
-          scale = target;
+          scale = 2.5; tx = 0; ty = 0;
           clampPan();
           applyTransform();
         }
@@ -212,12 +210,9 @@
     });
 
     window.addEventListener('resize', function () {
-      if (overlay && overlay.classList.contains('pz-open')) centerImage();
+      if (overlay && overlay.classList.contains('pz-open')) { clampPan(); applyTransform(); }
     });
   }
-
-  function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
-  function mid(a, b) { return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }; }
 
   // Marca las imágenes de contenido como ampliables.
   function markImages(root) {
@@ -225,8 +220,7 @@
     for (var i = 0; i < imgs.length; i++) {
       var img = imgs[i];
       if (img.dataset.pzInit) continue;
-      // Excluir imágenes dentro de enlaces (para no romper navegación) e íconos pequeños.
-      if (img.closest('a')) continue;
+      if (img.closest('a')) continue;                 // no romper enlaces
       if (img.hasAttribute('data-no-zoom')) continue;
       var w = img.getAttribute('width');
       if ((img.clientWidth && img.clientWidth < 70) || (w && parseInt(w, 10) < 70)) continue;
@@ -289,8 +283,7 @@
     document.body.appendChild(fab);
 
     function refresh() {
-      var pct = Math.round(STEPS[idx] * 100);
-      label.textContent = pct + '%';
+      label.textContent = Math.round(STEPS[idx] * 100) + '%';
       minus.disabled = idx === 0;
       plus.disabled = idx === STEPS.length - 1;
     }
@@ -309,7 +302,6 @@
   function init() {
     markImages(document);
     buildFontControl();
-    // Reobservar imágenes añadidas dinámicamente (galerías, etc.).
     if (window.MutationObserver) {
       var mo = new MutationObserver(function (muts) {
         for (var i = 0; i < muts.length; i++) {
