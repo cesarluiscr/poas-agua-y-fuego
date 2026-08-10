@@ -43,7 +43,12 @@
     '.mh-arrow{font-size:32px;line-height:1;color:#FF5A5F;text-shadow:0 2px 6px rgba(0,0,0,.35);margin-right:8px;}' +
     '.mh-label{margin-top:1px;background:#FF5A5F;color:#fff;font-size:12.5px;font-weight:700;' +
       'padding:6px 12px;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,.3);white-space:nowrap;cursor:pointer;}' +
-    '@keyframes mhBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}';
+    '@keyframes mhBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}' +
+    /* Botón de retroceso global */
+    '.bk-btn{position:fixed;left:14px;bottom:74px;z-index:99998;width:46px;height:46px;border:none;border-radius:50%;' +
+      'background:rgba(47,54,53,.92);color:#fff;font-size:23px;cursor:pointer;display:flex;align-items:center;' +
+      'justify-content:center;line-height:1;padding:0;box-shadow:0 6px 20px rgba(0,0,0,.28);backdrop-filter:blur(4px);}' +
+    '.bk-btn:active{transform:scale(.9);}';
 
   var style = document.createElement('style');
   style.textContent = css;
@@ -346,6 +351,31 @@
     setTimeout(hide, 10000); // se atenúa sola tras 10 s (volverá a mostrarse hasta que abran el menú)
   }
 
+  /* ================================================================= */
+  /*  4) BOTÓN DE RETROCESO GLOBAL                                     */
+  /* ================================================================= */
+  function buildBackButton() {
+    var file = (location.pathname || '').split('/').pop().toLowerCase();
+    // No mostrar en la portada.
+    if (file === '' || file === 'index.html' || file === 'index-en.html') return;
+
+    var btn = document.createElement('button');
+    btn.className = 'bk-btn';
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Regresar a la página anterior');
+    btn.innerHTML = '&#8592;'; // ←
+    document.body.appendChild(btn);
+
+    btn.addEventListener('click', function () {
+      if (window.history.length > 1) {
+        history.back();
+      } else {
+        var en = (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
+        location.href = en ? 'index-en.html' : 'index.html';
+      }
+    });
+  }
+
   /* ----------------------------------------------------------------- */
   /*  Inicialización                                                    */
   /* ----------------------------------------------------------------- */
@@ -353,6 +383,7 @@
     markImages(document);
     buildFontControl();
     buildMenuHint();
+    buildBackButton();
     if (window.MutationObserver) {
       var mo = new MutationObserver(function (muts) {
         for (var i = 0; i < muts.length; i++) {
