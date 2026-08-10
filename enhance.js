@@ -36,11 +36,11 @@
     '.fs-fab .fs-label{font-size:12px;min-width:34px;text-align:center;opacity:.9;}' +
     '.fs-fab button[disabled]{opacity:.35;cursor:default;}' +
     /* Pista de menú (flecha) */
-    '.mh-tip{position:fixed;z-index:99997;transform:translateX(-50%);pointer-events:none;font-family:sans-serif;}' +
+    '.mh-tip{position:fixed;z-index:99997;pointer-events:none;font-family:sans-serif;max-width:88vw;}' +
     '.mh-tip.mh-hide{opacity:0;transition:opacity .35s ease;pointer-events:none;}' +
-    '.mh-inner{display:flex;flex-direction:column;align-items:center;pointer-events:auto;' +
+    '.mh-inner{display:flex;flex-direction:column;align-items:flex-end;pointer-events:auto;' +
       'animation:mhBounce 1.1s ease-in-out infinite;}' +
-    '.mh-arrow{font-size:32px;line-height:1;color:#FF5A5F;text-shadow:0 2px 6px rgba(0,0,0,.35);}' +
+    '.mh-arrow{font-size:32px;line-height:1;color:#FF5A5F;text-shadow:0 2px 6px rgba(0,0,0,.35);margin-right:8px;}' +
     '.mh-label{margin-top:1px;background:#FF5A5F;color:#fff;font-size:12.5px;font-weight:700;' +
       'padding:6px 12px;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,.3);white-space:nowrap;cursor:pointer;}' +
     '@keyframes mhBounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}';
@@ -325,7 +325,9 @@
 
     function place() {
       var r = ham.getBoundingClientRect();
-      tip.style.left = (r.left + r.width / 2) + 'px';
+      // Anclar al borde derecho del botón: la etiqueta crece hacia adentro y no se corta.
+      tip.style.right = Math.max(6, window.innerWidth - r.right) + 'px';
+      tip.style.left = 'auto';
       tip.style.top = (r.bottom + 6) + 'px';
     }
     place();
