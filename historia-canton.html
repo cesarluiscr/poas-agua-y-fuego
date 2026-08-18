@@ -526,9 +526,106 @@
                     </div>
                 </a>
             </div>
+
+            <!-- LEYENDA: EL SACRIFICIO DEL RUALDO -->
+            <div style="max-width:680px;margin:3rem auto 0">
+                <article class="ley-card">
+                    <div class="ley-emblem">🐦</div>
+                    <div class="ley-kicker">Leyenda Indígena · Los Botos del Poás</div>
+                    <h3 class="ley-title">El Sacrificio del Rualdo</h3>
+                    <div class="ley-rule"></div>
+                    <div class="ley-body">
+                        <p><span class="ley-dropcap">C</span>uenta la leyenda que en las faldas del volcán Poás habitaba una tribu indígena, los indios botos. En el poblado vivía una joven huérfana que encontró un pajarillo desamparado, cuyos padres habían desaparecido. La muchacha decidió cuidarlo, alimentarlo y criarlo con entrañable cariño. El pajarillo, un <em>rualdo</em> (<em>Chlorophonia callophrys</em>), creció fuerte y alegre, acompañándola en todo momento y alegrando su choza con su canto.</p>
+                        <p>Un día, la furia del volcán Poás se desató violentamente. La tierra retumbaba y grandes corrientes de lava y ceniza amenazaban con destruir el poblado. Aterrorizados, los sacerdotes y brujos de la tribu intentaron calmar al gran coloso ofreciéndole animales y frutos, pero el volcán rugía cada vez con más fuerza.</p>
+                        <p>Tras consultar al espíritu del volcán, el brujo más anciano anunció que el dios del fuego exigía un sacrificio humano: la entrega de la doncella más hermosa de la aldea. La joven aceptó resignada su destino para salvar a su pueblo de la destrucción. Fue conducida hasta el borde del imponente cráter, dispuesta a entregarse a las entrañas ardientes de la montaña.</p>
+                        <p>En el momento en que la doncella avanzaba hacia el abismo, el fiel rualdo voló decididamente sobre el cráter, desafiando las lenguas de fuego y el humo espeso. El ave le habló al volcán en el lenguaje secreto de la naturaleza y le ofreció un trato: cambiar la vida de su protectora por la belleza y dulzura de su canto. En ese instante, el rualdo comenzó a entonar la melodía más hermosa y conmovedora jamás escuchada.</p>
+                        <p>El dios del volcán, conmovido por tan noble gesto de lealtad y amor, apaciguó su furia y perdonó la vida de la joven, permitiéndole regresar a salvo con su gente.</p>
+                        <p>Dice la tradición que, desde aquel día, el volcán conmovido jamás dejó de recordar aquel gesto, dejando escapar de vez en cuando columnas de vapor caliente que representan las <strong>lágrimas tardías del gran coloso de piedra</strong>.</p>
+                    </div>
+                    <div class="ley-footer">
+                        <span class="ley-tag">🌋 Volcán Poás</span>
+                        <span class="ley-tag">🐦 Rualdo</span>
+                        <span class="ley-tag">📜 Tradición Oral</span>
+                    </div>
+                </article>
+            </div>
         </div>
 
         <style>
+            /* ── Tarjeta de leyenda ── */
+            .ley-card {
+                position: relative;
+                background:
+                    radial-gradient(ellipse at 15% 0%, rgba(46,158,91,0.10) 0%, transparent 55%),
+                    linear-gradient(160deg, #f8f3e3 0%, #f1e7cb 45%, #ece0b8 100%);
+                border: 2px solid #6b8f3a;
+                box-shadow:
+                    inset 0 0 0 5px rgba(107,143,58,0.14),
+                    0 8px 40px rgba(20,40,15,0.20),
+                    4px 4px 0 rgba(60,90,30,0.10);
+                border-radius: 3px;
+                padding: 2.6rem 2.4rem 1.8rem;
+                overflow: visible;
+            }
+            .ley-card::before {
+                content: '';
+                position: absolute;
+                top: 8px; bottom: 8px; left: 8px; right: 8px;
+                border: 1px solid rgba(107,143,58,0.32);
+                border-radius: 2px;
+                pointer-events: none;
+            }
+            .ley-emblem {
+                position: absolute;
+                top: 1.1rem; right: 1.5rem;
+                font-size: 1.7rem;
+                filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+            }
+            .ley-kicker {
+                font-family: 'Outfit', sans-serif;
+                font-size: 0.72rem; font-weight: 800;
+                letter-spacing: 0.16em; text-transform: uppercase;
+                color: #5a7a2c; margin-bottom: 0.5rem;
+            }
+            .ley-title {
+                font-family: 'Playfair Display', serif;
+                font-size: clamp(1.6rem, 4.5vw, 2.2rem);
+                color: #2f2410; line-height: 1.1;
+                margin: 0 0 0.9rem;
+            }
+            .ley-rule {
+                height: 2px; width: 90px;
+                background: linear-gradient(90deg, #6b8f3a, transparent);
+                margin-bottom: 1.4rem;
+            }
+            .ley-body p {
+                font-family: 'Outfit', sans-serif;
+                color: #3d3320; font-size: 0.98rem;
+                line-height: 1.85; margin-bottom: 1rem;
+                text-align: justify;
+            }
+            .ley-dropcap {
+                float: left;
+                font-family: 'Playfair Display', serif;
+                font-size: 3.4rem; line-height: 0.8; font-weight: 800;
+                color: #6b8f3a; margin: 0.35rem 0.55rem 0 0;
+            }
+            .ley-body em { font-style: italic; color: #5a7a2c; }
+            .ley-footer {
+                display: flex; flex-wrap: wrap; gap: 0.5rem;
+                margin-top: 1.4rem; padding-top: 1.1rem;
+                border-top: 1px solid rgba(107,143,58,0.3);
+            }
+            .ley-tag {
+                font-family: 'Outfit', sans-serif;
+                font-size: 0.72rem; font-weight: 700;
+                color: #5a7a2c; background: rgba(107,143,58,0.14);
+                padding: 0.3rem 0.75rem; border-radius: 20px;
+            }
+            @media (max-width: 600px) {
+                .ley-card { padding: 1.8rem 1.4rem 1.4rem; }
+            }
+
             .gc-article-card {
                 position: relative;
                 background:
