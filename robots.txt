@@ -1,8 +1,5 @@
 User-agent: *
 Allow: /
-
-# No indexar archivos de configuración
-Disallow: /*.json$
-Disallow: /*.jsonl$
+Disallow: /admin.html
 
 Sitemap: https://cesarluiscr.github.io/poas-agua-y-fuego/sitemap.xml
