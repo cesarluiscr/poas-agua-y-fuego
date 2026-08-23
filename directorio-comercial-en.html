@@ -11,6 +11,21 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <link rel="stylesheet" href="style.css?v=2">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <style>
+        .mapa-section { margin: 1.2rem 0 2.5rem; }
+        .mapa-header { text-align: center; margin-bottom: 1.2rem; }
+        .mapa-header h2 { font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 800; color: #0E5E3F; margin-bottom: 0.4rem; }
+        .mapa-header p { color: #55665c; font-size: 0.95rem; }
+        #poas-map { height: 460px; width: 100%; border-radius: 18px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); border: 1px solid #D6EADD; z-index: 1; }
+        .mapa-legend { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem 1.2rem; margin-top: 1rem; font-size: 0.85rem; color: #40634e; }
+        .mapa-legend span { display: inline-flex; align-items: center; gap: 0.35rem; }
+        .leaflet-popup-content { font-family: 'Outfit', sans-serif; }
+        .map-pop b { color: #0E5E3F; font-size: 0.95rem; }
+        .map-pop small { color: #667; }
+        .map-pop a { color: #14603A; font-weight: 700; text-decoration: none; }
+        @media (max-width: 600px) { #poas-map { height: 360px; } }
+    </style>
     <style>
         .dir-hero {
             min-height: 36vh;
@@ -158,6 +173,22 @@
                 <a href="https://www.ict.go.cr/en/documents/brochures-1/brochures-para-el-turista/mapas-8/2179-01-caminos-poas/file.html" target="_blank" rel="noopener noreferrer" class="btn-primary ruta-banner-btn">View Tourist Map →</a>
             </div>
 
+            <!-- INTERACTIVE MAP -->
+            <div class="mapa-section" id="mapa">
+                <div class="mapa-header">
+                    <h2>🗺️ Interactive Canton Map</h2>
+                    <p>Businesses, tourist attractions and Finca Koki on the map. Tap a marker for details.</p>
+                </div>
+                <div id="poas-map"></div>
+                <div class="mapa-legend">
+                    <span>🌋 Attractions</span>
+                    <span>🎋 Finca Koki</span>
+                    <span>🏨 Lodging</span>
+                    <span>🍽️ Restaurants</span>
+                    <span>🛍️ Businesses &amp; services</span>
+                </div>
+            </div>
+
             <h2 class="section-title" style="margin-bottom:0.5rem;">Canton Businesses</h2>
             <p class="subtitle" style="margin-bottom:2rem;">Filter by category to find what you're looking for.</p>
 
@@ -197,6 +228,47 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        // ── Interactive map (Leaflet + OpenStreetMap) ──
+        (function () {
+            var el = document.getElementById('poas-map');
+            if (!el || typeof L === 'undefined') return;
+
+            var map = L.map('poas-map', { scrollWheelZoom: false }).setView([10.135, -84.225], 12);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap' }).addTo(map);
+
+            function icon(emoji) {
+                return L.divIcon({ html: '<div style="font-size:26px;line-height:1;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))">' + emoji + '</div>', className: '', iconSize: [30, 30], iconAnchor: [15, 28], popupAnchor: [0, -26] });
+            }
+
+            var puntos = [
+                { e: '🌋', lat: 10.1980, lng: -84.2330, n: 'Poás Volcano National Park', d: 'Active crater and Botos Lagoon.', l: 'https://www.sinac.go.cr/', lt: 'Book tickets (SINAC)' },
+                { e: '🏞️', lat: 10.1553, lng: -84.2069, n: 'Fraijanes Lagoon Recreational Park', d: 'Lagoon, trails and picnic areas.' },
+                { e: '🎋', lat: 10.0775, lng: -84.2335, n: 'Finca Koki – Natural Adventure', d: 'Ecotourism: kayak, zipline, tubing, trails and more. Bajo Kopper, San Pedro de Poás (approximate location).', l: 'https://www.fincakoki.com', lt: 'fincakoki.com' },
+                { e: '🍽️', lat: 10.14595548, lng: -84.19472337, n: 'Restaurante Típico Fraijanes', d: 'Costa Rican cuisine. Tel. 2482-2853.' },
+                { e: '🍽️', lat: 10.15537580, lng: -84.22553658, n: 'Restaurante Lo que tú quieras', d: 'Central Valley view. Mobile 6123-1507.' },
+                { e: '🏔️', lat: 10.15711832, lng: -84.19317842, n: 'MonteLuna', d: 'A-frame cabins with volcano views, in Poásito.' },
+                { e: '💻', lat: 10.09587101, lng: -84.24263835, n: 'Tech Center CR', d: 'Technical support and web development.', l: 'techcenter-en.html', lt: 'See more' },
+                { e: '🌿', lat: 10.0770, lng: -84.2450, n: 'Macrobiótica Presagio', d: 'Natural products in San Pedro de Poás.' }
+            ];
+
+            function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+            puntos.forEach(function (p) {
+                var html = '<div class="map-pop"><b>' + esc(p.n) + '</b><br><small>' + esc(p.d) + '</small>';
+                if (p.l) {
+                    var safe = /^https:\/\//.test(p.l) || /^[a-zA-Z0-9_\-./]+\.html$/.test(p.l);
+                    if (safe) html += '<br><a href="' + esc(p.l) + '"' + (/^https:/.test(p.l) ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + esc(p.lt || 'Open') + ' →</a>';
+                }
+                html += '</div>';
+                L.marker([p.lat, p.lng], { icon: icon(p.e), title: p.n }).addTo(map).bindPopup(html);
+            });
+
+            map.on('focus', function () { map.scrollWheelZoom.enable(); });
+            map.on('blur', function () { map.scrollWheelZoom.disable(); });
+        })();
+    </script>
     <script src="script.js?v=2"></script>
     <script>
         window.addEventListener('scroll', () => document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50));
