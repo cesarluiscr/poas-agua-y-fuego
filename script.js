@@ -23,7 +23,11 @@ function safeUrl(url) {
 
 function safeAssetUrl(url) {
     const u = String(url || '').trim();
-    return /^(https?:\/\/|\/|\.\/|\.\.\/)/.test(u) ? u : '';
+    if (/^(https?:\/\/|\/|\.\/|\.\.\/)/.test(u)) return u;
+    // Permitir rutas relativas locales seguras a imágenes (p. ej. "img/foto.jpg"),
+    // sin traversal ni esquemas peligrosos.
+    if (!u.includes('..') && !u.includes(':') && /^[A-Za-z0-9_\-]+\/[A-Za-z0-9_\-./ ]+\.(jpe?g|png|webp|gif|svg)$/i.test(u)) return u;
+    return '';
 }
 
 function safeWhatsappUrl(number) {
