@@ -169,6 +169,13 @@
             tags: 'mapa interactivo ubicación negocios atractivos puntos turísticos finca koki cómo llegar'
         },
         {
+            title: 'Cambio Climático',
+            desc: 'Principales efectos del cambio climático sobre el cantón de Poás',
+            url: 'ecologia.html#cambio-climatico',
+            icon: '🌡️',
+            tags: 'cambio climático clima calentamiento global agua café biodiversidad bosque nuboso lluvias adaptación mitigación ecología sostenibilidad'
+        },
+        {
             title: 'Contacto',
             desc: 'WhatsApp, redes sociales y formas de contacto',
             url: 'index.html#contacto',
