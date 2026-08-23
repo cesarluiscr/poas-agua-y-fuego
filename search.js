@@ -162,6 +162,13 @@
             tags: 'tech center cr tecnología soporte técnico desarrollo web redes informática césar quesada'
         },
         {
+            title: 'Muebles Ávila',
+            desc: 'Ebanistería y muebles a la medida: cocina, puertas, camas, closets y más',
+            url: 'directorio-comercial.html',
+            icon: '🪑',
+            tags: 'muebles ávila avila ebanistería carpintería muebles de cocina puertas camas closets estanterías muebles de baño restauración envíos negocio servicio madera'
+        },
+        {
             title: 'Macrobiótica Presagio',
             desc: 'Productos naturales y macrobióticos en San Pedro de Poás',
             url: 'directorio-comercial.html',

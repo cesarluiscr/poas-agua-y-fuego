@@ -431,6 +431,17 @@ document.addEventListener('DOMContentLoaded', () => {
             direccion: "Cantón de Poás, Alajuela",
             bannerAncho: true,
             imagenes: ["img/distribuidora_limpieza_banner.jpg"]
+        },
+        {
+            id: 6,
+            nombre: "Muebles Ávila",
+            categoria: "servicio",
+            emoji: "🪑",
+            descripcion: "Ebanistería y muebles a la medida: muebles de cocina, puertas, camas, closets, estanterías y muebles de baño. También restauración de muebles. Envíos a todo el país.",
+            descripcion_en: "Custom cabinetry and made-to-measure furniture: kitchen furniture, doors, beds, closets, shelving and bathroom furniture. Furniture restoration too. Nationwide shipping.",
+            whatsapp: "50661958089",
+            telefono: "89538482",
+            direccion: "Cantón de Poás, Alajuela · Envíos a todo el país"
         }
     ];
 
