@@ -71,6 +71,13 @@
             tags: 'historia cantón orígenes colonial tradiciones prehispánico patrimonio fundación 1901'
         },
         {
+            title: 'Historia de los Distritos',
+            desc: 'Orígenes de San Pedro, San Juan, San Rafael, Carrillos y Sabana Redonda',
+            url: 'historia-canton.html#distritos',
+            icon: '🏘️',
+            tags: 'distritos san pedro san juan san rafael carrillos sabana redonda historia fundación familias churruca cabuyal tejarcillos calabaza botos'
+        },
+        {
             title: 'Historia en Imágenes',
             desc: 'Fotografías históricas del cantón de Poás: parque, templo, calles y comunidades',
             url: 'historia-imagenes.html',

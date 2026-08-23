@@ -805,6 +805,72 @@
     </blockquote>
 </div>
 
+<!-- LOS DISTRITOS -->
+<style>
+    .distritos-grid { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem; }
+    .distrito-card { background: #fff; border-radius: 16px; border-left: 5px solid var(--historia-gold); box-shadow: 0 4px 20px rgba(60,32,8,.08); padding: 1.75rem 2rem; }
+    .distrito-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.1rem; }
+    .distrito-num { flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, #C8952A, #8b6914); color: #fff; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.15rem; display: flex; align-items: center; justify-content: center; }
+    .distrito-head h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--historia-dark); margin: 0; line-height: 1.2; }
+    .distrito-head h3 em { color: var(--historia-green); font-style: italic; font-size: .8em; }
+    .distrito-item { position: relative; padding-left: 1.3rem; margin-bottom: .85rem; font-size: .96rem; line-height: 1.75; color: #4a3a22; }
+    .distrito-item:last-child { margin-bottom: 0; }
+    .distrito-item::before { content: ''; position: absolute; left: 0; top: .62rem; width: 7px; height: 7px; border-radius: 50%; background: var(--historia-gold); }
+    .distrito-item strong { color: var(--historia-brown); }
+    @media (max-width: 560px) { .distrito-card { padding: 1.4rem 1.25rem; } .distrito-head h3 { font-size: 1.15rem; } }
+</style>
+<section class="hist-section" id="distritos">
+    <div class="hist-container">
+        <div class="hist-section-header">
+            <div class="hist-chapter-label">Los Distritos</div>
+            <h2 class="hist-section-title">Historia de los Distritos</h2>
+            <div class="hist-divider"></div>
+            <p style="text-align:center;max-width:660px;margin:0 auto 2.5rem;color:#6b5030;line-height:1.7;">El cantón de Poás está formado por cinco distritos, cada uno con su propia historia de fundación, familias fundadoras y transformación a lo largo del tiempo.</p>
+        </div>
+
+        <div class="distritos-grid">
+            <!-- 1. San Pedro -->
+            <div class="distrito-card">
+                <div class="distrito-head"><span class="distrito-num">1°</span><h3>San Pedro <em>(Distrito Central)</em></h3></div>
+                <div class="distrito-item"><strong>Orígenes y primeros pobladores:</strong> la tradición señala que la inmigración formal comenzó alrededor de 1806 y 1835 con diez matrimonios de familias (como los Murillo, Herrera, Chaves, Rodríguez, Zamora, etc.) procedentes de Heredia, atraídos por la fertilidad de las tierras para el cultivo y la cría de ganado, así como la abundancia de leña. La fundación del pueblo como <em>San Pedro de la Calabaza</em> se sitúa tradicionalmente hacia 1835.</div>
+                <div class="distrito-item"><strong>Consolidación política y nombre:</strong> en 1852 era un poblado humilde con solo 16 casas de madera y 8 ranchos pajizos repartidos en una sola calle. Pasó a ser villa y cabecera del nuevo cantón en 1901 y recibió el título de Ciudad mediante el Decreto N.º 3200 del 21 de septiembre de 1963.</div>
+                <div class="distrito-item"><strong>Asentamientos indígenas:</strong> en barrios como Chilamate y El Común (La Hilda) existieron asentamientos aborígenes de la tribu de los indios Botos.</div>
+            </div>
+
+            <!-- 2. San Juan -->
+            <div class="distrito-card">
+                <div class="distrito-head"><span class="distrito-num">2°</span><h3>San Juan</h3></div>
+                <div class="distrito-item"><strong>Primeros trazos e inmigración:</strong> surgió de forma paralela al poblamiento de la zona alta entre el centro de San Pedro y el macizo del volcán Poás. Estaba habitado mayoritariamente por familias de tradición agrícola y con profundo arraigo religioso (predominando familias como los Ugalde y los Herrera).</div>
+                <div class="distrito-item"><strong>Desarrollo histórico:</strong> fue durante décadas el paso obligado en el ascenso tradicional al volcán. En su barrio San Juan Norte (Cabuyal), a mediados del siglo XX (década de 1950) se ensayaron proyectos agrícolas de cultivo e hilandería de cabuya, que le dieron el nombre popular a esa zona. En el transporte del cantón, fue el sanjuaneño don José Ugalde García quien en los años 1920 introdujo el primer automóvil a todo Poás.</div>
+            </div>
+
+            <!-- 3. San Rafael -->
+            <div class="distrito-card">
+                <div class="distrito-head"><span class="distrito-num">3°</span><h3>San Rafael</h3></div>
+                <div class="distrito-item"><strong>Nombre antiguo y población:</strong> conocido antiguamente como <em>Churruca</em> (hoy barrio Churuca), el distrito se formó con la llegada y consolidación de familias como los Chaves, Gómez, Solís, Quesada, Rojas y Campos, entre otras.</div>
+                <div class="distrito-item"><strong>Orígenes agrícolas e hito cafetalero:</strong> en este distrito fue donde, a finales del siglo XIX, don Santiago Rodríguez Campos sembró las primeras 40 matas de café traídas desde Alajuelita, exactamente en los terrenos donde hoy se ubica la plaza de deportes de San Rafael.</div>
+                <div class="distrito-item"><strong>Tensiones territoriales y desarrollo:</strong> en 1930 ocurrió un intento frustrado de un grupo de vecinos de segregarse del cantón de Poás para anexarse a Grecia. No obstante, el distrito continuó fortaleciéndose hasta convertirse en la segunda población más densa del cantón en el siglo XX.</div>
+            </div>
+
+            <!-- 4. Carrillos -->
+            <div class="distrito-card">
+                <div class="distrito-head"><span class="distrito-num">4°</span><h3>Carrillos</h3></div>
+                <div class="distrito-item"><strong>Origen del nombre:</strong> guarda relación con la historia de los viejos caminos y la puesta en servicio público de vías entre Alajuela, Grecia y San Pedro desde finales del siglo XIX.</div>
+                <div class="distrito-item"><strong>Población y crecimiento:</strong> históricamente es el distrito más pequeño en extensión territorial, pero el más denso demográficamente. Formado por caseríos históricos como Bajo de Carrillos (cabecera), Alto de Carrillos (Platanillo), Ingenio Pinto y la Hacienda Sonora.</div>
+                <div class="distrito-item"><strong>Evolución económica:</strong> tuvo una fuerte transición productiva: pasó de ser una zona agrícola diversificada (piña, yuca, arroz y gran cantidad de cultivos de caña de azúcar industrializada en ingenios como el Ingenio Pinto/Costa Rica) al predominio de cafetales e industrias de cemento y almidón en la segunda mitad del siglo XX.</div>
+            </div>
+
+            <!-- 5. Sabana Redonda -->
+            <div class="distrito-card">
+                <div class="distrito-head"><span class="distrito-num">5°</span><h3>Sabana Redonda</h3></div>
+                <div class="distrito-item"><strong>Nombres antiguos y pertenencia:</strong> se le conoció en tiempos más antiguos con el nombre de <em>Tejarcillos</em> o <em>"Pilas"</em>. Antes de la creación del cantón de Poás en 1901, la comarca de Sabana Redonda pertenecía administrativamente al distrito de Sabanilla de Alajuela.</div>
+                <div class="distrito-item"><strong>Disputas territoriales:</strong> durante el proceso de emancipación del cantón entre 1890 y 1901 hubo un conflicto territorial entre los vecinos de San Pedro y Sabanilla, pues ambos pretendían anexarse las tierras de Sabana Redonda. Finalmente quedó integrada a Poás mediante el decreto de creación del cantón.</div>
+                <div class="distrito-item"><strong>Evolución del paisaje:</strong> pasó de ser una zona alta escarpada con charrales, producción maderera y de carbón, a convertirse en una próspera zona de lecherías de ganado fino, cultivo de hortalizas, flores y fresas, y punto de acceso turístico hacia el Parque Nacional Volcán Poás.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CAPÍTULO 2: EL VOLCÁN -->
 <section class="hist-section" id="volcan">
     <div class="hist-container">
