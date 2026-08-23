@@ -491,6 +491,72 @@
     </blockquote>
 </div>
 
+<!-- THE DISTRICTS -->
+<style>
+    .distritos-grid { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem; }
+    .distrito-card { background: #fff; border-radius: 16px; border-left: 5px solid var(--historia-gold); box-shadow: 0 4px 20px rgba(60,32,8,.08); padding: 1.75rem 2rem; }
+    .distrito-head { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.1rem; }
+    .distrito-num { flex-shrink: 0; width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, #C8952A, #8b6914); color: #fff; font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.15rem; display: flex; align-items: center; justify-content: center; }
+    .distrito-head h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--historia-dark); margin: 0; line-height: 1.2; }
+    .distrito-head h3 em { color: var(--historia-green); font-style: italic; font-size: .8em; }
+    .distrito-item { position: relative; padding-left: 1.3rem; margin-bottom: .85rem; font-size: .96rem; line-height: 1.75; color: #4a3a22; }
+    .distrito-item:last-child { margin-bottom: 0; }
+    .distrito-item::before { content: ''; position: absolute; left: 0; top: .62rem; width: 7px; height: 7px; border-radius: 50%; background: var(--historia-gold); }
+    .distrito-item strong { color: var(--historia-brown); }
+    @media (max-width: 560px) { .distrito-card { padding: 1.4rem 1.25rem; } .distrito-head h3 { font-size: 1.15rem; } }
+</style>
+<section class="hist-section" id="distritos">
+    <div class="hist-container">
+        <div class="hist-section-header">
+            <div class="hist-chapter-label">The Districts</div>
+            <h2 class="hist-section-title">History of the Districts</h2>
+            <div class="hist-divider"></div>
+            <p style="text-align:center;max-width:660px;margin:0 auto 2.5rem;color:#6b5030;line-height:1.7;">The Poás canton is made up of five districts, each with its own story of founding, founding families and transformation over time.</p>
+        </div>
+
+        <div class="distritos-grid">
+            <!-- 1. San Pedro -->
+            <div class="distrito-card">
+                <div class="distrito-head"><span class="distrito-num">1°</span><h3>San Pedro <em>(Central District)</em></h3></div>
+                <div class="distrito-item"><strong>Origins and first settlers:</strong> tradition holds that formal immigration began around 1806 and 1835 with ten married families (such as the Murillo, Herrera, Chaves, Rodríguez and Zamora) coming from Heredia, drawn by the fertile land for farming and cattle raising, as well as the abundance of firewood. The town's founding as <em>San Pedro de la Calabaza</em> is traditionally placed around 1835.</div>
+                <div class="distrito-item"><strong>Political consolidation and name:</strong> in 1852 it was a humble village with only 16 wooden houses and 8 thatched huts along a single street. It became a town and head of the new canton in 1901 and received the title of City by Decree No. 3200 of September 21, 1963.</div>
+                <div class="distrito-item"><strong>Indigenous settlements:</strong> neighborhoods such as Chilamate and El Común (La Hilda) held Indigenous settlements of the Botos tribe.</div>
+            </div>
+
+            <!-- 2. San Juan -->
+            <div class="distrito-card">
+                <div class="distrito-head"><span class="distrito-num">2°</span><h3>San Juan</h3></div>
+                <div class="distrito-item"><strong>First traces and immigration:</strong> it arose alongside the settlement of the highlands between the center of San Pedro and the Poás volcano massif. It was inhabited mostly by families of farming tradition with deep religious roots (chiefly the Ugalde and Herrera families).</div>
+                <div class="distrito-item"><strong>Historical development:</strong> for decades it was the obligatory pass on the traditional ascent to the volcano. In its San Juan Norte neighborhood (Cabuyal), in the mid-20th century (1950s) farming and cabuya-spinning projects were tested, giving the area its popular name. In the canton's transport history, it was San Juan native don José Ugalde García who, in the 1920s, brought the first automobile to all of Poás.</div>
+            </div>
+
+            <!-- 3. San Rafael -->
+            <div class="distrito-card">
+                <div class="distrito-head"><span class="distrito-num">3°</span><h3>San Rafael</h3></div>
+                <div class="distrito-item"><strong>Old name and population:</strong> formerly known as <em>Churruca</em> (today the Churuca neighborhood), the district formed with the arrival and consolidation of families such as the Chaves, Gómez, Solís, Quesada, Rojas and Campos, among others.</div>
+                <div class="distrito-item"><strong>Agricultural origins and a coffee milestone:</strong> it was in this district that, at the end of the 19th century, don Santiago Rodríguez Campos planted the first 40 coffee plants brought from Alajuelita, precisely where the San Rafael sports field stands today.</div>
+                <div class="distrito-item"><strong>Territorial tensions and development:</strong> in 1930 a group of residents made a failed attempt to break away from the Poás canton to join Grecia. Nonetheless, the district kept growing until it became the second most densely populated in the canton during the 20th century.</div>
+            </div>
+
+            <!-- 4. Carrillos -->
+            <div class="distrito-card">
+                <div class="distrito-head"><span class="distrito-num">4°</span><h3>Carrillos</h3></div>
+                <div class="distrito-item"><strong>Origin of the name:</strong> it relates to the history of the old roads and the public opening of routes between Alajuela, Grecia and San Pedro from the late 19th century.</div>
+                <div class="distrito-item"><strong>Population and growth:</strong> historically the smallest district in land area, but the most densely populated. Formed by historic hamlets such as Bajo de Carrillos (head town), Alto de Carrillos (Platanillo), Ingenio Pinto and Hacienda Sonora.</div>
+                <div class="distrito-item"><strong>Economic evolution:</strong> it went through a strong productive transition: from a diversified farming zone (pineapple, cassava, rice and large amounts of sugarcane industrialized in mills such as Ingenio Pinto/Costa Rica) to the predominance of coffee plantations and cement and starch industries in the second half of the 20th century.</div>
+            </div>
+
+            <!-- 5. Sabana Redonda -->
+            <div class="distrito-card">
+                <div class="distrito-head"><span class="distrito-num">5°</span><h3>Sabana Redonda</h3></div>
+                <div class="distrito-item"><strong>Old names and belonging:</strong> in earlier times it was known as <em>Tejarcillos</em> or <em>"Pilas"</em>. Before the Poás canton was created in 1901, the Sabana Redonda area belonged administratively to the Sabanilla de Alajuela district.</div>
+                <div class="distrito-item"><strong>Territorial disputes:</strong> during the canton's emancipation process between 1890 and 1901 there was a territorial conflict between the residents of San Pedro and Sabanilla, as both sought to annex the lands of Sabana Redonda. It was finally integrated into Poás through the canton's founding decree.</div>
+                <div class="distrito-item"><strong>Evolution of the landscape:</strong> it went from a steep highland zone of scrubland, timber and charcoal production to a prosperous area of fine-cattle dairies, vegetable, flower and strawberry farming, and a tourism gateway to the Poás Volcano National Park.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CHAPTER 2: THE VOLCANO -->
 <section class="hist-section" id="volcan">
     <div class="hist-container">
