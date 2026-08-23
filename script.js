@@ -447,6 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
             whatsapp2: "50689538482",
             direccion: "Del Cementerio de San Pedro, 100 m norte y 200 m oeste · San Pedro de Poás, Alajuela · Envíos a todo el país",
             logo: "img/muebles_avila_logo.jpg",
+            bannerAncho: true,
             imagenes: ["img/muebles_avila_1.jpg", "img/muebles_avila_2.jpg", "img/muebles_avila_3.jpg", "img/muebles_avila_4.jpg"]
         }
     ];
