@@ -422,6 +422,7 @@
             </div>
             <div class="mobile-nav-links">
                 <a href="index-en.html"              onclick="closeMobileNav()">🏠 Home</a>
+                <a href="centro-datos-en.html"       onclick="closeMobileNav()">📊 Data Center</a>
                 <div class="mobile-nav-sep"></div>
                 <a href="patrimonio-hidrico-en.html" onclick="closeMobileNav()">💧 Water Heritage</a>
                 <a href="historia-canton-en.html"    onclick="closeMobileNav()">📜 Canton History</a>
@@ -588,6 +589,31 @@
             </div>
         </div>
     </section>
+
+    <!-- Banner: Data Center -->
+    <style>
+        .obs-cta { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1.2rem;
+            max-width:1000px; margin:2.5rem auto; padding:1.6rem 2rem; border-radius:18px;
+            background:radial-gradient(ellipse at 20% 0%, #10345a, #0a1526 75%); color:#fff;
+            border:1px solid rgba(79,195,247,.25); box-shadow:0 12px 40px rgba(0,0,0,.35); text-decoration:none; }
+        .obs-cta:hover { border-color:rgba(79,195,247,.5); }
+        .obs-cta-left { display:flex; align-items:center; gap:1rem; }
+        .obs-cta-ic { font-size:2.2rem; }
+        .obs-cta h3 { font-family:'Outfit',sans-serif; font-size:1.25rem; font-weight:800; margin:0 0 .2rem; }
+        .obs-cta p { margin:0; color:rgba(255,255,255,.7); font-size:.9rem; }
+        .obs-cta-btn { background:#4FC3F7; color:#06263a; font-weight:800; font-size:.9rem; padding:.7rem 1.4rem; border-radius:99px; white-space:nowrap; }
+        @media (max-width:600px){ .obs-cta{ justify-content:center; text-align:center; } }
+    </style>
+    <a href="centro-datos-en.html" class="obs-cta">
+        <div class="obs-cta-left">
+            <span class="obs-cta-ic">📊</span>
+            <div>
+                <h3>Poás Data Center</h3>
+                <p>Digital Observatory: live weather, volcano, rivers, water and more canton indicators.</p>
+            </div>
+        </div>
+        <span class="obs-cta-btn">View indicators →</span>
+    </a>
 
     <!-- ── Water Heritage ── -->
     <section id="agua" class="water-heritage-section">

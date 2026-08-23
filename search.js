@@ -113,6 +113,13 @@
             tags: 'cómo llegar mapa rutas transporte autobús auto carretera acceso'
         },
         {
+            title: 'Centro de Datos de Poás',
+            desc: 'Observatorio Digital: indicadores del cantón en tiempo real',
+            url: 'centro-datos.html',
+            icon: '📊',
+            tags: 'centro de datos observatorio digital indicadores tiempo real clima temperatura lluvia ríos volcán actividad volcánica agua hídrico bosque cobertura forestal tránsito alertas población economía estadísticas dashboard'
+        },
+        {
             title: 'Ruta Turística',
             desc: 'Volcán, lagunas, cataratas, miradores y fincas de fresa del cantón',
             url: 'ruta-turistica.html',

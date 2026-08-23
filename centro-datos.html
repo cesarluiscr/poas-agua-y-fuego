@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Centro de Datos de Poás – Observatorio Digital | Poás Agua y Fuego</title>
+    <meta name="description" content="Observatorio Digital de Poás: indicadores en tiempo real del cantón — clima, ríos, volcán, agua, bosque, población y actividad económica.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <link rel="stylesheet" href="style.css?v=2">
+    <style>
+        .obs-hero {
+            background: radial-gradient(ellipse at 25% 0%, #10345a, #060d18 70%);
+            color: #fff; padding: 8rem 1.5rem 3.5rem; text-align: center; position: relative; overflow: hidden;
+        }
+        .obs-hero::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(80,180,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(80,180,255,.05) 1px, transparent 1px);
+            background-size: 34px 34px; mask-image: radial-gradient(ellipse at center, #000, transparent 75%);
+        }
+        .obs-hero-content { position: relative; z-index: 1; }
+        .obs-badge { display:inline-flex; align-items:center; gap:.5rem; background:rgba(37,211,102,.14); border:1px solid rgba(37,211,102,.4); color:#7BE495; font-weight:700; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; padding:.4rem 1rem; border-radius:99px; margin-bottom:1.2rem; }
+        .obs-badge .live-dot { width:8px; height:8px; border-radius:50%; background:#25D366; box-shadow:0 0 8px #25D366; animation:obsPulse 1.6s infinite; }
+        @keyframes obsPulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+        .obs-hero h1 { font-family:'Outfit',sans-serif; font-size:clamp(1.9rem,5vw,3.2rem); font-weight:800; margin-bottom:.6rem; }
+        .obs-hero h1 span { color:#4FC3F7; }
+        .obs-hero p { color:rgba(255,255,255,.7); font-size:1.03rem; max-width:640px; margin:0 auto; line-height:1.6; }
+        .obs-updated { margin-top:1.4rem; font-size:.82rem; color:rgba(255,255,255,.45); }
+
+        .obs-main { background:#070d18; padding:3.5rem 1.5rem 5rem; }
+        .obs-container { max-width:1100px; margin:0 auto; }
+        .obs-back { display:inline-flex; align-items:center; gap:.5rem; color:#4FC3F7; text-decoration:none; font-weight:600; font-size:.92rem; margin-bottom:2rem; }
+        .obs-back:hover { opacity:.75; }
+
+        .obs-section-label { text-align:center; color:#4FC3F7; font-weight:800; letter-spacing:.25em; font-size:.8rem; text-transform:uppercase; margin-bottom:2rem; }
+
+        .obs-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(215px,1fr)); gap:1.1rem; }
+        .obs-card {
+            background:linear-gradient(160deg,#0e1b30,#0a1322); border:1px solid rgba(79,195,247,.15);
+            border-radius:16px; padding:1.4rem; position:relative; overflow:hidden; transition:transform .2s, border-color .2s;
+        }
+        .obs-card:hover { transform:translateY(-4px); border-color:rgba(79,195,247,.4); }
+        .obs-card-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:.9rem; }
+        .obs-icon { font-size:1.7rem; }
+        .obs-tag { font-size:.62rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; padding:.2rem .55rem; border-radius:20px; }
+        .obs-tag.live { background:rgba(37,211,102,.16); color:#7BE495; border:1px solid rgba(37,211,102,.35); }
+        .obs-tag.official { background:rgba(79,195,247,.14); color:#7fd4ff; border:1px solid rgba(79,195,247,.3); }
+        .obs-tag.ref { background:rgba(212,175,55,.14); color:#e6c454; border:1px solid rgba(212,175,55,.3); }
+        .obs-label { color:rgba(255,255,255,.55); font-size:.82rem; font-weight:600; margin-bottom:.25rem; }
+        .obs-value { font-family:'Outfit',sans-serif; font-size:1.9rem; font-weight:800; color:#fff; line-height:1.1; }
+        .obs-value small { font-size:1rem; color:rgba(255,255,255,.6); font-weight:600; }
+        .obs-sub { color:rgba(255,255,255,.5); font-size:.8rem; margin-top:.4rem; line-height:1.45; }
+        .obs-card a.obs-link { color:#4FC3F7; text-decoration:none; font-weight:700; font-size:.8rem; display:inline-block; margin-top:.5rem; }
+        .obs-card a.obs-link:hover { text-decoration:underline; }
+        .obs-dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:.35rem; vertical-align:middle; }
+        .dot-verde{background:#22c55e;box-shadow:0 0 7px #22c55e;} .dot-amarillo{background:#eab308;box-shadow:0 0 7px #eab308;}
+        .dot-naranja{background:#f97316;box-shadow:0 0 7px #f97316;} .dot-rojo{background:#ef4444;box-shadow:0 0 7px #ef4444;}
+
+        .obs-note { margin-top:2.5rem; background:rgba(79,195,247,.06); border:1px solid rgba(79,195,247,.15); border-radius:14px; padding:1.3rem 1.5rem; color:rgba(255,255,255,.6); font-size:.85rem; line-height:1.7; }
+        .obs-note strong { color:#9fdcff; }
+        .obs-note a { color:#4FC3F7; text-decoration:none; } .obs-note a:hover { text-decoration:underline; }
+
+        @media (max-width:560px){ .obs-grid{ grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); } }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo">Poás <span>Agua y Fuego</span></div>
+    <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#patrimonio">Patrimonio Hídrico</a></li>
+        <li><a href="directorio-comercial.html" style="text-align:center;white-space:normal;line-height:1.3;">Directorio Turístico y<br>Comercial</a></li>
+        <li><a href="ecologia.html">Ecología</a></li>
+        <li><a href="eventos.html">Eventos</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-lang">
+        <a href="centro-datos.html" class="lang-btn active">🇨🇷 <span class="lang-label">Español</span></a>
+        <a href="centro-datos-en.html" class="lang-btn">🇺🇸 <span class="lang-label">English</span></a>
+    </div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span><em class="hamburger-label">Menú</em></div>
+</nav>
+<nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-panel" id="mobileNavPanel">
+        <div class="mobile-nav-header">
+            <span class="mobile-nav-logo">Poás <span>Agua y Fuego</span></span>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Cerrar menú">×</button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html" onclick="closeMobileNav()">🏠 Inicio</a>
+            <a href="centro-datos.html" onclick="closeMobileNav()">📊 Centro de Datos</a>
+            <a href="patrimonio-hidrico.html" onclick="closeMobileNav()">💧 Patrimonio Hídrico</a>
+            <a href="directorio-comercial.html" onclick="closeMobileNav()">🛍️ Directorio Turístico y Comercial</a>
+            <a href="ruta-turistica.html" onclick="closeMobileNav()">🧭 Ruta Turística</a>
+            <a href="ecologia.html" onclick="closeMobileNav()">🌿 Ecología</a>
+            <a href="eventos.html" onclick="closeMobileNav()">📅 Eventos</a>
+            <a href="plan-regulador.html" onclick="closeMobileNav()">🗺️ Plan Regulador</a>
+            <a href="index.html#contacto" onclick="closeMobileNav()">📬 Contacto</a>
+        </div>
+        <div class="mobile-nav-lang">
+            <a href="centro-datos.html" onclick="closeMobileNav()">🇨🇷 Español</a>
+            <a href="centro-datos-en.html" onclick="closeMobileNav()">🇺🇸 English</a>
+        </div>
+        <div class="mobile-nav-footer">Cantón de Poás · Alajuela · Costa Rica</div>
+    </div>
+</nav>
+
+<!-- Hero -->
+<div class="obs-hero">
+    <div class="obs-hero-content">
+        <div class="obs-badge"><span class="live-dot"></span> Observatorio Digital</div>
+        <h1>Centro de <span>Datos</span> de Poás</h1>
+        <p>Indicadores del cantón reunidos en un solo lugar. El clima se actualiza en vivo; el resto proviene de fuentes oficiales y datos de referencia.</p>
+        <div class="obs-updated" id="obsUpdated">Actualizando…</div>
+    </div>
+</div>
+
+<section class="obs-main">
+    <div class="obs-container">
+        <a href="index.html" class="obs-back">← Volver al inicio</a>
+        <div class="obs-section-label">Poás en tiempo real</div>
+
+        <div class="obs-grid">
+            <!-- Temperatura (LIVE) -->
+            <div class="obs-card">
+                <div class="obs-card-top"><span class="obs-icon">🌡️</span><span class="obs-tag live">En vivo</span></div>
+                <div class="obs-label">Temperatura</div>
+                <div class="obs-value" id="valTemp">--<small>°C</small></div>
+                <div class="obs-sub" id="subTemp">Zona del volcán · open-meteo</div>
+            </div>
+
+            <!-- Lluvia (LIVE) -->
+            <div class="obs-card">
+                <div class="obs-card-top"><span class="obs-icon">💧</span><span class="obs-tag live">En vivo</span></div>
+                <div class="obs-label">Lluvia</div>
+                <div class="obs-value" id="valRain">--<small> mm</small></div>
+                <div class="obs-sub" id="subRain">Precipitación actual</div>
+            </div>
+
+            <!-- Humedad + Viento (LIVE) -->
+            <div class="obs-card">
+                <div class="obs-card-top"><span class="obs-icon">🌬️</span><span class="obs-tag live">En vivo</span></div>
+                <div class="obs-label">Humedad / Viento</div>
+                <div class="obs-value" id="valHum">--<small>%</small></div>
+                <div class="obs-sub" id="subWind">Viento: -- km/h</div>
+            </div>
+
+            <!-- Actividad volcánica -->
+            <div class="obs-card">
+                <div class="obs-card-top"><span class="obs-icon">🌋</span><span class="obs-tag official">Oficial</span></div>
+                <div class="obs-label">Actividad volcánica</div>
+                <div class="obs-value" style="font-size:1.35rem;" id="valVolcan"><span class="obs-dot dot-verde"></span>Nivel Verde</div>
+                <div class="obs-sub">Actividad normal · Volcán Poás</div>
+                <a class="obs-link" href="https://www.ovsicori.una.ac.cr/" target="_blank" rel="noopener noreferrer">Ver OVSICORI →</a>
+            </div>
+
+            <!-- Estado de ríos -->
+            <div class="obs-card">
+                <div class="obs-card-top"><span class="obs-icon">🌊</span><span class="obs-tag official">Oficial</span></div>
+                <div class="obs-label">Estado de ríos</div>
+                <div class="obs-value" style="font-size:1.35rem;">Normal</div>
+                <div class="obs-sub">Sin crecidas reportadas</div>
+                <a class="obs-link" href="https://www.imn.ac.cr/" target="_blank" rel="noopener noreferrer">Ver IMN →</a>
+            </div>
+
+            <!-- Estado hídrico -->
+            <div class="obs-card">
+                <div class="obs-card-top"><span class="obs-icon">🚰</span><span class="obs-tag official">Oficial</span></div>
+                <div class="obs-label">Estado hídrico</div>
+                <div class="obs-value" style="font-size:1.35rem;">Estable</div>
+                <div class="obs-sub">9 ASADAS abastecen el cantón</div>
+                <a class="obs-link" href="patrimonio-hidrico.html">Patrimonio hídrico →</a>
+            </div>
+
+            <!-- Cobertura forestal -->
+            <div class="obs-card">
+                <div class="obs-card-top"><span class="obs-icon">🌳</span><span class="obs-tag ref">Referencia</span></div>
+                <div class="obs-label">Cobertura forestal</div>
+                <div class="obs-value" style="font-size:1.35rem;">Alta</div>
+                <div class="obs-sub">Bosque nuboso y áreas protegidas del Parque Nacional</div>
+                <a class="obs-link" href="ecologia.html#cambio-climatico">Ver ecología →</a>
+            </div>
+
+            <!-- Tránsito -->
+            <div class="obs-card">
+                <div class="obs-card-top"><span class="obs-icon">🚗</span><span class="obs-tag official">Oficial</span></div>
+                <div class="obs-label">Tránsito</div>
+                <div class="obs-value" style="font-size:1.35rem;">En vivo</div>
+                <div class="obs-sub">Consultá el estado de las vías en el mapa</div>
+                <a class="obs-link" href="https://www.waze.com/es-419/live-map" target="_blank" rel="noopener noreferrer">Abrir Waze →</a>
+            </div>
+
+            <!-- Alertas -->
+            <div class="obs-card">
+                <div class="obs-card-top"><span class="obs-icon">⚠️</span><span class="obs-tag official">Oficial</span></div>
+                <div class="obs-label">Alertas</div>
+                <div class="obs-value" style="font-size:1.35rem;">Sin alertas</div>
+                <div class="obs-sub">No hay alertas activas para el cantón</div>
+                <a class="obs-link" href="https://www.cne.go.cr/" target="_blank" rel="noopener noreferrer">Ver CNE →</a>
+            </div>
+
+            <!-- Población -->
+            <div class="obs-card">
+                <div class="obs-card-top"><span class="obs-icon">👥</span><span class="obs-tag ref">Referencia</span></div>
+                <div class="obs-label">Población</div>
+                <div class="obs-value">≈ 30<small> mil</small></div>
+                <div class="obs-sub">Habitantes del cantón · Censo INEC</div>
+                <a class="obs-link" href="https://www.inec.cr/" target="_blank" rel="noopener noreferrer">Ver INEC →</a>
+            </div>
+
+            <!-- Actividad económica -->
+            <div class="obs-card">
+                <div class="obs-card-top"><span class="obs-icon">🏪</span><span class="obs-tag ref">Referencia</span></div>
+                <div class="obs-label">Actividad económica</div>
+                <div class="obs-value" style="font-size:1.2rem;">Café · Turismo</div>
+                <div class="obs-sub">Café, fresas, turismo del volcán y comercio local</div>
+                <a class="obs-link" href="directorio-comercial.html">Ver directorio →</a>
+            </div>
+        </div>
+
+        <div class="obs-note">
+            <strong>Sobre estos datos:</strong> la temperatura, lluvia, humedad y viento se obtienen en vivo de <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">open-meteo</a> para la zona del Volcán Poás. Los indicadores marcados como <em>Oficial</em> enlazan a la fuente autoritativa (OVSICORI, IMN, CNE, Waze) y los de <em>Referencia</em> son valores orientativos del cantón. El nivel de alerta volcánica y otros estados pueden ajustarse manualmente. Esta página es informativa y no sustituye a las fuentes oficiales.
+        </div>
+    </div>
+</section>
+
+<script>
+    // Última actualización
+    (function () {
+        var el = document.getElementById('obsUpdated');
+        if (el) {
+            var now = new Date();
+            el.textContent = 'Última actualización: ' + now.toLocaleString('es-CR', { dateStyle: 'medium', timeStyle: 'short' });
+        }
+    })();
+
+    // Clima en vivo (open-meteo) — Volcán Poás
+    (function () {
+        var codes = {0:'Despejado',1:'Mayormente despejado',2:'Parcialmente nublado',3:'Nublado',45:'Neblina',48:'Neblina',51:'Llovizna',53:'Llovizna',55:'Llovizna',61:'Lluvia',63:'Lluvia',65:'Lluvia fuerte',66:'Lluvia',67:'Lluvia',71:'Nieve',80:'Chubascos',81:'Chubascos',82:'Chubascos fuertes',95:'Tormenta',96:'Tormenta',99:'Tormenta'};
+        fetch('https://api.open-meteo.com/v1/forecast?latitude=10.198&longitude=-84.233&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m')
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+                var c = d && d.current; if (!c) return;
+                var t = document.getElementById('valTemp'); if (t) t.innerHTML = Math.round(c.temperature_2m) + '<small>°C</small>';
+                var st = document.getElementById('subTemp'); if (st) st.textContent = (codes[c.weather_code] || '—') + ' · Volcán Poás';
+                var rn = document.getElementById('valRain'); if (rn) rn.innerHTML = (c.precipitation != null ? c.precipitation.toFixed(1) : '0.0') + '<small> mm</small>';
+                var h = document.getElementById('valHum'); if (h) h.innerHTML = Math.round(c.relative_humidity_2m) + '<small>%</small>';
+                var w = document.getElementById('subWind'); if (w) w.textContent = 'Viento: ' + Math.round(c.wind_speed_10m) + ' km/h';
+            })
+            .catch(function () {
+                var st = document.getElementById('subTemp'); if (st) st.textContent = 'Clima no disponible';
+            });
+    })();
+
+    // Mobile nav
+    (function () {
+        var hamburger = document.getElementById('hamburger');
+        var mobileNav = document.getElementById('mobileNav');
+        function closeMobileNav() {
+            if (!hamburger || !mobileNav) return;
+            hamburger.classList.remove('open'); mobileNav.classList.remove('open'); document.body.style.overflow = '';
+        }
+        window.closeMobileNav = closeMobileNav;
+        if (hamburger && mobileNav) {
+            hamburger.addEventListener('click', function () {
+                var isOpen = hamburger.classList.toggle('open');
+                mobileNav.classList.toggle('open', isOpen);
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+            });
+            mobileNav.addEventListener('click', function (e) { if (!e.target.closest('#mobileNavPanel')) closeMobileNav(); });
+            var cb = document.getElementById('mobileNavClose'); if (cb) cb.addEventListener('click', closeMobileNav);
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMobileNav(); });
+        }
+        window.addEventListener('scroll', function () { document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50); });
+    })();
+</script>
+<script src="security.js?v=2"></script>
+<script src="search.js"></script>
+<script src="enhance.js?v=5"></script>
+</body>
+</html>
