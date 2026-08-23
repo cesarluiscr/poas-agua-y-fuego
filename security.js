@@ -486,6 +486,7 @@
         secureForm('quejasForm',   { maxSubmits: 5, windowMs: 120000, requiredFields: ['[name="categoria"]', '[name="descripcion"]'] });
         secureForm('historiaForm', { maxSubmits: 2, windowMs: 300000, requiredFields: ['[name="nombre"]', '[name="historia"]'], emailFields: ['[name="correo"]'] });
         secureForm('negocioForm',  { maxSubmits: 3, windowMs: 120000, requiredFields: ['[name="nombre"]', '[name="categoria"]'] });
+        secureForm('contactForm',  { maxSubmits: 3, windowMs: 120000, requiredFields: ['[name="nombre"]', '[name="mensaje"]'], emailFields: ['[name="correo"]'] });
     }
 
     if (document.readyState === 'loading') {

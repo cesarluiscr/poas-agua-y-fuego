@@ -447,6 +447,11 @@
             return `${d} ${meses[parseInt(m,10)-1]} ${y}`;
         }
 
+        // Escape to prevent XSS when injecting into innerHTML
+        function esc(s) {
+            return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+
         function renderEventos() {
             const grid = document.getElementById('eventosGrid');
             const lista = filtroActual === 'all'
@@ -466,32 +471,32 @@
             }
 
             grid.innerHTML = lista.map(ev => `
-                <div class="evento-card" data-id="${ev.id}">
+                <div class="evento-card" data-id="${esc(ev.id)}">
                     <div class="evento-card-header">
                         <div>
-                            <span class="evento-categoria-badge cat-${ev.categoria}">${catLabels[ev.categoria] || ev.categoria}</span>
+                            <span class="evento-categoria-badge cat-${esc(ev.categoria)}">${esc(catLabels[ev.categoria] || ev.categoria)}</span>
                         </div>
-                        <h3>${ev.titulo}</h3>
+                        <h3>${esc(ev.titulo)}</h3>
                     </div>
                     <div class="evento-card-body">
                         <div class="evento-meta">
                             <span>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                                ${formatFecha(ev.fecha)}
+                                ${esc(formatFecha(ev.fecha))}
                             </span>
                             ${ev.hora ? `<span>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                                ${ev.hora}
+                                ${esc(ev.hora)}
                             </span>` : ''}
                             <span>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                                ${ev.lugar}
+                                ${esc(ev.lugar)}
                             </span>
                         </div>
-                        ${ev.descripcion ? `<p class="evento-desc">${ev.descripcion}</p>` : ''}
+                        ${ev.descripcion ? `<p class="evento-desc">${esc(ev.descripcion)}</p>` : ''}
                     </div>
                     <div class="evento-card-footer">
-                        <button class="btn-ev-delete" onclick="confirmarEliminar('${ev.id}')">🗑 Delete</button>
+                        <button class="btn-ev-delete" onclick="confirmarEliminar('${esc(ev.id)}')">🗑 Delete</button>
                     </div>
                 </div>
             `).join('');

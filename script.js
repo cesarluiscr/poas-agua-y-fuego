@@ -291,7 +291,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            // Anti-bot: si el honeypot (inyectado por security.js) está lleno, no enviar.
+            if ([...contactForm.querySelectorAll('.hp-field')].some(h => h.value)) return;
             const data = Object.fromEntries(new FormData(contactForm).entries());
+            delete data.website; delete data.phone_confirm; delete data.url_field; delete data._rt; delete data._token;
             data.tipo = 'contacto';
 
             const btn = contactForm.querySelector('button[type="submit"]');
