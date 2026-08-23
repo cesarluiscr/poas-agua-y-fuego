@@ -279,6 +279,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // =============================
+    // Formulario de Contacto (index)
+    // =============================
+    const contactForm = document.getElementById('contactForm');
+    const contactSuccess = document.getElementById('contactSuccess');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(contactForm).entries());
+            data.tipo = 'contacto';
+
+            const btn = contactForm.querySelector('button[type="submit"]');
+            const orig = btn.textContent;
+            btn.textContent = 'Enviando...';
+            btn.disabled = true;
+
+            try {
+                if (isAppsScriptConfigured()) {
+                    await fetch(APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'text/plain' },
+                        body: JSON.stringify(data)
+                    });
+                    contactForm.reset();
+                    if (contactSuccess) {
+                        contactSuccess.classList.remove('hidden');
+                        setTimeout(() => contactSuccess.classList.add('hidden'), 6000);
+                    }
+                } else {
+                    // Sin backend configurado: enviar por WhatsApp para no perder el mensaje.
+                    const msg = 'Hola, soy ' + (data.nombre || '') + ' (' + (data.correo || '') + ').\n'
+                        + (data.asunto ? 'Asunto: ' + data.asunto + '\n' : '')
+                        + (data.mensaje || '');
+                    window.open('https://wa.me/50687058612?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+                    contactForm.reset();
+                }
+            } catch (err) {
+                console.error('Error al enviar contacto:', err);
+                alert('Hubo un problema al enviar. Escríbenos por WhatsApp al 8705-8612.');
+            } finally {
+                btn.textContent = orig;
+                btn.disabled = false;
+            }
+        });
+    }
+
 
     // Lightbox Logic
     const lightbox = document.getElementById('lightbox');

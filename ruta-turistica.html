@@ -628,6 +628,53 @@
         <div class="container">
             <a href="directorio-comercial.html" class="rt-back">← Volver al Directorio Turístico y Comercial</a>
 
+            <!-- ESTADO DEL VOLCÁN POÁS -->
+            <style>
+                .volc-card{background:linear-gradient(135deg,#0C2A18,#14603A);border-radius:20px;padding:1.8rem;color:#fff;margin-bottom:1.5rem;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:center;box-shadow:0 10px 34px rgba(12,42,24,.22);}
+                .volc-now{text-align:center;min-width:120px;}
+                .volc-temp{font-size:2.6rem;font-weight:800;line-height:1;}
+                .volc-emoji{font-size:2.2rem;}
+                .volc-desc{font-size:.85rem;color:rgba(255,255,255,.8);margin-top:.3rem;}
+                .volc-body h3{font-size:1.25rem;font-weight:800;margin-bottom:.4rem;}
+                .volc-body p{font-size:.9rem;color:rgba(255,255,255,.85);line-height:1.6;margin-bottom:1rem;}
+                .volc-btns{display:flex;flex-wrap:wrap;gap:.6rem;}
+                .volc-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.1rem;border-radius:9px;font-weight:700;font-size:.85rem;text-decoration:none;transition:transform .2s;}
+                .volc-btn:hover{transform:translateY(-2px);}
+                .volc-btn-sinac{background:#7BE495;color:#063D22;}
+                .volc-btn-cam{background:rgba(255,255,255,.16);color:#fff;}
+                @media(max-width:600px){.volc-card{grid-template-columns:1fr;text-align:center;}.volc-btns{justify-content:center;}}
+            </style>
+            <div class="volc-card">
+                <div class="volc-now">
+                    <div class="volc-emoji" id="volcEmoji">⛅</div>
+                    <div class="volc-temp" id="volcTemp">--°</div>
+                    <div class="volc-desc" id="volcDesc">Cargando clima…</div>
+                </div>
+                <div class="volc-body">
+                    <h3>🌋 Estado del Volcán Poás</h3>
+                    <p>Clima en vivo en la zona del cráter (≈2.700 m). Antes de subir, reservá tu entrada en el SINAC y verificá si el cráter está despejado.</p>
+                    <div class="volc-btns">
+                        <a href="https://www.sinac.go.cr/" target="_blank" rel="noopener noreferrer" class="volc-btn volc-btn-sinac">🎟️ Reservar entradas (SINAC)</a>
+                        <a href="https://www.google.com/search?q=c%C3%A1mara+cr%C3%A1ter+volc%C3%A1n+po%C3%A1s+en+vivo" target="_blank" rel="noopener noreferrer" class="volc-btn volc-btn-cam">📷 Ver cámara del cráter</a>
+                    </div>
+                </div>
+            </div>
+            <script>
+                (function () {
+                    var codes = {0:['☀️','Despejado'],1:['🌤️','Mayormente despejado'],2:['⛅','Parcialmente nublado'],3:['☁️','Nublado'],45:['🌫️','Neblina'],48:['🌫️','Neblina'],51:['🌦️','Llovizna'],53:['🌦️','Llovizna'],55:['🌧️','Llovizna'],61:['🌧️','Lluvia'],63:['🌧️','Lluvia'],65:['🌧️','Lluvia fuerte'],66:['🌧️','Lluvia'],67:['🌧️','Lluvia'],71:['🌨️','Nieve'],80:['🌦️','Chubascos'],81:['🌧️','Chubascos'],82:['⛈️','Chubascos fuertes'],95:['⛈️','Tormenta'],96:['⛈️','Tormenta'],99:['⛈️','Tormenta']};
+                    fetch('https://api.open-meteo.com/v1/forecast?latitude=10.198&longitude=-84.233&current=temperature_2m,weather_code')
+                        .then(function (r) { return r.json(); })
+                        .then(function (d) {
+                            var c = d && d.current; if (!c) return;
+                            var info = codes[c.weather_code] || ['🌡️', '—'];
+                            document.getElementById('volcTemp').textContent = Math.round(c.temperature_2m) + '°C';
+                            document.getElementById('volcEmoji').textContent = info[0];
+                            document.getElementById('volcDesc').textContent = info[1];
+                        })
+                        .catch(function () { document.getElementById('volcDesc').textContent = 'Clima no disponible'; });
+                })();
+            </script>
+
             <!-- ═══ PUBLICACIÓN DESTACADA: FINCA KOKI ═══ -->
             <div class="fk-featured">
                 <div class="fk-badge">⭐ Destacado · Ecoturismo</div>

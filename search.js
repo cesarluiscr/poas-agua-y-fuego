@@ -113,11 +113,67 @@
             tags: 'cómo llegar mapa rutas transporte autobús auto carretera acceso'
         },
         {
+            title: 'Ruta Turística',
+            desc: 'Volcán, lagunas, cataratas, miradores y fincas de fresa del cantón',
+            url: 'ruta-turistica.html',
+            icon: '🧭',
+            tags: 'ruta turística atractivos volcán laguna catarata mirador senderos bosque fresa tour aventura naturaleza'
+        },
+        {
+            title: 'Finca Koki – Aventura Natural',
+            desc: 'Parque de ecoturismo: kayak, tirolesa, tubing, senderos, cataratas y más',
+            url: 'ruta-turistica.html',
+            icon: '🎋',
+            tags: 'finca koki ecoturismo aventura natural kayak paddle tirolesa tubing puente colgante senderos pesca paintball camping granja pase del día san pedro poás'
+        },
+        {
+            title: 'Volcán Poás',
+            desc: 'Parque Nacional Volcán Poás: cráter, Laguna Botos y bosque nuboso',
+            url: 'ruta-turistica.html',
+            icon: '🌋',
+            tags: 'volcán poás cráter laguna botos parque nacional sinac reserva bosque nuboso mirador entradas'
+        },
+        {
+            title: 'Laguna de Fraijanes',
+            desc: 'Parque Recreativo Laguna de Fraijanes: senderos, picnic y naturaleza',
+            url: 'ruta-turistica.html',
+            icon: '🏞️',
+            tags: 'laguna fraijanes parque recreativo senderos picnic familiar naturaleza sabana redonda'
+        },
+        {
+            title: 'MonteLuna',
+            desc: 'Cabañas A-frame con vista al volcán en Poásito',
+            url: 'directorio-comercial.html',
+            icon: '🏔️',
+            tags: 'monteluna hospedaje cabañas a-frame poásito alojamiento vista volcán turismo'
+        },
+        {
+            title: 'Tech Center CR',
+            desc: 'Soporte técnico, desarrollo web y servicios informáticos en Poás',
+            url: 'techcenter.html',
+            icon: '💻',
+            tags: 'tech center cr tecnología soporte técnico desarrollo web redes informática césar quesada'
+        },
+        {
+            title: 'Macrobiótica Presagio',
+            desc: 'Productos naturales y macrobióticos en San Pedro de Poás',
+            url: 'directorio-comercial.html',
+            icon: '🌿',
+            tags: 'macrobiótica presagio productos naturales moringa salud bienestar san pedro poás tienda'
+        },
+        {
+            title: 'Mapa Interactivo',
+            desc: 'Mapa con negocios, atractivos turísticos y Finca Koki del cantón',
+            url: 'directorio-comercial.html#mapa',
+            icon: '🗺️',
+            tags: 'mapa interactivo ubicación negocios atractivos puntos turísticos finca koki cómo llegar'
+        },
+        {
             title: 'Contacto',
             desc: 'WhatsApp, redes sociales y formas de contacto',
             url: 'index.html#contacto',
             icon: '📬',
-            tags: 'contacto whatsapp redes sociales facebook instagram tiktok'
+            tags: 'contacto whatsapp redes sociales facebook instagram tiktok formulario mensaje'
         }
     ];
 

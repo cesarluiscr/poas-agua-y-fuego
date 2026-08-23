@@ -48,7 +48,17 @@
     '.bk-btn{position:fixed;left:14px;bottom:74px;z-index:99998;width:46px;height:46px;border:none;border-radius:50%;' +
       'background:rgba(47,54,53,.92);color:#fff;font-size:23px;cursor:pointer;display:flex;align-items:center;' +
       'justify-content:center;line-height:1;padding:0;box-shadow:0 6px 20px rgba(0,0,0,.28);backdrop-filter:blur(4px);}' +
-    '.bk-btn:active{transform:scale(.9);}';
+    '.bk-btn:active{transform:scale(.9);}' +
+    /* Botón flotante de WhatsApp */
+    '.wa-fab{position:fixed;right:16px;bottom:16px;z-index:99998;width:56px;height:56px;border-radius:50%;' +
+      'background:#25D366;display:flex;align-items:center;justify-content:center;text-decoration:none;' +
+      'box-shadow:0 6px 20px rgba(0,0,0,.3);transition:transform .2s;}' +
+    '.wa-fab:hover{transform:scale(1.08);}' +
+    '.wa-fab:active{transform:scale(.92);}' +
+    '.wa-fab svg{width:32px;height:32px;fill:#fff;position:relative;z-index:1;}' +
+    '.wa-fab::after{content:"";position:absolute;inset:0;border-radius:50%;' +
+      'box-shadow:0 0 0 0 rgba(37,211,102,.5);animation:waPulse 2.4s infinite;}' +
+    '@keyframes waPulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.5);}70%{box-shadow:0 0 0 15px rgba(37,211,102,0);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}';
 
   var style = document.createElement('style');
   style.textContent = css;
@@ -376,6 +386,25 @@
     });
   }
 
+  /* ================================================================= */
+  /*  5) BOTÓN FLOTANTE DE WHATSAPP                                    */
+  /* ================================================================= */
+  function buildWhatsAppButton() {
+    if (document.querySelector('.wa-fab')) return;
+    var en = (document.documentElement.lang || '').toLowerCase().indexOf('en') === 0;
+    var msg = en
+      ? '¡Hello! I have a question about the Poás canton.'
+      : '¡Hola! Tengo una consulta sobre el cantón de Poás.';
+    var a = document.createElement('a');
+    a.className = 'wa-fab';
+    a.href = 'https://wa.me/50687058612?text=' + encodeURIComponent(msg);
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.setAttribute('aria-label', en ? 'Contact us on WhatsApp' : 'Escríbenos por WhatsApp');
+    a.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .396C7.163.396.006 7.554.006 16.39c0 2.892.756 5.72 2.194 8.21L0 32l7.6-2.157a15.9 15.9 0 007.65 1.95h.007c8.836 0 15.994-7.157 15.994-15.994 0-4.274-1.664-8.29-4.688-11.313A15.9 15.9 0 0016 .396zm0 29.2h-.006a13.2 13.2 0 01-6.72-1.84l-.482-.286-4.51 1.28 1.203-4.397-.314-.508A13.17 13.17 0 012.66 16.39C2.66 9.06 8.67 3.05 16.006 3.05c3.53 0 6.846 1.376 9.34 3.872a13.1 13.1 0 013.864 9.335c-.003 7.332-6.013 13.34-13.21 13.34zm7.24-9.874c-.397-.198-2.348-1.16-2.712-1.292-.364-.132-.63-.198-.895.2-.264.396-1.027 1.29-1.26 1.556-.232.264-.463.298-.86.1-.397-.2-1.676-.618-3.193-1.97-1.18-1.052-1.976-2.352-2.208-2.75-.232-.396-.025-.61.174-.807.18-.178.397-.463.595-.694.198-.232.264-.397.397-.66.132-.265.066-.497-.033-.695-.1-.198-.895-2.156-1.226-2.952-.323-.775-.65-.67-.895-.683l-.762-.013c-.264 0-.694.1-1.058.497-.364.396-1.39 1.358-1.39 3.31 0 1.953 1.424 3.84 1.622 4.104.198.264 2.8 4.28 6.786 6 .948.41 1.688.653 2.266.836.952.302 1.818.26 2.503.157.763-.114 2.348-.96 2.68-1.886.33-.926.33-1.72.23-1.886-.098-.165-.362-.264-.76-.462z"/></svg>';
+    document.body.appendChild(a);
+  }
+
   /* ----------------------------------------------------------------- */
   /*  Inicialización                                                    */
   /* ----------------------------------------------------------------- */
@@ -384,6 +413,7 @@
     buildFontControl();
     buildMenuHint();
     buildBackButton();
+    buildWhatsAppButton();
     if (window.MutationObserver) {
       var mo = new MutationObserver(function (muts) {
         for (var i = 0; i < muts.length; i++) {
