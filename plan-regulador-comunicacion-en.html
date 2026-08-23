@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Communication Guide for Zoning Plans – Poás Agua y Fuego</title>
+    <meta name="description" content="Summary of the INVU Communication Guide for managing municipal zoning plans in the Poás canton.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <link rel="stylesheet" href="style.css?v=2">
+    <style>
+        :root {
+            --pr-navy:   #0D2240;
+            --pr-blue:   #1A56DB;
+            --pr-teal:   #0D9488;
+            --pr-gold:   #D4AF37;
+            --pr-bg:     #F3F6FB;
+            --pr-text:   #1E293B;
+            --pr-muted:  #64748B;
+        }
+        * { box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: var(--pr-text); background: #fff; margin: 0; }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            min-height: 46vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+            padding: 9rem 1.5rem 5rem;
+            background: linear-gradient(135deg, #0D2240 0%, #1A3560 50%, #0D9488 100%);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 70% 30%, rgba(26,86,219,0.25), transparent 65%);
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 720px; }
+        .hero-badge {
+            display: inline-block; background: rgba(212,175,55,0.18); border: 1px solid rgba(212,175,55,0.5);
+            color: #D4AF37; font-size: 0.73rem; font-weight: 700; letter-spacing: 0.14em;
+            text-transform: uppercase; padding: 0.35rem 1.1rem; border-radius: 99px; margin-bottom: 1.4rem;
+        }
+        .hero h1 { font-family: 'Outfit', sans-serif; font-size: clamp(1.9rem,5vw,3.2rem); font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 1rem; }
+        .hero h1 span { color: #D4AF37; }
+        .hero p { color: rgba(255,255,255,0.78); font-size: 1.05rem; line-height: 1.7; max-width: 580px; margin: 0 auto; }
+        .hero-source { margin-top: 1.5rem; color: rgba(255,255,255,0.5); font-size: 0.82rem; }
+
+        /* ── LAYOUT ── */
+        .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+        .back-link {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            color: var(--pr-blue); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+            margin: 2.5rem 0 2rem; transition: opacity 0.2s;
+        }
+        .back-link:hover { opacity: 0.7; }
+
+        /* ── INTRO ── */
+        .intro-box {
+            background: var(--pr-bg); border-left: 4px solid var(--pr-blue);
+            border-radius: 0 12px 12px 0; padding: 1.6rem 1.8rem; margin-bottom: 3rem;
+            font-size: 1.02rem; line-height: 1.75; color: var(--pr-text);
+        }
+
+        /* ── SECTIONS ── */
+        .section { margin-bottom: 3.5rem; }
+        .section-header {
+            display: flex; align-items: center; gap: 0.9rem;
+            margin-bottom: 1.4rem; padding-bottom: 0.85rem;
+            border-bottom: 2px solid var(--pr-bg);
+        }
+        .section-icon {
+            width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; background: var(--pr-bg);
+        }
+        .section-title { font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 700; color: var(--pr-navy); }
+        .section-num { font-size: 0.78rem; color: var(--pr-muted); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+
+        /* ── GENERAL GOAL ── */
+        .goal-card {
+            background: linear-gradient(135deg, var(--pr-navy), #1A3560);
+            color: #fff; border-radius: 14px; padding: 1.8rem 2rem;
+            font-size: 1.05rem; line-height: 1.75; margin-bottom: 1.5rem;
+            position: relative; overflow: hidden;
+        }
+        .goal-card::before {
+            content: '🎯';
+            position: absolute; right: 1.5rem; top: 1rem;
+            font-size: 3rem; opacity: 0.12;
+        }
+
+        /* ── SPECIFIC OBJECTIVES ── */
+        .obj-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.85rem; }
+        .obj-list li {
+            display: flex; align-items: flex-start; gap: 0.85rem;
+            background: var(--pr-bg); border-radius: 10px; padding: 1rem 1.2rem;
+            font-size: 0.95rem; line-height: 1.6;
+        }
+        .obj-num {
+            min-width: 28px; height: 28px; border-radius: 50%;
+            background: var(--pr-blue); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.78rem; font-weight: 700; flex-shrink: 0; margin-top: 0.1rem;
+        }
+
+        /* ── KEY MESSAGES ── */
+        .msg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+        .msg-card {
+            border: 1px solid #DDE3EF; border-radius: 12px; padding: 1.2rem 1.3rem;
+            background: #fff; position: relative;
+        }
+        .msg-card .quote {
+            font-size: 0.82rem; font-weight: 700; color: var(--pr-blue);
+            text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem;
+        }
+        .msg-card p { font-size: 0.93rem; line-height: 1.6; color: var(--pr-text); margin: 0; font-style: italic; }
+        .msg-card .desc { font-style: normal; color: var(--pr-muted); margin-top: 0.4rem; font-size: 0.87rem; }
+
+        /* ── CHANNELS ── */
+        .canal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .canal-card {
+            background: var(--pr-bg); border-radius: 12px; padding: 1.2rem;
+            text-align: center; font-size: 0.9rem; font-weight: 600; color: var(--pr-navy);
+        }
+        .canal-icon { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
+        .canal-card p { font-size: 0.82rem; font-weight: 400; color: var(--pr-muted); margin-top: 0.35rem; }
+
+        /* ── BENEFITS ── */
+        .benefit-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.8rem; list-style: none; padding: 0; margin: 0; }
+        .benefit-list li {
+            display: flex; align-items: flex-start; gap: 0.6rem;
+            background: var(--pr-bg); border-radius: 8px; padding: 0.75rem 1rem;
+            font-size: 0.9rem; line-height: 1.5;
+        }
+        .benefit-list li::before { content: '✅'; flex-shrink: 0; }
+
+        /* ── RECOMMENDATIONS ── */
+        .rec-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+        .rec-list li {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            padding: 0.85rem 1.1rem; background: #fff; border-left: 3px solid var(--pr-teal);
+            border-radius: 0 8px 8px 0; font-size: 0.93rem; line-height: 1.6;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+        }
+        .rec-list li::before { content: '→'; color: var(--pr-teal); font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+
+        /* ── CTA ── */
+        .cta-box {
+            background: linear-gradient(135deg, var(--pr-teal), #0a7a70);
+            color: #fff; border-radius: 16px; padding: 2rem 2.2rem;
+            display: flex; flex-wrap: wrap; gap: 1.5rem;
+            align-items: center; justify-content: space-between;
+            margin: 3rem 0 4rem;
+        }
+        .cta-box h3 { font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .cta-box p { font-size: 0.93rem; opacity: 0.88; margin: 0; }
+        .cta-btn {
+            display: inline-block; background: #fff; color: var(--pr-teal);
+            font-weight: 700; font-size: 0.9rem; padding: 0.7rem 1.5rem;
+            border-radius: 99px; text-decoration: none; white-space: nowrap;
+            transition: transform 0.2s;
+        }
+        .cta-btn:hover { transform: scale(1.04); }
+
+        /* ── FOOTER ── */
+        .page-footer {
+            background: var(--pr-navy); color: rgba(255,255,255,0.55);
+            text-align: center; padding: 2rem 1.5rem; font-size: 0.82rem;
+        }
+
+        @media (max-width: 640px) {
+            .msg-grid, .canal-grid, .benefit-list { grid-template-columns: 1fr; }
+            .cta-box { flex-direction: column; }
+            .hero h1 { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar" id="navbar">
+    <div class="logo">Poás <span>Agua y Fuego</span></div>
+    <ul class="nav-links">
+        <li><a href="index-en.html">Home</a></li>
+        <li><a href="plan-regulador-en.html" class="active">Zoning Plan</a></li>
+        <li><a href="directorio-comercial-en.html">Directory</a></li>
+        <li><a href="bolsa-empleo-en.html">Jobs</a></li>
+        <li><a href="eventos-en.html">Events</a></li>
+    </ul>
+    <div class="nav-lang">
+        <a href="plan-regulador-comunicacion.html" class="lang-btn">🇨🇷 <span class="lang-label">Español</span></a>
+        <a href="plan-regulador-comunicacion-en.html" class="lang-btn active">🇺🇸 <span class="lang-label">English</span></a>
+    </div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span><em class="hamburger-label">Menu</em></div>
+</nav>
+<nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-panel" id="mobileNavPanel">
+        <div class="mobile-nav-header">
+            <span class="mobile-nav-logo">Poás <span>Agua y Fuego</span></span>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">×</button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index-en.html" onclick="closeMobileNav()">🏠 Home</a>
+            <a href="patrimonio-hidrico-en.html" onclick="closeMobileNav()">💧 Water Heritage</a>
+            <a href="historia-canton-en.html" onclick="closeMobileNav()">📜 Canton History</a>
+            <a href="galeria-en.html" onclick="closeMobileNav()">📷 Gallery</a>
+            <a href="directorio-comercial-en.html" onclick="closeMobileNav()">🛍️ Tourist &amp; Commercial Directory</a>
+            <a href="bolsa-empleo-en.html" onclick="closeMobileNav()">💼 Job Board</a>
+            <a href="eventos-en.html" onclick="closeMobileNav()">📅 Events</a>
+            <a href="ruta-gastronomica-en.html" onclick="closeMobileNav()">🍽️ Gastronomic Route</a>
+            <a href="agricultura-en.html" onclick="closeMobileNav()">🌱 Agriculture</a>
+            <a href="ecologia-en.html" onclick="closeMobileNav()">🌿 Ecology</a>
+            <a href="plan-regulador-en.html" onclick="closeMobileNav()">🗺️ Zoning Plan</a>
+            <a href="seguridad-ciudadana-en.html" onclick="closeMobileNav()">🛡️ Public Safety</a>
+            <a href="index-en.html#contacto" onclick="closeMobileNav()">📬 Contact</a>
+        </div>
+        <div class="mobile-nav-lang">
+            <a href="plan-regulador-comunicacion.html" onclick="closeMobileNav()">🇨🇷 Español</a>
+            <a href="plan-regulador-comunicacion-en.html" onclick="closeMobileNav()">🇺🇸 English</a>
+        </div>
+        <div class="mobile-nav-footer">Poás Canton · Alajuela · Costa Rica</div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">🗺️ Zoning Plan · Secondary topic</div>
+        <h1>Communication <span>Guide</span><br>for Zoning Plans</h1>
+        <p>How to inform, engage and build trust with the community during the implementation of the Municipal Zoning Plan.</p>
+        <p class="hero-source">Source: National Institute of Housing and Urban Planning (INVU) · Costa Rica</p>
+    </div>
+</div>
+
+<div class="container">
+    <a href="plan-regulador-en.html" class="back-link">← Back to the Zoning Plan</a>
+
+    <!-- INTRO -->
+    <div class="intro-box">
+        A strategic communication plan builds a solid foundation for reaching the right audiences with the Zoning Plan, through the right channels. Each municipality can identify concrete objectives and implement measures tailored to its local reality, answering the <strong>who, what, when, where and how</strong> of its communication.
+    </div>
+
+    <!-- GENERAL GOAL -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">🎯</div>
+            <div>
+                <div class="section-num">Section 2</div>
+                <div class="section-title">General Goal</div>
+            </div>
+        </div>
+        <div class="goal-card">
+            Inform and raise awareness in the community about zoning plans, promoting understanding, active participation and collaboration in their implementation, to ensure orderly, sustainable urban development aligned with local needs and expectations.
+        </div>
+
+        <ul class="obj-list">
+            <li><div class="obj-num">1</div>Clearly explain the contents and objectives of the zoning plan and how it will affect urban development and daily life.</li>
+            <li><div class="obj-num">2</div>Encourage active participation through public consultations, information meetings and surveys to gather residents' opinions.</li>
+            <li><div class="obj-num">3</div>Clarify the implementation process and expected timelines, so residents understand the plan's stages.</li>
+            <li><div class="obj-num">4</div>Establish effective communication channels to keep the population informed about progress and changes.</li>
+            <li><div class="obj-num">5</div>Offer educational tools so residents can interpret technical documents and regulations.</li>
+        </ul>
+    </div>
+
+    <!-- KEY MESSAGES -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">💬</div>
+            <div>
+                <div class="section-num">Section 4</div>
+                <div class="section-title">Key Messages for the Community</div>
+            </div>
+        </div>
+        <div class="msg-grid">
+            <div class="msg-card">
+                <div class="quote">Sustainable future</div>
+                <p>"A more prosperous and sustainable urban future"</p>
+                <p class="desc">Zoning plans ensure orderly development that respects the environment and improves quality of life.</p>
+            </div>
+            <div class="msg-card">
+                <div class="quote">Citizen participation</div>
+                <p>"Your voice matters in building the canton we want"</p>
+                <p class="desc">The zoning plan is an opportunity for the community to take part in planning its future.</p>
+            </div>
+            <div class="msg-card">
+                <div class="quote">Safety and access</div>
+                <p>"A growing, safe and accessible canton"</p>
+                <p class="desc">A good plan prevents problems such as overcrowding, lack of services and environmental degradation.</p>
+            </div>
+            <div class="msg-card">
+                <div class="quote">Quality of life</div>
+                <p>"Better quality of life for everyone"</p>
+                <p class="desc">Land-use planning contributes to a healthier, more accessible and fairer environment for all.</p>
+            </div>
+            <div class="msg-card">
+                <div class="quote">Environment</div>
+                <p>"Let's protect our natural resources for future generations"</p>
+                <p class="desc">A zoning plan balances urban development with environmental conservation.</p>
+            </div>
+            <div class="msg-card">
+                <div class="quote">Transparency</div>
+                <p>"Transparency and participation: the key to success"</p>
+                <p class="desc">Implementation is based on transparency and citizen participation so that all sectors are heard.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHANNELS -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">📡</div>
+            <div>
+                <div class="section-num">Sections 5 &amp; 6</div>
+                <div class="section-title">Communication and Press Channels</div>
+            </div>
+        </div>
+        <p style="margin-bottom:1.2rem;color:var(--pr-muted);font-size:0.95rem;line-height:1.65;">A lack of timely information can generate opposition to land-use planning processes. It is recommended to identify key actors in each neighborhood and district so they can relay the message.</p>
+        <div class="canal-grid">
+            <div class="canal-card">
+                <span class="canal-icon">📻</span>
+                Regional radio
+                <p>Interviews, news capsules and spots. The most effective medium in rural areas.</p>
+            </div>
+            <div class="canal-card">
+                <span class="canal-icon">📺</span>
+                Local television
+                <p>Interviews with project leaders and benefiting neighbors.</p>
+            </div>
+            <div class="canal-card">
+                <span class="canal-icon">📰</span>
+                Print press
+                <p>Feature articles, infographics and expert interviews.</p>
+            </div>
+            <div class="canal-card">
+                <span class="canal-icon">📱</span>
+                Social media
+                <p>Facebook, WhatsApp and Instagram. Videos with key messages from community leaders.</p>
+            </div>
+            <div class="canal-card">
+                <span class="canal-icon">📩</span>
+                Mass SMS
+                <p>For communities without network access. Between ¢8–¢9 per message.</p>
+            </div>
+            <div class="canal-card">
+                <span class="canal-icon">🚗</span>
+                Community outreach
+                <p>Door-to-door visits and meetings in community halls every week or fortnight.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- BENEFITS -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">✅</div>
+            <div>
+                <div class="section-num">Section 8 – Conclusions</div>
+                <div class="section-title">Benefits of a Zoning Plan</div>
+            </div>
+        </div>
+        <ul class="benefit-list">
+            <li>Define where residential and commercial buildings can be built</li>
+            <li>Design the exits and access points of road networks</li>
+            <li>Improve the location of housing</li>
+            <li>Define what activities may take place in an area</li>
+            <li>Facilitate investment in the canton</li>
+            <li>Strengthen urban and rural development</li>
+            <li>Promote ecotourism and agritourism</li>
+            <li>Encourage job creation and local entrepreneurship</li>
+            <li>Protect people's lives from natural hazards</li>
+        </ul>
+    </div>
+
+    <!-- RECOMMENDATIONS -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon">💡</div>
+            <div>
+                <div class="section-num">Section 9</div>
+                <div class="section-title">INVU Recommendations</div>
+            </div>
+        </div>
+        <ul class="rec-list">
+            <li>Define the message, scope and strategy to communicate the benefits of the zoning plan in each community.</li>
+            <li>Build a sense of belonging and a "community vision" of the development each area will gain from the plan.</li>
+            <li>Highlight the benefits in terms of job creation for the canton's residents.</li>
+            <li>Promote openness, transparency and trust to avoid misinformation and misunderstandings.</li>
+            <li>Include a communication expert and a budget for disseminating the plan in the procurement terms.</li>
+        </ul>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+        <div>
+            <h3>Want to learn about the Poás Zoning Plan?</h3>
+            <p>Check the plan details, zoning, regulations and citizen participation.</p>
+        </div>
+        <a href="plan-regulador-en.html" class="cta-btn">View Zoning Plan →</a>
+    </div>
+</div>
+
+<footer class="page-footer">
+    <p>Source: <strong>Communication guide for managing municipal zoning plans</strong> · INVU · Costa Rica</p>
+    <p style="margin-top:0.4rem;">© 2026 Poás Agua y Fuego · César Luis Quesada Herrera</p>
+</footer>
+
+<script>
+(function() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    function closeMobileNav() {
+        if (hamburger) hamburger.classList.remove('open');
+        if (mobileNav) mobileNav.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    window.closeMobileNav = closeMobileNav;
+    if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', () => {
+            const isOpen = hamburger.classList.toggle('open');
+            mobileNav.classList.toggle('open', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+        mobileNav.addEventListener('click', e => { if (!e.target.closest('#mobileNavPanel')) closeMobileNav(); });
+        document.getElementById('mobileNavClose').addEventListener('click', closeMobileNav);
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileNav(); });
+    }
+    window.addEventListener('scroll', () => document.getElementById('navbar')?.classList.toggle('scrolled', window.scrollY > 50));
+})();
+</script>
+<script src="security.js?v=2"></script>
+    <script src="enhance.js?v=5"></script>
+</body>
+</html>

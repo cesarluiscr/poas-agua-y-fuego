@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta property="og:title"       content="Biblioteca Pública del Cantón de Poás | Poás Agua y Fuego">
-    <meta property="og:description" content='Historia de la Biblioteca Pública del Cantón de Poás "Prof. Eliécer Murillo Esquivel", Alajuela, Costa Rica.'>
-    <meta property="og:url"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/biblioteca-publica.html">
-    <meta name="description"        content='Historia de la Biblioteca Pública del Cantón de Poás "Prof. Eliécer Murillo Esquivel". Reseña recopilada por Olga Martha Chaves Chaves, Directora 1998-2018.'>
-    <title>Biblioteca Pública del Cantón de Poás | Poás Agua y Fuego</title>
+    <meta property="og:title"       content="Public Library of the Poás Canton | Poás Agua y Fuego">
+    <meta property="og:description" content='History of the Public Library of the Poás Canton "Prof. Eliécer Murillo Esquivel", Alajuela, Costa Rica.'>
+    <meta property="og:url"         content="https://cesarluiscr.github.io/poas-agua-y-fuego/biblioteca-publica-en.html">
+    <meta name="description"        content='History of the Public Library of the Poás Canton "Prof. Eliécer Murillo Esquivel". Account compiled by Olga Martha Chaves Chaves, Director 1998-2018.'>
+    <title>Public Library of the Poás Canton | Poás Agua y Fuego</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -39,11 +39,14 @@
             color: var(--gold); font-weight: 700; font-size: 1rem;
             text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
         }
+        .bib-nav-right { display: flex; align-items: center; gap: 1.1rem; }
         .bib-nav-back {
             color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.88rem;
             display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s;
         }
         .bib-nav-back:hover { color: var(--gold); }
+        .bib-nav-lang { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+        .bib-nav-lang:hover { color: var(--gold); }
 
         /* ── HERO ── */
         .bib-hero {
@@ -319,99 +322,99 @@
 
 <!-- NAV -->
 <nav class="bib-nav">
-    <a href="index.html" class="bib-nav-logo">🌋 Poás Agua y Fuego</a>
-    <div style="display:flex;align-items:center;gap:1.1rem;">
-        <a href="biblioteca-publica-en.html" class="bib-nav-back" style="gap:.3rem;">🇺🇸 English</a>
-        <a href="historia-canton.html" class="bib-nav-back">← Historia del Cantón</a>
+    <a href="index-en.html" class="bib-nav-logo">🌋 Poás Agua y Fuego</a>
+    <div class="bib-nav-right">
+        <a href="biblioteca-publica.html" class="bib-nav-lang">🇨🇷 Español</a>
+        <a href="historia-canton-en.html" class="bib-nav-back">← Canton History</a>
     </div>
 </nav>
 <div class="breadcrumb">
-    <a href="index.html">🏠 Inicio</a>
+    <a href="index-en.html">🏠 Home</a>
     <span class="breadcrumb-sep">›</span>
-    <a href="historia-canton.html">Historia del Cantón</a>
+    <a href="historia-canton-en.html">Canton History</a>
     <span class="breadcrumb-sep">›</span>
-    <span class="breadcrumb-current">Biblioteca Pública</span>
+    <span class="breadcrumb-current">Public Library</span>
 </div>
 
 <!-- HERO -->
 <div class="bib-hero">
-    <div class="bib-hero-badge">📚 Patrimonio Cultural · San Pedro de Poás</div>
+    <div class="bib-hero-badge">📚 Cultural Heritage · San Pedro de Poás</div>
     <h1>
-        Biblioteca Pública del Cantón de Poás
+        Public Library of the Poás Canton
         <em>"Prof. Eliécer Murillo Esquivel"</em>
     </h1>
-    <p class="bib-hero-sub">Más de cinco décadas de historia al servicio de la cultura, el conocimiento y el desarrollo comunitario del cantón de Poás.</p>
+    <p class="bib-hero-sub">More than five decades of history serving the culture, knowledge and community development of the Poás canton.</p>
     <div class="bib-hero-meta">
-        <div class="bib-meta-item"><span>📅</span> Fundada en 1971</div>
-        <div class="bib-meta-item"><span>🏛️</span> Edificio propio desde 2012</div>
-        <div class="bib-meta-item"><span>📐</span> 658 m² de instalaciones</div>
+        <div class="bib-meta-item"><span>📅</span> Founded in 1971</div>
+        <div class="bib-meta-item"><span>🏛️</span> Own building since 2012</div>
+        <div class="bib-meta-item"><span>📐</span> 658 m² of facilities</div>
     </div>
 </div>
 
 <!-- CHAPTERS NAV -->
 <nav class="bib-chapters">
-    <a href="#origenes"    class="bib-chap-btn">📖 Orígenes</a>
-    <a href="#crecimiento" class="bib-chap-btn">🕰️ Crecimiento</a>
-    <a href="#edificio"    class="bib-chap-btn">🏛️ Nuevo Edificio</a>
-    <a href="#personas"    class="bib-chap-btn">👥 Personas Clave</a>
+    <a href="#origenes"    class="bib-chap-btn">📖 Origins</a>
+    <a href="#crecimiento" class="bib-chap-btn">🕰️ Growth</a>
+    <a href="#edificio"    class="bib-chap-btn">🏛️ New Building</a>
+    <a href="#personas"    class="bib-chap-btn">👥 Key People</a>
 </nav>
 
 <!-- FACTS BAR -->
 <div class="bib-facts">
     <div class="bib-fact">
         <div class="bib-fact-num">1971</div>
-        <div class="bib-fact-label">Año de<br>inauguración</div>
+        <div class="bib-fact-label">Year of<br>inauguration</div>
     </div>
     <div class="bib-fact">
         <div class="bib-fact-num">2012</div>
-        <div class="bib-fact-label">Edificio propio<br>inaugurado</div>
+        <div class="bib-fact-label">Own building<br>inaugurated</div>
     </div>
     <div class="bib-fact">
         <div class="bib-fact-num">658</div>
-        <div class="bib-fact-label">m² del nuevo<br>edificio</div>
+        <div class="bib-fact-label">m² of the new<br>building</div>
     </div>
     <div class="bib-fact">
         <div class="bib-fact-num">430</div>
-        <div class="bib-fact-label">Personas capacitadas<br>en informática</div>
+        <div class="bib-fact-label">People trained<br>in computing</div>
     </div>
     <div class="bib-fact">
         <div class="bib-fact-num">+50</div>
-        <div class="bib-fact-label">Años al servicio<br>de Poás</div>
+        <div class="bib-fact-label">Years serving<br>Poás</div>
     </div>
 </div>
 
-<!-- SECCIÓN 1: ORÍGENES -->
+<!-- SECTION 1: ORIGINS -->
 <section class="bib-section" id="origenes">
     <div class="bib-container">
         <div class="bib-section-header">
-            <div class="bib-chapter-label">Capítulo 1</div>
-            <h2 class="bib-section-title">Los Orígenes</h2>
+            <div class="bib-chapter-label">Chapter 1</div>
+            <h2 class="bib-section-title">The Origins</h2>
             <div class="bib-divider"></div>
         </div>
 
         <div class="bib-two-col" style="margin-bottom:3.5rem">
             <div class="bib-text">
-                <h3>El Movimiento Juvenil Poaseño</h3>
-                <p>En <strong>setiembre de 1971</strong>, con motivo del septuagésimo aniversario de la fundación del cantón, un grupo de jóvenes de la comunidad conocido como el <strong>Movimiento Juvenil Poaseño</strong> tomó la iniciativa de programar, como acto cultural central, la inauguración de una biblioteca pública para Poás.</p>
-                <p>Entre los impulsores de este sueño se encontraban <strong>Pedro Rojas Castro, Mario Murillo Chaves, María Eugenia Ugalde, Ricardo Arroyo y Claudio Arrollo</strong>, quienes comenzaron a recoger libros en la comunidad para formar el acervo inicial.</p>
-                <p>El <strong>domingo 17 de octubre de 1971</strong>, el señor Presidente de la República, <strong>José Figueres Ferrer</strong>, inauguró oficialmente la biblioteca, dándole al cantón de Poás un espacio cultural sin precedentes.</p>
+                <h3>The Poás Youth Movement</h3>
+                <p>In <strong>September 1971</strong>, on the occasion of the seventieth anniversary of the canton's founding, a group of community youths known as the <strong>Poás Youth Movement (Movimiento Juvenil Poaseño)</strong> took the initiative to program, as the central cultural event, the inauguration of a public library for Poás.</p>
+                <p>Among the driving forces behind this dream were <strong>Pedro Rojas Castro, Mario Murillo Chaves, María Eugenia Ugalde, Ricardo Arroyo and Claudio Arrollo</strong>, who began collecting books throughout the community to form the initial collection.</p>
+                <p>On <strong>Sunday, October 17, 1971</strong>, the President of the Republic, <strong>José Figueres Ferrer</strong>, officially inaugurated the library, giving the Poás canton an unprecedented cultural space.</p>
             </div>
             <div class="bib-highlight">
-                <h3>El Nombre que la Historia Merecía</h3>
-                <p>En sesión ordinaria <strong>No. 42, artículo 5</strong>, celebrada el <strong>6 de noviembre de 1971</strong>, el Comité Pro-Instalación propuso bautizar la biblioteca con el nombre de <strong style="color:var(--gold)">"Eliécer Murillo Esquivel"</strong>, en homenaje a uno de los hijos más ilustres del cantón.</p>
-                <p>Sin embargo, en ese momento no fue posible oficializarlo, pues el señor Murillo aún vivía. La biblioteca recibiría formalmente ese nombre décadas después, en cumplimiento de la normativa y en merecido reconocimiento a su legado.</p>
+                <h3>The Name History Deserved</h3>
+                <p>In ordinary session <strong>No. 42, article 5</strong>, held on <strong>November 6, 1971</strong>, the Pro-Installation Committee proposed naming the library <strong style="color:var(--gold)">"Eliécer Murillo Esquivel"</strong>, in tribute to one of the canton's most distinguished sons.</p>
+                <p>At the time, however, it was not possible to make it official, as Mr. Murillo was still alive. The library would formally receive that name decades later, in accordance with regulations and as a well-deserved recognition of his legacy.</p>
             </div>
         </div>
 
         <div class="bib-two-col reverse">
             <div class="bib-text">
-                <h3>Apertura al Público: Enero 1972</h3>
-                <p>La biblioteca abrió sus puertas al público en <strong>enero de 1972</strong>, instalada en la <strong>segunda planta de la Municipalidad</strong>, en la sala de sesiones, acondicionada especialmente para ese fin. Se conformó entonces una Junta Administrativa integrada por miembros prominentes del cantón.</p>
-                <p>El acervo bibliográfico inicial se nutrió de una <strong>campaña parroquial de donación</strong> de libros, que la comunidad depositó frente a la iglesia. Con los fondos recaudados —<strong>quinientos mil colones</strong>— el señor Pedro Rojas y la señora Zoila Vargas viajaron a la Librería Universal para adquirir más títulos, entre ellos obras del escritor costarricense <strong>José León Sánchez</strong>.</p>
-                <p>Ese mismo año, la biblioteca se <strong>oficializó</strong> y pasó a formar parte de la <em>Dirección General de Bibliotecas del Ministerio de Cultura, Juventud y Deportes</em>, garantizando su continuidad institucional.</p>
+                <h3>Opening to the Public: January 1972</h3>
+                <p>The library opened its doors to the public in <strong>January 1972</strong>, housed on the <strong>second floor of the Municipality</strong>, in the council chamber, specially adapted for the purpose. An Administrative Board was then formed, made up of prominent members of the canton.</p>
+                <p>The initial book collection grew from a <strong>parish donation campaign</strong> of books, which the community left in front of the church. With the funds raised —<strong>five hundred thousand colones</strong>— Mr. Pedro Rojas and Mrs. Zoila Vargas traveled to Librería Universal to acquire more titles, including works by the Costa Rican writer <strong>José León Sánchez</strong>.</p>
+                <p>That same year, the library was <strong>made official</strong> and became part of the <em>General Directorate of Libraries of the Ministry of Culture, Youth and Sports</em>, ensuring its institutional continuity.</p>
             </div>
             <div class="bib-text">
-                <h3>Primera Junta Administrativa</h3>
+                <h3>First Administrative Board</h3>
                 <ul>
                     <li>Eliécer Murillo Esquivel</li>
                     <li>Ademar Murillo Murillo</li>
@@ -420,18 +423,18 @@
                     <li>Claudio Arrollo Hernández</li>
                     <li>Gilberto Murillo Porras</li>
                 </ul>
-                <p style="margin-top:1.2rem">El <strong>Prof. Gerardo Vega Gómez</strong> fue el primer bibliotecario remunerado por el Ministerio de Cultura, Juventud y Deportes. Ejerció el cargo durante <strong>diez años</strong> bajo la coordinación de la señora <strong>Vera Violeta Acuña</strong>, supervisora nacional de bibliotecas públicas.</p>
+                <p style="margin-top:1.2rem">The <strong>Prof. Gerardo Vega Gómez</strong> was the first librarian paid by the Ministry of Culture, Youth and Sports. He held the position for <strong>ten years</strong> under the coordination of <strong>Vera Violeta Acuña</strong>, national supervisor of public libraries.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- SECCIÓN 2: CRECIMIENTO -->
+<!-- SECTION 2: GROWTH -->
 <section class="bib-section" id="crecimiento">
     <div class="bib-container">
         <div class="bib-section-header">
-            <div class="bib-chapter-label">Capítulo 2</div>
-            <h2 class="bib-section-title">Crecimiento y Adversidades</h2>
+            <div class="bib-chapter-label">Chapter 2</div>
+            <h2 class="bib-section-title">Growth and Hardships</h2>
             <div class="bib-divider"></div>
         </div>
 
@@ -439,164 +442,164 @@
             <div class="bib-timeline">
                 <div class="bib-tl-item">
                     <div class="bib-tl-year">1972</div>
-                    <div class="bib-tl-title">Oficialización</div>
-                    <div class="bib-tl-text">La biblioteca se integra a la Dirección General de Bibliotecas del Ministerio de Cultura, Juventud y Deportes.</div>
+                    <div class="bib-tl-title">Made official</div>
+                    <div class="bib-tl-text">The library joins the General Directorate of Libraries of the Ministry of Culture, Youth and Sports.</div>
                 </div>
                 <div class="bib-tl-item">
                     <div class="bib-tl-year">1975</div>
-                    <div class="bib-tl-title">Primer traslado</div>
-                    <div class="bib-tl-text">La biblioteca se muda a un segundo piso ubicado 100 metros al norte y 50 metros al oeste del Templo Católico, en un edificio alquilado por el Ministerio al señor Fernando Rodríguez Murillo.</div>
+                    <div class="bib-tl-title">First relocation</div>
+                    <div class="bib-tl-text">The library moves to a second floor located 100 meters north and 50 meters west of the Catholic Church, in a building rented by the Ministry from Mr. Fernando Rodríguez Murillo.</div>
                 </div>
                 <div class="bib-tl-item">
                     <div class="bib-tl-year">1989</div>
-                    <div class="bib-tl-title">Asociación de Amigos</div>
-                    <div class="bib-tl-text">El 21 de agosto se funda la <em>Asociación de Amigos de la Biblioteca Pública de San Pedro de Poás</em>, conformada por 17 miembros de la comunidad, con el objetivo de proyectarla a todo el cantón sin distinción ideológica, política, religiosa ni social.</div>
+                    <div class="bib-tl-title">Friends Association</div>
+                    <div class="bib-tl-text">On August 21, the <em>Association of Friends of the Public Library of San Pedro de Poás</em> is founded, made up of 17 community members, with the goal of extending it to the whole canton without ideological, political, religious or social distinction.</div>
                 </div>
                 <div class="bib-tl-item">
                     <div class="bib-tl-year">1993–1994</div>
-                    <div class="bib-tl-title">Cierre temporal</div>
-                    <div class="bib-tl-text">La biblioteca permanece cerrada por falta de personal, marcando uno de los momentos más difíciles de su historia.</div>
+                    <div class="bib-tl-title">Temporary closure</div>
+                    <div class="bib-tl-text">The library remains closed due to lack of staff, marking one of the most difficult moments in its history.</div>
                 </div>
                 <div class="bib-tl-item">
                     <div class="bib-tl-year">1995–1998</div>
-                    <div class="bib-tl-title">Reapertura parcial</div>
-                    <div class="bib-tl-text">La señora <strong>Lidia Ma. Murillo Montero</strong> trabaja medio tiempo como encargada, manteniendo viva la llama de la biblioteca.</div>
+                    <div class="bib-tl-title">Partial reopening</div>
+                    <div class="bib-tl-text"><strong>Lidia Ma. Murillo Montero</strong> works part-time as the person in charge, keeping the library's flame alive.</div>
                 </div>
                 <div class="bib-tl-item">
-                    <div class="bib-tl-year">15 febrero 1998</div>
-                    <div class="bib-tl-title">Nueva dirección</div>
-                    <div class="bib-tl-text">La señora <strong>Olga Martha Chaves Chaves</strong> es trasladada desde la Biblioteca Nacional para asumir la Dirección, trabajando en equipo con Lidia Murillo Montero a tiempo completo.</div>
+                    <div class="bib-tl-year">February 15, 1998</div>
+                    <div class="bib-tl-title">New director</div>
+                    <div class="bib-tl-text"><strong>Olga Martha Chaves Chaves</strong> is transferred from the National Library to take over as Director, working as a team with Lidia Murillo Montero full-time.</div>
                 </div>
                 <div class="bib-tl-item">
                     <div class="bib-tl-year">1999</div>
-                    <div class="bib-tl-title">Lote para nueva sede</div>
-                    <div class="bib-tl-text">La Municipalidad, bajo el Alcalde <strong>Víctor Manuel Rodríguez Salazar</strong>, dona un lote de <strong>929.89 m²</strong> ubicado 800 metros al sur del parque central, en el distrito de San Juan, para construir el futuro edificio de la biblioteca.</div>
+                    <div class="bib-tl-title">Lot for a new headquarters</div>
+                    <div class="bib-tl-text">The Municipality, under Mayor <strong>Víctor Manuel Rodríguez Salazar</strong>, donates a <strong>929.89 m²</strong> lot located 800 meters south of the central park, in the San Juan district, to build the library's future building.</div>
                 </div>
                 <div class="bib-tl-item">
                     <div class="bib-tl-year">2000</div>
-                    <div class="bib-tl-title">Centro de Inteligencia (CECI)</div>
-                    <div class="bib-tl-text">Se inaugura el CECI con <strong>6 computadoras</strong> para capacitación en informática. En 2014 se amplía con 6 equipos más. Hasta 2018 se han capacitado aproximadamente <strong>430 personas</strong>, incluyendo adultos mayores.</div>
+                    <div class="bib-tl-title">Intelligence Center (CECI)</div>
+                    <div class="bib-tl-text">The CECI opens with <strong>6 computers</strong> for computer training. In 2014 it is expanded with 6 more units. By 2018, approximately <strong>430 people</strong> have been trained, including senior citizens.</div>
                 </div>
                 <div class="bib-tl-item">
-                    <div class="bib-tl-year">9 abril 2001</div>
-                    <div class="bib-tl-title">Aprobación legislativa</div>
-                    <div class="bib-tl-text">El Lic. Everardo Rodríguez, diputado PUSC, presenta y logra la aprobación del proyecto de donación de los inmuebles ante la Asamblea Legislativa. Publicado en La Gaceta.</div>
+                    <div class="bib-tl-year">April 9, 2001</div>
+                    <div class="bib-tl-title">Legislative approval</div>
+                    <div class="bib-tl-text">Everardo Rodríguez, PUSC deputy, presents and secures approval of the property donation project before the Legislative Assembly. Published in La Gaceta.</div>
                 </div>
                 <div class="bib-tl-item">
-                    <div class="bib-tl-year">30 marzo 2004</div>
-                    <div class="bib-tl-title">Traspaso oficial</div>
-                    <div class="bib-tl-text">El Alcalde <strong>Carlos Soto Alpízar</strong> formaliza el traspaso de los inmuebles al Ministerio de Cultura y Juventud ante el Registro Nacional mediante escritura pública.</div>
+                    <div class="bib-tl-year">March 30, 2004</div>
+                    <div class="bib-tl-title">Official transfer</div>
+                    <div class="bib-tl-text">Mayor <strong>Carlos Soto Alpízar</strong> formalizes the transfer of the properties to the Ministry of Culture and Youth before the National Registry through a public deed.</div>
                 </div>
                 <div class="bib-tl-item">
                     <div class="bib-tl-year">2009</div>
-                    <div class="bib-tl-title">Diseño del edificio</div>
-                    <div class="bib-tl-text">Estudiantes de la <strong>Escuela de Arquitectura de la UCR</strong>, en calidad de trabajo comunal, elaboran los planos bajo la supervisión de la Arq. Viviana Vives (SINABI).</div>
+                    <div class="bib-tl-title">Building design</div>
+                    <div class="bib-tl-text">Students from the <strong>School of Architecture of the UCR</strong>, as community work, produce the plans under the supervision of Arch. Viviana Vives (SINABI).</div>
                 </div>
             </div>
 
             <div>
                 <div class="bib-highlight" style="margin-bottom:1.5rem">
-                    <h3>📋 Gestión del Lote Municipal</h3>
-                    <p>El vecino <strong>Francisco Murillo M.</strong> del Barrio El Carmen lideró la recolección de firmas de los vecinos para avalar la donación de dos bienes inmuebles de la Urbanización BoniMur. El proyecto fue tramitado mediante la <strong>Ley 8099 del 22 de marzo de 2001</strong> y el <strong>Acuerdo Municipal No. 19</strong>, sesión ordinaria No. 10 del 3 de julio de 2003.</p>
+                    <h3>📋 Managing the Municipal Lot</h3>
+                    <p>Neighbor <strong>Francisco Murillo M.</strong> of El Carmen neighborhood led the collection of residents' signatures to endorse the donation of two properties in the BoniMur development. The project was processed through <strong>Law 8099 of March 22, 2001</strong> and <strong>Municipal Agreement No. 19</strong>, ordinary session No. 10 of July 3, 2003.</p>
                 </div>
                 <div class="bib-highlight" style="border-left-color: var(--gold); border-color: rgba(200,149,42,0.25)">
-                    <h3 style="color:var(--gold)">✏️ Pro-Construcción</h3>
-                    <p>En <strong>2007</strong>, la Directora <strong>Olga Martha Chaves Chaves</strong> elaboró el proyecto de pro-construcción que impulsaría la materialización del nuevo edificio.</p>
-                    <p style="margin-top:.75rem">La constructora encargada de la ejecución fue la <strong>Industria Constructora del Poás S.A.</strong>, bajo la responsabilidad del <strong>Ing. Henry Rodríguez</strong>.</p>
+                    <h3 style="color:var(--gold)">✏️ Pro-Construction</h3>
+                    <p>In <strong>2007</strong>, Director <strong>Olga Martha Chaves Chaves</strong> prepared the pro-construction project that would drive the new building forward.</p>
+                    <p style="margin-top:.75rem">The company in charge of the work was <strong>Industria Constructora del Poás S.A.</strong>, under the responsibility of <strong>Eng. Henry Rodríguez</strong>.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- SECCIÓN 3: NUEVO EDIFICIO -->
+<!-- SECTION 3: NEW BUILDING -->
 <section class="bib-section" id="edificio" style="background:linear-gradient(180deg, #0a0f1e 0%, #080c18 100%)">
     <div class="bib-container">
         <div class="bib-section-header">
-            <div class="bib-chapter-label">Capítulo 3</div>
-            <h2 class="bib-section-title">El Nuevo Edificio</h2>
+            <div class="bib-chapter-label">Chapter 3</div>
+            <h2 class="bib-section-title">The New Building</h2>
             <div class="bib-divider"></div>
             <p style="color:#9db0cc;margin-top:1.2rem;max-width:600px;margin-inline:auto;line-height:1.7">
-                El sueño de una sede propia se hizo realidad el <strong style="color:#fff">9 de mayo de 2012</strong>, cuando se inauguró el moderno edificio de <strong style="color:var(--gold)">660 m²</strong> con una inversión de <strong style="color:var(--gold)">₡165.000.000</strong>.
+                The dream of an own headquarters came true on <strong style="color:#fff">May 9, 2012</strong>, when the modern <strong style="color:var(--gold)">660 m²</strong> building was inaugurated with an investment of <strong style="color:var(--gold)">₡165,000,000</strong>.
             </p>
         </div>
 
         <div class="bib-two-col" style="margin-bottom:3.5rem">
             <div class="bib-text">
-                <h3>Construcción e Inauguración</h3>
-                <p>En <strong>2011</strong> se inició la construcción del edificio de la Biblioteca Pública de Poás con presupuesto estatal, durante la administración de la Presidenta <strong>Lic. Laura Chinchilla Miranda</strong>, con el apoyo del Ministro de Cultura y Juventud <strong>Manuel Obregón López</strong> y la gestión fundamental de la Directora del SINABI, <strong>Lic. Olga Rodríguez Chaves</strong>.</p>
-                <p>El <strong>9 de mayo de 2012</strong>, la nueva sede fue inaugurada en una emotiva ceremonia con presencia de autoridades nacionales, municipales, instituciones educativas, familiares del Prof. Eliécer Murillo Esquivel y la comunidad en general.</p>
-                <p>En ese mismo año, mediante <strong>Acuerdo No. 7057-10-2012</strong> de la Comisión de Cultura de Poás —presidida por la señora <strong>Yolanda Alvarado Chaves</strong>— se oficializó el nombre completo: <em>"Biblioteca Pública Municipal Prof. Eliécer Murillo Esquivel"</em>, honrando así la propuesta original de 1971.</p>
+                <h3>Construction and Inauguration</h3>
+                <p>In <strong>2011</strong>, construction of the Poás Public Library building began with state funding, during the administration of President <strong>Laura Chinchilla Miranda</strong>, with the support of the Minister of Culture and Youth <strong>Manuel Obregón López</strong> and the essential efforts of the SINABI Director, <strong>Olga Rodríguez Chaves</strong>.</p>
+                <p>On <strong>May 9, 2012</strong>, the new headquarters was inaugurated in a moving ceremony attended by national and municipal authorities, educational institutions, relatives of Prof. Eliécer Murillo Esquivel and the community at large.</p>
+                <p>That same year, through <strong>Agreement No. 7057-10-2012</strong> of the Poás Culture Commission —chaired by <strong>Yolanda Alvarado Chaves</strong>— the full name was made official: <em>"Municipal Public Library Prof. Eliécer Murillo Esquivel"</em>, thereby honoring the original 1971 proposal.</p>
             </div>
             <div class="bib-text">
-                <h3>Presentes en la Inauguración</h3>
+                <h3>Present at the Inauguration</h3>
                 <ul>
-                    <li><strong>Manuel Obregón López</strong> — Ministro de Cultura y Juventud</li>
-                    <li><strong>Olga Rodríguez Chaves</strong> — Directora del SINABI</li>
-                    <li><strong>José Joaquín Brenes Vega</strong> — Alcalde Municipal de Poás</li>
-                    <li><strong>Sofía Murillo M.</strong> — Vicealcaldesa</li>
-                    <li><strong>Olga Martha Chaves Chaves</strong> — Directora de la Biblioteca</li>
-                    <li><strong>Lidia Murillo Montero</strong> — Asistente de Dirección</li>
-                    <li><strong>Pbro. Carlos Bolaños</strong></li>
-                    <li>Familiares del Prof. Eliécer Murillo Esquivel</li>
-                    <li>Representantes de colegios, escuelas e instituciones del cantón</li>
+                    <li><strong>Manuel Obregón López</strong> — Minister of Culture and Youth</li>
+                    <li><strong>Olga Rodríguez Chaves</strong> — SINABI Director</li>
+                    <li><strong>José Joaquín Brenes Vega</strong> — Municipal Mayor of Poás</li>
+                    <li><strong>Sofía Murillo M.</strong> — Deputy Mayor</li>
+                    <li><strong>Olga Martha Chaves Chaves</strong> — Library Director</li>
+                    <li><strong>Lidia Murillo Montero</strong> — Director's Assistant</li>
+                    <li><strong>Fr. Carlos Bolaños</strong></li>
+                    <li>Relatives of Prof. Eliécer Murillo Esquivel</li>
+                    <li>Representatives of high schools, schools and institutions of the canton</li>
                 </ul>
             </div>
         </div>
 
         <div class="bib-section-header" style="margin-bottom:2rem">
-            <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.4rem">Instalaciones del Nuevo Edificio</h3>
+            <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.4rem">Facilities of the New Building</h3>
         </div>
         <div class="bib-features-grid">
             <div class="bib-feature">
                 <div class="bib-feature-icon">📚</div>
-                <div class="bib-feature-text"><strong>Sala Bibliográfica</strong>Amplia sala principal donde se encuentra el acervo bibliográfico del cantón.</div>
+                <div class="bib-feature-text"><strong>Book Hall</strong>A large main hall housing the canton's book collection.</div>
             </div>
             <div class="bib-feature">
                 <div class="bib-feature-icon">🔬</div>
-                <div class="bib-feature-text"><strong>Salas de Estudio e Investigación</strong>Espacios dedicados para consulta y trabajo académico individual.</div>
+                <div class="bib-feature-text"><strong>Study and Research Rooms</strong>Spaces dedicated to consultation and individual academic work.</div>
             </div>
             <div class="bib-feature">
                 <div class="bib-feature-icon">👶</div>
-                <div class="bib-feature-text"><strong>Sala Infantil</strong>Espacio diseñado especialmente para niños y niñas del cantón.</div>
+                <div class="bib-feature-text"><strong>Children's Room</strong>A space designed especially for the canton's children.</div>
             </div>
             <div class="bib-feature">
                 <div class="bib-feature-icon">💻</div>
-                <div class="bib-feature-text"><strong>Dos Laboratorios de Cómputo</strong>Con 12 computadoras en total para capacitación y acceso digital de la comunidad.</div>
+                <div class="bib-feature-text"><strong>Two Computer Labs</strong>With 12 computers in total for training and digital access for the community.</div>
             </div>
             <div class="bib-feature">
                 <div class="bib-feature-icon">🎭</div>
-                <div class="bib-feature-text"><strong>Mezzanine Multifuncional</strong>Para talleres, cursos, conversatorios, charlas y exposiciones culturales.</div>
+                <div class="bib-feature-text"><strong>Multipurpose Mezzanine</strong>For workshops, courses, discussions, talks and cultural exhibitions.</div>
             </div>
             <div class="bib-feature">
                 <div class="bib-feature-icon">🌿</div>
-                <div class="bib-feature-text"><strong>Terracita y Zonas Verdes</strong>Espacios al aire libre que complementan el ambiente cultural del edificio.</div>
+                <div class="bib-feature-text"><strong>Terrace and Green Areas</strong>Outdoor spaces that complement the building's cultural atmosphere.</div>
             </div>
             <div class="bib-feature">
                 <div class="bib-feature-icon">🍽️</div>
-                <div class="bib-feature-text"><strong>Cocina-Comedor</strong>Para el servicio del personal y apoyo en actividades institucionales.</div>
+                <div class="bib-feature-text"><strong>Kitchen-Dining Area</strong>For staff service and support during institutional activities.</div>
             </div>
             <div class="bib-feature">
                 <div class="bib-feature-icon">♿</div>
-                <div class="bib-feature-text"><strong>Accesibilidad</strong>El edificio cumple con los requerimientos de la <strong>Ley 7600</strong> de igualdad de oportunidades para personas con discapacidad.</div>
+                <div class="bib-feature-text"><strong>Accessibility</strong>The building complies with the requirements of <strong>Law 7600</strong> on equal opportunities for persons with disabilities.</div>
             </div>
             <div class="bib-feature">
                 <div class="bib-feature-icon">🏛️</div>
-                <div class="bib-feature-text"><strong>Áreas de Oficinas</strong>Espacios administrativos para el personal directivo y de apoyo de la biblioteca.</div>
+                <div class="bib-feature-text"><strong>Office Areas</strong>Administrative spaces for the library's management and support staff.</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- SECCIÓN 4: PERSONAS CLAVE -->
+<!-- SECTION 4: KEY PEOPLE -->
 <section class="bib-section" id="personas">
     <div class="bib-container">
         <div class="bib-section-header">
-            <div class="bib-chapter-label">Capítulo 4</div>
-            <h2 class="bib-section-title">Personas que Construyeron este Legado</h2>
+            <div class="bib-chapter-label">Chapter 4</div>
+            <h2 class="bib-section-title">The People Who Built this Legacy</h2>
             <div class="bib-divider"></div>
             <p style="color:#9db0cc;margin-top:1.2rem;max-width:580px;margin-inline:auto;line-height:1.7">
-                La historia de la biblioteca es, ante todo, la historia de las personas que creyeron en ella.
+                The history of the library is, above all, the history of the people who believed in it.
             </p>
         </div>
 
@@ -604,96 +607,96 @@
             <div class="bib-person-card">
                 <div class="bib-person-icon">📖</div>
                 <div class="bib-person-name">Prof. Eliécer Murillo Esquivel</div>
-                <div class="bib-person-role">Ilustre hijo de Poás · Epónimo de la biblioteca</div>
+                <div class="bib-person-role">Distinguished son of Poás · Library's namesake</div>
             </div>
             <div class="bib-person-card">
                 <div class="bib-person-icon">👩‍💼</div>
                 <div class="bib-person-name">Olga Martha Chaves Chaves</div>
-                <div class="bib-person-role">Directora, 1998–2018 · Autora de la reseña histórica</div>
+                <div class="bib-person-role">Director, 1998–2018 · Author of the historical account</div>
             </div>
             <div class="bib-person-card">
                 <div class="bib-person-icon">👩‍💼</div>
                 <div class="bib-person-name">Lidia Ma. Murillo Montero</div>
-                <div class="bib-person-role">Asistente de Dirección · Guardiana de la biblioteca en tiempos difíciles</div>
+                <div class="bib-person-role">Director's Assistant · Guardian of the library in hard times</div>
             </div>
             <div class="bib-person-card">
                 <div class="bib-person-icon">🎓</div>
                 <div class="bib-person-name">Prof. Gerardo Vega Gómez</div>
-                <div class="bib-person-role">Primer bibliotecario remunerado · 10 años de servicio</div>
+                <div class="bib-person-role">First paid librarian · 10 years of service</div>
             </div>
             <div class="bib-person-card">
                 <div class="bib-person-icon">🤝</div>
                 <div class="bib-person-name">Pedro Rojas Castro</div>
-                <div class="bib-person-role">Movimiento Juvenil Poaseño · Cofundador</div>
+                <div class="bib-person-role">Poás Youth Movement · Co-founder</div>
             </div>
             <div class="bib-person-card">
                 <div class="bib-person-icon">🤝</div>
                 <div class="bib-person-name">Mario Murillo Chaves</div>
-                <div class="bib-person-role">Movimiento Juvenil Poaseño · Cofundador</div>
+                <div class="bib-person-role">Poás Youth Movement · Co-founder</div>
             </div>
             <div class="bib-person-card">
                 <div class="bib-person-icon">🏛️</div>
                 <div class="bib-person-name">Víctor Manuel Rodríguez Salazar</div>
-                <div class="bib-person-role">Alcalde de Poás 1999–2000 · Gestionó la donación del lote</div>
+                <div class="bib-person-role">Mayor of Poás 1999–2000 · Secured the lot donation</div>
             </div>
             <div class="bib-person-card">
                 <div class="bib-person-icon">📐</div>
-                <div class="bib-person-name">Lic. Olga Rodríguez Chaves</div>
-                <div class="bib-person-role">Directora SINABI 2010–2014 · Impulsó la construcción del edificio</div>
+                <div class="bib-person-name">Olga Rodríguez Chaves</div>
+                <div class="bib-person-role">SINABI Director 2010–2014 · Drove the building's construction</div>
             </div>
             <div class="bib-person-card">
                 <div class="bib-person-icon">🏗️</div>
-                <div class="bib-person-name">Ing. Henry Rodríguez</div>
-                <div class="bib-person-role">Industria Constructora del Poás S.A. · Constructor del edificio</div>
+                <div class="bib-person-name">Eng. Henry Rodríguez</div>
+                <div class="bib-person-role">Industria Constructora del Poás S.A. · Builder</div>
             </div>
         </div>
 
         <div style="margin-top:3rem">
-            <p style="color:#9db0cc;font-size:0.9rem;text-align:center;margin-bottom:1.5rem;opacity:0.7">Otros bibliotecarios que sirvieron a la comunidad</p>
+            <p style="color:#9db0cc;font-size:0.9rem;text-align:center;margin-bottom:1.5rem;opacity:0.7">Other librarians who served the community</p>
             <div class="bib-people-grid">
                 <div class="bib-person-card">
                     <div class="bib-person-name">Rosibel Fonseca</div>
-                    <div class="bib-person-role">Bibliotecaria</div>
+                    <div class="bib-person-role">Librarian</div>
                 </div>
                 <div class="bib-person-card">
                     <div class="bib-person-name">Ma. Soledad Vargas Monge</div>
-                    <div class="bib-person-role">Bibliotecaria</div>
+                    <div class="bib-person-role">Librarian</div>
                 </div>
                 <div class="bib-person-card">
                     <div class="bib-person-name">Emilia Rodríguez Meléndez</div>
-                    <div class="bib-person-role">Bibliotecaria</div>
+                    <div class="bib-person-role">Librarian</div>
                 </div>
                 <div class="bib-person-card">
                     <div class="bib-person-name">Alicia Murillo Solís</div>
-                    <div class="bib-person-role">Bibliotecaria</div>
+                    <div class="bib-person-role">Librarian</div>
                 </div>
                 <div class="bib-person-card">
                     <div class="bib-person-name">María de los Ángeles Chaves Ugalde</div>
-                    <div class="bib-person-role">Bibliotecaria</div>
+                    <div class="bib-person-role">Librarian</div>
                 </div>
                 <div class="bib-person-card">
                     <div class="bib-person-name">Lidieth Vega Castro</div>
-                    <div class="bib-person-role">Bibliotecaria</div>
+                    <div class="bib-person-role">Librarian</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- CITA FINAL -->
+<!-- CLOSING QUOTE -->
 <div class="bib-quote">
     <blockquote>
-        "La fe y la esperanza nunca se perdieron. Sueño hecho realidad. Gracias a Dios por tantas bendiciones."
-        <cite>— Olga Martha Chaves Chaves, Directora · Reseña Histórica, 2018</cite>
+        "Faith and hope were never lost. A dream come true. Thank God for so many blessings."
+        <cite>— Olga Martha Chaves Chaves, Director · Historical Account, 2018</cite>
     </blockquote>
 </div>
 
 <!-- FOOTER -->
 <footer class="bib-footer">
-    <p>© 2026 · Reseña histórica recopilada por <strong>Olga Martha Chaves Chaves</strong>, Directora de la Biblioteca Pública del Cantón de Poás, 1998–2018</p>
+    <p>© 2026 · Historical account compiled by <strong>Olga Martha Chaves Chaves</strong>, Director of the Public Library of the Poás Canton, 1998–2018</p>
     <p style="margin-top:0.4rem">
-        <a href="historia-canton.html">Historia del Cantón</a> ·
-        <a href="index.html">Poás Agua y Fuego</a>
+        <a href="historia-canton-en.html">Canton History</a> ·
+        <a href="index-en.html">Poás Agua y Fuego</a>
     </p>
 </footer>
 
