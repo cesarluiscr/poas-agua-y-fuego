@@ -405,6 +405,32 @@
     document.body.appendChild(a);
   }
 
+  /* ================================================================= */
+  /*  6) PWA: manifest, tema, ícono y service worker                   */
+  /* ================================================================= */
+  function buildPWA() {
+    var head = document.head;
+    if (!head) return;
+    function ensure(sel, make) { if (!document.querySelector(sel)) head.appendChild(make()); }
+    ensure('link[rel="manifest"]', function () {
+      var l = document.createElement('link'); l.rel = 'manifest'; l.href = 'manifest.webmanifest'; return l;
+    });
+    ensure('meta[name="theme-color"]', function () {
+      var m = document.createElement('meta'); m.name = 'theme-color'; m.content = '#0E5E3F'; return m;
+    });
+    ensure('link[rel="apple-touch-icon"]', function () {
+      var l = document.createElement('link'); l.rel = 'apple-touch-icon'; l.href = 'img/apple-touch-icon.png'; return l;
+    });
+    ensure('meta[name="apple-mobile-web-app-capable"]', function () {
+      var m = document.createElement('meta'); m.name = 'apple-mobile-web-app-capable'; m.content = 'yes'; return m;
+    });
+    if ('serviceWorker' in navigator && location.protocol === 'https:') {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('sw.js').catch(function () {});
+      });
+    }
+  }
+
   /* ----------------------------------------------------------------- */
   /*  Inicialización                                                    */
   /* ----------------------------------------------------------------- */
@@ -414,6 +440,7 @@
     buildMenuHint();
     buildBackButton();
     buildWhatsAppButton();
+    buildPWA();
     if (window.MutationObserver) {
       var mo = new MutationObserver(function (muts) {
         for (var i = 0; i < muts.length; i++) {

@@ -1,0 +1,17 @@
+{
+  "name": "Poás Agua y Fuego",
+  "short_name": "Poás A&F",
+  "description": "Plataforma comunitaria del cantón de Poás, Alajuela, Costa Rica: turismo, patrimonio hídrico, historia y datos del cantón.",
+  "lang": "es",
+  "start_url": "index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#070d18",
+  "theme_color": "#0E5E3F",
+  "icons": [
+    { "src": "img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
