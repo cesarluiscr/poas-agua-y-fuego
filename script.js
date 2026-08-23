@@ -440,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
             descripcion: "Ebanistería y muebles a la medida: muebles de cocina, puertas, camas, closets, estanterías y muebles de baño. También restauración de muebles. Envíos a todo el país.",
             descripcion_en: "Custom cabinetry and made-to-measure furniture: kitchen furniture, doors, beds, closets, shelving and bathroom furniture. Furniture restoration too. Nationwide shipping.",
             whatsapp: "50661958089",
-            telefono: "89538482",
+            whatsapp2: "50689538482",
             direccion: "Cantón de Poás, Alajuela · Envíos a todo el país"
         }
     ];
@@ -528,6 +528,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 : `<span class="negocio-emoji">${emoji}</span>`;
 
             const whatsappUrl = safeWhatsappUrl(negocio.whatsapp);
+            const whatsappUrl2 = safeWhatsappUrl(negocio.whatsapp2);
+            const waLabel = (w) => String(w || '').replace(/^506/, '').replace(/(\d{4})(\d{4})/, '$1-$2');
             const sitioUrl = safeUrl(negocio.sitio);
 
             card.innerHTML = `
@@ -545,10 +547,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${negocio.telefono ? `<a href="tel:+506${escH(negocio.telefono.replace(/(\d{4})(\d{4})/,'$1-$2'))}">📞 ${escH(negocio.telefono.replace(/(\d{4})(\d{4})/,'$1-$2'))}</a>` : ''}
                     ${negocio.correo ? `<a href="mailto:${escH(negocio.correo)}">✉️ ${escH(negocio.correo)}</a>` : ''}
                 </div>
-                ${(whatsappUrl !== '#' || sitioUrl !== '#' || negocio.facebook || negocio.instagram || negocio.tiktok || negocio.waze || negocio.booking) ? `
+                ${(whatsappUrl !== '#' || whatsappUrl2 !== '#' || sitioUrl !== '#' || negocio.facebook || negocio.instagram || negocio.tiktok || negocio.waze || negocio.booking) ? `
                 <div class="negocio-social">
                     ${sitioUrl !== '#' ? `<a href="${sitioUrl}" ${sitioUrl.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="social-btn ver-mas-btn">🌐 ${isEnglish ? 'See more' : 'Ver más'}</a>` : ''}
-                    ${whatsappUrl !== '#' ? `<a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="social-btn wa-btn">💬 WhatsApp</a>` : ''}
+                    ${whatsappUrl !== '#' ? `<a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="social-btn wa-btn">💬 ${whatsappUrl2 !== '#' ? escH(waLabel(negocio.whatsapp)) : 'WhatsApp'}</a>` : ''}
+                    ${whatsappUrl2 !== '#' ? `<a href="${whatsappUrl2}" target="_blank" rel="noopener noreferrer" class="social-btn wa-btn">💬 ${escH(waLabel(negocio.whatsapp2))}</a>` : ''}
                     ${negocio.facebook ? `<a href="${safeUrl(negocio.facebook)}" target="_blank" rel="noopener noreferrer" class="social-btn fb-btn">📘 Facebook</a>` : ''}
                     ${negocio.instagram ? `<a href="${safeUrl(negocio.instagram)}" target="_blank" rel="noopener noreferrer" class="social-btn ig-btn">📸 Instagram</a>` : ''}
                     ${negocio.tiktok ? `<a href="${safeUrl(negocio.tiktok)}" target="_blank" rel="noopener noreferrer" class="social-btn tt-btn">🎵 TikTok</a>` : ''}
