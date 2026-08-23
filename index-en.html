@@ -920,44 +920,6 @@
         </div>
     </footer>
 
-    <!-- ── Emergency FAB ── -->
-    <button class="emer-fab" id="emer-fab" aria-label="Emergency numbers">
-        🚨
-        <span class="emer-fab-tooltip">Emergencies</span>
-    </button>
-
-    <div class="emer-modal-overlay" id="emer-modal-overlay" role="dialog" aria-modal="true" aria-label="Emergency numbers in Costa Rica">
-        <div class="emer-modal">
-            <div class="emer-modal-header">
-                <span class="emer-modal-title">🚨 Emergency Numbers</span>
-                <button class="emer-modal-close" id="emer-modal-close" aria-label="Close">×</button>
-            </div>
-            <div class="emer-contact-list">
-                <a href="tel:911" class="emer-contact-item emer-911">
-                    <span class="emer-contact-num">911</span>
-                    <span class="emer-contact-name">General Emergencies</span>
-                </a>
-                <a href="tel:1118" class="emer-contact-item">
-                    <span class="emer-contact-num">1118</span>
-                    <span class="emer-contact-name">Fire Department</span>
-                </a>
-                <a href="tel:1176" class="emer-contact-item">
-                    <span class="emer-contact-num">1176</span>
-                    <span class="emer-contact-name">National Police</span>
-                </a>
-                <a href="tel:2461-2210" class="emer-contact-item">
-                    <span class="emer-contact-num">2461-2210</span>
-                    <span class="emer-contact-name">OIJ Alajuela</span>
-                </a>
-                <a href="tel:24485000" class="emer-contact-item">
-                    <span class="emer-contact-num">2448-5000</span>
-                    <span class="emer-contact-name">EBAIS San Pedro de Poás</span>
-                </a>
-            </div>
-            <p class="emer-modal-note">Tap a number to call directly · Costa Rica</p>
-        </div>
-    </div>
-
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
@@ -1031,17 +993,6 @@ const NIVEL_ALERTA_VOLCAN = 'verde';
     setTimeout(() => map.invalidateSize(), 300);
     const obs = new IntersectionObserver(entries => { if (entries[0].isIntersecting) { map.invalidateSize(); obs.disconnect(); } }, { threshold: 0.1 });
     obs.observe(document.getElementById('mapa-canton'));
-})();
-
-(function initEmerFab() {
-    const fab = document.getElementById('emer-fab');
-    const overlay = document.getElementById('emer-modal-overlay');
-    const closeBtn = document.getElementById('emer-modal-close');
-    if (!fab || !overlay) return;
-    fab.addEventListener('click', () => overlay.classList.add('open'));
-    closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
-    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') overlay.classList.remove('open'); });
 })();
     </script>
 

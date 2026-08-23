@@ -1280,45 +1280,6 @@
     }
     document.addEventListener('DOMContentLoaded', renderAnuncioBanner);
     </script>
-    <!-- ── Botón Flotante de Emergencias ── -->
-    <button class="emer-fab" id="emer-fab" aria-label="Números de emergencia">
-        🚨
-        <span class="emer-fab-tooltip">Emergencias</span>
-    </button>
-
-    <!-- Modal de Emergencias -->
-    <div class="emer-modal-overlay" id="emer-modal-overlay" role="dialog" aria-modal="true" aria-label="Números de emergencia en Costa Rica">
-        <div class="emer-modal">
-            <div class="emer-modal-header">
-                <span class="emer-modal-title">🚨 Números de Emergencia</span>
-                <button class="emer-modal-close" id="emer-modal-close" aria-label="Cerrar">×</button>
-            </div>
-            <div class="emer-contact-list">
-                <a href="tel:911" class="emer-contact-item emer-911">
-                    <span class="emer-contact-num">911</span>
-                    <span class="emer-contact-name">Emergencias Generales</span>
-                </a>
-                <a href="tel:1118" class="emer-contact-item">
-                    <span class="emer-contact-num">1118</span>
-                    <span class="emer-contact-name">Bomberos Costa Rica</span>
-                </a>
-                <a href="tel:1176" class="emer-contact-item">
-                    <span class="emer-contact-num">1176</span>
-                    <span class="emer-contact-name">Fuerza Pública</span>
-                </a>
-                <a href="tel:2461-2210" class="emer-contact-item">
-                    <span class="emer-contact-num">2461-2210</span>
-                    <span class="emer-contact-name">OIJ Alajuela</span>
-                </a>
-                <a href="tel:24485000" class="emer-contact-item">
-                    <span class="emer-contact-num">2448-5000</span>
-                    <span class="emer-contact-name">EBAIS San Pedro de Poás</span>
-                </a>
-            </div>
-            <p class="emer-modal-note">Presioná el número para llamar directamente · Costa Rica</p>
-        </div>
-    </div>
-
     <!-- ── Leaflet JS ── -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -1446,25 +1407,6 @@
             }
         }, { threshold: 0.1 });
         obs.observe(document.getElementById('mapa-canton'));
-    })();
-
-    /* ════════════════════════════════════════════════
-       4. Botón Flotante de Emergencias
-       ════════════════════════════════════════════════ */
-    (function initEmerFab() {
-        const fab     = document.getElementById('emer-fab');
-        const overlay = document.getElementById('emer-modal-overlay');
-        const closeBtn= document.getElementById('emer-modal-close');
-        if (!fab || !overlay) return;
-
-        fab.addEventListener('click', () => overlay.classList.add('open'));
-        closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
-        overlay.addEventListener('click', e => {
-            if (e.target === overlay) overlay.classList.remove('open');
-        });
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') overlay.classList.remove('open');
-        });
     })();
 
     (function initChatComunitario() {
