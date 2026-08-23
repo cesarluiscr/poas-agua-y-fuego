@@ -441,7 +441,9 @@ document.addEventListener('DOMContentLoaded', () => {
             descripcion_en: "Custom cabinetry and made-to-measure furniture: kitchen furniture, doors, beds, closets, shelving and bathroom furniture. Furniture restoration too. Nationwide shipping.",
             whatsapp: "50661958089",
             whatsapp2: "50689538482",
-            direccion: "Cantón de Poás, Alajuela · Envíos a todo el país"
+            direccion: "San Pedro de Poás, Alajuela · Envíos a todo el país",
+            logo: "img/muebles_avila_logo.jpg",
+            imagenes: ["img/muebles_avila_1.jpg", "img/muebles_avila_2.jpg", "img/muebles_avila_3.jpg", "img/muebles_avila_4.jpg"]
         }
     ];
 
