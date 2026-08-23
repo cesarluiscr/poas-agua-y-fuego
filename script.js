@@ -451,7 +451,15 @@ document.addEventListener('DOMContentLoaded', () => {
             direccion: "Del Cementerio de San Pedro, 100 m norte y 200 m oeste · San Pedro de Poás, Alajuela · Envíos a todo el país",
             logo: "img/muebles_avila_logo.jpg",
             bannerAncho: true,
-            imagenes: ["img/muebles_avila_1.jpg", "img/muebles_avila_2.jpg", "img/muebles_avila_3.jpg", "img/muebles_avila_4.jpg"]
+            galeriaLabel: "Ver galería de trabajos realizados",
+            galeriaLabel_en: "View gallery of completed works",
+            imagenes: [
+                "img/muebles_avila_1.jpg", "img/muebles_avila_2.jpg", "img/muebles_avila_3.jpg",
+                "img/muebles_avila_4.jpg", "img/muebles_avila_5.jpg", "img/muebles_avila_6.jpg",
+                "img/muebles_avila_7.jpg", "img/muebles_avila_8.jpg", "img/muebles_avila_9.jpg",
+                "img/muebles_avila_10.jpg", "img/muebles_avila_11.jpg", "img/muebles_avila_12.jpg",
+                "img/muebles_avila_13.jpg"
+            ]
         }
     ];
 
@@ -542,6 +550,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const waLabel = (w) => String(w || '').replace(/^506/, '').replace(/(\d{4})(\d{4})/, '$1-$2');
             const sitioUrl = safeUrl(negocio.sitio);
 
+            const galeriaLabel = isEnglish
+                ? (negocio.galeriaLabel_en || 'View gallery')
+                : (negocio.galeriaLabel || 'Ver galería');
+            const galeriaBtnHTML = (negocio.galeriaLabel && safeImages.length > 1)
+                ? `<div class="negocio-galeria-cta">
+                        <button type="button" class="negocio-galeria-btn" data-imgs="${escapeHtml(JSON.stringify(safeImages))}" data-index="0">🖼️ ${escH(galeriaLabel)} (${safeImages.length})</button>
+                    </div>`
+                : '';
+
             card.innerHTML = `
                 ${galeriaHTML}
                 <div class="negocio-card-header">
@@ -557,6 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${negocio.telefono ? `<a href="tel:+506${escH(negocio.telefono.replace(/(\d{4})(\d{4})/,'$1-$2'))}">📞 ${escH(negocio.telefono.replace(/(\d{4})(\d{4})/,'$1-$2'))}</a>` : ''}
                     ${negocio.correo ? `<a href="mailto:${escH(negocio.correo)}">✉️ ${escH(negocio.correo)}</a>` : ''}
                 </div>
+                ${galeriaBtnHTML}
                 ${(whatsappUrl !== '#' || whatsappUrl2 !== '#' || sitioUrl !== '#' || negocio.facebook || negocio.instagram || negocio.tiktok || negocio.waze || negocio.booking) ? `
                 <div class="negocio-social">
                     ${sitioUrl !== '#' ? `<a href="${sitioUrl}" ${sitioUrl.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="social-btn ver-mas-btn">🌐 ${isEnglish ? 'See more' : 'Ver más'}</a>` : ''}
@@ -613,11 +631,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.addEventListener('click', function(e) {
-        const img = e.target.closest('.negocio-galeria-img');
-        if (!img) return;
+        const trigger = e.target.closest('.negocio-galeria-img, .negocio-galeria-btn');
+        if (!trigger) return;
         createLightbox();
-        const imgs = JSON.parse(img.dataset.imgs);
-        const index = parseInt(img.dataset.index);
+        const imgs = JSON.parse(trigger.dataset.imgs);
+        const index = parseInt(trigger.dataset.index) || 0;
         document.getElementById('negocio-lightbox')._open(imgs, index);
     });
 

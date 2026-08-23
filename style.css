@@ -4377,3 +4377,17 @@ footer {
 }
 .mobile-nav > a:hover { background: rgba(255,255,255,0.1); color: #fff; }
 .mobile-nav > a:first-of-type { margin-top: 4rem; }
+
+/* ── Botón "Ver galería" en tarjetas de negocio ── */
+.negocio-galeria-cta { margin: 0.1rem 0 0.85rem; }
+.negocio-galeria-btn {
+    width: 100%;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: linear-gradient(90deg, #2BBBAD, #2E8B57);
+    color: #fff; border: none; border-radius: 10px;
+    padding: 11px 16px; font-size: 0.92rem; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(43,187,173,0.25);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.negocio-galeria-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(43,187,173,0.35); }
+.negocio-galeria-btn:active { transform: scale(0.98); }
