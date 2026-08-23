@@ -541,7 +541,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${negocio.facebook ? `<a href="${safeUrl(negocio.facebook)}" target="_blank" rel="noopener noreferrer" class="social-btn fb-btn">📘 Facebook</a>` : ''}
                     ${negocio.instagram ? `<a href="${safeUrl(negocio.instagram)}" target="_blank" rel="noopener noreferrer" class="social-btn ig-btn">📸 Instagram</a>` : ''}
                     ${negocio.tiktok ? `<a href="${safeUrl(negocio.tiktok)}" target="_blank" rel="noopener noreferrer" class="social-btn tt-btn">🎵 TikTok</a>` : ''}
-                    ${negocio.booking ? `<a href="${safeUrl(negocio.booking)}" target="_blank" rel="noopener noreferrer" class="social-btn bk-btn">🏨 ${isEnglish ? 'Book on Booking' : 'Reservar en Booking'}</a>` : ''}
+                    ${negocio.booking ? `<a href="${safeUrl(negocio.booking)}" target="_blank" rel="noopener noreferrer" class="social-btn booking-btn">🏨 ${isEnglish ? 'Book on Booking' : 'Reservar en Booking'}</a>` : ''}
                     ${negocio.waze ? `<a href="${safeUrl(negocio.waze)}" target="_blank" rel="noopener noreferrer" class="social-btn wz-btn">📍 ${isEnglish ? 'Get directions' : 'Cómo llegar'}</a>` : ''}
                 </div>` : ''}
             `;
