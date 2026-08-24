@@ -203,6 +203,20 @@
             if (ubicacion) msg += `Location: ${ubicacion}\n`;
             msg += `\nDescription:\n${desc}`;
 
+            // Record the complaint in the spreadsheet (backend), without blocking the WhatsApp send
+            if (typeof APPS_SCRIPT_URL !== 'undefined' && !APPS_SCRIPT_URL.includes('TU_URL_AQUI')) {
+                fetch(APPS_SCRIPT_URL, {
+                    method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({
+                        tipo: 'queja',
+                        categoria: tipoLabel,
+                        descripcion: desc + (ubicacion ? '\nUbicación: ' + ubicacion : ''),
+                        nombre: nombre,
+                        contacto: contacto
+                    })
+                }).catch(function () {});
+            }
+
             const encoded = encodeURIComponent(msg);
             window.open(`https://wa.me/50687058612?text=${encoded}`, '_blank');
         });

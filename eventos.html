@@ -638,6 +638,11 @@
             eventos.push(nuevo);
             saveEventos();
             renderEventos();
+            // Registrar el evento en la hoja de cálculo (backend) para revisión
+            fetch('https://script.google.com/macros/s/AKfycbyW2o0WW2cHvsuCyTqFQ4JxWUt_8Y2BkY666DvZPMRSo50Ox4shR9sz1P7dbDxPMP2z/exec', {
+                method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify(Object.assign({ tipo: 'evento' }, nuevo))
+            }).catch(function () {});
             document.getElementById('eventoModal').classList.remove('open');
             document.getElementById('eventoForm').reset();
         });
