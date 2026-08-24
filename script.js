@@ -1,5 +1,5 @@
-// v3 // ⬇️ Reemplazá TU_URL_AQUI con la URL de tu Google Apps Script desplegado
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/TU_URL_AQUI/exec';
+// v3 // Backend de formularios: URL del Google Apps Script desplegado (Web App)
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyW2o0WW2cHvsuCyTqFQ4JxWUt_8Y2BkY666DvZPMRSo50Ox4shR9sz1P7dbDxPMP2z/exec';
 
 // Valida que la URL esté configurada antes de usarla
 function isAppsScriptConfigured() {
