@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
+Disallow: /mensajes.html
 
 Sitemap: https://cesarluiscr.github.io/poas-agua-y-fuego/sitemap.xml

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Buzón — Poás Agua y Fuego</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg:#070d18; --card:#0e1b30; --line:rgba(79,195,247,.15); --accent:#4FC3F7; --txt:#dbe6f2; --muted:rgba(255,255,255,.55); }
+        * { box-sizing:border-box; }
+        body { margin:0; font-family:'Inter',sans-serif; background:var(--bg); color:var(--txt); }
+        header { background:radial-gradient(ellipse at 20% 0%,#10345a,#0a1526 75%); padding:1.4rem 1.5rem; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+        header h1 { font-family:'Outfit',sans-serif; font-size:1.3rem; margin:0; }
+        header h1 span { color:var(--accent); }
+        .btn { background:var(--accent); color:#06263a; border:none; font-weight:800; font-size:.85rem; padding:.55rem 1.1rem; border-radius:8px; cursor:pointer; text-decoration:none; display:inline-block; }
+        .btn.sec { background:rgba(255,255,255,.1); color:var(--txt); }
+        main { max-width:1050px; margin:0 auto; padding:1.5rem; }
+        /* Gate */
+        .gate { max-width:380px; margin:5rem auto; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:2rem; text-align:center; }
+        .gate h2 { font-family:'Outfit',sans-serif; margin:.2rem 0 .3rem; }
+        .gate p { color:var(--muted); font-size:.88rem; margin-bottom:1.3rem; }
+        .gate input { width:100%; padding:.75rem 1rem; border-radius:10px; border:1px solid rgba(255,255,255,.15); background:#0a1322; color:#fff; font-size:1rem; margin-bottom:.9rem; }
+        .gate .btn { width:100%; padding:.8rem; }
+        .err { color:#fca5a5; font-size:.85rem; min-height:1.1rem; margin-top:.5rem; }
+        /* Tabs */
+        .tabs { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1.3rem; }
+        .tab { background:var(--card); border:1px solid var(--line); color:var(--muted); padding:.5rem 1rem; border-radius:20px; cursor:pointer; font-weight:700; font-size:.85rem; }
+        .tab.active { background:var(--accent); color:#06263a; border-color:var(--accent); }
+        .meta { color:var(--muted); font-size:.82rem; margin-bottom:.8rem; }
+        .tablewrap { overflow-x:auto; border:1px solid var(--line); border-radius:14px; }
+        table { border-collapse:collapse; width:100%; font-size:.87rem; }
+        th, td { text-align:left; padding:.7rem .9rem; border-bottom:1px solid rgba(255,255,255,.06); vertical-align:top; }
+        th { background:#0a1322; color:var(--accent); font-family:'Outfit',sans-serif; font-weight:700; white-space:nowrap; position:sticky; top:0; }
+        td { color:var(--txt); }
+        tr:hover td { background:rgba(79,195,247,.04); }
+        .empty { text-align:center; color:var(--muted); padding:2.5rem; }
+        .loading { text-align:center; color:var(--muted); padding:2.5rem; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>📥 Buzón · <span>Poás Agua y Fuego</span></h1>
+    <div id="hdr-actions" style="display:none;">
+        <button class="btn sec" id="btnRefresh">↻ Actualizar</button>
+        <button class="btn sec" id="btnLogout">Salir</button>
+    </div>
+</header>
+
+<main>
+    <!-- Gate de token -->
+    <div class="gate" id="gate">
+        <div style="font-size:2rem;">🔒</div>
+        <h2>Acceso al Buzón</h2>
+        <p>Ingresá el token de administrador para ver los mensajes recibidos.</p>
+        <input type="password" id="token" placeholder="Token de administrador" autocomplete="off">
+        <button class="btn" id="btnEnter">Entrar</button>
+        <div class="err" id="gateErr"></div>
+    </div>
+
+    <!-- Panel -->
+    <div id="panel" style="display:none;">
+        <div class="tabs" id="tabs"></div>
+        <div class="meta" id="meta"></div>
+        <div class="tablewrap"><div id="content"></div></div>
+    </div>
+</main>
+
+<script>
+(function () {
+    var API = 'https://script.google.com/macros/s/AKfycbyW2o0WW2cHvsuCyTqFQ4JxWUt_8Y2BkY666DvZPMRSo50Ox4shR9sz1P7dbDxPMP2z/exec';
+    var SHEETS = ['Contacto', 'Quejas', 'Suscriptores', 'Eventos', 'Otros'];
+    var SK = 'poas_buzon_token';
+    var current = 'Quejas';
+
+    var gate = document.getElementById('gate');
+    var panel = document.getElementById('panel');
+    var hdrActions = document.getElementById('hdr-actions');
+
+    function esc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+            return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+    }
+    function token() { return sessionStorage.getItem(SK) || ''; }
+
+    function showPanel() {
+        gate.style.display = 'none';
+        panel.style.display = 'block';
+        hdrActions.style.display = 'flex';
+        buildTabs();
+        load(current);
+    }
+    function showGate(msg) {
+        sessionStorage.removeItem(SK);
+        gate.style.display = 'block';
+        panel.style.display = 'none';
+        hdrActions.style.display = 'none';
+        document.getElementById('gateErr').textContent = msg || '';
+    }
+
+    function buildTabs() {
+        var t = document.getElementById('tabs');
+        t.innerHTML = '';
+        SHEETS.forEach(function (name) {
+            var b = document.createElement('button');
+            b.className = 'tab' + (name === current ? ' active' : '');
+            b.textContent = name;
+            b.onclick = function () { current = name; buildTabs(); load(name); };
+            t.appendChild(b);
+        });
+    }
+
+    function load(sheet) {
+        var content = document.getElementById('content');
+        var meta = document.getElementById('meta');
+        content.innerHTML = '<div class="loading">Cargando…</div>';
+        meta.textContent = '';
+        fetch(API + '?action=list&sheet=' + encodeURIComponent(sheet) + '&token=' + encodeURIComponent(token()))
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+                if (!d.ok) { showGate('Token incorrecto.'); return; }
+                render(d);
+            })
+            .catch(function () {
+                content.innerHTML = '<div class="empty">No se pudo cargar. Verificá tu conexión o el despliegue del Apps Script.</div>';
+            });
+    }
+
+    function render(d) {
+        var content = document.getElementById('content');
+        var meta = document.getElementById('meta');
+        if (!d.rows || d.rows.length === 0) {
+            meta.textContent = d.sheet + ' · 0 registros';
+            content.innerHTML = '<div class="empty">Aún no hay registros en «' + esc(d.sheet) + '».</div>';
+            return;
+        }
+        meta.textContent = d.sheet + ' · ' + d.rows.length + ' registro(s) · más recientes primero';
+        var html = '<table><thead><tr>';
+        d.headers.forEach(function (h) { html += '<th>' + esc(h) + '</th>'; });
+        html += '</tr></thead><tbody>';
+        d.rows.forEach(function (row) {
+            html += '<tr>';
+            for (var i = 0; i < d.headers.length; i++) { html += '<td>' + esc(row[i]) + '</td>'; }
+            html += '</tr>';
+        });
+        html += '</tbody></table>';
+        content.innerHTML = html;
+    }
+
+    document.getElementById('btnEnter').onclick = function () {
+        var v = document.getElementById('token').value.trim();
+        if (!v) { document.getElementById('gateErr').textContent = 'Ingresá el token.'; return; }
+        sessionStorage.setItem(SK, v);
+        showPanel();
+    };
+    document.getElementById('token').addEventListener('keydown', function (e) { if (e.key === 'Enter') document.getElementById('btnEnter').click(); });
+    document.getElementById('btnRefresh').onclick = function () { load(current); };
+    document.getElementById('btnLogout').onclick = function () { showGate(''); };
+
+    if (token()) showPanel(); else showGate('');
+})();
+</script>
+<script src="security.js?v=2"></script>
+</body>
+</html>

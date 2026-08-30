@@ -20,6 +20,9 @@
  * ============================================================
  */
 
+// ⚠️ CAMBIÁ este token por uno privado tuyo. Se usa para leer los datos desde el Buzón del sitio.
+var READ_TOKEN = 'CAMBIA_ESTE_TOKEN_PRIVADO';
+
 // Evita inyección de fórmulas en Sheets.
 function sanitizeForSheet(value) {
   var str = String(value == null ? '' : value).trim();
@@ -95,8 +98,20 @@ function doPost(e) {
   }
 }
 
-// Permite abrir la URL en el navegador para verificar que está viva.
-function doGet() {
+// GET: verificación de vida y lectura autenticada para el Buzón del sitio.
+//   ?action=list&sheet=Quejas&token=TU_TOKEN  → devuelve las filas de esa hoja (más recientes primero).
+function doGet(e) {
+  var p = (e && e.parameter) || {};
+  if (p.action === 'list') {
+    if (p.token !== READ_TOKEN) return json({ ok: false, error: 'No autorizado' });
+    var permitidas = ['Contacto', 'Quejas', 'Suscriptores', 'Eventos', 'Otros'];
+    var name = permitidas.indexOf(p.sheet) !== -1 ? p.sheet : 'Quejas';
+    var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(name);
+    if (!sh || sh.getLastRow() < 1) return json({ ok: true, sheet: name, headers: [], rows: [] });
+    var values = sh.getDataRange().getValues();
+    var headers = values.shift();
+    return json({ ok: true, sheet: name, headers: headers, rows: values.reverse() });
+  }
   return json({ ok: true, service: 'Poás Agua y Fuego – Formularios' });
 }
 

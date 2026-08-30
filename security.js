@@ -272,7 +272,7 @@
                 "font-src 'self' https://fonts.gstatic.com https://unpkg.com https://cdnjs.cloudflare.com",
                 "img-src 'self' data: https: blob:",
                 "media-src 'self' blob:",
-                "connect-src 'self' https://script.google.com https://api.open-meteo.com https://nominatim.openstreetmap.org https://tile.openstreetmap.org",
+                "connect-src 'self' https://script.google.com https://script.googleusercontent.com https://api.open-meteo.com https://nominatim.openstreetmap.org https://tile.openstreetmap.org",
                 "worker-src blob: 'self'",
                 "frame-src 'none'",
                 "frame-ancestors 'none'",
