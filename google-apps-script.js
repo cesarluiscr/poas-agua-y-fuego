@@ -20,8 +20,13 @@
  * ============================================================
  */
 
-// ⚠️ CAMBIÁ este token por uno privado tuyo. Se usa para leer los datos desde el Buzón del sitio.
-var READ_TOKEN = 'CAMBIA_ESTE_TOKEN_PRIVADO';
+// El token de lectura NO se guarda en este archivo: este repositorio es publico.
+// Se configura una sola vez dentro del editor de Apps Script:
+//   Configuracion del proyecto -> Propiedades del script -> Agregar propiedad
+//   Nombre: READ_TOKEN     Valor: (tu token privado)
+function getReadToken() {
+  return PropertiesService.getScriptProperties().getProperty('READ_TOKEN') || '';
+}
 
 // Evita inyección de fórmulas en Sheets.
 function sanitizeForSheet(value) {
@@ -103,7 +108,11 @@ function doPost(e) {
 function doGet(e) {
   var p = (e && e.parameter) || {};
   if (p.action === 'list') {
-    if (p.token !== READ_TOKEN) return json({ ok: false, error: 'No autorizado' });
+    var expected = getReadToken();
+    // Sin READ_TOKEN configurado no se expone nada, y nunca se acepta un token vacio.
+    if (!expected || !p.token || p.token !== expected) {
+      return json({ ok: false, error: 'No autorizado' });
+    }
     var permitidas = ['Contacto', 'Quejas', 'Suscriptores', 'Eventos', 'Otros'];
     var name = permitidas.indexOf(p.sheet) !== -1 ? p.sheet : 'Quejas';
     var sh = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(name);
