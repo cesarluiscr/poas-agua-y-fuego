@@ -261,8 +261,15 @@
     /* ══════════════════════════════════════════
        11. META TAGS DE SEGURIDAD (CSP, Referrer)
     ══════════════════════════════════════════ */
+    /* La CSP REAL vive como <meta> estatico en el <head> de cada pagina: los
+       navegadores IGNORAN toda meta CSP insertada por JavaScript despues del
+       parseo, asi que este bloque nunca fue efectivo. Se conserva solo como
+       aviso en consola si alguna pagina quedara sin la meta estatica.
+       Nota: frame-ancestors no funciona via <meta> (requiere header HTTP);
+       el anti-clickjacking real es preventClickjacking() mas arriba. */
     function enforceSecurityMeta() {
         if (!document.querySelector('meta[http-equiv="Content-Security-Policy"]')) {
+            console.warn('[seguridad] Falta la meta CSP estatica en esta pagina.');
             var csp = document.createElement('meta');
             csp.httpEquiv = 'Content-Security-Policy';
             csp.content = [

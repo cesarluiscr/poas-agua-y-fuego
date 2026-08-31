@@ -527,22 +527,22 @@ document.addEventListener('DOMContentLoaded', () => {
             let galeriaHTML = '';
             if (tieneBannerLogo) {
                 galeriaHTML = `<div class="negocio-logo-banner">
-                    <img src="${safeLogo}" alt="Logo ${escapeHtml(negocio.nombre)}" class="negocio-logo-banner-img">
+                    <img src="${escH(safeLogo)}" alt="Logo ${escapeHtml(negocio.nombre)}" class="negocio-logo-banner-img">
                 </div>`;
             } else if (tieneGaleria) {
                 if (negocio.bannerAncho) {
                     galeriaHTML = `<div class="negocio-banner-ancho">
-                        <img src="${safeImages[0]}" alt="${escapeHtml(negocio.nombre)}" loading="lazy" class="negocio-galeria-img negocio-banner-img" data-imgs="${escapeHtml(JSON.stringify(safeImages))}" data-index="0">
+                        <img src="${escH(safeImages[0])}" alt="${escapeHtml(negocio.nombre)}" loading="lazy" class="negocio-galeria-img negocio-banner-img" data-imgs="${escapeHtml(JSON.stringify(safeImages))}" data-index="0">
                     </div>`;
                 } else {
                     galeriaHTML = `<div class="negocio-galeria">
-                        ${safeImages.map((img, i) => `<img src="${img}" alt="${escapeHtml(negocio.nombre)} ${i + 1}" loading="lazy" class="negocio-galeria-img" data-imgs="${escapeHtml(JSON.stringify(safeImages))}" data-index="${i}">`).join('')}
+                        ${safeImages.map((img, i) => `<img src="${escH(img)}" alt="${escapeHtml(negocio.nombre)} ${i + 1}" loading="lazy" class="negocio-galeria-img" data-imgs="${escapeHtml(JSON.stringify(safeImages))}" data-index="${i}">`).join('')}
                     </div>`;
                 }
             }
 
             const logoHTML = (!tieneBannerLogo && safeLogo)
-                ? `<img src="${safeLogo}" alt="Logo ${escapeHtml(negocio.nombre)}" class="negocio-logo">`
+                ? `<img src="${escH(safeLogo)}" alt="Logo ${escapeHtml(negocio.nombre)}" class="negocio-logo">`
                 : `<span class="negocio-emoji">${emoji}</span>`;
 
             const whatsappUrl = safeWhatsappUrl(negocio.whatsapp);
@@ -577,14 +577,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${galeriaBtnHTML}
                 ${(whatsappUrl !== '#' || whatsappUrl2 !== '#' || sitioUrl !== '#' || negocio.facebook || negocio.instagram || negocio.tiktok || negocio.waze || negocio.booking) ? `
                 <div class="negocio-social">
-                    ${sitioUrl !== '#' ? `<a href="${sitioUrl}" ${sitioUrl.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="social-btn ver-mas-btn">🌐 ${isEnglish ? 'See more' : 'Ver más'}</a>` : ''}
-                    ${whatsappUrl !== '#' ? `<a href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" class="social-btn wa-btn">💬 ${whatsappUrl2 !== '#' ? escH(waLabel(negocio.whatsapp)) : 'WhatsApp'}</a>` : ''}
-                    ${whatsappUrl2 !== '#' ? `<a href="${whatsappUrl2}" target="_blank" rel="noopener noreferrer" class="social-btn wa-btn">💬 ${escH(waLabel(negocio.whatsapp2))}</a>` : ''}
-                    ${negocio.facebook ? `<a href="${safeUrl(negocio.facebook)}" target="_blank" rel="noopener noreferrer" class="social-btn fb-btn">📘 Facebook</a>` : ''}
-                    ${negocio.instagram ? `<a href="${safeUrl(negocio.instagram)}" target="_blank" rel="noopener noreferrer" class="social-btn ig-btn">📸 Instagram</a>` : ''}
-                    ${negocio.tiktok ? `<a href="${safeUrl(negocio.tiktok)}" target="_blank" rel="noopener noreferrer" class="social-btn tt-btn">🎵 TikTok</a>` : ''}
-                    ${negocio.booking ? `<a href="${safeUrl(negocio.booking)}" target="_blank" rel="noopener noreferrer" class="social-btn booking-btn">🏨 ${isEnglish ? 'Book on Booking' : 'Reservar en Booking'}</a>` : ''}
-                    ${negocio.waze ? `<a href="${safeUrl(negocio.waze)}" target="_blank" rel="noopener noreferrer" class="social-btn wz-btn">📍 ${isEnglish ? 'Get directions' : 'Cómo llegar'}</a>` : ''}
+                    ${sitioUrl !== '#' ? `<a href="${escH(sitioUrl)}" ${sitioUrl.startsWith('http') ? 'target="_blank" rel="noopener noreferrer"' : ''} class="social-btn ver-mas-btn">🌐 ${isEnglish ? 'See more' : 'Ver más'}</a>` : ''}
+                    ${whatsappUrl !== '#' ? `<a href="${escH(whatsappUrl)}" target="_blank" rel="noopener noreferrer" class="social-btn wa-btn">💬 ${whatsappUrl2 !== '#' ? escH(waLabel(negocio.whatsapp)) : 'WhatsApp'}</a>` : ''}
+                    ${whatsappUrl2 !== '#' ? `<a href="${escH(whatsappUrl2)}" target="_blank" rel="noopener noreferrer" class="social-btn wa-btn">💬 ${escH(waLabel(negocio.whatsapp2))}</a>` : ''}
+                    ${negocio.facebook ? `<a href="${escH(safeUrl(negocio.facebook))}" target="_blank" rel="noopener noreferrer" class="social-btn fb-btn">📘 Facebook</a>` : ''}
+                    ${negocio.instagram ? `<a href="${escH(safeUrl(negocio.instagram))}" target="_blank" rel="noopener noreferrer" class="social-btn ig-btn">📸 Instagram</a>` : ''}
+                    ${negocio.tiktok ? `<a href="${escH(safeUrl(negocio.tiktok))}" target="_blank" rel="noopener noreferrer" class="social-btn tt-btn">🎵 TikTok</a>` : ''}
+                    ${negocio.booking ? `<a href="${escH(safeUrl(negocio.booking))}" target="_blank" rel="noopener noreferrer" class="social-btn booking-btn">🏨 ${isEnglish ? 'Book on Booking' : 'Reservar en Booking'}</a>` : ''}
+                    ${negocio.waze ? `<a href="${escH(safeUrl(negocio.waze))}" target="_blank" rel="noopener noreferrer" class="social-btn wz-btn">📍 ${isEnglish ? 'Get directions' : 'Cómo llegar'}</a>` : ''}
                 </div>` : ''}
             `;
             negociosGrid.appendChild(card);
