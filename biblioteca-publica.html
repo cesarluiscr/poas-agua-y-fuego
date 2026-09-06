@@ -355,6 +355,7 @@
 
 <!-- CHAPTERS NAV -->
 <nav class="bib-chapters">
+    <a href="#visitar"     class="bib-chap-btn">🕐 Visitar</a>
     <a href="#origenes"    class="bib-chap-btn">📖 Orígenes</a>
     <a href="#crecimiento" class="bib-chap-btn">🕰️ Crecimiento</a>
     <a href="#edificio"    class="bib-chap-btn">🏛️ Nuevo Edificio</a>
@@ -384,6 +385,93 @@
         <div class="bib-fact-label">Años al servicio<br>de Poás</div>
     </div>
 </div>
+
+<!-- SECCIÓN 0: VISITAR LA BIBLIOTECA
+     ⚠️ PENDIENTE: los campos marcados con la clase .bib-pendiente llevan datos
+     reales que hay que confirmar con la biblioteca (horario, teléfono, correo,
+     dirección y requisitos de asociación). Reemplazá el texto y borrá la clase
+     "bib-pendiente" de cada uno. No publiques esta sección sin completarla. -->
+<style>
+    .bib-info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
+    .bib-info-card {
+        background: rgba(13,18,32,0.7);
+        border: 1px solid rgba(37,99,235,0.15);
+        border-radius: 12px; padding: 1.4rem 1.5rem;
+    }
+    .bib-info-card h3 {
+        font-family: 'Outfit', sans-serif; font-size: .95rem; color: var(--blue-light);
+        margin: 0 0 .7rem; display: flex; align-items: center; gap: .5rem;
+    }
+    .bib-info-card p { margin: 0 0 .45rem; font-size: .93rem; line-height: 1.65; color: #c3d0e2; }
+    .bib-info-card p:last-child { margin-bottom: 0; }
+    .bib-info-card strong { color: #fff; }
+    .bib-pendiente {
+        background: rgba(200,149,42,0.16);
+        border-left: 3px solid #C8952A;
+        padding: .15rem .5rem; border-radius: 3px; color: #e8c98a !important;
+        font-style: italic;
+    }
+    @media (max-width: 720px) { .bib-info-grid { grid-template-columns: 1fr; } }
+</style>
+<section class="bib-section" id="visitar">
+    <div class="bib-container">
+        <div class="bib-section-header">
+            <div class="bib-chapter-label">Información al visitante</div>
+            <h2 class="bib-section-title">Visitá la Biblioteca</h2>
+            <div class="bib-divider"></div>
+        </div>
+
+        <div class="bib-info-grid">
+            <div class="bib-info-card">
+                <h3>🕐 Horario de atención</h3>
+                <p class="bib-pendiente">Pendiente: días y horas de apertura.</p>
+            </div>
+            <div class="bib-info-card">
+                <h3>📍 Ubicación</h3>
+                <p class="bib-pendiente">Pendiente: dirección exacta y punto de referencia.</p>
+                <p>San Pedro de Poás, Alajuela, Costa Rica.</p>
+            </div>
+            <div class="bib-info-card">
+                <h3>📞 Contacto</h3>
+                <p class="bib-pendiente">Pendiente: teléfono y correo electrónico.</p>
+            </div>
+            <div class="bib-info-card">
+                <h3>🎫 Cómo asociarse</h3>
+                <p class="bib-pendiente">Pendiente: requisitos y documentos para sacar el carné.</p>
+            </div>
+        </div>
+
+        <div class="bib-section-header" style="margin:3rem 0 1.5rem">
+            <h3 style="font-family:'Playfair Display',serif;color:#fff;font-size:1.4rem">Servicios para la comunidad</h3>
+        </div>
+        <div class="bib-features-grid">
+            <div class="bib-feature">
+                <div class="bib-feature-icon">💻</div>
+                <div class="bib-feature-text"><strong>Acceso a cómputo</strong>Dos laboratorios con 12 computadoras para capacitación y acceso digital de la comunidad.</div>
+            </div>
+            <div class="bib-feature">
+                <div class="bib-feature-icon">👶</div>
+                <div class="bib-feature-text"><strong>Sala infantil</strong>Un espacio pensado para los niños y niñas del cantón.</div>
+            </div>
+            <div class="bib-feature">
+                <div class="bib-feature-icon">🔬</div>
+                <div class="bib-feature-text"><strong>Salas de estudio</strong>Espacios para consulta y trabajo académico individual.</div>
+            </div>
+            <div class="bib-feature">
+                <div class="bib-feature-icon">🎭</div>
+                <div class="bib-feature-text"><strong>Talleres y actividades</strong>El mezzanine multifuncional acoge cursos, conversatorios, charlas y exposiciones.</div>
+            </div>
+            <div class="bib-feature">
+                <div class="bib-feature-icon">♿</div>
+                <div class="bib-feature-text"><strong>Edificio accesible</strong>Cumple con la <strong>Ley 7600</strong> de igualdad de oportunidades para personas con discapacidad.</div>
+            </div>
+            <div class="bib-feature">
+                <div class="bib-feature-icon">📚</div>
+                <div class="bib-feature-text"><strong>Préstamo de libros</strong><span class="bib-pendiente">Pendiente: condiciones del préstamo a domicilio.</span></div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- SECCIÓN 1: ORÍGENES -->
 <section class="bib-section" id="origenes">
