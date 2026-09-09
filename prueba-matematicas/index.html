@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es-CR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prueba de práctica de Matemática | Poás Agua y Fuego</title>
+<meta name="description" content="300 preguntas de selección múltiple de Matemática de primaria, basadas en la tabla de especificaciones de la Prueba Nacional Estandarizada 2026. Muestra la nota al terminar y la respuesta correcta con su explicación en la revisión.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cesarluiscr.github.io/poas-agua-y-fuego/prueba-matematicas/">
+<link rel="icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<header class="encabezado">
+  <div class="contenedor">
+    <p class="migas"><a href="../index.html">Poás Agua y Fuego</a> › Prueba de práctica</p>
+    <h1>Prueba de práctica de Matemática</h1>
+    <p>300 preguntas de selección múltiple para primaria, organizadas según la tabla de
+       especificaciones de la Prueba Nacional Estandarizada de Matemática 2026.
+       Al terminar se muestra la nota y, en la revisión, la respuesta correcta de cada
+       pregunta con su explicación.</p>
+  </div>
+</header>
+
+<main class="contenedor">
+
+  <!-- ============================================================ INICIO -->
+  <section id="inicio" aria-labelledby="titulo-inicio">
+    <div class="tarjeta">
+      <h2 id="titulo-inicio">Configure su práctica</h2>
+      <p class="ayuda">Elija el tema y la cantidad de preguntas. Las preguntas se toman
+         al azar del banco de <b id="total-banco">300</b> ítems.</p>
+
+      <div class="campos">
+        <div class="campo">
+          <label for="filtro-tema">Tema</label>
+          <select id="filtro-tema">
+            <option value="todos">Todos los temas</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="filtro-cantidad">Cantidad de preguntas</label>
+          <select id="filtro-cantidad">
+            <option value="10">10 preguntas</option>
+            <option value="20" selected>20 preguntas</option>
+            <option value="30">30 preguntas</option>
+            <option value="50">50 preguntas</option>
+            <option value="100">100 preguntas</option>
+            <option value="0">Todas las disponibles</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="campos" style="margin-top:16px">
+        <label class="casilla" for="barajar-opciones">
+          <input type="checkbox" id="barajar-opciones" checked>
+          Cambiar el orden de las opciones en cada intento
+        </label>
+        <label class="casilla" for="mostrar-tema">
+          <input type="checkbox" id="mostrar-tema" checked>
+          Mostrar el tema de cada pregunta durante la prueba
+        </label>
+      </div>
+
+      <p class="ayuda" id="aviso-disponibles" style="margin:16px 0 0"></p>
+
+      <div class="botonera" style="margin-top:18px">
+        <button type="button" class="boton" id="btn-comenzar">Comenzar la prueba</button>
+      </div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Contenidos evaluados</h2>
+      <p class="ayuda">Cantidad de preguntas del banco por afirmación de la tabla de
+         especificaciones.</p>
+      <ul class="temario" id="temario"></ul>
+    </div>
+
+    <div class="tarjeta oculto" id="tarjeta-historial">
+      <h2>Sus últimos intentos</h2>
+      <p class="ayuda">Se guardan solo en este dispositivo, en el navegador.</p>
+      <div class="tabla-desliza">
+        <table class="historial">
+          <thead>
+            <tr>
+              <th scope="col">Fecha</th>
+              <th scope="col">Tema</th>
+              <th class="num" scope="col">Preguntas</th>
+              <th class="num" scope="col">Nota</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpo-historial"></tbody>
+        </table>
+      </div>
+      <div class="botonera" style="margin-top:14px">
+        <button type="button" class="boton secundario" id="btn-borrar-historial">Borrar historial</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ PRUEBA -->
+  <section id="prueba" class="oculto" aria-labelledby="enunciado">
+    <div class="tarjeta">
+      <div class="estado-prueba">
+        <span id="contador">Pregunta 1 de 20</span>
+        <span id="contestadas">0 contestadas</span>
+        <span id="cronometro">00:00</span>
+      </div>
+      <div class="barra-progreso"><span id="progreso"></span></div>
+    </div>
+
+    <div class="tarjeta">
+      <p class="etiqueta-tema" id="tema-actual"></p>
+      <h2 class="enunciado" id="enunciado"></h2>
+      <div class="opciones" id="opciones" role="radiogroup" aria-labelledby="enunciado"></div>
+
+      <div class="botonera">
+        <button type="button" class="boton secundario" id="btn-anterior">← Anterior</button>
+        <button type="button" class="boton secundario" id="btn-siguiente">Siguiente →</button>
+        <button type="button" class="boton crece" id="btn-terminar">Terminar y ver la nota</button>
+      </div>
+      <p class="ayuda" style="margin:14px 0 0">Puede usar las teclas 1 a 4 para responder
+         y las flechas ← → para cambiar de pregunta.</p>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Mapa de preguntas</h2>
+      <p class="ayuda">Las preguntas contestadas aparecen resaltadas.</p>
+      <div class="mapa" id="mapa"></div>
+      <div class="botonera" style="margin-top:16px">
+        <button type="button" class="boton secundario" id="btn-abandonar">Salir sin calificar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= RESULTADOS -->
+  <section id="resultados" class="oculto" aria-labelledby="titulo-resultados">
+    <div class="tarjeta" id="tarjeta-nota">
+      <h2 id="titulo-resultados">Resultado de la prueba</h2>
+      <div class="nota">
+        <div>
+          <div class="nota-cifra" id="nota-cifra">0</div>
+          <div class="ayuda" style="margin:0">nota de 0 a 100</div>
+        </div>
+        <div>
+          <p class="veredicto" id="veredicto"></p>
+          <p class="ayuda" id="detalle-nota" style="margin:0"></p>
+        </div>
+      </div>
+
+      <div class="resumen">
+        <div class="dato"><b id="dato-correctas">0</b><span>correctas</span></div>
+        <div class="dato"><b id="dato-incorrectas">0</b><span>incorrectas</span></div>
+        <div class="dato"><b id="dato-blanco">0</b><span>sin responder</span></div>
+        <div class="dato"><b id="dato-tiempo">00:00</b><span>tiempo empleado</span></div>
+      </div>
+
+      <div class="botonera no-imprimir" style="margin-top:20px">
+        <button type="button" class="boton" id="btn-repetir">Hacer otra prueba</button>
+        <button type="button" class="boton secundario" id="btn-solo-errores">Ver solo las falladas</button>
+        <button type="button" class="boton secundario" id="btn-imprimir">Imprimir la revisión</button>
+      </div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Resultado por tema</h2>
+      <div class="tabla-desliza">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Tema</th>
+              <th class="num" scope="col">Correctas</th>
+              <th class="num" scope="col">Preguntas</th>
+              <th class="num" scope="col">%</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-temas"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Revisión de las preguntas</h2>
+      <p class="ayuda">Cada pregunta muestra la respuesta correcta, la respuesta que usted
+         marcó y la explicación del procedimiento.</p>
+    </div>
+    <div id="revision"></div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <p>Material de práctica elaborado a partir de la tabla de especificaciones de la
+       Prueba Nacional Estandarizada de Matemática, primaria 2026. Es un recurso de
+       estudio no oficial y no sustituye los materiales del Ministerio de Educación Pública.</p>
+    <p><a href="../index.html">Volver a Poás Agua y Fuego</a></p>
+  </div>
+</footer>
+
+<script src="preguntas.js"></script>
+<script src="quiz.js"></script>
+</body>
+</html>
