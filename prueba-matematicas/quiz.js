@@ -15,9 +15,6 @@
     preguntas: [],      // preguntas del intento, ya barajadas
     respuestas: [],     // índice marcado por la persona, o null
     indice: 0,
-    inicio: 0,
-    segundos: 0,
-    reloj: null,
     tema: "todos",
     mostrarTema: true
   };
@@ -30,12 +27,6 @@
       var t = copia[i]; copia[i] = copia[j]; copia[j] = t;
     }
     return copia;
-  }
-
-  function reloj(segundos) {
-    var m = Math.floor(segundos / 60);
-    var s = segundos % 60;
-    return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
   }
 
   function mostrarSeccion(id) {
@@ -127,15 +118,6 @@
     });
     estado.respuestas = estado.preguntas.map(function () { return null; });
     estado.indice = 0;
-    estado.segundos = 0;
-    estado.inicio = Date.now();
-
-    if (estado.reloj) { clearInterval(estado.reloj); }
-    estado.reloj = setInterval(function () {
-      estado.segundos = Math.floor((Date.now() - estado.inicio) / 1000);
-      el("cronometro").textContent = reloj(estado.segundos);
-    }, 1000);
-    el("cronometro").textContent = "00:00";
 
     armarMapa();
     pintarPregunta();
@@ -228,9 +210,6 @@
 
   /* ----------------------------------------------------------- calificación */
   function calificar() {
-    if (estado.reloj) { clearInterval(estado.reloj); estado.reloj = null; }
-    estado.segundos = Math.floor((Date.now() - estado.inicio) / 1000);
-
     var total = estado.preguntas.length;
     var correctas = 0, incorrectas = 0, blanco = 0;
     var porTema = {};
@@ -264,7 +243,6 @@
     el("dato-correctas").textContent = correctas;
     el("dato-incorrectas").textContent = incorrectas;
     el("dato-blanco").textContent = blanco;
-    el("dato-tiempo").textContent = reloj(estado.segundos);
 
     var cuerpo = el("tabla-temas");
     cuerpo.innerHTML = "";
@@ -439,7 +417,6 @@
       if (!window.confirm("Se perderán las respuestas de este intento. ¿Desea salir?")) {
         return;
       }
-      if (estado.reloj) { clearInterval(estado.reloj); estado.reloj = null; }
       mostrarSeccion("inicio");
     });
 
