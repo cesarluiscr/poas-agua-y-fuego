@@ -288,3 +288,23 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
   body { background: #fff; }
   .tarjeta, .revision-item { box-shadow: none; break-inside: avoid; }
 }
+
+/* ------------------------------------------- contexto de los ítems oficiales */
+#contexto:not(:empty) { margin: 0 0 18px; }
+#contexto table { margin-bottom: 14px; }
+#contexto th, #contexto td { border-bottom: 1px solid var(--borde); }
+.figura-item {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 14px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: #fff;      /* los escaneos son en tonos de gris sobre papel */
+  padding: 6px;
+}
+.contexto-texto { margin: 0 0 8px; }
+.lista-contexto { margin: 0 0 14px; padding-left: 1.25rem; }
+.lista-contexto li { margin-bottom: 6px; }
+.contexto-cierre { margin: 0; font-weight: 600; }
+.revision-item .figura-item { max-width: 420px; }

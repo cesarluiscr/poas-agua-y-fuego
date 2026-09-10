@@ -33,7 +33,15 @@
       <p class="ayuda">Elija el tema y la cantidad de preguntas. Las preguntas se toman
          al azar del banco de <b id="total-banco">300</b> ítems.</p>
 
-      <div class="campos">
+      <div class="campo" style="margin-bottom:16px">
+        <label for="filtro-prueba">Prueba</label>
+        <select id="filtro-prueba">
+          <option value="practica">Práctica por temas — Matemática (300 preguntas)</option>
+          <option value="pe-matematica-2025">Prueba Nacional Estandarizada 2025 — Matemática (35 ítems)</option>
+        </select>
+      </div>
+
+      <div class="campos" id="campos-practica">
         <div class="campo">
           <label for="filtro-tema">Tema</label>
           <select id="filtro-tema">
@@ -65,6 +73,7 @@
       </div>
 
       <p class="ayuda" id="aviso-disponibles" style="margin:16px 0 0"></p>
+      <p class="ayuda oculto" id="aviso-oficial" style="margin:16px 0 0"></p>
 
       <div class="botonera" style="margin-top:18px">
         <button type="button" class="boton" id="btn-comenzar">Comenzar la prueba</button>
@@ -72,9 +81,10 @@
     </div>
 
     <div class="tarjeta">
-      <h2>Contenidos evaluados</h2>
-      <p class="ayuda">Cantidad de preguntas del banco por afirmación de la tabla de
-         especificaciones.</p>
+      <h2>Contenidos de la práctica por temas</h2>
+      <p class="ayuda">Cantidad de preguntas del banco de práctica por afirmación de la
+         tabla de especificaciones. La Prueba Nacional Estandarizada 2025 se aplica
+         completa y no usa este filtro.</p>
       <ul class="temario" id="temario"></ul>
     </div>
 
@@ -113,6 +123,7 @@
     <div class="tarjeta">
       <p class="etiqueta-tema" id="tema-actual"></p>
       <h2 class="enunciado" id="enunciado"></h2>
+      <div id="contexto"></div>
       <div class="opciones" id="opciones" role="radiogroup" aria-labelledby="enunciado"></div>
 
       <div class="botonera">
@@ -120,8 +131,7 @@
         <button type="button" class="boton secundario" id="btn-siguiente">Siguiente →</button>
         <button type="button" class="boton crece" id="btn-terminar">Terminar y ver la nota</button>
       </div>
-      <p class="ayuda" style="margin:14px 0 0">Puede usar las teclas 1 a 4 para responder
-         y las flechas ← → para cambiar de pregunta.</p>
+      <p class="ayuda" style="margin:14px 0 0" id="ayuda-teclado"></p>
     </div>
 
     <div class="tarjeta">
@@ -199,6 +209,7 @@
 </footer>
 
 <script src="preguntas.js"></script>
+<script src="pe-matematica-2025.js"></script>
 <script src="quiz.js"></script>
 </body>
 </html>

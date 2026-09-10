@@ -4,6 +4,16 @@
   "use strict";
 
   var LETRAS = ["A", "B", "C", "D"];
+  // pruebas oficiales cargadas aparte del banco de práctica
+  var OFICIALES = (typeof PE_MATEMATICA_2025 !== "undefined")
+    ? [PE_MATEMATICA_2025] : [];
+
+  function pruebaOficial(id) {
+    for (var i = 0; i < OFICIALES.length; i++) {
+      if (OFICIALES[i].id === id) { return OFICIALES[i]; }
+    }
+    return null;
+  }
   var NOTA_MINIMA = 70;
   var CLAVE_HISTORIAL = "practica-matematica-historial";
   var MAX_HISTORIAL = 10;
@@ -15,6 +25,8 @@
     preguntas: [],      // preguntas del intento, ya barajadas
     respuestas: [],     // índice marcado por la persona, o null
     indice: 0,
+    prueba: "practica",     // "practica" | id de una prueba oficial
+    letras: LETRAS,
     tema: "todos",
     mostrarTema: true
   };
@@ -64,6 +76,7 @@
 
   function armarTemario() {
     var lista = el("temario");
+    if (!lista) { return; }
     var conteos = {};
     var orden = [];
     PREGUNTAS.forEach(function (p) {
@@ -85,6 +98,18 @@
   }
 
   function actualizarAviso() {
+    var esPractica = el("filtro-prueba").value === "practica";
+    el("campos-practica").classList.toggle("oculto", !esPractica);
+    el("aviso-disponibles").classList.toggle("oculto", !esPractica);
+    el("aviso-oficial").classList.toggle("oculto", esPractica);
+    if (!esPractica) {
+      var prueba = pruebaOficial(el("filtro-prueba").value);
+      el("aviso-oficial").textContent = prueba
+        ? "Se aplican los " + prueba.preguntas.length + " ítems completos, en su " +
+          "orden original. " + prueba.descripcion + " Fuente: " + prueba.fuente
+        : "";
+      return;
+    }
     var tema = el("filtro-tema").value;
     var disponibles = preguntasDelTema(tema).length;
     var pedidas = parseInt(el("filtro-cantidad").value, 10);
@@ -96,6 +121,12 @@
 
   /* ------------------------------------------------------------ la prueba */
   function comenzar() {
+    estado.prueba = el("filtro-prueba").value;
+    if (estado.prueba !== "practica") {
+      comenzarOficial(pruebaOficial(estado.prueba));
+      return;
+    }
+    estado.letras = LETRAS;
     var tema = el("filtro-tema").value;
     var disponibles = preguntasDelTema(tema);
     var pedidas = parseInt(el("filtro-cantidad").value, 10);
@@ -122,6 +153,88 @@
     armarMapa();
     pintarPregunta();
     mostrarSeccion("prueba");
+  }
+
+  function comenzarOficial(prueba) {
+    // la prueba oficial se aplica completa y en su orden original
+    estado.letras = prueba.letras;
+    estado.tema = prueba.nombre;
+    estado.mostrarTema = el("mostrar-tema").checked;
+    var barajarOpciones = el("barajar-opciones").checked;
+    estado.preguntas = prueba.preguntas.map(function (p) {
+      if (!barajarOpciones) {
+        return { base: p, opciones: p.opciones.slice(), correcta: p.correcta };
+      }
+      var orden = barajar(p.opciones.map(function (_, i) { return i; }));
+      return {
+        base: p,
+        opciones: orden.map(function (i) { return p.opciones[i]; }),
+        correcta: orden.indexOf(p.correcta)
+      };
+    });
+    estado.respuestas = estado.preguntas.map(function () { return null; });
+    estado.indice = 0;
+    armarMapa();
+    pintarPregunta();
+    mostrarSeccion("prueba");
+  }
+
+  /* Bloques de contexto de un ítem oficial: tabla, lista y figura. */
+  function pintarContexto(base) {
+    var caja = el("contexto");
+    caja.innerHTML = "";
+    if (!base.tabla && !base.lista && !base.figura && !base.cierre) { return; }
+
+    if (base.tabla) {
+      var envoltura = document.createElement("div");
+      envoltura.className = "tabla-desliza";
+      var tabla = document.createElement("table");
+      base.tabla.forEach(function (fila, i) {
+        var tr = document.createElement("tr");
+        fila.forEach(function (celda) {
+          var td = document.createElement(i === 0 ? "th" : "td");
+          if (i === 0) { td.scope = "col"; }
+          td.textContent = celda;
+          tr.appendChild(td);
+        });
+        tabla.appendChild(tr);
+      });
+      envoltura.appendChild(tabla);
+      caja.appendChild(envoltura);
+    }
+
+    if (base.figura) {
+      var img = document.createElement("img");
+      img.src = base.figura;
+      img.alt = base.figuraAlt || "Figura del ítem";
+      img.className = "figura-item";
+      img.loading = "lazy";
+      caja.appendChild(img);
+    }
+
+    if (base.lista) {
+      if (base.listaIntro) {
+        var intro = document.createElement("p");
+        intro.className = "contexto-texto";
+        intro.textContent = base.listaIntro;
+        caja.appendChild(intro);
+      }
+      var ul = document.createElement("ul");
+      ul.className = "lista-contexto";
+      base.lista.forEach(function (t) {
+        var li = document.createElement("li");
+        li.textContent = t;
+        ul.appendChild(li);
+      });
+      caja.appendChild(ul);
+    }
+
+    if (base.cierre) {
+      var cierre = document.createElement("p");
+      cierre.className = "contexto-cierre";
+      cierre.textContent = base.cierre;
+      caja.appendChild(cierre);
+    }
   }
 
   function armarMapa() {
@@ -163,6 +276,7 @@
     etiqueta.classList.toggle("oculto", !estado.mostrarTema);
 
     el("enunciado").textContent = item.base.pregunta;
+    pintarContexto(item.base);
 
     var caja = el("opciones");
     caja.innerHTML = "";
@@ -184,7 +298,7 @@
 
       var letra = document.createElement("span");
       letra.className = "letra";
-      letra.textContent = LETRAS[i] + ".";
+      letra.textContent = estado.letras[i] + ".";
 
       var cuerpo = document.createElement("span");
       cuerpo.className = "texto";
@@ -195,6 +309,10 @@
       etiquetaOpcion.appendChild(cuerpo);
       caja.appendChild(etiquetaOpcion);
     });
+
+    el("ayuda-teclado").textContent =
+      "Puede usar las teclas 1 a " + estado.letras.length + " para responder y las " +
+      "flechas ← → para cambiar de pregunta.";
 
     el("btn-anterior").disabled = estado.indice === 0;
     el("btn-siguiente").disabled = estado.indice === total - 1;
@@ -299,6 +417,11 @@
       enunciado.className = "enunciado";
       enunciado.style.fontSize = "1rem";
       enunciado.textContent = item.base.pregunta;
+      if (item.base.cierre) {
+        var cierreRev = document.createElement("p");
+        cierreRev.className = "contexto-cierre";
+        cierreRev.textContent = item.base.cierre;
+      }
 
       var lista = document.createElement("ul");
       lista.className = "lista-respuestas";
@@ -309,7 +432,7 @@
 
         var letra = document.createElement("span");
         letra.className = "letra";
-        letra.textContent = LETRAS[j] + ".";
+        letra.textContent = estado.letras[j] + ".";
         var cuerpo = document.createElement("span");
         cuerpo.textContent = opcionTexto;
         li.appendChild(letra);
@@ -335,6 +458,15 @@
 
       bloque.appendChild(cabecera);
       bloque.appendChild(enunciado);
+      if (item.base.figura) {
+        var imgRev = document.createElement("img");
+        imgRev.src = item.base.figura;
+        imgRev.alt = item.base.figuraAlt || "Figura del ítem";
+        imgRev.className = "figura-item";
+        imgRev.loading = "lazy";
+        bloque.appendChild(imgRev);
+      }
+      if (typeof cierreRev !== "undefined" && cierreRev) { bloque.appendChild(cierreRev); }
       bloque.appendChild(lista);
       bloque.appendChild(explicacion);
       caja.appendChild(bloque);
@@ -396,6 +528,7 @@
 
   /* ---------------------------------------------------------------- eventos */
   function conectarEventos() {
+    el("filtro-prueba").addEventListener("change", actualizarAviso);
     el("filtro-tema").addEventListener("change", actualizarAviso);
     el("filtro-cantidad").addEventListener("change", actualizarAviso);
     el("btn-comenzar").addEventListener("click", comenzar);
@@ -443,7 +576,7 @@
       if (etiqueta === "input" && evento.target.type !== "radio") { return; }
       if (etiqueta === "select" || etiqueta === "textarea") { return; }
 
-      if (evento.key >= "1" && evento.key <= "4") {
+      if (evento.key >= "1" && evento.key <= String(estado.letras.length)) {
         var i = parseInt(evento.key, 10) - 1;
         var radios = el("opciones").querySelectorAll("input[type=radio]");
         if (radios[i]) {
