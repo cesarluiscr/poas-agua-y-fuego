@@ -308,3 +308,11 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-sp
 .lista-contexto li { margin-bottom: 6px; }
 .contexto-cierre { margin: 0; font-weight: 600; }
 .revision-item .figura-item { max-width: 420px; }
+.nota-item {
+  margin: 10px 0 0;
+  font-size: .86rem;
+  color: var(--aviso);
+  background: var(--aviso-fondo);
+  border-radius: 8px;
+  padding: 9px 12px;
+}

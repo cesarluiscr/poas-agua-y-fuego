@@ -5,8 +5,12 @@
 
   var LETRAS = ["A", "B", "C", "D"];
   // pruebas oficiales cargadas aparte del banco de práctica
-  var OFICIALES = (typeof PE_MATEMATICA_2025 !== "undefined")
-    ? [PE_MATEMATICA_2025] : [];
+  var OFICIALES = [];
+  [typeof PE_MATEMATICA_2025 !== "undefined" ? PE_MATEMATICA_2025 : null,
+   typeof PE_ESPANOL_2025 !== "undefined" ? PE_ESPANOL_2025 : null,
+   typeof PE_CIENCIAS_2025 !== "undefined" ? PE_CIENCIAS_2025 : null,
+   typeof PE_SOCIALES_2025 !== "undefined" ? PE_SOCIALES_2025 : null
+  ].forEach(function (p) { if (p) { OFICIALES.push(p); } });
 
   function pruebaOficial(id) {
     for (var i = 0; i < OFICIALES.length; i++) {
@@ -105,8 +109,10 @@
     if (!esPractica) {
       var prueba = pruebaOficial(el("filtro-prueba").value);
       el("aviso-oficial").textContent = prueba
-        ? "Se aplican los " + prueba.preguntas.length + " ítems completos, en su " +
-          "orden original. " + prueba.descripcion + " Fuente: " + prueba.fuente
+        ? "Se aplican los ítems en su orden original. " + prueba.descripcion +
+          " Fuente: " + prueba.fuente +
+          " El documento original no trae solucionario: las respuestas correctas y sus " +
+          "explicaciones se elaboraron para este sitio y no son la clave oficial del MEP."
         : "";
       return;
     }
@@ -183,7 +189,9 @@
   function pintarContexto(base) {
     var caja = el("contexto");
     caja.innerHTML = "";
-    if (!base.tabla && !base.lista && !base.figura && !base.cierre) { return; }
+    if (!base.tabla && !base.lista && !base.figura && !base.cierre && !base.nota) {
+      return;
+    }
 
     if (base.tabla) {
       var envoltura = document.createElement("div");
@@ -234,6 +242,12 @@
       cierre.className = "contexto-cierre";
       cierre.textContent = base.cierre;
       caja.appendChild(cierre);
+    }
+    if (base.nota) {
+      var nota = document.createElement("p");
+      nota.className = "nota-item";
+      nota.textContent = "Nota: " + base.nota;
+      caja.appendChild(nota);
     }
   }
 
@@ -448,6 +462,13 @@
         }
         lista.appendChild(li);
       });
+
+      if (item.base.nota) {
+        var notaRev = document.createElement("p");
+        notaRev.className = "nota-item";
+        notaRev.textContent = "Nota: " + item.base.nota;
+        bloque.appendChild(notaRev);
+      }
 
       var explicacion = document.createElement("p");
       explicacion.className = "explicacion";
