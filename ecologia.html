@@ -561,64 +561,124 @@
     
         /* ── Reloj climático en tiempo real ── */
         .ec-clock-wrap {
-            max-width: 900px;
-            margin: 0 auto 3rem;
-            background: rgba(10, 20, 16, 0.55);
-            border: 1px solid rgba(46, 158, 91, 0.28);
-            border-radius: 16px;
-            padding: 1.9rem 1.8rem 1.5rem;
+            position: relative;
+            max-width: 880px;
+            margin: 0 auto 3.5rem;
+            background: #fff;
+            border-radius: 20px;
+            padding: 2.2rem 2rem 1.6rem;
             text-align: center;
+            box-shadow:
+                0 1px 2px rgba(13, 40, 24, .05),
+                0 12px 32px -8px rgba(13, 40, 24, .14);
+            overflow: hidden;
+        }
+        /* filo superior degradado */
+        .ec-clock-wrap::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--ec-green), var(--ec-teal) 55%, var(--ec-gold));
+        }
+        .ec-clock-head {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .6rem;
+            margin-bottom: .9rem;
+            flex-wrap: wrap;
         }
         .ec-clock-label {
             font-family: 'Outfit', sans-serif;
-            font-size: .72rem;
-            letter-spacing: .15em;
+            font-size: .7rem;
+            letter-spacing: .16em;
             text-transform: uppercase;
-            color: #6ee7a8;
+            color: var(--ec-muted);
             font-weight: 700;
-            margin-bottom: .8rem;
+        }
+        .ec-clock-live {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: .66rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #0f7a45;
+            background: rgba(46, 204, 113, .12);
+            border: 1px solid rgba(46, 204, 113, .32);
+            border-radius: 999px;
+            padding: .2rem .6rem .2rem .5rem;
+        }
+        .ec-clock-live::before {
+            content: '';
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--ec-green);
+            box-shadow: 0 0 0 0 rgba(46, 204, 113, .6);
+            animation: ec-pulse 2s ease-out infinite;
+        }
+        @keyframes ec-pulse {
+            0%   { box-shadow: 0 0 0 0 rgba(46, 204, 113, .55); }
+            70%  { box-shadow: 0 0 0 7px rgba(46, 204, 113, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
         }
         .ec-clock-intro {
             color: var(--ec-muted);
             font-size: .95rem;
             line-height: 1.75;
-            max-width: 660px;
-            margin: 0 auto 1.6rem;
+            max-width: 620px;
+            margin: 0 auto 1.7rem;
         }
-        .ec-clock-intro strong { color: #fff; }
+        .ec-clock-intro strong { color: var(--ec-dark); }
+        /* panel oscuro: el widget viene con su propia tipografía clara */
+        /* Sin fondo propio: el widget ya trae su panel oscuro redondeado.
+           Un segundo marco alrededor se veria como una caja dentro de otra. */
         .ec-clock-frame {
-            background: #05100c;
-            border-radius: 12px;
-            padding: 1.1rem .9rem;
             overflow-x: auto;
-            min-height: 96px;
+            min-height: 112px;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: .2rem 0;
+        }
+        .ec-clock-frame:empty,
+        .ec-clock-frame:has(> noscript:only-child) {
+            background: rgba(13, 40, 24, .05);
+            border: 1px dashed rgba(13, 40, 24, .18);
+            border-radius: 12px;
         }
         .ec-clock-frame climate-clock { width: 100%; }
         .ec-clock-fallback,
         .ec-clock-note {
             color: var(--ec-muted);
-            font-size: .85rem;
+            font-size: .84rem;
             line-height: 1.6;
-            margin: 1rem 0 0;
+            margin: 1.1rem 0 0;
         }
         .ec-clock-credit {
             color: var(--ec-muted);
-            font-size: .78rem;
-            margin: .5rem 0 0;
-            opacity: .75;
+            font-size: .76rem;
+            margin: .4rem 0 0;
+            opacity: .7;
         }
         .ec-clock-note a,
         .ec-clock-credit a {
-            color: #6ee7a8;
+            color: #0f7a45;
             font-weight: 600;
             text-decoration: none;
-            border-bottom: 1px solid rgba(110, 231, 168, .4);
+            border-bottom: 1px solid rgba(46, 204, 113, .45);
+            transition: border-color .2s, color .2s;
+        }
+        .ec-clock-note a:hover,
+        .ec-clock-credit a:hover {
+            color: var(--ec-teal);
+            border-bottom-color: var(--ec-teal);
         }
         .ec-clock-bridge {
-            max-width: 680px;
+            max-width: 660px;
             margin: 0 auto 2.5rem;
             text-align: center;
         }
@@ -629,8 +689,12 @@
             margin: 0;
         }
         @media (max-width: 560px) {
-            .ec-clock-wrap { padding: 1.4rem 1rem 1.1rem; border-radius: 12px; }
+            .ec-clock-wrap { padding: 1.6rem 1.1rem 1.2rem; border-radius: 14px; }
             .ec-clock-intro { font-size: .9rem; }
+            .ec-clock-frame { padding: 1rem .6rem; border-radius: 10px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .ec-clock-live::before { animation: none; }
         }
     </style>
 </head>
@@ -1023,7 +1087,10 @@
 
             <!-- ── RELOJ CLIMÁTICO EN TIEMPO REAL ── -->
             <div class="ec-clock-wrap">
-                <div class="ec-clock-label">Reloj climático · en tiempo real</div>
+                <div class="ec-clock-head">
+                    <span class="ec-clock-label">Reloj climático</span>
+                    <span class="ec-clock-live">En vivo</span>
+                </div>
                 <p class="ec-clock-intro">
                     El <strong>Climate Clock</strong> cuenta el tiempo que queda para agotar el presupuesto de carbono
                     compatible con limitar el calentamiento a 1,5 °C, y en paralelo mide el avance de la energía
