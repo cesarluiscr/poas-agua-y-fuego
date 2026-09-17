@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://script.google.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://unpkg.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; media-src 'self' blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://api.open-meteo.com https://nominatim.openstreetmap.org https://tile.openstreetmap.org; worker-src blob: 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://climateclock.world https://script.google.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://climateclock.world https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' https://climateclock.world https://fonts.gstatic.com https://unpkg.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; media-src 'self' blob:; connect-src 'self' https://api.climateclock.world https://climateclock.world https://script.google.com https://script.googleusercontent.com https://api.open-meteo.com https://nominatim.openstreetmap.org https://tile.openstreetmap.org; worker-src blob: 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -558,6 +558,80 @@
             .ec-nav { justify-content: space-between; padding: 0.7rem 1.2rem; gap: 0.5rem; }
             .ec-nav .nav-lang { margin-left: auto; }
         }
+    
+        /* ── Reloj climático en tiempo real ── */
+        .ec-clock-wrap {
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            background: rgba(10, 20, 16, 0.55);
+            border: 1px solid rgba(46, 158, 91, 0.28);
+            border-radius: 16px;
+            padding: 1.9rem 1.8rem 1.5rem;
+            text-align: center;
+        }
+        .ec-clock-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: .72rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: #6ee7a8;
+            font-weight: 700;
+            margin-bottom: .8rem;
+        }
+        .ec-clock-intro {
+            color: var(--ec-muted);
+            font-size: .95rem;
+            line-height: 1.75;
+            max-width: 660px;
+            margin: 0 auto 1.6rem;
+        }
+        .ec-clock-intro strong { color: #fff; }
+        .ec-clock-frame {
+            background: #05100c;
+            border-radius: 12px;
+            padding: 1.1rem .9rem;
+            overflow-x: auto;
+            min-height: 96px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .ec-clock-frame climate-clock { width: 100%; }
+        .ec-clock-fallback,
+        .ec-clock-note {
+            color: var(--ec-muted);
+            font-size: .85rem;
+            line-height: 1.6;
+            margin: 1rem 0 0;
+        }
+        .ec-clock-credit {
+            color: var(--ec-muted);
+            font-size: .78rem;
+            margin: .5rem 0 0;
+            opacity: .75;
+        }
+        .ec-clock-note a,
+        .ec-clock-credit a {
+            color: #6ee7a8;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(110, 231, 168, .4);
+        }
+        .ec-clock-bridge {
+            max-width: 680px;
+            margin: 0 auto 2.5rem;
+            text-align: center;
+        }
+        .ec-clock-bridge p {
+            color: var(--ec-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+        @media (max-width: 560px) {
+            .ec-clock-wrap { padding: 1.4rem 1rem 1.1rem; border-radius: 12px; }
+            .ec-clock-intro { font-size: .9rem; }
+        }
     </style>
 </head>
 <body>
@@ -999,6 +1073,34 @@
                     Por su ubicación de montaña y su dependencia del agua, el café y el turismo del volcán, el cantón de Poás es especialmente vulnerable al cambio climático. Estos son los principales efectos sobre nuestro territorio.
                 </p>
             </div>
+
+            <!-- ── RELOJ CLIMÁTICO EN TIEMPO REAL ── -->
+            <div class="ec-clock-wrap">
+                <div class="ec-clock-label">Reloj climático · en tiempo real</div>
+                <p class="ec-clock-intro">
+                    El <strong>Climate Clock</strong> cuenta el tiempo que queda para agotar el presupuesto de carbono
+                    compatible con limitar el calentamiento a 1,5 °C, y en paralelo mide el avance de la energía
+                    renovable. No es una cifra simbólica: se actualiza con los datos más recientes y corre en vivo.
+                </p>
+
+                <div class="ec-clock-frame">
+                    <climate-clock></climate-clock>
+                    <noscript>
+                        <p class="ec-clock-fallback">Activá JavaScript para ver el reloj en vivo, o consultalo directamente en climateclock.net.</p>
+                    </noscript>
+                </div>
+
+                <p class="ec-clock-note">
+                    Si el reloj no carga, puede que tu red bloquee recursos externos.
+                    <a href="https://climateclock.net/" target="_blank" rel="noopener noreferrer">Verlo en climateclock.net →</a>
+                </p>
+                <p class="ec-clock-credit">Datos y widget: <a href="https://climateclock.net/" target="_blank" rel="noopener noreferrer">Climate Clock</a>.</p>
+            </div>
+
+            <div class="ec-clock-bridge">
+                <p>Ese contador global se traduce, acá abajo, en efectos concretos sobre nuestro territorio.</p>
+            </div>
+
             <div class="ec-francia-grid">
                 <div class="ec-francia-card">
                     <span class="ec-francia-emoji">💧</span>
@@ -1101,5 +1203,7 @@
 })();
     </script>
     <script src="enhance.js?v=5"></script>
+    <!-- Widget oficial del Climate Clock (climateclock.net) -->
+    <script type="module" src="https://climateclock.world/widget-v2.js"></script>
 </body>
 </html>
