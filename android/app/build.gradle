@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'cr.poas.aguayfuego'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'cr.poas.aguayfuego'
+        minSdk 24
+        targetSdk 35
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.12.1'
+}
+
+// Empaqueta el sitio web (raíz del repositorio) dentro del APK, en assets/www.
+def webRoot = rootProject.file('..')
+tasks.register('copyWebAssets', Sync) {
+    from(webRoot) {
+        include '*.html', '*.js', '*.css', '*.webmanifest'
+        include 'img/**'
+        include 'prueba-matematicas/**'
+        exclude 'server.js', 'google-apps-script.js', 'admin.html', 'mensajes.html', 'google*.html'
+        exclude 'prueba-matematicas/generador/**'
+    }
+    into layout.projectDirectory.dir('src/main/assets/www')
+}
+preBuild.dependsOn 'copyWebAssets'
