@@ -1,0 +1,11 @@
+{
+  "esquema": "observatorio-agua-poas/actividades@1",
+  "actualizado": "2026-11-02",
+  "nota": "Calendario público de reforestación, limpieza de ríos, talleres y campañas. Las fotografías de participantes requieren consentimiento.",
+  "actividades": [],
+  "materiales": [],
+  "ejemplos_de_registro": {
+    "actividad": { "id": "AC-2026-01", "tipo": "reforestación | limpieza de río | taller | campaña", "titulo": "", "fecha": "AAAA-MM-DD", "hora": "HH:MM", "lugar": "", "organiza": "", "contacto_publico": "", "participantes": null, "resultado": "" },
+    "material": { "titulo": "", "publico": "centros educativos | organizaciones comunales", "url": "https://…" }
+  }
+}

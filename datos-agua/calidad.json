@@ -1,0 +1,18 @@
+{
+  "esquema": "observatorio-agua-poas/calidad@1",
+  "actualizado": "2026-11-02",
+  "norma_referencia": { "nombre": "Reglamento para la Calidad del Agua para Consumo Humano (Costa Rica)", "version": "Indicar decreto y versión vigente al publicar resultados", "aplica_a": "Agua para consumo humano" },
+  "nota": "Solo se publican muestras con sitio, fecha, responsable, método, unidad y laboratorio o equipo. Los resultados 'preliminar' se muestran separados de los 'validado'.",
+  "muestras": [],
+  "ejemplo_de_registro": {
+    "id": "CA-2026-0001", "estado": "preliminar | validado",
+    "sitio": "Nombre del punto de muestreo", "lat": 0, "lon": 0, "uso": "consumo humano | cuerpo de agua superficial",
+    "fecha": "AAAA-MM-DD", "hora": "HH:MM", "responsable": "Persona o institución que muestrea",
+    "laboratorio": "Laboratorio o equipo de campo", "informe_url": "https://…",
+    "cadena_custodia": true,
+    "parametros": [
+      { "parametro": "pH", "valor": 0, "unidad": "unidades de pH", "metodo": "", "equipo": "", "limite_deteccion": null },
+      { "parametro": "Turbidez", "valor": 0, "unidad": "NTU", "metodo": "", "equipo": "", "limite_deteccion": null }
+    ]
+  }
+}

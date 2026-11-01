@@ -3,12 +3,20 @@ package cr.poas.aquapoas;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Message;
+import android.print.PrintAttributes;
+import android.print.PrintManager;
+import android.provider.MediaStore;
+import android.webkit.JavascriptInterface;
+import android.webkit.ValueCallback;
 import android.view.View;
 import android.view.WindowInsets;
 import android.webkit.WebChromeClient;
@@ -19,21 +27,31 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+
 import androidx.webkit.WebViewAssetLoader;
 
 /**
- * AquaPoás: app independiente del observatorio del agua del cantón de Poás.
+ * Observatorio del Agua-Poás · Proyecto Gobernanza del Agua.
  * La interfaz va empaquetada en assets/app y se sirve desde un origen https local
  * (WebViewAssetLoader), de modo que funciona sin conexión; los datos en vivo
  * (Open-Meteo, mapas) se descargan cuando hay internet.
+ * Puente nativo: guardar archivos exportados (CSV) en Descargas e imprimir a PDF.
  */
 public class MainActivity extends Activity {
 
     private static final String HOST = "appassets.androidplatform.net";
     private static final String START_URL = "https://" + HOST + "/assets/app/index.html";
 
+    private static final int REQ_FILE = 41;
+    private static final int MAX_EXPORT_CHARS = 5_000_000;
+
     private WebView webView;
     private WebViewAssetLoader assetLoader;
+    private ValueCallback<Uri[]> fileCallback;
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
@@ -45,16 +63,20 @@ public class MainActivity extends Activity {
                 .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))
                 .build();
 
-        webView = new WebView(this);
-        webView.setBackgroundColor(Color.parseColor("#F2F8FB"));
+        boolean dark = (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+        int fondo = Color.parseColor(dark ? "#0A1524" : "#EDF5FB");
 
-        // Franja azul bajo la barra de estado y blanca bajo la barra de navegación
+        webView = new WebView(this);
+        webView.setBackgroundColor(fondo);
+
+        // Franja azul bajo la barra de estado y del color del pie bajo la barra de navegación
         LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
+        root.setBackgroundColor(fondo);
         View topBar = new View(this);
-        topBar.setBackgroundColor(Color.parseColor("#0077B6"));
+        topBar.setBackgroundColor(Color.parseColor("#0066A1"));
         View bottomBar = new View(this);
-        bottomBar.setBackgroundColor(Color.WHITE);
+        bottomBar.setBackgroundColor(fondo);
         root.addView(topBar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0));
         root.addView(webView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
         root.addView(bottomBar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0));
@@ -69,6 +91,7 @@ public class MainActivity extends Activity {
         s.setSupportMultipleWindows(true);
         s.setJavaScriptCanOpenWindowsAutomatically(true);
         s.setMediaPlaybackRequiresUserGesture(true);
+        webView.addJavascriptInterface(new Puente(), "ObservatorioNativo");
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -105,10 +128,80 @@ public class MainActivity extends Activity {
                 resultMsg.sendToTarget();
                 return true;
             }
+
+            // <input type="file">: selector de imágenes del sistema (no requiere permisos)
+            @Override
+            public boolean onShowFileChooser(WebView view, ValueCallback<Uri[]> callback, FileChooserParams params) {
+                if (fileCallback != null) fileCallback.onReceiveValue(null);
+                fileCallback = callback;
+                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
+                i.addCategory(Intent.CATEGORY_OPENABLE);
+                i.setType("image/*");
+                i.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/jpeg", "image/png", "image/webp"});
+                try {
+                    startActivityForResult(Intent.createChooser(i, "Elegí una fotografía"), REQ_FILE);
+                } catch (ActivityNotFoundException e) {
+                    fileCallback = null;
+                    return false;
+                }
+                return true;
+            }
         });
 
         if (savedInstanceState != null) webView.restoreState(savedInstanceState);
         else webView.loadUrl(START_URL);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode != REQ_FILE || fileCallback == null) return;
+        Uri[] result = null;
+        if (resultCode == RESULT_OK && data != null && data.getData() != null) result = new Uri[]{data.getData()};
+        fileCallback.onReceiveValue(result);
+        fileCallback = null;
+    }
+
+    /** Funciones nativas expuestas a la interfaz como window.ObservatorioNativo. */
+    private class Puente {
+        @JavascriptInterface
+        public String guardarArchivo(String nombre, String mime, String contenido) {
+            if (contenido == null || contenido.length() > MAX_EXPORT_CHARS) return "El archivo es demasiado grande para exportarlo.";
+            String limpio = (nombre == null ? "exportacion.csv" : nombre).replaceAll("[^A-Za-z0-9._-]", "_");
+            String tipo = "text/csv".equals(mime) ? "text/csv" : "text/plain";
+            byte[] bytes = contenido.getBytes(StandardCharsets.UTF_8);
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    ContentValues v = new ContentValues();
+                    v.put(MediaStore.Downloads.DISPLAY_NAME, limpio);
+                    v.put(MediaStore.Downloads.MIME_TYPE, tipo);
+                    Uri uri = getContentResolver().insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, v);
+                    if (uri == null) return "No se pudo crear el archivo.";
+                    try (OutputStream out = getContentResolver().openOutputStream(uri)) {
+                        if (out == null) return "No se pudo escribir el archivo.";
+                        out.write(bytes);
+                    }
+                    return "✅ Guardado en Descargas: " + limpio;
+                } else {
+                    File dir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+                    if (dir == null) return "Almacenamiento no disponible.";
+                    File f = new File(dir, limpio);
+                    try (FileOutputStream out = new FileOutputStream(f)) { out.write(bytes); }
+                    return "✅ Guardado en: " + f.getAbsolutePath();
+                }
+            } catch (Exception e) {
+                return "No se pudo guardar el archivo: " + e.getMessage();
+            }
+        }
+
+        @JavascriptInterface
+        public void imprimir(String titulo) {
+            final String t = (titulo == null || titulo.isEmpty()) ? "Observatorio del Agua-Poás" : titulo;
+            runOnUiThread(() -> {
+                PrintManager pm = (PrintManager) getSystemService(PRINT_SERVICE);
+                if (pm != null) pm.print(t, webView.createPrintDocumentAdapter(t), new PrintAttributes.Builder().build());
+            });
+        }
     }
 
     private void openExternal(Uri uri) {

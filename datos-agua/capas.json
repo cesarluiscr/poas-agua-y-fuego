@@ -1,0 +1,57 @@
+{
+  "esquema": "observatorio-agua-poas/capas@1",
+  "actualizado": "2026-11-02",
+  "nota": "Cada capa declara fuente, fecha, escala y nivel de confianza. Las capas con \"publico\": false no se muestran en la app (ubicaciones sensibles). Las capas sin elementos se listan como pendientes de datos oficiales.",
+  "capas": [
+    {
+      "id": "areas-protegidas", "nombre": "Áreas protegidas", "icono": "🌳", "color": "#2A9D8F", "visible": true, "publico": true,
+      "fuente": "Referencia aproximada (elaboración propia); límite oficial pendiente de SINAC", "fecha": "2026-11-01",
+      "escala": "Aproximada (círculo de 3,2 km)", "confianza": "baja",
+      "elementos": [
+        { "tipo": "circulo", "lat": 10.197, "lon": -84.230, "radio_m": 3200, "nombre": "Parque Nacional Volcán Poás", "detalle": "Bosque nuboso y páramo. Área dibujada de forma aproximada; no es el límite oficial." }
+      ]
+    },
+    {
+      "id": "cuerpos-agua", "nombre": "Cráteres y lagunas", "icono": "🌋", "color": "#E76F51", "visible": true, "publico": true,
+      "fuente": "OpenStreetMap / referencia geográfica general", "fecha": "2026-11-01", "escala": "Punto aproximado", "confianza": "media",
+      "elementos": [
+        { "tipo": "punto", "lat": 10.1997, "lon": -84.2306, "nombre": "Cráter principal del Poás", "detalle": "Laguna ácida caliente; la actividad volcánica puede afectar la calidad del agua y los cultivos." },
+        { "tipo": "punto", "lat": 10.2045, "lon": -84.2275, "nombre": "Laguna Botos", "detalle": "Cráter inactivo con laguna de agua de lluvia." }
+      ]
+    },
+    {
+      "id": "monitoreo", "nombre": "Puntos de cálculo (modelo)", "icono": "📡", "color": "#0077B6", "visible": true, "publico": true,
+      "fuente": "Observatorio del Agua-Poás: puntos donde se consultan los modelos Open-Meteo", "fecha": "2026-11-01",
+      "escala": "Celda de modelo (~11 km reanálisis; pronóstico de 1–11 km)", "confianza": "media",
+      "elementos": [
+        { "tipo": "punto", "lat": 10.170, "lon": -84.222, "nombre": "Zona alta · Volcán y Poasito", "detalle": "No es una estación física: es el punto donde se consultan los modelos." },
+        { "tipo": "punto", "lat": 10.098, "lon": -84.235, "nombre": "Zona media · San Juan y Sabana Redonda", "detalle": "No es una estación física: es el punto donde se consultan los modelos." },
+        { "tipo": "punto", "lat": 10.060, "lon": -84.255, "nombre": "Zona baja · San Pedro y Carrillos", "detalle": "No es una estación física: es el punto donde se consultan los modelos." }
+      ]
+    },
+    {
+      "id": "comunidades", "nombre": "Comunidades", "icono": "🏘️", "color": "#E9C46A", "visible": false, "publico": true,
+      "fuente": "Referencia aproximada de centros de distrito", "fecha": "2026-11-01", "escala": "Punto aproximado", "confianza": "baja",
+      "elementos": [
+        { "tipo": "punto", "lat": 10.0756, "lon": -84.2425, "nombre": "San Pedro", "detalle": "Cabecera del cantón." },
+        { "tipo": "punto", "lat": 10.0905, "lon": -84.2510, "nombre": "San Juan", "detalle": "" },
+        { "tipo": "punto", "lat": 10.0640, "lon": -84.2690, "nombre": "San Rafael", "detalle": "" },
+        { "tipo": "punto", "lat": 10.0395, "lon": -84.2705, "nombre": "Carrillos", "detalle": "" },
+        { "tipo": "punto", "lat": 10.1000, "lon": -84.2210, "nombre": "Sabana Redonda", "detalle": "" },
+        { "tipo": "punto", "lat": 10.1667, "lon": -84.2194, "nombre": "Poasito", "detalle": "" }
+      ]
+    },
+    { "id": "microcuencas", "nombre": "Microcuencas", "icono": "💦", "color": "#00B4D8", "visible": false, "publico": true,
+      "fuente": "Pendiente: límites oficiales (SENARA / MINAE / Comisión de microcuenca)", "fecha": null, "escala": null, "confianza": null, "elementos": [] },
+    { "id": "rios", "nombre": "Ríos y quebradas", "icono": "🏞️", "color": "#0096C7", "visible": false, "publico": true,
+      "fuente": "Pendiente: red hidrográfica oficial (IGN / SNIT)", "fecha": null, "escala": null, "confianza": null, "elementos": [] },
+    { "id": "nacientes", "nombre": "Nacientes y pozos", "icono": "⛲", "color": "#03045E", "visible": false, "publico": false,
+      "fuente": "Pendiente: inventario de ASADAS / SENARA (acceso restringido)", "fecha": null, "escala": null, "confianza": null, "elementos": [] },
+    { "id": "asadas", "nombre": "ASADAS y sistemas", "icono": "🚰", "color": "#48CAE4", "visible": false, "publico": true,
+      "fuente": "Pendiente: áreas de servicio autorizadas por cada ASADA / AyA", "fecha": null, "escala": null, "confianza": null, "elementos": [] },
+    { "id": "recarga", "nombre": "Zonas de recarga", "icono": "🌧️", "color": "#90E0EF", "visible": false, "publico": true,
+      "fuente": "Pendiente: estudios hidrogeológicos validados (SENARA)", "fecha": null, "escala": null, "confianza": null, "elementos": [] },
+    { "id": "amenazas", "nombre": "Amenazas", "icono": "⚠️", "color": "#F4A261", "visible": false, "publico": true,
+      "fuente": "Pendiente: CNE / Municipalidad / reportes validados", "fecha": null, "escala": null, "confianza": null, "elementos": [] }
+  ]
+}

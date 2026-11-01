@@ -1,0 +1,24 @@
+{
+  "esquema": "observatorio-agua-poas/gobernanza@1",
+  "actualizado": "2026-11-02",
+  "nota": "Información pública no sensible. Los registros los publica el administrador funcional del observatorio.",
+  "actores": [
+    { "nombre": "Municipalidad de Poás", "rol": "Gestión territorial, ambiente, residuos, acueducto municipal y coordinación local.", "url": "https://munipoas.go.cr" },
+    { "nombre": "ASADAS del cantón", "rol": "Operación de acueductos comunales, incidencias y acciones de protección de nacientes.", "url": "https://www.aya.go.cr" },
+    { "nombre": "AyA", "rol": "Rectoría técnica de los servicios de agua potable y de las ASADAS.", "url": "https://www.aya.go.cr" },
+    { "nombre": "MINAE", "rol": "Políticas, permisos e información ambiental; denuncias por SITADA.", "url": "https://sitada.minae.go.cr" },
+    { "nombre": "SINAC", "rol": "Áreas protegidas, biodiversidad y Parque Nacional Volcán Poás.", "url": "https://www.sinac.go.cr" },
+    { "nombre": "SENARA", "rol": "Información hidrogeológica y estudios de aguas subterráneas.", "url": "https://www.senara.go.cr" },
+    { "nombre": "CNE", "rol": "Amenazas, prevención y gestión del riesgo.", "url": "https://www.cne.go.cr" },
+    { "nombre": "Comisión de microcuenca", "rol": "Coordinación, acuerdos, seguimiento comunitario y proyectos.", "url": null },
+    { "nombre": "Centros educativos y organizaciones", "rol": "Educación ambiental, ciencia ciudadana y voluntariado.", "url": null }
+  ],
+  "proyectos": [],
+  "acuerdos": [],
+  "reuniones": [],
+  "ejemplos_de_registro": {
+    "proyecto": { "id": "PR-001", "nombre": "", "microcuenca": "", "objetivo": "", "responsable": "", "presupuesto_crc": 0, "financiamiento": "", "inicio": "AAAA-MM-DD", "fin": "AAAA-MM-DD", "estado": "planificado | en ejecución | finalizado | suspendido", "avance_pct": 0 },
+    "acuerdo": { "id": "AC-001", "descripcion": "", "responsable": "", "fecha_limite": "AAAA-MM-DD", "estado": "pendiente | en proceso | cumplido", "fecha_cumplimiento": null, "reunion": "RE-001" },
+    "reunion": { "id": "RE-001", "fecha": "AAAA-MM-DD", "tema": "", "lugar": "", "acta_publica_url": null }
+  }
+}

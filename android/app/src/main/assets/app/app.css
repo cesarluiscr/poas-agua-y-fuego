@@ -1,5 +1,5 @@
 /* ============================================================
-   AquaPoás — tema "Fresh Water 2026"
+   Observatorio del Agua-Poás — tema "Fresh Water 2026"
    Rediseño moderno: dock flotante, glassmorphism, modo oscuro
    automático, profundidad suave y micro-interacciones.
    Nota: la paleta de estado/azules replica el objeto C de app.js
@@ -17,7 +17,7 @@
     --shadow: 0 1px 2px rgba(9, 42, 79, .05), 0 10px 28px rgba(9, 42, 79, .09);
     --shadow-float: 0 12px 32px rgba(3, 4, 94, .18);
     --glow: 0 8px 20px rgba(0, 119, 182, .35);
-    --top-h: 64px; --tab-h: 66px;
+    --top-h: 64px; --tab-h: 62px; --credit-h: 24px;
     --ring: 0 0 0 4px rgba(0, 180, 216, .18);
 }
 @media (prefers-color-scheme: dark) {
@@ -83,7 +83,7 @@ b, strong { font-weight: 800; }
     .offline { background: linear-gradient(90deg, #3A2E07, #332906); color: #FFD666; border-bottom-color: rgba(255, 214, 102, .14); }
 }
 
-main { padding-bottom: calc(var(--tab-h) + 42px); }
+main { padding-bottom: calc(var(--tab-h) + var(--credit-h) + 30px); }
 .view { padding: 14px 14px 8px; animation: fade .3s cubic-bezier(.2, .7, .3, 1); }
 @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
@@ -208,7 +208,7 @@ main { padding-bottom: calc(var(--tab-h) + 42px); }
 /* ---------------- Mapa ---------------- */
 #v-mapa { padding: 0; position: relative; }
 #map {
-    height: calc(100vh - var(--top-h) - var(--tab-h)); height: calc(100dvh - var(--top-h) - var(--tab-h));
+    height: calc(100vh - var(--top-h) - var(--credit-h)); height: calc(100dvh - var(--top-h) - var(--credit-h));
     width: 100%; background: var(--foam); z-index: 1;
 }
 .map-layers {
@@ -321,8 +321,8 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--s
 /* ---------------- Dock de navegación flotante ---------------- */
 .tabbar {
     position: fixed; left: 12px; right: 12px;
-    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
-    z-index: 30; height: var(--tab-h); display: grid; grid-template-columns: repeat(5, 1fr);
+    bottom: calc(var(--credit-h) + 6px + env(safe-area-inset-bottom, 0px));
+    z-index: 30; height: var(--tab-h); display: grid; grid-template-columns: repeat(6, 1fr);
     background: rgba(255, 255, 255, .88);
     border: 1px solid rgba(255, 255, 255, .55); border-radius: 24px;
     box-shadow: 0 12px 34px rgba(3, 4, 94, .20), 0 2px 8px rgba(3, 4, 94, .08);
@@ -386,3 +386,116 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--s
     .modal-box { max-width: 560px; border-radius: 28px; }
 }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+
+/* ============================================================
+   v2.0 — Observatorio del Agua-Poás · Proyecto Gobernanza del Agua
+   ============================================================ */
+.brand h1 { font-size: 1.02rem; line-height: 1.15; }
+.brand p { font-size: .72rem; font-weight: 600; }
+.brand > div { min-width: 0; }
+
+/* Pie de créditos fijo bajo el dock */
+.credit {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 31; height: calc(var(--credit-h) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .7rem; font-weight: 700; letter-spacing: .06em; color: var(--muted);
+    background: var(--bg); border-top: 1px solid var(--line-soft);
+}
+.tabbar a { font-size: .6rem; padding: 0 1px; text-align: center; }
+.tabbar a span { font-size: 1.18rem; }
+
+/* Etiquetas de tipo de dato */
+.badge { display: inline-block; font-size: .6rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+    padding: 3px 7px; border-radius: 99px; vertical-align: middle; white-space: nowrap; border: 1px solid transparent; }
+.badge.obs { background: rgba(42,157,143,.14); color: #1E7A6F; border-color: rgba(42,157,143,.3); }
+.badge.est { background: rgba(0,119,182,.11); color: #0B5F91; border-color: rgba(0,119,182,.25); }
+.badge.rea { background: rgba(108,92,231,.12); color: #5847C9; border-color: rgba(108,92,231,.28); }
+.badge.pro { background: rgba(0,180,216,.14); color: #007C96; border-color: rgba(0,180,216,.3); }
+.badge.pen { background: rgba(233,196,106,.2); color: #8A6400; border-color: rgba(233,196,106,.45); }
+@media (prefers-color-scheme: dark) {
+    .badge.obs { color: #7FE0D3; } .badge.est { color: #8FD0F5; } .badge.rea { color: #B7ACFF; } .badge.pro { color: #8EE6F7; } .badge.pen { color: #F2D58C; }
+}
+.tile-top { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.info { border: none; background: none; color: var(--blue); font-size: .85rem; font-weight: 800; cursor: pointer; padding: 0 2px; }
+.hero-val small { font-size: 1rem; }
+.caveat { font-size: .76rem; color: var(--muted); margin: 8px 6px 0; line-height: 1.45; }
+.caveat b { color: var(--ink); }
+.link-btn { border: none; background: none; padding: 0; font: inherit; font-weight: 700; color: var(--blue); cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+.link-btn.light { color: #fff; opacity: .9; font-size: .78rem; }
+@media (prefers-color-scheme: dark) { .link-btn:not(.light), .info { color: var(--sky); } }
+
+/* Segmentos (subpestañas) */
+.seg { display: flex; gap: 4px; padding: 4px; border-radius: 16px; background: var(--card); border: 1px solid var(--line-soft); box-shadow: var(--shadow); margin-bottom: 12px; overflow-x: auto; scrollbar-width: none; }
+.seg::-webkit-scrollbar { display: none; }
+.seg button { flex: 1; white-space: nowrap; border: none; background: none; font: inherit; font-size: .8rem; font-weight: 700; color: var(--muted); padding: 9px 10px; border-radius: 12px; cursor: pointer; }
+.seg button[aria-selected="true"] { background: linear-gradient(120deg, var(--deep), var(--blue)); color: #fff; box-shadow: var(--glow); }
+.mini-seg { display: flex; gap: 4px; }
+.mini-seg button { border: 1px solid var(--line); background: var(--bg); color: var(--blue); font: inherit; font-size: .72rem; font-weight: 700; padding: 5px 9px; border-radius: 99px; cursor: pointer; }
+.row-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.row-head h2, .row-head h3 { margin-bottom: 0; }
+.sub { font-size: .92rem; color: var(--brand-ink); margin: 14px 0 6px; }
+.tiny { font-size: .76rem; line-height: 1.45; }
+.mono { font-family: ui-monospace, "Roboto Mono", monospace; letter-spacing: .02em; }
+.warn-txt { color: #A35A00; }
+@media (prefers-color-scheme: dark) { .warn-txt { color: #F4B860; } }
+.prose p { font-size: .9rem; line-height: 1.6; margin-bottom: 10px; }
+
+/* Tablas */
+.table-wrap { overflow-x: auto; margin-top: 8px; }
+.tbl { width: 100%; border-collapse: collapse; font-size: .8rem; }
+.tbl th, .tbl td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tbl thead th { font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.tbl tbody th { color: var(--brand-ink); font-weight: 700; }
+.kv-tbl th { width: 38%; color: var(--muted); font-weight: 700; }
+.kv-tbl a, .tbl a { color: var(--blue); }
+.comp td { white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* Listas y estados vacíos */
+.item { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.item:last-child { border-bottom: none; }
+.item p { margin-top: 3px; }
+.empty-state { text-align: center; padding: 18px 8px; font-size: 1.6rem; }
+.empty-state p { font-size: .86rem; margin-top: 6px; }
+.sample { border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; margin-bottom: 10px; }
+.actors { list-style: none; }
+.actors li { padding: 9px 0; border-bottom: 1px solid var(--line); display: grid; gap: 2px; }
+.actors li:last-child { border-bottom: none; }
+.actors a { color: var(--blue); font-weight: 700; text-decoration: none; }
+.actors span { color: var(--muted); font-size: .8rem; }
+.meter.small { height: 8px; margin: 6px 0 2px; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.actions .btn { flex: 1; }
+
+/* Formularios */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+input[type=number] { width: 100%; font: inherit; font-size: .95rem; color: var(--ink); background: var(--bg); border: 1.5px solid transparent; border-radius: 14px; padding: 11px 12px; }
+@media (prefers-color-scheme: dark) { input[type=number] { background: rgba(147, 169, 190, .08); } }
+.check { display: flex !important; align-items: flex-start; gap: 10px; font-weight: 600 !important; font-size: .82rem !important; }
+.check input { width: 20px; height: 20px; margin-top: 1px; accent-color: var(--blue); flex-shrink: 0; }
+.coord { font-size: .82rem; color: var(--ink); background: var(--bg); border-radius: 12px; padding: 9px 12px; }
+.file-btn { display: block; text-align: center; cursor: pointer; }
+.foto-prev { margin-top: 8px; display: flex; align-items: center; gap: 12px; }
+.foto-prev img { width: 84px; height: 84px; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); }
+.btn:disabled { opacity: .6; }
+.compare { margin-top: 4px; }
+.compare small { display: block; font-size: .72rem; }
+
+/* Mapa */
+.zone-jump { position: absolute; z-index: 5; right: 12px; top: 96px; display: grid; gap: 6px; }
+.zone-jump button { border: none; font: inherit; font-size: .7rem; font-weight: 800; padding: 7px 9px; border-radius: 10px; background: rgba(255,255,255,.94); color: var(--blue); box-shadow: 0 3px 10px rgba(3,4,94,.15); cursor: pointer; }
+@media (prefers-color-scheme: dark) { .zone-jump button { background: rgba(18,35,58,.94); color: var(--sky); } }
+.leaflet-popup-content hr { border: none; border-top: 1px solid #dfe8ef; margin: 6px 0; }
+.sheet { bottom: calc(var(--tab-h) + 16px); }
+.leaflet-bottom { bottom: calc(var(--tab-h) + 8px); }
+
+/* Impresión / exportación a PDF */
+@media print {
+    .topbar, .tabbar, .credit, .seg, .actions, .offline, #expMsg { display: none !important; }
+    body { background: #fff !important; color: #000; }
+    main { padding: 0; max-width: none; }
+    .card, .tile { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
+    .view[hidden], .pane[hidden] { display: none !important; }
+    #p-hist::before { content: "Observatorio del Agua-Poás · Proyecto Gobernanza del Agua · Tech Center CR @ 2026"; display: block; font-weight: 800; margin-bottom: 10px; }
+}

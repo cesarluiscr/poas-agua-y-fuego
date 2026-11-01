@@ -167,3 +167,11 @@ git push origin master master:main
 - **Colores principales**: turquesa (#40E0D0), rojo volcán (#C0392B), verde agua (#17A589)
 - **WhatsApp del proyecto**: 50687058612
 - **247 commits** en el repo hasta la fecha
+
+### App Android — Observatorio del Agua-Poás (Proyecto Gobernanza del Agua)
+| Ruta | Descripción |
+|------|-------------|
+| `android/` | Proyecto Android (WebView). Interfaz en `android/app/src/main/assets/app/` (`index.html`, `app.css`, `js/*.js`) |
+| `datos-agua/*.json` | Datos editables de la app: capas del mapa, calidad del agua, gobernanza y actividades. La app los lee del sitio publicado y lleva una copia para uso sin conexión |
+| `google-apps-script.js` | Backend: reportes `tipo: 'reporte_agua'` en la hoja "Reportes Agua" (código, estado, foto en Drive) y `?accion=estado&codigo=` |
+| `.github/workflows/android-apk.yml` | Compila el APK en GitHub Actions |

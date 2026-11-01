@@ -3,12 +3,12 @@
     <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowBackground">@color/fondo</item>
         <item name="android:statusBarColor">@color/primario</item>
-        <item name="android:navigationBarColor">@color/blanco</item>
+        <item name="android:navigationBarColor">@color/fondo</item>
         <item name="android:colorPrimary">@color/primario</item>
         <item name="android:colorAccent">@color/acento</item>
     </style>
-    <color name="fondo">#F2F8FB</color>
-    <color name="primario">#0077B6</color>
+    <color name="fondo">#EDF5FB</color>
+    <color name="primario">#0066A1</color>
     <color name="acento">#00B4D8</color>
     <color name="blanco">#FFFFFF</color>
 </resources>

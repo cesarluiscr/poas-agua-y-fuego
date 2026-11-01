@@ -10,8 +10,8 @@ android {
         applicationId 'cr.poas.aquapoas'
         minSdk 24
         targetSdk 35
-        versionCode 1
-        versionName '1.0.0'
+        versionCode 4
+        versionName '2.0.0'
     }
 
     compileOptions {
@@ -29,3 +29,11 @@ android {
 dependencies {
     implementation 'androidx.webkit:webkit:1.12.1'
 }
+
+// Datos editables del observatorio (capas, calidad, gobernanza, actividades):
+// se publican en el sitio (datos-agua/) y se incluye una copia en la app para uso sin conexión.
+tasks.register('copyDatosAgua', Sync) {
+    from(rootProject.file('../datos-agua')) { include '*.json' }
+    into layout.projectDirectory.dir('src/main/assets/app/data')
+}
+preBuild.dependsOn 'copyDatosAgua'
