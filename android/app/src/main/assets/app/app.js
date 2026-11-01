@@ -35,8 +35,8 @@
     function store(k, v) { try { localStorage.setItem('aqua:' + k, JSON.stringify({ t: Date.now(), v: v })); } catch (e) {} }
     function load(k) { try { return JSON.parse(localStorage.getItem('aqua:' + k)); } catch (e) { return null; } }
 
-    // Descarga con respaldo: si falla la red, usa lo último guardado.
-    function getJSON(url, key) {
+    // Descarga con respaldo: si falla la red, usa lo último guardado (con aviso de antigüedad).
+    function getJSON(url, key, maxAge) {
         return fetch(url).then(function (r) {
             if (!r.ok) throw new Error('HTTP ' + r.status);
             return r.json();
@@ -45,8 +45,35 @@
             return d;
         }).catch(function (err) {
             var c = key && load(key);
-            if (c) { c.v.__cachedAt = c.t; return c.v; }
+            if (c) { c.v.__cachedAt = c.t; c.v.__stale = maxAge ? (Date.now() - c.t > maxAge) : false; return c.v; }
             throw err;
+        });
+    }
+
+    // Cola de reportes: si no hay conexión, el reporte se guarda y se reintenta solo.
+    var PEND_KEY = 'pendientes';
+    function loadPend() { var c = load(PEND_KEY); return c && c.v && c.v.length ? c.v : []; }
+    function savePend(a) { try { localStorage.setItem('aqua:' + PEND_KEY, JSON.stringify({ t: Date.now(), v: a.slice(-20) })); } catch (e) {} }
+    function sendCentral(payload) {
+        var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+        var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 15000) : null;
+        return fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify(payload), signal: ctrl ? ctrl.signal : undefined
+        }).then(function () { return true; }).catch(function () { return false; }).then(function (ok) {
+            if (timer) clearTimeout(timer);
+            return ok;
+        });
+    }
+    function retryPending() {
+        var pend = loadPend();
+        if (!pend.length || !navigator.onLine) return;
+        var next = pend.shift(); savePend(pend);
+        sendCentral(next).then(function (ok) {
+            if (!ok) { var q = loadPend(); q.unshift(next); savePend(q); }
+            else if (!loadPend().length) {
+                var m = $('rMsg');
+                if (m) { m.style.color = C.ok; m.textContent = '✅ Reporte pendiente sincronizado con el registro central. ¡Gracias!'; }
+            }
         });
     }
     function forecastURL(lat, lon) {
@@ -159,7 +186,7 @@
         var z = zone, btn = $('btnRefresh');
         btn.classList.add('spin');
         html('chartDaily', '<p class="empty">Cargando…</p>');
-        var p1 = getJSON(forecastURL(z.lat, z.lon), 'fc-' + z.id).then(function (d) {
+        var p1 = getJSON(forecastURL(z.lat, z.lon), 'fc-' + z.id, 12 * 36e5).then(function (d) {
             if (z !== zone) return;
             var s = summarize(d), c = d.current || {}, st = status(s.balance);
             gauge(s.balance);
@@ -180,13 +207,13 @@
                     tip: dayLabel(t) + ': ' + fmt(d.daily.precipitation_sum[i], 1) + ' mm' + (fut && pr != null ? ' · prob. ' + pr + '%' : '') };
             }), { line: d.daily.et0_fao_evapotranspiration, mark: s.idx, every: 7, aria: 'Lluvia diaria' });
             $('offline').hidden = !d.__cachedAt;
-            if (d.__cachedAt) text('offline', 'Sin conexión · datos guardados el ' + new Date(d.__cachedAt).toLocaleString('es-CR', { dateStyle: 'short', timeStyle: 'short' }));
+            if (d.__cachedAt) text('offline', (d.__stale ? 'Sin conexión · datos antiguos (más de 12 h), guardados el ' : 'Sin conexión · datos guardados el ') + new Date(d.__cachedAt).toLocaleString('es-CR', { dateStyle: 'short', timeStyle: 'short' }));
         }).catch(function () {
             if (z !== zone) return;
             html('chartDaily', '<p class="empty">No hay conexión ni datos guardados para esta zona.</p>');
             text('kBalanceTxt', 'Sin datos'); $('offline').hidden = false;
         });
-        var p2 = getJSON('https://flood-api.open-meteo.com/v1/flood?latitude=' + z.flow.lat + '&longitude=' + z.flow.lon + '&daily=river_discharge&past_days=30&forecast_days=7', 'fl-' + z.id)
+        var p2 = getJSON('https://flood-api.open-meteo.com/v1/flood?latitude=' + z.flow.lat + '&longitude=' + z.flow.lon + '&daily=river_discharge&past_days=30&forecast_days=7', 'fl-' + z.id, 12 * 36e5)
             .then(function (d) {
                 if (z !== zone) return;
                 var t = d.daily.time, q = d.daily.river_discharge, i = t.indexOf(today()); if (i < 0) i = Math.min(30, t.length - 1);
@@ -262,7 +289,9 @@
             bar.appendChild(b);
         });
         var mk = null;
-        map.on('click', function (e) {
+        var clickTimer = null;
+        // Antirrebote del toque en el mapa: evita consultas repetidas por toques múltiples.
+        function consultPoint(e) {
             var lat = +e.latlng.lat.toFixed(4), lon = +e.latlng.lng.toFixed(4);
             mapPoint = { lat: lat, lon: lon };
             if (mk) mk.setLatLng(e.latlng); else mk = L.circleMarker(e.latlng, dot(C.deep)).addTo(map);
@@ -279,6 +308,10 @@
                     '<div><span>Estado</span><b><i class="dot ' + st.cls + '"></i>' + st.txt + '</b></div></div>' +
                     '<p class="muted" style="margin-top:8px">Podés usar este punto en la pestaña Reportar.</p>');
             }).catch(function () { html('sheetTxt', '<h3>📍 ' + lat + ', ' + lon + '</h3><p class="muted">Sin conexión para consultar este punto.</p>'); });
+        }
+        map.on('click', function (e) {
+            if (clickTimer) clearTimeout(clickTimer);
+            clickTimer = setTimeout(function () { consultPoint(e); }, 400);
         });
     }
 
@@ -292,7 +325,7 @@
         var now = new Date(), y0 = now.getFullYear() - 5;
         var end = new Date(now.getTime() - 6 * 864e5).toLocaleDateString('en-CA', { timeZone: TZ });
         html('chartMonthly', '<p class="empty">Cargando…</p>'); html('chartYearly', '<p class="empty">Cargando…</p>'); html('hStats', '');
-        getJSON('https://archive-api.open-meteo.com/v1/archive?latitude=' + z.lat + '&longitude=' + z.lon + '&start_date=' + y0 + '-01-01&end_date=' + end + '&daily=precipitation_sum&timezone=' + encodeURIComponent(TZ), 'hist-' + z.id)
+        getJSON('https://archive-api.open-meteo.com/v1/archive?latitude=' + z.lat + '&longitude=' + z.lon + '&start_date=' + y0 + '-01-01&end_date=' + end + '&daily=precipitation_sum&timezone=' + encodeURIComponent(TZ), 'hist-' + z.id, 7 * 864e5)
             .then(function (d) { if (z === zone) renderHistory(d.daily.time, d.daily.precipitation_sum, d.daily.time[d.daily.time.length - 1]); })
             .catch(function () { histZone = null; html('chartMonthly', '<p class="empty">Sin conexión para cargar el histórico.</p>'); html('chartYearly', ''); });
     }
@@ -323,9 +356,9 @@
         var ytdA = sum(ytdK.map(function (k) { return avgM[parseInt(k.slice(5), 10) - 1]; })), diff = ytdA ? (ytd - ytdA) / ytdA * 100 : 0;
         var cls = diff >= -10 ? 'ok' : diff >= -25 ? 'warn' : 'bad';
         html('hStats', [
-            ['📏', 'Promedio anual', fmt(avgY), 'mm · ' + past[0] + '–' + past[past.length - 1]],
-            ['💧', 'Año más lluvioso', wet || '--', wet ? fmt(yrs[wet]) + ' mm' : ''],
-            ['🏜️', 'Año más seco', dry || '--', dry ? fmt(yrs[dry]) + ' mm' : ''],
+            ['📏', 'Promedio anual', fmt(avgY), 'mm · ' + esc(past[0]) + '–' + esc(past[past.length - 1])],
+            ['💧', 'Año más lluvioso', esc(wet) || '--', wet ? fmt(yrs[wet]) + ' mm' : ''],
+            ['🏜️', 'Año más seco', esc(dry) || '--', dry ? fmt(yrs[dry]) + ' mm' : ''],
             ['📅', cur + ' a la fecha', fmt(ytd), ytdK.length ? '<i class="dot ' + cls + '"></i>' + (diff >= 0 ? '+' : '') + fmt(diff) + '% vs. promedio' : 'mm']
         ].map(function (s) { return '<div class="tile"><span class="t-ic">' + s[0] + '</span><span class="t-lab">' + s[1] + '</span><b>' + s[2] + '</b><small>' + s[3] + '</small></div>'; }).join(''));
     }
@@ -373,13 +406,21 @@
             var tipo = $('rTipo').value, ubic = clean($('rUbic').value, 200), desc = clean($('rDesc').value, 1000);
             var nom = clean($('rNombre').value, 100), con = clean($('rContacto').value, 100);
             if (!desc) { msg.style.color = C.bad; msg.textContent = 'Por favor describí la situación.'; $('rDesc').focus(); return; }
-            fetch(APPS_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' },
-                body: JSON.stringify({ tipo: 'queja', categoria: 'Agua (app AquaPoás) — ' + tipo, descripcion: desc + (ubic ? '\nUbicación: ' + ubic : ''), nombre: nom, contacto: con })
-            }).catch(function () {});
+            var payload = { tipo: 'queja', categoria: 'Agua (app AquaPoás) — ' + tipo, descripcion: desc + (ubic ? '\nUbicación: ' + ubic : ''), nombre: nom, contacto: con };
             var t = '💧 REPORTE DEL AGUA — AquaPoás\n\nTipo: ' + tipo + '\n' + (ubic ? 'Ubicación: ' + ubic + '\n' : '') + (nom ? 'Nombre: ' + nom + '\n' : '') + (con ? 'Contacto: ' + con + '\n' : '') + '\nDescripción:\n' + desc;
             window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(t), '_blank');
-            msg.style.color = C.ok; msg.textContent = '✅ Reporte enviado. ¡Gracias por cuidar el agua de Poás!';
             $('report').reset();
+            // Envío al registro central con reintento: nunca anunciar éxito si la red falló.
+            sendCentral(payload).then(function (ok) {
+                if (ok) {
+                    msg.style.color = C.ok;
+                    msg.textContent = '✅ WhatsApp abierto y reporte enviado al registro central. ¡Gracias por cuidar el agua de Poás!';
+                } else {
+                    var pend = loadPend(); pend.push(payload); savePend(pend);
+                    msg.style.color = C.alert;
+                    msg.textContent = '⚠️ WhatsApp abierto, pero el registro central no respondió. Tu reporte quedó guardado y se enviará solo cuando haya conexión.';
+                }
+            });
         });
     }
 
@@ -387,12 +428,13 @@
     var savedZone = load('zone');
     if (savedZone) zone = ZONES.filter(function (z) { return z.id === savedZone.v; })[0] || zone;
     $('btnRefresh').addEventListener('click', function () { histZone = null; loadLive(); if (!$('v-historico').hidden) loadHistory(); });
-    window.addEventListener('online', function () { loadLive(); });
+    window.addEventListener('online', function () { loadLive(); retryPending(); });
     window.addEventListener('offline', function () { $('offline').hidden = false; });
     renderZones();
     renderTopics();
     initCalc();
     initReport();
+    retryPending();
     loadLive();
     show(location.hash.slice(1) || 'inicio');
 })();
