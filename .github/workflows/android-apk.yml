@@ -29,13 +29,12 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - uses: android-actions/setup-android@v3
-
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.14.3'
 
       - name: Compilar APK
+        # El runner ubuntu-latest ya incluye el Android SDK (ANDROID_HOME)
         run: gradle -p android assembleDebug --no-daemon --stacktrace
 
       - name: Renombrar APK
