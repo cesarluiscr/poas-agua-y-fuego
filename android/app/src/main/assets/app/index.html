@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://tile.openstreetmap.org; connect-src https://api.open-meteo.com https://flood-api.open-meteo.com https://archive-api.open-meteo.com https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'">
+    <meta name="theme-color" content="#0077B6">
+    <title>AquaPoás</title>
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="brand">
+        <img src="img/icono.png" alt="" width="36" height="36">
+        <div>
+            <h1>AquaPoás</h1>
+            <p>Observatorio del agua</p>
+        </div>
+    </div>
+    <button class="icon-btn" id="btnRefresh" aria-label="Actualizar datos">⟳</button>
+</header>
+
+<div class="offline" id="offline" hidden>Sin conexión · mostrando los últimos datos guardados</div>
+
+<main>
+    <!-- INICIO -->
+    <section class="view" id="v-inicio" data-title="Inicio">
+        <div class="zones" id="zones" role="group" aria-label="Zona"></div>
+
+        <article class="hero-card">
+            <div class="gauge" id="gauge" aria-hidden="true"></div>
+            <div class="hero-txt">
+                <span class="eyebrow">Balance hídrico · 30 días</span>
+                <strong class="hero-val" id="kBalance">--</strong>
+                <span class="pill" id="kBalanceTxt">Cargando…</span>
+            </div>
+            <p class="season" id="season"></p>
+        </article>
+
+        <div class="tiles">
+            <div class="tile"><span class="t-ic">🌧️</span><span class="t-lab">Lluvia hoy</span><b id="kToday">--</b><small id="kTodaySub">mm</small></div>
+            <div class="tile"><span class="t-ic">☔</span><span class="t-lab">Últimos 7 días</span><b id="k7">--</b><small id="k30">mm</small></div>
+            <div class="tile"><span class="t-ic">🔮</span><span class="t-lab">Próximos 7 días</span><b id="kNext">--</b><small id="kNextSub">mm</small></div>
+            <div class="tile"><span class="t-ic">🌱</span><span class="t-lab">Humedad del suelo</span><b id="kSoil">--</b><small id="kSoilSub">%</small></div>
+            <div class="tile"><span class="t-ic">🏞️</span><span class="t-lab">Caudal del río</span><b id="kFlow">--</b><small id="kFlowSub">m³/s</small></div>
+            <div class="tile"><span class="t-ic">🌡️</span><span class="t-lab">Temperatura</span><b id="kTemp">--</b><small id="kTempSub">°C</small></div>
+        </div>
+
+        <article class="card">
+            <h2>Lluvia diaria</h2>
+            <p class="muted">30 días atrás y pronóstico de 7 días</p>
+            <div class="chart" id="chartDaily"><p class="empty">Cargando…</p></div>
+            <div class="legend"><span><i class="sw-a"></i>Lluvia</span><span><i class="sw-b"></i>Pronóstico</span><span><i class="sw-c"></i>Evapotranspiración</span></div>
+        </article>
+
+        <h2 class="sec">Aprendé sobre el agua</h2>
+        <div class="topics" id="topics"></div>
+    </section>
+
+    <!-- MAPA -->
+    <section class="view" id="v-mapa" data-title="Mapa" hidden>
+        <div id="map" aria-label="Mapa del agua"></div>
+        <div class="map-layers" id="layers"></div>
+        <article class="sheet" id="sheet">
+            <span class="grab"></span>
+            <p class="muted" id="sheetTxt">Tocá un punto del mapa para consultar la lluvia y el balance hídrico de ese lugar.</p>
+        </article>
+    </section>
+
+    <!-- HISTÓRICO -->
+    <section class="view" id="v-historico" data-title="Histórico" hidden>
+        <h2 class="sec first">Lluvia de los últimos 5 años</h2>
+        <p class="muted pad">Reanálisis climático ERA5 para la zona seleccionada en Inicio: <b id="hZone"></b></p>
+        <div class="tiles" id="hStats"></div>
+        <article class="card">
+            <h2>Lluvia mensual</h2>
+            <div class="chart" id="chartMonthly"><p class="empty">Cargando…</p></div>
+            <div class="legend"><span><i class="sw-a"></i>Sobre el promedio</span><span><i class="sw-d"></i>Bajo el promedio</span></div>
+        </article>
+        <article class="card">
+            <h2>Total anual</h2>
+            <div class="chart" id="chartYearly"><p class="empty">Cargando…</p></div>
+            <div class="legend"><span><i class="sw-e"></i>Año</span><span><i class="sw-c"></i>Promedio</span></div>
+        </article>
+    </section>
+
+    <!-- CONSUMO -->
+    <section class="view" id="v-consumo" data-title="Consumo" hidden>
+        <article class="card result">
+            <span class="eyebrow">Consumo por persona</span>
+            <strong class="hero-val" id="rPersona">--</strong>
+            <div class="meter"><span id="rMeter"></span></div>
+            <p class="muted" id="rRef"></p>
+            <div class="duo">
+                <div><span class="t-lab">Hogar / día</span><b id="rDia">--</b></div>
+                <div><span class="t-lab">Hogar / mes</span><b id="rMes">--</b></div>
+            </div>
+        </article>
+        <form class="card form" id="calc" onsubmit="return false">
+            <label>Personas en el hogar <output id="oPersonas"></output><input type="range" id="cPersonas" min="1" max="10" value="4"></label>
+            <label>Minutos de ducha por persona <output id="oDucha"></output><input type="range" id="cDucha" min="0" max="30" value="10"></label>
+            <label>Descargas de inodoro por persona <output id="oInodoro"></output><input type="range" id="cInodoro" min="0" max="10" value="5"></label>
+            <label>Cargas de lavadora por semana <output id="oLavadora"></output><input type="range" id="cLavadora" min="0" max="14" value="4"></label>
+            <label>Minutos lavando platos al día <output id="oPlatos"></output><input type="range" id="cPlatos" min="0" max="60" value="15"></label>
+            <label>Minutos de riego o lavado de carro <output id="oJardin"></output><input type="range" id="cJardin" min="0" max="60" value="5"></label>
+            <label>Grifería e inodoro
+                <select id="cEquipo"><option value="1">Convencional</option><option value="0.65">Ahorradora</option></select>
+            </label>
+        </form>
+        <article class="card">
+            <h2>Consejos para vos</h2>
+            <ul class="tips" id="rTips"></ul>
+        </article>
+    </section>
+
+    <!-- REPORTAR -->
+    <section class="view" id="v-reportar" data-title="Reportar" hidden>
+        <form class="card form" id="report" novalidate>
+            <h2>Reportar una situación</h2>
+            <p class="muted">Fugas, contaminación, nacientes afectadas o tala en zonas de recarga.</p>
+            <label>Tipo
+                <select id="rTipo">
+                    <option value="Fuga de agua">🚰 Fuga de agua en vía pública</option>
+                    <option value="Falta de agua">🚱 Falta o interrupción del servicio</option>
+                    <option value="Agua turbia o con olor">🧪 Agua turbia, con olor o sabor</option>
+                    <option value="Contaminación de río o quebrada">☣️ Contaminación de río o quebrada</option>
+                    <option value="Afectación a naciente">⛲ Afectación a una naciente</option>
+                    <option value="Tala o construcción en zona de recarga">🌳 Tala o construcción en zona de recarga</option>
+                    <option value="Inundación o desborde">🌊 Inundación o desborde</option>
+                    <option value="Otro">📝 Otro</option>
+                </select>
+            </label>
+            <label>Ubicación
+                <input type="text" id="rUbic" maxlength="200" placeholder="Distrito, barrio, referencia…">
+            </label>
+            <button type="button" class="btn ghost" id="rUseMap">📍 Usar el punto marcado en el mapa</button>
+            <label>Descripción *
+                <textarea id="rDesc" maxlength="1000" placeholder="¿Qué está pasando? ¿Desde cuándo?"></textarea>
+            </label>
+            <label>Nombre (opcional)<input type="text" id="rNombre" maxlength="100"></label>
+            <label>Teléfono o correo (opcional)<input type="text" id="rContacto" maxlength="100"></label>
+            <button type="submit" class="btn">Enviar reporte</button>
+            <p class="msg" id="rMsg" role="status"></p>
+        </form>
+        <article class="card">
+            <h2>Canales oficiales</h2>
+            <ul class="links">
+                <li><a href="tel:911">🚨 Emergencias · 9-1-1</a></li>
+                <li><a href="https://munipoas.go.cr">🏛️ Municipalidad de Poás</a></li>
+                <li><a href="https://www.aya.go.cr">🚰 AyA · rectoría de las ASADAS</a></li>
+                <li><a href="https://sitada.minae.go.cr">🌿 SITADA · denuncias ambientales (MINAE)</a></li>
+                <li><a href="https://www.sinac.go.cr">🌳 SINAC · Parque Nacional Volcán Poás</a></li>
+            </ul>
+        </article>
+        <p class="about">Datos: Open-Meteo (pronóstico y reanálisis ERA5) y GloFAS (caudal, ~5 km, referencial). El balance hídrico es un indicador simplificado. Esta app es informativa y no sustituye a las fuentes oficiales (IMN, AyA, SENARA, MINAE, CNE). Mapas © colaboradores de OpenStreetMap.</p>
+    </section>
+</main>
+
+<nav class="tabbar" aria-label="Navegación">
+    <a href="#inicio" data-v="inicio"><span>💧</span>Inicio</a>
+    <a href="#mapa" data-v="mapa"><span>🗺️</span>Mapa</a>
+    <a href="#historico" data-v="historico"><span>📊</span>Histórico</a>
+    <a href="#consumo" data-v="consumo"><span>🚿</span>Consumo</a>
+    <a href="#reportar" data-v="reportar"><span>📣</span>Reportar</a>
+</nav>
+
+<div class="modal" id="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="icon-btn close" id="modalClose" aria-label="Cerrar">✕</button>
+        <h2 id="modalTitle"></h2>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

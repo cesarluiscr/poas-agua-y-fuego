@@ -1,4 +1,4 @@
-package cr.poas.aguayfuego;
+package cr.poas.aquapoas;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,19 +17,20 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 
 import androidx.webkit.WebViewAssetLoader;
 
 /**
- * Contenedor nativo del Observatorio Digital del Agua de Poás.
- * El sitio va empaquetado en assets/www y se sirve desde un origen https local
+ * AquaPoás: app independiente del observatorio del agua del cantón de Poás.
+ * La interfaz va empaquetada en assets/app y se sirve desde un origen https local
  * (WebViewAssetLoader), de modo que funciona sin conexión; los datos en vivo
  * (Open-Meteo, mapas) se descargan cuando hay internet.
  */
 public class MainActivity extends Activity {
 
     private static final String HOST = "appassets.androidplatform.net";
-    private static final String START_URL = "https://" + HOST + "/assets/www/observatorio-agua.html";
+    private static final String START_URL = "https://" + HOST + "/assets/app/index.html";
 
     private WebView webView;
     private WebViewAssetLoader assetLoader;
@@ -45,9 +46,20 @@ public class MainActivity extends Activity {
                 .build();
 
         webView = new WebView(this);
-        webView.setBackgroundColor(Color.parseColor("#06121F"));
-        setContentView(webView);
-        applySystemBarInsets(webView);
+        webView.setBackgroundColor(Color.parseColor("#F2F8FB"));
+
+        // Franja azul bajo la barra de estado y blanca bajo la barra de navegación
+        LinearLayout root = new LinearLayout(this);
+        root.setOrientation(LinearLayout.VERTICAL);
+        View topBar = new View(this);
+        topBar.setBackgroundColor(Color.parseColor("#0077B6"));
+        View bottomBar = new View(this);
+        bottomBar.setBackgroundColor(Color.WHITE);
+        root.addView(topBar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0));
+        root.addView(webView, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
+        root.addView(bottomBar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0));
+        setContentView(root);
+        applySystemBarInsets(root, topBar, bottomBar);
 
         WebSettings s = webView.getSettings();
         s.setJavaScriptEnabled(true);
@@ -67,7 +79,7 @@ public class MainActivity extends Activity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 Uri uri = request.getUrl();
-                if (HOST.equals(uri.getHost())) return false; // páginas del sitio: dentro de la app
+                if (HOST.equals(uri.getHost())) return false; // pantallas de la app
                 openExternal(uri);                            // WhatsApp, tel:, sitios externos
                 return true;
             }
@@ -109,16 +121,19 @@ public class MainActivity extends Activity {
         }
     }
 
-    /** Android 15 dibuja de borde a borde: evitar que el contenido quede bajo las barras del sistema. */
-    private void applySystemBarInsets(View v) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            v.setOnApplyWindowInsetsListener((view, insets) -> {
-                android.graphics.Insets bars = insets.getInsets(
-                        WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
-                view.setPadding(bars.left, bars.top, bars.right, bars.bottom);
-                return WindowInsets.CONSUMED;
-            });
-        }
+    /** Android 15 dibuja de borde a borde: reservar el espacio de las barras del sistema. */
+    private void applySystemBarInsets(View root, View topBar, View bottomBar) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) return; // en versiones previas el sistema ya reserva el espacio
+        root.setOnApplyWindowInsetsListener((view, insets) -> {
+            android.graphics.Insets bars = insets.getInsets(
+                    WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout());
+            topBar.getLayoutParams().height = bars.top;
+            bottomBar.getLayoutParams().height = bars.bottom;
+            view.setPadding(bars.left, 0, bars.right, 0);
+            topBar.requestLayout();
+            bottomBar.requestLayout();
+            return WindowInsets.CONSUMED;
+        });
     }
 
     @Override

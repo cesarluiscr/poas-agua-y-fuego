@@ -1,13 +1,9 @@
-name: APK Android — Observatorio del Agua
+name: APK Android — AquaPoás
 
 on:
   push:
     paths:
       - 'android/**'
-      - '*.html'
-      - '*.js'
-      - '*.css'
-      - 'img/**'
       - '.github/workflows/android-apk.yml'
   workflow_dispatch:
 
@@ -40,12 +36,12 @@ jobs:
       - name: Renombrar APK
         run: |
           mkdir -p dist
-          cp android/app/build/outputs/apk/debug/app-debug.apk dist/observatorio-agua-poas.apk
+          cp android/app/build/outputs/apk/debug/app-debug.apk dist/aquapoas.apk
           ls -lh dist
 
       - name: Subir APK como artefacto
         uses: actions/upload-artifact@v4
         with:
-          name: observatorio-agua-poas-apk
-          path: dist/observatorio-agua-poas.apk
+          name: aquapoas-apk
+          path: dist/aquapoas.apk
           retention-days: 30
