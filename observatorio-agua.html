@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://script.google.com https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://unpkg.com https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; media-src 'self' blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://api.open-meteo.com https://flood-api.open-meteo.com https://archive-api.open-meteo.com https://nominatim.openstreetmap.org https://tile.openstreetmap.org; worker-src blob: 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://script.google.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <link rel="canonical" href="https://cesarluiscr.github.io/poas-agua-y-fuego/observatorio-agua.html">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta property="og:type"         content="website">
+    <meta property="og:site_name"    content="Poás Agua y Fuego">
+    <meta property="og:title"        content="Observatorio Digital del Agua | Poás Agua y Fuego">
+    <meta property="og:description"  content="Lluvia, balance hídrico, caudal de ríos, mapa del agua, datos históricos y reportes ciudadanos del cantón de Poás.">
+    <meta property="og:url"          content="https://cesarluiscr.github.io/poas-agua-y-fuego/observatorio-agua.html">
+    <meta property="og:image"        content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/poas_og_v3.png">
+    <meta property="og:locale"       content="es_CR">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Observatorio Digital del Agua | Poás Agua y Fuego">
+    <meta name="twitter:image"       content="https://cesarluiscr.github.io/poas-agua-y-fuego/img/poas_og_v3.png">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <title>Observatorio Digital del Agua — Poás Agua y Fuego</title>
+    <meta name="description" content="Observatorio Digital del Agua del cantón de Poás: lluvia en vivo, balance hídrico, caudal de ríos, mapa interactivo, datos históricos, calculadora de consumo y reportes ciudadanos.">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="style.css?v=3">
+    <style>
+        :root {
+            --oa-bg: #06121f; --oa-bg2: #0a1b2e; --oa-card: #0e2238; --oa-line: rgba(79,195,247,.18);
+            --oa-cyan: #4FC3F7; --oa-foam: #B3E5FC; --oa-green: #26A69A; --oa-text: #E3F2FD; --oa-mute: rgba(227,242,253,.62);
+            --oa-ok: #22c55e; --oa-warn: #eab308; --oa-alert: #f97316; --oa-bad: #ef4444;
+        }
+        body { background: var(--oa-bg); color: var(--oa-text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        /* HERO */
+        .oa-hero { position: relative; overflow: hidden; text-align: center; padding: 8rem 1.25rem 3.5rem;
+            background: radial-gradient(ellipse at 30% 0%, #11406b, #06121f 72%); }
+        .oa-hero::before { content: ''; position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(79,195,247,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(79,195,247,.05) 1px, transparent 1px);
+            background-size: 34px 34px; mask-image: radial-gradient(ellipse at center, #000, transparent 75%); -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 75%); }
+        .oa-hero > * { position: relative; z-index: 1; }
+        .oa-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(37,211,102,.14); border: 1px solid rgba(37,211,102,.4);
+            color: #7BE495; font-weight: 700; font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; padding: .4rem 1rem; border-radius: 99px; margin-bottom: 1.1rem; }
+        .oa-dot { width: 8px; height: 8px; border-radius: 50%; background: #25D366; box-shadow: 0 0 8px #25D366; animation: oaPulse 1.6s infinite; }
+        @keyframes oaPulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+        .oa-hero h1 { font-family: 'Outfit', sans-serif; font-size: clamp(1.9rem, 5vw, 3.1rem); font-weight: 800; line-height: 1.1; margin-bottom: .7rem; color: #fff; }
+        .oa-hero h1 span { color: var(--oa-cyan); }
+        .oa-hero p { color: var(--oa-mute); max-width: 660px; margin: 0 auto; line-height: 1.65; }
+        .oa-season { display: inline-block; margin-top: 1.2rem; font-size: .85rem; font-weight: 600; padding: .35rem .9rem; border-radius: 99px;
+            background: rgba(79,195,247,.1); border: 1px solid var(--oa-line); color: var(--oa-foam); }
+
+        /* TABS */
+        .oa-tabs { position: sticky; top: var(--oa-nav-h, 64px); z-index: 50; background: rgba(6,18,31,.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--oa-line); }
+        .oa-tabs-inner { max-width: 1150px; margin: 0 auto; display: flex; gap: .35rem; overflow-x: auto; padding: .6rem 1rem; scrollbar-width: none; }
+        .oa-tabs-inner::-webkit-scrollbar { display: none; }
+        .oa-tabs a { flex-shrink: 0; color: var(--oa-mute); text-decoration: none; font-size: .86rem; font-weight: 600; padding: .45rem .9rem; border-radius: 99px; transition: background .2s, color .2s; }
+        .oa-tabs a:hover, .oa-tabs a.active { background: rgba(79,195,247,.14); color: #fff; }
+
+        /* LAYOUT */
+        .oa-section { padding: 4rem 1.25rem; scroll-margin-top: calc(var(--oa-nav-h, 64px) + 60px); }
+        .oa-section:nth-of-type(even) { background: var(--oa-bg2); }
+        .oa-wrap { max-width: 1150px; margin: 0 auto; }
+        .oa-h2 { font-family: 'Outfit', sans-serif; font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 800; color: #fff; margin-bottom: .35rem; }
+        .oa-lead { color: var(--oa-mute); line-height: 1.65; max-width: 760px; margin-bottom: 1.8rem; font-size: .96rem; }
+        .oa-bar { width: 60px; height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--oa-cyan), var(--oa-green)); margin: .6rem 0 1.2rem; }
+
+        /* ZONE PICKER */
+        .oa-zones { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+        .oa-zone { cursor: pointer; border: 1px solid var(--oa-line); background: transparent; color: var(--oa-mute); font: inherit; font-size: .86rem; font-weight: 600;
+            padding: .5rem 1rem; border-radius: 99px; transition: all .2s; }
+        .oa-zone:hover { color: #fff; border-color: rgba(79,195,247,.45); }
+        .oa-zone[aria-pressed="true"] { background: var(--oa-cyan); color: #06263a; border-color: var(--oa-cyan); }
+
+        /* KPI CARDS */
+        .oa-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 1rem; }
+        .oa-card { background: linear-gradient(160deg, #10263f, #0b1a2c); border: 1px solid var(--oa-line); border-radius: 16px; padding: 1.25rem; min-width: 0; }
+        .oa-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: .75rem; }
+        .oa-ic { font-size: 1.6rem; }
+        .oa-tag { font-size: .6rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: .2rem .55rem; border-radius: 20px; }
+        .oa-tag.live { background: rgba(37,211,102,.16); color: #7BE495; border: 1px solid rgba(37,211,102,.35); }
+        .oa-tag.model { background: rgba(79,195,247,.14); color: #8fd8ff; border: 1px solid rgba(79,195,247,.3); }
+        .oa-tag.calc { background: rgba(212,175,55,.14); color: #e6c454; border: 1px solid rgba(212,175,55,.3); }
+        .oa-label { color: var(--oa-mute); font-size: .8rem; font-weight: 600; margin-bottom: .2rem; }
+        .oa-value { font-family: 'Outfit', sans-serif; font-size: 1.85rem; font-weight: 800; color: #fff; line-height: 1.1; font-variant-numeric: tabular-nums; }
+        .oa-value small { font-size: .95rem; color: var(--oa-mute); font-weight: 600; }
+        .oa-sub { color: var(--oa-mute); font-size: .78rem; margin-top: .35rem; line-height: 1.45; }
+        .oa-light { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: .35rem; vertical-align: middle; background: #64748b; }
+        .oa-light.ok { background: var(--oa-ok); box-shadow: 0 0 7px var(--oa-ok); }
+        .oa-light.warn { background: var(--oa-warn); box-shadow: 0 0 7px var(--oa-warn); }
+        .oa-light.alert { background: var(--oa-alert); box-shadow: 0 0 7px var(--oa-alert); }
+        .oa-light.bad { background: var(--oa-bad); box-shadow: 0 0 7px var(--oa-bad); }
+
+        /* CHARTS */
+        .oa-chart-card { margin-top: 1.25rem; background: #0b1a2c; border: 1px solid var(--oa-line); border-radius: 16px; padding: 1.25rem; }
+        .oa-chart-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem; margin-bottom: .75rem; }
+        .oa-chart-head h3 { font-family: 'Outfit', sans-serif; font-size: 1.05rem; color: #fff; }
+        .oa-legend { display: flex; flex-wrap: wrap; gap: 1rem; font-size: .76rem; color: var(--oa-mute); }
+        .oa-legend i { display: inline-block; width: 12px; height: 10px; border-radius: 2px; margin-right: .35rem; vertical-align: middle; }
+        .oa-chart { position: relative; width: 100%; }
+        .oa-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+        .oa-chart .ax { font-size: 10px; fill: rgba(227,242,253,.5); font-family: 'Inter', sans-serif; }
+        .oa-chart .grid { stroke: rgba(227,242,253,.08); }
+        .oa-tip { position: absolute; pointer-events: none; background: #02101d; border: 1px solid rgba(79,195,247,.4); color: #fff; font-size: .76rem;
+            padding: .4rem .6rem; border-radius: 8px; white-space: nowrap; transform: translate(-50%, -110%); opacity: 0; transition: opacity .12s; }
+        .oa-empty { color: var(--oa-mute); font-size: .85rem; padding: 2rem 0; text-align: center; }
+
+        /* MAP */
+        .oa-map-layout { display: grid; grid-template-columns: 1fr 300px; gap: 1rem; }
+        #oaMap { height: 520px; border-radius: 16px; border: 1px solid var(--oa-line); background: #0b1a2c; z-index: 1; }
+        .oa-map-side { background: #0b1a2c; border: 1px solid var(--oa-line); border-radius: 16px; padding: 1.1rem; display: flex; flex-direction: column; gap: .8rem; }
+        .oa-map-side h3 { font-family: 'Outfit', sans-serif; font-size: 1rem; color: #fff; }
+        .oa-layer { display: flex; align-items: center; gap: .55rem; font-size: .86rem; color: var(--oa-text); cursor: pointer; }
+        .oa-layer input { accent-color: var(--oa-cyan); width: 16px; height: 16px; }
+        .oa-swatch { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+        .oa-point { border-top: 1px solid var(--oa-line); padding-top: .8rem; font-size: .84rem; color: var(--oa-mute); line-height: 1.55; }
+        .oa-point strong { color: #fff; }
+        .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: #0b1a2c; color: var(--oa-text); }
+        .leaflet-popup-content { font-size: .84rem; line-height: 1.5; }
+        .leaflet-popup-content strong { color: var(--oa-cyan); }
+        .leaflet-container a.leaflet-popup-close-button { color: #fff; }
+
+        /* TOPICS */
+        .oa-topics { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .8rem; }
+        .oa-topic { text-align: left; cursor: pointer; font: inherit; color: inherit; background: #0e2238; border: 1px solid var(--oa-line); border-left: 4px solid var(--oa-cyan);
+            border-radius: 14px; padding: 1rem 1.1rem; transition: transform .2s, border-color .2s; }
+        .oa-topic:hover, .oa-topic[aria-expanded="true"] { transform: translateY(-3px); border-color: rgba(79,195,247,.55); }
+        .oa-topic .t-ic { font-size: 1.6rem; display: block; margin-bottom: .4rem; }
+        .oa-topic .t-name { font-weight: 800; color: #fff; font-size: .98rem; }
+        .oa-topic .t-short { display: block; color: var(--oa-mute); font-size: .8rem; margin-top: .25rem; line-height: 1.45; }
+        .oa-topic-detail { margin-top: 1rem; background: linear-gradient(135deg, rgba(38,166,154,.14), rgba(21,101,192,.12)); border: 1px solid rgba(38,166,154,.35);
+            border-radius: 16px; padding: 1.4rem 1.5rem; line-height: 1.7; font-size: .93rem; }
+        .oa-topic-detail h3 { font-family: 'Outfit', sans-serif; color: #fff; font-size: 1.2rem; margin-bottom: .5rem; }
+        .oa-topic-detail ul { margin: .6rem 0 0 1.1rem; color: var(--oa-mute); }
+        .oa-topic-detail a { color: var(--oa-cyan); }
+
+        /* HISTORY */
+        .oa-hist-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: .8rem; margin-bottom: .5rem; }
+
+        /* CALCULATOR */
+        .oa-calc { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+        .oa-form { background: #0b1a2c; border: 1px solid var(--oa-line); border-radius: 16px; padding: 1.3rem; display: grid; gap: .9rem; }
+        .oa-field label { display: flex; justify-content: space-between; font-size: .84rem; font-weight: 600; color: var(--oa-text); margin-bottom: .35rem; }
+        .oa-field label output { color: var(--oa-cyan); font-variant-numeric: tabular-nums; }
+        .oa-field input[type=range] { width: 100%; accent-color: var(--oa-cyan); }
+        .oa-field input[type=text], .oa-field select, .oa-field textarea { width: 100%; background: #06121f; color: var(--oa-text); border: 1px solid var(--oa-line);
+            border-radius: 10px; padding: .65rem .8rem; font: inherit; font-size: .9rem; }
+        .oa-field textarea { min-height: 110px; resize: vertical; }
+        .oa-field input:focus, .oa-field select:focus, .oa-field textarea:focus { outline: 2px solid var(--oa-cyan); outline-offset: 1px; }
+        .oa-result { background: linear-gradient(160deg, #10263f, #0b1a2c); border: 1px solid var(--oa-line); border-radius: 16px; padding: 1.3rem; }
+        .oa-big { font-family: 'Outfit', sans-serif; font-size: 2.6rem; font-weight: 800; color: #fff; font-variant-numeric: tabular-nums; }
+        .oa-meter { height: 12px; border-radius: 99px; background: rgba(255,255,255,.08); overflow: hidden; margin: .8rem 0 .4rem; }
+        .oa-meter span { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--oa-green), var(--oa-cyan)); transition: width .3s; }
+        .oa-tips { margin: .9rem 0 0 1.1rem; color: var(--oa-mute); font-size: .87rem; line-height: 1.6; }
+        .oa-btn { cursor: pointer; border: none; font: inherit; font-weight: 800; font-size: .92rem; padding: .75rem 1.4rem; border-radius: 99px; background: var(--oa-cyan); color: #06263a; }
+        .oa-btn:hover { filter: brightness(1.08); }
+        .oa-btn.ghost { background: transparent; color: var(--oa-cyan); border: 1px solid var(--oa-line); }
+
+        /* REPORT */
+        .oa-report { display: grid; grid-template-columns: 1.3fr 1fr; gap: 1.25rem; }
+        .oa-contacts { background: #0b1a2c; border: 1px solid var(--oa-line); border-radius: 16px; padding: 1.3rem; font-size: .88rem; line-height: 1.6; color: var(--oa-mute); }
+        .oa-contacts h3 { font-family: 'Outfit', sans-serif; color: #fff; font-size: 1.05rem; margin-bottom: .6rem; }
+        .oa-contacts li { list-style: none; padding: .55rem 0; border-bottom: 1px solid var(--oa-line); }
+        .oa-contacts li:last-child { border-bottom: none; }
+        .oa-contacts a { color: var(--oa-cyan); text-decoration: none; font-weight: 700; }
+        .oa-msg { font-size: .85rem; color: #7BE495; min-height: 1.2em; }
+
+        .oa-note { margin-top: 2rem; background: rgba(79,195,247,.06); border: 1px solid var(--oa-line); border-radius: 14px; padding: 1.2rem 1.4rem;
+            color: var(--oa-mute); font-size: .83rem; line-height: 1.7; }
+        .oa-note strong { color: #9fdcff; }
+        .oa-note a { color: var(--oa-cyan); }
+
+        .oa-footer { text-align: center; padding: 2.5rem 1rem; color: var(--oa-mute); font-size: .85rem; border-top: 1px solid var(--oa-line); }
+        .oa-footer a { color: var(--oa-cyan); text-decoration: none; }
+
+        @media (max-width: 900px) {
+            .oa-map-layout, .oa-calc, .oa-report { grid-template-columns: 1fr; }
+            #oaMap { height: 420px; }
+        }
+        @media (max-width: 560px) {
+            .oa-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+            .oa-value { font-size: 1.5rem; }
+            .oa-section { padding: 3rem 1rem; }
+        }
+        @media (prefers-reduced-motion: reduce) { .oa-dot { animation: none; } * { transition: none !important; } }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo">Poás <span>Agua y Fuego</span></div>
+    <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="centro-datos.html">Centro de Datos</a></li>
+            <li><a href="patrimonio-hidrico.html">Patrimonio Hídrico</a></li>
+            <li><a href="observatorio-agua.html">Observatorio del Agua</a></li>
+            <li><a href="historia-canton.html">Historia</a></li>
+            <li><a href="historia-imagenes.html">Imágenes Históricas</a></li>
+            <li><a href="directorio-comercial.html">Directorio Turístico y Comercial</a></li>
+            <li><a href="ruta-turistica.html">Ruta Turística</a></li>
+            <li><a href="galeria.html">Galería</a></li>
+            <li><a href="ruta-gastronomica.html">Gastronomía</a></li>
+            <li><a href="agricultura.html">Agricultura</a></li>
+            <li><a href="ecologia.html">Ecología</a></li>
+            <li><a href="techcenter.html">Tech Center</a></li>
+            <li class="nav-row-break" aria-hidden="true"></li>
+            <li><a href="bolsa-empleo.html">Empleo</a></li>
+            <li><a href="eventos.html">Eventos</a></li>
+            <li><a href="plan-regulador.html">Plan Regulador</a></li>
+            <li><a href="seguridad-ciudadana.html">Seguridad</a></li>
+            <li><a href="como-llegar.html">Cómo Llegar</a></li>
+            <li><a href="quejas.html">Quejas</a></li>
+            <li><a href="index.html#contacto">Contacto</a></li>
+        </ul>
+    <div class="nav-lang">
+        <a href="observatorio-agua.html" class="lang-btn active">🇨🇷 <span class="lang-label">Español</span></a>
+        <a href="patrimonio-hidrico-en.html" class="lang-btn">🇺🇸 <span class="lang-label">English</span></a>
+    </div>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span><em class="hamburger-label">Menú</em></div>
+</nav>
+<nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-panel" id="mobileNavPanel">
+        <div class="mobile-nav-header">
+            <span class="mobile-nav-logo">Poás <span>Agua y Fuego</span></span>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Cerrar menú">×</button>
+        </div>
+        <div class="mobile-nav-links">
+            <a href="index.html" onclick="closeMobileNav()">🏠 Inicio</a>
+            <a href="centro-datos.html" onclick="closeMobileNav()">📊 Centro de Datos</a>
+            <a href="patrimonio-hidrico.html" onclick="closeMobileNav()">💧 Patrimonio Hídrico</a>
+            <a href="observatorio-agua.html" onclick="closeMobileNav()">🌊 Observatorio del Agua</a>
+            <a href="historia-canton.html" onclick="closeMobileNav()">📜 Historia del Cantón</a>
+            <a href="galeria.html" onclick="closeMobileNav()">📷 Galería</a>
+            <a href="directorio-comercial.html" onclick="closeMobileNav()">🛍️ Directorio Turístico y Comercial</a>
+            <a href="ruta-turistica.html" onclick="closeMobileNav()">🧭 Ruta Turística</a>
+            <a href="ruta-gastronomica.html" onclick="closeMobileNav()">🍽️ Ruta Gastronómica</a>
+            <a href="bolsa-empleo.html" onclick="closeMobileNav()">💼 Bolsa de Empleo</a>
+            <a href="eventos.html" onclick="closeMobileNav()">📅 Eventos</a>
+            <a href="agricultura.html" onclick="closeMobileNav()">🌱 Agricultura</a>
+            <a href="ecologia.html" onclick="closeMobileNav()">🌿 Ecología</a>
+            <a href="plan-regulador.html" onclick="closeMobileNav()">🗺️ Plan Regulador</a>
+            <a href="seguridad-ciudadana.html" onclick="closeMobileNav()">🛡️ Seguridad Ciudadana</a>
+            <a href="index.html#contacto" onclick="closeMobileNav()">📬 Contacto</a>
+        </div>
+        <div class="mobile-nav-lang">
+            <a href="observatorio-agua.html" onclick="closeMobileNav()">🇨🇷 Español</a>
+            <a href="patrimonio-hidrico-en.html" onclick="closeMobileNav()">🇺🇸 English</a>
+        </div>
+        <div class="mobile-nav-footer">Cantón de Poás · Alajuela · Costa Rica</div>
+    </div>
+</nav>
+
+<header class="oa-hero">
+    <div class="oa-badge"><span class="oa-dot"></span> Observatorio Digital del Agua</div>
+    <h1>El agua de <span>Poás</span>, en datos</h1>
+    <p>Lluvia en vivo, balance hídrico, caudal de ríos, mapa del agua, registros históricos y reportes ciudadanos del cantón hídrico de Poás, en una sola herramienta abierta.</p>
+    <div class="oa-season" id="oaSeason">Calculando época del año…</div>
+</header>
+
+<nav class="oa-tabs" aria-label="Secciones del observatorio">
+    <div class="oa-tabs-inner">
+        <a href="#vivo">📡 En vivo</a>
+        <a href="#mapa">🗺️ Mapa del agua</a>
+        <a href="#temas">💧 Temas</a>
+        <a href="#historico">📊 Histórico</a>
+        <a href="#consumo">🚿 Mi consumo</a>
+        <a href="#reportar">📣 Reportar</a>
+    </div>
+</nav>
+
+<main>
+    <!-- EN VIVO -->
+    <section class="oa-section" id="vivo">
+        <div class="oa-wrap">
+            <h2 class="oa-h2">📡 Estado hídrico en vivo</h2>
+            <div class="oa-bar"></div>
+            <p class="oa-lead">Elegí una zona del cantón. Los valores se calculan con modelos meteorológicos abiertos para ese punto y se actualizan cada vez que abrís la página.</p>
+
+            <div class="oa-zones" role="group" aria-label="Zona del cantón" id="oaZones"></div>
+
+            <div class="oa-grid">
+                <div class="oa-card">
+                    <div class="oa-card-top"><span class="oa-ic">🌧️</span><span class="oa-tag live">En vivo</span></div>
+                    <div class="oa-label">Lluvia hoy</div>
+                    <div class="oa-value" id="kRainToday">--<small> mm</small></div>
+                    <div class="oa-sub" id="kRainTodaySub">Acumulado del día</div>
+                </div>
+                <div class="oa-card">
+                    <div class="oa-card-top"><span class="oa-ic">☔</span><span class="oa-tag live">En vivo</span></div>
+                    <div class="oa-label">Lluvia últimos 7 días</div>
+                    <div class="oa-value" id="kRain7">--<small> mm</small></div>
+                    <div class="oa-sub" id="kRain30">30 días: -- mm</div>
+                </div>
+                <div class="oa-card">
+                    <div class="oa-card-top"><span class="oa-ic">🔮</span><span class="oa-tag model">Pronóstico</span></div>
+                    <div class="oa-label">Lluvia próximos 7 días</div>
+                    <div class="oa-value" id="kRainNext">--<small> mm</small></div>
+                    <div class="oa-sub" id="kRainNextSub">Día más lluvioso: --</div>
+                </div>
+                <div class="oa-card">
+                    <div class="oa-card-top"><span class="oa-ic">☀️</span><span class="oa-tag model">Modelo</span></div>
+                    <div class="oa-label">Evapotranspiración 30 días</div>
+                    <div class="oa-value" id="kEt0">--<small> mm</small></div>
+                    <div class="oa-sub">Agua que regresa a la atmósfera (ET₀ FAO)</div>
+                </div>
+                <div class="oa-card">
+                    <div class="oa-card-top"><span class="oa-ic">⚖️</span><span class="oa-tag calc">Índice</span></div>
+                    <div class="oa-label">Balance hídrico 30 días</div>
+                    <div class="oa-value" id="kBalance">--<small> mm</small></div>
+                    <div class="oa-sub" id="kBalanceSub"><span class="oa-light"></span>Lluvia − evapotranspiración</div>
+                </div>
+                <div class="oa-card">
+                    <div class="oa-card-top"><span class="oa-ic">🌱</span><span class="oa-tag model">Modelo</span></div>
+                    <div class="oa-label">Humedad del suelo</div>
+                    <div class="oa-value" id="kSoil">--<small>%</small></div>
+                    <div class="oa-sub" id="kSoilSub">Capa de 3 a 9 cm</div>
+                </div>
+                <div class="oa-card">
+                    <div class="oa-card-top"><span class="oa-ic">🏞️</span><span class="oa-tag model">Modelo</span></div>
+                    <div class="oa-label">Caudal estimado del río</div>
+                    <div class="oa-value" id="kFlow">--<small> m³/s</small></div>
+                    <div class="oa-sub" id="kFlowSub">GloFAS · celda más cercana</div>
+                </div>
+                <div class="oa-card">
+                    <div class="oa-card-top"><span class="oa-ic">🌡️</span><span class="oa-tag live">En vivo</span></div>
+                    <div class="oa-label">Temperatura y humedad</div>
+                    <div class="oa-value" id="kTemp">--<small>°C</small></div>
+                    <div class="oa-sub" id="kTempSub">Humedad relativa: --%</div>
+                </div>
+            </div>
+
+            <div class="oa-chart-card">
+                <div class="oa-chart-head">
+                    <h3>Lluvia diaria: últimos 30 días y pronóstico a 7 días</h3>
+                    <div class="oa-legend">
+                        <span><i style="background:#4FC3F7"></i>Observado / modelado</span>
+                        <span><i style="background:rgba(79,195,247,.35);border:1px dashed #4FC3F7"></i>Pronóstico</span>
+                        <span><i style="background:#e6c454;height:3px"></i>Evapotranspiración</span>
+                    </div>
+                </div>
+                <div class="oa-chart" id="chartDaily"><div class="oa-empty">Cargando datos…</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAPA -->
+    <section class="oa-section" id="mapa">
+        <div class="oa-wrap">
+            <h2 class="oa-h2">🗺️ Mapa del agua de Poás</h2>
+            <div class="oa-bar"></div>
+            <p class="oa-lead">Activá las capas para ver los puntos de referencia del recurso hídrico. <strong>Tocá cualquier punto del mapa</strong> para consultar la lluvia y el balance hídrico de ese lugar.</p>
+            <div class="oa-map-layout">
+                <div id="oaMap" role="region" aria-label="Mapa interactivo del agua de Poás"></div>
+                <aside class="oa-map-side">
+                    <h3>Capas</h3>
+                    <div id="oaLayers"></div>
+                    <div class="oa-point" id="oaPoint">Tocá el mapa para consultar un punto.</div>
+                </aside>
+            </div>
+            <p class="oa-sub" style="margin-top:.8rem">Las ubicaciones son aproximadas y orientativas (centros de comunidad, no infraestructura exacta). Para cartografía oficial consultá la sección <a href="patrimonio-hidrico.html" style="color:var(--oa-cyan)">Patrimonio Hídrico</a>.</p>
+        </div>
+    </section>
+
+    <!-- TEMAS -->
+    <section class="oa-section" id="temas">
+        <div class="oa-wrap">
+            <h2 class="oa-h2">💧 Temas del observatorio</h2>
+            <div class="oa-bar"></div>
+            <p class="oa-lead">Desde dónde nace el agua hasta cómo la protegemos. Elegí un tema para conocer más.</p>
+            <div class="oa-topics" id="oaTopics"></div>
+            <div class="oa-topic-detail" id="oaTopicDetail" hidden></div>
+        </div>
+    </section>
+
+    <!-- HISTÓRICO -->
+    <section class="oa-section" id="historico">
+        <div class="oa-wrap">
+            <h2 class="oa-h2">📊 Datos históricos de lluvia</h2>
+            <div class="oa-bar"></div>
+            <p class="oa-lead">Lluvia mensual de los últimos cinco años para la zona seleccionada, a partir del reanálisis climático ERA5. Permite comparar el año en curso con el promedio y detectar años secos o lluviosos.</p>
+            <div class="oa-hist-stats" id="oaHistStats"></div>
+            <div class="oa-chart-card">
+                <div class="oa-chart-head">
+                    <h3>Lluvia mensual (mm)</h3>
+                    <div class="oa-legend" id="oaHistLegend"></div>
+                </div>
+                <div class="oa-chart" id="chartMonthly"><div class="oa-empty">Cargando histórico…</div></div>
+            </div>
+            <div class="oa-chart-card">
+                <div class="oa-chart-head">
+                    <h3>Total anual (mm)</h3>
+                </div>
+                <div class="oa-chart" id="chartYearly"><div class="oa-empty">Cargando histórico…</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONSUMO -->
+    <section class="oa-section" id="consumo">
+        <div class="oa-wrap">
+            <h2 class="oa-h2">🚿 Calculadora de consumo de agua</h2>
+            <div class="oa-bar"></div>
+            <p class="oa-lead">Estimá cuánta agua usa tu hogar al día y descubrí dónde ahorrar. Los valores son aproximados y se calculan en tu navegador; no se envían a ningún lado.</p>
+            <div class="oa-calc">
+                <form class="oa-form" id="oaCalc" onsubmit="return false">
+                    <div class="oa-field"><label for="cPersonas">Personas en el hogar <output id="oPersonas"></output></label><input type="range" id="cPersonas" min="1" max="10" value="4"></div>
+                    <div class="oa-field"><label for="cDucha">Minutos de ducha por persona <output id="oDucha"></output></label><input type="range" id="cDucha" min="0" max="30" value="10"></div>
+                    <div class="oa-field"><label for="cInodoro">Descargas de inodoro por persona <output id="oInodoro"></output></label><input type="range" id="cInodoro" min="0" max="10" value="5"></div>
+                    <div class="oa-field"><label for="cLavadora">Cargas de lavadora por semana <output id="oLavadora"></output></label><input type="range" id="cLavadora" min="0" max="14" value="4"></div>
+                    <div class="oa-field"><label for="cPlatos">Minutos lavando platos al día <output id="oPlatos"></output></label><input type="range" id="cPlatos" min="0" max="60" value="15"></div>
+                    <div class="oa-field"><label for="cJardin">Minutos de riego / lavado de carro al día <output id="oJardin"></output></label><input type="range" id="cJardin" min="0" max="60" value="5"></div>
+                    <div class="oa-field"><label for="cEquipo">Tipo de grifería e inodoro</label>
+                        <select id="cEquipo">
+                            <option value="1">Convencional</option>
+                            <option value="0.65">Ahorradora (reductores, inodoro de bajo consumo)</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="oa-result" aria-live="polite">
+                    <div class="oa-label">Consumo estimado por persona</div>
+                    <div class="oa-big" id="rPersona">--</div>
+                    <div class="oa-meter"><span id="rMeter" style="width:0"></span></div>
+                    <div class="oa-sub" id="rRef">Referencia: 100 L por persona al día (OMS, uso doméstico óptimo).</div>
+                    <div class="oa-grid" style="margin-top:1rem;grid-template-columns:1fr 1fr">
+                        <div><div class="oa-label">Hogar por día</div><div class="oa-value" id="rDia">--</div></div>
+                        <div><div class="oa-label">Hogar por mes</div><div class="oa-value" id="rMes">--</div></div>
+                    </div>
+                    <ul class="oa-tips" id="rTips"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REPORTAR -->
+    <section class="oa-section" id="reportar">
+        <div class="oa-wrap">
+            <h2 class="oa-h2">📣 Reporte ciudadano del agua</h2>
+            <div class="oa-bar"></div>
+            <p class="oa-lead">¿Viste una fuga, un vertido en un río o tala en una naciente? Reportalo. El reporte se registra en el sistema de quejas del sitio y se abre WhatsApp para enviarlo.</p>
+            <div class="oa-report">
+                <form class="oa-form" id="oaReport" novalidate>
+                    <div class="oa-field"><label for="rTipo">Tipo de situación</label>
+                        <select id="rTipo" required>
+                            <option value="Fuga de agua">🚰 Fuga de agua en vía pública</option>
+                            <option value="Falta de agua">🚱 Falta o interrupción del servicio</option>
+                            <option value="Agua turbia o con olor">🧪 Agua turbia, con olor o sabor extraño</option>
+                            <option value="Contaminación de río o quebrada">☣️ Contaminación de río o quebrada</option>
+                            <option value="Afectación a naciente">⛲ Afectación a una naciente</option>
+                            <option value="Tala o construcción en zona de recarga">🌳 Tala o construcción en zona de recarga</option>
+                            <option value="Inundación o desborde">🌊 Inundación o desborde</option>
+                            <option value="Otro">📝 Otro</option>
+                        </select>
+                    </div>
+                    <div class="oa-field"><label for="rUbic">Ubicación <button type="button" class="oa-btn ghost" id="rUseMap" style="padding:.2rem .7rem;font-size:.75rem">Usar punto del mapa</button></label>
+                        <input type="text" id="rUbic" maxlength="200" placeholder="Distrito, barrio, referencia…"></div>
+                    <div class="oa-field"><label for="rDesc">Descripción *</label>
+                        <textarea id="rDesc" maxlength="1000" required placeholder="¿Qué está pasando? ¿Desde cuándo?"></textarea></div>
+                    <div class="oa-field"><label for="rNombre">Nombre (opcional)</label><input type="text" id="rNombre" maxlength="100"></div>
+                    <div class="oa-field"><label for="rContacto">Teléfono o correo (opcional)</label><input type="text" id="rContacto" maxlength="100"></div>
+                    <div><button type="submit" class="oa-btn">Enviar reporte</button></div>
+                    <div class="oa-msg" id="rMsg" role="status"></div>
+                </form>
+                <div class="oa-contacts">
+                    <h3>Canales oficiales</h3>
+                    <ul>
+                        <li>🚨 <strong>Emergencias</strong> (inundaciones, deslizamientos): <a href="tel:911">9-1-1</a></li>
+                        <li>🏛️ <a href="https://munipoas.go.cr" target="_blank" rel="noopener noreferrer">Municipalidad de Poás</a> — acueducto municipal y gestión ambiental</li>
+                        <li>🚰 <a href="https://www.aya.go.cr" target="_blank" rel="noopener noreferrer">AyA</a> — rectoría de las ASADAS y servicio de agua potable</li>
+                        <li>🌿 <a href="https://sitada.minae.go.cr" target="_blank" rel="noopener noreferrer">SITADA (MINAE)</a> — denuncias ambientales oficiales</li>
+                        <li>🌳 <a href="https://www.sinac.go.cr" target="_blank" rel="noopener noreferrer">SINAC</a> — áreas protegidas y Parque Nacional Volcán Poás</li>
+                        <li>📣 <a href="quejas.html">Quejas del sitio</a> — otras situaciones del cantón</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="oa-note">
+                <strong>Sobre estos datos:</strong> la lluvia, temperatura, humedad, evapotranspiración y humedad del suelo provienen de <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> (modelos de pronóstico y reanálisis ERA5); el caudal es una estimación del modelo hidrológico global <a href="https://www.globalfloods.eu/" target="_blank" rel="noopener noreferrer">GloFAS</a> con resolución de ~5 km, por lo que es solo referencial para ríos pequeños. El balance hídrico es un indicador simplificado (lluvia − evapotranspiración) y no sustituye los estudios hidrogeológicos. Esta herramienta es informativa y no reemplaza a las fuentes oficiales (IMN, AyA, SENARA, MINAE, CNE).
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="oa-footer">
+    <p>&copy; 2026 Poás Agua y Fuego — Cantón de Poás, Alajuela, Costa Rica · <a href="patrimonio-hidrico.html">Patrimonio Hídrico</a> · <a href="centro-datos.html">Centro de Datos</a></p>
+    <p style="margin-top:.4rem;opacity:.75">Desarrollado por César Luis Quesada Herrera</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="observatorio-agua.js?v=1"></script>
+<script src="security.js?v=2"></script>
+<script src="search.js"></script>
+<script src="enhance.js?v=5"></script>
+</body>
+</html>

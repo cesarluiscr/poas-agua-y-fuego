@@ -27,6 +27,7 @@ Sitio web comunitario e informativo del **Cantón de Poás, Alajuela, Costa Rica
 | `agricultura.html` / `-en` | Agricultura del cantón |
 | `ecologia.html` / `-en` | Ecología / Ecobarrio |
 | `patrimonio-hidrico.html` / `-en` | Patrimonio hídrico |
+| `observatorio-agua.html` + `observatorio-agua.js` | Observatorio Digital del Agua (lluvia en vivo, balance hídrico, caudal GloFAS, mapa, histórico ERA5, calculadora, reportes) |
 | `guerra-civil-poasena.html` / `-en` | Guerra Civil 1948 |
 | `plan-regulador.html` / `-en` | Plan Regulador |
 | `plan-regulador-comunicacion.html` | Comunicación Plan Regulador (de PDF INVU) |
