@@ -7,7 +7,7 @@
     'use strict';
 
     var OA = window.OA = {};
-    OA.VERSION = '2.1.0';
+    OA.VERSION = '2.1.1';
     OA.TZ = 'America/Costa_Rica';
     OA.MESES = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Dic'];
     OA.C = { deep: '#03045E', blue: '#0077B6', sky: '#00B4D8', mist: '#90E0EF', ok: '#2A9D8F', warn: '#E9C46A', alert: '#F4A261', bad: '#E76F51' };

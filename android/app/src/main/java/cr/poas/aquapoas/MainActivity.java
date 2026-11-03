@@ -26,6 +26,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+import android.window.OnBackInvokedCallback;
+import android.window.OnBackInvokedDispatcher;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -150,7 +152,19 @@ public class MainActivity extends Activity {
 
         if (savedInstanceState != null) webView.restoreState(savedInstanceState);
         else webView.loadUrl(START_URL);
+
+        // Android 13+ (obligatorio con targetSdk 36): el botón/gesto Atrás llega por OnBackInvokedCallback,
+        // ya no por onBackPressed(). Atrás retrocede en la app (pestañas, fichas) y sale al llegar al inicio.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            backCallback = () -> {
+                if (webView.canGoBack()) webView.goBack();
+                else finish();
+            };
+            getOnBackInvokedDispatcher().registerOnBackInvokedCallback(OnBackInvokedDispatcher.PRIORITY_DEFAULT, backCallback);
+        }
     }
+
+    private OnBackInvokedCallback backCallback;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -235,6 +249,7 @@ public class MainActivity extends Activity {
         webView.saveState(outState);
     }
 
+    // Solo para Android 12 o anterior; en Android 13+ se usa backCallback.
     @SuppressWarnings("deprecation")
     @Override
     public void onBackPressed() {
@@ -244,6 +259,9 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onDestroy() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && backCallback != null) {
+            getOnBackInvokedDispatcher().unregisterOnBackInvokedCallback(backCallback);
+        }
         if (webView != null) webView.destroy();
         super.onDestroy();
     }
