@@ -1,4 +1,4 @@
-name: APK Android — Observatorio del Agua-Poás
+name: Android — Observatorio del Agua-Poás (APK y AAB)
 
 on:
   push:
@@ -30,19 +30,56 @@ jobs:
         with:
           gradle-version: '8.14.3'
 
-      - name: Compilar APK
-        # El runner ubuntu-latest ya incluye el Android SDK (ANDROID_HOME)
-        run: gradle -p android assembleDebug --no-daemon --stacktrace
+      # Clave de subida de Google Play (opcional). Se configura en
+      # Settings → Secrets and variables → Actions:
+      #   ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD
+      - name: Preparar clave de firma
+        id: firma
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$KEYSTORE_B64" ]; then
+            echo "$KEYSTORE_B64" | base64 -d > "$RUNNER_TEMP/subida.jks"
+            echo "path=$RUNNER_TEMP/subida.jks" >> "$GITHUB_OUTPUT"
+            echo "sufijo=" >> "$GITHUB_OUTPUT"
+            echo "Se firmará con la clave de subida."
+          else
+            echo "path=" >> "$GITHUB_OUTPUT"
+            echo "sufijo=-sin-firmar" >> "$GITHUB_OUTPUT"
+            echo "::warning::No hay clave de subida configurada: el AAB sale SIN FIRMAR (Google Play lo rechaza hasta firmarlo)."
+          fi
 
-      - name: Renombrar APK
+      - name: Compilar APK de prueba y AAB para Google Play
+        # El runner ubuntu-latest ya incluye el Android SDK (ANDROID_HOME)
+        env:
+          ANDROID_KEYSTORE_PATH: ${{ steps.firma.outputs.path }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: gradle -p android assembleDebug bundleRelease --no-daemon --stacktrace
+
+      - name: Verificar y renombrar
         run: |
           mkdir -p dist
           cp android/app/build/outputs/apk/debug/app-debug.apk dist/observatorio-agua-poas.apk
+          cp android/app/build/outputs/bundle/release/app-release.aab "dist/observatorio-agua-poas${{ steps.firma.outputs.sufijo }}.aab"
+          if [ -n "${{ steps.firma.outputs.path }}" ]; then
+            jarsigner -verify dist/*.aab | tail -1
+          fi
+          unzip -l dist/*.aab | grep -E "AndroidManifest|assets/app/index.html|classes.dex"
+          rm -f "$RUNNER_TEMP/subida.jks"
           ls -lh dist
 
-      - name: Subir APK como artefacto
+      - name: Subir APK de prueba
         uses: actions/upload-artifact@v4
         with:
           name: observatorio-agua-poas-apk
           path: dist/observatorio-agua-poas.apk
+          retention-days: 30
+
+      - name: Subir AAB para Google Play
+        uses: actions/upload-artifact@v4
+        with:
+          name: observatorio-agua-poas-aab${{ steps.firma.outputs.sufijo }}
+          path: dist/*.aab
           retention-days: 30

@@ -14,6 +14,20 @@ android {
         versionName '2.1.0'
     }
 
+    // Firma de publicación (clave de subida de Google Play). Se toma de variables de entorno
+    // para que la clave nunca quede en el repositorio. Sin ellas, el AAB/APK de release sale sin firmar.
+    def ksPath = System.getenv('ANDROID_KEYSTORE_PATH')
+    signingConfigs {
+        if (ksPath && file(ksPath).exists()) {
+            release {
+                storeFile file(ksPath)
+                storePassword System.getenv('ANDROID_KEYSTORE_PASSWORD')
+                keyAlias System.getenv('ANDROID_KEY_ALIAS')
+                keyPassword System.getenv('ANDROID_KEY_PASSWORD')
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -22,6 +36,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            if (ksPath && file(ksPath).exists()) signingConfig signingConfigs.release
         }
     }
 }
