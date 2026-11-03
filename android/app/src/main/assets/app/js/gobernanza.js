@@ -1,5 +1,5 @@
 /*
- * gobernanza.js — tablero público del Proyecto Gobernanza del Agua: actores,
+ * gobernanza.js — tablero público de Gobernanza del Agua: actores,
  * proyectos, matriz de acuerdos, agenda e indicadores de éxito.
  * Los registros provienen de gobernanza.json (información no sensible).
  */

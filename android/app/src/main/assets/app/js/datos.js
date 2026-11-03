@@ -143,7 +143,7 @@
         var msg = OA.$('expMsg');
         if (!lastHist) { msg.textContent = 'Primero cargá el histórico.'; return; }
         var z = lastHist.z, h = lastHist.h, a = lastHist.a;
-        var L = ['# Observatorio del Agua-Poás · Proyecto Gobernanza del Agua',
+        var L = ['# Observatorio del Agua-Poás · Gobernanza del Agua',
             '# Zona;' + z.name + ' (' + z.place + ');' + z.lat + ';' + z.lon,
             '# Fuente;Open-Meteo Historical API · reanálisis ' + h.modelo + ' · resolución ' + h.resolucion,
             '# Periodo;' + h.start + ' a ' + h.end + ';descargado ' + OA.stamp(h.fetchedAt),

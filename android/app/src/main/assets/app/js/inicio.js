@@ -44,13 +44,13 @@
 
     var TILES = [
         { id: 'today', ic: '🌧️', lab: 'Lluvia hoy', b: 'est' },
-        { id: 'r7', ic: '☔', lab: 'Lluvia últimos 7 días', b: 'est' },
-        { id: 'next', ic: '🔮', lab: 'Lluvia próximos 7 días', b: 'pro' },
-        { id: 'ppn', ic: '📈', lab: 'Lluvia vs. su promedio', b: 'rea' },
+        { id: 'r7', ic: '☔', lab: 'Lluvia 7 días', b: 'est' },
+        { id: 'next', ic: '🔮', lab: 'Próximos 7 días', b: 'pro' },
+        { id: 'ppn', ic: '📈', lab: 'Lluvia vs. promedio', b: 'rea' },
         { id: 'soil', ic: '🌱', lab: 'Humedad del suelo', b: 'est' },
         { id: 'flow', ic: '🏞️', lab: 'Caudal estimado', b: 'pen' },
         { id: 'temp', ic: '🌡️', lab: 'Temperatura', b: 'est' },
-        { id: 'et', ic: '☀️', lab: 'Evapotranspiración 30 días', b: 'est' }
+        { id: 'et', ic: '☀️', lab: 'Evapotransp. 30 días', b: 'est' }
     ];
     function renderTiles() {
         OA.html('tiles', TILES.map(function (t) {
@@ -81,6 +81,7 @@
                 OA.zone = z; OA.store('zone', z.id); OA.renderZones(); OA.loadLive();
             });
             box.appendChild(b);
+            if (z === OA.zone) setTimeout(function () { b.scrollIntoView({ block: 'nearest', inline: 'center' }); }, 0);
         });
     };
 
@@ -142,6 +143,7 @@
             if (z !== OA.zone) return;
             OA.html('chartDaily', '<p class="empty">No hay conexión ni datos guardados para esta zona.</p>');
             OA.text('kBalanceTxt', 'Sin datos'); OA.offline('Sin conexión y sin datos guardados.');
+            OA.html('gauge', '<svg viewBox="0 0 120 120"><path d="M14 66 A46 46 0 0 1 106 66" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="12" stroke-linecap="round"/><text x="60" y="92" text-anchor="middle" font-size="22">💧</text></svg>');
         });
 
         var p2 = OA.getJSON('https://flood-api.open-meteo.com/v1/flood?latitude=' + z.flow.lat + '&longitude=' + z.flow.lon + '&daily=river_discharge&past_days=30&forecast_days=7', 'fl-' + z.id, 12 * 36e5)

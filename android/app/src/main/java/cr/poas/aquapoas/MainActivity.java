@@ -35,7 +35,7 @@ import java.nio.charset.StandardCharsets;
 import androidx.webkit.WebViewAssetLoader;
 
 /**
- * Observatorio del Agua-Poás · Proyecto Gobernanza del Agua.
+ * Observatorio del Agua-Poás · Gobernanza del Agua.
  * La interfaz va empaquetada en assets/app y se sirve desde un origen https local
  * (WebViewAssetLoader), de modo que funciona sin conexión; los datos en vivo
  * (Open-Meteo, mapas) se descargan cuando hay internet.

@@ -1,5 +1,5 @@
 /*
- * Observatorio del Agua-Poás · Proyecto Gobernanza del Agua
+ * Observatorio del Agua-Poás · Gobernanza del Agua
  * core.js — utilidades compartidas: almacenamiento, red, datos, gráficos,
  * fichas de metadatos y navegación. Todos los módulos cuelgan de window.OA.
  */
@@ -7,7 +7,7 @@
     'use strict';
 
     var OA = window.OA = {};
-    OA.VERSION = '2.0.0';
+    OA.VERSION = '2.1.0';
     OA.TZ = 'America/Costa_Rica';
     OA.MESES = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Dic'];
     OA.C = { deep: '#03045E', blue: '#0077B6', sky: '#00B4D8', mist: '#90E0EF', ok: '#2A9D8F', warn: '#E9C46A', alert: '#F4A261', bad: '#E76F51' };
@@ -96,7 +96,14 @@
         });
     };
     // Archivos de datos del observatorio: primero el sitio (actualizable), luego la copia de la app.
+    var dataMem = {};
     OA.loadData = function (name) {
+        if (dataMem[name]) return dataMem[name];   // una sola descarga por sesión y archivo
+        var p = dataMem[name] = loadDataRaw(name);
+        p.catch(function () { delete dataMem[name]; });
+        return p;
+    };
+    function loadDataRaw(name) {
         return OA.fetchT(OA.DATA_REMOTE + name + '.json', { cache: 'no-cache' }, 8000)
             .then(function (r) { if (!r.ok) throw 0; return r.json(); })
             .then(function (d) { d.__origen = 'sitio web del observatorio'; OA.store('data-' + name, d); return d; })
@@ -106,7 +113,7 @@
                 return fetch(OA.DATA_LOCAL + name + '.json').then(function (r) { return r.json(); })
                     .then(function (d) { d.__origen = 'copia incluida en la app'; return d; });
             });
-    };
+    }
 
     // ─────────── avisos ───────────
     OA.offline = function (msg) {
@@ -119,7 +126,7 @@
     OA.meta = {};
     OA.BADGES = {
         obs: ['obs', 'Observado'], est: ['est', 'Estimación'], rea: ['rea', 'Reanálisis'],
-        pro: ['pro', 'Pronóstico'], pen: ['pen', 'Pendiente de validación'], calc: ['est', 'Cálculo']
+        pro: ['pro', 'Pronóstico'], pen: ['pen', 'Por validar'], calc: ['est', 'Cálculo']
     };
     OA.badge = function (t) { var b = OA.BADGES[t] || OA.BADGES.est; return '<span class="badge ' + b[0] + '">' + b[1] + '</span>'; };
     OA.showMeta = function (key) {
@@ -137,8 +144,25 @@
     });
 
     // ─────────── modal ───────────
-    OA.modal = function (title, body) { OA.text('modalTitle', title); OA.html('modalBody', body); OA.$('modal').hidden = false; OA.$('modalClose').focus(); };
-    OA.closeModal = function () { OA.$('modal').hidden = true; };
+    var lastFocus = null;
+    OA.modal = function (title, body) {
+        var m = OA.$('modal'), wasOpen = !m.hidden;
+        OA.text('modalTitle', title); OA.html('modalBody', body);
+        if (!wasOpen) { lastFocus = document.activeElement; m.hidden = false; history.pushState({ modal: true }, ''); }
+        OA.$('modalClose').focus();
+    };
+    // Cerrar = retroceder en el historial, para que el botón Atrás de Android cierre la ficha.
+    OA.closeModal = function () { if (!OA.$('modal').hidden) { if (history.state && history.state.modal) history.back(); else hideModal(); } };
+    function hideModal() { OA.$('modal').hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+    window.addEventListener('popstate', function () { if (!OA.$('modal').hidden) hideModal(); });
+    // Mantener el foco dentro de la ficha abierta
+    document.addEventListener('keydown', function (e) {
+        var m = OA.$('modal'); if (m.hidden || e.key !== 'Tab') return;
+        var f = m.querySelectorAll('button, a[href], input, select, textarea'); if (!f.length) return;
+        var a = f[0], z = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
+        else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+    });
 
     // ─────────── gráficos SVG ───────────
     function niceStep(v) { var raw = v / 4, mag = Math.pow(10, Math.floor(Math.log10(raw || 1))), r = raw / mag; return (r <= 1 ? 1 : r <= 2 ? 2 : r <= 5 ? 5 : 10) * mag; }
@@ -186,6 +210,7 @@
     OA.onShow = {};   // vista -> función al mostrarse
     OA.onPane = {};   // panel -> función al mostrarse
     OA.show = function (route) {
+        lastRoute = route;
         var parts = String(route || '').split('/'), v = parts[0];
         if (!OA.$('v-' + v)) v = 'inicio';
         document.querySelectorAll('.view').forEach(function (s) { s.hidden = s.id !== 'v-' + v; });
@@ -214,7 +239,8 @@
         var g = e.target.closest('[data-go]');
         if (g) { e.preventDefault(); location.hash = g.getAttribute('data-go'); }
     });
-    window.addEventListener('hashchange', function () { OA.show(location.hash.slice(1)); });
+    var lastRoute = null;
+    window.addEventListener('hashchange', function () { var r = location.hash.slice(1); if (r !== lastRoute) OA.show(r); });
 
     // Puente con la parte nativa (exportar archivos, imprimir a PDF, abrir enlaces)
     OA.nativo = window.ObservatorioNativo || null;

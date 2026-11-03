@@ -168,7 +168,7 @@ git push origin master master:main
 - **WhatsApp del proyecto**: 50687058612
 - **247 commits** en el repo hasta la fecha
 
-### App Android — Observatorio del Agua-Poás (Proyecto Gobernanza del Agua)
+### App Android — Observatorio del Agua-Poás (Gobernanza del Agua)
 | Ruta | Descripción |
 |------|-------------|
 | `android/` | Proyecto Android (WebView). Interfaz en `android/app/src/main/assets/app/` (`index.html`, `app.css`, `js/*.js`) |

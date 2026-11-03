@@ -9,7 +9,7 @@
    ============================================================ */
 :root {
     --deep: #03045E; --blue: #0077B6; --sky: #00B4D8; --mist: #90E0EF; --foam: #CAF0F8;
-    --bg: #EDF5FB; --card: #FFFFFF; --ink: #0C2B45; --muted: #5E7A90;
+    --bg: #EDF5FB; --card: #FFFFFF; --ink: #0C2B45; --muted: #4F6A80;
     --line: #E2EDF5; --line-soft: rgba(12, 43, 69, .06);
     --brand-ink: #063055;               /* títulos sobre tarjeta */
     --ok: #2A9D8F; --warn: #E9C46A; --alert: #F4A261; --bad: #E76F51;
@@ -35,6 +35,7 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html, body { height: 100%; }
+html { background: var(--bg); }
 body {
     font-family: system-ui, -apple-system, "Segoe UI", "Roboto", "Noto Sans", sans-serif;
     background: linear-gradient(180deg, #F3FAFE 0%, #E9F3FA 100%) fixed;
@@ -51,7 +52,7 @@ b, strong { font-weight: 800; }
 
 /* ---------------- Barra superior (glass) ---------------- */
 .topbar {
-    position: sticky; top: 0; z-index: 20; height: var(--top-h);
+    position: sticky; top: 0; z-index: 20; min-height: var(--top-h); padding-top: 8px !important; padding-bottom: 8px !important;
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 16px; color: #fff;
     background: linear-gradient(120deg, rgba(0, 102, 161, .94), rgba(0, 158, 193, .90));
@@ -173,7 +174,7 @@ main { padding-bottom: calc(var(--tab-h) + var(--credit-h) + 30px); }
 .chart .ax { font-size: 10px; fill: var(--muted); }
 .chart .grid { stroke: var(--line); }
 .empty { color: var(--muted); font-size: .85rem; text-align: center; padding: 30px 0; animation: pulse 1.4s ease-in-out infinite; }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .8; } }
 .legend { display: flex; flex-wrap: wrap; gap: 12px; font-size: .74rem; color: var(--muted); margin-top: 10px; }
 .legend i { display: inline-block; width: 12px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: middle; }
 .sw-a { background: var(--blue); } .sw-b { background: var(--mist); } .sw-c { background: var(--alert); height: 3px !important; }
@@ -389,7 +390,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--s
 
 
 /* ============================================================
-   v2.0 — Observatorio del Agua-Poás · Proyecto Gobernanza del Agua
+   v2.0 — Observatorio del Agua-Poás · Gobernanza del Agua
    ============================================================ */
 .brand h1 { font-size: 1.02rem; line-height: 1.15; }
 .brand p { font-size: .72rem; font-weight: 600; }
@@ -497,5 +498,52 @@ input[type=number] { width: 100%; font: inherit; font-size: .95rem; color: var(-
     main { padding: 0; max-width: none; }
     .card, .tile { box-shadow: none; border: 1px solid #ccc; break-inside: avoid; }
     .view[hidden], .pane[hidden] { display: none !important; }
-    #p-hist::before { content: "Observatorio del Agua-Poás · Proyecto Gobernanza del Agua · Tech Center CR @ 2026"; display: block; font-weight: 800; margin-bottom: 10px; }
+    #p-hist::before { content: "Observatorio del Agua-Poás · Gobernanza del Agua · Tech Center CR @ 2026"; display: block; font-weight: 800; margin-bottom: 10px; }
+}
+
+
+/* ============================================================
+   v2.1 — accesibilidad, pantallas pequeñas y texto grande
+   ============================================================ */
+:root { --link: #0B5F91; }
+@media (prefers-color-scheme: dark) { :root { --link: #7FD3F5; } }
+.links a, .actors a, .kv-tbl a, .tbl a, .link-btn:not(.light), .info, .leaflet-popup-content a { color: var(--link); }
+.brand { min-width: 0; flex: 1; }
+.brand h1 { font-size: clamp(.92rem, 4.4vw, 1.05rem); overflow-wrap: anywhere; }
+.brand p { overflow-wrap: anywhere; }
+.icon-btn { flex-shrink: 0; margin-left: 8px; }
+
+/* Nada debe provocar desplazamiento horizontal */
+.tile, .card, .topic { min-width: 0; overflow-wrap: anywhere; }
+.badge { white-space: normal; text-align: center; line-height: 1.2; }
+.tabbar a { font-size: clamp(8px, 2.5vw, 11px); line-height: 1.1; overflow: hidden; }
+.tabbar a span { font-size: clamp(16px, 5vw, 21px); }
+
+/* Mapa: capas en una fila desplazable, panel plegable y atribución visible */
+.map-layers { flex-wrap: nowrap; overflow-x: auto; right: 12px; top: 10px; padding-bottom: 4px; scrollbar-width: none; }
+.map-layers::-webkit-scrollbar { display: none; }
+.map-layers .chip { flex-shrink: 0; white-space: nowrap; }
+.leaflet-top.leaflet-right { top: 56px; }
+.zone-jump { top: 140px; }
+.sheet { max-height: 42%; }
+.sheet.collapsed #sheetTxt { display: none; }
+.grab { cursor: pointer; width: 100%; height: 18px; background: none; position: relative; margin: -4px 0 4px; border: none; }
+.grab::before { content: ''; position: absolute; left: 50%; top: 7px; transform: translateX(-50%); width: 42px; height: 4px; border-radius: 4px; background: var(--line); }
+.osm { display: block; font-size: .68rem; color: var(--muted); text-align: right; margin-top: 4px; }
+.osm a { color: var(--link); }
+
+/* Reportes rechazados o que requieren acción */
+.report .btn.ghost { margin-top: 6px; padding: 8px 12px; font-size: .8rem; }
+.bad-txt { color: #B4361C; }
+@media (prefers-color-scheme: dark) { .bad-txt { color: #FF9C84; } }
+/* Contraste AA en botones secundarios, valores y etiquetas */
+.btn.ghost, .mini-seg button, .form output { color: var(--link); }
+.badge.pro { color: #006A80; }
+@media (prefers-color-scheme: dark) { .btn.ghost, .mini-seg button, .form output { color: var(--link); } .badge.pro { color: #8EE6F7; } }
+.empty { animation: none; }
+
+@media (max-width: 360px) {
+    .hero-card { grid-template-columns: 88px 1fr; gap: 10px; padding: 16px; }
+    .gauge svg { width: 88px; height: 88px; }
+    .hero-val { font-size: 1.9rem; }
 }

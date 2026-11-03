@@ -18,15 +18,14 @@
         <img src="img/icono.png" alt="" width="36" height="36">
         <div>
             <h1>Observatorio del Agua-Poás</h1>
-            <p>Proyecto Gobernanza del Agua</p>
+            <p>Gobernanza del Agua</p>
         </div>
     </div>
     <button class="icon-btn" id="btnRefresh" aria-label="Actualizar datos">⟳</button>
 </header>
 
-<div class="offline" id="offline" hidden></div>
-
 <main>
+    <div class="offline" id="offline" role="status" hidden></div>
     <!-- ═════════════ INICIO ═════════════ -->
     <section class="view" id="v-inicio">
         <div class="zones" id="zones" role="group" aria-label="Zona"></div>
@@ -60,8 +59,9 @@
         <div id="map" aria-label="Mapa hídrico cantonal"></div>
         <div class="map-layers" id="layers"></div>
         <article class="sheet" id="sheet">
-            <span class="grab"></span>
-            <div id="sheetTxt"><p class="muted">Tocá un punto del mapa para consultar la lluvia y el balance climático de ese lugar, o un elemento para ver su ficha con fuente, fecha y confianza del dato.</p></div>
+            <button type="button" class="grab" id="sheetToggle" aria-label="Mostrar u ocultar el panel" aria-expanded="true"></button>
+            <div id="sheetTxt"><p class="muted">Tocá el mapa para consultar la lluvia de un punto, o un elemento para ver su fuente y confianza.</p></div>
+            <span class="osm">Mapa base © <a href="https://www.openstreetmap.org/copyright">colaboradores de OpenStreetMap</a></span>
         </article>
     </section>
 
@@ -257,7 +257,7 @@
                 <h2>Aviso de privacidad</h2>
                 <p><b>Qué datos se recopilan.</b> Solo los que escribís al enviar un reporte: tipo, descripción, referencia del sitio, coordenadas (únicamente si marcás un punto en el mapa), fotografía (opcional), y nombre y contacto (opcionales). La app no usa el GPS ni pide permisos de ubicación, cámara o contactos.</p>
                 <p><b>Para qué se usan.</b> Para registrar, clasificar y atender el reporte, y para estadísticas agregadas sin datos personales.</p>
-                <p><b>Dónde se guardan.</b> En el registro central del Proyecto Gobernanza del Agua. Los nombres, teléfonos, correos y ubicaciones precisas no se publican en tableros públicos.</p>
+                <p><b>Dónde se guardan.</b> En el registro central de la iniciativa Gobernanza del Agua. Los nombres, teléfonos, correos y ubicaciones precisas no se publican en tableros públicos.</p>
                 <p><b>Cuánto tiempo.</b> El necesario para atender el caso y documentar su cierre; después se conservan solo datos agregados.</p>
                 <p><b>En este teléfono.</b> La app guarda tus reportes, la zona elegida, la calculadora y los últimos datos consultados para funcionar sin conexión. Podés borrarlos cuando quieras.</p>
                 <p><b>Servicios externos.</b> El clima se consulta a Open-Meteo y el mapa base a OpenStreetMap; como cualquier sitio web, reciben la dirección IP del dispositivo.</p>
@@ -269,7 +269,7 @@
         <div class="pane" id="p-acerca" hidden>
             <article class="card prose">
                 <h2>Observatorio del Agua-Poás</h2>
-                <p>Plataforma del <b>Proyecto Gobernanza del Agua</b> para conocer, proteger y gestionar participativamente el agua del cantón de Poás.</p>
+                <p>Plataforma de la iniciativa <b>Gobernanza del Agua</b> para conocer, proteger y gestionar participativamente el agua del cantón de Poás.</p>
                 <p class="muted" id="appVersion"></p>
             </article>
             <article class="card">
@@ -290,12 +290,12 @@
 </main>
 
 <nav class="tabbar" aria-label="Navegación">
-    <a href="#inicio" data-v="inicio"><span>💧</span>Inicio</a>
-    <a href="#mapa" data-v="mapa"><span>🗺️</span>Mapa</a>
-    <a href="#datos" data-v="datos"><span>📊</span>Datos</a>
-    <a href="#gob" data-v="gob"><span>🤝</span>Gobernanza</a>
-    <a href="#reportar" data-v="reportar"><span>📣</span>Reportar</a>
-    <a href="#mas" data-v="mas"><span>☰</span>Más</a>
+    <a href="#inicio" data-v="inicio"><span aria-hidden="true">💧</span>Inicio</a>
+    <a href="#mapa" data-v="mapa"><span aria-hidden="true">🗺️</span>Mapa</a>
+    <a href="#datos" data-v="datos"><span aria-hidden="true">📊</span>Datos</a>
+    <a href="#gob" data-v="gob"><span aria-hidden="true">🤝</span>Gobernanza</a>
+    <a href="#reportar" data-v="reportar"><span aria-hidden="true">📣</span>Reportar</a>
+    <a href="#mas" data-v="mas"><span aria-hidden="true">☰</span>Más</a>
 </nav>
 
 <footer class="credit">Tech Center CR @ 2026</footer>

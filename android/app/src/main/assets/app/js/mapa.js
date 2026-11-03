@@ -22,6 +22,7 @@
 
     function consultPoint(lat, lon) {
         OA.mapPoint = { lat: lat, lon: lon };
+        OA.$('sheet').classList.remove('collapsed'); OA.$('sheetToggle').setAttribute('aria-expanded', 'true');
         OA.html('sheetTxt', '<h3>📍 ' + lat + ', ' + lon + '</h3><p class="muted">Consultando…</p>');
         OA.getJSON(OA.forecastURL(lat, lon)).then(function (res) {
             if (!OA.mapPoint || OA.mapPoint.lat !== lat || OA.mapPoint.lon !== lon) return;
@@ -41,9 +42,13 @@
 
     OA.initMap = function () {
         if (map || typeof L === 'undefined') { if (map) map.invalidateSize(); return; }
-        map = L.map('map', { zoomControl: false }).setView([10.115, -84.235], 12);
+        // La atribución de OpenStreetMap se muestra fija en el panel inferior (siempre visible).
+        map = L.map('map', { zoomControl: false, attributionControl: false }).setView([10.115, -84.235], 12);
         L.control.zoom({ position: 'topright' }).addTo(map);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '© colaboradores de OpenStreetMap' }).addTo(map);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }).addTo(map);
+
+        var sheet = OA.$('sheet'), tg = OA.$('sheetToggle');
+        tg.addEventListener('click', function () { var c = sheet.classList.toggle('collapsed'); tg.setAttribute('aria-expanded', c ? 'false' : 'true'); });
 
         var bar = OA.$('layers');
         OA.loadData('capas').then(function (d) {
@@ -63,15 +68,14 @@
                 });
                 if (c.visible) g.addTo(map);
                 var b = document.createElement('button');
-                b.type = 'button'; b.className = 'chip'; b.textContent = c.icono + ' ' + c.nombre;
+                b.type = 'button'; b.className = 'chip'; b.textContent = (c.icono || '') + ' ' + c.nombre;
                 b.setAttribute('aria-pressed', c.visible ? 'true' : 'false');
                 b.addEventListener('click', function () {
                     var on = b.getAttribute('aria-pressed') !== 'true';
                     b.setAttribute('aria-pressed', on ? 'true' : 'false');
                     if (on) g.addTo(map); else map.removeLayer(g);
                 });
-                b.addEventListener('contextmenu', function (ev) { ev.preventDefault(); OA.modal(c.icono + ' ' + c.nombre, fichaCapa(c)); });
-                bar.appendChild(b);
+                                bar.appendChild(b);
             });
             var info = document.createElement('button');
             info.type = 'button'; info.className = 'chip'; info.textContent = 'ⓘ Capas y fuentes';
@@ -79,9 +83,9 @@
                 OA.modal('Capas del mapa hídrico',
                     '<p class="muted">Registro de capas actualizado el ' + OA.dateLabel(d.actualizado) + ' (' + OA.esc(d.__origen) + ').</p>' +
                     (d.capas || []).filter(function (c) { return c.publico !== false && c.elementos && c.elementos.length; })
-                        .map(function (c) { return '<h3 class="sub">' + c.icono + ' ' + OA.esc(c.nombre) + '</h3>' + fichaCapa(c); }).join('') +
+                        .map(function (c) { return '<h3 class="sub">' + OA.esc(c.icono) + ' ' + OA.esc(c.nombre) + '</h3>' + fichaCapa(c); }).join('') +
                     '<h3 class="sub">Pendientes de datos oficiales</h3><ul>' + pend.map(function (c) {
-                        return '<li><b>' + c.icono + ' ' + OA.esc(c.nombre) + '</b> — ' + OA.esc(c.fuente) + (c.publico === false ? ' <i>(no se mostrará públicamente: ubicación sensible)</i>' : '') + '</li>';
+                        return '<li><b>' + OA.esc(c.icono) + ' ' + OA.esc(c.nombre) + '</b> — ' + OA.esc(c.fuente) + (c.publico === false ? ' <i>(no se mostrará públicamente: ubicación sensible)</i>' : '') + '</li>';
                     }).join('') + '</ul>');
             });
             bar.appendChild(info);

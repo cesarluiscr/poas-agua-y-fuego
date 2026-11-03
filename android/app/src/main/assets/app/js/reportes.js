@@ -49,14 +49,14 @@
         old.v.forEach(function (p) {
             a.push({ codigo: newCode(), creado: new Date(old.t).toISOString(), tipo: String(p.categoria || '').replace(/^.*—\s*/, '') || 'Otro',
                 ubic: '', desc: p.descripcion || '', nombre: p.nombre || '', contacto: p.contacto || '', consentimiento: false,
-                estado: 'pendiente', confirmado: false, intentos: 0, migrado: true });
+                estado: 'pendiente', confirmado: false, intentos: 0, migrado: true, requiereConsentimiento: true });
         });
         save(a);
         try { localStorage.removeItem('oap:pendientes'); } catch (e) {}
     })();
 
-    function payload(r) {
-        var foto = getFoto(r.codigo);
+    function payload(r, fotoDirecta) {
+        var foto = fotoDirecta || getFoto(r.codigo);
         return {
             tipo: 'reporte_agua', codigo: r.codigo, creado: r.creado, categoria: 'Agua — ' + r.tipo,
             descripcion: r.desc + (r.ubic ? '\nReferencia: ' + r.ubic : '') + (r.lat != null ? '\nCoordenadas: ' + r.lat + ', ' + r.lon + ' (marcadas en el mapa)' : '') + '\nCódigo: ' + r.codigo,
@@ -67,14 +67,22 @@
         };
     }
 
+    // Errores de validación del servidor: reintentar no sirve, el reporte necesita una acción.
+    var PERMANENTES = /c[oó]digo inv[aá]lido|consentimiento|descripci[oó]n insuficiente/i;
+
     // Envío con confirmación verificable: requiere JSON {success:true} del servidor.
-    function send(r) {
-        return OA.fetchT(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload(r)), redirect: 'follow' }, 30000)
+    function send(r, fotoDirecta) {
+        return OA.fetchT(API, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload(r, fotoDirecta)), redirect: 'follow' }, 30000)
             .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
             .then(function (j) {
+                if (j && j.success === false && PERMANENTES.test(j.error || '')) {
+                    update(r.codigo, { rechazado: true, error: String(j.error).replace(/\.+$/, ''), ultimoIntento: new Date().toISOString(),
+                        requiereConsentimiento: /consentimiento/i.test(j.error) });
+                    return false;
+                }
                 if (!j || (j.success !== true && j.ok !== true)) throw new Error((j && j.error) || 'respuesta no válida');
                 var now = new Date().toISOString();
-                update(r.codigo, { estado: j.estado || 'recibido', confirmado: true, confirmadoEn: now, actualizado: now, error: null });
+                update(r.codigo, { estado: j.estado || 'recibido', confirmado: true, confirmadoEn: now, actualizado: now, error: null, rechazado: false });
                 dropFoto(r.codigo);
                 return true;
             })
@@ -84,10 +92,16 @@
             });
     }
 
+    // Espera creciente entre reintentos automáticos: 1, 2, 4… hasta 60 minutos.
+    function due(r) {
+        if (!r.ultimoIntento || !r.intentos) return true;
+        var wait = Math.min(60, Math.pow(2, r.intentos - 1)) * 60000;
+        return Date.now() - new Date(r.ultimoIntento).getTime() >= wait;
+    }
     var busy = false;
-    OA.processQueue = function () {
+    OA.processQueue = function (force) {
         if (busy) return Promise.resolve();
-        var pend = list().filter(function (r) { return !r.confirmado; });
+        var pend = list().filter(function (r) { return !r.confirmado && !r.rechazado && !r.requiereConsentimiento && (force || due(r)); });
         if (!pend.length) return Promise.resolve();
         busy = true;
         // Todos los pendientes, en orden, sin detenerse en el primero que falle.
@@ -113,7 +127,15 @@
         if (!a.length) { OA.html('myReports', '<p class="muted">Todavía no enviaste reportes desde este teléfono.</p>'); return; }
         OA.html('myReports', a.map(function (r) {
             var e = ESTADOS[r.estado] || ['est', OA.esc(r.estado)];
-            var note = !r.confirmado
+            if (r.requiereConsentimiento) e = ['pen', '✋ Requiere tu autorización'];
+            else if (r.rechazado) e = ['pen', '⛔ Rechazado por el servidor'];
+            var note = r.requiereConsentimiento
+                ? '<p class="tiny warn-txt">Este reporte se creó en una versión anterior, sin el aviso de privacidad. Para enviarlo necesitamos tu autorización.</p>' +
+                  '<button type="button" class="btn ghost" data-consent="' + OA.esc(r.codigo) + '">Acepto el aviso de privacidad y envío el reporte</button> ' +
+                  '<button type="button" class="link-btn" data-discard="' + OA.esc(r.codigo) + '">Descartar</button>'
+                : r.rechazado
+                ? '<p class="tiny bad-txt">El servidor no aceptó el reporte: ' + OA.esc(r.error) + '.</p><button type="button" class="link-btn" data-discard="' + OA.esc(r.codigo) + '">Descartar</button>'
+                : !r.confirmado
                 ? '<p class="tiny warn-txt">Aún no confirmado por el servidor' + (r.intentos ? ' · ' + r.intentos + ' intento(s), último: ' + OA.stamp(r.ultimoIntento) + (r.error ? ' (' + OA.esc(r.error) + ')' : '') : '') + '. Se reintentará automáticamente.</p>'
                 : '<p class="tiny muted">Confirmado el ' + OA.stamp(r.confirmadoEn) + (r.seguimiento === false ? ' · el seguimiento en línea aún no está habilitado por la institución' : r.actualizado ? ' · estado al ' + (/^\d{4}-\d{2}-\d{2}T/.test(r.actualizado) ? OA.stamp(r.actualizado) : OA.esc(r.actualizado)) : '') + (r.accion ? ' · ' + OA.esc(r.accion) : '') + '</p>';
             return '<div class="item report"><div class="row-head"><b class="mono">' + OA.esc(r.codigo) + '</b><span class="badge ' + e[0] + '">' + e[1] + '</span></div>' +
@@ -163,6 +185,17 @@
             }).catch(function (err) { say(err.message, C.bad); OA.$('rFoto').value = ''; });
         });
 
+        OA.$('myReports').addEventListener('click', function (e) {
+            var c = e.target.getAttribute('data-consent'), d = e.target.getAttribute('data-discard');
+            if (c) {
+                update(c, { consentimiento: true, requiereConsentimiento: false, rechazado: false, intentos: 0, ultimoIntento: null });
+                OA.html('myReports', '<p class="empty">Enviando…</p>');
+                OA.processQueue(true).then(render);
+            } else if (d && window.confirm('¿Descartar el reporte ' + d + '? Se borrará de este teléfono.')) {
+                save(list().filter(function (r) { return r.codigo !== d; })); dropFoto(d); render();
+            }
+        });
+
         OA.$('report').addEventListener('submit', function (e) {
             e.preventDefault();
             var desc = clean(OA.$('rDesc').value, 1000);
@@ -178,9 +211,12 @@
             var wa = OA.$('rWhats').checked;
             OA.$('rSend').disabled = true;
             say('Enviando ' + r.codigo + '…', C.blue);
-            send(r).then(function (ok) {
+            var fotoEnvio = foto;   // la foto viaja aunque no haya cabido en el almacenamiento local
+            send(r, fotoEnvio).then(function (ok) {
                 OA.$('rSend').disabled = false;
+                var rr = list().filter(function (x) { return x.codigo === r.codigo; })[0] || {};
                 if (ok) say('✅ Reporte ' + r.codigo + ' recibido por el servidor. Guardá el código para dar seguimiento.', C.ok);
+                else if (rr.rechazado) say('⛔ El servidor no aceptó el reporte ' + r.codigo + ': ' + (rr.error || '') + '.', C.bad);
                 else say('⚠️ El servidor no confirmó la recepción. El reporte ' + r.codigo + ' quedó guardado en este teléfono y se reenviará automáticamente.' + (fotoGuardada ? '' : ' (La foto no cabía en el teléfono y no se guardó.)'), C.alert);
                 if (wa) {
                     var t = '💧 REPORTE DEL AGUA — Observatorio del Agua-Poás\nCódigo: ' + r.codigo + '\nTipo: ' + r.tipo + '\n' + (r.ubic ? 'Referencia: ' + r.ubic + '\n' : '') +
@@ -194,10 +230,13 @@
         });
         OA.$('rRetry').addEventListener('click', function () {
             OA.html('myReports', '<p class="empty">Sincronizando…</p>');
-            OA.processQueue().then(checkStatus).then(render);
+            OA.processQueue(true).then(checkStatus).then(render);
         });
+        // Reintentos automáticos: al volver a la app y cada 5 minutos mientras está abierta.
+        document.addEventListener('visibilitychange', function () { if (!document.hidden) OA.processQueue(); });
+        setInterval(function () { if (!document.hidden && navigator.onLine) OA.processQueue(); }, 5 * 60000);
         OA.onShow.reportar = render;
-        window.addEventListener('online', function () { OA.processQueue(); });
+        window.addEventListener('online', function () { OA.processQueue(true); });
         render();
         OA.processQueue();
     };
