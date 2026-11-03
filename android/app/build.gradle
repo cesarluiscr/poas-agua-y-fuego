@@ -7,7 +7,7 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId 'agua.poas.com'
+        applicationId 'com.agua.aab'
         minSdk 24
         targetSdk 35
         versionCode 5
