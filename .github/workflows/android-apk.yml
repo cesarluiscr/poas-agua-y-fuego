@@ -52,6 +52,7 @@ jobs:
       - name: Compilar APK de prueba y AAB para Google Play
         # El runner ubuntu-latest ya incluye el Android SDK (ANDROID_HOME)
         env:
+          VERSION_CODE: ${{ 1000 + github.run_number }}
           ANDROID_KEYSTORE_PATH: ${{ steps.firma.outputs.path }}
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
@@ -69,6 +70,7 @@ jobs:
           unzip -l dist/*.aab | grep -E "AndroidManifest|assets/app/index.html|classes.dex"
           rm -f "$RUNNER_TEMP/subida.jks"
           ls -lh dist
+          echo "Código de versión (versionCode): ${{ 1000 + github.run_number }}" | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Subir APK de prueba
         uses: actions/upload-artifact@v4

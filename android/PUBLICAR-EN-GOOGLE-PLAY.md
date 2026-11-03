@@ -46,7 +46,8 @@ jarsigner -verify observatorio-agua-poas.aab
 - **Identificador de la app:** `agua.poas.com` (en `android/app/build.gradle`). Aparece en el enlace
   de Google Play (`play.google.com/store/apps/details?id=agua.poas.com`) y **no se puede cambiar
   después de publicar**. (El paquete interno del código sigue siendo `cr.poas.aquapoas`; no es visible.)
-- **Número de versión:** cada subida necesita un `versionCode` mayor que el anterior (`android/app/build.gradle`).
+- **Número de versión:** GitHub Actions asigna `versionCode = 1000 + número de compilación`, así cada AAB tiene
+  un código nuevo y mayor que el anterior. El valor aparece en el resumen de cada ejecución.
 - **Política de privacidad:** Play exige una URL pública. Se puede publicar el texto de la sección
   *Más → Privacidad* en el sitio web.
 - **Seguridad de los datos (formulario de Play Console):** la app recopila, solo si la persona los escribe al

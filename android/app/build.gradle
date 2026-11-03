@@ -10,7 +10,8 @@ android {
         applicationId 'agua.poas.com'
         minSdk 24
         targetSdk 36
-        versionCode 7
+        // En GitHub Actions: 1000 + número de compilación (siempre único y creciente para Google Play).
+        versionCode((System.getenv('VERSION_CODE') ?: '100') as int)
         versionName '2.1.1'
     }
 
