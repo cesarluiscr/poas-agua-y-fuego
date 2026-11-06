@@ -11,21 +11,38 @@
     var OA = window.OA, C = OA.C, fmt = OA.fmt, sum = OA.sum;
     var YEARS = 10;
 
-    // ─────────── reanálisis (ERA5-Land, con respaldo a ERA5) ───────────
+    // ─────────── reanálisis (ERA5, con respaldos) ───────────
+    // ERA5-Land no publica precipitación para las celdas del cantón (devuelve todo vacío),
+    // por eso se usa ERA5: una sola fuente homogénea para todo el periodo de referencia.
+    // Si un modelo responde pero sin datos útiles, se prueba el siguiente.
+    var MODELOS = [
+        { q: '&models=era5', key: 'arch-era5-', nombre: 'ERA5', res: '0,25° (~28 km)' },
+        { q: '&models=era5_seamless', key: 'arch-era5s-', nombre: 'ERA5 combinado (ERA5 + ERA5-Land)', res: '0,1°–0,25° (~11–28 km)' }
+    ];
+    function util(r) {
+        var v = r.data && r.data.daily && r.data.daily.precipitation_sum;
+        if (!v || !v.length) return false;
+        var n = 0; for (var i = 0; i < v.length; i++) if (v[i] != null) n++;
+        return n / v.length >= 0.8;   // al menos 80 % de días con dato
+    }
     var archMem = {};
     OA.getArchive = function (z, force) {
         if (archMem[z.id] && !force) return archMem[z.id];
         var y = new Date().getFullYear(), start = (y - YEARS) + '-01-01', end = OA.isoAdd(OA.today(), -5);
         var base = 'https://archive-api.open-meteo.com/v1/archive?latitude=' + z.lat + '&longitude=' + z.lon +
             '&start_date=' + start + '&end_date=' + end + '&daily=precipitation_sum&timezone=' + encodeURIComponent(OA.TZ);
-        var p = OA.getJSON(base + '&models=era5_land', 'arch-land-' + z.id, 2 * 864e5).then(function (r) {
-            r.modelo = 'ERA5-Land'; r.resolucion = '0,1° (~11 km)'; return r;
-        }).catch(function () {
-            return OA.getJSON(base + '&models=era5', 'arch-era5-' + z.id, 2 * 864e5).then(function (r) { r.modelo = 'ERA5'; r.resolucion = '0,25° (~28 km)'; return r; });
-        }).then(function (r) {
+        var p = MODELOS.reduce(function (prev, m) {
+            return prev.catch(function () {
+                return OA.getJSON(base + m.q, m.key + z.id, 2 * 864e5).then(function (r) {
+                    if (!util(r)) throw new Error('sin datos en ' + m.nombre);
+                    r.modelo = m.nombre; r.resolucion = m.res; return r;
+                });
+            });
+        }, Promise.reject(new Error('inicio'))).then(function (r) {
             var t = r.data.daily.time, v = r.data.daily.precipitation_sum, last = -1;
             for (var i = v.length - 1; i >= 0; i--) if (v[i] != null) { last = i; break; }
             r.fuente = '<a href="https://open-meteo.com/en/docs/historical-weather-api">Open-Meteo Historical API</a> · reanálisis ' + r.modelo + ' (Copernicus/ECMWF)';
+            r.celda = (r.data.latitude != null ? r.data.latitude.toFixed(2) + ', ' + r.data.longitude.toFixed(2) : '');
             r.start = t[0]; r.end = last >= 0 ? t[last] : null;
             r.byDate = {}; t.forEach(function (d, k) { r.byDate[d] = v[k]; });
             return r;
@@ -103,7 +120,7 @@
                 '<table class="tbl kv-tbl"><tr><th>Periodo de referencia</th><td>' + periodo + '</td></tr>' +
                 '<tr><th>Año en curso</th><td>' + cur + ', del 1 Ene al ' + OA.dateLabel(h.end) + ' (último dato disponible)</td></tr>' +
                 '<tr><th>Variable</th><td>Precipitación diaria acumulada (mm)</td></tr>' +
-                '<tr><th>Fuente</th><td>' + h.fuente + '</td></tr><tr><th>Resolución</th><td>' + h.resolucion + ' · punto ' + z.lat + ', ' + z.lon + '</td></tr>' +
+                '<tr><th>Fuente</th><td>' + h.fuente + '</td></tr><tr><th>Resolución</th><td>' + h.resolucion + ' · punto consultado ' + z.lat + ', ' + z.lon + (h.celda ? ' · centro de la celda ' + h.celda : '') + '</td></tr>' +
                 '<tr><th>Actualizado</th><td>' + OA.stamp(h.fetchedAt) + (h.cached ? ' (copia guardada)' : '') + '</td></tr>' +
                 '<tr><th>Datos faltantes</th><td>' + (a.order.filter(function (k) { return a.mo[k].missing; }).length ? 'Hay meses con días sin dato; se excluyen de los promedios.' : 'Ninguno en el periodo') + '</td></tr>' +
                 '<tr><th>Limitaciones</th><td>El reanálisis suaviza los contrastes locales (el relieve del volcán genera diferencias que una celda de ' + h.resolucion + ' no capta). Contrastar con pluviómetros locales cuando existan.</td></tr></table>');

@@ -13,7 +13,7 @@ android {
         // En GitHub Actions: 1000 + número de compilación (siempre único y creciente para Google Play).
         def runNumber = System.getenv('GITHUB_RUN_NUMBER')
         versionCode(runNumber ? 1000 + (runNumber as int) : 100)
-        versionName '2.1.1'
+        versionName '2.1.2'
     }
 
     // Firma de publicación (clave de subida de Google Play). Se toma de variables de entorno

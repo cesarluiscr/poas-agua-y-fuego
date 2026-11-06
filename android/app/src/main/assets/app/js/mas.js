@@ -100,7 +100,7 @@
     function fuentes() {
         var F = [
             ['Pronóstico y estimaciones diarias', 'Open-Meteo Forecast API (modelos combinados)', '1–11 km', 'Estimación / Pronóstico'],
-            ['Histórico y anomalía de lluvia', 'Open-Meteo Historical API · ERA5-Land (respaldo ERA5)', '~11 km (ERA5: ~28 km)', 'Reanálisis'],
+            ['Histórico y anomalía de lluvia', 'Open-Meteo Historical API · ERA5 (Copernicus/ECMWF)', '0,25° (~28 km)', 'Reanálisis'],
             ['Caudal', 'Open-Meteo Flood API · GloFAS (Copernicus)', '~5 km', 'Estimación pendiente de validación'],
             ['Evapotranspiración', 'FAO-56 Penman-Monteith (Open-Meteo)', 'Celda del modelo', 'Estimación'],
             ['Mapa base', 'OpenStreetMap', '—', 'Cartografía colaborativa'],
